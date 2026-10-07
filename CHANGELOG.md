@@ -5,6 +5,10 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Added
+- First runnable mobile preview: Home, lesson browsing, reading, quizzes, progress and profile.
+- Four sample lessons, bookmarks and device-local progress with saved best quiz scores.
+- Shared pastel UI components, feature-based organisation and eight passing data tests.
+- TypeScript, linting and formatting configuration.
 - Expo and TypeScript mobile project for SundaySeeds.
 - Project working agreement covering design fidelity, feature boundaries, verification and collaborative development.
 
