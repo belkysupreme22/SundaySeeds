@@ -12,7 +12,9 @@ import { SectionHeading } from '../../../shared/ui/SectionHeading';
 import { colors, type Pastel } from '../../../shared/theme/tokens';
 import { WeeklyHero } from '../components/WeeklyHero';
 import { ContinueLearning } from '../components/ContinueLearning';
+import { useLearnerProfile } from '../../profile/hooks/useLearnerProfile';
 export function HomeScreen() {
+  const { displayName } = useLearnerProfile();
   const { bookmarks, progress } = useLearningProgress();
   const completed = Object.values(progress).filter((p) => p.completed).length;
   const shortcuts: {
@@ -59,7 +61,7 @@ export function HomeScreen() {
             <Icon name="sun" size={21} />
           </View>
           <View style={styles.greeting}>
-            <Text variant="title">Hello, learner! ☀</Text>
+            <Text variant="title">Hello, {displayName || 'learner'}! ☀</Text>
             <Text variant="caption" muted>
               A little learning. A little growing.
             </Text>

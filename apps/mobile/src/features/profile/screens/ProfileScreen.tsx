@@ -9,7 +9,9 @@ import { Card } from '../../../shared/ui/Card';
 import { Button } from '../../../shared/ui/Button';
 import { Icon } from '../../../shared/ui/Icon';
 import { colors } from '../../../shared/theme/tokens';
+import { useLearnerProfile } from '../hooks/useLearnerProfile';
 export function ProfileScreen() {
+  const { displayName, loadError, retryLoad } = useLearnerProfile();
   const { progress, bookmarks, resetProgress } = useLearningProgress();
   const [confirm, setConfirm] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -36,11 +38,25 @@ export function ProfileScreen() {
           <Icon name="user" size={38} />
         </View>
         <View style={styles.words}>
-          <Text variant="heading">Hello, learner</Text>
+          <Text variant="heading">Hello, {displayName || 'learner'}</Text>
           <Text variant="small">SundaySeeds preview</Text>
           <Text variant="caption">No account needed for this demo</Text>
         </View>
       </Card>
+      {loadError && (
+        <Card tone="peach" shadow={false}>
+          <Text accessibilityRole="alert" style={styles.space}>
+            {loadError}
+          </Text>
+          <Button label="Try loading my name again" icon="refresh-cw" onPress={retryLoad} />
+        </Card>
+      )}
+      <Button
+        label="Edit profile"
+        icon="edit-2"
+        variant="outline"
+        onPress={() => router.push('/edit-profile')}
+      />
       <View style={styles.stats}>
         <Card tone="mint" shadow={false} style={styles.stat}>
           <Text variant="heading">{completed}</Text>
@@ -88,8 +104,8 @@ export function ProfileScreen() {
           <Text variant="label">Saved on this device</Text>
         </View>
         <Text variant="small" style={styles.space}>
-          Your progress and bookmarks stay in this app on this device. They are not backed up to an
-          account or synced with a class.
+          Your name, progress and bookmarks stay in this app on this device. They are not backed up
+          to an account or synced with a class.
         </Text>
       </Card>
       {message ? (
@@ -102,6 +118,7 @@ export function ProfileScreen() {
           <Text variant="title">Start fresh?</Text>
           <Text style={styles.space}>
             This removes your saved quiz scores, reading positions and bookmarks from this device.
+            Your display name is kept.
           </Text>
           <Button
             label={busy ? 'Resetting…' : 'Yes, reset my preview'}

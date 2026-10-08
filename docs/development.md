@@ -18,6 +18,12 @@ Use `npm run android` with an Android emulator or device ready. A web preview is
 
 Current owner preference: keep each increment small. The owner runs builds, tests and intensive terminal checks; provide the relevant commands instead of running them unless explicitly requested. Report unverified behaviour clearly.
 
+### Profile name checkpoint
+
+Open Profile -> Edit profile, enter a first name or nickname and save. Check both the Profile and Home greetings, then reload to confirm persistence. Try Cancel, a name containing spaces, a long name and saving a blank field (restores “learner”). Reset preview progress should keep the display name. Names use `sundayseeds.profile.v1`, separate from lesson progress and welcome preferences. Storage failures keep the editor open; failed profile reads must be retried before editing.
+
+No new dependencies. Launch with `start.cmd`; runtime and keyboard/layout checks remain with the owner.
+
 ### Topic browsing checkpoint
 
 Open Lessons -> Browse topics. Check the four pastel cards and their sample-lesson counts. Pick a topic and confirm only its lessons appear; combine it with search, Saved or In progress. All topics clears just the topic, while Clear filters on an empty result clears topic, search and status. An unknown topic URL should show all topics. On the topic screen, the Lessons tab stays highlighted and returns to the full lesson list.

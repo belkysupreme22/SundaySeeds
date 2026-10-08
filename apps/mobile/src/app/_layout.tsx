@@ -14,6 +14,7 @@ import {
   useLearningProgress,
 } from '../features/progress/hooks/useLearningProgress';
 import { colors } from '../shared/theme/tokens';
+import { LearnerProfileProvider } from '../features/profile/hooks/useLearnerProfile';
 import { Text } from '../shared/ui/Text';
 
 function AppNavigator() {
@@ -61,7 +62,9 @@ export default function RootLayout() {
             </View>
           ) : (
             <LearningProgressProvider>
-              <AppNavigator />
+              <LearnerProfileProvider>
+                <AppNavigator />
+              </LearnerProfileProvider>
             </LearningProgressProvider>
           )}
         </View>
