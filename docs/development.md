@@ -16,6 +16,21 @@ Use `npm run android` with an Android emulator or device ready. A web preview is
 
 ## Work in reviewable increments
 
+Current owner preference: keep each increment small. The owner runs builds, tests and intensive terminal checks; provide the relevant commands instead of running them unless explicitly requested. Report unverified behaviour clearly.
+
+### Welcome flow checkpoint
+
+On the next fresh app launch, the introduction appears before Home. Try Next, Back and Get started, then reload: Home should open directly. Profile -> View introduction replays the three pages; Skip returns to Home. Existing lesson progress and bookmarks use a separate storage key and are retained.
+
+If verification is wanted, run these from `apps/mobile` after starting Expo once to refresh its generated route types:
+
+```powershell
+npm.cmd run typecheck
+npm.cmd run lint
+```
+
+The new flow uses existing dependencies, so there is no installation step.
+
 1. Choose one user-visible outcome and identify the affected files.
 2. Reuse existing visual tokens and components before adding alternatives.
 3. Keep screen layout, interaction logic and persistence separate.

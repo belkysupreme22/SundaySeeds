@@ -54,6 +54,12 @@ export function ProfileScreen() {
       <ContentGroup>
         <Text variant="title">Make yourself at home</Text>
         <Button
+          label="View introduction"
+          icon="sun"
+          variant="outline"
+          onPress={() => router.push('/welcome')}
+        />
+        <Button
           label="My saved lessons"
           icon="bookmark"
           variant="outline"
