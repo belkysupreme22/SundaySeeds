@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { router } from 'expo-router';
 import { StyleSheet, View } from 'react-native';
 import { useLearningProgress } from '../../progress/hooks/useLearningProgress';
@@ -6,33 +5,27 @@ import { Screen, ContentGroup } from '../../../shared/ui/Screen';
 import { PageHeader } from '../../../shared/ui/PageHeader';
 import { Text } from '../../../shared/ui/Text';
 import { Card } from '../../../shared/ui/Card';
-import { Button } from '../../../shared/ui/Button';
+import { Button, IconButton } from '../../../shared/ui/Button';
 import { Icon } from '../../../shared/ui/Icon';
 import { colors } from '../../../shared/theme/tokens';
 import { useLearnerProfile } from '../hooks/useLearnerProfile';
 export function ProfileScreen() {
   const { displayName, loadError, retryLoad } = useLearnerProfile();
-  const { progress, bookmarks, resetProgress } = useLearningProgress();
-  const [confirm, setConfirm] = useState(false);
-  const [busy, setBusy] = useState(false);
-  const [message, setMessage] = useState('');
+  const { progress, bookmarks } = useLearningProgress();
   const completed = Object.values(progress).filter((p) => p.completed).length;
-  async function reset() {
-    setBusy(true);
-    setMessage('');
-    try {
-      await resetProgress();
-      setConfirm(false);
-      setMessage('Your preview progress and bookmarks have been reset.');
-    } catch {
-      setMessage('We could not reset saved data. Please try again.');
-    } finally {
-      setBusy(false);
-    }
-  }
   return (
     <Screen tabs>
-      <PageHeader title="Your learning space" subtitle="A little about your journey." />
+      <PageHeader
+        title="Your learning space"
+        subtitle="A little about your journey."
+        action={
+          <IconButton
+            name="settings"
+            label="Open settings"
+            onPress={() => router.push('/settings')}
+          />
+        }
+      />
       <Card tone="lavender" style={styles.profile}>
         <View style={styles.avatar}>
           <Icon name="user" size={38} />
@@ -87,62 +80,13 @@ export function ProfileScreen() {
           variant="outline"
           onPress={() => router.replace('/progress')}
         />
-      </ContentGroup>
-      <Card shadow={false}>
-        <Text variant="title">A small beginning</Text>
-        <Text style={styles.space}>
-          Explore four sample lessons, practise with short quizzes and keep track of your growth.
-        </Text>
-        <Text variant="small" muted>
-          Teacher publishing, class invitations and accounts are planned next. The sample content is
-          here to help us shape the experience together.
-        </Text>
-      </Card>
-      <Card tone="mint" shadow={false}>
-        <View style={styles.row}>
-          <Icon name="smartphone" />
-          <Text variant="label">Saved on this device</Text>
-        </View>
-        <Text variant="small" style={styles.space}>
-          Your name, progress and bookmarks stay in this app on this device. They are not backed up
-          to an account or synced with a class.
-        </Text>
-      </Card>
-      {message ? (
-        <Text accessibilityLiveRegion="polite" variant="small">
-          {message}
-        </Text>
-      ) : null}
-      {confirm ? (
-        <Card tone="peach" shadow={false}>
-          <Text variant="title">Start fresh?</Text>
-          <Text style={styles.space}>
-            This removes your saved quiz scores, reading positions and bookmarks from this device.
-            Your display name is kept.
-          </Text>
-          <Button
-            label={busy ? 'Resetting…' : 'Yes, reset my preview'}
-            disabled={busy}
-            onPress={() => void reset()}
-          />
-          <View style={styles.space}>
-            <Button
-              label="Keep my progress"
-              icon={false}
-              variant="outline"
-              disabled={busy}
-              onPress={() => setConfirm(false)}
-            />
-          </View>
-        </Card>
-      ) : (
         <Button
-          label="Reset preview progress"
-          icon="refresh-cw"
+          label="Settings"
+          icon="settings"
           variant="outline"
-          onPress={() => setConfirm(true)}
+          onPress={() => router.push('/settings')}
         />
-      )}
+      </ContentGroup>
       <Text variant="caption" muted style={styles.center}>
         SundaySeeds · A little faith, every day · Preview 0.1.0
       </Text>
@@ -165,6 +109,5 @@ const styles = StyleSheet.create({
   stats: { flexDirection: 'row', gap: 12 },
   stat: { flex: 1 },
   space: { marginVertical: 12 },
-  row: { flexDirection: 'row', gap: 9, alignItems: 'center' },
   center: { textAlign: 'center' },
 });

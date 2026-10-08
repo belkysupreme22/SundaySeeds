@@ -32,7 +32,7 @@ function ProfileNameForm({ initialName }: { initialName: string }) {
   const { saveName, saving, saveError } = useLearnerProfile();
 
   async function save() {
-    if (await saveName(name)) router.replace('/profile');
+    if (await saveName(name)) closeEditor();
   }
 
   return (
@@ -98,10 +98,15 @@ function ProfileNameForm({ initialName }: { initialName: string }) {
         variant="outline"
         icon={false}
         disabled={saving}
-        onPress={() => router.replace('/profile')}
+        onPress={closeEditor}
       />
     </Screen>
   );
+}
+
+function closeEditor() {
+  if (router.canGoBack()) router.back();
+  else router.replace('/profile');
 }
 
 const styles = StyleSheet.create({

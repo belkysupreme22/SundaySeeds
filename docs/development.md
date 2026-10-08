@@ -18,6 +18,12 @@ Use `npm run android` with an Android emulator or device ready. A web preview is
 
 Current owner preference: keep each increment small. The owner runs builds, tests and intensive terminal checks; provide the relevant commands instead of running them unless explicitly requested. Report unverified behaviour clearly.
 
+### Settings checkpoint
+
+Open Profile -> Settings using either the gear icon or Settings button. Open Display name, save or cancel, and check that you return to Settings; opening the editor directly from Profile should still return there. Under Learning data, open Reset preview progress and first choose Keep my progress. If you want to test deletion with sample data, confirm the reset and check scores, reading positions and bookmarks are cleared while your name and introduction preference remain. Reload to check the reset persists. Read the About section and return to Profile using Back.
+
+No new dependencies or storage keys. Launch with `start.cmd`; runtime checks remain with the owner.
+
 ### Profile name checkpoint
 
 Open Profile -> Edit profile, enter a first name or nickname and save. Check both the Profile and Home greetings, then reload to confirm persistence. Try Cancel, a name containing spaces, a long name and saving a blank field (restores “learner”). Reset preview progress should keep the display name. Names use `sundayseeds.profile.v1`, separate from lesson progress and welcome preferences. Storage failures keep the editor open; failed profile reads must be retried before editing.

@@ -5,6 +5,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Added
+- Settings screen with personal information, learning-data controls and About SundaySeeds, accessible from Profile.
 - Optional device-local display name, a Profile editor and personalised Home/Profile greetings, with storage kept separate from learning progress.
 - Pastel topic browsing for Faith, Kindness, Courage and Prayer, with sample-lesson counts, combined topic/search/status filtering and a clear-filters action.
 - Quiz results now offer an answer review with selected choices, correct answers and explanations; result and review UI live in separate feature files.
@@ -19,5 +20,6 @@ Notable changes are recorded here. Unreleased entries describe development miles
 - Project working agreement covering design fidelity, feature boundaries, verification and collaborative development.
 
 ### Changed
+- Moved reset confirmation and device-storage information from Profile into Settings; the name editor now returns to its originating screen after save or cancel.
 - Removed unused, untracked Claude Expo plugin settings from the mobile folder.
 - Replaced the discontinued Kotlin app with the agreed React Native direction; preserved reusable artwork.
