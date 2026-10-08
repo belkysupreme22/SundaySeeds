@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocalSearchParams } from 'expo-router';
 import { Pressable, StyleSheet, TextInput, View } from 'react-native';
 import { lessons } from '../data/lessons';
@@ -10,16 +10,31 @@ import { PageHeader } from '../../../shared/ui/PageHeader';
 import { Text } from '../../../shared/ui/Text';
 import { Card } from '../../../shared/ui/Card';
 import { Icon } from '../../../shared/ui/Icon';
-const filters = ['All lessons', 'Saved', 'Completed'] as const;
+const filters = [
+  { value: 'all', label: 'All lessons' },
+  { value: 'in-progress', label: 'In progress' },
+  { value: 'saved', label: 'Saved' },
+  { value: 'completed', label: 'Completed' },
+] as const;
+type LessonFilter = (typeof filters)[number]['value'];
+
+function getFilter(value?: string): LessonFilter {
+  return filters.find((filter) => filter.value === value)?.value ?? 'all';
+}
+
 export function LessonsScreen() {
   const params = useLocalSearchParams<{ filter?: string }>();
-  const [filter, setFilter] = useState<string>(params.filter === 'saved' ? 'Saved' : 'All lessons');
+  const [filter, setFilter] = useState<LessonFilter>(() => getFilter(params.filter));
   const [query, setQuery] = useState('');
+  useEffect(() => {
+    setFilter(getFilter(params.filter));
+  }, [params.filter]);
   const { bookmarks, progress } = useLearningProgress();
   const visible = lessons.filter(
     (l) =>
-      (filter !== 'Saved' || bookmarks.includes(l.id)) &&
-      (filter !== 'Completed' || progress[l.id]?.completed) &&
+      (filter !== 'saved' || bookmarks.includes(l.id)) &&
+      (filter !== 'completed' || progress[l.id]?.completed) &&
+      (filter !== 'in-progress' || (progress[l.id] && !progress[l.id].completed)) &&
       `${l.title} ${l.category} ${l.scripture}`.toLowerCase().includes(query.toLowerCase().trim()),
   );
   return (
@@ -46,12 +61,12 @@ export function LessonsScreen() {
         {filters.map((f) => (
           <Pressable
             accessibilityRole="button"
-            accessibilityState={{ selected: f === filter }}
-            key={f}
-            onPress={() => setFilter(f)}
-            style={[styles.filter, f === filter && { backgroundColor: colors.lavender }]}
+            accessibilityState={{ selected: f.value === filter }}
+            key={f.value}
+            onPress={() => setFilter(f.value)}
+            style={[styles.filter, f.value === filter && { backgroundColor: colors.lavender }]}
           >
-            <Text variant="small">{f}</Text>
+            <Text variant="small">{f.label}</Text>
           </Pressable>
         ))}
       </View>
@@ -67,11 +82,15 @@ export function LessonsScreen() {
             <Icon name="book-open" />
             <Text variant="title">Nothing here just yet</Text>
             <Text>
-              {filter === 'Saved'
-                ? 'Tap a bookmark on a lesson to keep it here.'
-                : filter === 'Completed'
-                  ? 'Finish a lesson’s quiz to see it here.'
-                  : 'Try a different search.'}
+              {query.trim()
+                ? 'No matching lessons in this view. Try a different search or choose All lessons.'
+                : filter === 'saved'
+                  ? 'Tap a bookmark on a lesson to keep it here.'
+                  : filter === 'completed'
+                    ? 'Finish a lesson’s quiz to see it here.'
+                    : filter === 'in-progress'
+                      ? 'Start a reading to keep your place here. Finished lessons move to Completed.'
+                      : 'Try a different search.'}
             </Text>
           </Card>
         )}
@@ -94,15 +113,17 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   input: { flex: 1, minHeight: 46, fontFamily: fonts.regular, fontSize: 12, color: colors.ink },
-  filters: { flexDirection: 'row', gap: 8 },
+  filters: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
   filter: {
-    flex: 1,
+    flexGrow: 1,
+    flexBasis: '45%',
     minHeight: 44,
     borderRadius: 7,
     borderWidth: 1,
     borderColor: colors.ink,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingHorizontal: 3,
+    paddingHorizontal: 8,
+    paddingVertical: 8,
   },
 });

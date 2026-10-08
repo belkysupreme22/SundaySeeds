@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { router } from 'expo-router';
 import { StyleSheet, View } from 'react-native';
 import { getLesson } from '../data/lessons';
@@ -12,6 +13,10 @@ import { ProgressBar } from '../../../shared/ui/ProgressBar';
 export function ReaderScreen({ lessonId }: { lessonId: string }) {
   const lesson = getLesson(lessonId);
   const { progress, setSection } = useLearningProgress();
+  const started = Boolean(progress[lessonId]);
+  useEffect(() => {
+    if (lesson && !started) setSection(lesson.id, 0);
+  }, [lesson, started, setSection]);
   if (!lesson)
     return (
       <Screen>
@@ -68,8 +73,8 @@ export function ReaderScreen({ lessonId }: { lessonId: string }) {
         <Text>What is one small way you could put this into practice this week?</Text>
       </Card>
       <Text variant="caption" muted>
-        Original sample teaching content. Your reading position saves when you move between
-        sections.
+        Original sample teaching content. Your reading position saves when you open a lesson or move
+        between sections.
       </Text>
     </Screen>
   );

@@ -5,6 +5,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Added
+- Home Continue learning cards and an In progress lesson filter; opening the first reading now saves its starting position.
 - Windows startup launcher: double-click `start.cmd` to start the mobile development server.
 - Three-page welcome flow with Skip, Back, Next and Get started controls, a saved completion preference and replay from Profile.
 - First runnable mobile preview: Home, lesson browsing, reading, quizzes, progress and profile.

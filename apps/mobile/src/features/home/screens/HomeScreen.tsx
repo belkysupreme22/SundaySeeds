@@ -11,6 +11,7 @@ import { Card } from '../../../shared/ui/Card';
 import { SectionHeading } from '../../../shared/ui/SectionHeading';
 import { colors, type Pastel } from '../../../shared/theme/tokens';
 import { WeeklyHero } from '../components/WeeklyHero';
+import { ContinueLearning } from '../components/ContinueLearning';
 export function HomeScreen() {
   const { bookmarks, progress } = useLearningProgress();
   const completed = Object.values(progress).filter((p) => p.completed).length;
@@ -67,6 +68,7 @@ export function HomeScreen() {
         <IconButton name="user" label="Your profile" onPress={() => router.replace('/profile')} />
       </View>
       <WeeklyHero />
+      <ContinueLearning />
       <ContentGroup>
         <SectionHeading title="Your learning space" />
         <View style={styles.shortcuts}>

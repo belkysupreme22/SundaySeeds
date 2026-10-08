@@ -18,6 +18,12 @@ Use `npm run android` with an Android emulator or device ready. A web preview is
 
 Current owner preference: keep each increment small. The owner runs builds, tests and intensive terminal checks; provide the relevant commands instead of running them unless explicitly requested. Report unverified behaviour clearly.
 
+### Continue learning checkpoint
+
+Start a lesson, return Home and tap its Continue learning card: it should reopen the same reading, including reading one. Move to reading two, reload and check that position is restored. Home shows up to two unfinished lessons in collection order; View all opens the In progress filter. Complete a quiz and verify that lesson moves out of In progress into Completed. Saving an unopened lesson should only add it to Saved. Search works within each filter and gives a search-specific empty message.
+
+No new dependencies or storage migration. Runtime checks are left to the owner; use `start.cmd` from the project root.
+
 ### Welcome flow checkpoint
 
 On the next fresh app launch, the introduction appears before Home. Try Next, Back and Get started, then reload: Home should open directly. Profile -> View introduction replays the three pages; Skip returns to Home. Existing lesson progress and bookmarks use a separate storage key and are retained.
