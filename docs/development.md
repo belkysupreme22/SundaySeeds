@@ -18,6 +18,12 @@ Use `npm run android` with an Android emulator or device ready. A web preview is
 
 Current owner preference: keep each increment small. The owner runs builds, tests and intensive terminal checks; provide the relevant commands instead of running them unless explicitly requested. Report unverified behaviour clearly.
 
+### Quiz answer review checkpoint
+
+Finish a quiz with a mix of correct and incorrect answers, then tap Review answers. Check the question order, your chosen answers, the correct answers for missed questions and each explanation. Hide the review, retry the quiz and confirm the new attempt starts with no choices selected and a fresh review. A lower retry score should not replace the saved best score in Progress. The answer review belongs to the current attempt and is not stored after closing the quiz.
+
+No new dependencies or storage changes. Runtime checks are left to the owner; launch with `start.cmd`.
+
 ### Continue learning checkpoint
 
 Start a lesson, return Home and tap its Continue learning card: it should reopen the same reading, including reading one. Move to reading two, reload and check that position is restored. Home shows up to two unfinished lessons in collection order; View all opens the In progress filter. Complete a quiz and verify that lesson moves out of In progress into Completed. Saving an unopened lesson should only add it to Saved. Search works within each filter and gives a search-specific empty message.

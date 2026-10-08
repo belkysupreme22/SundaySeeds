@@ -4,6 +4,7 @@ import { Pressable, StyleSheet, View } from 'react-native';
 import { getLesson } from '../../lessons/data/lessons';
 import { useLearningProgress } from '../../progress/hooks/useLearningProgress';
 import { scoreQuiz, type QuizScore } from '../data/scoreQuiz';
+import { QuizResultScreen } from './QuizResultScreen';
 import { Screen, ContentGroup } from '../../../shared/ui/Screen';
 import { PageHeader } from '../../../shared/ui/PageHeader';
 import { Text } from '../../../shared/ui/Text';
@@ -46,46 +47,17 @@ export function QuizScreen({ lessonId }: { lessonId: string }) {
   }
   if (result)
     return (
-      <Screen
-        footer={<Button label="See my progress" onPress={() => router.replace('/progress')} />}
-      >
-        <PageHeader title="A little wiser" back />
-        <View style={styles.celebration}>
-          <View style={styles.medal}>
-            <Icon name="check" size={54} />
-          </View>
-          <Text variant="heading">You did it!</Text>
-          <Text muted style={styles.center}>
-            Every little lesson helps you grow.
-          </Text>
-        </View>
-        <Card tone="lavender" style={styles.result}>
-          <Text variant="hero">{result.percentage}%</Text>
-          <Text>
-            {result.correct} of {result.total} answers correct
-          </Text>
-          <Text variant="label">{lesson.title}</Text>
-        </Card>
-        <Card tone="mint" shadow={false}>
-          <Text variant="label">Take it into your week</Text>
-          <Text>Choose one small action from this lesson and put it into practice.</Text>
-        </Card>
-        <Text variant="small" muted>
-          Your best score is kept on this device. Any storage problem is shown at the top of the
-          app.
-        </Text>
-        <Button
-          label="Try the quiz again"
-          variant="outline"
-          icon="refresh-cw"
-          onPress={() => {
-            setIndex(0);
-            setChecked(false);
-            setAnswers(lesson.questions.map(() => null));
-            setResult(null);
-          }}
-        />
-      </Screen>
+      <QuizResultScreen
+        lesson={lesson}
+        result={result}
+        answers={answers}
+        onRetry={() => {
+          setIndex(0);
+          setChecked(false);
+          setAnswers(lesson.questions.map(() => null));
+          setResult(null);
+        }}
+      />
     );
   return (
     <Screen
@@ -174,17 +146,4 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
   optionText: { flex: 1 },
-  celebration: { alignItems: 'center', gap: 12, paddingVertical: 20 },
-  medal: {
-    width: 108,
-    height: 108,
-    borderRadius: 54,
-    backgroundColor: colors.mint,
-    borderWidth: 1.2,
-    borderColor: colors.ink,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  center: { textAlign: 'center' },
-  result: { alignItems: 'center', gap: 10 },
 });
