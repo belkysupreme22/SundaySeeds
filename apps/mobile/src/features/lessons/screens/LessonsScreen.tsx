@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
-import { useLocalSearchParams } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import { Pressable, StyleSheet, TextInput, View } from 'react-native';
 import { lessons } from '../data/lessons';
+import { getLessonTopic } from '../data/lessonTopics';
 import { LessonCard } from '../components/LessonCard';
 import { useLearningProgress } from '../../progress/hooks/useLearningProgress';
 import { colors, fonts } from '../../../shared/theme/tokens';
@@ -10,6 +11,7 @@ import { PageHeader } from '../../../shared/ui/PageHeader';
 import { Text } from '../../../shared/ui/Text';
 import { Card } from '../../../shared/ui/Card';
 import { Icon } from '../../../shared/ui/Icon';
+import { Button, IconButton } from '../../../shared/ui/Button';
 const filters = [
   { value: 'all', label: 'All lessons' },
   { value: 'in-progress', label: 'In progress' },
@@ -23,7 +25,8 @@ function getFilter(value?: string): LessonFilter {
 }
 
 export function LessonsScreen() {
-  const params = useLocalSearchParams<{ filter?: string }>();
+  const params = useLocalSearchParams<{ filter?: string; topic?: string }>();
+  const topic = getLessonTopic(params.topic);
   const [filter, setFilter] = useState<LessonFilter>(() => getFilter(params.filter));
   const [query, setQuery] = useState('');
   useEffect(() => {
@@ -32,6 +35,7 @@ export function LessonsScreen() {
   const { bookmarks, progress } = useLearningProgress();
   const visible = lessons.filter(
     (l) =>
+      (!topic || l.category === topic.name) &&
       (filter !== 'saved' || bookmarks.includes(l.id)) &&
       (filter !== 'completed' || progress[l.id]?.completed) &&
       (filter !== 'in-progress' || (progress[l.id] && !progress[l.id].completed)) &&
@@ -39,7 +43,17 @@ export function LessonsScreen() {
   );
   return (
     <Screen tabs>
-      <PageHeader title="Explore lessons" subtitle="Small steps to a growing faith." />
+      <PageHeader
+        title="Explore lessons"
+        subtitle="Small steps to a growing faith."
+        action={
+          <IconButton
+            name="grid"
+            label="Browse topics"
+            onPress={() => router.push('/lessons/topics')}
+          />
+        }
+      />
       <View style={styles.search}>
         <Icon name="search" size={18} />
         <TextInput
@@ -51,11 +65,18 @@ export function LessonsScreen() {
           style={styles.input}
         />
       </View>
-      <Card tone="yellow" shadow={false}>
-        <Text variant="title">Make room for a little wonder.</Text>
+      <Card tone={topic?.tone ?? 'yellow'} shadow={false} style={styles.banner}>
+        <Text variant="title">{topic ? topic.name : 'Make room for a little wonder.'}</Text>
         <Text variant="small">
-          Read a story, find a new perspective, and carry it into your week.
+          {topic?.description ??
+            'Read a story, find a new perspective, and carry it into your week.'}
         </Text>
+        <Button
+          label={topic ? 'All topics' : 'Browse topics'}
+          variant="outline"
+          icon={topic ? 'x' : 'grid'}
+          onPress={() => (topic ? router.setParams({ topic: '' }) : router.push('/lessons/topics'))}
+        />
       </Card>
       <View style={styles.filters}>
         {filters.map((f) => (
@@ -72,26 +93,39 @@ export function LessonsScreen() {
       </View>
       <ContentGroup>
         <Text variant="label">
-          {visible.length} {visible.length === 1 ? 'lesson' : 'lessons'} to explore
+          {visible.length} {visible.length === 1 ? 'lesson' : 'lessons'}
+          {topic ? ` in ${topic.name}` : ' to explore'}
         </Text>
         {visible.map((l) => (
           <LessonCard key={l.id} lesson={l} />
         ))}
         {!visible.length && (
-          <Card shadow={false}>
+          <Card shadow={false} style={styles.banner}>
             <Icon name="book-open" />
             <Text variant="title">Nothing here just yet</Text>
             <Text>
               {query.trim()
-                ? 'No matching lessons in this view. Try a different search or choose All lessons.'
-                : filter === 'saved'
-                  ? 'Tap a bookmark on a lesson to keep it here.'
-                  : filter === 'completed'
-                    ? 'Finish a lesson’s quiz to see it here.'
-                    : filter === 'in-progress'
-                      ? 'Start a reading to keep your place here. Finished lessons move to Completed.'
-                      : 'Try a different search.'}
+                ? 'No matching lessons in this view. Try another search or clear your filters.'
+                : topic
+                  ? `No ${topic.name.toLowerCase()} lessons match this view yet. Try All lessons or another topic.`
+                  : filter === 'saved'
+                    ? 'Tap a bookmark on a lesson to keep it here.'
+                    : filter === 'completed'
+                      ? 'Finish a lesson’s quiz to see it here.'
+                      : filter === 'in-progress'
+                        ? 'Start a reading to keep your place here. Finished lessons move to Completed.'
+                        : 'Try a different search.'}
             </Text>
+            <Button
+              label="Clear filters"
+              variant="outline"
+              icon="x"
+              onPress={() => {
+                setQuery('');
+                setFilter('all');
+                router.setParams({ topic: '', filter: 'all' });
+              }}
+            />
           </Card>
         )}
       </ContentGroup>
@@ -102,6 +136,7 @@ export function LessonsScreen() {
   );
 }
 const styles = StyleSheet.create({
+  banner: { gap: 12 },
   search: {
     borderWidth: 1,
     borderColor: colors.ink,

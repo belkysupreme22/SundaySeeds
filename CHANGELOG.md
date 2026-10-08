@@ -5,6 +5,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Added
+- Pastel topic browsing for Faith, Kindness, Courage and Prayer, with sample-lesson counts, combined topic/search/status filtering and a clear-filters action.
 - Quiz results now offer an answer review with selected choices, correct answers and explanations; result and review UI live in separate feature files.
 - Home Continue learning cards and an In progress lesson filter; opening the first reading now saves its starting position.
 - Windows startup launcher: double-click `start.cmd` to start the mobile development server.

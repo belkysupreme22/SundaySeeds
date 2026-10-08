@@ -17,7 +17,8 @@ export function BottomNav() {
     <SafeAreaView edges={['bottom']} style={styles.safe}>
       <View style={styles.bar}>
         {tabs.map((tab) => {
-          const selected = pathname === tab.href;
+          const selected =
+            pathname === tab.href || (tab.href === '/lessons' && pathname.startsWith('/lessons/'));
           return (
             <Pressable
               key={tab.label}
@@ -25,7 +26,7 @@ export function BottomNav() {
               accessibilityState={{ selected }}
               accessibilityLabel={tab.label}
               onPress={() => {
-                if (!selected) router.replace(tab.href);
+                if (pathname !== tab.href) router.replace(tab.href);
               }}
               style={[styles.tab, selected && styles.active]}
             >

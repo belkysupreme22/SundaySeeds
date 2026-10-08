@@ -18,6 +18,12 @@ Use `npm run android` with an Android emulator or device ready. A web preview is
 
 Current owner preference: keep each increment small. The owner runs builds, tests and intensive terminal checks; provide the relevant commands instead of running them unless explicitly requested. Report unverified behaviour clearly.
 
+### Topic browsing checkpoint
+
+Open Lessons -> Browse topics. Check the four pastel cards and their sample-lesson counts. Pick a topic and confirm only its lessons appear; combine it with search, Saved or In progress. All topics clears just the topic, while Clear filters on an empty result clears topic, search and status. An unknown topic URL should show all topics. On the topic screen, the Lessons tab stays highlighted and returns to the full lesson list.
+
+No dependencies or storage changes. Launch with `start.cmd`; runtime and visual checks remain with the owner.
+
 ### Quiz answer review checkpoint
 
 Finish a quiz with a mix of correct and incorrect answers, then tap Review answers. Check the question order, your chosen answers, the correct answers for missed questions and each explanation. Hide the review, retry the quiz and confirm the new attempt starts with no choices selected and a fresh review. A lower retry score should not replace the saved best score in Progress. The answer review belongs to the current attempt and is not stored after closing the quiz.
