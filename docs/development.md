@@ -18,6 +18,14 @@ Use `npm run android` with an Android emulator or device ready. A web preview is
 
 Current owner preference: keep each increment small. The owner runs builds, tests and intensive terminal checks; provide the relevant commands instead of running them unless explicitly requested. Report unverified behaviour clearly.
 
+### Reading progress, quiz feedback and readability checkpoint
+
+Open a lesson and visit each reading. The reader, lesson cards, Continue learning and Progress should agree on Reading position (1 of 3, 2 of 3, 3 of 3). The full reading-position bar on reading three still says Quiz not finished. Only finishing the quiz changes the label to Lesson completed and updates the overall completed-lesson count. Reopening a completed lesson should keep its completed status.
+
+Choose a wrong quiz answer: before checking it uses a neutral selection icon; after checking, your answer has a peach background, an X and an Incorrect label, while the correct answer has a mint background, checkmark and Correct answer label. Check a correct selection too, and verify the next question clears the feedback.
+
+On Home, inspect the larger shortcut and hero labels at normal text size, then at 150% and 200% system text size. Shortcut tiles should wrap into fewer columns without clipping. Check the hero button remains reachable. Launch with `start.cmd`; runtime and native layout checks remain with the owner. No stored progress is changed by this display update.
+
 ### Settings checkpoint
 
 Open Profile -> Settings using either the gear icon or Settings button. Open Display name, save or cancel, and check that you return to Settings; opening the editor directly from Profile should still return there. Under Learning data, open Reset preview progress and first choose Keep my progress. If you want to test deletion with sample data, confirm the reset and check scores, reading positions and bookmarks are cleared while your name and introduction preference remain. Reload to check the reset persists. Read the About section and return to Profile using Back.

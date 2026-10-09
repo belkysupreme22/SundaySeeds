@@ -20,6 +20,8 @@ Notable changes are recorded here. Unreleased entries describe development miles
 - Project working agreement covering design fidelity, feature boundaries, verification and collaborative development.
 
 ### Changed
+- Unified reading-position labels across lesson cards, the reader, Continue learning and Progress; quiz completion is stated separately.
+- Quiz choices now distinguish selected, correct and incorrect states with text and icons. Home labels are larger, shortcut tiles wrap for narrower screens/larger text, and the hero action has a 44-point minimum height.
 - Moved reset confirmation and device-storage information from Profile into Settings; the name editor now returns to its originating screen after save or cancel.
 - Removed unused, untracked Claude Expo plugin settings from the mobile folder.
 - Replaced the discontinued Kotlin app with the agreed React Native direction; preserved reusable artwork.

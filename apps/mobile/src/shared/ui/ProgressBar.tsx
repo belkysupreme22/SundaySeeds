@@ -1,12 +1,15 @@
 import { View, StyleSheet } from 'react-native';
 import { colors } from '../theme/tokens';
 
-export function ProgressBar({ value, color = colors.primary }: { value: number; color?: string }) {
+export function ProgressBar({ value, color = colors.primary, label, valueText }: {
+  value: number; color?: string; label?: string; valueText?: string;
+}) {
   const percent = Math.min(100, Math.max(0, value));
   return (
     <View
       accessibilityRole="progressbar"
-      accessibilityValue={{ min: 0, max: 100, now: percent }}
+      accessibilityLabel={label}
+      accessibilityValue={{ min: 0, max: 100, now: percent, text: valueText }}
       style={styles.track}
     >
       <View style={[styles.fill, { width: `${percent}%`, backgroundColor: color }]} />

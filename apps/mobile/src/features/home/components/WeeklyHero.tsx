@@ -42,11 +42,11 @@ export function WeeklyHero() {
 const styles = StyleSheet.create({
   hero: { minHeight: 235, padding: 18, overflow: 'hidden', position: 'relative' },
   copy: { zIndex: 2, width: '64%', gap: 9 },
-  eyebrow: { fontSize: 8, letterSpacing: 0.5 },
-  description: { maxWidth: 165, fontSize: 11, lineHeight: 18 },
+  eyebrow: { fontSize: 11, lineHeight: 18, letterSpacing: 0.5 },
+  description: { maxWidth: 165, fontSize: 12, lineHeight: 19 },
   cta: {
     alignSelf: 'flex-start',
-    minHeight: 40,
+    minHeight: 44,
     paddingVertical: 8,
     paddingHorizontal: 10,
     borderRadius: 6,

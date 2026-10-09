@@ -6,7 +6,7 @@ import { useLearningProgress } from '../../progress/hooks/useLearningProgress';
 import { colors } from '../../../shared/theme/tokens';
 import { Card } from '../../../shared/ui/Card';
 import { Icon } from '../../../shared/ui/Icon';
-import { ProgressBar } from '../../../shared/ui/ProgressBar';
+import { LessonProgressSummary } from '../../lessons/components/LessonProgressSummary';
 import { ContentGroup } from '../../../shared/ui/Screen';
 import { SectionHeading } from '../../../shared/ui/SectionHeading';
 import { Text } from '../../../shared/ui/Text';
@@ -44,10 +44,7 @@ export function ContinueLearning() {
               <LessonArtwork id={lesson.id} tone={lesson.color} />
               <View style={styles.copy}>
                 <Text variant="label">{lesson.title}</Text>
-                <Text variant="caption" muted>
-                  Reading {index + 1} of {lesson.sections.length}
-                </Text>
-                <ProgressBar value={(index / lesson.sections.length) * 100} />
+                <LessonProgressSummary readingCount={lesson.sections.length} progress={progress[lesson.id]} />
                 <Text variant="caption">{lesson.sections[index].title}</Text>
               </View>
               <View style={styles.play}>

@@ -1,5 +1,5 @@
 import { router } from 'expo-router';
-import { Pressable, StyleSheet, View } from 'react-native';
+import { Pressable, StyleSheet, useWindowDimensions, View } from 'react-native';
 import { lessons } from '../../lessons/data/lessons';
 import { useLearningProgress } from '../../progress/hooks/useLearningProgress';
 import { LessonCard } from '../../lessons/components/LessonCard';
@@ -14,6 +14,8 @@ import { WeeklyHero } from '../components/WeeklyHero';
 import { ContinueLearning } from '../components/ContinueLearning';
 import { useLearnerProfile } from '../../profile/hooks/useLearnerProfile';
 export function HomeScreen() {
+  const { width, fontScale } = useWindowDimensions();
+  const wrapShortcuts = width < 360 || fontScale > 1.2;
   const { displayName } = useLearnerProfile();
   const { bookmarks, progress } = useLearningProgress();
   const completed = Object.values(progress).filter((p) => p.completed).length;
@@ -79,11 +81,11 @@ export function HomeScreen() {
               key={item.title}
               accessibilityRole="button"
               onPress={item.action}
-              style={styles.shortcut}
+              style={[styles.shortcut, wrapShortcuts && styles.wideShortcut, { minWidth: 72 * fontScale }]}
             >
               <Card tone={item.tone} shadow={false} style={styles.shortcutCard}>
                 <Icon name={item.icon} size={23} />
-                <Text variant="caption" style={styles.shortcutTitle}>
+                <Text variant="label" style={styles.shortcutTitle}>
                   {item.title}
                 </Text>
                 <Text variant="caption" style={styles.shortcutSubtitle}>
@@ -137,18 +139,20 @@ const styles = StyleSheet.create({
     borderColor: colors.ink,
     backgroundColor: colors.yellow,
   },
-  shortcuts: { flexDirection: 'row', gap: 8 },
-  shortcut: { flex: 1 },
+  shortcuts: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
+  shortcut: { flexGrow: 1, flexBasis: '20%' },
+  wideShortcut: { flexBasis: '45%' },
   shortcutCard: {
-    paddingHorizontal: 2,
+    flex: 1,
+    paddingHorizontal: 6,
     paddingVertical: 14,
     borderRadius: 9,
     alignItems: 'center',
     gap: 6,
-    minHeight: 104,
+    minHeight: 112,
   },
-  shortcutTitle: { fontSize: 9, textAlign: 'center' },
-  shortcutSubtitle: { fontSize: 8, textAlign: 'center' },
+  shortcutTitle: { fontSize: 12, lineHeight: 19, textAlign: 'center' },
+  shortcutSubtitle: { fontSize: 11, lineHeight: 18, textAlign: 'center' },
   verseTitle: { flexDirection: 'row', alignItems: 'center', gap: 8, flexWrap: 'wrap' },
   verse: { marginTop: 10, marginBottom: 8 },
   demo: { textAlign: 'center', paddingHorizontal: 10 },

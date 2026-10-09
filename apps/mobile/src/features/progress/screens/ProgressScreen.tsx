@@ -10,6 +10,7 @@ import { Card } from '../../../shared/ui/Card';
 import { Button } from '../../../shared/ui/Button';
 import { Icon } from '../../../shared/ui/Icon';
 import { ProgressBar } from '../../../shared/ui/ProgressBar';
+import { LessonProgressSummary } from '../../lessons/components/LessonProgressSummary';
 export function ProgressScreen() {
   const { progress, bookmarks } = useLearningProgress();
   const entries = Object.values(progress);
@@ -69,11 +70,6 @@ export function ProgressScreen() {
         <Text variant="title">Lesson progress</Text>
         {lessons.map((l) => {
           const p = progress[l.id];
-          const percent = p?.completed
-            ? 100
-            : p
-              ? Math.round((p.sectionIndex / l.sections.length) * 100)
-              : 0;
           return (
             <Pressable
               key={l.id}
@@ -86,14 +82,8 @@ export function ProgressScreen() {
                 </View>
                 <View style={styles.words}>
                   <Text variant="label">{l.title}</Text>
-                  <ProgressBar value={percent} color={colors[l.color]} />
-                  <Text variant="caption" muted>
-                    {p?.completed
-                      ? `Completed · Best quiz ${p.bestScore}%`
-                      : p
-                        ? `Reading ${p.sectionIndex + 1} of ${l.sections.length}`
-                        : 'Ready when you are'}
-                  </Text>
+                  <LessonProgressSummary readingCount={l.sections.length} progress={p} color={colors[l.color]} />
+                  {p?.completed && <Text variant="caption" muted>Best quiz {p.bestScore}%</Text>}
                 </View>
                 <Icon name="chevron-right" size={18} />
               </Card>

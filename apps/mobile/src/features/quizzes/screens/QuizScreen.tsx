@@ -86,6 +86,7 @@ export function QuizScreen({ lessonId }: { lessonId: string }) {
           <Pressable
             key={option}
             accessibilityRole="radio"
+            accessibilityLabel={`${option}${checked && optionIndex === question.correctIndex ? ', correct answer' : checked && selected === optionIndex ? ', your answer, incorrect' : ''}`}
             accessibilityState={{ checked: selected === optionIndex, disabled: checked }}
             disabled={checked}
             onPress={() =>
@@ -97,13 +98,22 @@ export function QuizScreen({ lessonId }: { lessonId: string }) {
               styles.option,
               selected === optionIndex && styles.selected,
               checked && optionIndex === question.correctIndex && styles.correct,
+              checked && selected === optionIndex && !correct && styles.incorrect,
             ]}
           >
             <View style={styles.letter}>
               <Text variant="label">{String.fromCharCode(65 + optionIndex)}</Text>
             </View>
-            <Text style={styles.optionText}>{option}</Text>
-            {selected === optionIndex && <Icon name="check-circle" size={18} />}
+            <View style={styles.optionText}>
+              <Text>{option}</Text>
+              {checked && optionIndex === question.correctIndex && <Text variant="caption">Correct answer</Text>}
+              {checked && selected === optionIndex && !correct && <Text variant="caption">Your answer · Incorrect</Text>}
+            </View>
+            {checked && optionIndex === question.correctIndex ? (
+              <Icon name="check-circle" size={18} color={colors.success} />
+            ) : selected === optionIndex ? (
+              <Icon name={checked ? 'x-circle' : 'disc'} size={18} color={checked ? colors.danger : colors.ink} />
+            ) : null}
           </Pressable>
         ))}
       </ContentGroup>
@@ -135,6 +145,7 @@ const styles = StyleSheet.create({
   },
   selected: { backgroundColor: colors.lavender },
   correct: { backgroundColor: colors.mint },
+  incorrect: { backgroundColor: colors.peach },
   letter: {
     width: 30,
     height: 30,
@@ -145,5 +156,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: colors.white,
   },
-  optionText: { flex: 1 },
+  optionText: { flex: 1, gap: 4 },
 });

@@ -9,7 +9,7 @@ import { Text } from '../../../shared/ui/Text';
 import { Card } from '../../../shared/ui/Card';
 import { Button } from '../../../shared/ui/Button';
 import { Icon } from '../../../shared/ui/Icon';
-import { ProgressBar } from '../../../shared/ui/ProgressBar';
+import { LessonProgressSummary } from '../components/LessonProgressSummary';
 export function ReaderScreen({ lessonId }: { lessonId: string }) {
   const lesson = getLesson(lessonId);
   const { progress, setSection } = useLearningProgress();
@@ -54,7 +54,10 @@ export function ReaderScreen({ lessonId }: { lessonId: string }) {
         subtitle={`Reading ${index + 1} of ${lesson.sections.length}`}
         back
       />
-      <ProgressBar value={((index + 1) / lesson.sections.length) * 100} />
+      <LessonProgressSummary
+        readingCount={lesson.sections.length}
+        progress={progress[lesson.id] ?? { sectionIndex: index, completed: false, bestScore: null }}
+      />
       <Card tone={lesson.color} shadow={false} style={styles.cover}>
         <Icon name="book-open" size={36} />
         <Text variant="caption">{lesson.scripture}</Text>
