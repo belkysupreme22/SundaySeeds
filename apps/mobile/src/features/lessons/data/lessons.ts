@@ -15,6 +15,12 @@ export const lessons: Lesson[] = [
     color: 'lavender',
     intro:
       'Sample lesson · Explore the Good Samaritan and discover how everyday kindness can become love in action.',
+    outcomes: [
+      { title: 'Notice others', description: 'Recognise someone who may need care.' },
+      { title: 'Show kindness', description: 'Turn compassion into practical help.' },
+      { title: 'Cross boundaries', description: 'Show love beyond your own circle.' },
+      { title: 'Take a small step', description: 'Choose one safe way to help this week.' },
+    ],
     memoryVerse: {
       text: 'Thou shalt love thy neighbour as thyself.',
       reference: 'Matthew 22:39 · KJV excerpt',
@@ -81,6 +87,12 @@ export const lessons: Lesson[] = [
     color: 'yellow',
     intro:
       'Sample lesson · Meet David and reflect on courage, trust and using the gifts you already have.',
+    outcomes: [
+      { title: 'Name your fear', description: 'Be honest about a difficult challenge.' },
+      { title: 'Remember your gifts', description: 'Notice skills you already practise.' },
+      { title: 'Trust God', description: 'Reflect on what gave David courage.' },
+      { title: 'Choose wisely', description: 'Take a safe step and ask for support.' },
+    ],
     memoryVerse: {
       text: 'What time I am afraid, I will trust in thee.',
       reference: 'Psalm 56:3 · KJV',
@@ -147,6 +159,12 @@ export const lessons: Lesson[] = [
     color: 'mint',
     intro:
       'Sample lesson · Discover prayer as an honest conversation with God, starting with a quiet moment today.',
+    outcomes: [
+      { title: 'Speak honestly', description: 'Bring your real concerns to God.' },
+      { title: 'Learn a pattern', description: 'Explore the prayer Jesus taught.' },
+      { title: 'Pause and reflect', description: 'Make room for thanks and listening.' },
+      { title: 'Build a habit', description: 'Choose a regular moment to pray.' },
+    ],
     memoryVerse: { text: 'Pray without ceasing.', reference: '1 Thessalonians 5:17 · KJV' },
     sections: [
       {
@@ -215,6 +233,12 @@ export const lessons: Lesson[] = [
     color: 'peach',
     intro:
       'Sample lesson · Explore Jesus’ mustard seed picture and the value of small, faithful beginnings.',
+    outcomes: [
+      { title: 'Start small', description: 'Explore Jesus’ mustard seed picture.' },
+      { title: 'Be patient', description: 'Give steady growth time to happen.' },
+      { title: 'Practise faith', description: 'Choose a small habit for this week.' },
+      { title: 'Welcome others', description: 'Make room for someone to belong.' },
+    ],
     memoryVerse: {
       text: 'For we walk by faith, not by sight.',
       reference: '2 Corinthians 5:7 · KJV',

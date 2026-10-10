@@ -111,6 +111,34 @@ test('quiz retries retain the best score and reading cannot undo completion', as
   await delay();
 });
 
+test('revisiting a completed lesson saves the first reading without losing achievements or its bookmark', async () => {
+  let disk: string | null = null;
+  const storage = {
+    getItem: async () => disk,
+    setItem: async (_key: string, value: string) => {
+      disk = value;
+    },
+  };
+  const store = createLearningStore(storage);
+  await store.hydrate();
+  store.completeQuiz(firstLesson.id, 100);
+  store.toggleBookmark(firstLesson.id);
+  await delay();
+  assert.equal(parseSavedLearning(disk).progress[firstLesson.id].sectionIndex, 2);
+
+  store.setSection(firstLesson.id, 0);
+  await delay();
+
+  const reopened = createLearningStore(storage);
+  await reopened.hydrate();
+  assert.deepEqual(reopened.getSnapshot().progress[firstLesson.id], {
+    sectionIndex: 0,
+    completed: true,
+    bestScore: 100,
+  });
+  assert.deepEqual(reopened.getSnapshot().bookmarks, [firstLesson.id]);
+});
+
 test('serialized writes ensure reset wins even if an older save is slow', async () => {
   let releaseFirstWrite: () => void = () => undefined;
   const writes: string[] = [];

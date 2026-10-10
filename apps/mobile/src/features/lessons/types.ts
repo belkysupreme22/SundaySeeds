@@ -18,6 +18,7 @@ export type Lesson = {
   durationMinutes: number;
   color: LessonColor;
   intro: string;
+  outcomes: { title: string; description: string }[];
   memoryVerse: { text: string; reference: string };
   sections: { id: string; title: string; body: string }[];
   questions: QuizQuestion[];

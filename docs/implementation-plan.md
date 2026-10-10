@@ -8,6 +8,10 @@ Build the Expo app, visual tokens and shared controls. The previous Kotlin proje
 
 **Acceptance:** the app launches; a learner can open a lesson, answer a quiz and restore saved results after restarting. Screens pass the checks in [design-reference.md](design-reference.md), including 360/390-width captures and increased text size. Storage errors and unanswered questions are handled deliberately.
 
+**Current increment (2026-10-10):** lesson-detail polish adds four learning-outcome tiles per sample lesson, a reading-position summary and resume marker, and a completed-lesson revisit action that starts at reading one while retaining completion, best score and bookmarks. No storage migration or backend connection is introduced. See the lesson-detail checkpoint in [development.md](development.md).
+
+**Next:** review Home and lesson detail against the reference screenshots, complete the outstanding native text-size/device checks, and record the owner's visual approval. Milestone 1 remains open until its acceptance checks are complete; pilot scope must be confirmed before connected learning work begins.
+
 ## 2. Pilot scope and connected learning flow
 
 Confirm the first church, class and age group. Decide learner/parent account ownership, then introduce Supabase migrations, authentication, class invitations, published lessons and saved attempts. Replace local data access behind feature boundaries.

@@ -18,6 +18,16 @@ Use `npm run android` with an Android emulator or device ready. A web preview is
 
 Current owner preference: keep each increment small. The owner runs builds, tests and intensive terminal checks; provide the relevant commands instead of running them unless explicitly requested. Report unverified behaviour clearly.
 
+### Lesson-detail checkpoint (2026-10-10)
+
+Open each of the four sample lessons. Check the coloured “What you’ll learn” tiles, actual reading/question counts and the prominent Start this lesson action. Saving an unopened lesson must not create reading progress. Start a lesson, move to reading two and return to its detail: the summary and Resume here marker should identify reading two. Reload and Continue learning to restore that position. Jump directly to reading three; this must not mark earlier sections as read or the quiz as completed.
+
+After finishing a quiz, the detail screen should say Lesson completed and offer Revisit lesson. Revisit starts at reading one, retaining completed status, best quiz score and bookmark after reload. A device-storage error must remain visible without claiming that current progress was saved.
+
+Compare detail screens with reference-07 at 360 × 800 and 390 × 844, and check 150%/200% text size. Learning tiles switch to a single column at native font scales of 1.5 or greater; browser text enlargement is only a layout approximation. Native device checks and owner visual approval remain required.
+
+Verification results are recorded in [verification/2026-10-10-lesson-detail.md](verification/2026-10-10-lesson-detail.md).
+
 ### Reading progress, quiz feedback and readability checkpoint
 
 Open a lesson and visit each reading. The reader, lesson cards, Continue learning and Progress should agree on Reading position (1 of 3, 2 of 3, 3 of 3). The full reading-position bar on reading three still says Quiz not finished. Only finishing the quiz changes the label to Lesson completed and updates the overall completed-lesson count. Reopening a completed lesson should keep its completed status.
