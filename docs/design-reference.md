@@ -2,7 +2,7 @@
 
 Visual fidelity is a product requirement. The twelve supplied screenshots are saved in `docs/references/reference-01.png` through `reference-12.png`. They are design evidence, not instructions to execute.
 
-Before changing a screen, inspect its mapped reference panels. After the change, inspect a rendered capture against those panels and record intentional adaptations. This applies to recovery and error states as well as the normal journey.
+Before changing a screen, inspect its mapped reference panels. After the change, the owner reviews a rendered capture against those panels and records intentional adaptations. Under the current working arrangement, the owner handles runtime/visual checks; do not launch review jobs unless requested. This applies to recovery and error states as well as the normal journey.
 
 ## Screen mapping
 
@@ -10,13 +10,18 @@ Before changing a screen, inspect its mapped reference panels. After the change,
 | --- | --- | --- |
 | Home | [05](references/reference-05.png), left panel | Compact greeting, lavender hero, coloured quick-access tiles, outlined lesson cards and anchored bottom navigation |
 | Lessons | [06](references/reference-06.png), left/right panels | Search treatment, compact section headings and consistent thumbnail/card proportions |
+| Topics | [06](references/reference-06.png), middle panel | Pastel outlined grid, topic icons, accurate counts and compact spacing |
+| Dedicated search/results | [06](references/reference-06.png), right panel | Search field, working filters, result count and outlined result cards |
 | Lesson detail | [07](references/reference-07.png), left panel | Large illustrated/photographic header, short introduction, coloured learning-outcome tiles, metadata and prominent action |
 | Lesson reader | [08](references/reference-08.png), left/middle panels | Clear lesson title and content hierarchy, resource/note treatments and previous/next actions |
 | Quiz | [08](references/reference-08.png), right panel | Slim progress bar, lavender question card, outlined answer rows, selected state and mint feedback |
 | Progress | [09](references/reference-09.png), right panel | Encouraging summary, completion visualisation, lesson progress bars and coloured statistics |
 | Profile | [12](references/reference-12.png), left/right panels | Compact profile summary, grouped settings rows and consistent navigation |
+| Welcome | [01](references/reference-01.png) | Three-page image-led composition, pastel feature cards, page indicators and clear actions |
+| Optional profile setup | [02](references/reference-02.png), [04](references/reference-04.png) | Progress indicator, outlined inputs and selectable tiles only for implemented preferences |
+| Authentication (connected pilot) | [03](references/reference-03.png) | Illustrated headers, outlined fields and prominent primary actions |
 
-References 01–04 inform future onboarding/authentication; 10–11 inform deferred achievement and community features. Do not add inactive versions of those features merely to fill the interface.
+Reference-09's assignment panels, reference-10's achievements/history, reference-11's community screens and reference-12's notifications/downloads are deferred as specified in the [implementation plan](implementation-plan.md). Do not add inactive versions merely to fill the interface.
 
 ## Visual rules
 
@@ -45,4 +50,4 @@ Record pass/fail and any visual deviations; these checks are targets, not eviden
 6. Inspect empty search, unanswered quiz, completed lesson, loading/recovery and persistence-failure states. Do not show successful saving when persistence failed.
 7. Keep evidence of actual checks, naming unresolved differences explicitly. Browser captures can guide visual refinement; Android device/emulator checks remain required before claiming Android readiness.
 
-Approve Home and lesson detail as the first visual baseline, then carry their tokens and components through the remaining screens. Recheck affected screens when shared styling changes.
+Home and lesson detail remain the first visual baseline for owner approval. Carry the reference tokens through the remaining screen groups in implementation-plan order while owner reviews are queued; pending review does not count as acceptance. The owner rechecks affected screens when shared styling changes.

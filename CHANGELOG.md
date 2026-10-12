@@ -22,6 +22,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 - Project working agreement covering design fidelity, feature boundaries, verification and collaborative development.
 
 ### Changed
+- Replaced the broad frontend roadmap with an ordered screen-by-screen plan, starting with Lessons discovery; recorded reference mappings, owner acceptance criteria, backend dependencies and deferred designs.
 - Lesson cards give bookmarks their own control column and stack artwork above copy for narrow screens or larger native text.
 - Home follows the reference's hero-to-quick-access order, with more compact shortcut tiles and separate hero text/artwork columns that stack for narrow screens or larger native text.
 - Progress recovery preserves stored data after read failures and retries the current snapshot without repeating quiz or bookmark actions. Older queued saves no longer clear a warning before the latest changes are saved.
