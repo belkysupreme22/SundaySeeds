@@ -18,6 +18,14 @@ Use `npm run android` with an Android emulator or device ready. A web preview is
 
 Current owner preference: keep each increment small. The owner runs builds, tests and intensive terminal checks; provide the relevant commands instead of running them unless explicitly requested. Report unverified behaviour clearly.
 
+### Lessons browse D1 checkpoint (2026-10-12)
+
+Reference-06 left panel was inspected before implementation. Lessons now groups a compact heading and outlined search field above a lavender portrait hero and dark topic action. The retained artwork substitutes for the reference portrait; sample lessons replace popularity/teacher claims. Topic views use their existing colour, description and an All topics action. The hero separates copy from artwork and stacks below 350 logical pixels or at native font scales of 1.5 and above.
+
+The list has a sample/topic heading, actual result count and Clear all action when narrowed. Search can be cleared independently; combined topic/status/search filtering, empty-state recovery, outlined lesson cards, independent bookmarks and anchored bottom navigation are retained. Dedicated search and filter redesign remain D3/D4.
+
+Owner checks: compare Lessons with reference-06 at 360/390 widths and 150%/200% native text. Open topics from the header and hero; choose a topic and clear it. Search a title/scripture, combine with Saved/In progress/Completed, clear the query or all filters, and try no results. Open a lesson and toggle its bookmark independently. Check bottom navigation and large-text hero flow. No typecheck, lint, tests, builds or runtime/visual review were run, per the owner's instruction. D1 is implemented, acceptance pending; D2 topic grid is next.
+
 ### Home design implementation checkpoint (2026-10-12)
 
 Reference-05's left panel informs this increment: compact lavender hero, adjacent portrait, quick-access tiles immediately below, then lesson cards. Hero text and artwork now occupy separate layout columns rather than overlap; they stack below 350 logical pixels or at native font scales of 1.5 and above. Quick-access tiles are shorter at default text size. Continue learning follows the shortcuts so returning learners keep the same entry layout.

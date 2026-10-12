@@ -2,7 +2,7 @@
 
 Updated 12 October 2026. This plan turns the reference designs into a sequence of complete learner flows. It separates implemented functionality, remaining design work and owner acceptance; a working screen is not automatically a finished design.
 
-**Next task: D1 — Lessons browse screen, reference-06 left panel.** Continue through Lessons discovery before another discretionary Home polish pass.
+**Next task: D2 — Topic grid, reference-06 middle panel.** D1 browse design is implemented and awaiting owner runtime/visual review. Continue through Lessons discovery before another discretionary Home polish pass.
 
 ## Delivery agreement
 
@@ -29,13 +29,15 @@ All tasks below build on the existing app. They are remaining design/interaction
 
 | Order | Screen group | References | Starting point / status |
 | --- | --- | --- | --- |
-| D1–D4 | Lessons discovery | [06](references/reference-06.png) | Browse, topics and inline search exist; next implementation group |
+| D1–D4 | Lessons discovery | [06](references/reference-06.png) | D1 browse design implemented, owner review pending; D2 topics next, then dedicated search and filters |
 | L1–L3 | Lesson overview, reader and quiz | [07](references/reference-07.png), [08](references/reference-08.png) | Working local journey; complete remaining reference layouts |
 | P1 | Progress dashboard | [05](references/reference-05.png) middle/right, [09](references/reference-09.png) right | Local progress exists; dashboard design remains to be completed |
 | S1–S2 | Profile and settings | [12](references/reference-12.png) left/right | Name editor and settings exist; finish visual structure |
 | O1–O2 | Welcome and profile setup | [01](references/reference-01.png), [02](references/reference-02.png), [04](references/reference-04.png) | Welcome exists; finish adapted setup flow |
 
 ### 1. Lessons discovery — implement next
+
+**D1 implementation checkpoint (12 October):** compact browse header/search, lavender portrait hero with working topic action, sample-lesson heading/count and clear controls are implemented. Existing outlined lesson cards, combined status/topic/query filtering, bookmarks and anchored navigation are retained. Hero stacks below 350 logical pixels or at native font scales of 1.5 and above. Owner testing and visual acceptance are pending; no tests, builds or runtime review were run for this increment. D2–D4 remain open.
 
 **D1. Browse lessons:** implement reference-06's left-panel hierarchy: search entry, compact illustrated hero, section headings, outlined lesson cards and anchored navigation. Use sample lesson groupings, with no fabricated popularity, ratings, teachers or class data.
 

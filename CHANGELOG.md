@@ -22,6 +22,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 - Project working agreement covering design fidelity, feature boundaries, verification and collaborative development.
 
 ### Changed
+- Lessons browse now follows reference-06 with a compact header/search, responsive lavender portrait hero, topic action, result count and clear controls; existing filters, bookmarks and lesson navigation are retained. Owner runtime and visual review are pending.
 - Added discovery and maintenance instructions for an ignored local agent handoff; aligned agent verification guidance with the owner's implementation-focused workflow.
 - Replaced the broad frontend roadmap with an ordered screen-by-screen plan, starting with Lessons discovery; recorded reference mappings, owner acceptance criteria, backend dependencies and deferred designs.
 - Lesson cards give bookmarks their own control column and stack artwork above copy for narrow screens or larger native text.
