@@ -20,6 +20,8 @@ Current owner preference: keep each increment small. The owner runs builds, test
 
 ### Input stroke consistency checkpoint (2026-10-12)
 
+**Later owner correction:** the dark frame on Search was unwanted. Search now uses InputField's borderless `soft` appearance, with a pale idle background and lavender focused background; its clear icon also has no enclosing dark box. Profile retains the outlined appearance described below. This intentionally adapts reference-06 based on direct feedback. Check Search idle/focused/with text and keyboard access to Clear search; runtime/visual review remains pending.
+
 During D3 the owner requested consistent focused/unfocused input strokes across screens. Source inventory found two editable fields: Lesson Search and Edit Profile. Both now use `shared/ui/InputField`: one 1-point dark outer stroke when idle, a 2-point dark stroke with pale focus fill when focused, and compensating padding to keep dimensions stable. The input's inner border, browser outline and Android underline are suppressed; the wrapper supplies visible focus. Disabled profile saving uses the muted stroke. Browse's search entry is a button, with the same visible keyboard-focus treatment. References 03, 06 and 12 informed the outlined treatment; no authentication screens were added.
 
 Owner checks: focus/blur both editable fields with touch and keyboard, type and clear values, use search's clear button, and inspect disabled profile saving. Confirm one outer stroke, a visible focus change, no positional jump and no platform underline/inner rectangle at normal and larger text sizes on web and native. The browse search entry should show focus when reached with Tab. Source inventory/formatting only; no runtime, native or visual pass is claimed.

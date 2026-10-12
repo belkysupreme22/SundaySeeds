@@ -4,7 +4,7 @@ Updated 12 October 2026. This plan turns the reference designs into a sequence o
 
 **Next task: D4 — Discovery filters, reference-06.** D1 browse, D2 topic grid and D3 dedicated search/results are implemented and awaiting owner runtime/visual review. Continue through Lessons discovery before another discretionary Home polish pass.
 
-**Owner-requested addition during D3:** consistent idle/focus input strokes are implemented in the shared InputField used by Search and Edit Profile, with matching keyboard-focus styling on Browse's search entry. Source inventory found no other editable inputs. This cross-screen fix also awaits owner visual review; D4 remains next.
+**Owner-requested addition during D3:** shared InputField provides consistent idle/focus treatment. After owner feedback, Search uses its borderless soft variant with lavender focus fill and an unboxed clear icon; Edit Profile retains the outlined variant and Browse's entry retains its keyboard-focus styling. Source inventory found no other editable inputs. Visual review remains pending; D4 remains next.
 
 ## Delivery agreement
 

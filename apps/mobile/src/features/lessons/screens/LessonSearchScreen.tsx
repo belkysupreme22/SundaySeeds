@@ -42,6 +42,7 @@ export function LessonSearchScreen() {
         </View>
         <InputField
           icon="search"
+          appearance="soft"
           accessibilityLabel="Search lessons by title, topic or scripture"
           placeholder="Search lessons or scripture"
           placeholderTextColor={colors.muted}
@@ -52,7 +53,14 @@ export function LessonSearchScreen() {
           returnKeyType="search"
           trailing={
             query.length > 0 ? (
-              <IconButton name="x" label="Clear search" onPress={clearQuery} />
+              <Pressable
+                accessibilityRole="button"
+                accessibilityLabel="Clear search"
+                onPress={clearQuery}
+                style={styles.clearSearch}
+              >
+                <Icon name="x" size={20} />
+              </Pressable>
             ) : undefined
           }
         />
@@ -140,6 +148,7 @@ function SearchContext({ label, onRemove }: { label: string; onRemove: () => voi
 
 const styles = StyleSheet.create({
   intro: { gap: 12 },
+  clearSearch: { minWidth: 44, minHeight: 44, alignItems: 'center', justifyContent: 'center' },
   header: { flexDirection: 'row', alignItems: 'center', gap: 8 },
   words: { flex: 1, gap: 2 },
   context: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },

@@ -23,6 +23,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 - Project working agreement covering design fidelity, feature boundaries, verification and collaborative development.
 
 ### Changed
+- Removed the dark frame from the Search lessons field and its clear icon at the owner's request; Search now uses a soft borderless background with lavender focus feedback.
 - Standardised every current editable field (lesson search and profile name) with one shared idle/focus stroke, no inner browser outline or Android underline, and no border-induced layout shift. The browse search entry uses the same keyboard-focus treatment; visual verification remains pending.
 - Topic browsing follows reference-06's compact pastel grid with aligned icons, actual counts, a full-width All lessons tile and a single-column layout for narrow screens or larger text. Owner runtime and visual review are pending.
 - Lessons browse now follows reference-06 with a compact header/search, responsive lavender portrait hero, topic action, result count and clear controls; existing filters, bookmarks and lesson navigation are retained. Owner runtime and visual review are pending.

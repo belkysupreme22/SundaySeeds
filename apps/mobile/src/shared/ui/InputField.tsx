@@ -6,17 +6,27 @@ import { Icon, type IconName } from './Icon';
 export function InputField({
   icon,
   trailing,
+  appearance = 'outlined',
   onFocus,
   onBlur,
   editable = true,
   style,
   ...props
-}: TextInputProps & { icon?: IconName; trailing?: ReactNode }) {
+}: TextInputProps & {
+  icon?: IconName;
+  trailing?: ReactNode;
+  appearance?: 'outlined' | 'soft';
+}) {
   const [focused, setFocused] = useState(false);
 
   return (
     <View
-      style={[styles.frame, focused && editable && styles.focused, !editable && styles.disabled]}
+      style={[
+        styles.frame,
+        appearance === 'soft' && styles.soft,
+        focused && editable && (appearance === 'soft' ? styles.softFocused : styles.focused),
+        !editable && styles.disabled,
+      ]}
     >
       {icon && <Icon name={icon} size={20} />}
       <TextInput
@@ -66,6 +76,13 @@ const styles = StyleSheet.create({
     paddingVertical: 0,
   },
   disabled: { borderColor: colors.muted, backgroundColor: colors.soft },
+  soft: {
+    borderWidth: 0,
+    paddingHorizontal: 14,
+    paddingVertical: 2,
+    backgroundColor: colors.soft,
+  },
+  softFocused: { backgroundColor: colors.lavender },
   input: {
     flex: 1,
     minWidth: 0,
