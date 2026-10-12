@@ -31,3 +31,6 @@ coverage/
 # Generated native projects
 apps/mobile/android/
 apps/mobile/ios/
+
+# Local agent handoff (not included in clones)
+/docs/AGENT_HANDOFF.local.md

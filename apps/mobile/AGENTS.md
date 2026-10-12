@@ -21,7 +21,7 @@ npx expo-doctor             # diagnose dependency and config issues
 npx expo install --fix      # fix incompatible package versions
 ```
 
-Run lint and typecheck before declaring any task done.
+Follow the current owner verification agreement in the root `AGENTS.md`: the owner handles tests, builds, terminal-heavy checks and runtime/visual review unless explicitly delegated. Report implementation separately from verification; leave unperformed checks pending.
 
 ## Navigation & Routing
 
