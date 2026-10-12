@@ -5,6 +5,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Added
+- In-app retries for failed progress loads and saves, with an outlined peach recovery card and a busy state while retrying.
 - Lesson-detail learning tiles for each sample lesson, a reading-position summary and resume marker, and a Revisit lesson action that keeps completion and best quiz scores.
 - Settings screen with personal information, learning-data controls and About SundaySeeds, accessible from Profile.
 - Optional device-local display name, a Profile editor and personalised Home/Profile greetings, with storage kept separate from learning progress.
@@ -21,6 +22,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 - Project working agreement covering design fidelity, feature boundaries, verification and collaborative development.
 
 ### Changed
+- Progress recovery preserves stored data after read failures and retries the current snapshot without repeating quiz or bookmark actions. Older queued saves no longer clear a warning before the latest changes are saved.
 - Lesson metadata now uses the actual reading/question counts; the detail hero and learning tiles adapt to narrow layouts and larger native text settings.
 - Unified reading-position labels across lesson cards, the reader, Continue learning and Progress; quiz completion is stated separately.
 - Quiz choices now distinguish selected, correct and incorrect states with text and icons. Home labels are larger, shortcut tiles wrap for narrower screens/larger text, and the hero action has a 44-point minimum height.

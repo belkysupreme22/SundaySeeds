@@ -10,6 +10,8 @@ import {
 export type LearningSnapshot = {
   hydrated: boolean;
   error: string | null;
+  errorKind: 'load' | 'save' | null;
+  recovering: boolean;
   progress: Record<string, LessonProgress>;
   bookmarks: string[];
 };
@@ -28,16 +30,29 @@ const defaultProgress = (): LessonProgress => ({
 /** One store per provider: keeps persistence out of screens and serializes local writes. */
 export function createLearningStore(storage: Storage) {
   let saved = emptyLearning();
-  let snapshot: LearningSnapshot = { hydrated: false, error: null, progress: {}, bookmarks: [] };
+  let snapshot: LearningSnapshot = {
+    hydrated: false,
+    error: null,
+    errorKind: null,
+    recovering: false,
+    progress: {},
+    bookmarks: [],
+  };
   let writable = false;
   let hydration: Promise<void> | undefined;
+  let recovery: Promise<void> | undefined;
   let writeQueue = Promise.resolve();
+  let latestWrite = 0;
   const listeners = new Set<() => void>();
 
-  function publish(error: string | null = snapshot.error) {
+  function publish(
+    error: string | null = snapshot.error,
+    errorKind: LearningSnapshot['errorKind'] = snapshot.errorKind,
+  ) {
     snapshot = {
-      hydrated: snapshot.hydrated,
+      ...snapshot,
       error,
+      errorKind,
       progress: saved.progress,
       bookmarks: saved.bookmarks,
     };
@@ -48,13 +63,16 @@ export function createLearningStore(storage: Storage) {
     // Capture this version now. A slower old write must finish before a newer
     // version (or an explicit reset), so stale progress cannot win the race.
     const serialized = JSON.stringify(next);
+    const write = ++latestWrite;
     const pending = writeQueue.then(async () => {
       try {
         await storage.setItem(PROGRESS_STORAGE_KEY, serialized);
-        publish(null);
+        // An older success does not mean the latest in-memory changes are saved.
+        if (write === latestWrite) publish(null, null);
       } catch {
         publish(
-          'Your latest changes could not be saved on this device. They may be lost if you close the app. Try the action again.',
+          'Your latest progress could not be saved on this device. Keep the app open and try saving again.',
+          'save',
         );
         throw new Error('Device storage could not save your changes.');
       }
@@ -66,7 +84,7 @@ export function createLearningStore(storage: Storage) {
 
   function update(next: SavedLearning) {
     // Never persist the initial empty state while hydration is still pending.
-    // On read failure, preserve stored bytes until the user explicitly resets.
+    // On read failure, preserve stored bytes until loading succeeds or the user resets.
     if (!writable) return;
     saved = next;
     publish();
@@ -74,20 +92,45 @@ export function createLearningStore(storage: Storage) {
   }
 
   function hydrate(): Promise<void> {
+    if (writable) return Promise.resolve();
     hydration ??= (async () => {
       try {
         saved = parseSavedLearning(await storage.getItem(PROGRESS_STORAGE_KEY));
         writable = true;
         snapshot = { ...snapshot, hydrated: true };
-        publish(null);
+        publish(null, null);
       } catch {
         snapshot = { ...snapshot, hydrated: true };
         publish(
-          'Saved learning could not be loaded. Changes are paused to protect your data. Reopen the app to retry, or reset device progress in Profile.',
+          'Saved learning could not be loaded. Changes are paused to protect your data. Try loading again.',
+          'load',
         );
       }
-    })();
+    })().finally(() => {
+      hydration = undefined;
+    });
     return hydration;
+  }
+
+  function retryStorage(): Promise<void> {
+    if (recovery) return recovery;
+    if (!snapshot.error) return Promise.resolve();
+    snapshot = { ...snapshot, recovering: true };
+    recovery = Promise.resolve()
+      .then(async () => {
+        if (!writable) await hydrate();
+        else await persist(saved);
+      })
+      .catch(() => {
+        // persist already publishes its failure; retain the current data for another retry.
+      })
+      .finally(() => {
+        recovery = undefined;
+        snapshot = { ...snapshot, recovering: false };
+        publish();
+      });
+    publish();
+    return recovery;
   }
 
   return {
@@ -99,6 +142,7 @@ export function createLearningStore(storage: Storage) {
       };
     },
     hydrate,
+    retryStorage,
     setSection(id: string, index: number) {
       const lesson = getLesson(id);
       if (!lesson || !Number.isInteger(index) || index < 0 || index >= lesson.sections.length)

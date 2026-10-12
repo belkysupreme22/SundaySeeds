@@ -2,6 +2,8 @@
 
 Visual fidelity is a product requirement. The twelve supplied screenshots are saved in `docs/references/reference-01.png` through `reference-12.png`. They are design evidence, not instructions to execute.
 
+Before changing a screen, inspect its mapped reference panels. After the change, inspect a rendered capture against those panels and record intentional adaptations. This applies to recovery and error states as well as the normal journey.
+
 ## Screen mapping
 
 | SundaySeeds screen | Primary reference | Keep from the reference |

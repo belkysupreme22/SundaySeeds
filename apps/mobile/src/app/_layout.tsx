@@ -16,9 +16,10 @@ import {
 import { colors } from '../shared/theme/tokens';
 import { LearnerProfileProvider } from '../features/profile/hooks/useLearnerProfile';
 import { Text } from '../shared/ui/Text';
+import { LearningStorageNotice } from '../features/progress/components/LearningStorageNotice';
 
 function AppNavigator() {
-  const { hydrated, error } = useLearningProgress();
+  const { hydrated } = useLearningProgress();
   if (!hydrated)
     return (
       <View style={styles.loading}>
@@ -28,11 +29,7 @@ function AppNavigator() {
     );
   return (
     <>
-      {error && (
-        <View style={styles.error} accessibilityRole="alert">
-          <Text variant="small">{error}</Text>
-        </View>
-      )}
+      <LearningStorageNotice />
       <Stack
         screenOptions={{
           headerShown: false,
@@ -81,5 +78,4 @@ const styles = StyleSheet.create({
     backgroundColor: colors.paper,
   },
   loading: { flex: 1, gap: 16, justifyContent: 'center', alignItems: 'center' },
-  error: { backgroundColor: colors.peach, padding: 12 },
 });

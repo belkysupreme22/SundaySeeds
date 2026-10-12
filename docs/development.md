@@ -18,6 +18,12 @@ Use `npm run android` with an Android emulator or device ready. A web preview is
 
 Current owner preference: keep each increment small. The owner runs builds, tests and intensive terminal checks; provide the relevant commands instead of running them unless explicitly requested. Report unverified behaviour clearly.
 
+### Saved-progress recovery checkpoint (2026-10-10)
+
+If saved learning cannot load, use Try loading again. Until loading succeeds, learning mutations remain paused and stored bytes are preserved. If saving fails, keep the app open and use Try saving again; this writes current reading positions, quiz scores and bookmarks without repeating the original action. The card stays visible after another failure and disables its retry button while the retry is running. A successful retry must retain the active quiz result and reading screen.
+
+Use an isolated preview profile to simulate storage errors; do not corrupt personal data for a test. Check the recovery control at both target widths and larger text sizes. The card scrolls within a limited height so the current screen stays reachable. See [verification/2026-10-10-progress-recovery.md](verification/2026-10-10-progress-recovery.md) for actual checks and [decision 0002](decisions/0002-local-progress-recovery.md) for persistence behavior.
+
 ### Lesson-detail checkpoint (2026-10-10)
 
 Open each of the four sample lessons. Check the coloured “What you’ll learn” tiles, actual reading/question counts and the prominent Start this lesson action. Saving an unopened lesson must not create reading progress. Start a lesson, move to reading two and return to its detail: the summary and Resume here marker should identify reading two. Reload and Continue learning to restore that position. Jump directly to reading three; this must not mark earlier sections as read or the quiz as completed.

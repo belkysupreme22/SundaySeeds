@@ -8,7 +8,9 @@ Build the Expo app, visual tokens and shared controls. The previous Kotlin proje
 
 **Acceptance:** the app launches; a learner can open a lesson, answer a quiz and restore saved results after restarting. Screens pass the checks in [design-reference.md](design-reference.md), including 360/390-width captures and increased text size. Storage errors and unanswered questions are handled deliberately.
 
-**Current increment (2026-10-10):** lesson-detail polish adds four learning-outcome tiles per sample lesson, a reading-position summary and resume marker, and a completed-lesson revisit action that starts at reading one while retaining completion, best score and bookmarks. No storage migration or backend connection is introduced. See the lesson-detail checkpoint in [development.md](development.md).
+**Completed frontend increments (2026-10-10):** lesson-detail polish adds four learning-outcome tiles per sample lesson, a reading-position summary and resume marker, and a completed-lesson revisit action that starts at reading one while retaining completion, best score and bookmarks. Saved-progress recovery now offers explicit load/save retries, preserves data through failures, and keeps older queued saves from clearing the latest warning. No storage migration or backend connection is introduced. See the checkpoints in [development.md](development.md).
+
+The owner has deferred the two existing lint issues. Prioritize outstanding learner-flow and visual acceptance work; do not treat lint cleanup as the next product task.
 
 **Next:** review Home and lesson detail against the reference screenshots, complete the outstanding native text-size/device checks, and record the owner's visual approval. Milestone 1 remains open until its acceptance checks are complete; pilot scope must be confirmed before connected learning work begins.
 

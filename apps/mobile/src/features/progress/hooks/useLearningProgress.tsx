@@ -30,6 +30,7 @@ export function useLearningProgress() {
     setSection: store.setSection,
     completeQuiz: store.completeQuiz,
     toggleBookmark: store.toggleBookmark,
+    retryStorage: store.retryStorage,
     resetProgress: () => store.resetProgress(),
   };
 }
