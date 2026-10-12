@@ -1,52 +1,35 @@
 import { useEffect, useState } from 'react';
 import { router, useLocalSearchParams } from 'expo-router';
-import { Pressable, StyleSheet, TextInput, View } from 'react-native';
-import { lessons } from '../data/lessons';
+import { Pressable, StyleSheet, View } from 'react-native';
 import { getLessonTopic } from '../data/lessonTopics';
 import { LessonCard } from '../components/LessonCard';
 import { LessonsBrowseHero } from '../components/LessonsBrowseHero';
-import { useLearningProgress } from '../../progress/hooks/useLearningProgress';
-import { colors, fonts } from '../../../shared/theme/tokens';
+import {
+  getLessonFilter,
+  lessonFilters,
+  useLessonResults,
+  type LessonFilter,
+} from '../hooks/useLessonResults';
+import { colors } from '../../../shared/theme/tokens';
 import { Screen, ContentGroup } from '../../../shared/ui/Screen';
 import { Text } from '../../../shared/ui/Text';
 import { Card } from '../../../shared/ui/Card';
 import { Icon } from '../../../shared/ui/Icon';
 import { Button, IconButton } from '../../../shared/ui/Button';
-const filters = [
-  { value: 'all', label: 'All lessons' },
-  { value: 'in-progress', label: 'In progress' },
-  { value: 'saved', label: 'Saved' },
-  { value: 'completed', label: 'Completed' },
-] as const;
-type LessonFilter = (typeof filters)[number]['value'];
-
-function getFilter(value?: string): LessonFilter {
-  return filters.find((filter) => filter.value === value)?.value ?? 'all';
-}
-
 export function LessonsScreen() {
   const params = useLocalSearchParams<{ filter?: string; topic?: string }>();
   const topic = getLessonTopic(params.topic);
-  const [filter, setFilter] = useState<LessonFilter>(() => getFilter(params.filter));
-  const [query, setQuery] = useState('');
+  const [filter, setFilter] = useState<LessonFilter>(() => getLessonFilter(params.filter));
+  const [searchFocused, setSearchFocused] = useState(false);
   useEffect(() => {
-    setFilter(getFilter(params.filter));
+    setFilter(getLessonFilter(params.filter));
   }, [params.filter]);
-  const { bookmarks, progress } = useLearningProgress();
-  const narrowed = Boolean(topic || query.trim() || filter !== 'all');
+  const visible = useLessonResults({ topic: topic?.name, filter });
+  const narrowed = Boolean(topic || filter !== 'all');
   const clearFilters = () => {
-    setQuery('');
     setFilter('all');
     router.setParams({ topic: '', filter: 'all' });
   };
-  const visible = lessons.filter(
-    (l) =>
-      (!topic || l.category === topic.name) &&
-      (filter !== 'saved' || bookmarks.includes(l.id)) &&
-      (filter !== 'completed' || progress[l.id]?.completed) &&
-      (filter !== 'in-progress' || (progress[l.id] && !progress[l.id].completed)) &&
-      `${l.title} ${l.category} ${l.scripture}`.toLowerCase().includes(query.toLowerCase().trim()),
-  );
   return (
     <Screen tabs>
       <View style={styles.intro}>
@@ -65,22 +48,26 @@ export function LessonsScreen() {
             onPress={() => router.push('/lessons/topics')}
           />
         </View>
-        <View style={styles.search}>
+        <Pressable
+          accessibilityRole="button"
+          accessibilityLabel="Search lessons"
+          accessibilityHint="Search by title, topic or scripture within this lesson view"
+          onPress={() =>
+            router.push({
+              pathname: '/lessons/search',
+              params: { topic: topic?.name ?? '', filter },
+            })
+          }
+          onFocus={() => setSearchFocused(true)}
+          onBlur={() => setSearchFocused(false)}
+          style={[styles.search, searchFocused && styles.searchFocused]}
+        >
           <Icon name="search" size={18} />
-          <TextInput
-            accessibilityLabel="Search lessons by title, topic or scripture"
-            placeholder="Search lessons or scripture"
-            placeholderTextColor={colors.muted}
-            value={query}
-            onChangeText={setQuery}
-            autoCorrect={false}
-            returnKeyType="search"
-            style={styles.input}
-          />
-          {query.length > 0 && (
-            <IconButton name="x" label="Clear search" onPress={() => setQuery('')} />
-          )}
-        </View>
+          <Text variant="small" muted style={styles.searchLabel}>
+            Search lessons or scripture
+          </Text>
+          <Icon name="arrow-right" size={18} />
+        </Pressable>
         <LessonsBrowseHero
           title={topic ? `Grow in ${topic.name.toLowerCase()}` : 'Small stories.\nLasting faith.'}
           description={topic?.description ?? 'Find a Bible story to carry into your week.'}
@@ -107,7 +94,7 @@ export function LessonsScreen() {
           )}
         </View>
         <View style={styles.filters}>
-          {filters.map((f) => (
+          {lessonFilters.map((f) => (
             <Pressable
               accessibilityRole="button"
               accessibilityState={{ selected: f.value === filter }}
@@ -127,24 +114,17 @@ export function LessonsScreen() {
             <Icon name="book-open" />
             <Text variant="title">Nothing here just yet</Text>
             <Text>
-              {query.trim()
-                ? 'No matching lessons in this view. Try another search or clear your filters.'
-                : topic
-                  ? `No ${topic.name.toLowerCase()} lessons match this view yet. Try All lessons or another topic.`
-                  : filter === 'saved'
-                    ? 'Tap a bookmark on a lesson to keep it here.'
-                    : filter === 'completed'
-                      ? 'Finish a lesson’s quiz to see it here.'
-                      : filter === 'in-progress'
-                        ? 'Start a reading to keep your place here. Finished lessons move to Completed.'
-                        : 'Try a different search.'}
+              {topic
+                ? `No ${topic.name.toLowerCase()} lessons match this view yet. Try All lessons or another topic.`
+                : filter === 'saved'
+                  ? 'Tap a bookmark on a lesson to keep it here.'
+                  : filter === 'completed'
+                    ? 'Finish a lesson’s quiz to see it here.'
+                    : filter === 'in-progress'
+                      ? 'Start a reading to keep your place here. Finished lessons move to Completed.'
+                      : 'Try a different search.'}
             </Text>
-            <Button
-              label="Clear filters"
-              variant="outline"
-              icon="x"
-              onPress={clearFilters}
-            />
+            <Button label="Clear filters" variant="outline" icon="x" onPress={clearFilters} />
           </Card>
         )}
       </ContentGroup>
@@ -167,18 +147,19 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     backgroundColor: colors.white,
     paddingHorizontal: 12,
+    paddingVertical: 10,
+    minHeight: 48,
+    outlineWidth: 0,
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
   },
-  input: {
-    flex: 1,
-    minWidth: 0,
-    minHeight: 48,
-    paddingVertical: 10,
-    fontFamily: fonts.regular,
-    fontSize: 12,
-    color: colors.ink,
+  searchLabel: { flex: 1 },
+  searchFocused: {
+    borderWidth: 2,
+    paddingHorizontal: 11,
+    paddingVertical: 9,
+    backgroundColor: colors.soft,
   },
   filters: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
   filter: {

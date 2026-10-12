@@ -18,6 +18,20 @@ Use `npm run android` with an Android emulator or device ready. A web preview is
 
 Current owner preference: keep each increment small. The owner runs builds, tests and intensive terminal checks; provide the relevant commands instead of running them unless explicitly requested. Report unverified behaviour clearly.
 
+### Input stroke consistency checkpoint (2026-10-12)
+
+During D3 the owner requested consistent focused/unfocused input strokes across screens. Source inventory found two editable fields: Lesson Search and Edit Profile. Both now use `shared/ui/InputField`: one 1-point dark outer stroke when idle, a 2-point dark stroke with pale focus fill when focused, and compensating padding to keep dimensions stable. The input's inner border, browser outline and Android underline are suppressed; the wrapper supplies visible focus. Disabled profile saving uses the muted stroke. Browse's search entry is a button, with the same visible keyboard-focus treatment. References 03, 06 and 12 informed the outlined treatment; no authentication screens were added.
+
+Owner checks: focus/blur both editable fields with touch and keyboard, type and clear values, use search's clear button, and inspect disabled profile saving. Confirm one outer stroke, a visible focus change, no positional jump and no platform underline/inner rectangle at normal and larger text sizes on web and native. The browse search entry should show focus when reached with Tab. Source inventory/formatting only; no runtime, native or visual pass is claimed.
+
+### Dedicated search D3 checkpoint (2026-10-12)
+
+Reference-06 right panel was inspected before implementation. Browse's search-looking control now opens `/lessons/search` with the current topic and status. The dedicated screen uses an outlined query field, lavender Lessons label, removable topic/status labels, actual matching count and shared outlined lesson cards. Query matching remains case-insensitive, ignores outer whitespace and covers title/topic/scripture through `useLessonResults`, shared with Browse. Blank queries show all lessons within the selected context. Clear search preserves filters; Clear filters/Search all lessons preserves the query. The full topic/status selection control remains D4.
+
+Owner checks: enter from All lessons, a topic and Saved/In progress/Completed. Search `love`, `prayer` or `Luke`, mixed case and outer spaces; try an unmatched phrase and recover with query/filter clearing. Remove a context label and confirm the count changes correctly. Toggle a bookmark in Saved search and confirm the list updates. Open a result and return, confirming query/context retention; Back from Search should restore the originating Browse view. Direct-entry Search with no history should return to Lessons. Check the keyboard, 360/390 widths, large native text, clear controls and bottom navigation. New routes may require restarting the owner's Expo session to refresh generated route types.
+
+Only changed source files were formatted, including the subsequent shared-input fix requested during this increment. No tests, typecheck, lint, builds or runtime/visual review were run. No new dependency, storage key or backend service was added; the two known lint issues remain deferred. D3 and the input-stroke fix are implemented, acceptance pending; D4 is next.
+
 ### Topic grid D2 checkpoint (2026-10-12)
 
 Reference-06 middle panel was inspected before implementation. Topic tiles now have compact proportions, aligned icons, tighter spacing, fine outlines and offset shadows. Counts derive from sample lessons. The reference's full-width final row is adapted into All lessons with the actual collection count, replacing the separate outline button. The four existing topics remain; no filler categories were added. Topics switch to one column below 350 logical pixels or at native font scales of 1.5 and above.

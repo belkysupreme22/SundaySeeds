@@ -5,6 +5,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Added
+- Dedicated lesson search/results with title/topic/scripture matching, inherited topic/status context, removable filters, query clearing, actual counts and empty-result recovery. Browse and Search share matching logic; owner runtime and visual review are pending.
 - In-app retries for failed progress loads and saves, with an outlined peach recovery card and a busy state while retrying.
 - Lesson-detail learning tiles for each sample lesson, a reading-position summary and resume marker, and a Revisit lesson action that keeps completion and best quiz scores.
 - Settings screen with personal information, learning-data controls and About SundaySeeds, accessible from Profile.
@@ -22,6 +23,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 - Project working agreement covering design fidelity, feature boundaries, verification and collaborative development.
 
 ### Changed
+- Standardised every current editable field (lesson search and profile name) with one shared idle/focus stroke, no inner browser outline or Android underline, and no border-induced layout shift. The browse search entry uses the same keyboard-focus treatment; visual verification remains pending.
 - Topic browsing follows reference-06's compact pastel grid with aligned icons, actual counts, a full-width All lessons tile and a single-column layout for narrow screens or larger text. Owner runtime and visual review are pending.
 - Lessons browse now follows reference-06 with a compact header/search, responsive lavender portrait hero, topic action, result count and clear controls; existing filters, bookmarks and lesson navigation are retained. Owner runtime and visual review are pending.
 - Added discovery and maintenance instructions for an ignored local agent handoff; aligned agent verification guidance with the owner's implementation-focused workflow.

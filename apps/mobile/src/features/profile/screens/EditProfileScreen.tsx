@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { router } from 'expo-router';
-import { StyleSheet, TextInput, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { DISPLAY_NAME_LIMIT } from '../data/profileStorage';
 import { useLearnerProfile } from '../hooks/useLearnerProfile';
 import { Screen, ContentGroup } from '../../../shared/ui/Screen';
@@ -9,7 +9,8 @@ import { Text } from '../../../shared/ui/Text';
 import { Icon } from '../../../shared/ui/Icon';
 import { Button } from '../../../shared/ui/Button';
 import { Card } from '../../../shared/ui/Card';
-import { colors, fonts } from '../../../shared/theme/tokens';
+import { colors } from '../../../shared/theme/tokens';
+import { InputField } from '../../../shared/ui/InputField';
 
 export function EditProfileScreen() {
   const { displayName, hydrated, loadError, retryLoad } = useLearnerProfile();
@@ -60,23 +61,20 @@ function ProfileNameForm({ initialName }: { initialName: string }) {
       </View>
       <ContentGroup>
         <Text variant="label">Display name (optional)</Text>
-        <View style={styles.field}>
-          <Icon name="user" size={20} />
-          <TextInput
-            accessibilityLabel="Display name, optional"
-            placeholder="Your name or nickname"
-            placeholderTextColor={colors.muted}
-            value={name}
-            onChangeText={setName}
-            maxLength={DISPLAY_NAME_LIMIT}
-            autoCapitalize="words"
-            autoCorrect={false}
-            editable={!saving}
-            returnKeyType="done"
-            onSubmitEditing={() => void save()}
-            style={styles.input}
-          />
-        </View>
+        <InputField
+          icon="user"
+          accessibilityLabel="Display name, optional"
+          placeholder="Your name or nickname"
+          placeholderTextColor={colors.muted}
+          value={name}
+          onChangeText={setName}
+          maxLength={DISPLAY_NAME_LIMIT}
+          autoCapitalize="words"
+          autoCorrect={false}
+          editable={!saving}
+          returnKeyType="done"
+          onSubmitEditing={() => void save()}
+        />
         <Text variant="caption" muted>
           Up to {DISPLAY_NAME_LIMIT} characters. Leave blank to use “learner”.
         </Text>
@@ -122,16 +120,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   center: { textAlign: 'center' },
-  field: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 12,
-    paddingHorizontal: 14,
-    borderWidth: 1.2,
-    borderColor: colors.ink,
-    borderRadius: 9,
-    backgroundColor: colors.white,
-  },
-  input: { flex: 1, minHeight: 54, fontFamily: fonts.regular, fontSize: 14, color: colors.ink },
   note: { gap: 10 },
 });

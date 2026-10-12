@@ -13,6 +13,7 @@
 - Follow apps/mobile/AGENTS.md for Expo version-specific guidance.
 - Route files compose feature screens. Screens must not access storage or backend clients directly.
 - Feature folders own their data, hooks, components, screens and types as needed. Shared UI has no feature business logic.
+- Use `shared/ui/InputField` for editable text fields so idle/focus strokes stay consistent; preserve its visible focus treatment rather than adding platform-default inner outlines or underlines.
 - Strict TypeScript; no unexplained any or giant screen files. Prefer simple explicit abstractions over speculative frameworks.
 - The user authorizes parallel agents. Delegate bounded independent tasks with explicit file ownership; one lead integrates and commits.
 - Do not create user-visible Codex tasks for internal delegation.
