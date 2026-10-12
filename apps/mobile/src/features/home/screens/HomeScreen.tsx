@@ -72,16 +72,19 @@ export function HomeScreen() {
         <IconButton name="user" label="Your profile" onPress={() => router.replace('/profile')} />
       </View>
       <WeeklyHero />
-      <ContinueLearning />
       <ContentGroup>
-        <SectionHeading title="Your learning space" />
+        <SectionHeading title="Quick access" />
         <View style={styles.shortcuts}>
           {shortcuts.map((item) => (
             <Pressable
               key={item.title}
               accessibilityRole="button"
               onPress={item.action}
-              style={[styles.shortcut, wrapShortcuts && styles.wideShortcut, { minWidth: 72 * fontScale }]}
+              style={[
+                styles.shortcut,
+                wrapShortcuts && styles.wideShortcut,
+                { minWidth: 72 * fontScale },
+              ]}
             >
               <Card tone={item.tone} shadow={false} style={styles.shortcutCard}>
                 <Icon name={item.icon} size={23} />
@@ -96,6 +99,7 @@ export function HomeScreen() {
           ))}
         </View>
       </ContentGroup>
+      <ContinueLearning />
       <ContentGroup>
         <SectionHeading
           title="Grow a little today"
@@ -145,11 +149,11 @@ const styles = StyleSheet.create({
   shortcutCard: {
     flex: 1,
     paddingHorizontal: 6,
-    paddingVertical: 14,
+    paddingVertical: 12,
     borderRadius: 9,
     alignItems: 'center',
     gap: 6,
-    minHeight: 112,
+    minHeight: 96,
   },
   shortcutTitle: { fontSize: 12, lineHeight: 19, textAlign: 'center' },
   shortcutSubtitle: { fontSize: 11, lineHeight: 18, textAlign: 'center' },

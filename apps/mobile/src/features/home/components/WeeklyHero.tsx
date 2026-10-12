@@ -1,19 +1,23 @@
 import { router } from 'expo-router';
-import { Image, StyleSheet, View } from 'react-native';
+import { Image, StyleSheet, View, useWindowDimensions } from 'react-native';
 import { Card } from '../../../shared/ui/Card';
 import { Text } from '../../../shared/ui/Text';
 import { Button } from '../../../shared/ui/Button';
 import { Icon } from '../../../shared/ui/Icon';
 import { colors } from '../../../shared/theme/tokens';
 export function WeeklyHero() {
+  const { width, fontScale } = useWindowDimensions();
+  const stacked = width < 350 || fontScale >= 1.5;
   return (
-    <Card tone="lavender" style={styles.hero}>
-      <View style={styles.copy}>
+    <Card tone="lavender" style={[styles.hero, stacked && styles.stacked]}>
+      <View style={[styles.copy, stacked && styles.stackedCopy]}>
         <Text variant="caption" style={styles.eyebrow}>
           THIS WEEK’S LESSON
         </Text>
-        <Text variant="hero">Small acts.{'\n'}Great love.</Text>
-        <Text variant="small" style={styles.description}>
+        <Text variant="hero" style={styles.headline}>
+          Small acts.{'\n'}Great love.
+        </Text>
+        <Text variant="small" style={[styles.description, stacked && styles.fullDescription]}>
           Discover what it means to be a good neighbour.
         </Text>
         <Button
@@ -23,10 +27,14 @@ export function WeeklyHero() {
           style={styles.cta}
         />
       </View>
-      <View style={styles.art}>
+      <View
+        style={[styles.art, stacked && styles.stackedArt]}
+        accessibilityElementsHidden
+        importantForAccessibility="no-hide-descendants"
+      >
         <Image
           source={require('../../../../assets/legacy/home_banner_user.png')}
-          style={styles.image}
+          style={[styles.image, stacked && styles.stackedImage]}
           resizeMode="cover"
         />
         <View style={styles.spark}>
@@ -40,10 +48,14 @@ export function WeeklyHero() {
   );
 }
 const styles = StyleSheet.create({
-  hero: { minHeight: 235, padding: 18, overflow: 'hidden', position: 'relative' },
-  copy: { zIndex: 2, width: '64%', gap: 9 },
+  hero: { minHeight: 210, padding: 0, overflow: 'hidden', flexDirection: 'row' },
+  stacked: { flexDirection: 'column' },
+  copy: { flex: 1, gap: 8, paddingLeft: 16, paddingVertical: 14 },
+  stackedCopy: { flex: 0, paddingRight: 16 },
+  headline: { fontSize: 24, lineHeight: 31, letterSpacing: -0.6 },
   eyebrow: { fontSize: 11, lineHeight: 18, letterSpacing: 0.5 },
   description: { maxWidth: 165, fontSize: 12, lineHeight: 19 },
+  fullDescription: { maxWidth: '100%' },
   cta: {
     alignSelf: 'flex-start',
     minHeight: 44,
@@ -52,16 +64,16 @@ const styles = StyleSheet.create({
     borderRadius: 6,
   },
   art: {
-    position: 'absolute',
-    right: 0,
-    top: 34,
-    bottom: 0,
-    width: '42%',
+    position: 'relative',
+    width: '38%',
+    alignSelf: 'stretch',
     overflow: 'hidden',
-    borderTopLeftRadius: 85,
+    borderTopLeftRadius: 70,
   },
+  stackedArt: { width: '100%', height: 150, borderTopLeftRadius: 0 },
   image: { position: 'absolute', right: -26, bottom: 0, width: 280, height: 235 },
-  spark: { position: 'absolute', top: 4, right: 8 },
+  stackedImage: { right: 16, width: 210, height: 176 },
+  spark: { position: 'absolute', top: 12, right: 8 },
   book: {
     position: 'absolute',
     right: 12,

@@ -22,6 +22,8 @@ Notable changes are recorded here. Unreleased entries describe development miles
 - Project working agreement covering design fidelity, feature boundaries, verification and collaborative development.
 
 ### Changed
+- Lesson cards give bookmarks their own control column and stack artwork above copy for narrow screens or larger native text.
+- Home follows the reference's hero-to-quick-access order, with more compact shortcut tiles and separate hero text/artwork columns that stack for narrow screens or larger native text.
 - Progress recovery preserves stored data after read failures and retries the current snapshot without repeating quiz or bookmark actions. Older queued saves no longer clear a warning before the latest changes are saved.
 - Lesson metadata now uses the actual reading/question counts; the detail hero and learning tiles adapt to narrow layouts and larger native text settings.
 - Unified reading-position labels across lesson cards, the reader, Continue learning and Progress; quiz completion is stated separately.

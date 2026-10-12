@@ -1,5 +1,5 @@
 import { router } from 'expo-router';
-import { Pressable, StyleSheet, View } from 'react-native';
+import { Pressable, StyleSheet, View, useWindowDimensions } from 'react-native';
 import type { Lesson } from '../types';
 import { useLearningProgress } from '../../progress/hooks/useLearningProgress';
 import { Card } from '../../../shared/ui/Card';
@@ -8,6 +8,8 @@ import { IconButton } from '../../../shared/ui/Button';
 import { LessonProgressSummary } from './LessonProgressSummary';
 import { LessonArtwork } from './LessonArtwork';
 export function LessonCard({ lesson }: { lesson: Lesson }) {
+  const { width, fontScale } = useWindowDimensions();
+  const stacked = width < 350 || fontScale >= 1.5;
   const { progress, bookmarks, toggleBookmark } = useLearningProgress();
   const saved = bookmarks.includes(lesson.id);
   const entry = progress[lesson.id];
@@ -17,7 +19,7 @@ export function LessonCard({ lesson }: { lesson: Lesson }) {
         accessibilityRole="button"
         accessibilityLabel={`Open ${lesson.title}`}
         onPress={() => router.push(`/lessons/${lesson.id}`)}
-        style={styles.main}
+        style={[styles.main, stacked && styles.stacked]}
       >
         <LessonArtwork id={lesson.id} tone={lesson.color} />
         <View style={styles.words}>
@@ -43,9 +45,10 @@ export function LessonCard({ lesson }: { lesson: Lesson }) {
   );
 }
 const styles = StyleSheet.create({
-  card: { padding: 9, position: 'relative' },
-  main: { flexDirection: 'row', gap: 12 },
-  words: { flex: 1, paddingRight: 28, justifyContent: 'center', gap: 4 },
+  card: { padding: 9, flexDirection: 'row', alignItems: 'flex-start', gap: 6 },
+  main: { flex: 1, flexDirection: 'row', alignItems: 'center', gap: 12 },
+  stacked: { flexDirection: 'column', alignItems: 'stretch' },
+  words: { flexGrow: 1, flexShrink: 1, flexBasis: 'auto', justifyContent: 'center', gap: 4 },
   title: { fontSize: 13, lineHeight: 19 },
-  save: { position: 'absolute', right: 1, top: 1 },
+  save: { width: 44, minHeight: 44 },
 });

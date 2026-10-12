@@ -18,6 +18,14 @@ Use `npm run android` with an Android emulator or device ready. A web preview is
 
 Current owner preference: keep each increment small. The owner runs builds, tests and intensive terminal checks; provide the relevant commands instead of running them unless explicitly requested. Report unverified behaviour clearly.
 
+### Home design implementation checkpoint (2026-10-12)
+
+Reference-05's left panel informs this increment: compact lavender hero, adjacent portrait, quick-access tiles immediately below, then lesson cards. Hero text and artwork now occupy separate layout columns rather than overlap; they stack below 350 logical pixels or at native font scales of 1.5 and above. Quick-access tiles are shorter at default text size. Continue learning follows the shortcuts so returning learners keep the same entry layout.
+
+Lesson cards keep the outlined thumbnail-and-copy layout. Bookmarks now have an independent 44-point column instead of floating over the text; at narrow widths or larger native text, artwork stacks above the copy.
+
+The owner explicitly requested implementation only and will handle terminal-heavy checks and visual review. No build, typecheck, lint, tests or completed runtime checks were performed for this design increment. Check Home at 360/390 widths, 150%/200% native text size, and with both fresh and existing learning progress. Compare with reference-05; confirm hero and shortcut actions and independent lesson-card/bookmark actions remain usable.
+
 ### Saved-progress recovery checkpoint (2026-10-10)
 
 If saved learning cannot load, use Try loading again. Until loading succeeds, learning mutations remain paused and stored bytes are preserved. If saving fails, keep the app open and use Try saving again; this writes current reading positions, quiz scores and bookmarks without repeating the original action. The card stays visible after another failure and disables its retry button while the retry is running. A successful retry must retain the active quiz result and reading screen.

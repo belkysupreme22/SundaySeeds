@@ -12,6 +12,8 @@ Build the Expo app, visual tokens and shared controls. The previous Kotlin proje
 
 The owner has deferred the two existing lint issues. Prioritize outstanding learner-flow and visual acceptance work; do not treat lint cleanup as the next product task.
 
+**Design implementation (2026-10-12):** Home's hero/quick-access order and compact spacing have been refined from reference-05. The hero separates copy and artwork and stacks them for narrow screens or larger native text. Runtime checks and visual review are assigned to the owner at their explicit request; this increment is not marked visually verified.
+
 **Next:** review Home and lesson detail against the reference screenshots, complete the outstanding native text-size/device checks, and record the owner's visual approval. Milestone 1 remains open until its acceptance checks are complete; pilot scope must be confirmed before connected learning work begins.
 
 ## 2. Pilot scope and connected learning flow
