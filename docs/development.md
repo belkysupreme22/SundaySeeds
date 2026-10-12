@@ -16,6 +16,14 @@ Use `npm run android` with an Android emulator or device ready. A web preview is
 
 ## Work in reviewable increments
 
+### Discovery filters D4 checkpoint (2026-10-12)
+
+Reference-06's filter controls inform the shared Filters trigger on Browse and Search. The supplied screenshot does not show an expanded panel: its outlined topic/status choices and pastel summary adapt the existing design language. The modal has scrollable content, safe-area spacing and single-column choices below 350 logical pixels or at native font scales of 1.5 and above.
+
+Opening copies applied topic/status into a draft and dismisses the search keyboard. The draft live count uses `useLessonResults` and the existing query. Clear filters resets draft topic/status only; Apply commits and closes, including zero-result combinations. Cancel, the close icon and modal system Back discard changes. Reopening starts from applied values. Browse displays an applied summary; Search retains removable context labels, and its query and input outline correction are preserved.
+
+Owner checks: open Filters on both screens, choose a topic/status combination and Apply; compare the preview count with the resulting cards. Change selections then Cancel/close/Android Back and confirm the previous view remains. Clear then Cancel should retain the old filters; Clear then Apply should remove them while retaining the search query. Reopen and check selected values; exercise zero results, bookmarks in Saved, detail-and-back navigation, keyboard dismissal, web Escape/focus, safe areas and narrow/150%/200% text layouts. Only changed source files were formatted and the diff checked for whitespace; no tests, typecheck, lint, builds or runtime/visual review were run. D1–D4 are implemented with owner acceptance pending; L1 is next.
+
 Current owner preference: keep each increment small. The owner runs builds, tests and intensive terminal checks; provide the relevant commands instead of running them unless explicitly requested. Report unverified behaviour clearly.
 
 ### Input stroke consistency checkpoint (2026-10-12)

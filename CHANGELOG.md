@@ -5,6 +5,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Added
+- Shared topic/status filter panel for Browse and Search, with draft selection, live matching count, Apply/Clear/Cancel behavior and active-filter summaries; search text is retained. Owner runtime and visual review are pending.
 - Dedicated lesson search/results with title/topic/scripture matching, inherited topic/status context, removable filters, query clearing, actual counts and empty-result recovery. Browse and Search share matching logic; owner runtime and visual review are pending.
 - In-app retries for failed progress loads and saves, with an outlined peach recovery card and a busy state while retrying.
 - Lesson-detail learning tiles for each sample lesson, a reading-position summary and resume marker, and a Revisit lesson action that keeps completion and best quiz scores.

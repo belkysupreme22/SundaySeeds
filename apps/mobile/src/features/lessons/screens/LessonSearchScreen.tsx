@@ -3,6 +3,7 @@ import { Pressable, StyleSheet, View } from 'react-native';
 import { getLessonTopic } from '../data/lessonTopics';
 import { getLessonFilter, lessonFilters, useLessonResults } from '../hooks/useLessonResults';
 import { LessonCard } from '../components/LessonCard';
+import { LessonFilters } from '../components/LessonFilters';
 import { colors } from '../../../shared/theme/tokens';
 import { InputField } from '../../../shared/ui/InputField';
 import { Screen, ContentGroup } from '../../../shared/ui/Screen';
@@ -65,9 +66,17 @@ export function LessonSearchScreen() {
           }
         />
         <View style={styles.context}>
-          <View style={styles.collection}>
-            <Text variant="label">Lessons</Text>
-          </View>
+          <LessonFilters
+            topic={topic?.name}
+            filter={filter}
+            query={query}
+            onApply={(selection) =>
+              router.setParams({
+                topic: selection.topic ?? '',
+                filter: selection.filter,
+              })
+            }
+          />
           {topic && (
             <SearchContext label={topic.name} onRemove={() => router.setParams({ topic: '' })} />
           )}
@@ -152,15 +161,6 @@ const styles = StyleSheet.create({
   header: { flexDirection: 'row', alignItems: 'center', gap: 8 },
   words: { flex: 1, gap: 2 },
   context: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
-  collection: {
-    backgroundColor: colors.lavender,
-    borderColor: colors.ink,
-    borderWidth: 1,
-    borderRadius: 6,
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    justifyContent: 'center',
-  },
   contextFilter: {
     flexDirection: 'row',
     alignItems: 'center',

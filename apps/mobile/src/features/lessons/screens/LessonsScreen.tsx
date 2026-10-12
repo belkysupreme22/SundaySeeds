@@ -4,6 +4,7 @@ import { Pressable, StyleSheet, View } from 'react-native';
 import { getLessonTopic } from '../data/lessonTopics';
 import { LessonCard } from '../components/LessonCard';
 import { LessonsBrowseHero } from '../components/LessonsBrowseHero';
+import { LessonFilters } from '../components/LessonFilters';
 import {
   getLessonFilter,
   lessonFilters,
@@ -94,17 +95,18 @@ export function LessonsScreen() {
           )}
         </View>
         <View style={styles.filters}>
-          {lessonFilters.map((f) => (
-            <Pressable
-              accessibilityRole="button"
-              accessibilityState={{ selected: f.value === filter }}
-              key={f.value}
-              onPress={() => setFilter(f.value)}
-              style={[styles.filter, f.value === filter && { backgroundColor: colors.lavender }]}
-            >
-              <Text variant="small">{f.label}</Text>
-            </Pressable>
-          ))}
+          <LessonFilters
+            topic={topic?.name}
+            filter={filter}
+            onApply={(selection) => {
+              setFilter(selection.filter);
+              router.setParams({ topic: selection.topic ?? '', filter: selection.filter });
+            }}
+          />
+          <Text variant="small" muted style={styles.filterSummary}>
+            {topic?.name ?? 'All topics'} ·{' '}
+            {lessonFilters.find((item) => item.value === filter)?.label}
+          </Text>
         </View>
         {visible.map((l) => (
           <LessonCard key={l.id} lesson={l} />
@@ -161,17 +163,6 @@ const styles = StyleSheet.create({
     paddingVertical: 9,
     backgroundColor: colors.soft,
   },
-  filters: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
-  filter: {
-    flexGrow: 1,
-    flexBasis: '45%',
-    minHeight: 44,
-    borderRadius: 7,
-    borderWidth: 1,
-    borderColor: colors.ink,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingHorizontal: 8,
-    paddingVertical: 8,
-  },
+  filters: { flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', gap: 8 },
+  filterSummary: { flexGrow: 1, flexShrink: 1, flexBasis: 140 },
 });

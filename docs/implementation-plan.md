@@ -2,11 +2,11 @@
 
 Updated 12 October 2026. This plan turns the reference designs into a sequence of complete learner flows. It separates implemented functionality, remaining design work and owner acceptance; a working screen is not automatically a finished design.
 
-**Next task: D4 — Discovery filters, reference-06.** D1 browse, D2 topic grid and D3 dedicated search/results are implemented and awaiting owner runtime/visual review. Continue through Lessons discovery before another discretionary Home polish pass.
+**Next task: L1 — Lesson overview, reference-07 left panel.** D1–D4 discovery designs are implemented and awaiting owner runtime/visual review. Continue into the learning flow before another discretionary Home polish pass.
 
-Latest screenshot feedback identifies the inner browser input focus rectangle. The shared web input now explicitly resets outline style/width/colour and box shadow, preserving the surrounding field's focus treatment. Rendered confirmation remains pending; D4 stays next.
+Latest screenshot feedback identifies the inner browser input focus rectangle. The shared web input now explicitly resets outline style/width/colour and box shadow, preserving the surrounding field's focus treatment. Rendered confirmation remains pending; the fix is preserved in D4.
 
-**Owner-requested addition during D3:** shared InputField provides consistent idle/focus treatment. After owner feedback, Search uses its borderless soft variant with lavender focus fill and an unboxed clear icon; Edit Profile retains the outlined variant and Browse's entry retains its keyboard-focus styling. Source inventory found no other editable inputs. Visual review remains pending; D4 remains next.
+**Owner-requested addition during D3:** shared InputField provides consistent idle/focus treatment. After owner feedback, Search uses its borderless soft variant with lavender focus fill and an unboxed clear icon; Edit Profile retains the outlined variant and Browse's entry retains its keyboard-focus styling. Source inventory found no other editable inputs. Visual review remains pending.
 
 ## Delivery agreement
 
@@ -33,19 +33,21 @@ All tasks below build on the existing app. They are remaining design/interaction
 
 | Order | Screen group | References | Starting point / status |
 | --- | --- | --- | --- |
-| D1–D4 | Lessons discovery | [06](references/reference-06.png) | D1–D3 implemented, owner review pending; D4 topic/status filter control next |
-| L1–L3 | Lesson overview, reader and quiz | [07](references/reference-07.png), [08](references/reference-08.png) | Working local journey; complete remaining reference layouts |
+| D1–D4 | Lessons discovery | [06](references/reference-06.png) | D1–D4 implemented; owner runtime/visual review pending |
+| L1–L3 | Lesson overview, reader and quiz | [07](references/reference-07.png), [08](references/reference-08.png) | Working local journey; L1 overview design is next |
 | P1 | Progress dashboard | [05](references/reference-05.png) middle/right, [09](references/reference-09.png) right | Local progress exists; dashboard design remains to be completed |
 | S1–S2 | Profile and settings | [12](references/reference-12.png) left/right | Name editor and settings exist; finish visual structure |
 | O1–O2 | Welcome and profile setup | [01](references/reference-01.png), [02](references/reference-02.png), [04](references/reference-04.png) | Welcome exists; finish adapted setup flow |
 
-### 1. Lessons discovery — implement next
+### 1. Lessons discovery — implemented, acceptance pending
 
 **D1 implementation checkpoint (12 October):** compact browse header/search, lavender portrait hero with working topic action, sample-lesson heading/count and clear controls are implemented. Existing outlined lesson cards, combined status/topic/query filtering, bookmarks and anchored navigation are retained. Hero stacks below 350 logical pixels or at native font scales of 1.5 and above. Owner testing and visual acceptance are pending; no tests, builds or runtime review were run for this increment.
 
 **D2 implementation checkpoint (12 October):** topic tiles now use compact outlined pastel rows, aligned icons and actual collection counts. The final full-width All lessons tile adapts the reference's last row and opens the complete sample collection. Below 350 logical pixels or at native font scales of 1.5 and above, topics use one column. The four existing topics and navigation remain; no extra categories were invented. Owner testing and visual acceptance are pending; no tests, builds or runtime review were run.
 
-**D3 implementation checkpoint (12 October):** Browse's search entry now opens `/lessons/search`, carrying its topic and status. The dedicated screen has an outlined editable query, matching counts/cards, removable context labels, separate query/filter clearing and empty-result recovery. Both screens share matching logic; query/topic/status live in the search route, with normal stack Back retaining browse context. Direct-entry Back falls back to Lessons. No inactive instructor/course tabs or sorting claims were added. Formatting was applied only to changed source files; tests, typecheck, lint, builds and runtime/visual review remain with the owner. D4 remains open.
+**D3 implementation checkpoint (12 October):** Browse's search entry opens `/lessons/search`, carrying its topic and status. The dedicated screen has an editable query (subsequently changed to a soft borderless treatment at the owner's request), matching counts/cards, removable context labels, separate query/filter clearing and empty-result recovery. Both screens share matching logic; query/topic/status live in the search route, with normal stack Back retaining browse context. Direct-entry Back falls back to Lessons. No inactive instructor/course tabs or sorting claims were added. Formatting was applied only to changed source files; tests, typecheck, lint, builds and runtime/visual review remain with the owner.
+
+**D4 implementation checkpoint (12 October):** Browse and Search share a Filters control and scrollable modal panel with topic/status choices. Opening copies applied values into a draft; Clear resets only the draft, Apply commits it, and Cancel/close/system Back discards it. Search text remains applied and a live count previews matching lessons. The trigger shows the active filter count; Browse shows a summary and Search retains removable context labels. Narrow/large-text choices stack. No storage changes or dependencies; tests, typecheck, lint, builds and runtime/visual review were not run. L1 is next.
 
 **D1. Browse lessons:** implement reference-06's left-panel hierarchy: search entry, compact illustrated hero, section headings, outlined lesson cards and anchored navigation. Use sample lesson groupings, with no fabricated popularity, ratings, teachers or class data.
 
