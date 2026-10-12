@@ -18,6 +18,12 @@ Use `npm run android` with an Android emulator or device ready. A web preview is
 
 Current owner preference: keep each increment small. The owner runs builds, tests and intensive terminal checks; provide the relevant commands instead of running them unless explicitly requested. Report unverified behaviour clearly.
 
+### Topic grid D2 checkpoint (2026-10-12)
+
+Reference-06 middle panel was inspected before implementation. Topic tiles now have compact proportions, aligned icons, tighter spacing, fine outlines and offset shadows. Counts derive from sample lessons. The reference's full-width final row is adapted into All lessons with the actual collection count, replacing the separate outline button. The four existing topics remain; no filler categories were added. Topics switch to one column below 350 logical pixels or at native font scales of 1.5 and above.
+
+Owner checks: open Topics from Lessons, compare the grid against reference-06 at 360/390 widths, below 350, and at 150%/200% native text. Check that each topic opens its matching lessons/count, All lessons removes topic/status restrictions, Back returns sensibly and bottom navigation remains usable. No typecheck, lint, tests, builds or runtime/visual review were run for this increment. D2 is implemented, acceptance pending; D3 dedicated search/results is next.
+
 ### Lessons browse D1 checkpoint (2026-10-12)
 
 Reference-06 left panel was inspected before implementation. Lessons now groups a compact heading and outlined search field above a lavender portrait hero and dark topic action. The retained artwork substitutes for the reference portrait; sample lessons replace popularity/teacher claims. Topic views use their existing colour, description and an All topics action. The hero separates copy from artwork and stacks below 350 logical pixels or at native font scales of 1.5 and above.
