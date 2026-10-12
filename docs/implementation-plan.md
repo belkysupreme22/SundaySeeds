@@ -2,7 +2,7 @@
 
 Updated 12 October 2026. This plan turns the reference designs into a sequence of complete learner flows. It separates implemented functionality, remaining design work and owner acceptance; a working screen is not automatically a finished design.
 
-**Next task: L1 — Lesson overview, reference-07 left panel.** D1–D4 discovery designs are implemented and awaiting owner runtime/visual review. Continue into the learning flow before another discretionary Home polish pass.
+**Next task: L2 — Lesson reader, reference-08 left/middle panels.** D1–D4 discovery and L1 overview designs are implemented and awaiting owner runtime/visual review. Continue through the learning flow before another discretionary Home polish pass.
 
 Latest screenshot feedback identifies the inner browser input focus rectangle. The shared web input now explicitly resets outline style/width/colour and box shadow, preserving the surrounding field's focus treatment. Rendered confirmation remains pending; the fix is preserved in D4.
 
@@ -34,7 +34,7 @@ All tasks below build on the existing app. They are remaining design/interaction
 | Order | Screen group | References | Starting point / status |
 | --- | --- | --- | --- |
 | D1–D4 | Lessons discovery | [06](references/reference-06.png) | D1–D4 implemented; owner runtime/visual review pending |
-| L1–L3 | Lesson overview, reader and quiz | [07](references/reference-07.png), [08](references/reference-08.png) | Working local journey; L1 overview design is next |
+| L1–L3 | Lesson overview, reader and quiz | [07](references/reference-07.png), [08](references/reference-08.png) | L1 overview implemented, owner review pending; L2 reader next, then L3 quiz |
 | P1 | Progress dashboard | [05](references/reference-05.png) middle/right, [09](references/reference-09.png) right | Local progress exists; dashboard design remains to be completed |
 | S1–S2 | Profile and settings | [12](references/reference-12.png) left/right | Name editor and settings exist; finish visual structure |
 | O1–O2 | Welcome and profile setup | [01](references/reference-01.png), [02](references/reference-02.png), [04](references/reference-04.png) | Welcome exists; finish adapted setup flow |
@@ -60,6 +60,8 @@ All tasks below build on the existing app. They are remaining design/interaction
 **Owner acceptance:** browse -> topic/search -> results -> matching lesson works; filters and counts agree with the sample collection; back navigation preserves intended context; empty results can be cleared; bookmark state stays consistent across Home and Lessons.
 
 ### 2. Learning flow
+
+**L1 implementation checkpoint (12 October):** reference-07's overview/curriculum hierarchy now appears through a compact portrait header with title/subtitle/scripture, bordered metadata row, icon-and-copy learning tiles, grouped reading rows and a mint quiz entry showing an actual best score only when completed. Resume highlighting, bookmarks, progress/storage notices, memory verse and fixed Start/Continue/Revisit actions are preserved. Header/metadata/outcomes adapt below 350 logical pixels or at fontScale >= 1.5. No fabricated instructor, pricing, enrolment or per-reading completion. Source formatting only; automated checks and runtime/visual acceptance remain pending with the owner. L2 is next.
 
 **L1. Lesson overview:** carry reference-07's overview and curriculum hierarchy through the remaining detail layout. Preserve the learning tiles, scripture, metadata, memory verse, section list, reading-position marker and Start/Continue/Revisit action. Adapt enrolment/payment treatments to the already-available sample lesson; no paid-enrolment controls.
 

@@ -24,6 +24,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 - Project working agreement covering design fidelity, feature boundaries, verification and collaborative development.
 
 ### Changed
+- Lesson overview follows reference-07 with a compact portrait header, outlined metadata, icon-and-copy learning tiles and grouped reading/quiz curriculum. Existing progress, bookmark and revisit behavior is preserved; owner runtime and visual review are pending.
 - Simplified Browse/Search filters to icon-only controls without adjacent summaries or chips. Topic/status options can be deselected, and applying with no selections removes all filter restrictions while retaining the query.
 - Explicitly reset the inner web text input's outline style, colour and shadow across shared inputs after the owner identified a remaining browser focus rectangle in Search.
 - Removed the dark frame from the Search lessons field and its clear icon at the owner's request; Search now uses a soft borderless background with lavender focus feedback.

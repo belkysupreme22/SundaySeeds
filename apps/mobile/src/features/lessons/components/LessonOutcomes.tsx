@@ -14,7 +14,7 @@ const accents: { tone: Pastel; icon: IconName }[] = [
 ];
 
 export function LessonOutcomes({ outcomes }: { outcomes: Lesson['outcomes'] }) {
-  const { fontScale } = useWindowDimensions();
+  const { width, fontScale } = useWindowDimensions();
   return (
     <ContentGroup>
       <Text variant="title" accessibilityRole="header">
@@ -28,11 +28,13 @@ export function LessonOutcomes({ outcomes }: { outcomes: Lesson['outcomes'] }) {
               key={outcome.title}
               tone={accent.tone}
               shadow={false}
-              style={[styles.tile, fontScale >= 1.5 && styles.fullWidth]}
+              style={[styles.tile, (width < 350 || fontScale >= 1.5) && styles.fullWidth]}
             >
               <Icon name={accent.icon} />
-              <Text variant="label">{outcome.title}</Text>
-              <Text variant="small">{outcome.description}</Text>
+              <View style={styles.words}>
+                <Text variant="label">{outcome.title}</Text>
+                <Text variant="small">{outcome.description}</Text>
+              </View>
             </Card>
           );
         })}
@@ -43,6 +45,16 @@ export function LessonOutcomes({ outcomes }: { outcomes: Lesson['outcomes'] }) {
 
 const styles = StyleSheet.create({
   grid: { flexDirection: 'row', flexWrap: 'wrap', gap: 10 },
-  tile: { flexBasis: '45%', flexGrow: 1, minWidth: 135, padding: 12, gap: 6 },
+  tile: {
+    flexBasis: '45%',
+    flexGrow: 1,
+    minWidth: 135,
+    padding: 10,
+    gap: 8,
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    borderRadius: 8,
+  },
+  words: { flex: 1, gap: 4 },
   fullWidth: { flexBasis: '100%' },
 });

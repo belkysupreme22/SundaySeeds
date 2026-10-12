@@ -16,6 +16,14 @@ Use `npm run android` with an Android emulator or device ready. A web preview is
 
 ## Work in reviewable increments
 
+### Lesson overview L1 checkpoint (2026-10-12)
+
+Reference-07 left/middle panels were inspected for the overview and curriculum. `LessonOverviewHeader` groups the portrait, category/sample label, title, subtitle and scripture, followed by introduction and an outlined metadata row using real reading/duration/question values. Learning outcomes now pair icons with copy in compact pastel tiles. Header/metadata/outcomes stack below 350 logical pixels or at native text scale >= 1.5.
+
+`LessonCurriculum` groups reading rows inside one outlined card with separators and the existing Resume here highlight. It adds a working quiz entry with real question count and, after completion, the recorded best percentage. Reading rows deliberately do not display completion ticks because only the current position is stored. The sample quiz remains accessible directly, consistent with existing quiz shortcuts. The feature components are presentational; the screen retains navigation and progress-hook callbacks. Bookmark behavior, memory verse, storage feedback and Start/Continue/Revisit footer are preserved. No storage schema, accounts, paid enrolment or teacher claims were added.
+
+Owner checks: compare all four lesson overviews against reference-07 at 360/390 widths, below 350, and 150%/200% native text. Try a fresh lesson, an unfinished saved position and a completed lesson. Open each curriculum row, return and confirm the correct resume marker. Open the quiz row and return; finish a quiz and check the actual best score, including zero. Revisit should start at reading one without losing completion, best score or bookmark. Check memory verse, footer reachability and storage warnings. Only the four changed source files were formatted; no tests, typecheck, lint, builds or runtime/visual checks were run. L1 is implemented with acceptance pending; L2 reader is next.
+
 ### Discovery filters D4 checkpoint (2026-10-12)
 
 Reference-06's filter controls inform the shared Filters trigger on Browse and Search. The supplied screenshot does not show an expanded panel: its outlined topic/status choices and pastel summary adapt the existing design language. The modal has scrollable content, safe-area spacing and single-column choices below 350 logical pixels or at native font scales of 1.5 and above.
