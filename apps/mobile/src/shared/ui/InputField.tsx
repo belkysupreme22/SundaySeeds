@@ -94,6 +94,14 @@ const styles = StyleSheet.create({
     color: colors.ink,
     backgroundColor: 'transparent',
   },
-  noInnerBorder: { borderWidth: 0 },
-  noWebOutline: { outlineWidth: 0 },
+  noInnerBorder: { borderWidth: 0, borderColor: 'transparent' },
+  // Reset the browser's automatic focus-ring style as well as its width.
+  // Focus remains visible on the surrounding field, never on an inner rectangle.
+  noWebOutline: {
+    outlineStyle: 'solid',
+    outlineWidth: 0,
+    outlineColor: 'transparent',
+    outlineOffset: 0,
+    boxShadow: 'none',
+  },
 });
