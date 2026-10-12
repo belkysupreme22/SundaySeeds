@@ -45,7 +45,6 @@ export function LessonFilters({
         style={[styles.trigger, activeCount > 0 && styles.active]}
       >
         <Icon name="sliders" size={18} />
-        <Text variant="label">Filters{activeCount > 0 ? ` · ${activeCount}` : ''}</Text>
       </Pressable>
       <Modal visible={open} transparent animationType="fade" onRequestClose={close}>
         <SafeAreaView style={styles.overlay}>
@@ -58,23 +57,23 @@ export function LessonFilters({
                 <IconButton name="x" label="Cancel filter changes" onPress={close} />
               </View>
               <Text variant="small" muted>
-                Choose a topic and learning status, then apply your filters.
+                Choose a topic or learning status, or leave all filters off.
               </Text>
               <Text variant="label" accessibilityRole="header">
                 Topic
               </Text>
               <View style={styles.options}>
-                <FilterChoice
-                  label="All topics"
-                  selected={!draft.topic}
-                  onPress={() => setDraft({ ...draft, topic: undefined })}
-                />
                 {lessonTopics.map((item) => (
                   <FilterChoice
                     key={item.name}
                     label={item.name}
                     selected={draft.topic === item.name}
-                    onPress={() => setDraft({ ...draft, topic: item.name })}
+                    onPress={() =>
+                      setDraft({
+                        ...draft,
+                        topic: draft.topic === item.name ? undefined : item.name,
+                      })
+                    }
                   />
                 ))}
               </View>
@@ -82,14 +81,21 @@ export function LessonFilters({
                 Learning status
               </Text>
               <View style={styles.options}>
-                {lessonFilters.map((item) => (
-                  <FilterChoice
-                    key={item.value}
-                    label={item.label}
-                    selected={draft.filter === item.value}
-                    onPress={() => setDraft({ ...draft, filter: item.value })}
-                  />
-                ))}
+                {lessonFilters
+                  .filter((item) => item.value !== 'all')
+                  .map((item) => (
+                    <FilterChoice
+                      key={item.value}
+                      label={item.label}
+                      selected={draft.filter === item.value}
+                      onPress={() =>
+                        setDraft({
+                          ...draft,
+                          filter: draft.filter === item.value ? 'all' : item.value,
+                        })
+                      }
+                    />
+                  ))}
               </View>
               <View style={styles.preview}>
                 <Text variant="label" accessibilityLiveRegion="polite">
@@ -135,7 +141,7 @@ function FilterChoice({
   const { width, fontScale } = useWindowDimensions();
   return (
     <Pressable
-      accessibilityRole="radio"
+      accessibilityRole="checkbox"
       accessibilityState={{ checked: selected }}
       onPress={onPress}
       style={[
@@ -154,9 +160,9 @@ function FilterChoice({
 
 const styles = StyleSheet.create({
   trigger: {
-    flexDirection: 'row',
     alignItems: 'center',
-    gap: 8,
+    justifyContent: 'center',
+    minWidth: 44,
     minHeight: 44,
     paddingHorizontal: 12,
     paddingVertical: 8,

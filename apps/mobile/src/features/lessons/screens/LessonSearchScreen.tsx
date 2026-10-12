@@ -1,7 +1,7 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import { Pressable, StyleSheet, View } from 'react-native';
 import { getLessonTopic } from '../data/lessonTopics';
-import { getLessonFilter, lessonFilters, useLessonResults } from '../hooks/useLessonResults';
+import { getLessonFilter, useLessonResults } from '../hooks/useLessonResults';
 import { LessonCard } from '../components/LessonCard';
 import { LessonFilters } from '../components/LessonFilters';
 import { colors } from '../../../shared/theme/tokens';
@@ -17,7 +17,6 @@ export function LessonSearchScreen() {
   const query = params.query ?? '';
   const topic = getLessonTopic(params.topic);
   const filter = getLessonFilter(params.filter);
-  const statusLabel = lessonFilters.find((item) => item.value === filter)?.label ?? 'All lessons';
   const narrowed = Boolean(topic || filter !== 'all');
   const visible = useLessonResults({ query, topic: topic?.name, filter });
   const clearQuery = () => router.setParams({ query: '' });
@@ -77,21 +76,7 @@ export function LessonSearchScreen() {
               })
             }
           />
-          {topic && (
-            <SearchContext label={topic.name} onRemove={() => router.setParams({ topic: '' })} />
-          )}
-          {filter !== 'all' && (
-            <SearchContext
-              label={statusLabel}
-              onRemove={() => router.setParams({ filter: 'all' })}
-            />
-          )}
         </View>
-        {narrowed && (
-          <Text variant="small" muted>
-            Searching within your selected topic or learning status.
-          </Text>
-        )}
       </View>
       <ContentGroup>
         <View style={styles.summary}>
@@ -139,42 +124,12 @@ export function LessonSearchScreen() {
   );
 }
 
-function SearchContext({ label, onRemove }: { label: string; onRemove: () => void }) {
-  return (
-    <Pressable
-      accessibilityRole="button"
-      accessibilityLabel={`Remove ${label} filter`}
-      onPress={onRemove}
-      style={styles.contextFilter}
-    >
-      <Text variant="small" style={styles.contextLabel}>
-        {label}
-      </Text>
-      <Icon name="x" size={16} />
-    </Pressable>
-  );
-}
-
 const styles = StyleSheet.create({
   intro: { gap: 12 },
   clearSearch: { minWidth: 44, minHeight: 44, alignItems: 'center', justifyContent: 'center' },
   header: { flexDirection: 'row', alignItems: 'center', gap: 8 },
   words: { flex: 1, gap: 2 },
   context: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
-  contextFilter: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-    maxWidth: '100%',
-    minHeight: 44,
-    paddingHorizontal: 10,
-    paddingVertical: 8,
-    borderWidth: 1,
-    borderColor: colors.ink,
-    borderRadius: 6,
-    backgroundColor: colors.white,
-  },
-  contextLabel: { flexShrink: 1 },
   summary: { flexDirection: 'row', alignItems: 'center', gap: 8 },
   clear: { minHeight: 44, justifyContent: 'center', paddingHorizontal: 4 },
   empty: { gap: 12 },

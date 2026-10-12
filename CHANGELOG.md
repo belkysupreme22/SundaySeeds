@@ -24,6 +24,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 - Project working agreement covering design fidelity, feature boundaries, verification and collaborative development.
 
 ### Changed
+- Simplified Browse/Search filters to icon-only controls without adjacent summaries or chips. Topic/status options can be deselected, and applying with no selections removes all filter restrictions while retaining the query.
 - Explicitly reset the inner web text input's outline style, colour and shadow across shared inputs after the owner identified a remaining browser focus rectangle in Search.
 - Removed the dark frame from the Search lessons field and its clear icon at the owner's request; Search now uses a soft borderless background with lavender focus feedback.
 - Standardised every current editable field (lesson search and profile name) with one shared idle/focus stroke, no inner browser outline or Android underline, and no border-induced layout shift. The browse search entry uses the same keyboard-focus treatment; visual verification remains pending.
