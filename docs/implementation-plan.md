@@ -1,8 +1,8 @@
 # SundaySeeds implementation plan
 
-Updated 12 October 2026. This plan turns the reference designs into a sequence of complete learner flows. It separates implemented functionality, remaining design work and owner acceptance; a working screen is not automatically a finished design.
+Updated 13 October 2026. This plan turns the reference designs into a sequence of complete learner flows. It separates implemented functionality, remaining design work and owner acceptance; a working screen is not automatically a finished design.
 
-**Next task: L2 — Lesson reader, reference-08 left/middle panels.** D1–D4 discovery and L1 overview designs are implemented and awaiting owner runtime/visual review. Continue through the learning flow before another discretionary Home polish pass.
+**Next task: L3 — Quiz and results, reference-08 right panel and reference-07 completion treatment.** D1–D4 discovery and L1–L2 overview/reader designs are implemented and awaiting owner runtime/visual review. Continue through the learning flow before another discretionary Home polish pass.
 
 Latest screenshot feedback identifies the inner browser input focus rectangle. The shared web input now explicitly resets outline style/width/colour and box shadow, preserving the surrounding field's focus treatment. Rendered confirmation remains pending; the fix is preserved in D4.
 
@@ -34,7 +34,7 @@ All tasks below build on the existing app. They are remaining design/interaction
 | Order | Screen group | References | Starting point / status |
 | --- | --- | --- | --- |
 | D1–D4 | Lessons discovery | [06](references/reference-06.png) | D1–D4 implemented; owner runtime/visual review pending |
-| L1–L3 | Lesson overview, reader and quiz | [07](references/reference-07.png), [08](references/reference-08.png) | L1 overview implemented, owner review pending; L2 reader next, then L3 quiz |
+| L1–L3 | Lesson overview, reader and quiz | [07](references/reference-07.png), [08](references/reference-08.png) | L1–L2 implemented, owner review pending; L3 quiz/results next |
 | P1 | Progress dashboard | [05](references/reference-05.png) middle/right, [09](references/reference-09.png) right | Local progress exists; dashboard design remains to be completed |
 | S1–S2 | Profile and settings | [12](references/reference-12.png) left/right | Name editor and settings exist; finish visual structure |
 | O1–O2 | Welcome and profile setup | [01](references/reference-01.png), [02](references/reference-02.png), [04](references/reference-04.png) | Welcome exists; finish adapted setup flow |
@@ -66,6 +66,8 @@ All tasks below build on the existing app. They are remaining design/interaction
 **L1. Lesson overview:** carry reference-07's overview and curriculum hierarchy through the remaining detail layout. Preserve the learning tiles, scripture, metadata, memory verse, section list, reading-position marker and Start/Continue/Revisit action. Adapt enrolment/payment treatments to the already-available sample lesson; no paid-enrolment controls.
 
 **L2. Reader:** complete reference-08's reading hierarchy, section indicator, reflection/memory-verse treatment and previous/next actions. Reopen the saved section and preserve completed status when revisiting. Use text lessons; video, resource downloads and personal notes are not part of this increment unless their behavior is separately scoped and implemented.
+
+**L2 implementation checkpoint (13 October):** compact section header, explicit reading-position bar with separate completion/revisit text, section-specific reflection cards, memory verse and a working Up next row now adapt reference-08 to text lessons. Original content is preserved; recognised reflection paragraphs are presented as cards instead of being followed by a duplicate generic prompt. The fixed Previous/Next/Take quiz controls stack below 350 logical pixels or fontScale >= 1.5. Initial position recording, saved-section navigation and storage recovery remain; reading the final section does not mark completion. Only changed files were formatted; tests, typecheck, lint, builds and runtime/visual review remain pending with the owner. L3 is next.
 
 **L3. Quiz and results:** finish the lavender question card, outlined choices, selected/correct/incorrect states, explanations, completion presentation and answer review. Preserve unanswered-question handling, retry behavior, best scores and storage-recovery feedback.
 

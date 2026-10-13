@@ -16,6 +16,14 @@ Use `npm run android` with an Android emulator or device ready. A web preview is
 
 ## Work in reviewable increments
 
+### Lesson reader L2 checkpoint (2026-10-13)
+
+Reference-08 left/middle panels were inspected before implementation. The reader adapts their content hierarchy, pastel reflection treatment, Up next and anchored navigation to the agreed text lessons. It now has a compact section header with scripture, an explicit current-reading-position bar, and separate quiz-completion/revisit text. `ReadingContent` keeps paragraph order and wording, presenting existing Reflect/Try this/Take it with you paragraphs as yellow cards; the old duplicate generic reflection prompt is removed. A mint memory-verse card and outlined Up next row follow the reading. No inactive video, notes, resources or downloads were added.
+
+Previous/Next and the Up next row use the existing saved-position actions; the last reading opens the quiz without marking completion. The screen still resets its scroll position when the section changes and records reading one when a new lesson opens. Footer actions stack below 350 logical pixels or at native fontScale >= 1.5. Device-storage errors now also change the reader's persistence note instead of leaving unconditional save wording.
+
+Owner checks: open all sample lessons, compare reference-08 adaptations at 360/390 widths, below 350 and 150%/200% text; inspect reflection wording, memory verses, footer reachability and Up next destinations. Move forward/back, return from quiz and reopen a saved section. Revisit a completed lesson: current position should change while completion and best score remain. Reading three's full position bar must still say quiz not finished until a quiz is completed. Exercise existing storage-retry behavior and ensure reading content remains available. Only the two changed source files were formatted; no tests, typecheck, lint, builds or runtime/visual review were run. L2 is implemented, acceptance pending; L3 quiz/results is next.
+
 ### Lesson overview L1 checkpoint (2026-10-12)
 
 Reference-07 left/middle panels were inspected for the overview and curriculum. `LessonOverviewHeader` groups the portrait, category/sample label, title, subtitle and scripture, followed by introduction and an outlined metadata row using real reading/duration/question values. Learning outcomes now pair icons with copy in compact pastel tiles. Header/metadata/outcomes stack below 350 logical pixels or at native text scale >= 1.5.
