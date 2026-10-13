@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import { router } from 'expo-router';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, useWindowDimensions } from 'react-native';
 import type { Lesson } from '../../lessons/types';
+import { LessonArtwork } from '../../lessons/components/LessonArtwork';
+import { useLearningProgress } from '../../progress/hooks/useLearningProgress';
 import type { QuizScore } from '../data/scoreQuiz';
 import { AnswerReviewCard } from '../components/AnswerReviewCard';
+import { QuizNextAction } from '../components/QuizNextAction';
 import { Screen, ContentGroup } from '../../../shared/ui/Screen';
 import { PageHeader } from '../../../shared/ui/PageHeader';
 import { Text } from '../../../shared/ui/Text';
@@ -21,36 +24,70 @@ type QuizResultScreenProps = {
 
 export function QuizResultScreen({ lesson, result, answers, onRetry }: QuizResultScreenProps) {
   const [showReview, setShowReview] = useState(false);
+  const { progress, error, hydrated } = useLearningProgress();
+  const { width, fontScale } = useWindowDimensions();
+  const stacked = width < 350 || fontScale >= 1.5;
+  const bestScore = progress[lesson.id]?.bestScore;
 
   return (
-    <Screen footer={<Button label="See my progress" onPress={() => router.replace('/progress')} />}>
-      <PageHeader title="A little wiser" back />
+    <Screen
+      footer={
+        <Button
+          label="See my progress"
+          icon="arrow-right"
+          onPress={() => router.replace('/progress')}
+        />
+      }
+    >
+      <PageHeader title="Quiz results" back />
       <View style={styles.celebration}>
         <View style={styles.medal}>
           <Icon name="check" size={54} />
         </View>
-        <Text variant="heading">You did it!</Text>
+        <Text variant="heading" style={styles.center}>
+          You did it!
+        </Text>
         <Text muted style={styles.center}>
-          Every little lesson helps you grow.
+          Quiz complete. Every little lesson helps you grow.
         </Text>
       </View>
-      <Card tone="lavender" style={styles.result}>
-        <Text variant="hero">{result.percentage}%</Text>
-        <Text>
-          {result.correct} of {result.total} answers correct
-        </Text>
-        <Text variant="label" style={styles.center}>
-          {lesson.title}
-        </Text>
-        <Text variant="caption" muted>
-          This attempt
-        </Text>
+      <Card shadow={false} style={[styles.lesson, stacked && styles.stacked]}>
+        <LessonArtwork id={lesson.id} tone={lesson.color} />
+        <View style={styles.lessonCopy}>
+          <Text variant="caption" muted>
+            Sample lesson · {lesson.category}
+          </Text>
+          <Text variant="title">{lesson.title}</Text>
+          <Text variant="small" muted>
+            {lesson.scripture}
+          </Text>
+          <Text variant="caption">{lesson.questions.length} questions</Text>
+        </View>
+      </Card>
+      <Card tone="lavender" style={[styles.result, stacked && styles.stacked]}>
+        <View style={styles.score}>
+          <Text variant="label">This attempt</Text>
+          <Text variant="hero">{result.percentage}%</Text>
+          <Text variant="small">
+            {result.correct} of {result.total} correct
+          </Text>
+        </View>
+        <View style={[styles.best, stacked && styles.bestStacked]}>
+          <Text variant="label">Best score</Text>
+          <Text variant="heading">{bestScore == null ? '—' : `${bestScore}%`}</Text>
+          <Text variant="caption" muted>
+            {error ? 'Storage needs attention' : 'Device-local learning'}
+          </Text>
+        </View>
       </Card>
       <ContentGroup>
-        <Button
-          label={showReview ? 'Hide answer review' : 'Review answers'}
-          variant="outline"
-          icon={showReview ? 'chevron-up' : 'book-open'}
+        <Text variant="title">What’s next?</Text>
+        <QuizNextAction
+          title={showReview ? 'Hide answer review' : 'Review your answers'}
+          description="Look back at your choices and explanations."
+          icon="book-open"
+          tone="mint"
+          expanded={showReview}
           onPress={() => setShowReview((visible) => !visible)}
         />
         {showReview && (
@@ -69,22 +106,32 @@ export function QuizResultScreen({ lesson, result, answers, onRetry }: QuizResul
             ))}
           </ContentGroup>
         )}
+        <QuizNextAction
+          title="Try the quiz again"
+          description="Start fresh. Your best score stays."
+          icon="refresh-cw"
+          tone="lavender"
+          onPress={onRetry}
+        />
       </ContentGroup>
-      <Card tone="mint" shadow={false}>
+      <Card tone="yellow" shadow={false}>
         <Text variant="label">Take it into your week</Text>
         <Text>Choose one small action from this lesson and put it into practice.</Text>
       </Card>
       <Text variant="small" muted>
-        Your best score is kept on this device. This answer review is available until you leave the
-        quiz or try again. Any storage problem is shown at the top of the app.
+        {error
+          ? 'This result is visible for this session, but saving is not confirmed. Use the storage notice above to recover your learning data.'
+          : !hydrated
+            ? 'Device-local learning data is still loading. Saving this result is not confirmed.'
+            : 'Only your best score is kept on this device, not a history of attempts.'}{' '}
+        This answer review is available until you leave the quiz or try again.
       </Text>
-      <Button label="Try the quiz again" variant="outline" icon="refresh-cw" onPress={onRetry} />
     </Screen>
   );
 }
 
 const styles = StyleSheet.create({
-  celebration: { alignItems: 'center', gap: 12, paddingVertical: 20 },
+  celebration: { alignItems: 'center', gap: 10, paddingVertical: 8 },
   medal: {
     width: 108,
     height: 108,
@@ -94,7 +141,14 @@ const styles = StyleSheet.create({
     borderColor: colors.ink,
     alignItems: 'center',
     justifyContent: 'center',
+    boxShadow: '3px 4px 0px #26212E',
   },
   center: { textAlign: 'center' },
-  result: { alignItems: 'center', gap: 10 },
+  lesson: { flexDirection: 'row', alignItems: 'center', gap: 14 },
+  lessonCopy: { flex: 1, gap: 5 },
+  result: { flexDirection: 'row', gap: 16 },
+  score: { flex: 1, gap: 4 },
+  best: { flex: 1, gap: 4, borderLeftWidth: 1, borderColor: colors.ink, paddingLeft: 16 },
+  stacked: { flexDirection: 'column', alignItems: 'stretch' },
+  bestStacked: { borderLeftWidth: 0, borderTopWidth: 1, paddingLeft: 0, paddingTop: 12 },
 });

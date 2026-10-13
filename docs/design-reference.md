@@ -15,6 +15,7 @@ Before changing a screen, inspect its mapped reference panels. After the change,
 | Lesson detail | [07](references/reference-07.png), left panel | Large illustrated/photographic header, short introduction, coloured learning-outcome tiles, metadata and prominent action |
 | Lesson reader | [08](references/reference-08.png), left/middle panels | Clear lesson title and content hierarchy, resource/note treatments and previous/next actions |
 | Quiz | [08](references/reference-08.png), right panel | Slim progress bar, lavender question card, outlined answer rows, selected state and mint feedback |
+| Quiz results | [07](references/reference-07.png), right panel | Mint completion emblem, compact lesson identity and outlined next-action rows, adapted to this attempt, best score, review and retry |
 | Progress | [09](references/reference-09.png), right panel | Encouraging summary, completion visualisation, lesson progress bars and coloured statistics |
 | Profile | [12](references/reference-12.png), left/right panels | Compact profile summary, grouped settings rows and consistent navigation |
 | Welcome | [01](references/reference-01.png) | Three-page image-led composition, pastel feature cards, page indicators and clear actions |

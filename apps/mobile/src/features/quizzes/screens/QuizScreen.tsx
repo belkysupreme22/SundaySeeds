@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { router } from 'expo-router';
-import { Pressable, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { getLesson } from '../../lessons/data/lessons';
 import { useLearningProgress } from '../../progress/hooks/useLearningProgress';
 import { scoreQuiz, type QuizScore } from '../data/scoreQuiz';
 import { QuizResultScreen } from './QuizResultScreen';
+import { QuizChoice } from '../components/QuizChoice';
 import { Screen, ContentGroup } from '../../../shared/ui/Screen';
 import { PageHeader } from '../../../shared/ui/PageHeader';
 import { Text } from '../../../shared/ui/Text';
@@ -12,7 +13,6 @@ import { Card } from '../../../shared/ui/Card';
 import { Button } from '../../../shared/ui/Button';
 import { Icon } from '../../../shared/ui/Icon';
 import { ProgressBar } from '../../../shared/ui/ProgressBar';
-import { colors } from '../../../shared/theme/tokens';
 
 export function QuizScreen({ lessonId }: { lessonId: string }) {
   const lesson = getLesson(lessonId);
@@ -34,6 +34,8 @@ export function QuizScreen({ lessonId }: { lessonId: string }) {
   const selected = answers[index];
   const correct = selected === question.correctIndex;
   const last = index === lesson.questions.length - 1;
+  const checkedCount = index + (checked ? 1 : 0);
+  const checkedPercent = Math.round((checkedCount / lesson.questions.length) * 100);
   function next() {
     if (!lesson) return;
     if (last) {
@@ -65,96 +67,69 @@ export function QuizScreen({ lessonId }: { lessonId: string }) {
       footer={
         <Button
           label={!checked ? 'Check answer' : last ? 'Finish quiz' : 'Next question'}
+          icon={!checked ? 'check' : 'arrow-right'}
           disabled={selected === null}
           onPress={() => (checked ? next() : setChecked(true))}
         />
       }
     >
-      <PageHeader title="A moment to reflect" subtitle={lesson.title} back />
-      <View style={styles.between}>
-        <Text variant="small">
-          Question {index + 1} of {lesson.questions.length}
-        </Text>
-        <Text variant="small">{Math.round((index / lesson.questions.length) * 100)}% complete</Text>
+      <PageHeader title="Quiz time" subtitle={lesson.title} back />
+      <View style={styles.progress}>
+        <View style={styles.between}>
+          <Text variant="label">
+            Question {index + 1} of {lesson.questions.length}
+          </Text>
+          <Text variant="small">{checkedPercent}% checked</Text>
+        </View>
+        <ProgressBar
+          value={checkedPercent}
+          label="Answers checked"
+          valueText={`${checkedCount} of ${lesson.questions.length} answers checked`}
+        />
       </View>
-      <ProgressBar value={(index / lesson.questions.length) * 100} />
       <Card tone="lavender" style={styles.question}>
         <Text variant="title">{question.prompt}</Text>
       </Card>
       <ContentGroup>
         {question.options.map((option, optionIndex) => (
-          <Pressable
+          <QuizChoice
             key={option}
-            accessibilityRole="radio"
-            accessibilityLabel={`${option}${checked && optionIndex === question.correctIndex ? ', correct answer' : checked && selected === optionIndex ? ', your answer, incorrect' : ''}`}
-            accessibilityState={{ checked: selected === optionIndex, disabled: checked }}
-            disabled={checked}
-            onPress={() =>
+            label={option}
+            index={optionIndex}
+            selected={selected === optionIndex}
+            checked={checked}
+            correct={optionIndex === question.correctIndex}
+            onSelect={() =>
               setAnswers((previous) =>
                 previous.map((answer, i) => (i === index ? optionIndex : answer)),
               )
             }
-            style={[
-              styles.option,
-              selected === optionIndex && styles.selected,
-              checked && optionIndex === question.correctIndex && styles.correct,
-              checked && selected === optionIndex && !correct && styles.incorrect,
-            ]}
-          >
-            <View style={styles.letter}>
-              <Text variant="label">{String.fromCharCode(65 + optionIndex)}</Text>
-            </View>
-            <View style={styles.optionText}>
-              <Text>{option}</Text>
-              {checked && optionIndex === question.correctIndex && <Text variant="caption">Correct answer</Text>}
-              {checked && selected === optionIndex && !correct && <Text variant="caption">Your answer · Incorrect</Text>}
-            </View>
-            {checked && optionIndex === question.correctIndex ? (
-              <Icon name="check-circle" size={18} color={colors.success} />
-            ) : selected === optionIndex ? (
-              <Icon name={checked ? 'x-circle' : 'disc'} size={18} color={checked ? colors.danger : colors.ink} />
-            ) : null}
-          </Pressable>
+          />
         ))}
       </ContentGroup>
       {checked && (
-        <Card tone={correct ? 'mint' : 'peach'} shadow={false} accessibilityLiveRegion="polite">
-          <Text variant="label">{correct ? 'That’s right!' : 'A chance to learn'}</Text>
+        <Card tone={correct ? 'mint' : 'peach'} accessibilityLiveRegion="polite">
+          <View style={styles.feedbackHeading}>
+            <Icon name={correct ? 'check-circle' : 'book-open'} size={18} />
+            <Text variant="label" style={styles.feedbackTitle}>
+              {correct ? 'That’s right!' : 'A chance to learn'}
+            </Text>
+          </View>
           <Text variant="small">{question.explanation}</Text>
         </Card>
       )}
       <Text variant="caption" muted>
-        Take your time. This is practice, not a race.
+        {checked && last
+          ? 'All answers checked. Tap Finish quiz to record your result.'
+          : 'Take your time. Choose an answer, then check it to learn more.'}
       </Text>
     </Screen>
   );
 }
 const styles = StyleSheet.create({
+  progress: { gap: 8 },
   between: { flexDirection: 'row', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 },
-  question: { minHeight: 135, justifyContent: 'center' },
-  option: {
-    borderWidth: 1.2,
-    borderColor: colors.ink,
-    backgroundColor: colors.white,
-    borderRadius: 9,
-    padding: 14,
-    minHeight: 64,
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 12,
-  },
-  selected: { backgroundColor: colors.lavender },
-  correct: { backgroundColor: colors.mint },
-  incorrect: { backgroundColor: colors.peach },
-  letter: {
-    width: 30,
-    height: 30,
-    borderWidth: 1,
-    borderColor: colors.ink,
-    borderRadius: 16,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: colors.white,
-  },
-  optionText: { flex: 1, gap: 4 },
+  question: { minHeight: 120, justifyContent: 'center' },
+  feedbackHeading: { flexDirection: 'row', alignItems: 'center', gap: 8 },
+  feedbackTitle: { flex: 1 },
 });

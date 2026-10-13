@@ -2,7 +2,7 @@
 
 Updated 13 October 2026. This plan turns the reference designs into a sequence of complete learner flows. It separates implemented functionality, remaining design work and owner acceptance; a working screen is not automatically a finished design.
 
-**Next task: L3 — Quiz and results, reference-08 right panel and reference-07 completion treatment.** D1–D4 discovery and L1–L2 overview/reader designs are implemented and awaiting owner runtime/visual review. Continue through the learning flow before another discretionary Home polish pass.
+**Next task: P1 — Progress dashboard, reference-05 middle/right and reference-09 right.** D1–D4 discovery and L1–L3 learning-flow designs are implemented and awaiting owner runtime/visual review. Continue through the planned screen groups before another discretionary Home polish pass.
 
 Latest screenshot feedback identifies the inner browser input focus rectangle. The shared web input now explicitly resets outline style/width/colour and box shadow, preserving the surrounding field's focus treatment. Rendered confirmation remains pending; the fix is preserved in D4.
 
@@ -34,7 +34,7 @@ All tasks below build on the existing app. They are remaining design/interaction
 | Order | Screen group | References | Starting point / status |
 | --- | --- | --- | --- |
 | D1–D4 | Lessons discovery | [06](references/reference-06.png) | D1–D4 implemented; owner runtime/visual review pending |
-| L1–L3 | Lesson overview, reader and quiz | [07](references/reference-07.png), [08](references/reference-08.png) | L1–L2 implemented, owner review pending; L3 quiz/results next |
+| L1–L3 | Lesson overview, reader and quiz | [07](references/reference-07.png), [08](references/reference-08.png) | L1–L3 implemented; owner runtime/visual review pending |
 | P1 | Progress dashboard | [05](references/reference-05.png) middle/right, [09](references/reference-09.png) right | Local progress exists; dashboard design remains to be completed |
 | S1–S2 | Profile and settings | [12](references/reference-12.png) left/right | Name editor and settings exist; finish visual structure |
 | O1–O2 | Welcome and profile setup | [01](references/reference-01.png), [02](references/reference-02.png), [04](references/reference-04.png) | Welcome exists; finish adapted setup flow |
@@ -70,6 +70,8 @@ All tasks below build on the existing app. They are remaining design/interaction
 **L2 implementation checkpoint (13 October):** compact section header, explicit reading-position bar with separate completion/revisit text, section-specific reflection cards, memory verse and a working Up next row now adapt reference-08 to text lessons. Original content is preserved; recognised reflection paragraphs are presented as cards instead of being followed by a duplicate generic prompt. The fixed Previous/Next/Take quiz controls stack below 350 logical pixels or fontScale >= 1.5. Initial position recording, saved-section navigation and storage recovery remain; reading the final section does not mark completion. Only changed files were formatted; tests, typecheck, lint, builds and runtime/visual review remain pending with the owner. L3 is next.
 
 **L3. Quiz and results:** finish the lavender question card, outlined choices, selected/correct/incorrect states, explanations, completion presentation and answer review. Preserve unanswered-question handling, retry behavior, best scores and storage-recovery feedback.
+
+**L3 implementation checkpoint (13 October):** reference-08's compact quiz composition now has a grouped checked-answer progress bar, lavender question card, outlined choices with dark selected letter badges, explicit checked-answer labels and pastel explanation cards. Checking all answers is distinct from finishing the quiz. Reference-07's completion treatment is adapted to a mint check, sample-lesson portrait summary, separate this-attempt/best-score figures and working outlined review/retry rows. Lesson/score layouts stack below 350 logical pixels or fontScale >= 1.5; badges grow with text. Storage-error wording replaces unconditional save wording; existing global recovery and scoring remain. No passing threshold, certificates or attempt history. Only changed source formatting and whitespace checks were performed; tests, typecheck, lint, builds and runtime/visual review remain with the owner. P1 is next.
 
 **Owner acceptance:** complete Home -> lesson -> reader -> quiz -> results -> progress; restore reading position and saved results after restart; revisit without losing completion or best score; distinguish reading position from quiz completion; exercise unanswered, incorrect-answer and save-failure states.
 

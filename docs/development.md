@@ -16,6 +16,12 @@ Use `npm run android` with an Android emulator or device ready. A web preview is
 
 ## Work in reviewable increments
 
+### Quiz/results L3 checkpoint (2026-10-13)
+
+Reference-08 right and reference-07 completion panels were inspected. Quiz choices now use scalable letter badges, a dark selected badge, outlined pastel selection/feedback and explicit correct/incorrect labels. The compact bar reports answers checked, not saved completion; Finish quiz still records the result. Results use the reference's mint completion emblem, outlined sample-lesson portrait summary and next-action rows. This attempt and the actual best percentage are separate; absent scores show a dash, including during unavailable learning data, while a real zero remains visible. Review and retry preserve existing behavior. Result lesson/score groups stack below 350 logical pixels or native fontScale >= 1.5. No new storage, passing rule, certificates or attempt history.
+
+Owner checks: compare quiz and results with references at 360/390 widths, below 350 and 150%/200% native text. Confirm Check answer is disabled before selection, selections can change before checking and are locked afterward, incorrect feedback reveals the correct choice, and 100% checked still requires Finish quiz. Finish with zero and nonzero scores; retry with a lower score and confirm best score stays. Expand/collapse review, retry from review and open Progress. Exercise storage warnings/retry without losing answer review; a load failure still pauses learning mutations, so recover before a new quiz attempt to record it. Restart to inspect stored best scores. Only four changed source files were formatted and whitespace checked; no tests, typecheck, lint, builds or runtime/visual review were run. L3 is implemented with acceptance pending; P1 progress is next.
+
 ### Lesson reader L2 checkpoint (2026-10-13)
 
 Reference-08 left/middle panels were inspected before implementation. The reader adapts their content hierarchy, pastel reflection treatment, Up next and anchored navigation to the agreed text lessons. It now has a compact section header with scripture, an explicit current-reading-position bar, and separate quiz-completion/revisit text. `ReadingContent` keeps paragraph order and wording, presenting existing Reflect/Try this/Take it with you paragraphs as yellow cards; the old duplicate generic reflection prompt is removed. A mint memory-verse card and outlined Up next row follow the reading. No inactive video, notes, resources or downloads were added.
