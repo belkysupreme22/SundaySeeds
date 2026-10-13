@@ -17,7 +17,8 @@ Before changing a screen, inspect its mapped reference panels. After the change,
 | Quiz | [08](references/reference-08.png), right panel | Slim progress bar, lavender question card, outlined answer rows, selected state and mint feedback |
 | Quiz results | [07](references/reference-07.png), right panel | Mint completion emblem, compact lesson identity and outlined next-action rows, adapted to this attempt, best score, review and retry |
 | Progress | [05](references/reference-05.png), middle/right; [09](references/reference-09.png), right | Lavender portrait hero, actual completion percentage/bar, outlined portrait lesson rows and pastel statistics; no unrecorded history/time metrics |
-| Profile | [12](references/reference-12.png), left/right panels | Compact profile summary, grouped settings rows and consistent navigation |
+| Profile | [12](references/reference-12.png), left panel | Compact lavender identity/edit card, real local-learning tiles, grouped outlined navigation and anchored tabs |
+| Settings | [12](references/reference-12.png), right panel | Grouped outlined rows, clear section headings and real local-data actions |
 | Welcome | [01](references/reference-01.png) | Three-page image-led composition, pastel feature cards, page indicators and clear actions |
 | Optional profile setup | [02](references/reference-02.png), [04](references/reference-04.png) | Progress indicator, outlined inputs and selectable tiles only for implemented preferences |
 | Authentication (connected pilot) | [03](references/reference-03.png) | Illustrated headers, outlined fields and prominent primary actions |

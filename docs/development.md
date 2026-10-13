@@ -16,6 +16,14 @@ Use `npm run android` with an Android emulator or device ready. A web preview is
 
 ## Work in reviewable increments
 
+### Profile S1 checkpoint (2026-10-13)
+
+Reference-12 left was inspected. Profile now uses a compact lavender identity card with a generic avatar and a working edit icon, three pastel completed/in-progress/saved counts, and two outlined navigation groups with icon tiles, descriptions and separators. All destinations retain their existing routing: Edit profile/Settings/Welcome push; Saved and Progress replace. The optional-name editor and shared InputField are unchanged. Header and statistics stack below 350 logical pixels or native fontScale >= 1.5; row text wraps without fixed heights. Local identity and sample content remain explicit; no invented personal biography, avatar photo, enrolment, certificates, streaks, skills or goals.
+
+Name loading and failure have distinct header text; edit becomes available after successful name hydration. Existing name retry remains. Learning hydration/read failures withhold counts, independently of the profile name; save failures keep session counts with warning wording and global recovery. Counts use known sample lessons, and bookmarking alone does not count as in-progress learning. No storage or provider changes; the known profile-hook lint issue remains deferred.
+
+Owner checks: compare Profile against reference-12 at 360/390 widths, below 350 and 150%/200% native text. Inspect blank and 40-character names, independent name/learning loading/failures and recovery, zero/bookmarked/in-progress/completed counts and save warnings. Use the edit icon, save/cancel and confirm the greeting updates; verify each group row, Settings shortcut and back behavior. Only three changed source files were formatted and whitespace checked. No tests, typecheck, lint, builds or runtime/visual review were run. S1 implemented with owner acceptance pending; S2 Settings is next.
+
 ### Progress P1 checkpoint (2026-10-13)
 
 Reference-05 middle/right and reference-09 right were inspected. The dashboard now uses a lavender portrait hero, overall completion percentage/bar, four outlined pastel statistic tiles and portrait lesson rows. Completed/in-progress/saved counts derive from known sample lessons; the average uses each recorded best score, including zero, and states how many quizzes contribute. A dash means no recorded scores. Rows retain the shared reading-position/completed distinction and open the existing lesson overview, with Start/Continue/Revisit labels. Hero copy covers fresh, started and all-completed states; saved-only data gets a distinct first-use prompt. Hero/tiles/rows stack below 350 logical pixels or native fontScale >= 1.5.

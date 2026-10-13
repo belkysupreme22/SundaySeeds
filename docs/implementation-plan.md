@@ -2,7 +2,7 @@
 
 Updated 13 October 2026. This plan turns the reference designs into a sequence of complete learner flows. It separates implemented functionality, remaining design work and owner acceptance; a working screen is not automatically a finished design.
 
-**Next task: S1 — Profile, reference-12 left.** D1–D4 discovery, L1–L3 learning-flow and P1 Progress designs are implemented and awaiting owner runtime/visual review. Continue through the planned screen groups before another discretionary Home polish pass.
+**Next task: S2 — Settings, reference-12 right.** D1–D4 discovery, L1–L3 learning-flow, P1 Progress and S1 Profile designs are implemented and awaiting owner runtime/visual review. Continue through the planned screen groups before another discretionary Home polish pass.
 
 Latest screenshot feedback identifies the inner browser input focus rectangle. The shared web input now explicitly resets outline style/width/colour and box shadow, preserving the surrounding field's focus treatment. Rendered confirmation remains pending; the fix is preserved in D4.
 
@@ -36,7 +36,7 @@ All tasks below build on the existing app. They are remaining design/interaction
 | D1–D4 | Lessons discovery | [06](references/reference-06.png) | D1–D4 implemented; owner runtime/visual review pending |
 | L1–L3 | Lesson overview, reader and quiz | [07](references/reference-07.png), [08](references/reference-08.png) | L1–L3 implemented; owner runtime/visual review pending |
 | P1 | Progress dashboard | [05](references/reference-05.png) middle/right, [09](references/reference-09.png) right | Implemented; owner runtime/visual review pending |
-| S1–S2 | Profile and settings | [12](references/reference-12.png) left/right | Name editor and settings exist; finish visual structure |
+| S1–S2 | Profile and settings | [12](references/reference-12.png) left/right | S1 implemented, owner review pending; S2 Settings next |
 | O1–O2 | Welcome and profile setup | [01](references/reference-01.png), [02](references/reference-02.png), [04](references/reference-04.png) | Welcome exists; finish adapted setup flow |
 
 ### 1. Lessons discovery — implemented, acceptance pending
@@ -88,6 +88,8 @@ Do not display learning hours, streaks, weekly graphs, XP or historical activity
 ### 4. Profile and settings
 
 **S1. Profile:** finish the reference-12 profile header, personal summary, genuine local-learning statistics and grouped navigation rows. Keep the optional display-name editor and clearly identify the local preview.
+
+**S1 implementation checkpoint (13 October):** reference-12's lavender identity card, edit affordance, compact statistics and outlined navigation groups are implemented. The generic avatar represents a device-local profile; real completed/in-progress/saved counts replace enrolment/certificate/streak data. Profile name and learning data have independent loading/failure presentation; unavailable values are not shown as an empty name or zero counts. The header and statistics stack below 350 logical pixels or fontScale >= 1.5. Existing editor/save/cancel, Saved, Progress, introduction and Settings destinations remain. No account, biography, skills, goals or uploads were added. Three changed source files formatted and whitespace checked; tests, typecheck, lint, builds and runtime/visual review remain with the owner. S2 is next.
 
 **S2. Settings:** finish Personal information, Learning data, introduction replay and About/support presentation using the grouped outlined-row design. Keep the existing confirmed reset behavior and error recovery. Only include support links with real destinations; account settings arrive with authentication.
 
