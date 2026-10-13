@@ -1,7 +1,10 @@
 import { router } from 'expo-router';
-import { Pressable, StyleSheet, View } from 'react-native';
+import { StyleSheet, View, useWindowDimensions } from 'react-native';
 import { lessons } from '../../lessons/data/lessons';
 import { useLearningProgress } from '../hooks/useLearningProgress';
+import { ProgressHero } from '../components/ProgressHero';
+import { ProgressStats } from '../components/ProgressStats';
+import { LessonProgressRow } from '../components/LessonProgressRow';
 import { colors } from '../../../shared/theme/tokens';
 import { Screen, ContentGroup } from '../../../shared/ui/Screen';
 import { PageHeader } from '../../../shared/ui/PageHeader';
@@ -10,102 +13,142 @@ import { Card } from '../../../shared/ui/Card';
 import { Button } from '../../../shared/ui/Button';
 import { Icon } from '../../../shared/ui/Icon';
 import { ProgressBar } from '../../../shared/ui/ProgressBar';
-import { LessonProgressSummary } from '../../lessons/components/LessonProgressSummary';
+
 export function ProgressScreen() {
-  const { progress, bookmarks } = useLearningProgress();
-  const entries = Object.values(progress);
-  const finished = entries.filter((p) => p.completed).length;
-  const scores = entries.flatMap((p) => (p.bestScore === null ? [] : [p.bestScore]));
-  const average = scores.length
-    ? Math.round(scores.reduce((a, b) => a + b, 0) / scores.length)
+  const { progress, bookmarks, hydrated, error, errorKind } = useLearningProgress();
+  const { width, fontScale } = useWindowDimensions();
+  const stacked = width < 350 || fontScale >= 1.5;
+  const entries = lessons.flatMap((lesson) => (progress[lesson.id] ? [progress[lesson.id]] : []));
+  const completed = entries.filter((entry) => entry.completed).length;
+  const inProgress = entries.length - completed;
+  const saved = lessons.filter((lesson) => bookmarks.includes(lesson.id)).length;
+  const scores = entries.flatMap((entry) => (entry.bestScore == null ? [] : [entry.bestScore]));
+  const averageBestScore = scores.length
+    ? Math.round(scores.reduce((sum, score) => sum + score, 0) / scores.length)
     : null;
+  const completion = lessons.length ? Math.round((completed / lessons.length) * 100) : 0;
+
+  if (!hydrated || errorKind === 'load') {
+    return (
+      <Screen tabs>
+        <PageHeader title="Your progress" subtitle="Learning on this device" />
+        <Card
+          tone={errorKind === 'load' ? 'peach' : 'lavender'}
+          style={styles.state}
+          accessibilityLiveRegion="polite"
+        >
+          <Icon name={errorKind === 'load' ? 'alert-circle' : 'book-open'} size={28} />
+          <Text variant="title">
+            {errorKind === 'load' ? 'Your progress is on hold' : 'Loading your learning…'}
+          </Text>
+          <Text variant="small">
+            {errorKind === 'load'
+              ? 'Saved learning is unavailable right now. Use Try loading again in the notice above to restore your dashboard.'
+              : 'Your lesson positions, saved lessons and quiz scores will appear here.'}
+          </Text>
+        </Card>
+      </Screen>
+    );
+  }
+
   return (
     <Screen tabs>
-      <PageHeader title="Your little victories" subtitle="Every step forward matters." />
-      <Card tone="lavender">
-        <View style={styles.hero}>
-          <View style={styles.words}>
-            <Text variant="heading">Keep growing.</Text>
-            <Text variant="small">
-              A story learned. A kindness shared. A little more faith each day.
+      <PageHeader title="Your progress" subtitle="Every little step matters." />
+      <ProgressHero
+        completed={completed}
+        total={lessons.length}
+        started={entries.length > 0}
+        stacked={stacked}
+      />
+      <ContentGroup>
+        <Text variant="title">Overall progress</Text>
+        <Card shadow={false} style={styles.overall}>
+          <View style={styles.between}>
+            <Text variant="label" style={styles.grow}>
+              {completed} of {lessons.length} lessons completed
             </Text>
+            <View style={styles.percentage}>
+              <Text variant="title">{completion}%</Text>
+            </View>
           </View>
-          <Icon name="sun" size={48} />
-        </View>
-      </Card>
-      <View style={styles.stats}>
-        <Card tone="mint" shadow={false} style={styles.stat}>
-          <Icon name="check-circle" />
-          <Text variant="heading">{finished}</Text>
-          <Text variant="small">Lessons completed</Text>
-        </Card>
-        <Card tone="yellow" shadow={false} style={styles.stat}>
-          <Icon name="award" />
-          <Text variant="heading">{average === null ? '—' : `${average}%`}</Text>
-          <Text variant="small">Average best score</Text>
-        </Card>
-      </View>
-      <Card shadow={false}>
-        <View style={styles.between}>
-          <Text variant="label">Your learning journey</Text>
-          <Text variant="small">
-            {finished} / {lessons.length}
+          <ProgressBar
+            value={completion}
+            label="Completed sample lessons"
+            valueText={completed + ' of ' + lessons.length + ' lessons completed'}
+          />
+          <Text variant="caption" muted>
+            Finishing a quiz completes its lesson. Reading position is shown separately below.
           </Text>
-        </View>
-        <View style={styles.track}>
-          <ProgressBar value={(finished / lessons.length) * 100} />
-        </View>
-        <Text variant="caption" muted>
-          Lessons are completed when you finish their quiz.
-        </Text>
-      </Card>
-      {!entries.length && (
-        <Card tone="peach" shadow={false}>
-          <Text variant="title">Your first seed starts here</Text>
-          <Text style={styles.space}>Open a lesson and see where it takes you.</Text>
-          <Button label="Find a lesson" onPress={() => router.replace('/lessons')} />
+        </Card>
+      </ContentGroup>
+      <ContentGroup>
+        <Text variant="title">Learning overview</Text>
+        <ProgressStats
+          completed={completed}
+          inProgress={inProgress}
+          saved={saved}
+          averageBestScore={averageBestScore}
+          scoredLessons={scores.length}
+          stacked={stacked}
+        />
+      </ContentGroup>
+      {entries.length === 0 && (
+        <Card tone="peach" shadow={false} style={styles.state}>
+          <Text variant="title">
+            {saved ? 'Your saved lessons are waiting' : 'Your first seed starts here'}
+          </Text>
+          <Text variant="small">
+            {saved
+              ? 'Saving a lesson keeps it handy. Open one when you’re ready to begin.'
+              : 'Open a sample lesson to begin. Your reading position and best quiz score will appear here.'}
+          </Text>
+          <Button
+            label="Explore lessons"
+            icon="arrow-right"
+            onPress={() => router.push('/lessons')}
+          />
         </Card>
       )}
       <ContentGroup>
-        <Text variant="title">Lesson progress</Text>
-        {lessons.map((l) => {
-          const p = progress[l.id];
-          return (
-            <Pressable
-              key={l.id}
-              accessibilityRole="button"
-              onPress={() => router.push(`/lessons/${l.id}`)}
-            >
-              <Card shadow={false} style={styles.lesson}>
-                <View style={[styles.badge, { backgroundColor: colors[l.color] }]}>
-                  <Icon name={p?.completed ? 'check' : 'book-open'} />
-                </View>
-                <View style={styles.words}>
-                  <Text variant="label">{l.title}</Text>
-                  <LessonProgressSummary readingCount={l.sections.length} progress={p} color={colors[l.color]} />
-                  {p?.completed && <Text variant="caption" muted>Best quiz {p.bestScore}%</Text>}
-                </View>
-                <Icon name="chevron-right" size={18} />
-              </Card>
-            </Pressable>
-          );
-        })}
+        <View style={styles.between}>
+          <Text variant="title" style={styles.grow}>
+            Lesson progress
+          </Text>
+          <Text variant="caption" muted>
+            {lessons.length} sample lessons
+          </Text>
+        </View>
+        {lessons.map((lesson) => (
+          <LessonProgressRow
+            key={lesson.id}
+            lesson={lesson}
+            progress={progress[lesson.id]}
+            saved={bookmarks.includes(lesson.id)}
+            stacked={stacked}
+            onPress={() => router.push(`/lessons/${lesson.id}`)}
+          />
+        ))}
       </ContentGroup>
-      <Text variant="caption" muted>
-        {bookmarks.length} saved lessons · Progress is stored on this device, with no cloud account
-        yet.
+      <Text variant="small" muted>
+        {error
+          ? 'These figures include changes in this session that may not be saved. Use the storage notice above to try saving again.'
+          : 'Your learning stays on this device. There is no cloud account or activity history in this sample.'}
       </Text>
     </Screen>
   );
 }
+
 const styles = StyleSheet.create({
-  hero: { flexDirection: 'row', alignItems: 'center', gap: 16 },
-  words: { flex: 1, gap: 7 },
-  stats: { flexDirection: 'row', gap: 12 },
-  stat: { flex: 1, gap: 6 },
-  between: { flexDirection: 'row', justifyContent: 'space-between', gap: 10 },
-  track: { marginVertical: 12 },
-  lesson: { flexDirection: 'row', alignItems: 'center', gap: 12, padding: 12 },
-  badge: { padding: 10, borderWidth: 1, borderColor: colors.ink, borderRadius: 7 },
-  space: { marginVertical: 12 },
+  overall: { gap: 12 },
+  between: { flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', gap: 10 },
+  grow: { flexGrow: 1, flexShrink: 1 },
+  percentage: {
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderWidth: 1,
+    borderColor: colors.ink,
+    borderRadius: 6,
+    backgroundColor: colors.lavender,
+  },
+  state: { gap: 12 },
 });

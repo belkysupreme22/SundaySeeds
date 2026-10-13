@@ -2,7 +2,7 @@
 
 Updated 13 October 2026. This plan turns the reference designs into a sequence of complete learner flows. It separates implemented functionality, remaining design work and owner acceptance; a working screen is not automatically a finished design.
 
-**Next task: P1 — Progress dashboard, reference-05 middle/right and reference-09 right.** D1–D4 discovery and L1–L3 learning-flow designs are implemented and awaiting owner runtime/visual review. Continue through the planned screen groups before another discretionary Home polish pass.
+**Next task: S1 — Profile, reference-12 left.** D1–D4 discovery, L1–L3 learning-flow and P1 Progress designs are implemented and awaiting owner runtime/visual review. Continue through the planned screen groups before another discretionary Home polish pass.
 
 Latest screenshot feedback identifies the inner browser input focus rectangle. The shared web input now explicitly resets outline style/width/colour and box shadow, preserving the surrounding field's focus treatment. Rendered confirmation remains pending; the fix is preserved in D4.
 
@@ -35,7 +35,7 @@ All tasks below build on the existing app. They are remaining design/interaction
 | --- | --- | --- | --- |
 | D1–D4 | Lessons discovery | [06](references/reference-06.png) | D1–D4 implemented; owner runtime/visual review pending |
 | L1–L3 | Lesson overview, reader and quiz | [07](references/reference-07.png), [08](references/reference-08.png) | L1–L3 implemented; owner runtime/visual review pending |
-| P1 | Progress dashboard | [05](references/reference-05.png) middle/right, [09](references/reference-09.png) right | Local progress exists; dashboard design remains to be completed |
+| P1 | Progress dashboard | [05](references/reference-05.png) middle/right, [09](references/reference-09.png) right | Implemented; owner runtime/visual review pending |
 | S1–S2 | Profile and settings | [12](references/reference-12.png) left/right | Name editor and settings exist; finish visual structure |
 | O1–O2 | Welcome and profile setup | [01](references/reference-01.png), [02](references/reference-02.png), [04](references/reference-04.png) | Welcome exists; finish adapted setup flow |
 
@@ -78,6 +78,8 @@ All tasks below build on the existing app. They are remaining design/interaction
 ### 3. Progress dashboard
 
 **P1. Dashboard:** implement the reference's encouraging summary, completion visualisation, pastel statistics and outlined lesson-progress rows. Show actual completed lessons, in-progress lessons, saved lessons and best quiz scores where useful. Include a useful first-use state and links back into learning.
+
+**P1 implementation checkpoint (13 October):** references 05/09 now inform a lavender portrait hero, overall completion count/percentage/bar, four pastel statistics and outlined portrait lesson rows. Counts use current sample lessons; average best score includes genuine zero scores and states its quiz denominator. Saved-only, fresh/reset, started and all-completed states use appropriate copy. Loading/read failures withhold dashboard figures; save failures keep current session figures with warning wording and existing global retry. Reading position remains separate from quiz completion. Hero, tiles and lesson rows stack below 350 logical pixels or fontScale >= 1.5. The overall bar adapts the reference's circular visual without adding a chart dependency. No time filters, historical charts, hours, streaks, XP or certificates. Source formatting/whitespace checks only; tests, typecheck, lint, builds and runtime/visual review remain with the owner. S1 is next.
 
 Do not display learning hours, streaks, weekly graphs, XP or historical activity that the app does not record. Reference-10's history timeline requires an explicit event-history feature and is deferred.
 

@@ -16,6 +16,14 @@ Use `npm run android` with an Android emulator or device ready. A web preview is
 
 ## Work in reviewable increments
 
+### Progress P1 checkpoint (2026-10-13)
+
+Reference-05 middle/right and reference-09 right were inspected. The dashboard now uses a lavender portrait hero, overall completion percentage/bar, four outlined pastel statistic tiles and portrait lesson rows. Completed/in-progress/saved counts derive from known sample lessons; the average uses each recorded best score, including zero, and states how many quizzes contribute. A dash means no recorded scores. Rows retain the shared reading-position/completed distinction and open the existing lesson overview, with Start/Continue/Revisit labels. Hero copy covers fresh, started and all-completed states; saved-only data gets a distinct first-use prompt. Hero/tiles/rows stack below 350 logical pixels or native fontScale >= 1.5.
+
+Loading and failed reads withhold statistics rather than presenting zero as loaded progress. Save failures retain current in-memory figures with conditional persistence wording; the global notice owns retries. No storage schema, scoring or reset behavior changed. The reference's circular completion graphic is adapted to an accessible percentage and linear bar; no historical graphs, time filters, certificates, hours or streaks were invented.
+
+Owner checks: inspect Progress with fresh/reset data, bookmarks only, a saved reading, completed quizzes including zero, and all four lessons completed. Confirm counts, average denominator and preserved best scores after a lower retry. Check the final reading still says Quiz not finished until completion; tap every lesson row and return. Exercise load/save failures and recovery, then restart for persistence. Compare references at 360/390 widths, below 350 and 150%/200% native text, checking hero crop, wrapped tiles/rows, touch targets and anchored navigation. Four changed source files formatted; whitespace checks only. Tests, typecheck, lint, builds and runtime/visual review remain pending with the owner. P1 implemented; S1 Profile is next.
+
 ### Quiz/results L3 checkpoint (2026-10-13)
 
 Reference-08 right and reference-07 completion panels were inspected. Quiz choices now use scalable letter badges, a dark selected badge, outlined pastel selection/feedback and explicit correct/incorrect labels. The compact bar reports answers checked, not saved completion; Finish quiz still records the result. Results use the reference's mint completion emblem, outlined sample-lesson portrait summary and next-action rows. This attempt and the actual best percentage are separate; absent scores show a dash, including during unavailable learning data, while a real zero remains visible. Review and retry preserve existing behavior. Result lesson/score groups stack below 350 logical pixels or native fontScale >= 1.5. No new storage, passing rule, certificates or attempt history.
