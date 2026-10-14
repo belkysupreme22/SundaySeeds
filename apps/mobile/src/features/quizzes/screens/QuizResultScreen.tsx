@@ -75,9 +75,11 @@ export function QuizResultScreen({ lesson, result, answers, onRetry }: QuizResul
         <View style={[styles.best, stacked && styles.bestStacked]}>
           <Text variant="label">Best score</Text>
           <Text variant="heading">{bestScore == null ? '—' : `${bestScore}%`}</Text>
-          <Text variant="caption" muted>
-            {error ? 'Storage needs attention' : 'Device-local learning'}
-          </Text>
+          {error && (
+            <Text variant="caption" muted>
+              Saving needs attention
+            </Text>
+          )}
         </View>
       </Card>
       <ContentGroup>
@@ -122,8 +124,8 @@ export function QuizResultScreen({ lesson, result, answers, onRetry }: QuizResul
         {error
           ? 'This result is visible for this session, but saving is not confirmed. Use the storage notice above to recover your learning data.'
           : !hydrated
-            ? 'Device-local learning data is still loading. Saving this result is not confirmed.'
-            : 'Only your best score is kept on this device, not a history of attempts.'}{' '}
+            ? 'Your learning data is still loading. Saving this result is not confirmed.'
+            : 'Your best score is kept when you try again.'}{' '}
         This answer review is available until you leave the quiz or try again.
       </Text>
     </Screen>

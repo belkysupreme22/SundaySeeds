@@ -16,6 +16,14 @@ Use `npm run android` with an Android emulator or device ready. A web preview is
 
 ## Work in reviewable increments
 
+### Profile correction and app wording (2026-10-14)
+
+Owner feedback requested closer avatar/name alignment and compact learning tiles. Reference-12 left was inspected again. Profile now keeps the avatar beside a smaller name/edit row; the extra profile banner is removed. `ProfileLearningStats` places icon/count pairs above centred captions in equal white outlined tiles directly beneath the card, matching the reference hierarchy. The narrow/large-text single-column fallback, actual counts and name/learning recovery remain.
+
+The owner also rejected repeated local/device/preview labels throughout the app. These are removed from Profile, editing, Home, discovery, reader, results, progress and welcome. Settings retains one storage explanation; reset wording now says learning progress. Sample lesson labels remain where they identify content. Save/read/reset failures still explain recovery without repeated implementation labels. Storage logic and navigation were not changed.
+
+Owner checks: Profile with blank/long names, aligned avatar/edit, zero/real counts, 360/390 widths and 150%/200% text; scan the affected screens for natural copy and exercise reset cancel/confirmation and save recovery. Six files with layout changes were formatted; copy-only files were kept scoped. Whitespace checks only; tests, builds, typecheck, lint and runtime/visual review are pending with the owner. S2 remains the next learner design task; parallel prototype/backend planning is tracked separately.
+
 ### Profile S1 checkpoint (2026-10-13)
 
 Reference-12 left was inspected. Profile now uses a compact lavender identity card with a generic avatar and a working edit icon, three pastel completed/in-progress/saved counts, and two outlined navigation groups with icon tiles, descriptions and separators. All destinations retain their existing routing: Edit profile/Settings/Welcome push; Saved and Progress replace. The optional-name editor and shared InputField are unchanged. Header and statistics stack below 350 logical pixels or native fontScale >= 1.5; row text wraps without fixed heights. Local identity and sample content remain explicit; no invented personal biography, avatar photo, enrolment, certificates, streaks, skills or goals.

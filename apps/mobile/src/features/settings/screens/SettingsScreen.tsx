@@ -42,7 +42,7 @@ export function SettingsScreen() {
             <View style={styles.row}>
               <Icon name="smartphone" />
               <Text variant="label" style={styles.words}>
-                Saved on this device
+                How your learning is saved
               </Text>
             </View>
             <Text variant="small">
@@ -61,16 +61,12 @@ export function SettingsScreen() {
               <Icon name="sun" size={28} />
               <View style={styles.words}>
                 <Text variant="title">A little faith, every day.</Text>
-                <Text variant="caption">SundaySeeds · Preview 0.1.0</Text>
+                <Text variant="caption">SundaySeeds · Version 0.1.0</Text>
               </View>
             </View>
             <Text variant="small">
               Explore {lessons.length} sample lessons, practise with short quizzes and keep track of
-              your growth. No account is needed for this preview.
-            </Text>
-            <Text variant="small">
-              Teacher publishing, class invitations and accounts are planned. The sample content is
-              here to help us shape the experience together.
+              your growth.
             </Text>
           </ContentGroup>
         </Card>

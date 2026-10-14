@@ -118,7 +118,7 @@ export function WelcomeScreen({ saving, error, onFinish, onContinueForNow }: Pro
         </View>
       )}
       <Text variant="caption" muted style={styles.note}>
-        Explore sample lessons. No account needed. Progress stays on this device.
+        Read, reflect and grow, one lesson at a time.
       </Text>
     </Screen>
   );

@@ -83,7 +83,7 @@ function ProfileNameForm({ initialName }: { initialName: string }) {
         <Icon name="smartphone" />
         <Text variant="label">A familiar hello</Text>
         <Text variant="small">
-          Your name appears on Home and Profile and is saved only on this device.
+          Your name appears on Home and Profile.
         </Text>
       </Card>
       {saveError && (

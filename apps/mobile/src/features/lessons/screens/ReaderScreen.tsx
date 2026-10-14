@@ -124,8 +124,8 @@ export function ReaderScreen({ lessonId }: { lessonId: string }) {
       </View>
       <Text variant="caption" muted>
         {error
-          ? 'Device storage needs attention. Your latest reading position may not be saved.'
-          : 'Original sample teaching. Reading position is stored on this device; quiz completion is tracked separately.'}
+          ? 'Your latest reading position may not be saved. Use the notice above to try again.'
+          : 'Finish the quiz when you’re ready to complete this lesson.'}
       </Text>
     </Screen>
   );

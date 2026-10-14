@@ -24,6 +24,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 - Project working agreement covering design fidelity, feature boundaries, verification and collaborative development.
 
 ### Changed
+- Aligned the Profile avatar/name/edit row and replaced tall summary cards with compact white icon/count tiles from reference-12. Removed repetitive local/device/preview wording across learner screens, keeping one storage explanation in Settings and actionable save warnings. Owner runtime/visual review is pending.
 - Profile follows reference-12 with a compact local identity card, edit icon, three real learning counts and grouped outlined navigation. Added distinct name/learning loading and recovery presentation plus narrow/large-text stacking; owner runtime and visual review are pending.
 - Progress follows references 05/09 with a portrait hero, actual completion summary, four pastel local-learning statistics and outlined lesson rows. Added distinct first-use/loading/recovery presentation and narrow/large-text stacking; owner runtime and visual review are pending.
 - Quiz and results follow references 08/07 with compact checked-answer progress, outlined answer states, a mint completion emblem, lesson summary, separate attempt/best scores and review/retry rows. Large-text layout and storage-warning copy are included; owner runtime and visual review are pending.

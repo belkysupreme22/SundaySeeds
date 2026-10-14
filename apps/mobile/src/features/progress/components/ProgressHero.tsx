@@ -26,7 +26,7 @@ export function ProgressHero({ completed, total, started, stacked }: ProgressHer
               : 'A story, a reflection, a small act of faith. Your first lesson is waiting.'}
         </Text>
         <View style={styles.label}>
-          <Text variant="caption">{total} sample lessons · On this device</Text>
+          <Text variant="caption">{total} lessons to explore</Text>
         </View>
       </View>
       <View style={[styles.art, stacked && styles.stackedArt]} accessible={false}>

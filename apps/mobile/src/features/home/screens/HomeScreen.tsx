@@ -124,7 +124,7 @@ export function HomeScreen() {
         </Card>
       </ContentGroup>
       <Text variant="caption" muted style={styles.demo}>
-        SundaySeeds preview · Sample lessons · Progress stays on this device
+        A little faith, every day.
       </Text>
     </Screen>
   );

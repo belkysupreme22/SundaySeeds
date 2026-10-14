@@ -118,7 +118,7 @@ export function LessonSearchScreen() {
         )}
       </ContentGroup>
       <Text variant="caption" muted>
-        Sample lessons · Bookmarks and progress stay on this device.
+        Find a story for your next step.
       </Text>
     </Screen>
   );

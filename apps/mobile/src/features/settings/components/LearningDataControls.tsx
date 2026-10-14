@@ -20,9 +20,9 @@ export function LearningDataControls() {
     try {
       await resetProgress();
       setConfirm(false);
-      setMessage('Your preview progress and bookmarks have been reset.');
+      setMessage('Your progress and bookmarks have been reset.');
     } catch {
-      setMessage('We could not save the reset on this device. Please try again.');
+      setMessage('We could not reset your progress. Please try again.');
     } finally {
       resetting.current = false;
       setBusy(false);
@@ -41,11 +41,11 @@ export function LearningDataControls() {
           <ContentGroup>
             <Text variant="title">Start fresh?</Text>
             <Text>
-              This removes your saved quiz scores, reading positions and bookmarks from this device.
+              This removes your saved quiz scores, reading positions and bookmarks.
               Your display name and introduction preference are kept.
             </Text>
             <Button
-              label={busy ? 'Resetting…' : 'Yes, reset my preview'}
+              label={busy ? 'Resetting…' : 'Yes, reset my progress'}
               disabled={busy}
               onPress={() => void reset()}
             />
@@ -63,7 +63,7 @@ export function LearningDataControls() {
         </Card>
       ) : (
         <Button
-          label="Reset preview progress"
+          label="Reset learning progress"
           icon="refresh-cw"
           variant="outline"
           onPress={() => {

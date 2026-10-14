@@ -22,41 +22,32 @@ export function ProfileHeader({
 }: ProfileHeaderProps) {
   return (
     <Card tone="lavender" style={styles.card}>
-      <View style={styles.topLine}>
-        <Text variant="caption" style={styles.topLabel}>
-          YOUR LOCAL PROFILE
-        </Text>
-        {!loading && !unavailable && (
-          <IconButton name="edit-2" label="Edit display name" onPress={onEdit} />
-        )}
-      </View>
       <View style={[styles.identity, stacked && styles.stacked]}>
         <View style={styles.avatar} accessible={false}>
           <Icon name="user" size={38} />
         </View>
         <View style={[styles.copy, stacked && styles.stackedCopy]} accessibilityLiveRegion="polite">
-          <Text variant="heading">
-            {loading
-              ? 'Opening your profile…'
-              : unavailable
-                ? 'Name unavailable'
-                : displayName || 'Hello, learner'}
-          </Text>
-          <Text variant="small">
+          <View style={styles.nameRow}>
+            <Text variant="title" style={styles.name}>
+              {loading
+                ? 'Opening your profile…'
+                : unavailable
+                  ? 'Name unavailable'
+                  : displayName || 'Hello, learner'}
+            </Text>
+            {!loading && !unavailable && (
+              <IconButton name="edit-2" label="Edit display name" onPress={onEdit} />
+            )}
+          </View>
+          <Text variant="caption">
             {loading
               ? 'Loading your saved name.'
               : unavailable
                 ? 'Try loading your name again below.'
                 : displayName
-                  ? 'A little faith, every day.'
-                  : 'Add a name or nickname to make this space yours.'}
+                  ? 'SundaySeeds learner'
+                  : 'Add a name or nickname'}
           </Text>
-          <View style={styles.localLabel}>
-            <Icon name="smartphone" size={14} />
-            <Text variant="caption" style={styles.localText}>
-              On this device
-            </Text>
-          </View>
         </View>
       </View>
     </Card>
@@ -64,13 +55,14 @@ export function ProfileHeader({
 }
 
 const styles = StyleSheet.create({
-  card: { gap: 8 },
-  topLine: { flexDirection: 'row', alignItems: 'center', gap: 8 },
-  topLabel: { flex: 1 },
-  identity: { flexDirection: 'row', alignItems: 'center', gap: 14 },
+  card: { padding: 14, borderRadius: 9 },
+  nameRow: { flexDirection: 'row', alignItems: 'center', gap: 4 },
+  name: { flex: 1 },
+  identity: { flexDirection: 'row', alignItems: 'center', gap: 12 },
   avatar: {
     width: 72,
     height: 72,
+    flexShrink: 0,
     borderRadius: 36,
     borderWidth: 1.2,
     borderColor: colors.ink,
@@ -78,9 +70,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  copy: { flex: 1, gap: 6 },
-  localLabel: { flexDirection: 'row', alignItems: 'center', gap: 5 },
-  localText: { flexShrink: 1 },
+  copy: { flex: 1, minWidth: 0, gap: 4 },
   stacked: { flexDirection: 'column', alignItems: 'flex-start' },
   stackedCopy: { flex: 0, alignSelf: 'stretch' },
 });

@@ -38,7 +38,7 @@ Reference-09's assignment panels, reference-10's achievements/history, reference
 
 SundaySeeds uses lesson series, Bible-story teaching, memory verses and reflection quizzes instead of career courses, paid enrolment and professional certificates. Labels, imagery, content length and screen count therefore differ. The target is faithful visual language and layout, not a claim that adapted screens are pixel-identical to the commercial-course mockups.
 
-The demo must identify sample content and local-only progress. Do not imply a real signed-in learner, live class, cloud sync or teacher service. Buttons must have implemented behaviour or be omitted; future features should be explained in context rather than presented as functioning controls.
+Keep sample content identifiable, with one clear storage explanation in Settings. Per owner feedback on 14 October, do not repeat local/device/preview disclaimers on learner screens. Keep actual failure/retry messages useful. Do not imply a real signed-in learner, live class, cloud sync or teacher service. Buttons must have implemented behaviour or be omitted; prototype-only actions must be clearly identified as such.
 
 ## Acceptance checks
 

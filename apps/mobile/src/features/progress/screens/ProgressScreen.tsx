@@ -31,7 +31,7 @@ export function ProgressScreen() {
   if (!hydrated || errorKind === 'load') {
     return (
       <Screen tabs>
-        <PageHeader title="Your progress" subtitle="Learning on this device" />
+        <PageHeader title="Your progress" subtitle="Every little step matters." />
         <Card
           tone={errorKind === 'load' ? 'peach' : 'lavender'}
           style={styles.state}
@@ -129,11 +129,11 @@ export function ProgressScreen() {
           />
         ))}
       </ContentGroup>
-      <Text variant="small" muted>
-        {error
-          ? 'These figures include changes in this session that may not be saved. Use the storage notice above to try saving again.'
-          : 'Your learning stays on this device. There is no cloud account or activity history in this sample.'}
-      </Text>
+      {error && (
+        <Text variant="small" muted>
+          Your latest progress may not be saved. Use the notice above to try again.
+        </Text>
+      )}
     </Screen>
   );
 }

@@ -71,7 +71,7 @@ export function createLearningStore(storage: Storage) {
         if (write === latestWrite) publish(null, null);
       } catch {
         publish(
-          'Your latest progress could not be saved on this device. Keep the app open and try saving again.',
+          'Your latest progress could not be saved. Keep the app open and try saving again.',
           'save',
         );
         throw new Error('Device storage could not save your changes.');

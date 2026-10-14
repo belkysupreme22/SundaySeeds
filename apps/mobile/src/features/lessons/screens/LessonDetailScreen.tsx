@@ -69,11 +69,11 @@ export function LessonDetailScreen({ lessonId }: { lessonId: string }) {
               Resume at “{lesson.sections[lessonProgress.sectionIndex].title}”.
             </Text>
           )}
-          <Text variant="small" muted>
-            {error
-              ? 'Device storage needs attention. Your latest progress may not be saved.'
-              : 'Progress is kept on this device only.'}
-          </Text>
+          {error && (
+            <Text variant="small" muted>
+              Your latest progress may not be saved. Use the notice above to try again.
+            </Text>
+          )}
         </Card>
       )}
       <LessonCurriculum
@@ -92,11 +92,6 @@ export function LessonDetailScreen({ lessonId }: { lessonId: string }) {
         </Text>
         <Text variant="small">{lesson.memoryVerse.reference}</Text>
       </Card>
-      {!lessonProgress && (
-        <Text variant="small" muted>
-          Sample content. Reading position and quiz progress are kept on this device only.
-        </Text>
-      )}
     </Screen>
   );
 }

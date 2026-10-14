@@ -122,7 +122,7 @@ export function LessonsScreen() {
         )}
       </ContentGroup>
       <Text variant="caption" muted>
-        Sample lessons · Bookmarks and progress stay on this device.
+        Choose a story to read, reflect and grow.
       </Text>
     </Screen>
   );
