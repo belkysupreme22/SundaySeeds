@@ -17,10 +17,10 @@ Updated 14 October 2026. This supplements [the implementation plan](implementati
 | ID | Work / deliverable | Dependency and completion target |
 | --- | --- | --- |
 | A0 — implemented | Correct Profile name/avatar alignment and compact summary tiles against reference-12; simplify repetitive storage copy across the app | Commit `cd00e19`. Real counts, unavailable states, shared input treatment and recovery retained. Owner visual acceptance pending |
-| S2 | Settings: outlined Personal information, Learning data, introduction replay and About groups | Reference-12 right. Working destinations, confirmed reset/cancel and recovery; no decorative account/support controls |
+| S2 — implemented | Settings: outlined Personal information, Learning data, introduction replay and About groups | Reference-12 right inspected; compact groups and replay row implemented. Reset/cancel/recovery preserved. Owner runtime/visual acceptance pending |
 | O1 | Welcome: finish three-page composition, imagery, cards, indicators and navigation | Reference-01. Preserve first-launch preference, replay and Skip/Back/Next/Get started |
 | O2 | One optional minimal setup flow using the existing display name | References 02/04 are alternatives. Add topic preferences only if their effect is implemented; avoid unnecessary identity fields |
-| A1 | Owner acceptance of completed learner designs | D1–D4, L1–L3, P1 and S1 are implemented, with runtime/visual acceptance pending. Include A0, S2, O1 and O2 as they land |
+| A1 | Owner acceptance of completed learner designs | D1–D4, L1–L3, P1, S1–S2 and A0 are implemented, with runtime/visual acceptance pending. Include O1/O2 as they land |
 
 ## Workstream T — teacher dashboard
 
@@ -101,4 +101,4 @@ React + TypeScript teacher/admin screen source is implemented, A0 learner correc
 
 Source task commits: shared React foundation `a91263a`, teacher screens `3e4bea7`, admin screens `4369e77`. Backend contracts and delivery documentation form a separate task commit.
 
-Next: follow [dashboard setup and review](../apps/teacher-web/README.md) for T1/M2, resolve B0/M1 alongside that review, and continue learner S2 → O1 → O2. Review teacher draft create/edit/preview and workspace switching; admin filter/proposal/reset behavior; chart examples; keyboard/dialog focus; narrow screens and larger text.
+Next: the owner is reviewing dashboards using [setup and review steps](../apps/teacher-web/README.md) for T1/M2; feedback is pending. Resolve B0/M1 alongside that review, and continue learner O1 → O2 after the implemented S2 Settings. Review teacher draft create/edit/preview and workspace switching; admin filter/proposal/reset behavior; chart examples; keyboard/dialog focus; narrow screens and larger text.

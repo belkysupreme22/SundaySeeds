@@ -16,6 +16,12 @@ Use `npm run android` with an Android emulator or device ready. A web preview is
 
 ## Work in reviewable increments
 
+### Settings S2 checkpoint (2026-10-14)
+
+Reference-12 right was inspected. Settings now uses compact white outlined Personal information, Learning data and About groups, with simple icons, dividers and wrapping text. Display name opens the unchanged editor. Replay the introduction opens the existing Welcome flow; finishing it returns Home. The storage explanation appears once; static About rows show the version and actual sample lesson count without misleading navigation arrows. Reset remains a separate action below the groups with its existing confirmation/cancel, busy guard and success/failure feedback. No storage, scoring or welcome-preference rules changed.
+
+Owner checks: Settings → Display name → save/cancel returns to Settings; replay → Skip/Get started returns Home; cancel reset keeps learning intact; confirmed reset clears progress/bookmarks but keeps the name and welcome preference. Exercise reset busy/failure feedback and global recovery. Inspect 360/390 widths, narrow screens and 150%/200% native text for wrapping and reachable actions. Source formatting and whitespace checks only; tests, typecheck, lint, builds and runtime/visual review remain pending. S2 is implemented; O1 Welcome is next. Dashboard review is in progress with the owner; no acceptance result has been reported.
+
 ### Parallel dashboard prototypes and backend planning (2026-10-14)
 
 The owner selected React + TypeScript screen prototypes before the connected pilot, alongside backend planning, then requested modern UI/chart libraries matching the design. `apps/teacher-web` now contains teacher and administration proposals in one review shell, with separate feature folders. Radix tabs/dialogs, named Lucide icons, bundled Poppins and on-demand Recharts are declared; package versions/peer requirements were read from npm and official library docs consulted. No installation, lockfile generation, typecheck, build or runtime review was performed. Six learner layout files were formatted in the preceding correction; new dashboard sources receive scoped formatting only. Performance/bundle size is not verified.
