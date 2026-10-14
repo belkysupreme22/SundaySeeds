@@ -21,7 +21,7 @@ export function ProfileHeader({
   onEdit,
 }: ProfileHeaderProps) {
   return (
-    <Card tone="lavender" style={styles.card}>
+    <Card tone="lavender" stroke="soft" shadow={false} style={styles.card}>
       <View style={[styles.identity, stacked && styles.stacked]}>
         <View style={styles.avatar} accessible={false}>
           <Icon name="user" size={38} />
@@ -64,8 +64,8 @@ const styles = StyleSheet.create({
     height: 72,
     flexShrink: 0,
     borderRadius: 36,
-    borderWidth: 1.2,
-    borderColor: colors.ink,
+    borderWidth: 1,
+    borderColor: colors.line,
     backgroundColor: colors.white,
     alignItems: 'center',
     justifyContent: 'center',

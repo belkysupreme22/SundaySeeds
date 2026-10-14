@@ -67,8 +67,8 @@ export function QuizChoice({
 
 const styles = StyleSheet.create({
   option: {
-    borderWidth: 1.2,
-    borderColor: colors.ink,
+    borderWidth: 1,
+    borderColor: colors.outline,
     backgroundColor: colors.white,
     borderRadius: 9,
     padding: 12,

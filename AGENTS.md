@@ -4,6 +4,7 @@
 - Build the agreed React Native + Expo + TypeScript app in apps/mobile.
 - Teacher/admin screen prototypes use React + TypeScript in apps/teacher-web, with Radix primitives, Lucide icons and lazy-loaded Recharts examples. Follow that workspace's AGENTS.md; keep backend planning separate from connected implementation.
 - Use docs/references screenshots as the visual source of truth: pale lavender, mint, yellow and peach; dark fine outlines; modest radii; crisp offset shadows; geometric type.
+- Choose strokes per screen and element from its reference. Do not replace every dark border or shadow globally: Settings/Profile/navigation use lighter strokes, while several Home/discovery/lesson/Welcome elements retain strong outlines and offset shadows. Record intentional adaptations and keep shared defaults stable.
 - Start with a polished Home -> lesson -> quiz -> saved progress journey. Do not invent production accounts, class memberships or backend connectivity.
 - Keep sample content identifiable and explain device-only storage once in Settings. Do not repeat local/device/preview disclaimers across learner screens. No fabricated analytics or completion history.
 - Preserve design fidelity through screenshots and human review. Test small widths and larger text. Never claim native verification from a web preview.

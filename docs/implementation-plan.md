@@ -12,6 +12,8 @@ Updated 14 October 2026. This plan turns the reference designs into a sequence o
 
 Latest screenshot feedback identifies the inner browser input focus rectangle. The shared web input now explicitly resets outline style/width/colour and box shadow, preserving the surrounding field's focus treatment. Rendered confirmation remains pending; the fix is preserved in D4.
 
+**14 October stroke correction:** the owner requested the lighter bottom-navigation frame and a screen-specific border audit, explicitly rejecting a global dark-to-gray substitution. Reference-matched changes are limited to Profile/Progress frames, quiz-choice/next-action/reader rows and the completion emblem. Strong Home/discovery/lesson/Welcome outlines, shared button/card defaults and input focus behavior are preserved. See the stroke matrix in [design-reference.md](design-reference.md). Source implementation only; owner visual acceptance remains pending. This is a separate corrective task, not completion of O1 or LMS-T1.
+
 **Owner-requested addition during D3:** shared InputField provides consistent idle/focus treatment. After owner feedback, Search uses its borderless soft variant with lavender focus fill and an unboxed clear icon; Edit Profile retains the outlined variant and Browse's entry retains its keyboard-focus styling. Source inventory found no other editable inputs. Visual review remains pending.
 
 ## Delivery agreement

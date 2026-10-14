@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
     gap: 10,
     padding: 12,
     borderWidth: 1,
-    borderColor: colors.ink,
+    borderColor: colors.outline,
     borderRadius: 8,
     backgroundColor: colors.white,
   },

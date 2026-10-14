@@ -36,6 +36,27 @@ Reference-09's assignment panels, reference-10's achievements/history, reference
 
 ## Adaptation boundaries
 
+### Stroke treatment by reference (14 October owner correction)
+
+Do not apply a universal gray-border replacement. The owner explicitly requires a screen-by-screen comparison; the first blanket source edit was discarded before committing. The following decisions come from inspecting the reference images, not rendered-app verification. `colors.outline` is an approximate medium gray for soft strokes; `colors.line` is the lighter divider/group gray. The default Card/Button dark outlines and crisp shadows remain unchanged. Card's optional `soft`/`subtle` stroke is selected at individual screen call sites.
+
+| Screen / reference | Treatment retained or corrected |
+| --- | --- |
+| Welcome, 01 | Retain strong feature/sticker/button outlines and crisp shadows |
+| Name editor and input treatment, 02/03/04 | Retain outlined avatar/input/buttons and existing visible focus behavior; Search's explicit borderless override remains |
+| Home, 05 left | Retain strong lesson/hero/quick-access outlines and offset shadows; lighten navigation frame |
+| Browse, Topics and Search, 06 | Retain strong course cards, topic tiles and filter controls; do not reintroduce a Search input frame |
+| Lesson detail/curriculum, 07 | Retain stronger lesson summary and feature-card outlines; existing light internal separators remain |
+| Reader, 08 left/middle | Use a medium-gray Up next row; retain stronger reading/reflection/verse cards and footer actions |
+| Quiz, 08 right | Use one-point medium-gray option frames; retain dark letter rings/selected badges, colored feedback, stronger question/feedback cards and primary action |
+| Results, 07 right | Use soft next-action row outlines and a fine mint completion-emblem rim with no heavy emblem shadow; keep the lesson/result cards and primary action strong; score divider stays light |
+| Progress, 05 right and 09 right | Soft hero without offset shadow, light summary/list frames and soft percentage marker; retain stronger colored statistic tiles from 05 |
+| Profile, 12 left | Soft lavender header without offset shadow; light avatar rim, compact summary tiles and navigation groups |
+| Settings, 12 right | Keep one-point light-gray groups/detail sheets and distinct red reset controls; anchored navigation with Profile selected |
+| Shared bottom navigation, 05/06/09/12 | Light outer frame as requested; preserve lavender active tab, icons, routes and safe area |
+
+Owner review is still required at normal and larger text sizes; these source changes do not establish visual/native acceptance. Dashboard styling is outside this learner-app pass.
+
 SundaySeeds uses lesson series, Bible-story teaching, memory verses and reflection quizzes instead of career courses, paid enrolment and professional certificates. Labels, imagery, content length and screen count therefore differ. The target is faithful visual language and layout, not a claim that adapted screens are pixel-identical to the commercial-course mockups.
 
 Keep sample content identifiable, with one clear storage explanation in Settings. Per owner feedback on 14 October, do not repeat local/device/preview disclaimers on learner screens. Keep actual failure/retry messages useful. Do not imply a real signed-in learner, live class, cloud sync or teacher service. Buttons must have implemented behaviour or be omitted; prototype-only actions must be clearly identified as such.

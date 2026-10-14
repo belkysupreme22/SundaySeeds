@@ -10,6 +10,7 @@ export const colors = {
   peach: '#FFD0B0',
   pink: '#F3C9EC',
   line: '#DED9E5',
+  outline: '#AAA6B1',
   soft: '#F1EDF7',
   success: '#225F4B',
   danger: '#A52F3F',

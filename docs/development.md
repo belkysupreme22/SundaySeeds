@@ -16,6 +16,12 @@ Use `npm run android` with an Android emulator or device ready. A web preview is
 
 ## Work in reviewable increments
 
+### Reference-specific stroke correction (2026-10-14)
+
+The owner requested lighter bottom navigation and an app-wide check against each screen's own reference, then explicitly rejected blanket replacement of dark strokes. The blanket edit was reverted before commit. References 01–09 and 12 relevant to implemented screens were inspected (03 for field styling; 02/04 for profile setup/editor). Shared Card/Button/InputField defaults and strong Home/discovery/lesson/Welcome styling remain. Individual Profile and Progress cards opt into soft/subtle Card strokes; quiz options, reader Up next, results next actions and the completion emblem use targeted softer borders. Bottom navigation uses the light Settings gray. The completion-emblem and Profile/Progress hero shadows are removed where their references use fine flat outlines; other crisp shadows remain.
+
+Owner checks: compare Home/discovery strong cards against 05/06; reader/quiz/result border hierarchy against 07/08; Progress against 05/09; Profile/Settings and active bottom navigation against 12. Recheck input focus/blur and the borderless Search, quiz selected/correct/incorrect states, 360/390 widths and larger text. Only scoped formatting/source inspection and whitespace checks; no tests, typecheck, lint, build or runtime/visual review. See the per-screen matrix in design-reference.md. No backend/data behavior changed; dashboard work remains separate.
+
 ### Full Settings reference components (2026-10-14)
 
 Following S2 commit `dc41231`, the owner explicitly requested all reference-12 Settings components. Account, App Settings and Support & About rows are now represented, with an adaptive value column, descriptive detail sheets and a disabled Log out component. Display-name editing, introduction replay and confirmed progress reset remain functional. Help Center contains instructions for existing learning/recovery flows; About shows the actual sample lesson count. Data usage holds the one storage explanation. Fixed Light mode and English are described as current settings, not selectable alternatives. Account/email/playback/download services and official privacy/terms documents are explicitly unavailable; no credentials, preference saves or fake policies were added.

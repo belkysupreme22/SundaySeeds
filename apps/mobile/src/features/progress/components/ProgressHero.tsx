@@ -8,7 +8,12 @@ type ProgressHeroProps = { completed: number; total: number; started: boolean; s
 export function ProgressHero({ completed, total, started, stacked }: ProgressHeroProps) {
   const allComplete = total > 0 && completed === total;
   return (
-    <Card tone="lavender" style={[styles.hero, stacked && styles.stacked]}>
+    <Card
+      tone="lavender"
+      stroke="soft"
+      shadow={false}
+      style={[styles.hero, stacked && styles.stacked]}
+    >
       <View style={[styles.copy, stacked && styles.stackedCopy]}>
         <Text variant="caption">YOUR LEARNING JOURNEY</Text>
         <Text variant="heading">
@@ -51,7 +56,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     paddingVertical: 5,
     borderWidth: 1,
-    borderColor: colors.ink,
+    borderColor: colors.line,
     borderRadius: 5,
   },
   art: {
@@ -59,7 +64,7 @@ const styles = StyleSheet.create({
     height: 150,
     overflow: 'hidden',
     borderWidth: 1,
-    borderColor: colors.ink,
+    borderColor: colors.line,
     borderRadius: 7,
     backgroundColor: colors.lavender,
   },

@@ -62,7 +62,7 @@ export function ProgressScreen() {
       />
       <ContentGroup>
         <Text variant="title">Overall progress</Text>
-        <Card shadow={false} style={styles.overall}>
+        <Card stroke="subtle" shadow={false} style={styles.overall}>
           <View style={styles.between}>
             <Text variant="label" style={styles.grow}>
               {completed} of {lessons.length} lessons completed
@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 5,
     borderWidth: 1,
-    borderColor: colors.ink,
+    borderColor: colors.outline,
     borderRadius: 6,
     backgroundColor: colors.lavender,
   },

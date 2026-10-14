@@ -45,8 +45,8 @@ export function ProfileNavigationGroup({ items }: { items: readonly ProfileNavig
 
 const styles = StyleSheet.create({
   group: {
-    borderWidth: 1.2,
-    borderColor: colors.ink,
+    borderWidth: 1,
+    borderColor: colors.line,
     borderRadius: 9,
     backgroundColor: colors.white,
     overflow: 'hidden',
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     width: 34,
     height: 34,
     borderWidth: 1,
-    borderColor: colors.ink,
+    borderColor: colors.line,
     borderRadius: 6,
     alignItems: 'center',
     justifyContent: 'center',

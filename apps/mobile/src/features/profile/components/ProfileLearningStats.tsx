@@ -18,6 +18,7 @@ export function ProfileLearningStats({ completed, inProgress, saved, stacked }: 
         <Card
           key={stat.label}
           shadow={false}
+          stroke="subtle"
           style={[styles.tile, stacked && styles.stackedTile]}
           accessible
           accessibilityLabel={`${stat.value} lessons ${stat.label.toLowerCase()}`}
