@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { BookOpen, ShieldCheck, Sprout } from "lucide-react";
 import TeacherDashboard from "./features/teacher/TeacherDashboard";
+import AdminDashboard from "./features/admin/AdminDashboard";
 
 export function App() {
   const [workspace, setWorkspace] = useState<"teacher" | "admin">("teacher");
@@ -64,10 +65,7 @@ export function App() {
             hidden={workspace !== "admin"}
             aria-label="Administration proposal"
           >
-            <div className="panel">
-              <h1>Administration workspace</h1>
-              <p>Administration screens are a separate implementation task.</p>
-            </div>
+            <AdminDashboard />
           </section>
         </main>
         <footer className="workspace-footer">

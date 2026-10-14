@@ -1,0 +1,237 @@
+.admin-tab-content {
+  margin-top: 24px;
+}
+.admin-workspace-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+.admin-welcome {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+}
+.admin-welcome h2 {
+  font-size: clamp(22px, 2.5vw, 30px);
+  margin: 7px 0 10px;
+}
+.admin-welcome p {
+  max-width: 540px;
+}
+.admin-sprout {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 94px;
+  height: 94px;
+  border: 1px solid var(--ink, #26212e);
+  border-radius: 50%;
+  background: #fff;
+  transform: rotate(-8deg);
+}
+.admin-stat-label {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+.admin-stat-label h3 {
+  font-size: 13px;
+  margin: 0;
+}
+.admin-stat-label svg {
+  flex-shrink: 0;
+}
+.admin-stat-value {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 14px 0 8px;
+}
+.admin-help {
+  font-size: 12px;
+  line-height: 1.6;
+}
+.admin-icon-tile {
+  width: 42px;
+  height: 42px;
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+  border: 1px solid var(--ink, #26212e);
+  border-radius: 7px;
+}
+.admin-structure-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 0;
+  border-bottom: 1px solid #d7d2dd;
+  flex-wrap: wrap;
+}
+.admin-structure-row > div {
+  flex: 1;
+  min-width: 140px;
+}
+.admin-structure-row h3 {
+  font-size: 14px;
+  margin: 0 0 4px;
+}
+.admin-structure-row p {
+  font-size: 12px;
+  margin: 0;
+}
+.admin-structure-row .badge {
+  font-size: 10px;
+}
+.admin-panel-action {
+  padding-top: 18px;
+}
+.admin-people-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+.admin-people-filters [aria-pressed="true"] {
+  background: var(--lavender, #e2d8fa);
+}
+.admin-directory {
+  padding: 0;
+  overflow: hidden;
+}
+.admin-directory caption {
+  padding: 15px 18px;
+  text-align: left;
+  font-size: 12px;
+}
+.admin-directory th {
+  white-space: nowrap;
+}
+.admin-directory .empty-state {
+  min-height: 260px;
+}
+.admin-directory .empty-state p {
+  max-width: 420px;
+  margin-inline: auto;
+}
+.admin-note {
+  border: 1px solid var(--ink, #26212e);
+  border-radius: 8px;
+  padding: 16px 18px;
+  font-size: 12px;
+  line-height: 1.7;
+}
+.admin-role-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+.admin-role-card h3,
+.admin-role-card p {
+  margin: 0;
+}
+.admin-role-card .badge {
+  margin-top: auto;
+  font-size: 11px;
+}
+.admin-scope-callout {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+.admin-scope-callout > div {
+  flex: 1;
+  min-width: min(100%, 250px);
+}
+.admin-scope-callout h2 {
+  margin: 0 0 8px;
+}
+.admin-scope-callout p {
+  margin: 0;
+  font-size: 13px;
+}
+.admin-role-dialog {
+  max-height: calc(100dvh - 40px);
+  overflow-y: auto;
+}
+.admin-role-form {
+  margin-top: 23px;
+}
+.admin-responsibilities {
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+.admin-responsibilities legend {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 9px;
+}
+.admin-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  margin: 11px 0;
+  font-size: 13px;
+  cursor: pointer;
+}
+.admin-checkbox input {
+  width: 17px;
+  height: 17px;
+  margin: 2px 0 0;
+  accent-color: #6e508f;
+  flex-shrink: 0;
+}
+.admin-proposal-preview {
+  border: 1px solid var(--ink, #26212e);
+  border-radius: 8px;
+  padding: 18px;
+  margin-top: 23px;
+}
+.admin-proposal-preview h3 {
+  font-size: 15px;
+  margin: 0 0 9px;
+}
+.admin-proposal-preview p,
+.admin-proposal-preview dl {
+  font-size: 13px;
+}
+.admin-proposal-preview dt {
+  font-size: 11px;
+  margin-top: 13px;
+  color: #706979;
+}
+.admin-proposal-preview dd {
+  margin: 3px 0 0;
+  overflow-wrap: anywhere;
+}
+.admin-proposal-preview ul {
+  margin: 0;
+  padding-left: 20px;
+}
+@media (max-width: 620px) {
+  .admin-sprout {
+    width: 64px;
+    height: 64px;
+  }
+  .admin-sprout svg {
+    width: 36px;
+  }
+  .admin-workspace-badge {
+    align-self: flex-start;
+  }
+  .admin-scope-callout > .button {
+    width: 100%;
+  }
+}
+@media (max-width: 390px) {
+  .admin-sprout {
+    display: none;
+  }
+  .admin-structure-row .badge {
+    margin-left: 54px;
+  }
+}

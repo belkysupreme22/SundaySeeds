@@ -5,6 +5,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Added
+- Administration dashboard proposal with Overview/People/Access tabs, empty directory filters and an unsaved sub-admin scope proposal dialog. No accounts or permissions are created; owner runtime/visual acceptance is pending.
 - Teacher dashboard proposal with Overview/Lessons/Classes tabs, in-memory lesson draft create/edit/preview, a labelled example reading and optional chart illustration. No publishing or class service is connected; owner runtime/visual acceptance is pending.
 - React + TypeScript dashboard foundation in `apps/teacher-web`, with a responsive shared shell, Radix primitives, Lucide icons, Poppins, shared text fields and lazy-loaded Recharts examples. Installation, lockfile generation and runtime checks remain with the owner.
 - Shared topic/status filter panel for Browse and Search, with draft selection, live matching count, Apply/Clear/Cancel behavior and active-filter summaries; search text is retained. Owner runtime and visual review are pending.
