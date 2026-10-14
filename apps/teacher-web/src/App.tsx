@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { BookOpen, ShieldCheck, Sprout } from "lucide-react";
+import TeacherDashboard from "./features/teacher/TeacherDashboard";
 
 export function App() {
   const [workspace, setWorkspace] = useState<"teacher" | "admin">("teacher");
@@ -57,10 +58,7 @@ export function App() {
             hidden={workspace !== "teacher"}
             aria-label="Teacher proposal"
           >
-            <div className="panel">
-              <h1>Teacher workspace</h1>
-              <p>Lesson screens are the next implementation task.</p>
-            </div>
+            <TeacherDashboard />
           </section>
           <section
             hidden={workspace !== "admin"}
