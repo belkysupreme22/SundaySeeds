@@ -40,11 +40,14 @@ Version the stored shape, validate loaded data, and recover sensibly from missin
 
 Supabase will hold profiles, churches, classes, memberships, published lessons, quiz attempts and progress. Introduce migrations and permission tests alongside these features. Class and church ownership must be enforced in the database, not merely hidden in the UI. Never place privileged service credentials in the mobile app.
 
-A future teacher web dashboard may share contracts and validation with mobile. Its screens will remain separate. Add `packages/contracts`, `apps/teacher-web` and `supabase/` only when those implementations begin.
+Teacher/admin screen prototypes now share a React + TypeScript review workspace in `apps/teacher-web`, built with Vite. Teacher and admin feature folders own their UI state; the shell switches proposals without representing authentication or permission grants. Selected Radix primitives provide tabs/dialogs, Lucide provides icons and Recharts is lazy-loaded only when chart examples are opened. Poppins is bundled through Fontsource. Styling remains in ordinary CSS using the learner reference palette. These are reusable screen proposals, not connected services; deployment and production route/auth separation remain decisions.
+
+Backend entity, capability and access proposals are in [backend-contract-proposal.md](backend-contract-proposal.md). Add shared contract and Supabase implementation directories only when that work begins. The owner approved parallel prototypes and planning before the pilot; see [decision 0003](decisions/0003-parallel-prototypes-and-administration.md). Do not restore standalone HTML mockups as the dashboard implementation.
 
 ## Decisions still required
 
-- First learner age group and whether accounts are learner-owned or parent-managed.
+- Adult learners are confirmed. Choose the adult sign-in and account-provisioning flow.
+- System-wide super admin and sub-admin roles are confirmed in principle. Define delegation, scope, revocation, auditing and initial provisioning before implementing permissions.
 - Pilot church, class and curriculum ownership.
 - How teachers join and who grants their permissions.
 - Content and Bible translation permissions before distributing real material.

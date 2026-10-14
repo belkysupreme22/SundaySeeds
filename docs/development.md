@@ -16,6 +16,12 @@ Use `npm run android` with an Android emulator or device ready. A web preview is
 
 ## Work in reviewable increments
 
+### Parallel dashboard prototypes and backend planning (2026-10-14)
+
+The owner selected React + TypeScript screen prototypes before the connected pilot, alongside backend planning, then requested modern UI/chart libraries matching the design. `apps/teacher-web` now contains teacher and administration proposals in one review shell, with separate feature folders. Radix tabs/dialogs, named Lucide icons, bundled Poppins and on-demand Recharts are declared; package versions/peer requirements were read from npm and official library docs consulted. No installation, lockfile generation, typecheck, build or runtime review was performed. Six learner layout files were formatted in the preceding correction; new dashboard sources receive scoped formatting only. Performance/bundle size is not verified.
+
+Teacher: Overview/Lessons/Classes, required title/reading, draft/edit/learner preview and an explicit example lesson. Admin: Overview/People/Access, empty directory role filters and an unsaved role-scope proposal with preview/clear. Chart examples use labelled illustrative fixtures with a table; actual analytics remain unavailable. No auth, role grant, publishing, class records or durable draft storage. See the workspace README for owner setup and interaction checks, `parallel-delivery-plan.md` for remaining tasks, and `backend-contract-proposal.md` for the initial capability/permission discussion. Adult learners and system-wide super-admin/sub-admin direction are confirmed; permission scopes and pilot identity still need decisions.
+
 ### Profile correction and app wording (2026-10-14)
 
 Owner feedback requested closer avatar/name alignment and compact learning tiles. Reference-12 left was inspected again. Profile now keeps the avatar beside a smaller name/edit row; the extra profile banner is removed. `ProfileLearningStats` places icon/count pairs above centred captions in equal white outlined tiles directly beneath the card, matching the reference hierarchy. The narrow/large-text single-column fallback, actual counts and name/learning recovery remain.

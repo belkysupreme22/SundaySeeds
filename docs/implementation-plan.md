@@ -1,8 +1,12 @@
 # SundaySeeds implementation plan
 
-Updated 13 October 2026. This plan turns the reference designs into a sequence of complete learner flows. It separates implemented functionality, remaining design work and owner acceptance; a working screen is not automatically a finished design.
+Updated 14 October 2026. This plan turns the reference designs into a sequence of complete learner flows. It separates implemented functionality, remaining design work and owner acceptance; a working screen is not automatically a finished design.
 
 **Next task: S2 — Settings, reference-12 right.** D1–D4 discovery, L1–L3 learning-flow, P1 Progress and S1 Profile designs are implemented and awaiting owner runtime/visual review. Continue through the planned screen groups before another discretionary Home polish pass.
+
+**Parallel work approved, 14 October:** teacher and system-administration screen prototypes proceed before the connected pilot, alongside backend planning. The audience is adult learners; administration includes a system-wide super admin and evolving sub-admin roles. Detailed delegated permissions remain undecided. Follow the [parallel delivery plan](parallel-delivery-plan.md) and [decision 0003](decisions/0003-parallel-prototypes-and-administration.md). This changes the preparation order below; backend services and production dashboards are not yet implemented.
+
+**React prototype checkpoint, 14 October:** `apps/teacher-web` now contains the teacher and admin screen proposals in React + TypeScript, as selected by the owner. Teacher draft create/edit/preview, admin directory filters/scope proposals and optional illustrative charts are implemented in source. Radix primitives, Lucide and lazily loaded Recharts support the shared design. [Backend contracts and a conceptual access matrix](backend-contract-proposal.md) are drafted for agreement. Dependency installation, initial lockfile, build/type checks and runtime/visual review remain pending with the owner; see the [workspace README](../apps/teacher-web/README.md). Next learner implementation remains S2; next dashboard steps are layout/workflow acceptance and permission decisions, before connected work.
 
 Latest screenshot feedback identifies the inner browser input focus rectangle. The shared web input now explicitly resets outline style/width/colour and box shadow, preserving the surrounding field's focus treatment. Rendered confirmation remains pending; the fix is preserved in D4.
 
@@ -15,7 +19,7 @@ Latest screenshot feedback identifies the inner browser input focus rectangle. T
 - Complete one screen group through small, coherent commits, then move to the next group. Revisit earlier screens for owner feedback, broken interactions or shared-component regressions rather than open-ended polish.
 - The owner handles terminal-heavy checks, runtime testing and visual review. Provide a short handoff with affected screens, actions to try and known limitations. Do not run builds, tests or review jobs unless the owner requests them.
 - Record implementation and acceptance separately. Pending owner review can remain queued while the next screen is implemented; it must not be reported as a pass. Native verification cannot be inferred from web previews.
-- Keep sample content and device-local storage clearly labelled. Every visible control must work; omit controls whose underlying feature is not implemented.
+- Keep sample content identifiable and explain storage once in Settings. Do not repeat local/device/preview labels across learner screens. Every visible control must work; omit controls whose underlying feature is not implemented.
 - The two existing lint issues are deferred at the owner's request. They are not the next product task, but remain outstanding before release.
 - Maintain `CHANGELOG.md` and document material architecture decisions in `docs/decisions`. No production accounts, class memberships or backend connectivity are assumed.
 
@@ -93,6 +97,8 @@ Do not display learning hours, streaks, weekly graphs, XP or historical activity
 
 **S2. Settings:** finish Personal information, Learning data, introduction replay and About/support presentation using the grouped outlined-row design. Keep the existing confirmed reset behavior and error recovery. Only include support links with real destinations; account settings arrive with authentication.
 
+**S1 owner correction (14 October):** name/edit and avatar now share one compact row, with the redundant profile banner removed. White outlined icon/count tiles sit directly beneath the profile card; long names and larger text retain adaptive layout. Repeated local/device/preview labels are removed across learner screens, with one storage explanation in Settings. Data, reset and recovery behavior remain. Formatting/whitespace inspection only; owner acceptance pending.
+
 **Owner acceptance:** profile edits update the greeting and persist; save/cancel return correctly; reset confirmation can be cancelled and clears only learning data when confirmed; rows have real destinations. Notifications/downloads, password changes and sign-out are not presented as working in the local demo.
 
 ### 5. Welcome and profile setup
@@ -111,7 +117,7 @@ Phase 1 is accepted only when the complete learner journey and required native c
 
 ## Phase 2 — Connected pilot and authentication
 
-**Dependencies:** confirm the first church/class, learner age group, curriculum owner, learner-versus-parent account ownership, teacher access and content/translation permissions before designing production account behavior.
+**Confirmed:** adult learners; system-wide super admin with sub-admin roles to be defined. **Dependencies:** confirm the first pilot group, curriculum owner, adult sign-in method, teacher provisioning, delegated admin scopes and content/translation permissions before implementing production account/access behavior. Backend planning and teacher/admin prototypes can proceed in parallel now.
 
 1. Introduce Supabase schema/migrations and access rules for the agreed pilot.
 2. Implement login, signup and appropriate recovery/session states using [reference-03](references/reference-03.png). Offer only configured authentication methods; do not add decorative Google/Apple sign-in controls.
@@ -123,6 +129,8 @@ Phase 1 is accepted only when the complete learner journey and required native c
 ## Phase 3 — Teacher publishing
 
 Build a small responsive web dashboard for assigned teachers to draft, preview and publish text/image lessons and quizzes, then view genuine class completion. There is no supplied teacher-dashboard reference; agree that layout using the established visual language before implementation.
+
+Teacher and administrator layout proposals now run ahead of the connected pilot. The administration track covers system oversight and explicitly delegated access; detailed sub-admin capabilities remain proposed. Production publishing and privileged administration still depend on backend contracts and access rules. Prototype review is not production acceptance.
 
 **Acceptance:** a teacher prepares and publishes a weekly lesson without editing code or database records. Drafts stay private, unassigned classes are inaccessible and learners see only published content.
 
