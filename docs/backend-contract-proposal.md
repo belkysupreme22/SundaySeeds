@@ -12,6 +12,7 @@ This document supplies a shared vocabulary for the learner app and teacher/admin
 | Organization, class and membership | An organization contains classes; an identity has explicit class memberships. Membership records distinguish learner participation from assigned teacher responsibility and track active/revoked state |
 | Scoped role grant | A staff identity receives an explicit capability set and scope from an authorized grantor. The system super-admin bootstrap and sub-admin grant/delegation rules must be agreed before implementation |
 | Invitation | Refers to an intended class/membership and, if required, recipient identity. Expiry, redemption limits, revocation and grant authority are enforced by a trusted operation |
+| Course and module (new proposal) | A course groups ordered modules and lessons. Decide class/course availability, published outline versions and the impact of reordering before migrations; the current lesson-only prototype has no course authoring yet |
 | Lesson and lesson version | A stable lesson has editable draft content and immutable published versions containing ordered sections, questions and scoring rules. Class availability points to an allowed published version |
 | Quiz attempt and submitted answers | An attempt belongs to one authenticated learner and one published version; its submitted answers produce a trusted score and completion outcome. No synthetic attempts are created from sample summaries |
 | Reading progress and bookmark | Per-learner records refer to lesson identity; reading position also identifies the applicable version/section. Completion derives from accepted attempts, not merely opening the last section |
@@ -25,7 +26,7 @@ Media ownership/access can be attached to lesson versions when images enter the 
 - Responses distinguish available data, empty results and unavailable/error states. A transport success alone must not be interpreted as a durable mutation unless the operation acknowledges acceptance.
 - Proposed failure vocabulary: `unauthenticated`, `forbidden`, `not_found`, `validation_failed`, `conflict`, `expired`, `rate_limited` and `temporarily_unavailable`. Define safe error details, retry guidance and a diagnostic identifier where appropriate; avoid leaking restricted resource existence.
 - Server-controlled timestamps describe server events. Client times may be diagnostic input but cannot establish trusted completion or audit history.
-- Reads return only authorized fields. Learner question payloads must not expose answer keys or explanations prematurely; the feedback-release policy is a pilot decision.
+- Reads return only authorized fields. The owner confirmed automatic knowledge checks: show the correct answer and explanation after the learner checks a response, with no teacher review. Define the trusted feedback operation and version binding before connected work; initial question payloads need not expose unchecked answers. These are learning interactions, not proctored examinations.
 - List operations need explicit ordering and bounded pagination when the dataset warrants it. Empty pages are not an authorization failure.
 
 ## Capability proposals
@@ -34,6 +35,7 @@ Media ownership/access can be attached to lesson versions when images enter the 
 | --- | --- | --- |
 | Mobile: browse/open published lesson | Current session, class or visible collection, lesson/version identifier | Authorized lesson summary/content and version; empty collection, unavailable publication, lost membership or expired session |
 | Mobile: save reading position/bookmark | Lesson/version, valid section or desired bookmark state, optional revision token | Acknowledged current state/revision; invalid section, stale version, lost access or temporary save failure |
+| Mobile: check a quiz answer | Authorized published version, question ID and selected choice | Automatic correct/incorrect feedback, correct answer and explanation for that version; invalid question/choice, revoked access or unavailable version. Checking one answer is not final attempt completion |
 | Mobile: submit quiz attempt | Published version, answers keyed by question, unique submission key | Accepted attempt ID, trusted score/completion and permitted feedback; incomplete/invalid answers, unavailable version, duplicate-key conflict, revoked access or uncertain network outcome |
 | Mobile: read progress/results | Current session and authorized lesson scope | Genuine completion/best-score summaries; attempts only if that view is agreed. No results is distinct from a failed load |
 | Teacher: create/update draft | Authorized destination scope, draft content, expected draft revision on update | Draft ID and new revision with validation details; forbidden destination, invalid content or concurrent-edit conflict |
@@ -77,7 +79,7 @@ Unknown sub-admin scopes must remain denied in production, even when the prototy
 1. **Pilot boundaries:** first organization/class, curriculum owner and who can invite/assign teachers; intended publication/class visibility and content/translation permissions.
 2. **Administrative authority:** super-admin bootstrap and recovery; initial sub-admin capabilities/scopes; who may delegate/revoke them; guardrails for the last authorized administrator and audit access.
 3. **Identity and membership:** configured sign-in/recovery methods for adults, membership approval/invitation rules, staff-as-learner support and session/account-switch behavior.
-4. **Content and assessment:** publication/version lifecycle, old-version submissions, answer/explanation release timing, retry/completion rules and teacher result detail.
+4. **Content and assessment:** course/module hierarchy and publication/version lifecycle, old-version submissions, implementation of automatic checked-answer feedback, retry/completion rules and teacher result detail. Teacher review is not part of quiz completion.
 5. **Data lifecycle and reliability:** retention/export/deletion, revocation effects, cache isolation, sample-data transfer choice, acknowledged-save/offline behavior, backups and operational ownership.
 
 Next deliverable: resolve decisions 1–3 and annotate this proposal with accepted boundaries before drafting migrations or production auth/role behavior. Teacher/admin layout feedback can proceed independently. No backend code, service configuration, permission tests or runtime validation accompanies this document; the owner retains tests/builds/runtime review unless explicitly delegated.

@@ -5,6 +5,7 @@ Updated 14 October 2026. This supplements [the implementation plan](implementati
 ## Confirmed direction
 
 - The owner selected **screen prototypes before a connected pilot, alongside backend planning**. Learner design work continues in parallel.
+- The owner has approved the teacher/admin prototype design direction and requested the core LMS expansion in [the LMS implementation plan](lms-implementation-plan.md). Quizzes are automatic knowledge checks with correct answers/explanations; teacher-reviewed assignments remain deferred. Prototype approval does not establish runtime or permission validation.
 - Learners are **adults**. Parent-managed and child-account workflows are outside this plan.
 - Administration means a **system-wide super admin with sub-admin roles**. Sub-admin responsibilities, scope and delegation rules are still to be defined; no universal sub-admin access is assumed.
 - Supabase and a responsive React teacher dashboard remain the planned architecture. No backend service, authentication provider or production role system is currently connected.
@@ -17,7 +18,7 @@ Updated 14 October 2026. This supplements [the implementation plan](implementati
 | ID | Work / deliverable | Dependency and completion target |
 | --- | --- | --- |
 | A0 — implemented | Correct Profile name/avatar alignment and compact summary tiles against reference-12; simplify repetitive storage copy across the app | Commit `cd00e19`. Real counts, unavailable states, shared input treatment and recovery retained. Owner visual acceptance pending |
-| S2 — implemented | Settings: outlined Personal information, Learning data, introduction replay and About groups | Reference-12 right inspected; compact groups and replay row implemented. Reset/cancel/recovery preserved. Owner runtime/visual acceptance pending |
+| S2 / S2-F — implemented | Settings: full Account/App Settings/Support & About components, learning replay, light-gray outlines and Profile-active bottom navigation | Reference-12 right inspected. Existing editor/reset/recovery preserved; unavailable services/policies are explicitly identified in detail sheets. Owner runtime/visual acceptance pending |
 | O1 | Welcome: finish three-page composition, imagery, cards, indicators and navigation | Reference-01. Preserve first-launch preference, replay and Skip/Back/Next/Get started |
 | O2 | One optional minimal setup flow using the existing display name | References 02/04 are alternatives. Add topic preferences only if their effect is implemented; avoid unnecessary identity fields |
 | A1 | Owner acceptance of completed learner designs | D1–D4, L1–L3, P1, S1–S2 and A0 are implemented, with runtime/visual acceptance pending. Include O1/O2 as they land |
@@ -101,4 +102,4 @@ React + TypeScript teacher/admin screen source is implemented, A0 learner correc
 
 Source task commits: shared React foundation `a91263a`, teacher screens `3e4bea7`, admin screens `4369e77`. Backend contracts and delivery documentation form a separate task commit.
 
-Next: the owner is reviewing dashboards using [setup and review steps](../apps/teacher-web/README.md) for T1/M2; feedback is pending. Resolve B0/M1 alongside that review, and continue learner O1 → O2 after the implemented S2 Settings. Review teacher draft create/edit/preview and workspace switching; admin filter/proposal/reset behavior; chart examples; keyboard/dialog focus; narrow screens and larger text.
+Next: dashboard design direction is approved. Begin LMS-T1 course outlines and the LMS-B1 contract decisions in [the LMS plan](lms-implementation-plan.md); fuller teacher/admin tasks remain explicit separate increments. Resolve B0/M1 before production access. Learner O1 → O2 remains queued after completed S2/S2-F. [Owner review checks](../apps/teacher-web/README.md) remain open for new behaviors, keyboard/dialog focus, narrow screens and larger text.

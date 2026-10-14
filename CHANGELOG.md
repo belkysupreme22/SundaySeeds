@@ -5,6 +5,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Added
+- Core LMS implementation roadmap following owner approval of the dashboard design, with separate course, lesson, automatic quiz, class/enrollment, reporting, administration and backend tasks. Backend proposals now record immediate checked-answer feedback and a proposed course/module hierarchy; no new services are connected.
 - Full reference-12 Settings components: Account, App Settings, Support & About, useful help/detail sheets and a disabled sign-out row. Added anchored bottom navigation with Profile selected and softened Settings card borders to light gray. Service-dependent controls and unpublished policies show their availability honestly; current editor/replay/reset behavior is preserved.
 - Settings introduction replay entry, alongside compact reference-12 outlined information groups and a separate reset action. Existing reset confirmation, recovery and name/welcome preservation remain; owner runtime/visual review is pending.
 - Parallel learner/teacher/admin/backend delivery plan and an initial backend contract/access proposal for adult learners, system-wide super-admin and scoped sub-admin roles. Detailed permissions remain undecided; planning is committed separately from screen implementation.
