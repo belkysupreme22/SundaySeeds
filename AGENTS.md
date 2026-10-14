@@ -2,6 +2,7 @@
 
 ## Product and visual quality
 - Build the agreed React Native + Expo + TypeScript app in apps/mobile.
+- Teacher/admin screen prototypes use React + TypeScript in apps/teacher-web, with Radix primitives, Lucide icons and lazy-loaded Recharts examples. Follow that workspace's AGENTS.md; keep backend planning separate from connected implementation.
 - Use docs/references screenshots as the visual source of truth: pale lavender, mint, yellow and peach; dark fine outlines; modest radii; crisp offset shadows; geometric type.
 - Start with a polished Home -> lesson -> quiz -> saved progress journey. Do not invent production accounts, class memberships or backend connectivity.
 - Keep sample content identifiable and explain device-only storage once in Settings. Do not repeat local/device/preview disclaimers across learner screens. No fabricated analytics or completion history.
@@ -21,6 +22,6 @@
 
 ## Verification and history
 - Current owner preference: focus on design implementation against the reference screenshots. The owner handles tests, builds, terminal-heavy checks and runtime/visual review; run these only when explicitly requested. Supply affected screens and actions to check, and mark unperformed checks as pending. The two known lint issues remain deferred until requested or scheduled for release readiness.
-- Commit coherent, working increments with plain, descriptive messages. Do not commit secrets, generated builds or unrelated files.
+- Commit each bounded task separately with a plain, descriptive message. Keep shared foundations, teacher screens, admin screens and backend planning in distinct commits; do not bundle independent tasks. Do not commit secrets, generated builds or unrelated files.
 - Maintain CHANGELOG.md with notable additions, changes and fixes under Unreleased; document architectural decisions in docs/decisions.
 - Report implemented scope, actual verification and remaining limitations honestly.

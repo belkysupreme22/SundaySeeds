@@ -5,6 +5,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Added
+- React + TypeScript dashboard foundation in `apps/teacher-web`, with a responsive shared shell, Radix primitives, Lucide icons, Poppins, shared text fields and lazy-loaded Recharts examples. Installation, lockfile generation and runtime checks remain with the owner.
 - Shared topic/status filter panel for Browse and Search, with draft selection, live matching count, Apply/Clear/Cancel behavior and active-filter summaries; search text is retained. Owner runtime and visual review are pending.
 - Dedicated lesson search/results with title/topic/scripture matching, inherited topic/status context, removable filters, query clearing, actual counts and empty-result recovery. Browse and Search share matching logic; owner runtime and visual review are pending.
 - In-app retries for failed progress loads and saves, with an outlined peach recovery card and a busy state while retrying.
