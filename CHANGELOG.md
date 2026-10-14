@@ -5,6 +5,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Added
+- Full reference-12 Settings components: Account, App Settings, Support & About, useful help/detail sheets and a disabled sign-out row. Added anchored bottom navigation with Profile selected and softened Settings card borders to light gray. Service-dependent controls and unpublished policies show their availability honestly; current editor/replay/reset behavior is preserved.
 - Settings introduction replay entry, alongside compact reference-12 outlined information groups and a separate reset action. Existing reset confirmation, recovery and name/welcome preservation remain; owner runtime/visual review is pending.
 - Parallel learner/teacher/admin/backend delivery plan and an initial backend contract/access proposal for adult learners, system-wide super-admin and scoped sub-admin roles. Detailed permissions remain undecided; planning is committed separately from screen implementation.
 - Administration dashboard proposal with Overview/People/Access tabs, empty directory filters and an unsaved sub-admin scope proposal dialog. No accounts or permissions are created; owner runtime/visual acceptance is pending.

@@ -18,7 +18,9 @@ export function BottomNav() {
       <View style={styles.bar}>
         {tabs.map((tab) => {
           const selected =
-            pathname === tab.href || (tab.href === '/lessons' && pathname.startsWith('/lessons/'));
+            pathname === tab.href ||
+            (tab.href === '/lessons' && pathname.startsWith('/lessons/')) ||
+            (tab.href === '/profile' && pathname === '/settings');
           return (
             <Pressable
               key={tab.label}

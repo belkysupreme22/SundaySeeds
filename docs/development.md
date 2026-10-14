@@ -16,6 +16,14 @@ Use `npm run android` with an Android emulator or device ready. A web preview is
 
 ## Work in reviewable increments
 
+### Full Settings reference components (2026-10-14)
+
+Following S2 commit `dc41231`, the owner explicitly requested all reference-12 Settings components. Account, App Settings and Support & About rows are now represented, with an adaptive value column, descriptive detail sheets and a disabled Log out component. Display-name editing, introduction replay and confirmed progress reset remain functional. Help Center contains instructions for existing learning/recovery flows; About shows the actual sample lesson count. Data usage holds the one storage explanation. Fixed Light mode and English are described as current settings, not selectable alternatives. Account/email/playback/download services and official privacy/terms documents are explicitly unavailable; no credentials, preference saves or fake policies were added.
+
+Owner corrections in the same follow-up: reference-12 was inspected again, Settings now uses anchored bottom navigation with Profile selected, and group/detail/reset-confirmation outlines use one-point light-gray `colors.line` strokes. Other screens retain their existing outlines. The four existing learner destinations remain Home/Lessons/Progress/Profile; unsupported assignment/community tabs were not added from the reference.
+
+Owner checks: open/dismiss every detail sheet, system Back, scroll long Help/Data text, close/Done actions, 360/390 widths and 150%/200% native text; confirm unavailable labels and disabled logout are clear, and edit/replay/reset retain their behavior. Only scoped source formatting and whitespace checks are performed; no tests, builds, typecheck or runtime review. This UI follow-up is its own task commit. Dashboard design direction is approved; LMS expansion proceeds separately, with automatic knowledge-check quizzes and answers/explanations rather than teacher grading.
+
 ### Settings S2 checkpoint (2026-10-14)
 
 Reference-12 right was inspected. Settings now uses compact white outlined Personal information, Learning data and About groups, with simple icons, dividers and wrapping text. Display name opens the unchanged editor. Replay the introduction opens the existing Welcome flow; finishing it returns Home. The storage explanation appears once; static About rows show the version and actual sample lesson count without misleading navigation arrows. Reset remains a separate action below the groups with its existing confirmation/cancel, busy guard and success/failure feedback. No storage, scoring or welcome-preference rules changed.

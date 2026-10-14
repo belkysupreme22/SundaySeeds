@@ -18,7 +18,7 @@ Before changing a screen, inspect its mapped reference panels. After the change,
 | Quiz results | [07](references/reference-07.png), right panel | Mint completion emblem, compact lesson identity and outlined next-action rows, adapted to this attempt, best score, review and retry |
 | Progress | [05](references/reference-05.png), middle/right; [09](references/reference-09.png), right | Lavender portrait hero, actual completion percentage/bar, outlined portrait lesson rows and pastel statistics; no unrecorded history/time metrics |
 | Profile | [12](references/reference-12.png), left panel | Compact lavender identity/edit card, real local-learning tiles, grouped outlined navigation and anchored tabs |
-| Settings | [12](references/reference-12.png), right panel | Grouped outlined rows, clear section headings and real local-data actions |
+| Settings | [12](references/reference-12.png), right panel | Light-gray outlined groups, compact headings/rows and anchored bottom navigation with Profile active; complete Account, App Settings and Support & About components |
 | Welcome | [01](references/reference-01.png) | Three-page image-led composition, pastel feature cards, page indicators and clear actions |
 | Optional profile setup | [02](references/reference-02.png), [04](references/reference-04.png) | Progress indicator, outlined inputs and selectable tiles only for implemented preferences |
 | Authentication (connected pilot) | [03](references/reference-03.png) | Illustrated headers, outlined fields and prominent primary actions |
@@ -39,6 +39,8 @@ Reference-09's assignment panels, reference-10's achievements/history, reference
 SundaySeeds uses lesson series, Bible-story teaching, memory verses and reflection quizzes instead of career courses, paid enrolment and professional certificates. Labels, imagery, content length and screen count therefore differ. The target is faithful visual language and layout, not a claim that adapted screens are pixel-identical to the commercial-course mockups.
 
 Keep sample content identifiable, with one clear storage explanation in Settings. Per owner feedback on 14 October, do not repeat local/device/preview disclaimers on learner screens. Keep actual failure/retry messages useful. Do not imply a real signed-in learner, live class, cloud sync or teacher service. Buttons must have implemented behaviour or be omitted; prototype-only actions must be clearly identified as such.
+
+Settings exception explicitly requested on 14 October: show all reference-12 components even where services are deferred. Use labelled availability detail sheets for account/email/video/download features and unpublished policies; Log out stays disabled while no account is signed in. Do not add pretend preferences or fabricated policies. Preserve working editor/replay/reset actions and the single storage explanation under Data usage. Settings card strokes use `colors.line` at one point, not the usual dark card outline. Bottom navigation stays visible with Profile selected.
 
 ## Acceptance checks
 
