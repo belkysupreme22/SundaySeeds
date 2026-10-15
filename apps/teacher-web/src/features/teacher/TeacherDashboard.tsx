@@ -1,6 +1,7 @@
 import * as Tabs from "@radix-ui/react-tabs";
 import {
   ArrowRight,
+  BarChart3,
   BookOpen,
   Home,
   Layers,
@@ -18,9 +19,10 @@ import { EditorialStudio } from "./studio/EditorialStudio";
 import { CourseLibrary } from "./studio/CourseLibrary";
 import type { StudioEntry } from "./studio/types";
 import { ClassesPanel } from "./classes/ClassesPanel";
+import { ReportsPanel } from "./reporting/ReportsPanel";
 import "./teacher.css";
 
-type TeacherTab = "overview" | "courses" | "lessons" | "classes";
+type TeacherTab = "overview" | "courses" | "lessons" | "classes" | "reports";
 export default function TeacherDashboard({
   onStudioChange,
 }: {
@@ -123,7 +125,9 @@ export default function TeacherDashboard({
                   ? "Your courses"
                   : tab === "lessons"
                     ? "Your lesson library"
-                    : "Your classes"}
+                    : tab === "classes"
+                      ? "Your classes"
+                      : "Learning reports"}
             </h1>
             <p className="muted">
               Shape a course from its first idea to its final knowledge check.
@@ -154,6 +158,7 @@ export default function TeacherDashboard({
                 { id: "courses", label: "Courses", Icon: Layers },
                 { id: "lessons", label: "Lesson library", Icon: BookOpen },
                 { id: "classes", label: "Classes", Icon: Users },
+                { id: "reports", label: "Reports", Icon: BarChart3 },
               ] as const
             ).map(({ id, label, Icon }) => (
               <Tabs.Trigger className="tab-trigger" value={id} key={id}>
@@ -271,6 +276,14 @@ export default function TeacherDashboard({
             className="page-stack teacher-tab-content"
           >
             <ClassesPanel courses={courses.courses} onOpenCourse={openCourse} />
+          </Tabs.Content>
+          <Tabs.Content
+            value="reports"
+            forceMount
+            hidden={tab !== "reports"}
+            className="page-stack teacher-tab-content"
+          >
+            <ReportsPanel courses={courses.courses} />
           </Tabs.Content>
         </Tabs.Root>
       </div>
