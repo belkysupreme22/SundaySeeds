@@ -1,5 +1,32 @@
-.publication-dialog {
-  width: min(860px, calc(100vw - 32px));
+.publication-studio {
+  min-width: 0;
+  padding: clamp(18px, 3vw, 36px);
+  border: 1px solid #d3cdd8;
+  border-radius: 9px;
+  background: #fffefb;
+}
+.publication-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 18px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #ded9e4;
+}
+.publication-header > div {
+  min-width: 0;
+  flex: 1 1 260px;
+}
+.publication-header h2 {
+  margin: 6px 0 10px;
+  overflow-wrap: anywhere;
+}
+.publication-header p {
+  margin: 0;
+}
+.publication-header .button {
+  min-height: 44px;
 }
 .publication-notice {
   margin-top: 20px;
@@ -138,9 +165,7 @@
   .publication-checks {
     grid-template-columns: minmax(0, 1fr);
   }
-  .publication-dialog {
-    width: calc(100vw - 20px);
-  }
+
   .publication-history > li {
     align-items: flex-start;
     flex-wrap: wrap;

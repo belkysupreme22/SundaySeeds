@@ -82,6 +82,11 @@ export function createExampleCourse(): CourseOutline {
     id: "sample-faith-course",
     example: true,
     title: "Faith in Everyday Life",
+    audience: "Adult learners exploring faith in everyday situations",
+    outcomes: [
+      "Practise compassion and forgiveness in daily relationships",
+      "Build a thoughtful daily rhythm of prayer",
+    ],
     summary:
       "Explore practical ways to love others and build a daily rhythm of faith. This example has two modules and three editable lesson drafts.",
     modules: [

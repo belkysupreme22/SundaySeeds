@@ -1,6 +1,5 @@
-import * as Dialog from "@radix-ui/react-dialog";
-import { ArrowLeft, Eye, X } from "lucide-react";
-import { useRef, useState, type FormEvent } from "react";
+import { ArrowLeft, Eye, Save } from "lucide-react";
+import { useEffect, useId, useRef, useState, type FormEvent } from "react";
 import { InputField, TextAreaField } from "../../../shared/ui/InputField";
 import { LessonSectionsEditor } from "./LessonSectionsEditor";
 import { LessonImageField } from "./LessonImageField";
@@ -15,7 +14,8 @@ interface LessonEditorProps {
   destination?: string;
   onSave: (draft: LessonContent) => void;
   onClose: () => void;
-  restoreFocus: () => void;
+  restoreFocus?: () => void;
+  onDirtyChange?: (dirty: boolean) => void;
 }
 
 export function LessonEditor({
@@ -23,7 +23,7 @@ export function LessonEditor({
   destination,
   onSave,
   onClose,
-  restoreFocus,
+  onDirtyChange,
 }: LessonEditorProps) {
   const [content, setContent] = useState<LessonContent>(() => ({
     title: draft?.title ?? "",
@@ -34,7 +34,10 @@ export function LessonEditor({
     image: draft?.image,
     quiz: draft?.quiz ?? [],
   }));
-  const [initial] = useState(() => JSON.stringify(content));
+  const [initial, setInitial] = useState(() => JSON.stringify(content));
+  const [section, setSection] = useState("details");
+  const [savedOnce, setSavedOnce] = useState(Boolean(draft));
+  const formId = useId();
   const [outcomesText, setOutcomesText] = useState(content.outcomes.join("\n"));
   const [previewing, setPreviewing] = useState(false);
   const [imageBusy, setImageBusy] = useState(false);
@@ -42,6 +45,10 @@ export function LessonEditor({
   const [error, setError] = useState("");
   const errorRef = useRef<HTMLParagraphElement>(null);
   const keepEditingRef = useRef<HTMLButtonElement>(null);
+  const dirty = imageBusy || JSON.stringify(content) !== initial;
+  useEffect(() => {
+    onDirtyChange?.(dirty);
+  }, [dirty, onDirtyChange]);
   function update<K extends keyof LessonContent>(
     key: K,
     value: LessonContent[K],
@@ -55,7 +62,9 @@ export function LessonEditor({
       requestAnimationFrame(() => keepEditingRef.current?.focus());
     } else onClose();
   }
-  function showError(message: string) {
+  function showError(message: string, target = "details") {
+    setPreviewing(false);
+    setSection(target);
     setError(message);
     requestAnimationFrame(() => errorRef.current?.focus());
   }
@@ -72,6 +81,7 @@ export function LessonEditor({
     if (!content.sections.length || incomplete >= 0) {
       showError(
         `Add a heading and reading to section ${Math.max(0, incomplete) + 1}.`,
+        "reading",
       );
       return;
     }
@@ -92,10 +102,10 @@ export function LessonEditor({
     }
     const quizIssues = getQuizIssues(content.quiz ?? []);
     if (quizIssues.length) {
-      showError(quizIssues[0]);
+      showError(quizIssues[0], "quiz");
       return;
     }
-    onSave({
+    const saved: LessonContent = {
       ...content,
       title: content.title.trim(),
       scripture: content.scripture.trim(),
@@ -118,220 +128,241 @@ export function LessonEditor({
       image: content.image
         ? { ...content.image, alt: content.image.alt.trim() }
         : undefined,
-    });
+    };
+    setContent(saved);
+    setOutcomesText(saved.outcomes.join("\n"));
+    setInitial(JSON.stringify(saved));
+    setSavedOnce(true);
+    onDirtyChange?.(false);
+    onSave(saved);
   }
   return (
-    <Dialog.Root
-      open
-      onOpenChange={(open) => {
-        if (!open) requestClose();
-      }}
-    >
-      <Dialog.Portal>
-        <Dialog.Overlay className="dialog-overlay" />
-        <Dialog.Content
-          className="dialog-content teacher-dialog lesson-authoring-dialog"
-          onCloseAutoFocus={(event) => {
-            event.preventDefault();
-            restoreFocus();
-          }}
-        >
-          <div className="dialog-header">
-            <div>
-              <p className="eyebrow">
-                Lesson studio{draft?.example ? " · Example content" : ""}
-              </p>
-              <Dialog.Title>
-                {draft ? "Edit lesson draft" : "Create a lesson draft"}
-              </Dialog.Title>
-            </div>
-            <Dialog.Close
-              className="icon-button"
-              aria-label="Close lesson editor"
-            >
-              <X size={20} aria-hidden="true" />
-            </Dialog.Close>
-          </div>
-          <Dialog.Description className="muted teacher-dialog-description">
-            {destination
-              ? `Build a lesson for “${destination}”. Saving adds it to this module automatically.`
-              : "Set learning outcomes, shape the reading and invite reflection."}
-          </Dialog.Description>
-          {discarding && (
-            <div className="lesson-discard" role="alert">
-              <strong>Discard your unsaved changes?</strong>
-              <p>
-                {draft
-                  ? "Your saved lesson will stay as it was."
-                  : "This new lesson has not been saved."}
-              </p>
-              <div className="lesson-editor-actions">
-                <button
-                  ref={keepEditingRef}
-                  type="button"
-                  className="button button-outline"
-                  onClick={() => setDiscarding(false)}
-                >
-                  Keep editing
-                </button>
-                <button
-                  type="button"
-                  className="button button-primary"
-                  onClick={onClose}
-                >
-                  Discard changes
-                </button>
-              </div>
-            </div>
-          )}
-          <div className="lesson-editor-heading">
-            <span className="badge tone-lavender">
-              {previewing
-                ? "Learner preview · Unsaved"
-                : "Lesson details → Reading → Reflection → Knowledge check"}
-            </span>
+    <section className="lesson-editor-studio" aria-label="Lesson editor">
+      <div className="lesson-studio-header">
+        <div>
+          <p className="eyebrow">
+            Lesson studio{draft?.example ? " · Example content" : ""}
+          </p>
+          <h2>{content.title.trim() || "Untitled lesson"}</h2>
+          <p className="lesson-editor-status" role="status">
+            {imageBusy
+              ? "Preparing image…"
+              : dirty
+                ? "Unsaved changes"
+                : savedOnce
+                  ? "Draft saved for this session"
+                  : "New lesson · Save when ready"}
+          </p>
+        </div>
+        <div className="lesson-editor-actions">
+          <button
+            type="button"
+            className="button button-outline"
+            onClick={requestClose}
+          >
+            <ArrowLeft size={17} aria-hidden="true" />
+            Back to course
+          </button>
+          <button
+            className="button button-primary"
+            type="submit"
+            form={formId}
+            disabled={imageBusy}
+          >
+            <Save size={17} aria-hidden="true" />
+            {destination ? "Save and add to module" : "Save draft"}
+          </button>
+        </div>
+      </div>
+      <p className="muted teacher-dialog-description">
+        {destination
+          ? `Build a lesson for “${destination}”. Saving adds it to this module automatically.`
+          : "Set learning outcomes, shape the reading and invite reflection."}
+      </p>
+      {discarding && (
+        <div className="lesson-discard" role="alert">
+          <strong>Discard your unsaved changes?</strong>
+          <p>
+            {draft
+              ? "Your saved lesson will stay as it was."
+              : "This new lesson has not been saved."}
+          </p>
+          <div className="lesson-editor-actions">
             <button
+              ref={keepEditingRef}
               type="button"
               className="button button-outline"
-              disabled={imageBusy}
+              onClick={() => setDiscarding(false)}
+            >
+              Keep editing
+            </button>
+            <button
+              type="button"
+              className="button button-primary"
+              onClick={onClose}
+            >
+              Discard changes
+            </button>
+          </div>
+        </div>
+      )}
+      <div className="lesson-editor-heading">
+        <span className="badge tone-lavender">
+          {previewing
+            ? dirty
+              ? "Learner preview · Unsaved changes"
+              : "Learner preview"
+            : "Shape a complete lesson, one section at a time"}
+        </span>
+        <button
+          type="button"
+          className="button button-outline"
+          disabled={imageBusy}
+          onClick={() => {
+            setPreviewing((current) => !current);
+            setError("");
+          }}
+        >
+          {previewing ? (
+            <ArrowLeft size={17} aria-hidden="true" />
+          ) : (
+            <Eye size={17} aria-hidden="true" />
+          )}
+          {previewing ? "Back to editing" : "Preview lesson"}
+        </button>
+      </div>
+      {previewing && <LessonContentPreview content={content} />}
+      <div hidden={previewing}>
+        <nav className="lesson-section-nav" aria-label="Lesson sections">
+          {[
+            ["details", "01", "Details"],
+            ["reading", "02", "Reading"],
+            ["reflection", "03", "Reflection"],
+            ["quiz", "04", "Quiz"],
+          ].map(([id, number, label]) => (
+            <button
+              key={id}
+              type="button"
+              aria-current={section === id ? "step" : undefined}
+              className={section === id ? "is-active" : ""}
               onClick={() => {
-                setPreviewing((current) => !current);
+                setSection(id);
                 setError("");
               }}
             >
-              {previewing ? (
-                <ArrowLeft size={17} aria-hidden="true" />
-              ) : (
-                <Eye size={17} aria-hidden="true" />
-              )}
-              {previewing ? "Back to editing" : "Preview lesson"}
+              <span>{number}</span>
+              {label}
             </button>
+          ))}
+        </nav>
+        <form
+          id={formId}
+          noValidate
+          className="teacher-editor-form lesson-authoring-form"
+          onSubmit={submit}
+        >
+          <section
+            hidden={section !== "details"}
+            className="lesson-editor-group"
+            aria-labelledby="lesson-details-heading"
+          >
+            <div>
+              <p className="eyebrow">01 · Lesson details</p>
+              <h3 id="lesson-details-heading">
+                Give the lesson a clear purpose
+              </h3>
+            </div>
+            <label className="field">
+              Lesson title{" "}
+              <InputField
+                autoFocus
+                required
+                maxLength={100}
+                value={content.title}
+                onChange={(event) => update("title", event.target.value)}
+                placeholder="Give your lesson a clear title"
+              />
+            </label>
+            <label className="field">
+              Scripture reference{" "}
+              <InputField
+                maxLength={100}
+                value={content.scripture}
+                onChange={(event) => update("scripture", event.target.value)}
+                placeholder="For example, Luke 10:25–37"
+              />
+            </label>
+            <label className="field">
+              What will learners learn?{" "}
+              <TextAreaField
+                rows={3}
+                maxLength={1206}
+                value={outcomesText}
+                onChange={(event) => {
+                  setOutcomesText(event.target.value);
+                  update("outcomes", event.target.value.split("\n"));
+                }}
+                placeholder={
+                  "Recognise compassion in everyday situations\nChoose one practical way to help a neighbour"
+                }
+              />
+              <span className="muted teacher-form-note">
+                Optional · One outcome per line, up to six. Maximum 200
+                characters each.
+              </span>
+            </label>
+            <LessonImageField
+              image={content.image}
+              onChange={(image) => update("image", image)}
+              onBusyChange={setImageBusy}
+            />
+          </section>
+          <div hidden={section !== "reading"}>
+            <LessonSectionsEditor
+              sections={content.sections}
+              onChange={(sections) => update("sections", sections)}
+            />
           </div>
-          {previewing ? (
-            <LessonContentPreview content={content} />
-          ) : (
-            <form
-              className="teacher-editor-form lesson-authoring-form"
-              onSubmit={submit}
+          <section
+            hidden={section !== "reflection"}
+            className="lesson-editor-group lesson-reflection-editor"
+            aria-labelledby="lesson-reflection-heading"
+          >
+            <div>
+              <p className="eyebrow">03 · Reflection</p>
+              <h3 id="lesson-reflection-heading">
+                Bring it into everyday life
+              </h3>
+            </div>
+            <label className="field">
+              Reflection question
+              <TextAreaField
+                rows={3}
+                maxLength={500}
+                value={content.reflection}
+                onChange={(event) => update("reflection", event.target.value)}
+                placeholder="What could this look like in your week?"
+              />
+            </label>
+          </section>
+          <div hidden={section !== "quiz"}>
+            <QuizBuilder
+              questions={content.quiz ?? []}
+              onChange={(questions) => update("quiz", questions)}
+            />
+          </div>
+          {error && (
+            <p
+              ref={errorRef}
+              tabIndex={-1}
+              className="teacher-form-error"
+              role="alert"
             >
-              <section
-                className="lesson-editor-group"
-                aria-labelledby="lesson-details-heading"
-              >
-                <div>
-                  <p className="eyebrow">01 · Lesson details</p>
-                  <h3 id="lesson-details-heading">
-                    Give the lesson a clear purpose
-                  </h3>
-                </div>
-                <label className="field">
-                  Lesson title{" "}
-                  <InputField
-                    autoFocus
-                    required
-                    maxLength={100}
-                    value={content.title}
-                    onChange={(event) => update("title", event.target.value)}
-                    placeholder="Give your lesson a clear title"
-                  />
-                </label>
-                <label className="field">
-                  Scripture reference{" "}
-                  <InputField
-                    maxLength={100}
-                    value={content.scripture}
-                    onChange={(event) =>
-                      update("scripture", event.target.value)
-                    }
-                    placeholder="For example, Luke 10:25–37"
-                  />
-                </label>
-                <label className="field">
-                  What will learners learn?{" "}
-                  <TextAreaField
-                    rows={3}
-                    maxLength={1206}
-                    value={outcomesText}
-                    onChange={(event) => {
-                      setOutcomesText(event.target.value);
-                      update("outcomes", event.target.value.split("\n"));
-                    }}
-                    placeholder={
-                      "Recognise compassion in everyday situations\nChoose one practical way to help a neighbour"
-                    }
-                  />
-                  <span className="muted teacher-form-note">
-                    Optional · One outcome per line, up to six. Maximum 200
-                    characters each.
-                  </span>
-                </label>
-                <LessonImageField
-                  image={content.image}
-                  onChange={(image) => update("image", image)}
-                  onBusyChange={setImageBusy}
-                />
-              </section>
-              <LessonSectionsEditor
-                sections={content.sections}
-                onChange={(sections) => update("sections", sections)}
-              />
-              <section
-                className="lesson-editor-group lesson-reflection-editor"
-                aria-labelledby="lesson-reflection-heading"
-              >
-                <div>
-                  <p className="eyebrow">03 · Reflection</p>
-                  <h3 id="lesson-reflection-heading">
-                    Bring it into everyday life
-                  </h3>
-                </div>
-                <label className="field">
-                  Reflection question
-                  <TextAreaField
-                    rows={3}
-                    maxLength={500}
-                    value={content.reflection}
-                    onChange={(event) =>
-                      update("reflection", event.target.value)
-                    }
-                    placeholder="What could this look like in your week?"
-                  />
-                </label>
-              </section>
-              <QuizBuilder
-                questions={content.quiz ?? []}
-                onChange={(questions) => update("quiz", questions)}
-              />
-              {error && (
-                <p
-                  ref={errorRef}
-                  tabIndex={-1}
-                  className="teacher-form-error"
-                  role="alert"
-                >
-                  {error}
-                </p>
-              )}
-              <p className="muted teacher-form-note">
-                Save your changes, then open Publication from the Lessons list
-                to review and simulate a version.
-              </p>
-              <div className="dialog-actions">
-                <Dialog.Close className="button button-outline" type="button">
-                  Cancel
-                </Dialog.Close>
-                <button
-                  className="button button-primary"
-                  type="submit"
-                  disabled={imageBusy}
-                >
-                  {destination ? "Save and add to module" : "Save lesson draft"}
-                </button>
-              </div>
-            </form>
+              {error}
+            </p>
           )}
-        </Dialog.Content>
-      </Dialog.Portal>
-    </Dialog.Root>
+        </form>
+      </div>
+    </section>
   );
 }

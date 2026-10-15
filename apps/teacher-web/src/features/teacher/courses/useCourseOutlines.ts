@@ -12,10 +12,15 @@ export interface CourseOutline {
   example?: boolean;
   title: string;
   summary: string;
+  audience?: string;
+  outcomes?: string[];
   modules: CourseModule[];
 }
 
-export type CourseDetails = Pick<CourseOutline, "title" | "summary">;
+export type CourseDetails = Pick<
+  CourseOutline,
+  "title" | "summary" | "audience" | "outcomes"
+>;
 export type MoveDirection = -1 | 1;
 
 function move<T>(items: T[], index: number, direction: MoveDirection): T[] {
@@ -54,21 +59,36 @@ export function useCourseOutlines() {
     }));
   }
 
+  function createCourse(details: CourseDetails): string | null {
+    if (!details.title.trim()) return null;
+    const courseId = `course-${nextId.current++}`;
+    setCourses((current) => [
+      ...current,
+      {
+        id: courseId,
+        title: details.title.trim(),
+        summary: details.summary.trim(),
+        audience: details.audience?.trim(),
+        outcomes: details.outcomes?.map((item) => item.trim()).filter(Boolean),
+        modules: [],
+      },
+    ]);
+    selectCourse(courseId);
+    return courseId;
+  }
+
   function saveCourse(details: CourseDetails, id?: string): boolean {
     if (!details.title.trim()) return false;
     const content = {
       title: details.title.trim(),
       summary: details.summary.trim(),
+      audience: details.audience?.trim(),
+      outcomes: details.outcomes
+        ?.map((outcome) => outcome.trim())
+        .filter(Boolean),
     };
     if (id) updateCourse(id, (course) => ({ ...course, ...content }));
-    else {
-      const courseId = `course-${nextId.current++}`;
-      setCourses((current) => [
-        ...current,
-        { ...content, id: courseId, modules: [] },
-      ]);
-      selectCourse(courseId);
-    }
+    else return Boolean(createCourse(details));
     return true;
   }
 
@@ -120,6 +140,7 @@ export function useCourseOutlines() {
     selectedId,
     selectCourse,
     saveCourse,
+    createCourse,
     addModule,
     renameModule,
     attachLesson,

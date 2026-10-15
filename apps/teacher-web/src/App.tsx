@@ -4,9 +4,12 @@ import TeacherDashboard from "./features/teacher/TeacherDashboard";
 import AdminDashboard from "./features/admin/AdminDashboard";
 
 export function App() {
+  const [studioOpen, setStudioOpen] = useState(false);
   const [workspace, setWorkspace] = useState<"teacher" | "admin">("teacher");
   return (
-    <div className="app-shell">
+    <div
+      className={`app-shell${workspace === "teacher" && studioOpen ? " editorial-shell" : ""}`}
+    >
       <a className="skip-link" href="#workspace">
         Skip to workspace
       </a>
@@ -59,7 +62,7 @@ export function App() {
             hidden={workspace !== "teacher"}
             aria-label="Teacher proposal"
           >
-            <TeacherDashboard />
+            <TeacherDashboard onStudioChange={setStudioOpen} />
           </section>
           <section
             hidden={workspace !== "admin"}

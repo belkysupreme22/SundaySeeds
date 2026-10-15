@@ -1,8 +1,62 @@
-.lesson-authoring-dialog {
-  width: min(820px, calc(100vw - 32px));
+.lesson-editor-studio {
+  display: grid;
+  gap: 20px;
+  min-width: 0;
+}
+.lesson-editor-studio [hidden] {
+  display: none !important;
+}
+.lesson-studio-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--line);
+}
+.lesson-studio-header > div:first-child {
+  flex: 1 1 240px;
+  min-width: 0;
+}
+.lesson-studio-header h2 {
+  margin: 4px 0 8px;
+  overflow-wrap: anywhere;
+}
+.lesson-section-nav {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding-bottom: 4px;
+}
+.lesson-section-nav button {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 14px;
+  min-height: 44px;
+  border: 1px solid #aaa6b1;
+  border-radius: 6px;
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+  cursor: pointer;
+}
+.lesson-section-nav button span {
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+.lesson-section-nav button.is-active {
+  border-color: #49434f;
+  background: var(--lavender);
+  box-shadow: 2px 2px 0 #49434f;
+}
+.lesson-section-nav button:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
 }
 .lesson-authoring-form {
-  margin-top: 22px;
+  margin-top: 18px;
 }
 .lesson-editor-group {
   display: grid;
@@ -106,7 +160,7 @@
   font: inherit;
   font-size: 0.82rem;
 }
-.lesson-authoring-dialog .badge {
+.lesson-editor-studio .badge {
   white-space: normal;
 }
 @media (max-width: 620px) {
@@ -119,7 +173,13 @@
   .lesson-editor-heading > .button {
     width: 100%;
   }
-  .lesson-authoring-dialog .dialog-actions {
-    flex-wrap: wrap;
+  .lesson-studio-header > .lesson-editor-actions {
+    width: 100%;
+  }
+  .lesson-studio-header > .lesson-editor-actions > .button {
+    flex: 1 1 160px;
+  }
+  .lesson-section-nav button {
+    flex: 1 1 calc(50% - 8px);
   }
 }
