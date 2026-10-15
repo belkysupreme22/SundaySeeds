@@ -73,7 +73,7 @@ export function SettingsScreen() {
         <SettingsRow
           icon="play-circle"
           title="Replay the introduction"
-          description="Take another look around SundaySeeds."
+          description="Look around again and revisit optional name setup."
           onPress={() => router.push('/welcome')}
         />
       </SettingsGroup>
