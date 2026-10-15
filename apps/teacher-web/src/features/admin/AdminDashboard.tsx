@@ -4,14 +4,11 @@ import { ArrowRight, BookOpen, ShieldCheck, Sprout, Users } from "lucide-react";
 import { ChartPreview } from "../../shared/ChartPreview";
 import RoleProposalDialog from "./RoleProposalDialog";
 import "./admin.css";
-
-const peopleFilters = [
-  "Everyone",
-  "Adult learners",
-  "Teachers",
-  "Administrators",
-] as const;
-type PeopleFilter = (typeof peopleFilters)[number];
+import { useAdminDirectory } from "./directory/useAdminDirectory";
+import { PeoplePanel } from "./directory/PeoplePanel";
+import { OrganizationsPanel } from "./directory/OrganizationsPanel";
+import { InvitationsPanel } from "./directory/InvitationsPanel";
+import "./directory/directory.css";
 
 function AdministrationStructure() {
   return (
@@ -44,7 +41,7 @@ function AdministrationStructure() {
 
 export default function AdminDashboard() {
   const [tab, setTab] = useState("overview");
-  const [peopleFilter, setPeopleFilter] = useState<PeopleFilter>("Everyone");
+  const directory = useAdminDirectory();
 
   return (
     <div className="page-stack admin-dashboard">
@@ -69,10 +66,32 @@ export default function AdminDashboard() {
           <Tabs.Trigger className="tab-trigger" value="people">
             People
           </Tabs.Trigger>
+          <Tabs.Trigger className="tab-trigger" value="organizations">
+            Organizations
+          </Tabs.Trigger>
+          <Tabs.Trigger className="tab-trigger" value="invitations">
+            Invitations
+          </Tabs.Trigger>
           <Tabs.Trigger className="tab-trigger" value="access">
             Access &amp; roles
           </Tabs.Trigger>
         </Tabs.List>
+        {["people", "organizations", "invitations"].includes(tab) && (
+          <div className="admin-dir-workspace-note">
+            <p>
+              <strong>Directory simulation.</strong> People, organizations and
+              invitations share example records for this session. No accounts,
+              messages or access grants are created.
+            </p>
+            <button
+              className="button button-outline"
+              type="button"
+              onClick={directory.loadExamples}
+            >
+              Explore example workspace
+            </button>
+          </div>
+        )}
         <Tabs.Content value="overview" className="page-stack admin-tab-content">
           <section className="panel tone-lavender admin-welcome">
             <div>
@@ -160,77 +179,32 @@ export default function AdminDashboard() {
           </div>
           <ChartPreview kind="activity" />
         </Tabs.Content>
-        <Tabs.Content value="people" className="page-stack admin-tab-content">
-          <div className="panel-heading">
-            <div>
-              <h2>People</h2>
-              <p className="muted">The people who learn, teach and support.</p>
-            </div>
-          </div>
-          <div
-            className="admin-people-filters"
-            role="group"
-            aria-label="Filter people by role"
-          >
-            {peopleFilters.map((filter) => (
-              <button
-                key={filter}
-                type="button"
-                className="button button-outline"
-                aria-pressed={peopleFilter === filter}
-                onClick={() => setPeopleFilter(filter)}
-              >
-                {filter}
-              </button>
-            ))}
-          </div>
-          <section className="panel admin-directory">
-            <div className="table-wrap">
-              <table className="data-table">
-                <caption>{peopleFilter} · Directory preview</caption>
-                <thead>
-                  <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Role</th>
-                    <th scope="col">Assigned scope</th>
-                    <th scope="col">Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td colSpan={4}>
-                      <div className="empty-state">
-                        <span className="admin-icon-tile tone-mint">
-                          <Users size={25} aria-hidden="true" />
-                        </span>
-                        <h3 aria-live="polite">
-                          {peopleFilter === "Everyone"
-                            ? "No directory data connected"
-                            : `No ${peopleFilter.toLowerCase()} data connected`}
-                        </h3>
-                        <p className="muted">
-                          People and confirmed roles will appear here. No
-                          accounts or assignments have been loaded.
-                        </p>
-                        <button
-                          type="button"
-                          className="button button-outline"
-                          onClick={() => setTab("access")}
-                        >
-                          Review the access model{" "}
-                          <ArrowRight size={17} aria-hidden="true" />
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </section>
-          <p className="admin-note tone-yellow">
-            Invitations, teacher permissions and account management are still to
-            be defined before this directory becomes operational.
-          </p>
+        <Tabs.Content
+          value="people"
+          forceMount
+          hidden={tab !== "people"}
+          className="page-stack admin-tab-content"
+        >
+          <PeoplePanel model={directory} />
+        </Tabs.Content>
+        <Tabs.Content
+          value="organizations"
+          forceMount
+          hidden={tab !== "organizations"}
+          className="page-stack admin-tab-content"
+        >
+          <OrganizationsPanel model={directory} />
+        </Tabs.Content>
+        <Tabs.Content
+          value="invitations"
+          forceMount
+          hidden={tab !== "invitations"}
+          className="page-stack admin-tab-content"
+        >
+          <InvitationsPanel
+            model={directory}
+            onOpenOrganizations={() => setTab("organizations")}
+          />
         </Tabs.Content>
         <Tabs.Content value="access" className="page-stack admin-tab-content">
           <div className="panel-heading">

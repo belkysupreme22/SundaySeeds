@@ -5,6 +5,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Added
+- Administrator People/Organizations/Invitations workflow with one shared simulated directory, scoped rosters, validated forms, invitation lifecycle and preserved archive/restore states. Opt-in examples update consistently across full-page screens; no accounts, messages or access grants. Owner review pending.
 - Teacher Reports screen with unavailable connected data, opt-in fictional class/course/lesson filters, explicit completion/data-coverage measures, learner detail and lazy Recharts snapshot with exact table values. Recorded zeroes, missing states and unavailable scores stay distinct. No real analytics or backend connection; owner review pending.
 - Optional name setup is now reachable after Get started when replaying the introduction from Settings, so existing users can revisit it without resetting progress. Skip preserves the current name; the owner confirmed this setup/replay flow is working visually on 15 October. Automated/native coverage remains unreported.
 - Teacher class/enrollment screen simulation with class briefs, existing course links, adult roster/invitation states, inline lifecycle confirmations, archive/restore and explicit directory loading/error examples. State survives tabs/studio/workspace switching until refresh; no email, account or access service. Owner review pending.
