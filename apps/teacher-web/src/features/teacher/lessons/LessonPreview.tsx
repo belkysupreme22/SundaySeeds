@@ -2,6 +2,7 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { ArrowLeft, ArrowRight, BookOpen, Lightbulb, X } from "lucide-react";
 import { useRef, useState } from "react";
 import type { LessonContent, LessonDraft } from "./types";
+import { QuizPreview } from "../quizzes/QuizPreview";
 import "./lesson-preview.css";
 
 export function LessonContentPreview({ content }: { content: LessonContent }) {
@@ -134,6 +135,11 @@ export function LessonContentPreview({ content }: { content: LessonContent }) {
             sections in the order you choose.
           </p>
         </section>
+      )}
+      {Boolean(content.quiz?.length) && (
+        <div hidden={Boolean(section) && !isLastSection}>
+          <QuizPreview questions={content.quiz ?? []} />
+        </div>
       )}
     </div>
   );

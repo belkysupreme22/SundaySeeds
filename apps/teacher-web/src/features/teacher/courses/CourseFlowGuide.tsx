@@ -22,7 +22,7 @@ const steps = [
   },
   {
     title: "Lessons",
-    description: "Reading and reflection. Quick knowledge checks are planned.",
+    description: "Reading, reflection and optional quick knowledge checks.",
     example: "Good Samaritan",
     Icon: BookOpen,
   },

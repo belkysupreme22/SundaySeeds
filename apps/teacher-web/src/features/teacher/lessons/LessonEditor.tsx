@@ -5,6 +5,8 @@ import { InputField, TextAreaField } from "../../../shared/ui/InputField";
 import { LessonSectionsEditor } from "./LessonSectionsEditor";
 import { LessonImageField } from "./LessonImageField";
 import { LessonContentPreview } from "./LessonPreview";
+import { QuizBuilder } from "../quizzes/QuizBuilder";
+import { getQuizIssues } from "../quizzes/types";
 import type { LessonContent, LessonDraft } from "./types";
 import "./lesson-authoring.css";
 
@@ -30,6 +32,7 @@ export function LessonEditor({
     sections: draft?.sections ?? [{ id: "reading-1", title: "", body: "" }],
     reflection: draft?.reflection ?? "",
     image: draft?.image,
+    quiz: draft?.quiz ?? [],
   }));
   const [initial] = useState(() => JSON.stringify(content));
   const [outcomesText, setOutcomesText] = useState(content.outcomes.join("\n"));
@@ -87,6 +90,11 @@ export function LessonEditor({
       );
       return;
     }
+    const quizIssues = getQuizIssues(content.quiz ?? []);
+    if (quizIssues.length) {
+      showError(quizIssues[0]);
+      return;
+    }
     onSave({
       ...content,
       title: content.title.trim(),
@@ -98,6 +106,15 @@ export function LessonEditor({
         body: section.body.trim(),
       })),
       reflection: content.reflection.trim(),
+      quiz: (content.quiz ?? []).map((question) => ({
+        ...question,
+        prompt: question.prompt.trim(),
+        options: question.options.map((option) => ({
+          ...option,
+          text: option.text.trim(),
+        })),
+        explanation: question.explanation.trim(),
+      })),
       image: content.image
         ? { ...content.image, alt: content.image.alt.trim() }
         : undefined,
@@ -171,7 +188,7 @@ export function LessonEditor({
             <span className="badge tone-lavender">
               {previewing
                 ? "Learner preview · Unsaved"
-                : "Lesson details → Reading → Reflection"}
+                : "Lesson details → Reading → Reflection → Knowledge check"}
             </span>
             <button
               type="button"
@@ -281,6 +298,10 @@ export function LessonEditor({
                   />
                 </label>
               </section>
+              <QuizBuilder
+                questions={content.quiz ?? []}
+                onChange={(questions) => update("quiz", questions)}
+              />
               {error && (
                 <p
                   ref={errorRef}
@@ -292,7 +313,8 @@ export function LessonEditor({
                 </p>
               )}
               <p className="muted teacher-form-note">
-                Quiz authoring and publishing are next in the plan.
+                Save this draft to keep your changes during this page session.
+                Publishing is the next step in the plan.
               </p>
               <div className="dialog-actions">
                 <Dialog.Close className="button button-outline" type="button">

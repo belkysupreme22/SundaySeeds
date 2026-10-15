@@ -16,6 +16,12 @@ Use `npm run android` with an Android emulator or device ready. A web preview is
 
 ## Work in reviewable increments
 
+### Automatic quiz authoring — LMS-T3 (2026-10-15)
+
+The owner confirmed LMS-T2 visuals and authorized the next task. Reference-08 was inspected for question/option/feedback/navigation styling. The optional quiz builder supports question/answer ordering, one correct answer, explanatory feedback and confirmed question removal. Stable option IDs preserve correctness when reordered; removing the correct option clears the key. Empty quiz is valid; incomplete/blank/duplicate answers, missing keys or explanations block saving and preview attempts. Prototype limits are ten questions and two–four options. Existing sample readings now include explicit sample quizzes. The learner preview offers Check answer, retained per-question choices, final attempt counts, review and fresh retry. Results are computed from checked answers only and remain page state. No marking queue, passing threshold, timer, remote publication, attempt persistence or mobile progress changes.
+
+Owner checks: load the example course and edit/preview The Good Samaritan; reorder questions/options and verify answer identity; remove a correct option and choose another; try whitespace/duplicate answers and missing explanations; cancel/discard/reopen/save. Complete both right and wrong checks, verify answer/explanation and choice locking, Previous/Next retention, final score only after all checks, Review answers and Try again clearing the attempt. Verify empty/incomplete quiz states, edits resetting preview answers, question bounds, keyboard/live feedback, 360px layouts and 150%/200% text. New dependency files were created before integration to avoid the previous missing-import overlay. Only scoped source formatting and whitespace checks are performed; owner tests/typecheck/build/runtime/native checks remain pending. Next task LMS-T4 is publication UI with explicit simulation until services exist.
+
 ### Structured lesson authoring — LMS-T2 (2026-10-15)
 
 During implementation the owner reported Vite failing to resolve `./LessonImageField` because the editor was integrated before that delegated file existed. The lead added and formatted the missing component, including file validation, decode/read failure handling, cancellation and stale-read protection. Source resolution is corrected; owner confirmation of Vite recovery remains pending. Future parallel work must land dependencies before wiring them into the live dashboard.

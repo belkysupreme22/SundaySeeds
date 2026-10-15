@@ -1,9 +1,11 @@
 import type { LessonDraft } from "../DraftEditor";
 import type { CourseOutline } from "./useCourseOutlines";
+import { exampleQuizzes } from "../quizzes/exampleQuizzes";
 
 export const exampleCourseLessons: LessonDraft[] = [
   {
     id: "sample-course-neighbour",
+    quiz: exampleQuizzes["sample-course-neighbour"],
     example: true,
     title: "The Good Samaritan",
     scripture: "Luke 10:25–37",
@@ -27,6 +29,7 @@ export const exampleCourseLessons: LessonDraft[] = [
   },
   {
     id: "sample-course-forgiveness",
+    quiz: exampleQuizzes["sample-course-forgiveness"],
     example: true,
     title: "Practising forgiveness",
     scripture: "Colossians 3:12–14",
@@ -50,6 +53,7 @@ export const exampleCourseLessons: LessonDraft[] = [
   },
   {
     id: "sample-course-prayer",
+    quiz: exampleQuizzes["sample-course-prayer"],
     example: true,
     title: "A daily rhythm of prayer",
     scripture: "Philippians 4:6–7",

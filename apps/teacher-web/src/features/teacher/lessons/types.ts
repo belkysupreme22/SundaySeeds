@@ -1,3 +1,5 @@
+import type { QuizQuestion } from "../quizzes/types";
+
 export interface LessonSection {
   id: string;
   title: string;
@@ -17,6 +19,7 @@ export interface LessonContent {
   sections: LessonSection[];
   reflection: string;
   image?: LessonImage;
+  quiz?: QuizQuestion[];
 }
 
 export interface LessonDraft extends LessonContent {
