@@ -5,6 +5,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Added
+- Mobile Welcome reference-01 refinement: larger imagery, paired pastel stickers, actionable feature cards, circular page indicators and responsive navigation. Existing completion preference, replay and recovery are preserved; owner runtime/visual review is pending.
 - Full-page teacher editorial studio: course briefs, persistent curriculum outline, focused lesson/quiz writing, previews, saved-draft duplication, draft course review and inline simulated-publication history. Explicit saves and unsaved-navigation confirmation; no backend connection. Classes/enrollment follow studio feedback.
 - Lesson publication review with readiness checks, draft/version previews, fixed simulated snapshots, next drafts and confirmed withdraw/archive/restore actions. Lesson cards show simulated lifecycle status; course links and history remain intact. State resets on refresh; no learner delivery or backend publication. Owner review remains pending.
 - Optional teacher quiz authoring with ordered questions/options, one correct answer, explanations and validation. Added immediate learner answer feedback, attempt results, review/retry and sample course quizzes. Attempts remain temporary; no backend or publication service. Owner review of this workflow is pending.

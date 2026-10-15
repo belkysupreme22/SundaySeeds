@@ -8,6 +8,8 @@ type WelcomeSlide = {
   image: ImageSourcePropType;
   icon: IconName;
   accent: Pastel;
+  companionIcon: IconName;
+  companionAccent: Pastel;
   featureTitle: string;
   featureDescription: string;
 };
@@ -20,6 +22,8 @@ export const welcomeSlides: WelcomeSlide[] = [
     image: require('../../../../assets/legacy/onboarding_learn.png'),
     icon: 'book-open',
     accent: 'yellow',
+    companionIcon: 'sun',
+    companionAccent: 'mint',
     featureTitle: 'A little learning, anytime',
     featureDescription: 'Short lessons that fit into your day, at your own pace.',
   },
@@ -30,6 +34,8 @@ export const welcomeSlides: WelcomeSlide[] = [
     image: require('../../../../assets/legacy/onboarding_experts.png'),
     icon: 'heart',
     accent: 'mint',
+    companionIcon: 'book-open',
+    companionAccent: 'yellow',
     featureTitle: 'Small lessons. Everyday kindness.',
     featureDescription: 'Memory verses and gentle questions help the message stay with you.',
   },
@@ -40,6 +46,8 @@ export const welcomeSlides: WelcomeSlide[] = [
     image: require('../../../../assets/legacy/home_banner_user.png'),
     icon: 'sun',
     accent: 'pink',
+    companionIcon: 'bookmark',
+    companionAccent: 'yellow',
     featureTitle: 'Your own learning journey',
     featureDescription: 'Your reading progress and best quiz scores, all in one place.',
   },
