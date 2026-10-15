@@ -17,6 +17,7 @@ import { useLessonPublications } from "./publication/useLessonPublications";
 import { EditorialStudio } from "./studio/EditorialStudio";
 import { CourseLibrary } from "./studio/CourseLibrary";
 import type { StudioEntry } from "./studio/types";
+import { ClassesPanel } from "./classes/ClassesPanel";
 import "./teacher.css";
 
 type TeacherTab = "overview" | "courses" | "lessons" | "classes";
@@ -86,21 +87,20 @@ export default function TeacherDashboard({
       setStudio({ mode: "publish", lessonId: draft.id }),
     getPublication: publications.get,
   };
-  if (studio)
-    return (
-      <EditorialStudio
-        entry={studio}
-        model={courses}
-        drafts={drafts}
-        publications={publications}
-        onSave={saveDraft}
-        onTryExample={tryExample}
-        onClose={() => {
-          setStudio(null);
-          requestAnimationFrame(() => headingRef.current?.focus());
-        }}
-      />
-    );
+  const studioCanvas = studio ? (
+    <EditorialStudio
+      entry={studio}
+      model={courses}
+      drafts={drafts}
+      publications={publications}
+      onSave={saveDraft}
+      onTryExample={tryExample}
+      onClose={() => {
+        setStudio(null);
+        requestAnimationFrame(() => headingRef.current?.focus());
+      }}
+    />
+  ) : null;
   const library = (
     <CourseLibrary
       courses={courses.courses}
@@ -110,173 +110,170 @@ export default function TeacherDashboard({
     />
   );
   return (
-    <div className="page-stack teacher-dashboard">
-      <header className="page-heading">
-        <div>
-          <p className="eyebrow">Teacher space · Editorial desk</p>
-          <h1 ref={headingRef} tabIndex={-1}>
-            {tab === "overview"
-              ? "Make room for meaningful learning."
-              : tab === "courses"
-                ? "Your courses"
-                : tab === "lessons"
-                  ? "Your lesson library"
-                  : "Your classes"}
-          </h1>
-          <p className="muted">
-            Shape a course from its first idea to its final knowledge check.
-          </p>
-        </div>
-        <button
-          className="button button-primary"
-          onClick={() =>
-            setStudio({
-              mode: "course",
-              courseId: courses.selectedId ?? courses.courses[0]?.id,
-            })
-          }
+    <>
+      {studioCanvas}
+      <div hidden={studio !== null} className="page-stack teacher-dashboard">
+        <header className="page-heading">
+          <div>
+            <p className="eyebrow">Teacher space · Editorial desk</p>
+            <h1 ref={headingRef} tabIndex={-1}>
+              {tab === "overview"
+                ? "Make room for meaningful learning."
+                : tab === "courses"
+                  ? "Your courses"
+                  : tab === "lessons"
+                    ? "Your lesson library"
+                    : "Your classes"}
+            </h1>
+            <p className="muted">
+              Shape a course from its first idea to its final knowledge check.
+            </p>
+          </div>
+          <button
+            className="button button-primary"
+            onClick={() =>
+              setStudio({
+                mode: "course",
+                courseId: courses.selectedId ?? courses.courses[0]?.id,
+              })
+            }
+          >
+            <BookOpen size={19} aria-hidden="true" />
+            Open editorial studio
+          </button>
+        </header>
+        <Tabs.Root
+          className="section-tabs"
+          value={tab}
+          onValueChange={(value) => setTab(value as TeacherTab)}
         >
-          <BookOpen size={19} aria-hidden="true" />
-          Open editorial studio
-        </button>
-      </header>
-      <Tabs.Root
-        className="section-tabs"
-        value={tab}
-        onValueChange={(value) => setTab(value as TeacherTab)}
-      >
-        <Tabs.List className="tab-list" aria-label="Teacher sections">
-          {(
-            [
-              { id: "overview", label: "Editorial desk", Icon: Home },
-              { id: "courses", label: "Courses", Icon: Layers },
-              { id: "lessons", label: "Lesson library", Icon: BookOpen },
-              { id: "classes", label: "Classes", Icon: Users },
-            ] as const
-          ).map(({ id, label, Icon }) => (
-            <Tabs.Trigger className="tab-trigger" value={id} key={id}>
-              <Icon size={17} aria-hidden="true" />
-              {label}
-            </Tabs.Trigger>
-          ))}
-        </Tabs.List>
-        <Tabs.Content
-          value="overview"
-          className="page-stack teacher-tab-content"
-        >
-          <section className="panel tone-lavender teacher-hero">
-            <div>
-              <p className="eyebrow">Plan · Write · Refine</p>
-              <h2>From a thoughtful idea to a complete course.</h2>
-              <p>
-                Set the direction, organize your modules and give each lesson
-                the space it deserves.
-              </p>
-              <div className="studio-toolbar">
+          <Tabs.List className="tab-list" aria-label="Teacher sections">
+            {(
+              [
+                { id: "overview", label: "Editorial desk", Icon: Home },
+                { id: "courses", label: "Courses", Icon: Layers },
+                { id: "lessons", label: "Lesson library", Icon: BookOpen },
+                { id: "classes", label: "Classes", Icon: Users },
+              ] as const
+            ).map(({ id, label, Icon }) => (
+              <Tabs.Trigger className="tab-trigger" value={id} key={id}>
+                <Icon size={17} aria-hidden="true" />
+                {label}
+              </Tabs.Trigger>
+            ))}
+          </Tabs.List>
+          <Tabs.Content
+            value="overview"
+            className="page-stack teacher-tab-content"
+          >
+            <section className="panel tone-lavender teacher-hero">
+              <div>
+                <p className="eyebrow">Plan · Write · Refine</p>
+                <h2>From a thoughtful idea to a complete course.</h2>
+                <p>
+                  Set the direction, organize your modules and give each lesson
+                  the space it deserves.
+                </p>
+                <div className="studio-toolbar">
+                  <button
+                    className="button button-primary"
+                    onClick={createCourse}
+                  >
+                    <Plus size={18} aria-hidden="true" />
+                    Start a course
+                  </button>
+                  <button
+                    className="button button-outline"
+                    onClick={openExample}
+                  >
+                    Explore example course
+                    <ArrowRight size={18} aria-hidden="true" />
+                  </button>
+                </div>
+              </div>
+              <div className="teacher-book-art" aria-hidden="true">
+                <Sprout size={25} />
+                <BookOpen size={62} strokeWidth={1.25} />
+                <span>GROW TOGETHER</span>
+              </div>
+            </section>
+            <section aria-labelledby="editorial-glance">
+              <h2 id="editorial-glance" className="teacher-section-title">
+                On your editorial desk
+              </h2>
+              <div className="three-col">
+                {[
+                  {
+                    label: "Course drafts",
+                    value: courses.courses.length,
+                    tone: "mint",
+                  },
+                  {
+                    label: "Lesson drafts",
+                    value: drafts.length,
+                    tone: "yellow",
+                  },
+                  {
+                    label: "Knowledge-check questions",
+                    value: drafts.reduce(
+                      (sum, draft) => sum + (draft.quiz?.length ?? 0),
+                      0,
+                    ),
+                    tone: "peach",
+                  },
+                ].map((item) => (
+                  <article
+                    className={`stat-tile tone-${item.tone}`}
+                    key={item.label}
+                  >
+                    <h3>{item.label}</h3>
+                    <strong className="teacher-stat-value">{item.value}</strong>
+                    <p className="muted">In your current workspace</p>
+                  </article>
+                ))}
+              </div>
+            </section>
+            {library}
+            <section>
+              <div className="panel-heading">
+                <h2>Recent lesson drafts</h2>
                 <button
-                  className="button button-primary"
-                  onClick={createCourse}
+                  className="button button-outline"
+                  onClick={() => setTab("lessons")}
                 >
-                  <Plus size={18} aria-hidden="true" />
-                  Start a course
-                </button>
-                <button className="button button-outline" onClick={openExample}>
-                  Explore example course
-                  <ArrowRight size={18} aria-hidden="true" />
+                  View library
+                  <ArrowRight size={16} aria-hidden="true" />
                 </button>
               </div>
-            </div>
-            <div className="teacher-book-art" aria-hidden="true">
-              <Sprout size={25} />
-              <BookOpen size={62} strokeWidth={1.25} />
-              <span>GROW TOGETHER</span>
-            </div>
-          </section>
-          <section aria-labelledby="editorial-glance">
-            <h2 id="editorial-glance" className="teacher-section-title">
-              On your editorial desk
-            </h2>
-            <div className="three-col">
-              {[
-                {
-                  label: "Course drafts",
-                  value: courses.courses.length,
-                  tone: "mint",
-                },
-                {
-                  label: "Lesson drafts",
-                  value: drafts.length,
-                  tone: "yellow",
-                },
-                {
-                  label: "Knowledge-check questions",
-                  value: drafts.reduce(
-                    (sum, draft) => sum + (draft.quiz?.length ?? 0),
-                    0,
-                  ),
-                  tone: "peach",
-                },
-              ].map((item) => (
-                <article
-                  className={`stat-tile tone-${item.tone}`}
-                  key={item.label}
-                >
-                  <h3>{item.label}</h3>
-                  <strong className="teacher-stat-value">{item.value}</strong>
-                  <p className="muted">In your current workspace</p>
-                </article>
-              ))}
-            </div>
-          </section>
-          {library}
-          <section>
-            <div className="panel-heading">
-              <h2>Recent lesson drafts</h2>
-              <button
-                className="button button-outline"
-                onClick={() => setTab("lessons")}
-              >
-                View library
-                <ArrowRight size={16} aria-hidden="true" />
-              </button>
-            </div>
-            <LessonDraftList drafts={drafts.slice(0, 3)} {...listActions} />
-          </section>
-        </Tabs.Content>
-        <Tabs.Content
-          value="courses"
-          className="page-stack teacher-tab-content"
-        >
-          {library}
-        </Tabs.Content>
-        <Tabs.Content
-          value="lessons"
-          className="page-stack teacher-tab-content"
-        >
-          <LessonDraftList drafts={drafts} {...listActions} />
-          <button className="button button-outline" onClick={openExample}>
-            Explore the sample course
-            <ArrowRight size={17} aria-hidden="true" />
-          </button>
-        </Tabs.Content>
-        <Tabs.Content
-          value="classes"
-          className="page-stack teacher-tab-content"
-        >
-          <section className="panel empty-state teacher-empty">
-            <Users size={28} aria-hidden="true" />
-            <h2>Your classes will appear here</h2>
-            <p className="muted">
-              Class and enrollment prototypes follow the editorial studio.
-              Learner access and completion need a connected teaching service.
-            </p>
-            <button className="button button-primary" onClick={createCourse}>
-              Prepare a course
-              <ArrowRight size={18} aria-hidden="true" />
+              <LessonDraftList drafts={drafts.slice(0, 3)} {...listActions} />
+            </section>
+          </Tabs.Content>
+          <Tabs.Content
+            value="courses"
+            className="page-stack teacher-tab-content"
+          >
+            {library}
+          </Tabs.Content>
+          <Tabs.Content
+            value="lessons"
+            className="page-stack teacher-tab-content"
+          >
+            <LessonDraftList drafts={drafts} {...listActions} />
+            <button className="button button-outline" onClick={openExample}>
+              Explore the sample course
+              <ArrowRight size={17} aria-hidden="true" />
             </button>
-          </section>
-        </Tabs.Content>
-      </Tabs.Root>
-    </div>
+          </Tabs.Content>
+          <Tabs.Content
+            value="classes"
+            forceMount
+            hidden={tab !== "classes"}
+            className="page-stack teacher-tab-content"
+          >
+            <ClassesPanel courses={courses.courses} onOpenCourse={openCourse} />
+          </Tabs.Content>
+        </Tabs.Root>
+      </div>
+    </>
   );
 }
