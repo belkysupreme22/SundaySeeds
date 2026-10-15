@@ -313,8 +313,8 @@ export function LessonEditor({
                 </p>
               )}
               <p className="muted teacher-form-note">
-                Save this draft to keep your changes during this page session.
-                Publishing is the next step in the plan.
+                Save your changes, then open Publication from the Lessons list
+                to review and simulate a version.
               </p>
               <div className="dialog-actions">
                 <Dialog.Close className="button button-outline" type="button">

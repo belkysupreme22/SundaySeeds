@@ -107,6 +107,7 @@
 }
 .teacher-draft {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 14px;
   padding: 18px;
@@ -129,6 +130,7 @@
   margin-top: 8px;
 }
 .teacher-draft-actions {
+  flex-wrap: wrap;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -280,7 +282,7 @@
   }
   .teacher-draft-actions {
     width: 100%;
-    padding-left: 62px;
+    padding-left: 0;
   }
   .teacher-example {
     flex-wrap: wrap;

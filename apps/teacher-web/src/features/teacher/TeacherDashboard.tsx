@@ -3,8 +3,6 @@ import {
   ArrowRight,
   BookOpen,
   CheckCircle2,
-  Eye,
-  FilePenLine,
   Home,
   Layers,
   Plus,
@@ -17,6 +15,9 @@ import { DraftEditor, LessonPreview, type LessonDraft } from "./DraftEditor";
 import { CoursesPanel } from "./courses/CoursesPanel";
 import { useCourseOutlines } from "./courses/useCourseOutlines";
 import { exampleCourseLessons } from "./courses/exampleCourse";
+import { LessonDraftList } from "./lessons/LessonDraftList";
+import { useLessonPublications } from "./publication/useLessonPublications";
+import { PublicationDialog } from "./publication/PublicationDialog";
 import "./teacher.css";
 
 type TeacherTab = "overview" | "courses" | "lessons" | "classes";
@@ -44,75 +45,13 @@ const exampleLesson: LessonDraft = {
   reflection: "What might it mean to be a neighbour to someone this week?",
 };
 
-interface DraftListProps {
-  drafts: LessonDraft[];
-  onCreate: (trigger: HTMLButtonElement) => void;
-  onEdit: (draft: LessonDraft, trigger: HTMLButtonElement) => void;
-  onPreview: (draft: LessonDraft, trigger: HTMLButtonElement) => void;
-}
-
-function DraftList({ drafts, onCreate, onEdit, onPreview }: DraftListProps) {
-  if (!drafts.length) {
-    return (
-      <div className="panel empty-state teacher-empty">
-        <span className="teacher-icon-tile tone-mint">
-          <BookOpen aria-hidden="true" size={25} />
-        </span>
-        <h3>Your first lesson starts here</h3>
-        <p className="muted">
-          Bring a passage, an idea and a little curiosity. Your drafts will
-          appear here.
-        </p>
-        <button
-          className="button button-outline"
-          onClick={(event) => onCreate(event.currentTarget)}
-        >
-          Create a lesson
-        </button>
-      </div>
-    );
-  }
-  return (
-    <div className="teacher-draft-list">
-      {drafts.map((draft) => (
-        <article className="panel teacher-draft" key={draft.id}>
-          <span className="teacher-icon-tile tone-lavender">
-            <BookOpen size={23} aria-hidden="true" />
-          </span>
-          <div className="teacher-draft-copy">
-            <h3>{draft.title}</h3>
-            <p className="muted">{draft.scripture || "Scripture not added"}</p>
-            <span className="badge">
-              {draft.example ? "Example draft" : "Draft"}
-            </span>
-          </div>
-          <div className="teacher-draft-actions">
-            <button
-              className="button button-outline"
-              aria-label={`Preview ${draft.title}`}
-              onClick={(event) => onPreview(draft, event.currentTarget)}
-            >
-              <Eye size={17} aria-hidden="true" />
-              Preview
-            </button>
-            <button
-              className="icon-button"
-              aria-label={`Edit ${draft.title}`}
-              onClick={(event) => onEdit(draft, event.currentTarget)}
-            >
-              <FilePenLine size={19} aria-hidden="true" />
-            </button>
-          </div>
-        </article>
-      ))}
-    </div>
-  );
-}
-
 export default function TeacherDashboard() {
   const [tab, setTab] = useState<TeacherTab>("overview");
   const [drafts, setDrafts] = useState<LessonDraft[]>([]);
   const courseOutlines = useCourseOutlines();
+  const publications = useLessonPublications();
+  const [publicationId, setPublicationId] = useState<string | null>(null);
+  const publicationDraft = drafts.find((draft) => draft.id === publicationId);
   const [editor, setEditor] = useState<{
     draft: LessonDraft | null;
     courseId?: string;
@@ -124,6 +63,7 @@ export default function TeacherDashboard() {
   } | null>(null);
   const [status, setStatus] = useState("");
   const openerRef = useRef<HTMLButtonElement | null>(null);
+  const openingPublicationEditor = useRef(false);
   const nextId = useRef(1);
 
   function createDraft(trigger: HTMLButtonElement) {
@@ -132,6 +72,12 @@ export default function TeacherDashboard() {
     setEditor({ draft: null });
   }
   function editDraft(draft: LessonDraft, trigger: HTMLButtonElement) {
+    if (publications.get(draft.id).archived) {
+      setStatus(
+        "Restore this lesson from its Publication screen before editing.",
+      );
+      return;
+    }
     openerRef.current = trigger;
     setStatus("");
     setEditor({ draft });
@@ -165,6 +111,11 @@ export default function TeacherDashboard() {
   function restoreFocus() {
     openerRef.current?.focus();
   }
+  function reviewPublication(draft: LessonDraft, trigger: HTMLButtonElement) {
+    openingPublicationEditor.current = false;
+    openerRef.current = trigger;
+    setPublicationId(draft.id);
+  }
   function saveDraft(content: Omit<LessonDraft, "id">) {
     const existingId = editor?.draft?.id;
     const draft = {
@@ -177,6 +128,7 @@ export default function TeacherDashboard() {
         ? current.map((item) => (item.id === existingId ? draft : item))
         : [draft, ...current],
     );
+    publications.edit(draft.id);
     if (editor?.courseId && editor.moduleId) {
       courseOutlines.attachLesson(editor.courseId, editor.moduleId, draft.id);
     }
@@ -202,6 +154,8 @@ export default function TeacherDashboard() {
     onCreate: createDraft,
     onEdit: editDraft,
     onPreview: previewDraft,
+    onReview: reviewPublication,
+    getPublication: publications.get,
   };
 
   return (
@@ -334,7 +288,7 @@ export default function TeacherDashboard() {
                   <ArrowRight size={16} aria-hidden="true" />
                 </button>
               </div>
-              <DraftList drafts={drafts.slice(0, 3)} {...listActions} />
+              <LessonDraftList drafts={drafts.slice(0, 3)} {...listActions} />
             </section>
             <section className="panel teacher-preparation">
               <h2>From an idea to a lesson</h2>
@@ -392,9 +346,9 @@ export default function TeacherDashboard() {
               <h2>
                 Drafts <span className="muted">{drafts.length}</span>
               </h2>
-              <span className="muted">Not published</span>
+              <span className="muted">Publication is simulated</span>
             </div>
-            <DraftList drafts={drafts} {...listActions} />
+            <LessonDraftList drafts={drafts} {...listActions} />
           </section>
           <section className="panel teacher-example">
             <span className="teacher-icon-tile tone-yellow">
@@ -471,6 +425,25 @@ export default function TeacherDashboard() {
           example={preview.example}
           onClose={() => setPreview(null)}
           restoreFocus={restoreFocus}
+        />
+      )}
+      {publicationDraft && (
+        <PublicationDialog
+          draft={publicationDraft}
+          record={publications.get(publicationDraft.id)}
+          onPublish={() => publications.publish(publicationDraft)}
+          onWithdraw={() => publications.withdraw(publicationDraft.id)}
+          onArchive={() => publications.archive(publicationDraft.id)}
+          onRestore={() => publications.restore(publicationDraft.id)}
+          onEdit={() => {
+            openingPublicationEditor.current = true;
+            setPublicationId(null);
+            setEditor({ draft: publicationDraft });
+          }}
+          onClose={() => setPublicationId(null)}
+          restoreFocus={() => {
+            if (!openingPublicationEditor.current) restoreFocus();
+          }}
         />
       )}
     </div>

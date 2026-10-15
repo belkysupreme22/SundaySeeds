@@ -5,6 +5,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Added
+- Lesson publication review with readiness checks, draft/version previews, fixed simulated snapshots, next drafts and confirmed withdraw/archive/restore actions. Lesson cards show simulated lifecycle status; course links and history remain intact. State resets on refresh; no learner delivery or backend publication. Owner review remains pending.
 - Optional teacher quiz authoring with ordered questions/options, one correct answer, explanations and validation. Added immediate learner answer feedback, attempt results, review/retry and sample course quizzes. Attempts remain temporary; no backend or publication service. Owner review of this workflow is pending.
 - Structured teacher lesson authoring with learning outcomes, ordered reading sections, reflection, unsaved learner preview and discard confirmation. Linked lessons can be edited from course modules. Added optional temporary cover images with alt text and clear/replace controls; samples demonstrate two-section readings. Owner confirmed these visuals on 15 October; automated/native checks remain unreported.
 - Teacher Courses screen with editable course details, ordered modules and existing lesson-draft attachment, ordering, preview and unlinking. Confirmed course/module removal preserves drafts. Temporary outlines survive tab/workspace switching and reset on refresh; no publishing or backend connection. New workflow review remains pending.
