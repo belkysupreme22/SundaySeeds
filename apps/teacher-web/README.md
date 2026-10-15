@@ -1,6 +1,6 @@
 # SundaySeeds dashboard
 
-React + TypeScript screen prototypes for teacher and system administration. Built with Vite, selected Radix primitives, Lucide icons and on-demand Recharts examples. Shared styles adapt learner references 05/07/12; the owner has not yet accepted these dashboard layouts.
+React + TypeScript screen prototypes for teacher and system administration. Built with Vite, selected Radix primitives, Lucide icons and on-demand Recharts examples. Shared styles adapt learner references 05/07/12; the owner approved the dashboard design direction. Added workflows still need owner review.
 
 ## Owner setup and review
 
@@ -16,7 +16,9 @@ The first install creates `package-lock.json`; review and commit it. Subsequent 
 
 ## Review flows
 
-- Teacher: Overview / Lessons / Classes, create a lesson, edit the draft and preview the learner reading/reflection. Title and reading are required. Drafts persist only while the page stays open; switching dashboard workspaces retains mounted state, refresh clears it.
+- Teacher: Overview / Courses / Lessons / Classes, create a lesson, edit the draft and preview the learner reading/reflection. Title and reading are required. Drafts persist only while the page stays open; switching dashboard workspaces retains mounted state, refresh clears it.
+- Courses: create/edit a course title and summary; add, rename and reorder modules; attach existing lesson drafts, reorder/preview/unlink them. A lesson appears once per course and can be reused in another course. Removing a course or module asks for confirmation and keeps the lesson drafts. Try blank/whitespace titles, long names, cancel/Escape, and switching tabs/workspaces. Course outlines also reset on refresh; nothing is published or saved to a service.
+- Start with **Courses → Try an example course**: Faith in Everyday Life contains Loving Others (The Good Samaritan, Practising forgiveness) and Growing in Faith (A daily rhythm of prayer). Samples are labelled and editable; reopening the example preserves your edits instead of adding duplicates. The three-step guide explains Course → Modules → Lessons. Inside any module, **Create lesson → Save and add to module** places a new draft automatically; **Choose an existing lesson** reuses a library draft.
 - Administration: Overview / People / Access, filter the empty directory and sketch/preview/reset a sub-admin scope. This creates no role or permission grant.
 - Charts: open the explicitly labelled chart example. Recharts loads only then; example values are also available in a table. These are illustration fixtures, not recorded analytics.
 - Try keyboard tab/arrow navigation, dialogs with Escape and focus return, 360px and desktop widths, 150%/200% text, long lesson names and empty/required fields.

@@ -1,6 +1,6 @@
 # LMS implementation plan
 
-Updated 14 October 2026. This extends the [implementation plan](implementation-plan.md), [parallel delivery plan](parallel-delivery-plan.md) and [backend contract proposal](backend-contract-proposal.md). It defines the next teacher/admin work after the owner approved the prototype direction. It does not claim these components or backend services are implemented.
+Updated 15 October 2026. This extends the [implementation plan](implementation-plan.md), [parallel delivery plan](parallel-delivery-plan.md) and [backend contract proposal](backend-contract-proposal.md). It tracks teacher/admin work after the owner approved the prototype direction. Only explicitly marked tasks have source implementation; backend services remain unconnected.
 
 ## Confirmed scope and current priority
 
@@ -15,7 +15,7 @@ Updated 14 October 2026. This extends the [implementation plan](implementation-p
 | Area | Current implementation | Next capability |
 | --- | --- | --- |
 | Mobile learner | Sample catalogue, lesson detail/reading, automatic answer checks/explanations, results/retry, bookmarks, reading position, best scores, Profile and Settings | Requested Settings completeness, then remaining Welcome/setup design; later authorized course/class content and acknowledged account progress |
-| Teacher | Overview/Lessons/Classes screen prototype; temporary title/scripture/reading/reflection draft creation, editing and preview | Course structure, full lesson authoring and automatic quiz authoring; then class and reporting screens |
+| Teacher | Overview/Courses/Lessons/Classes prototype; temporary lesson drafts and course/module outlines with ordered draft links and previews | Structured lesson authoring and automatic quiz authoring; then publication, class and reporting screens |
 | Administrator | Overview/People/Access prototype; empty directory filters and unsaved role-scope proposals | Organization/class directory, concrete scoped permissions, configuration and audit screens |
 | Charts | Explicitly illustrative examples loaded on demand | Genuine reporting only after recorded data, permission scopes and denominators exist |
 | Backend | Contract and conceptual access-matrix documents | Agreed schema, identity, permission enforcement, durable content/progress and recovery |
@@ -29,7 +29,7 @@ Each row is a separate task and commit boundary. Split a row further if its impl
 | ID | Deliverable and completion target | Depends on |
 | --- | --- | --- |
 | S2-F — implemented | **Mobile Settings correction:** full groups/components, availability details, single storage explanation, confirmed reset and Profile-active bottom navigation with light-gray cards | `8a4d709`; reference inspected, source formatted and whitespace checked. Owner runtime/visual acceptance pending |
-| LMS-T1 | **Course outline UI:** course title/summary, modules, ordered lessons and a clear editable outline. Support add/edit/reorder and useful empty/validation states; no invented enrolled learners | Approved teacher design; define a small course/module draft shape |
+| LMS-T1 — source implemented | **Course outline UI:** create/edit title/summary; add/rename/reorder modules; attach/reorder/preview/unlink lesson drafts; confirmed course/module removal preserves drafts; empty/validation states | References 07/05 inspected. In-memory feature hook retains outlines across tabs/workspaces, resets on refresh. Owner workflow/visual checks pending |
 | LMS-T2 | **Lesson authoring UI:** integrate existing reading/reflection editor with the outline; outcomes, scripture, structured sections and learner preview. Add image selection/alt text/clear behavior only with explicit temporary preview semantics | LMS-T1; agree supported content types and media limits before durable uploads |
 | LMS-T3 | **Quiz authoring UI:** question/options, one correct answer, explanation, add/edit/reorder/remove, validation and learner Check answer preview. Prevent incomplete questions from being considered publishable | LMS-T2; preserve the agreed automatic feedback model |
 | LMS-T4 | **Publication workflow UI:** draft validation summary, preview, publication/version status and explicit simulation where services are absent. Editing published content produces a new draft, with withdrawal/archive consequences described | LMS-T1–T3; agreed content lifecycle; no production publish claim |
@@ -52,6 +52,8 @@ Each row is a separate task and commit boundary. Split a row further if its impl
 | LMS-R1 | **Recovery and pilot gate:** record owner-run access/integration/native checks, supported offline behavior, backup/restore responsibilities and actual-class feedback | LMS-I1–I3; no unresolved critical access or data-loss failures |
 
 A shared reusable UI or contract change needed by several rows is its own foundation task/commit. Feature screens must not call storage/backend clients directly. Use existing feature boundaries before adding broad frameworks or packages.
+
+LMS-T1 includes the owner's requested flow clarification: a three-step Course → Modules → Lessons guide, direct lesson creation inside a module with automatic placement, and an on-demand labelled example (Faith in Everyday Life, two modules, three editable lessons). Existing drafts can also be attached from the lesson library. Reopening the example preserves edits and avoids duplicates. This is a temporary authoring demonstration, not published curriculum or learner history.
 
 ## Assessment and publication rules to carry forward
 
@@ -77,4 +79,4 @@ The owner retains tests, builds, terminal-heavy work and runtime/visual review u
 
 Teacher-reviewed assignments/submissions, commerce/payments, community/chat/live sessions, certificates/badges, leaderboard/advanced analytics and full offline quiz synchronization remain deferred until explicitly requested with a concrete use case. Notifications, downloads, video, extended personal fields and history require their own working services/data rules; visual Settings components alone do not implement those capabilities.
 
-Next sequence: begin **LMS-T1** with **LMS-B1** planning in parallel. Admin expansion can proceed independently once its file ownership and initial scoped-role decisions are explicit. Automatic quiz authoring (LMS-T3) is not yet implemented; the existing mobile quiz already supplies automatic feedback. The lead updates the tracked roadmap, changelog and ignored handoff as each task lands, and records each task's own commit and actual verification.
+Next sequence: **LMS-T2** structured lesson authoring, with **LMS-B1** contract planning alongside it. LMS-T1 is implemented in source and awaits owner review; its prototype permits one placement of a lesson per course and reuse across courses, which does not finalize backend publication semantics. Admin expansion can proceed independently once its file ownership and initial scoped-role decisions are explicit. Automatic quiz authoring (LMS-T3) is not yet implemented; the existing mobile quiz already supplies automatic feedback. The lead updates the tracked roadmap, changelog and ignored handoff as each task lands, and records each task's own commit and actual verification.

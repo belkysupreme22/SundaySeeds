@@ -6,6 +6,7 @@ import {
   Eye,
   FilePenLine,
   Home,
+  Layers,
   Plus,
   Sprout,
   Users,
@@ -13,9 +14,12 @@ import {
 import { useRef, useState } from "react";
 import { ChartPreview } from "../../shared/ChartPreview";
 import { DraftEditor, LessonPreview, type LessonDraft } from "./DraftEditor";
+import { CoursesPanel } from "./courses/CoursesPanel";
+import { useCourseOutlines } from "./courses/useCourseOutlines";
+import { exampleCourseLessons } from "./courses/exampleCourse";
 import "./teacher.css";
 
-type TeacherTab = "overview" | "lessons" | "classes";
+type TeacherTab = "overview" | "courses" | "lessons" | "classes";
 
 const exampleLesson: LessonDraft = {
   id: "example-kindness",
@@ -63,7 +67,9 @@ function DraftList({ drafts, onCreate, onEdit, onPreview }: DraftListProps) {
           <div className="teacher-draft-copy">
             <h3>{draft.title}</h3>
             <p className="muted">{draft.scripture || "Scripture not added"}</p>
-            <span className="badge">Draft</span>
+            <span className="badge">
+              {draft.example ? "Example draft" : "Draft"}
+            </span>
           </div>
           <div className="teacher-draft-actions">
             <button
@@ -91,9 +97,12 @@ function DraftList({ drafts, onCreate, onEdit, onPreview }: DraftListProps) {
 export default function TeacherDashboard() {
   const [tab, setTab] = useState<TeacherTab>("overview");
   const [drafts, setDrafts] = useState<LessonDraft[]>([]);
-  const [editor, setEditor] = useState<{ draft: LessonDraft | null } | null>(
-    null,
-  );
+  const courseOutlines = useCourseOutlines();
+  const [editor, setEditor] = useState<{
+    draft: LessonDraft | null;
+    courseId?: string;
+    moduleId?: string;
+  } | null>(null);
   const [preview, setPreview] = useState<{
     draft: LessonDraft;
     example: boolean;
@@ -112,10 +121,28 @@ export default function TeacherDashboard() {
     setStatus("");
     setEditor({ draft });
   }
+  function createModuleLesson(
+    courseId: string,
+    moduleId: string,
+    trigger: HTMLButtonElement,
+  ) {
+    openerRef.current = trigger;
+    setStatus("");
+    setEditor({ draft: null, courseId, moduleId });
+  }
+  function tryExampleCourse() {
+    setDrafts((current) => [
+      ...current,
+      ...exampleCourseLessons.filter(
+        (example) => !current.some((draft) => draft.id === example.id),
+      ),
+    ]);
+    courseOutlines.openExample();
+  }
   function previewDraft(
     draft: LessonDraft,
     trigger: HTMLButtonElement,
-    example = false,
+    example = draft.example ?? false,
   ) {
     openerRef.current = trigger;
     setPreview({ draft, example });
@@ -125,17 +152,33 @@ export default function TeacherDashboard() {
   }
   function saveDraft(content: Omit<LessonDraft, "id">) {
     const existingId = editor?.draft?.id;
-    const draft = { ...content, id: existingId ?? `draft-${nextId.current++}` };
+    const draft = {
+      ...content,
+      example: editor?.draft?.example,
+      id: existingId ?? `draft-${nextId.current++}`,
+    };
     setDrafts((current) =>
       existingId
         ? current.map((item) => (item.id === existingId ? draft : item))
         : [draft, ...current],
     );
+    if (editor?.courseId && editor.moduleId) {
+      courseOutlines.attachLesson(editor.courseId, editor.moduleId, draft.id);
+    }
+    setStatus(
+      editor?.moduleId
+        ? "Lesson created and added to the module."
+        : "Preview draft saved. Open it to see the learner view.",
+    );
     setEditor(null);
-    setStatus("Preview draft saved. Open it to see the learner view.");
   }
   function changeTab(value: string) {
-    if (value === "overview" || value === "lessons" || value === "classes") {
+    if (
+      value === "overview" ||
+      value === "courses" ||
+      value === "lessons" ||
+      value === "classes"
+    ) {
       setTab(value);
       setStatus("");
     }
@@ -154,16 +197,20 @@ export default function TeacherDashboard() {
           <h1>
             {tab === "overview"
               ? "Space to help others grow."
-              : tab === "lessons"
-                ? "Your lessons"
-                : "Your classes"}
+              : tab === "courses"
+                ? "Your courses"
+                : tab === "lessons"
+                  ? "Your lessons"
+                  : "Your classes"}
           </h1>
           <p className="muted">
             {tab === "overview"
               ? "Prepare meaningful lessons for adult learners."
-              : tab === "lessons"
-                ? "A space to shape your next teaching moment."
-                : "Support learning, one group at a time."}
+              : tab === "courses"
+                ? "Give each learning journey a thoughtful structure."
+                : tab === "lessons"
+                  ? "A space to shape your next teaching moment."
+                  : "Support learning, one group at a time."}
           </p>
         </div>
         <button
@@ -179,6 +226,10 @@ export default function TeacherDashboard() {
           <Tabs.Trigger className="tab-trigger" value="overview">
             <Home size={17} aria-hidden="true" />
             Overview
+          </Tabs.Trigger>
+          <Tabs.Trigger className="tab-trigger" value="courses">
+            <Layers size={17} aria-hidden="true" />
+            Courses
           </Tabs.Trigger>
           <Tabs.Trigger className="tab-trigger" value="lessons">
             <BookOpen size={17} aria-hidden="true" />
@@ -304,6 +355,19 @@ export default function TeacherDashboard() {
           <ChartPreview kind="completion" />
         </Tabs.Content>
         <Tabs.Content
+          value="courses"
+          className="page-stack teacher-tab-content"
+        >
+          <CoursesPanel
+            model={courseOutlines}
+            drafts={drafts}
+            onPreview={previewDraft}
+            onOpenLessons={() => changeTab("lessons")}
+            onCreateLesson={createModuleLesson}
+            onTryExample={tryExampleCourse}
+          />
+        </Tabs.Content>
+        <Tabs.Content
           value="lessons"
           className="page-stack teacher-tab-content"
         >
@@ -375,6 +439,11 @@ export default function TeacherDashboard() {
       {editor && (
         <DraftEditor
           draft={editor.draft}
+          destination={
+            courseOutlines.courses
+              .find((course) => course.id === editor.courseId)
+              ?.modules.find((module) => module.id === editor.moduleId)?.title
+          }
           onSave={saveDraft}
           onClose={() => setEditor(null)}
           restoreFocus={restoreFocus}

@@ -16,6 +16,16 @@ Use `npm run android` with an Android emulator or device ready. A web preview is
 
 ## Work in reviewable increments
 
+### Teacher course/module outlines — LMS-T1 (2026-10-14)
+
+References 07 (curriculum grouping/order) and 05 (approved dashboard visual language) were inspected. Courses now has a library, course-details dialog, lavender summary, ordered modules and draft lesson rows. Creation/editing, module rename/reorder, lesson attachment/reordering/preview/unlinking and confirmed course/module removal are implemented. Removing an outline never deletes its independent lesson drafts. A draft can appear once per course and be reused across courses. `useCourseOutlines` owns temporary feature state in the dashboard, retaining it across tabs/workspaces; refresh clears it. No dependency, backend or storage changes.
+
+Owner checks: create two courses and several lesson drafts; add/rename/reorder modules, attach/reorder/preview/unlink lessons, edit a linked lesson and confirm its updated title/preview, cancel/confirm removals and verify drafts remain. Check empty and whitespace titles, long names, keyboard/dialog focus/Escape, 360px/desktop layouts and 150%/200% text. Tests, typecheck, lint, builds and runtime/visual checks were not run; only scoped formatting/source inspection and whitespace checks. Next task is LMS-T2 structured lesson authoring, with automatic quiz authoring following as LMS-T3.
+
+The owner confirmed the preceding learner stroke visuals in `bd8a243`. No platform/device or automated-check evidence was supplied, and that approval does not cover this new Courses workflow.
+
+Follow-up within LMS-T1: the owner asked for a clearer organizing flow with sample data. The three-step guide now explains the hierarchy, modules offer direct create-and-attach lesson editing, and Try an example course loads two themed modules with three labelled, editable readings. Check initial loading, reopening after editing (no duplication/overwrite), sample labels in the library/outline/preview, cancelling direct creation (no attachment) and saving it (one attachment in the intended module). Sample quizzes are not invented; quiz authoring remains next after structured lessons.
+
 ### Reference-specific stroke correction (2026-10-14)
 
 The owner requested lighter bottom navigation and an app-wide check against each screen's own reference, then explicitly rejected blanket replacement of dark strokes. The blanket edit was reverted before commit. References 01–09 and 12 relevant to implemented screens were inspected (03 for field styling; 02/04 for profile setup/editor). Shared Card/Button/InputField defaults and strong Home/discovery/lesson/Welcome styling remain. Individual Profile and Progress cards opt into soft/subtle Card strokes; quiz options, reader Up next, results next actions and the completion emblem use targeted softer borders. Bottom navigation uses the light Settings gray. The completion-emblem and Profile/Progress hero shadows are removed where their references use fine flat outlines; other crisp shadows remain.

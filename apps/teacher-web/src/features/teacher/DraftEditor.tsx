@@ -5,6 +5,7 @@ import { InputField, TextAreaField } from "../../shared/ui/InputField";
 
 export interface LessonDraft {
   id: string;
+  example?: boolean;
   title: string;
   scripture: string;
   body: string;
@@ -13,6 +14,7 @@ export interface LessonDraft {
 
 interface DraftEditorProps {
   draft: LessonDraft | null;
+  destination?: string;
   onSave: (draft: Omit<LessonDraft, "id">) => void;
   onClose: () => void;
   restoreFocus: () => void;
@@ -20,6 +22,7 @@ interface DraftEditorProps {
 
 export function DraftEditor({
   draft,
+  destination,
   onSave,
   onClose,
   restoreFocus,
@@ -75,8 +78,9 @@ export function DraftEditor({
             </Dialog.Close>
           </div>
           <Dialog.Description className="muted teacher-dialog-description">
-            Shape a reading and a reflection for adult learners. Drafts in this
-            preview reset when you refresh the page.
+            {destination
+              ? `Create a reading and reflection for “${destination}”. Saving will add this lesson to the module automatically.`
+              : "Shape a reading and a reflection for adult learners. Drafts in this preview reset when you refresh the page."}
           </Dialog.Description>
           <form className="teacher-editor-form" onSubmit={submit}>
             <label className="field">
@@ -134,7 +138,7 @@ export function DraftEditor({
                 Cancel
               </Dialog.Close>
               <button className="button button-primary" type="submit">
-                Save preview draft
+                {destination ? "Save and add to module" : "Save preview draft"}
               </button>
             </div>
           </form>

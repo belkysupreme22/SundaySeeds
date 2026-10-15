@@ -5,6 +5,8 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Added
+- Teacher Courses screen with editable course details, ordered modules and existing lesson-draft attachment, ordering, preview and unlinking. Confirmed course/module removal preserves drafts. Temporary outlines survive tab/workspace switching and reset on refresh; no publishing or backend connection. New workflow review remains pending.
+- Guided Course → Modules → Lessons setup, direct lesson creation within a module, and an on-demand editable example course with two modules and three labelled sample readings, following the owner's request for a clearer organizing flow.
 - Core LMS implementation roadmap following owner approval of the dashboard design, with separate course, lesson, automatic quiz, class/enrollment, reporting, administration and backend tasks. Backend proposals now record immediate checked-answer feedback and a proposed course/module hierarchy; no new services are connected.
 - Full reference-12 Settings components: Account, App Settings, Support & About, useful help/detail sheets and a disabled sign-out row. Added anchored bottom navigation with Profile selected and softened Settings card borders to light gray. Service-dependent controls and unpublished policies show their availability honestly; current editor/replay/reset behavior is preserved.
 - Settings introduction replay entry, alongside compact reference-12 outlined information groups and a separate reset action. Existing reset confirmation, recovery and name/welcome preservation remain; owner runtime/visual review is pending.
@@ -31,7 +33,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 - Project working agreement covering design fidelity, feature boundaries, verification and collaborative development.
 
 ### Changed
-- Matched learner strokes by screen reference: lighter bottom navigation/Profile groups, softer Progress frames, gray quiz-option and reader/next-action rows, and a fine completion-emblem rim. Strong Home/discovery/lesson/Welcome outlines and shared button/card defaults remain; no blanket border replacement. Owner visual review pending.
+- Matched learner strokes by screen reference: lighter bottom navigation/Profile groups, softer Progress frames, gray quiz-option and reader/next-action rows, and a fine completion-emblem rim. Strong Home/discovery/lesson/Welcome outlines and shared button/card defaults remain; no blanket border replacement. Owner confirmed these visuals on 14 October; native/automated coverage was not supplied.
 - Aligned the Profile avatar/name/edit row and replaced tall summary cards with compact white icon/count tiles from reference-12. Removed repetitive local/device/preview wording across learner screens, keeping one storage explanation in Settings and actionable save warnings. Owner runtime/visual review is pending.
 - Profile follows reference-12 with a compact local identity card, edit icon, three real learning counts and grouped outlined navigation. Added distinct name/learning loading and recovery presentation plus narrow/large-text stacking; owner runtime and visual review are pending.
 - Progress follows references 05/09 with a portrait hero, actual completion summary, four pastel local-learning statistics and outlined lesson rows. Added distinct first-use/loading/recovery presentation and narrow/large-text stacking; owner runtime and visual review are pending.

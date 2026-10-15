@@ -29,7 +29,7 @@ Updated 14 October 2026. This supplements [the implementation plan](implementati
 | --- | --- | --- |
 | T0 — source implemented | React teacher proposal: `apps/teacher-web/src/features/teacher` | Overview/Lessons/Classes tabs, in-memory draft create/edit/preview and an optional chart example. No class records or publishing. Dependencies and runtime/visual review pending; layout is not yet an approved production reference |
 | T1 | Confirm dashboard navigation, empty/loading/error states and content workflow from T0 | Owner design feedback plus agreed content/class boundaries. Record the approved proposal as the reference for subsequent implementation |
-| T2 — foundation implemented | Extend the React shell and draft/preview editor after T1 | Shell and text/reflection editor exist in T0. Full quiz/image authoring, agreed loading/error states and feature data adapters remain; contract agreement precedes connected behavior |
+| T2 — foundation and outlines implemented | Extend the React shell and draft/preview editor after T1 | Shell, text/reflection editor and LMS-T1 course/module outlines exist. Structured lesson/quiz/image authoring, loading/error states and data adapters remain; contract agreement precedes connected behavior |
 | T3 | Connect draft validation, preview and publish to versioned content | Requires B2–B5 and permission evidence. Published edits must not rewrite the meaning of previous attempts |
 | T4 | Connect assigned-class roster and genuine completion/results views | Requires membership scopes and B6. No fabricated production statistics or access to unassigned classes |
 
@@ -102,4 +102,4 @@ React + TypeScript teacher/admin screen source is implemented, A0 learner correc
 
 Source task commits: shared React foundation `a91263a`, teacher screens `3e4bea7`, admin screens `4369e77`. Backend contracts and delivery documentation form a separate task commit.
 
-Next: dashboard design direction is approved. Begin LMS-T1 course outlines and the LMS-B1 contract decisions in [the LMS plan](lms-implementation-plan.md); fuller teacher/admin tasks remain explicit separate increments. Resolve B0/M1 before production access. Learner O1 → O2 remains queued after completed S2/S2-F. [Owner review checks](../apps/teacher-web/README.md) remain open for new behaviors, keyboard/dialog focus, narrow screens and larger text.
+Next: LMS-T1 course/module outlines are source-implemented. Continue LMS-T2 structured lesson authoring and LMS-B1 contract decisions in [the LMS plan](lms-implementation-plan.md); teacher/admin tasks remain separate increments. Resolve B0/M1 before production access. Learner O1 → O2 remains queued after S2/S2-F. The owner confirmed the latest learner stroke visuals (`bd8a243`); this does not establish native or automated checks. [Owner review checks](../apps/teacher-web/README.md) remain open for new Courses behaviors, keyboard/dialog focus, narrow screens and larger text.
