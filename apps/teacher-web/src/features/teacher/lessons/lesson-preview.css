@@ -1,0 +1,127 @@
+.lesson-content-preview {
+  display: grid;
+  gap: 24px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.lesson-preview-image {
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--ink);
+  border-radius: 8px;
+  background: var(--lavender);
+}
+.lesson-preview-image img {
+  display: block;
+  width: 100%;
+  max-height: 320px;
+  object-fit: contain;
+}
+.lesson-preview-introduction {
+  display: grid;
+  gap: 10px;
+}
+.lesson-preview-introduction h2 {
+  font-size: clamp(1.2rem, 3vw, 1.65rem);
+}
+.lesson-preview-outcomes {
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+.lesson-preview-outcomes ul {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+}
+.lesson-preview-outcomes li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid #9c97a4;
+  border-radius: 6px;
+  background: var(--mint);
+  font-size: 0.84rem;
+  line-height: 1.65;
+}
+.lesson-preview-outcomes li:nth-child(4n + 2) {
+  background: var(--yellow);
+}
+.lesson-preview-outcomes li:nth-child(4n + 3) {
+  background: var(--lavender);
+}
+.lesson-preview-outcomes li:nth-child(4n + 4) {
+  background: var(--peach);
+}
+.lesson-preview-outcomes svg {
+  margin-top: 2px;
+}
+.lesson-preview-section {
+  display: grid;
+  gap: 12px;
+}
+.lesson-preview-section h3 {
+  font-size: 1.12rem;
+}
+.lesson-preview-body {
+  white-space: pre-wrap;
+  line-height: 1.85;
+}
+.lesson-preview-empty {
+  font-size: 0.82rem;
+  margin-top: 8px;
+}
+.lesson-preview-reflection {
+  display: grid;
+  gap: 8px;
+  padding: 20px;
+  border: 1px solid var(--ink);
+  border-radius: 8px;
+  background: #fff3b9;
+}
+.lesson-preview-reflection p:not(.eyebrow) {
+  white-space: pre-wrap;
+}
+.lesson-preview-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 5px;
+  border: 1px solid var(--ink);
+  border-radius: 7px;
+  background: var(--lavender);
+}
+.lesson-preview-navigation > span {
+  text-align: center;
+  font-size: 0.75rem;
+}
+.lesson-preview-nav-button {
+  min-height: 44px;
+  padding: 9px 12px;
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+}
+.lesson-preview-nav-button:hover:not(:disabled) {
+  background: #eee8ff;
+}
+@media (max-width: 480px) {
+  .lesson-preview-outcomes ul {
+    grid-template-columns: 1fr;
+  }
+  .lesson-preview-navigation {
+    flex-wrap: wrap;
+  }
+  .lesson-preview-navigation > span {
+    order: -1;
+    width: 100%;
+    padding: 6px 0 0;
+  }
+  .lesson-preview-nav-button {
+    flex: 1;
+  }
+}

@@ -25,7 +25,22 @@ const exampleLesson: LessonDraft = {
   id: "example-kindness",
   title: "Kindness in everyday life",
   scripture: "Luke 10:25–37",
-  body: "In the story of the Good Samaritan, care begins with noticing someone in need. Compassion becomes meaningful when it moves us to act.\n\nOur opportunities to show kindness may look ordinary: listening without rushing, making space for someone or offering practical help.\n\nThis week, notice one person you might otherwise pass by. Choose one small, thoughtful action.",
+  outcomes: [
+    "Recognise opportunities for compassion",
+    "Choose a practical act of kindness",
+  ],
+  sections: [
+    {
+      id: "kindness-notice",
+      title: "Notice someone in need",
+      body: "In the story of the Good Samaritan, care begins with noticing someone in need. Compassion becomes meaningful when it moves us to act.",
+    },
+    {
+      id: "kindness-act",
+      title: "Put kindness into practice",
+      body: "Our opportunities to show kindness may look ordinary: listening without rushing, making space for someone or offering practical help.\n\nThis week, notice one person you might otherwise pass by. Choose one small, thoughtful action.",
+    },
+  ],
   reflection: "What might it mean to be a neighbour to someone this week?",
 };
 
@@ -362,6 +377,7 @@ export default function TeacherDashboard() {
             model={courseOutlines}
             drafts={drafts}
             onPreview={previewDraft}
+            onEdit={editDraft}
             onOpenLessons={() => changeTab("lessons")}
             onCreateLesson={createModuleLesson}
             onTryExample={tryExampleCourse}

@@ -61,6 +61,7 @@ export function CourseModuleCard({
   onDetach,
   onMoveLesson,
   onPreview,
+  onEdit,
   onOpenLessons,
   onCreateLesson,
 }: {
@@ -76,6 +77,7 @@ export function CourseModuleCard({
   onDetach: (lessonId: string) => void;
   onMoveLesson: (lessonId: string, direction: MoveDirection) => void;
   onPreview: (draft: LessonDraft, trigger: HTMLButtonElement) => void;
+  onEdit: (draft: LessonDraft, trigger: HTMLButtonElement) => void;
   onOpenLessons: () => void;
   onCreateLesson: (trigger: HTMLButtonElement) => void;
 }) {
@@ -229,6 +231,16 @@ export function CourseModuleCard({
                   onMove={(direction) => onMoveLesson(id, direction)}
                 />
                 <div className="course-actions">
+                  {lesson && (
+                    <button
+                      type="button"
+                      className="icon-button"
+                      aria-label={`Edit lesson ${label}`}
+                      onClick={(event) => onEdit(lesson, event.currentTarget)}
+                    >
+                      <Pencil size={17} aria-hidden="true" />
+                    </button>
+                  )}
                   {lesson && (
                     <button
                       type="button"

@@ -20,6 +20,7 @@ export function CoursesPanel({
   model,
   drafts,
   onPreview,
+  onEdit,
   onOpenLessons,
   onCreateLesson,
   onTryExample,
@@ -27,6 +28,7 @@ export function CoursesPanel({
   model: CourseOutlineModel;
   drafts: LessonDraft[];
   onPreview: (draft: LessonDraft, trigger: HTMLButtonElement) => void;
+  onEdit: (draft: LessonDraft, trigger: HTMLButtonElement) => void;
   onOpenLessons: () => void;
   onCreateLesson: (
     courseId: string,
@@ -301,6 +303,7 @@ export function CoursesPanel({
                     setStatus(`Lesson moved ${direction < 0 ? "up" : "down"}.`);
                   }}
                   onPreview={onPreview}
+                  onEdit={onEdit}
                   onOpenLessons={onOpenLessons}
                   onCreateLesson={(trigger) =>
                     onCreateLesson(course.id, module.id, trigger)

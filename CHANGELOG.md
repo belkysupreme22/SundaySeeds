@@ -5,6 +5,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Added
+- Structured teacher lesson authoring with learning outcomes, ordered reading sections, reflection, unsaved learner preview and discard confirmation. Linked lessons can be edited from course modules. Added optional temporary cover images with alt text and clear/replace controls; samples now demonstrate two-section readings. No upload, publishing or backend service was added; owner review remains pending.
 - Teacher Courses screen with editable course details, ordered modules and existing lesson-draft attachment, ordering, preview and unlinking. Confirmed course/module removal preserves drafts. Temporary outlines survive tab/workspace switching and reset on refresh; no publishing or backend connection. New workflow review remains pending.
 - Guided Course → Modules → Lessons setup, direct lesson creation within a module, and an on-demand editable example course with two modules and three labelled sample readings, following the owner's request for a clearer organizing flow.
 - Core LMS implementation roadmap following owner approval of the dashboard design, with separate course, lesson, automatic quiz, class/enrollment, reporting, administration and backend tasks. Backend proposals now record immediate checked-answer feedback and a proposed course/module hierarchy; no new services are connected.
