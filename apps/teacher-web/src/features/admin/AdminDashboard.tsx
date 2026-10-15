@@ -2,7 +2,7 @@ import { useState } from "react";
 import * as Tabs from "@radix-ui/react-tabs";
 import { ArrowRight, BookOpen, ShieldCheck, Sprout, Users } from "lucide-react";
 import { ChartPreview } from "../../shared/ChartPreview";
-import RoleProposalDialog from "./RoleProposalDialog";
+import { AccessWorkspace } from "./access/AccessWorkspace";
 import "./admin.css";
 import { useAdminDirectory } from "./directory/useAdminDirectory";
 import { PeoplePanel } from "./directory/PeoplePanel";
@@ -206,52 +206,16 @@ export default function AdminDashboard() {
             onOpenOrganizations={() => setTab("organizations")}
           />
         </Tabs.Content>
-        <Tabs.Content value="access" className="page-stack admin-tab-content">
-          <div className="panel-heading">
-            <div>
-              <h2>Access &amp; roles</h2>
-              <p className="muted">
-                Give each responsibility a clear boundary.
-              </p>
-            </div>
-          </div>
-          <div className="two-col">
-            <article className="panel tone-lavender admin-role-card">
-              <ShieldCheck size={25} aria-hidden="true" />
-              <h3>Super-admin</h3>
-              <p>
-                System-wide oversight. Sign-in, assignment and sensitive-action
-                rules still need implementation.
-              </p>
-              <span className="badge">Role confirmed · Unconfigured</span>
-            </article>
-            <article className="panel admin-role-card">
-              <Users size={25} aria-hidden="true" />
-              <h3>Sub-admin</h3>
-              <p>
-                A delegated role with an explicitly agreed scope. No inherited
-                global access is assumed.
-              </p>
-              <span className="badge">Structure proposed · Unconfigured</span>
-            </article>
-          </div>
-          <section className="panel admin-scope-callout">
-            <span className="admin-icon-tile tone-mint">
-              <Sprout size={24} aria-hidden="true" />
-            </span>
-            <div>
-              <h2>A structure that can grow</h2>
-              <p className="muted">
-                Sketch a sub-admin role before deciding who can do what. Scope
-                and responsibilities remain proposals.
-              </p>
-            </div>
-            <RoleProposalDialog />
-          </section>
-          <p className="admin-note tone-yellow">
-            No administrator assignments are configured. Future permissions must
-            be enforced by the backend, including every delegated scope.
-          </p>
+        <Tabs.Content
+          value="access"
+          forceMount
+          hidden={tab !== "access"}
+          className="page-stack admin-tab-content"
+        >
+          <AccessWorkspace
+            directory={directory}
+            onOpenDirectory={() => setTab("organizations")}
+          />
         </Tabs.Content>
       </Tabs.Root>
     </div>

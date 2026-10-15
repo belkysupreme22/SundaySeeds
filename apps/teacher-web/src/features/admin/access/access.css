@@ -1,0 +1,361 @@
+.access-stack {
+  display: grid;
+  gap: 22px;
+  min-width: 0;
+}
+.access-tab-content {
+  margin-top: 22px;
+  min-width: 0;
+}
+.access-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.access-heading > div:first-child {
+  flex: 1 1 260px;
+  min-width: 0;
+}
+.access-heading h2 {
+  font-size: clamp(1.35rem, 2.3vw, 1.8rem);
+  margin: 6px 0 10px;
+  overflow-wrap: anywhere;
+}
+.access-heading p {
+  margin: 7px 0 0;
+  line-height: 1.7;
+}
+.access-surface {
+  padding: clamp(18px, 2.5vw, 26px);
+  border: 1px solid #c4bbcf;
+  border-radius: 9px;
+  background: #fff;
+  min-width: 0;
+}
+.access-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.access-actions .button {
+  min-height: 44px;
+  white-space: normal;
+}
+.access-actions .muted {
+  font-size: 0.78rem;
+}
+.access-notice {
+  padding: 16px 18px;
+  background: #fff6dc;
+  border: 1px solid #d4c5a0;
+  border-radius: 7px;
+  font-size: 0.82rem;
+  line-height: 1.7;
+}
+.access-notice p {
+  margin: 0 0 10px;
+}
+.access-unsaved {
+  display: grid;
+  gap: 12px;
+  padding: 18px;
+  border: 1px solid #bf9a85;
+  border-radius: 7px;
+  background: #fff0e3;
+}
+.access-unsaved p {
+  margin: 0;
+  line-height: 1.7;
+}
+.access-form {
+  display: grid;
+  gap: 20px;
+  min-width: 0;
+}
+.access-form > .button {
+  justify-self: start;
+}
+.access-fieldset {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+  margin: 0;
+  padding: 20px;
+  border: 1px solid #c4bbcf;
+  border-radius: 7px;
+}
+.access-fieldset legend {
+  padding: 0 7px;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+.access-fieldset > p {
+  margin: 0;
+  font-size: 0.8rem;
+  line-height: 1.7;
+}
+.access-scope-options {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.access-scope-options label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 8px 14px;
+  border: 1px solid #b4a5c9;
+  border-radius: 6px;
+  background: #eee7fb;
+}
+.access-capability-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.access-capability-list label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 16px;
+  min-height: 52px;
+  border: 1px solid #b4a5c9;
+  border-radius: 7px;
+  background: #f4f0fc;
+  font-size: 0.83rem;
+  line-height: 1.6;
+}
+.access-capability-list input {
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+.access-role-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: 18px;
+}
+.access-role-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 24px;
+  background: #fff;
+  border: 1px solid #b6a9c7;
+  border-radius: 9px;
+  min-width: 0;
+}
+.access-role-card h3,
+.access-role-card p {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.access-role-card > .access-actions {
+  margin-top: auto;
+}
+.access-badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.access-role-capabilities,
+.access-capability-summary {
+  display: grid;
+  gap: 9px;
+  padding-left: 20px;
+  margin: 0;
+  font-size: 0.83rem;
+  line-height: 1.7;
+}
+.access-scope-label {
+  color: #5d4c77;
+  font-size: 0.82rem;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+.access-empty {
+  display: grid;
+  justify-items: center;
+  gap: 16px;
+  text-align: center;
+  padding: 36px 20px;
+}
+.access-empty h3,
+.access-empty p {
+  margin: 0;
+  max-width: 64ch;
+}
+.access-empty-icon {
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  background: var(--lavender);
+  border: 1px solid #9e8eb4;
+  border-radius: 9px;
+}
+.access-back {
+  justify-self: start;
+}
+.access-error {
+  color: #9a2d32;
+  font-size: 0.82rem;
+  line-height: 1.7;
+}
+.access-status {
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+.access-subtext {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-top: 6px;
+}
+.access-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr));
+  gap: 20px;
+  margin: 0;
+}
+.access-summary dt {
+  margin-bottom: 7px;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+.access-summary dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+  font-weight: 500;
+}
+.access-summary small {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.76rem;
+  color: var(--muted);
+  font-weight: 400;
+}
+.access-filters {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  align-items: end;
+}
+.access-stack .field {
+  min-width: 0;
+}
+.access-stack .badge {
+  white-space: normal;
+}
+.access-stack select {
+  max-width: 100%;
+  min-height: 44px;
+}
+.access-safeguards {
+  display: grid;
+  gap: 22px;
+  border-color: #c4bbcf;
+}
+.access-safeguard-controls {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  align-items: end;
+}
+.access-safeguard-controls .field {
+  flex: 1 1 260px;
+}
+.access-safeguard-summary {
+  padding: 18px;
+  border: 1px solid #c4b3da;
+  border-radius: 7px;
+  background: #eee7fb;
+  line-height: 1.7;
+}
+.access-safeguard-summary p {
+  margin: 6px 0;
+}
+.access-safeguard-people {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: grid;
+  gap: 12px;
+}
+.access-safeguard-person {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 18px;
+  border: 1px solid #d0c7da;
+  border-radius: 7px;
+  background: #fff;
+}
+.access-safeguard-person > div {
+  flex: 1 1 200px;
+  min-width: 0;
+}
+.access-safeguard-person p {
+  margin: 5px 0;
+  font-size: 0.8rem;
+}
+.access-safeguard-outcome {
+  background: #fff6dc;
+  border: 1px solid #d4c5a0;
+  border-radius: 7px;
+  padding: 16px;
+  font-size: 0.82rem;
+  line-height: 1.7;
+}
+.access-safeguard-outcome:empty {
+  display: none;
+}
+.access-recovery-checklist {
+  padding: 18px;
+  border: 1px solid #c4bbcf;
+  border-radius: 7px;
+  background: #fff;
+}
+.access-recovery-checklist summary {
+  cursor: pointer;
+  min-height: 32px;
+  font-weight: 500;
+}
+.access-recovery-checklist ol {
+  padding-left: 22px;
+  display: grid;
+  gap: 16px;
+}
+.access-recovery-checklist li p {
+  margin: 6px 0 0;
+  line-height: 1.7;
+  font-size: 0.82rem;
+}
+.access-safeguard-policy {
+  padding: 16px 18px;
+  background: #e3f4ec;
+  border: 1px solid #b3cabd;
+  border-radius: 7px;
+  font-size: 0.82rem;
+  line-height: 1.7;
+}
+@media (max-width: 650px) {
+  .access-capability-list,
+  .access-filters {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .access-heading > .button {
+    width: 100%;
+  }
+  .access-fieldset {
+    padding: 16px;
+  }
+  .access-safeguard-person > .button {
+    width: 100%;
+  }
+}

@@ -5,6 +5,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Added
+- Full-page administrator Access workspace with scoped role proposals, finite capabilities, revisioned assignment reviews and confirmed revocation simulations. Added isolated last-admin/self-removal/bootstrap examples and recovery considerations. No directory roles, actual grants or backend services changed; owner review pending.
 - Administrator People/Organizations/Invitations workflow with one shared simulated directory, scoped rosters, validated forms, invitation lifecycle and preserved archive/restore states. Opt-in examples update consistently across full-page screens; no accounts, messages or access grants. Owner review pending.
 - Teacher Reports screen with unavailable connected data, opt-in fictional class/course/lesson filters, explicit completion/data-coverage measures, learner detail and lazy Recharts snapshot with exact table values. Recorded zeroes, missing states and unavailable scores stay distinct. No real analytics or backend connection; owner review pending.
 - Optional name setup is now reachable after Get started when replaying the introduction from Settings, so existing users can revisit it without resetting progress. Skip preserves the current name; the owner confirmed this setup/replay flow is working visually on 15 October. Automated/native coverage remains unreported.
