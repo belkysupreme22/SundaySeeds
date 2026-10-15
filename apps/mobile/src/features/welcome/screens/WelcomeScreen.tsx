@@ -13,10 +13,19 @@ type Props = {
   error: string | null;
   onFinish: () => void;
   onContinueForNow: () => void;
+  onSkip?: () => void;
+  initialIndex?: number;
 };
 
-export function WelcomeScreen({ saving, error, onFinish, onContinueForNow }: Props) {
-  const [index, setIndex] = useState(0);
+export function WelcomeScreen({
+  saving,
+  error,
+  onFinish,
+  onContinueForNow,
+  onSkip = onFinish,
+  initialIndex = 0,
+}: Props) {
+  const [index, setIndex] = useState(initialIndex);
   const { height, width, fontScale } = useWindowDimensions();
   const slide = welcomeSlides[index];
   const isLast = index === welcomeSlides.length - 1;
@@ -63,7 +72,7 @@ export function WelcomeScreen({ saving, error, onFinish, onContinueForNow }: Pro
             accessibilityLabel="Skip introduction"
             disabled={saving}
             accessibilityState={{ disabled: saving }}
-            onPress={onFinish}
+            onPress={onSkip}
             style={({ pressed }) => [styles.skip, pressed && styles.pressed]}
           >
             <Text variant="small" muted>
