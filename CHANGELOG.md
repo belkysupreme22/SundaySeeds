@@ -5,7 +5,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Added
-- Optional name setup is now reachable after Get started when replaying the introduction from Settings, so existing users can revisit it without resetting progress. Skip preserves the current name; source checks only, runtime review pending.
+- Optional name setup is now reachable after Get started when replaying the introduction from Settings, so existing users can revisit it without resetting progress. Skip preserves the current name; the owner confirmed this setup/replay flow is working visually on 15 October. Automated/native coverage remains unreported.
 - Teacher class/enrollment screen simulation with class briefs, existing course links, adult roster/invitation states, inline lifecycle confirmations, archive/restore and explicit directory loading/error examples. State survives tabs/studio/workspace switching until refresh; no email, account or access service. Owner review pending.
 - Optional first-run learner name setup after Welcome, adapted from references 02/04. Reuses safe profile loading/saving with skip and recovery; existing Profile editing and introduction replay stay available. No additional personal fields or account services. Owner runtime/native review remains pending.
 - Mobile Welcome reference-01 refinement: larger imagery, paired pastel stickers, actionable feature cards, circular page indicators and responsive navigation. Existing completion preference, replay and recovery are preserved; owner runtime/visual review is pending.
