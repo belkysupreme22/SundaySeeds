@@ -13,19 +13,22 @@ export function ClassEditor({
   organization,
   onSave,
   onBack,
+  defaultPurpose = "",
 }: {
   item?: DirectoryClass;
   organization: DirectoryOrganization;
   onSave: (details: ClassDetails) => DirectoryResult;
   onBack: () => void;
+  defaultPurpose?: string;
 }) {
   const prefix = useId();
   const [name, setName] = useState(item?.name ?? "");
-  const [description, setDescription] = useState(item?.description ?? "");
+  const [initialDescription] = useState(item?.description ?? defaultPurpose);
+  const [description, setDescription] = useState(initialDescription);
   const [error, setError] = useState("");
   const [discard, setDiscard] = useState(false);
   const dirty =
-    name !== (item?.name ?? "") || description !== (item?.description ?? "");
+    name !== (item?.name ?? "") || description !== initialDescription;
   function save(event: FormEvent) {
     event.preventDefault();
     const result = onSave({
@@ -53,6 +56,12 @@ export function ClassEditor({
         Organization: <strong>{organization.name}</strong>. Moving a class
         between organizations is not available.
       </p>
+      {!item && initialDescription && (
+        <p className="muted">
+          The purpose starts with your workspace default. Edit it for this class
+          without changing that default.
+        </p>
+      )}
       {discard && (
         <div
           className="admin-dir-confirm"

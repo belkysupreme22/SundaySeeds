@@ -9,6 +9,9 @@ import { PeoplePanel } from "./directory/PeoplePanel";
 import { OrganizationsPanel } from "./directory/OrganizationsPanel";
 import { InvitationsPanel } from "./directory/InvitationsPanel";
 import "./directory/directory.css";
+import { useAdminSettings } from "./settings/useAdminSettings";
+import { SystemSettingsPanel } from "./settings/SystemSettingsPanel";
+import { AdminHelpCard } from "./settings/AdminHelpCard";
 
 function AdministrationStructure() {
   return (
@@ -42,9 +45,13 @@ function AdministrationStructure() {
 export default function AdminDashboard() {
   const [tab, setTab] = useState("overview");
   const directory = useAdminDirectory();
+  const settings = useAdminSettings(directory);
 
   return (
-    <div className="page-stack admin-dashboard">
+    <div
+      className="page-stack admin-dashboard"
+      data-table-density={settings.preferences.tableDensity}
+    >
       <header className="page-heading">
         <div>
           <p className="eyebrow">SundaySeeds administration</p>
@@ -74,6 +81,9 @@ export default function AdminDashboard() {
           </Tabs.Trigger>
           <Tabs.Trigger className="tab-trigger" value="access">
             Access &amp; roles
+          </Tabs.Trigger>
+          <Tabs.Trigger className="tab-trigger" value="settings">
+            Settings
           </Tabs.Trigger>
         </Tabs.List>
         {["people", "organizations", "invitations"].includes(tab) && (
@@ -177,6 +187,12 @@ export default function AdminDashboard() {
               </div>
             </section>
           </div>
+          <AdminHelpCard
+            title={settings.defaults.helpTitle}
+            message={settings.defaults.helpMessage}
+            onOpenDirectory={() => setTab("organizations")}
+            onOpenSettings={() => setTab("settings")}
+          />
           <ChartPreview kind="activity" />
         </Tabs.Content>
         <Tabs.Content
@@ -193,7 +209,10 @@ export default function AdminDashboard() {
           hidden={tab !== "organizations"}
           className="page-stack admin-tab-content"
         >
-          <OrganizationsPanel model={directory} />
+          <OrganizationsPanel
+            model={directory}
+            newClassPurpose={settings.defaults.newClassPurpose}
+          />
         </Tabs.Content>
         <Tabs.Content
           value="invitations"
@@ -203,6 +222,8 @@ export default function AdminDashboard() {
         >
           <InvitationsPanel
             model={directory}
+            defaultRole={settings.defaults.invitationRole}
+            defaultClassId={settings.defaults.invitationClassId}
             onOpenOrganizations={() => setTab("organizations")}
           />
         </Tabs.Content>
@@ -216,6 +237,14 @@ export default function AdminDashboard() {
             directory={directory}
             onOpenDirectory={() => setTab("organizations")}
           />
+        </Tabs.Content>
+        <Tabs.Content
+          value="settings"
+          forceMount
+          hidden={tab !== "settings"}
+          className="page-stack admin-tab-content"
+        >
+          <SystemSettingsPanel model={settings} directory={directory} />
         </Tabs.Content>
       </Tabs.Root>
     </div>

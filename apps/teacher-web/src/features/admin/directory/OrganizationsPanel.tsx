@@ -16,7 +16,13 @@ type View =
   | { kind: "organization-new" }
   | { kind: "class" | "class-edit"; classId: string };
 
-export function OrganizationsPanel({ model }: { model: DirectoryModel }) {
+export function OrganizationsPanel({
+  model,
+  newClassPurpose = "",
+}: {
+  model: DirectoryModel;
+  newClassPurpose?: string;
+}) {
   const [view, setView] = useState<View>({ kind: "list" });
   const [query, setQuery] = useState("");
   const [status, setStatus] = useState("all");
@@ -72,6 +78,7 @@ export function OrganizationsPanel({ model }: { model: DirectoryModel }) {
   )
     return (
       <ClassEditor
+        defaultPurpose={newClassPurpose}
         key={selectedClass?.id ?? "new-class"}
         organization={organization}
         item={selectedClass}

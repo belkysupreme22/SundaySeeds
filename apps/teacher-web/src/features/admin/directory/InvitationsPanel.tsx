@@ -7,14 +7,19 @@ import {
   directoryRoleLabels,
   type DirectoryInvitation,
   type DirectoryModel,
+  type DirectoryRole,
 } from "./types";
 
 export function InvitationsPanel({
   model,
   onOpenOrganizations,
+  defaultRole = "learner",
+  defaultClassId = "",
 }: {
   model: DirectoryModel;
   onOpenOrganizations: () => void;
+  defaultRole?: DirectoryRole;
+  defaultClassId?: string;
 }) {
   const [query, setQuery] = useState("");
   const [organizationId, setOrganizationId] = useState("");
@@ -55,6 +60,8 @@ export function InvitationsPanel({
   if (creating)
     return (
       <InvitationForm
+        defaultRole={defaultRole}
+        defaultClassId={defaultClassId}
         model={model}
         onClose={() => setCreating(false)}
         onCreated={(id) => {

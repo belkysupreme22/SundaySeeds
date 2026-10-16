@@ -10,16 +10,33 @@ export function InvitationForm({
   model,
   onClose,
   onCreated,
+  defaultRole = "learner",
+  defaultClassId = "",
 }: {
   model: DirectoryModel;
   onClose: () => void;
   onCreated: (id: string) => void;
+  defaultRole?: DirectoryRole;
+  defaultClassId?: string;
 }) {
   const prefix = useId();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [classId, setClassId] = useState("");
-  const [role, setRole] = useState<DirectoryRole>("learner");
+  const [initialClassId] = useState(() =>
+    model.classes.some(
+      (item) =>
+        item.id === defaultClassId &&
+        !item.archived &&
+        model.organizations.some(
+          (org) => org.id === item.organizationId && !org.archived,
+        ),
+    )
+      ? defaultClassId
+      : "",
+  );
+  const [initialRole] = useState(defaultRole);
+  const [classId, setClassId] = useState(initialClassId);
+  const [role, setRole] = useState<DirectoryRole>(initialRole);
   const [error, setError] = useState("");
   const [discard, setDiscard] = useState(false);
   const available = model.classes.filter(
@@ -30,7 +47,9 @@ export function InvitationForm({
       ),
   );
   const validClass = available.some((item) => item.id === classId);
-  const dirty = Boolean(name || email || classId || role !== "learner");
+  const dirty = Boolean(
+    name || email || classId !== initialClassId || role !== initialRole,
+  );
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const result = model.createInvitation({ name, email, classId, role });
@@ -56,6 +75,12 @@ export function InvitationForm({
           Back to invitations
         </button>
       </div>
+      {(initialClassId || initialRole !== "learner") && (
+        <p className="muted">
+          Participation and class start with your workspace defaults. You can
+          change them for this invitation.
+        </p>
+      )}
       {discard && (
         <div
           className="admin-dir-confirm"
