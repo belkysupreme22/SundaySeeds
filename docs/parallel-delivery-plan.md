@@ -1,5 +1,7 @@
 # Parallel delivery plan
 
+**16 October — current learner identity lane:** Continue the reference-informed mobile auth UI with verification and password-reset previews while backend decisions remain separate. [Auth onboarding flow](auth-onboarding-flow.md) is the current route/state and handoff guide. Teacher/admin prototypes are unchanged by this bounded increment; connected identity and class admission remain later tasks.
+
 **16 October learner identity lane:** Mobile sign-in/self-registration/recovery screen prototypes implemented separately from backend services, reachable from Settings. Reference 03 inspected. Existing Welcome/profile/progress flows remain. Owner visual/runtime acceptance and B1-05b recovery/verification/class-admission decisions are pending; staff authority and pilot decisions still gate connected work.
 
 **16 October owner decision — self-onboarding:** Adults create their own learner accounts with email/password; no prior invitation is required for registration. Account creation is separate from class membership and staff permissions. The backend proposal records B1-05a as confirmed; B1-05b still covers verification/recovery, class admission and staff identity rules. No service configuration or authentication implementation. Next design task may prototype self-registration/sign-in/recovery against references 02–04 while unresolved behavior remains explicitly unavailable.

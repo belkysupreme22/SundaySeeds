@@ -5,10 +5,12 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Changed
+- Refined account recovery with a code-native mail illustration using reference 03's visual language and restored right-arrow primary actions on existing auth screens. Existing sign-in/signup portraits, Google/Apple options and account-only lilac tint are preserved; owner visual review pending.
 - Reworked mobile account artwork against reference 03 with transparent portraits, layered pastel shapes and ink accents; added requested Google/Apple options with explicit unavailable-provider feedback. Owner runtime/visual review pending.
 - Removed example-value autofill and hardcoded credentials from the mobile account screens; forms use manual entry.
 
 ### Added
+- Mobile email-verification and new-password screen previews, reached through explicit preview actions after valid signup/recovery forms. Verification/resend and password submission report unavailable services; no email, account verification or password change is claimed. New-password fields support independent visibility and missing/mismatch validation. Current routes, deferred policies and checks are documented in [auth onboarding flow](docs/auth-onboarding-flow.md).
 - Reference-based mobile email/password sign-in, self-registration and recovery screen prototypes, reachable from Settings. Shared inputs, password visibility and validation work without account creation, authentication or email delivery. Owner runtime/visual acceptance pending.
 - Backend contract refresh for implemented course/admin prototypes, with release/progress proposals and an explicit pilot decision register. Adult learner email/password sign-in is owner-confirmed; backend implementation and remaining policies stay pending.
 - Course next steps on learner quiz results: shared quiz-finished status, next unfinished lesson/module and curriculum access, plus all-finished revisit guidance. Existing answer review/retry, best scores and recovery remain; owner runtime/visual review pending.

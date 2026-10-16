@@ -1,14 +1,16 @@
 import { useState } from 'react';
 import { router } from 'expo-router';
-import { Keyboard, Pressable, StyleSheet, View } from 'react-native';
+import { Keyboard, Pressable, StyleSheet } from 'react-native';
 import { PasswordField } from '../components/PasswordField';
 import { AccountHero } from '../components/AccountHero';
 import { AccountProviders } from '../components/AccountProviders';
+import { AccountTopBar } from '../components/AccountTopBar';
+import { AccountRecoveryHero } from '../components/AccountRecoveryHero';
 import { Screen, ContentGroup } from '../../../shared/ui/Screen';
 import { InputField } from '../../../shared/ui/InputField';
 import { Text } from '../../../shared/ui/Text';
 import { Card } from '../../../shared/ui/Card';
-import { Button, IconButton } from '../../../shared/ui/Button';
+import { Button } from '../../../shared/ui/Button';
 import { colors } from '../../../shared/theme/tokens';
 
 type Mode = 'sign-in' | 'sign-up' | 'recovery';
@@ -41,19 +43,11 @@ export function AccountScreen({ mode }: { mode: Mode }) {
   }
   return (
     <Screen contentStyle={styles.screenContent} backgroundColor="#F8F5FC">
-      <View style={styles.topBar}>
-        <IconButton
-          name="arrow-left"
-          label="Go back"
-          onPress={() => (router.canGoBack() ? router.back() : router.replace('/settings'))}
-        />
-        <View style={styles.badge}>
-          <Text variant="caption">
-            {recovery ? 'Account recovery' : signup ? 'Create account' : 'Welcome back'}
-          </Text>
-        </View>
-      </View>
-      <AccountHero mode={mode} />
+      <AccountTopBar
+        label={recovery ? 'Account recovery' : signup ? 'Create account' : 'Welcome back'}
+        onBack={() => (router.canGoBack() ? router.back() : router.replace('/settings'))}
+      />
+      {recovery ? <AccountRecoveryHero mode="request" /> : <AccountHero mode={mode} />}
       <ContentGroup>
         {signup && (
           <ContentGroup>
@@ -63,7 +57,10 @@ export function AccountScreen({ mode }: { mode: Mode }) {
               accessibilityLabel="Display name, optional"
               placeholder="What should we call you?"
               value={name}
-              onChangeText={setName}
+              onChangeText={(value) => {
+                setName(value);
+                edit();
+              }}
               maxLength={40}
               autoComplete="nickname"
             />
@@ -156,7 +153,6 @@ export function AccountScreen({ mode }: { mode: Mode }) {
         )}
         <Button
           label={recovery ? 'Request password reset' : signup ? 'Create account' : 'Sign in'}
-          icon={false}
           onPress={submit}
         />
         {submitted && Object.keys(errors).length > 0 && (
@@ -184,6 +180,13 @@ export function AccountScreen({ mode }: { mode: Mode }) {
                 ? 'No email has been sent. Recovery and email verification still need to be configured.'
                 : 'Your fields are ready for this screen preview. Nothing has been submitted or saved to an account.'}
             </Text>
+            {(signup || recovery) && (
+              <Button
+                label={signup ? 'Preview email verification' : 'Preview password reset'}
+                variant="outline"
+                onPress={() => router.push(signup ? '/verify-email' : '/reset-password')}
+              />
+            )}
           </Card>
         )}
       </ContentGroup>
@@ -222,14 +225,6 @@ const styles = StyleSheet.create({
   accent: { color: '#75619D' },
   switchLink: { minHeight: 44, justifyContent: 'center', alignItems: 'center', paddingVertical: 8 },
   center: { textAlign: 'center' },
-  topBar: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', gap: 12 },
-  badge: {
-    backgroundColor: colors.lavender,
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    borderRadius: 4,
-    flexShrink: 1,
-  },
   group: { gap: 10 },
   link: { minHeight: 44, justifyContent: 'center', alignSelf: 'flex-start', paddingVertical: 8 },
   error: { color: colors.danger },

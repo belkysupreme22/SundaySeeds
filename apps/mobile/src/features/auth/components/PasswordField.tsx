@@ -1,6 +1,7 @@
 import { useState } from 'react';
+import { Pressable, StyleSheet } from 'react-native';
 import { InputField } from '../../../shared/ui/InputField';
-import { IconButton } from '../../../shared/ui/Button';
+import { Icon } from '../../../shared/ui/Icon';
 
 export function PasswordField({
   label,
@@ -27,12 +28,20 @@ export function PasswordField({
       autoCorrect={false}
       autoComplete={newPassword ? 'new-password' : 'current-password'}
       trailing={
-        <IconButton
-          name={visible ? 'eye-off' : 'eye'}
-          label={`${visible ? 'Hide' : 'Show'} ${label.toLowerCase()}`}
+        <Pressable
+          accessibilityRole="button"
+          accessibilityLabel={`${visible ? 'Hide' : 'Show'} ${label.toLowerCase()}`}
           onPress={() => setVisible(!visible)}
-        />
+          style={({ pressed }) => [styles.reveal, pressed && styles.pressed]}
+        >
+          <Icon name={visible ? 'eye-off' : 'eye'} size={18} />
+        </Pressable>
       }
     />
   );
 }
+
+const styles = StyleSheet.create({
+  reveal: { minWidth: 44, minHeight: 44, alignItems: 'center', justifyContent: 'center' },
+  pressed: { opacity: 0.6 },
+});

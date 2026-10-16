@@ -1,5 +1,7 @@
 # Backend contract proposal
 
+**16 October — auth follow-up UI scope:** Verification and new-password screens are explicitly reachable previews of future states; every service action remains unavailable. [Auth onboarding flow](auth-onboarding-flow.md) records the paths and backend considerations. No delivery method, code/token format, password policy, callback contract or verified-access gate is chosen. The question of requiring email verification before course access is unanswered; B1-05b remains open.
+
 **16 October provider UI request:** Owner requested Google and Apple options from the account reference. Both now exist as unavailable screen actions on mobile sign-in/sign-up. Email/password self-onboarding remains confirmed. Provider setup, callbacks, email collision/account linking, verification and recovery behavior remain undefined and unconfigured; adding buttons does not establish a working OAuth service.
 
 Updated 16 October 2026. **Discussion draft; not an approved schema, API or permission implementation.** The owner selected adult learners, **self-onboarding with email and password**, screen prototypes before a connected pilot, and backend planning in parallel. Adults can register without a prior invitation. Administration means a system-wide super admin with evolving sub-admin roles. Supabase is planned, not configured or connected. Registration selection does not settle email verification, recovery, staff sign-in, class admission or invitation policy.
@@ -105,7 +107,7 @@ No SQL, RLS policies, provider configuration, credentials, email delivery or net
 | B1-03 | Confirmed by owner | Automatic knowledge checks with answers and explanations; no teacher marking | Feedback operation implementation |
 | B1-04 | Owner decision required | First organization/class, curriculum owner, content/translation rights and permitted publisher/inviter | Real pilot data and content publication |
 | B1-05a | Confirmed by owner, 16 October | Adult learner self-onboarding: create an account without an invitation using email/password. Class admission and staff grants are separate | Registration UI/contract direction established; no service configured |
-| B1-05b | Owner decision required | Email verification; password recovery destination; class discovery/admission or invitation rules; staff sign-in and staff-as-learner support | Remaining identity/enrollment workflow and connected implementation |
+| B1-05b | Owner decision required | Whether email verification is required before course access (question unanswered); verification/recovery method and destination; class discovery/admission or invitation rules; staff sign-in and staff-as-learner support | Remaining identity/enrollment workflow and connected implementation; follow-up UI previews do not settle these rules |
 | B1-06 | Owner decision required | Super-admin bootstrap/backup/recovery, initial sub-admin capabilities/scopes, delegation and audit readers | Production grants/administrative authorization |
 | B1-07 | Proposal above; not accepted | Immutable course releases, class assignment pinning, withdrawal/revocation and older in-flight attempts | Schema and publishing/learning services |
 | B1-08 | Proposal above; not accepted | Completion without pass threshold, unlimited retries, version-bound best score and course denominator | Trusted attempts and reporting |

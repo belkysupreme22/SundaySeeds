@@ -2,22 +2,18 @@ import { Image, StyleSheet, useWindowDimensions, View } from 'react-native';
 import { Text } from '../../../shared/ui/Text';
 import { AccountBackdrop } from './AccountBackdrop';
 
-export function AccountHero({ mode }: { mode: 'sign-in' | 'sign-up' | 'recovery' }) {
+export function AccountHero({ mode }: { mode: 'sign-in' | 'sign-up' }) {
   const signup = mode === 'sign-up';
   const { width, fontScale } = useWindowDimensions();
   const stacked = width < 360 || fontScale > 1.2;
   return (
     <View style={[styles.hero, stacked && styles.stacked]}>
       <View style={[styles.copy, stacked && styles.stackedCopy]}>
-        <Text variant="heading">
-          {signup ? 'Sign up' : mode === 'recovery' ? 'Forgot password?' : 'Sign in'}
-        </Text>
+        <Text variant="heading">{signup ? 'Sign up' : 'Sign in'}</Text>
         <Text variant="small">
           {signup
             ? 'Create your account and start growing today.'
-            : mode === 'recovery'
-              ? 'Find your way back to learning.'
-              : 'Welcome back! Make room for a little learning today.'}
+            : 'Welcome back! Make room for a little learning today.'}
         </Text>
       </View>
       <View
