@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet, View, type StyleProp, type ViewStyle } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { colors } from '../theme/tokens';
 import { BottomNav } from './BottomNav';
@@ -8,15 +8,22 @@ export function Screen({
   children,
   tabs = false,
   footer,
+  contentStyle,
+  backgroundColor,
 }: {
   children: ReactNode;
   tabs?: boolean;
   footer?: ReactNode;
+  contentStyle?: StyleProp<ViewStyle>;
+  backgroundColor?: string;
 }) {
   return (
-    <SafeAreaView style={styles.safe} edges={['top', 'left', 'right']}>
+    <SafeAreaView
+      style={[styles.safe, backgroundColor ? { backgroundColor } : undefined]}
+      edges={['top', 'left', 'right']}
+    >
       <ScrollView
-        contentContainerStyle={styles.content}
+        contentContainerStyle={[styles.content, contentStyle]}
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}
       >

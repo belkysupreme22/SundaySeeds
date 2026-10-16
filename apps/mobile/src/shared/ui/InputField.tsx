@@ -2,9 +2,11 @@ import { useState, type ReactNode } from 'react';
 import { Platform, StyleSheet, TextInput, View, type TextInputProps } from 'react-native';
 import { colors, fonts } from '../theme/tokens';
 import { Icon, type IconName } from './Icon';
+import { Text } from './Text';
 
 export function InputField({
   icon,
+  label,
   trailing,
   appearance = 'outlined',
   onFocus,
@@ -14,11 +16,36 @@ export function InputField({
   ...props
 }: TextInputProps & {
   icon?: IconName;
+  label?: string;
   trailing?: ReactNode;
   appearance?: 'outlined' | 'soft';
 }) {
   const [focused, setFocused] = useState(false);
-
+  const input = (
+    <TextInput
+      placeholderTextColor={colors.muted}
+      selectionColor={colors.primary}
+      cursorColor={colors.ink}
+      {...props}
+      editable={editable}
+      underlineColorAndroid="transparent"
+      onFocus={(event) => {
+        setFocused(true);
+        onFocus?.(event);
+      }}
+      onBlur={(event) => {
+        setFocused(false);
+        onBlur?.(event);
+      }}
+      style={[
+        styles.input,
+        label && styles.labeledInput,
+        style,
+        styles.noInnerBorder,
+        Platform.OS === 'web' && styles.noWebOutline,
+      ]}
+    />
+  );
   return (
     <View
       style={[
@@ -29,34 +56,25 @@ export function InputField({
       ]}
     >
       {icon && <Icon name={icon} size={20} />}
-      <TextInput
-        placeholderTextColor={colors.muted}
-        selectionColor={colors.primary}
-        cursorColor={colors.ink}
-        {...props}
-        editable={editable}
-        underlineColorAndroid="transparent"
-        onFocus={(event) => {
-          setFocused(true);
-          onFocus?.(event);
-        }}
-        onBlur={(event) => {
-          setFocused(false);
-          onBlur?.(event);
-        }}
-        style={[
-          styles.input,
-          style,
-          styles.noInnerBorder,
-          Platform.OS === 'web' && styles.noWebOutline,
-        ]}
-      />
+      {label ? (
+        <View style={styles.inputColumn}>
+          <Text variant="caption" style={styles.insideLabel}>
+            {label}
+          </Text>
+          {input}
+        </View>
+      ) : (
+        input
+      )}
       {trailing}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  inputColumn: { flex: 1, minWidth: 0 },
+  insideLabel: { fontSize: 10, lineHeight: 14, paddingTop: 6 },
+  labeledInput: { flex: 0, minHeight: 28, paddingTop: 0, paddingBottom: 6, fontSize: 12 },
   frame: {
     flexDirection: 'row',
     alignItems: 'center',

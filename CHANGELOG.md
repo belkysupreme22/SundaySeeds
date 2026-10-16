@@ -5,6 +5,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Changed
+- Reworked mobile account artwork against reference 03 with transparent portraits, layered pastel shapes and ink accents; added requested Google/Apple options with explicit unavailable-provider feedback. Owner runtime/visual review pending.
 - Removed example-value autofill and hardcoded credentials from the mobile account screens; forms use manual entry.
 
 ### Added

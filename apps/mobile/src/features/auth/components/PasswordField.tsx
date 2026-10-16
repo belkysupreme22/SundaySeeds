@@ -17,6 +17,7 @@ export function PasswordField({
   return (
     <InputField
       icon="lock"
+      label={label}
       accessibilityLabel={label}
       placeholder={label}
       value={value}
