@@ -17,6 +17,14 @@ export function SettingsScreen() {
       <PageHeader title="Settings" subtitle="Make SundaySeeds your own." back />
       <SettingsGroup title="Account">
         <SettingsRow
+          icon="log-in"
+          title="Sign in or create an account"
+          value="Preview"
+          description="Explore email and password self-onboarding."
+          onPress={() => router.push('/sign-in')}
+        />
+        <SettingsRow
+          divider
           icon="user"
           title="Personal information"
           description="Update your display name."

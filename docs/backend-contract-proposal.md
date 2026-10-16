@@ -6,6 +6,8 @@ This document supplies a shared vocabulary for the learner app and teacher/admin
 
 ## Current implementation and contract boundary
 
+Mobile email/password self-registration, sign-in and recovery now have reference-based screen prototypes reachable from Settings. They validate fields and show service-unavailable outcomes; no identity provider, verification/reset delivery, policy consent or session exists. The optional name field does not update the learner profile. B1-05b remains open and these screens do not constitute LMS-B3 implementation.
+
 Teacher course/module authoring, structured lessons and automatic quizzes, preview/publication snapshots, class/enrollment examples and reports now have source prototypes. Administrator directory, scoped Access proposals, Settings and audit/operations examples also exist. Their state is session-only and does not establish real accounts, authorization, publication, invitations or audit history.
 
 Mobile now groups four stable sample lesson IDs into one course with two modules. Home, Lessons, curriculum and quiz results derive a course journey from the existing lesson store. Quiz completion, reading position and best score remain distinct. The sample course is not a publication produced by the teacher workspace. A connected adapter must never treat either prototype's fixtures as authoritative records.
