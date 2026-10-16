@@ -43,14 +43,6 @@ export function AccountScreen({ mode }: { mode: Mode }) {
     Keyboard.dismiss();
     setNotice(true);
   }
-  function useExample() {
-    setEmail('learner@example.com');
-    setName('Alex');
-    setPassword('Example-only-2026');
-    setConfirmation('Example-only-2026');
-    setSubmitted(false);
-    setNotice(false);
-  }
   function edit() {
     setNotice(false);
   }
@@ -78,10 +70,8 @@ export function AccountScreen({ mode }: { mode: Mode }) {
       <Card tone="yellow" shadow={false} stroke="soft" style={styles.group}>
         <Text variant="label">Account services are not connected yet</Text>
         <Text variant="small">
-          Use example details to explore these screens. No account is created, no sign-in occurs and
-          no recovery email is sent.
+          No account is created, no sign-in occurs and no recovery email is sent.
         </Text>
-        <Button label="Use example details" variant="outline" icon="edit-3" onPress={useExample} />
       </Card>
       <ContentGroup>
         {signup && (
