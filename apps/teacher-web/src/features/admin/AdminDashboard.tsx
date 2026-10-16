@@ -12,6 +12,7 @@ import "./directory/directory.css";
 import { useAdminSettings } from "./settings/useAdminSettings";
 import { SystemSettingsPanel } from "./settings/SystemSettingsPanel";
 import { AdminHelpCard } from "./settings/AdminHelpCard";
+import { AuditWorkspace } from "./audit/AuditWorkspace";
 
 function AdministrationStructure() {
   return (
@@ -84,6 +85,9 @@ export default function AdminDashboard() {
           </Tabs.Trigger>
           <Tabs.Trigger className="tab-trigger" value="settings">
             Settings
+          </Tabs.Trigger>
+          <Tabs.Trigger className="tab-trigger" value="audit">
+            Audit &amp; operations
           </Tabs.Trigger>
         </Tabs.List>
         {["people", "organizations", "invitations"].includes(tab) && (
@@ -172,7 +176,7 @@ export default function AdminDashboard() {
                 <span className="admin-icon-tile tone-yellow">
                   <BookOpen size={23} aria-hidden="true" />
                 </span>
-                <h3>No activity to display yet</h3>
+                <h3>No connected activity records</h3>
                 <p className="muted">
                   Verified actions will appear here once activity records are
                   available.
@@ -180,9 +184,9 @@ export default function AdminDashboard() {
                 <button
                   type="button"
                   className="button button-outline"
-                  onClick={() => setTab("people")}
+                  onClick={() => setTab("audit")}
                 >
-                  Explore the people view
+                  Review audit workspace
                 </button>
               </div>
             </section>
@@ -245,6 +249,14 @@ export default function AdminDashboard() {
           className="page-stack admin-tab-content"
         >
           <SystemSettingsPanel model={settings} directory={directory} />
+        </Tabs.Content>
+        <Tabs.Content
+          value="audit"
+          forceMount
+          hidden={tab !== "audit"}
+          className="page-stack admin-tab-content"
+        >
+          <AuditWorkspace />
         </Tabs.Content>
       </Tabs.Root>
     </div>

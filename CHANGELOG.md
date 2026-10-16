@@ -5,6 +5,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Added
+- Administrator Audit & operations screens with opt-in fictional event filters/details, explicit unavailable live history/services and isolated recovery presentations. Denied/failed outcomes remain distinct from acknowledged changes; no prototype actions become real audit events. Owner runtime/visual review pending.
 - Administrator Settings with useful new-class/invitation defaults, editable Overview help guide and separate table-spacing preference. Explicit Save/Cancel and draft-only restore preserve open forms and existing records; archived default scopes are handled safely. Session-only; runtime review pending.
 - Full-page administrator Access workspace with scoped role proposals, finite capabilities, revisioned assignment reviews and confirmed revocation simulations. Added isolated last-admin/self-removal/bootstrap examples and recovery considerations. No directory roles, actual grants or backend services changed; owner review pending.
 - Administrator People/Organizations/Invitations workflow with one shared simulated directory, scoped rosters, validated forms, invitation lifecycle and preserved archive/restore states. Opt-in examples update consistently across full-page screens; no accounts, messages or access grants. Owner review pending.
