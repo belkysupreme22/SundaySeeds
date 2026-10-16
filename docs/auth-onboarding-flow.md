@@ -20,6 +20,8 @@ The existing first-run path remains **Welcome â†’ optional display-name setup â†
 
 The follow-up pages show a concise service-availability note and meaningful return links. Recovery and follow-up pages do not show provider rows. Google/Apple remain on sign-in and signup.
 
+Social buttons follow reference 03's secondary proportions: 44px minimum height versus the primary CTA's 52px, white fill, fine charcoal border, 6px corners and medium labels. Equal 22px icon slots align the official Google asset and installed Apple mark. Side-by-side buttons retain narrow/large-text stacking; stacked buttons grow with their content. Provider actions remain unavailable, with no OAuth or session. Source formatting/whitespace passed; rendered review remains pending because the preview tool could not initialize.
+
 All credentials are component state only. Navigation carries no email or password query parameters; follow-up direct routes do not require an existing registration, email, reset token or session. No new storage keys, profile updates, learning mutations, dependencies or network requests are part of this increment. No credential is logged or saved by these screens.
 
 ## Reference decisions

@@ -1,5 +1,7 @@
 # Design reference and acceptance
 
+**16 October — social-button follow-up:** Reference-03 sign-in uses shorter secondary Google/Apple buttons than its main CTA. Provider buttons now use 44px minimum height, charcoal 1px borders, 6px corners, medium labels and equal icon slots. Existing marks, white fill and responsive stacking remain; no provider is connected. Owner rendered review pending.
+
 **16 October — auth input follow-up:** Reference 03's field outlines are softer than its CTA outlines. Account fields now opt into charcoal 1px borders and semibold internal labels; focused fields use violet 2px borders, white fill and compensated padding. Focus is an accessibility adaptation, not a shown reference state. Plain password eyes remain unboxed, with the crossed-eye glyph while masked. Other screen/input appearances are unchanged. Live-preview tool failed; owner rendered comparison pending.
 
 **16 October — auth follow-up reference boundary:** Reference 03 contains Welcome, Login and Sign Up; references 02/04 contain profile, interests and learning preferences. None shows recovery, verification or new-password screens. The follow-up pages therefore extend reference 03's pale lilac surface, fine outlines, pastel geometry and field/CTA hierarchy with a code-native mail illustration. Existing auth portraits retain their right-edge placement; primary CTA arrows are restored to match reference 03. See [auth onboarding flow](auth-onboarding-flow.md) for scope and pending visual checks. No pixel-exact or rendered acceptance is claimed.

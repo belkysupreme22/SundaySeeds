@@ -5,6 +5,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Changed
+- Matched auth Google/Apple buttons to the reference's shorter secondary proportions, fine charcoal borders and consistent icon alignment, preserving responsive stacking and unavailable-provider feedback.
 - Refined auth inputs against reference 03 with softer charcoal outlines, semibold internal labels, masked crossed-eye glyphs and violet focus borders; other screen input appearances are unchanged. Rendered acceptance pending.
 - Refined account recovery with a code-native mail illustration using reference 03's visual language and restored right-arrow primary actions on existing auth screens. Existing sign-in/signup portraits, Google/Apple options and account-only lilac tint are preserved; owner visual review pending.
 - Reworked mobile account artwork against reference 03 with transparent portraits, layered pastel shapes and ink accents; added requested Google/Apple options with explicit unavailable-provider feedback. Owner runtime/visual review pending.
