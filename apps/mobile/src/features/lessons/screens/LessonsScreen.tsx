@@ -72,6 +72,16 @@ export function LessonsScreen() {
           onPress={() => (topic ? router.setParams({ topic: '' }) : router.push('/lessons/topics'))}
         />
       </View>
+      <Card tone="mint" shadow={false} style={styles.banner}>
+        <Text variant="small">SAMPLE COURSE · 2 MODULES · 4 LESSONS</Text>
+        <Text variant="title">Faith for everyday life</Text>
+        <Text>Follow a guided path through prayer, trust, courage and kindness.</Text>
+        <Button
+          label="Explore course"
+          icon="arrow-right"
+          onPress={() => router.push('/lessons/course')}
+        />
+      </Card>
       <ContentGroup>
         <View style={styles.sectionHeader}>
           <View style={styles.headerWords}>
