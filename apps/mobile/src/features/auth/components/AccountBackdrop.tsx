@@ -3,13 +3,7 @@ import Svg, { G, Path } from 'react-native-svg';
 /** Separate contours traced from reference-03's centre and right auth panels. */
 export function AccountBackdrop({ signup }: { signup: boolean }) {
   return (
-    <Svg
-      width="100%"
-      height="100%"
-      viewBox="0 0 240 240"
-      preserveAspectRatio="none"
-      accessible={false}
-    >
+    <Svg width="100%" height="100%" viewBox="0 0 240 240" preserveAspectRatio="none" aria-hidden>
       <Path
         d={
           signup

@@ -1,5 +1,7 @@
 # SundaySeeds implementation plan
 
+**16 October — SVG web warning fix:** Replaced the native-only `accessible={false}` prop on both auth SVG roots with `aria-hidden`, following a focused reproduction of the React DOM warning. See [auth flow checks](auth-onboarding-flow.md). Browser/native review remains pending; account-policy decisions and screen flow are unchanged.
+
 **16 October — social-button follow-up:** Refined Google/Apple button proportions, border weight and icon alignment against reference 03. Both auth screens share the correction; see [current auth flow](auth-onboarding-flow.md). No scope/backend decision changed; owner rendered review remains pending.
 
 **16 October — auth input follow-up:** Applied reference-03 field-specific charcoal outlines, semibold inside labels, masked crossed-eye glyph and violet focus treatment through an opt-in account appearance. Other screens retain their respective styles. See [current auth flow](auth-onboarding-flow.md); rendered review remains pending after the preview tool failed to start.

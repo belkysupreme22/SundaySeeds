@@ -30,7 +30,7 @@ export function AccountRecoveryHero({ mode }: { mode: Mode }) {
         accessibilityElementsHidden
         importantForAccessibility="no-hide-descendants"
       >
-        <Svg width="100%" height="100%" viewBox="0 0 190 205" accessible={false}>
+        <Svg width="100%" height="100%" viewBox="0 0 190 205" aria-hidden>
           <Path
             d="M190 202H91C46 202 25 177 25 143C25 111 44 91 71 77L80 91L82 62L112 55L119 73L139 48L162 63L158 81L190 73Z"
             fill={reset ? colors.yellow : colors.lavender}

@@ -36,6 +36,8 @@ All credentials are component state only. Navigation carries no email or passwor
 
 ## Owner review and actual checks
 
+Web SVG correction: both decorative auth SVG roots use `aria-hidden` instead of `accessible={false}`. The installed SVG web renderer forwards `accessible` to React DOM, where a false value causes the non-boolean-attribute warning at `<Svg>`. A focused render-only reproduction confirmed the warning and the warning-free `aria-hidden` alternative. The existing art wrappers still hide decorative content on native. No artwork paths or placement changed. Browser/native rendered acceptance remains pending owner.
+
 The eight changed auth source files were formatted with the installed formatter. Source inspection and whitespace checks passed; these do not establish runtime acceptance. Runtime, build, typecheck, lint, native and visual checks have not been run for this increment. The owner retains terminal-heavy checks and rendered review. The existing deferred mobile lint issues are outside this task.
 
 Suggested owner review:
