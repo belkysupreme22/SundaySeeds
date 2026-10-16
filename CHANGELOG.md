@@ -5,6 +5,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Added
+- Backend contract refresh for implemented course/admin prototypes, with release/progress proposals and an explicit pilot decision register. Adult learner email/password sign-in is owner-confirmed; backend implementation and remaining policies stay pending.
 - Course next steps on learner quiz results: shared quiz-finished status, next unfinished lesson/module and curriculum access, plus all-finished revisit guidance. Existing answer review/retry, best scores and recovery remain; owner runtime/visual review pending.
 - Shared learner course journey card on Home and Lessons with existing quiz progress, curriculum access and resume/revisit actions. Course summary logic is shared with the curriculum; loading/read failure stays distinct from zero completion. Owner runtime/visual review pending.
 - Sample learner course curriculum with two modules, existing lesson links, reading/quiz status and a resumable journey. Existing lesson progress and bookmarks are preserved; no enrollment or backend service. Owner runtime/visual review pending.
