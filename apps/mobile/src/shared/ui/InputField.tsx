@@ -18,7 +18,7 @@ export function InputField({
   icon?: IconName;
   label?: string;
   trailing?: ReactNode;
-  appearance?: 'outlined' | 'soft';
+  appearance?: 'outlined' | 'soft' | 'account';
 }) {
   const [focused, setFocused] = useState(false);
   const input = (
@@ -50,15 +50,20 @@ export function InputField({
     <View
       style={[
         styles.frame,
+        appearance === 'account' && styles.account,
         appearance === 'soft' && styles.soft,
         focused && editable && (appearance === 'soft' ? styles.softFocused : styles.focused),
+        focused && editable && appearance === 'account' && styles.accountFocused,
         !editable && styles.disabled,
       ]}
     >
       {icon && <Icon name={icon} size={20} />}
       {label ? (
         <View style={styles.inputColumn}>
-          <Text variant="caption" style={styles.insideLabel}>
+          <Text
+            variant="caption"
+            style={[styles.insideLabel, appearance === 'account' && styles.accountLabel]}
+          >
             {label}
           </Text>
           {input}
@@ -75,6 +80,10 @@ const styles = StyleSheet.create({
   inputColumn: { flex: 1, minWidth: 0 },
   insideLabel: { fontSize: 10, lineHeight: 14, paddingTop: 6 },
   labeledInput: { flex: 0, minHeight: 28, paddingTop: 0, paddingBottom: 6, fontSize: 12 },
+  // Reference 03 uses a finer charcoal field outline than its dark CTA outline.
+  account: { borderColor: '#6B6672' },
+  accountLabel: { fontFamily: fonts.semibold },
+  accountFocused: { borderColor: '#75619D', backgroundColor: colors.white },
   frame: {
     flexDirection: 'row',
     alignItems: 'center',

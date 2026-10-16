@@ -52,6 +52,7 @@ export function AccountScreen({ mode }: { mode: Mode }) {
         {signup && (
           <ContentGroup>
             <InputField
+              appearance="account"
               label="Display name (optional)"
               icon="user"
               accessibilityLabel="Display name, optional"
@@ -68,6 +69,7 @@ export function AccountScreen({ mode }: { mode: Mode }) {
         )}
         <ContentGroup>
           <InputField
+            appearance="account"
             label="Email address"
             icon="mail"
             accessibilityLabel="Email address"

@@ -17,6 +17,7 @@ export function PasswordField({
   const [visible, setVisible] = useState(false);
   return (
     <InputField
+      appearance="account"
       icon="lock"
       label={label}
       accessibilityLabel={label}
@@ -34,7 +35,7 @@ export function PasswordField({
           onPress={() => setVisible(!visible)}
           style={({ pressed }) => [styles.reveal, pressed && styles.pressed]}
         >
-          <Icon name={visible ? 'eye-off' : 'eye'} size={18} />
+          <Icon name={visible ? 'eye' : 'eye-off'} size={18} />
         </Pressable>
       }
     />
