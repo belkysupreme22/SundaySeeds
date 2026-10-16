@@ -12,6 +12,7 @@ import { SectionHeading } from '../../../shared/ui/SectionHeading';
 import { colors, type Pastel } from '../../../shared/theme/tokens';
 import { WeeklyHero } from '../components/WeeklyHero';
 import { ContinueLearning } from '../components/ContinueLearning';
+import { CourseJourneyCard } from '../../courses/components/CourseJourneyCard';
 import { useLearnerProfile } from '../../profile/hooks/useLearnerProfile';
 export function HomeScreen() {
   const { width, fontScale } = useWindowDimensions();
@@ -100,6 +101,10 @@ export function HomeScreen() {
         </View>
       </ContentGroup>
       <ContinueLearning />
+      <ContentGroup>
+        <SectionHeading title="Your course journey" />
+        <CourseJourneyCard />
+      </ContentGroup>
       <ContentGroup>
         <SectionHeading
           title="Grow a little today"

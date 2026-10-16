@@ -5,6 +5,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Added
+- Shared learner course journey card on Home and Lessons with existing quiz progress, curriculum access and resume/revisit actions. Course summary logic is shared with the curriculum; loading/read failure stays distinct from zero completion. Owner runtime/visual review pending.
 - Sample learner course curriculum with two modules, existing lesson links, reading/quiz status and a resumable journey. Existing lesson progress and bookmarks are preserved; no enrollment or backend service. Owner runtime/visual review pending.
 - Administrator Audit & operations screens with opt-in fictional event filters/details, explicit unavailable live history/services and isolated recovery presentations. Denied/failed outcomes remain distinct from acknowledged changes; no prototype actions become real audit events. Owner runtime/visual review pending.
 - Administrator Settings with useful new-class/invitation defaults, editable Overview help guide and separate table-spacing preference. Explicit Save/Cancel and draft-only restore preserve open forms and existing records; archived default scopes are handled safely. Session-only; runtime review pending.

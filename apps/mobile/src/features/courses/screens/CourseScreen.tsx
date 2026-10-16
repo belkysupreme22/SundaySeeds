@@ -2,7 +2,7 @@ import { router } from 'expo-router';
 import { Pressable, StyleSheet, View } from 'react-native';
 import { sampleCourse } from '../data/sampleCourse';
 import { getLesson } from '../../lessons/data/lessons';
-import { useLearningProgress } from '../../progress/hooks/useLearningProgress';
+import { useCourseJourney } from '../hooks/useCourseJourney';
 import { Screen } from '../../../shared/ui/Screen';
 import { PageHeader } from '../../../shared/ui/PageHeader';
 import { Card } from '../../../shared/ui/Card';
@@ -12,21 +12,12 @@ import { Icon } from '../../../shared/ui/Icon';
 import { colors } from '../../../shared/theme/tokens';
 
 export function CourseScreen() {
-  const { progress, hydrated, errorKind } = useLearningProgress();
-  const lessons = sampleCourse.modules
-    .flatMap((module) => module.lessonIds.map(getLesson))
-    .filter((lesson) => lesson !== undefined);
-  const available = hydrated && errorKind !== 'load';
-  const completed = lessons.filter((lesson) => progress[lesson.id]?.completed).length;
-  const next =
-    lessons.find((lesson) => progress[lesson.id] && !progress[lesson.id].completed) ??
-    lessons.find((lesson) => !progress[lesson.id]?.completed) ??
-    lessons[0];
+  const { progress, lessons, available, completed, next, finished, status } = useCourseJourney();
   return (
     <Screen tabs>
       <PageHeader title="Course overview" back />
       <Card tone="lavender" style={styles.group}>
-        <Text variant="small">SAMPLE COURSE · 2 MODULES</Text>
+        <Text variant="small">SAMPLE COURSE · {sampleCourse.modules.length} MODULES</Text>
         <Text variant="heading">{sampleCourse.title}</Text>
         <Text>{sampleCourse.description}</Text>
         <Text variant="small">
@@ -36,14 +27,8 @@ export function CourseScreen() {
       </Card>
       <Card shadow={false} stroke="soft" style={styles.group}>
         <Text variant="title">Your course journey</Text>
-        <Text variant="small">
-          {available
-            ? `${completed} of ${lessons.length} lesson quizzes finished`
-            : hydrated
-              ? 'Progress unavailable. Use the recovery notice to try again.'
-              : 'Loading your progress…'}
-        </Text>
-        {available && (
+        <Text variant="small">{status}</Text>
+        {available && lessons.length > 0 && (
           <View
             accessibilityRole="progressbar"
             accessibilityValue={{ min: 0, max: lessons.length, now: completed }}
@@ -60,7 +45,7 @@ export function CourseScreen() {
             label={
               !available
                 ? 'Explore first lesson'
-                : completed === lessons.length
+                : finished
                   ? 'Revisit course'
                   : progress[next.id]
                     ? 'Continue learning'
