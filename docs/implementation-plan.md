@@ -1,10 +1,16 @@
 # SundaySeeds implementation plan
 
+## Learner sample content polish — 19 October 2026
+
+Following optional account onboarding in `752de75`, the owner requested realistic sample data and finished product wording for review. The four original adult lessons now have refined introductions/outcomes and 12 reading/reflection sections; the course/module descriptions, curriculum guidance and post-quiz next steps describe the learning experience. Home labels its fixed selection Featured lesson rather than implying a weekly publication schedule. Existing sample badges identify content without repeated inline sample prefixes or an architecture-oriented course footer.
+
+Course/module/lesson/section/question IDs, ordering, question text/answer keys, reading durations, storage schema and progress logic are unchanged. No fabricated enrollment, instructor, history, analytics, account or connected service is added. Scope is the current learner course journey; teacher/admin examples remain their separate prototypes. Changed source was formatted and reviewed; tests/build/typecheck/lint and runtime/native/visual acceptance remain pending owner. Review Home → course curriculum → all four lesson overviews/readers → quiz next steps at narrow widths and larger text, alongside the new account onboarding. B1-04/B1-05b/B1-06 and subsequent contract approval remain prerequisites for connected work.
+
 ## Optional account onboarding — 19 October 2026
 
 The owner approved an optional account step after Welcome, with Create account, Sign in and Skip for now. First launch and Settings introduction replay share the account/form steps; Skip opens Home directly using the existing welcome preference. Add a name for your welcome retains the existing optional name flow, with Back to account options. Existing completed users keep Home; sample courses/lessons stay available without sign-in. Auth forms keep truthful unavailable outcomes and explicit follow-up previews; no session, enrollment, email verification policy, storage schema or backend connection is introduced. See [auth flow and owner checks](auth-onboarding-flow.md) and [decision 0009](decisions/0009-optional-account-onboarding.md).
 
-References 01/02/03 informed the new choice page and retained forms. Source formatting/review only; tests/build/typecheck/lint, browser/runtime/native and visual acceptance remain pending owner. Next: separately polish learner sample content for realistic product review, then owner reviews the full onboarding/course journey. Connected work still requires B1-04/B1-05b/B1-06 decisions and approved contracts; future sign-in at a connected course's Start/Join action is not implemented by this increment.
+References 01/02/03 informed the new choice page and retained forms. Source formatting/review only; tests/build/typecheck/lint, browser/runtime/native and visual acceptance remain pending owner. Learner sample content polish is recorded separately above; next is owner review of the full onboarding/course journey. Connected work still requires B1-04/B1-05b/B1-06 decisions and approved contracts; future sign-in at a connected course's Start/Join action is not implemented by this increment.
 
 ## Current checkpoint — 19 October 2026
 

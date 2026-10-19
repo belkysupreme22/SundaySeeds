@@ -76,7 +76,7 @@ Connected implementation must use acknowledged identity-service outcomes for del
 
 ## Next implementation sequence
 
-1. Owner reviews optional account onboarding, Settings entry and the five forms; record acceptance separately from source completion and automated checks. Refine sample learner content as a separate bounded increment.
+1. Owner reviews optional account onboarding, Settings entry and the five forms, plus the separately implemented learner sample-content polish; record acceptance separately from source completion and automated checks.
 2. Resolve verification/recovery and class-admission decisions in B1-05b alongside pilot ownership/staff-authority decisions. Keep the Google/Apple UI request distinct from configured providers.
 3. Refine course discovery/joining designs against their own references once class-admission behavior is agreed. Existing sample curriculum can remain available independently.
 4. Approve the connected identity contract and backend implementation scope, then connect registration, sign-in, verification and recovery with real service outcomes and appropriate validation. This UI task does not close LMS-B1/B3 or authorize production auth configuration.

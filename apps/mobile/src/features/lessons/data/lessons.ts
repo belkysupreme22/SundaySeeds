@@ -8,18 +8,18 @@ export const lessons: Lesson[] = [
   {
     id: 'good-samaritan',
     title: 'Love your neighbour',
-    subtitle: 'Small acts. A big difference.',
+    subtitle: 'Put compassion into practice.',
     category: 'Kindness',
     scripture: 'Luke 10:25–37',
     durationMinutes: 8,
     color: 'lavender',
     intro:
-      'Sample lesson · Explore the Good Samaritan and discover how everyday kindness can become love in action.',
+      'What does it mean to be a neighbour? Explore the Good Samaritan and consider how compassion shapes the way we respond to people around us.',
     outcomes: [
-      { title: 'Notice others', description: 'Recognise someone who may need care.' },
-      { title: 'Show kindness', description: 'Turn compassion into practical help.' },
-      { title: 'Cross boundaries', description: 'Show love beyond your own circle.' },
-      { title: 'Take a small step', description: 'Choose one safe way to help this week.' },
+      { title: 'Pay attention', description: 'Recognise needs that are easy to overlook.' },
+      { title: 'Respond with care', description: 'Connect compassion with practical help.' },
+      { title: 'Cross boundaries', description: 'Extend kindness beyond familiar circles.' },
+      { title: 'Make it practical', description: 'Choose one thoughtful action for this week.' },
     ],
     memoryVerse: {
       text: 'Thou shalt love thy neighbour as thyself.',
@@ -29,17 +29,17 @@ export const lessons: Lesson[] = [
       {
         id: 'notice',
         title: 'Notice the person',
-        body: 'Jesus told a story about a traveller who was attacked and left beside the road. Some people saw him and passed by. A Samaritan stopped. Compassion begins when we notice a person rather than treating their need as an interruption.\n\nReflect: Who might feel overlooked in your school, workplace or neighbourhood?',
+        body: 'Jesus told a story about a traveller who was attacked and left beside the road. Others saw him and passed by, but a Samaritan stopped. The difference began with attention: he allowed another person’s need to interrupt his journey.\n\nReflect: Who might be easy to overlook in your workplace, neighbourhood or church? What could help you notice them this week?',
       },
       {
         id: 'care',
         title: 'Put kindness into action',
-        body: 'The Samaritan cared for the traveller’s wounds, brought him to a place of rest and arranged further help. His kindness involved practical steps. We cannot meet every need alone, but we can offer what we have and ask a trusted person to help.\n\nTry this: Think of one safe, practical way to support someone this week.',
+        body: 'The Samaritan treated the traveller’s wounds, brought him to an inn and arranged continued care. His compassion became a series of practical decisions. We cannot meet every need ourselves, but we can listen, offer appropriate help and involve someone better placed to support the person.\n\nTry this: Think of someone facing a difficult week. Ask what would help before deciding what to offer.',
       },
       {
         id: 'neighbour',
         title: 'Become a neighbour',
-        body: 'Jesus turned the question from who counts as a neighbour to who acts like one. The Samaritan crossed a social boundary to show mercy. Love is not reserved for people who are already like us.\n\nTake it with you: Listen before judging. Offer help respectfully. Let the other person tell you what they need.',
+        body: 'Jesus shifted the question from who qualifies as a neighbour to who acts as one. The Samaritan crossed a social boundary to show mercy. Being a neighbour asks us to look beyond familiarity and treat another person’s dignity as seriously as our own.\n\nTake it with you: Listen before making assumptions. Choose one respectful, practical act of kindness beyond your usual circle.',
       },
     ],
     questions: [
@@ -86,12 +86,12 @@ export const lessons: Lesson[] = [
     durationMinutes: 7,
     color: 'yellow',
     intro:
-      'Sample lesson · Meet David and reflect on courage, trust and using the gifts you already have.',
+      'Explore David’s response to Goliath and reflect on the relationship between trust, preparation and courage in everyday decisions.',
     outcomes: [
-      { title: 'Name your fear', description: 'Be honest about a difficult challenge.' },
-      { title: 'Remember your gifts', description: 'Notice skills you already practise.' },
+      { title: 'Name your fear', description: 'Identify a challenge you are facing.' },
+      { title: 'Recognise your gifts', description: 'Consider the experience you can draw on.' },
       { title: 'Trust God', description: 'Reflect on what gave David courage.' },
-      { title: 'Choose wisely', description: 'Take a safe step and ask for support.' },
+      { title: 'Choose wisely', description: 'Plan a responsible step with support.' },
     ],
     memoryVerse: {
       text: 'What time I am afraid, I will trust in thee.',
@@ -101,17 +101,17 @@ export const lessons: Lesson[] = [
       {
         id: 'fear',
         title: 'Name the challenge',
-        body: 'Goliath frightened the army of Israel. David saw the same challenge, yet trusted that God had not abandoned them. Courage does not require pretending that a difficult situation is easy.\n\nReflect: What challenge feels bigger than your ability right now? Naming it can be the first step toward seeking help.',
+        body: 'Goliath’s challenge left the army of Israel afraid. David faced the same circumstances, yet trusted that God had not abandoned them. Courage begins with an honest view of a difficult situation; it does not require us to deny fear or minimise what is at stake.\n\nReflect: What conversation, responsibility or decision are you avoiding? Name the challenge and consider what support you need.',
       },
       {
         id: 'gifts',
         title: 'Use what you have',
-        body: 'David remembered caring for his father’s sheep. He did not fight in armour that did not fit him. He went with skills he had practised and trust in God.\n\nReflect: Which gifts, habits or experiences could help you take a wise next step? You do not need to copy someone else’s strengths.',
+        body: 'David drew on his experience caring for his father’s sheep. He set aside unfamiliar armour and used tools he knew. His trust in God did not erase his preparation; the skills formed in ordinary responsibilities mattered.\n\nReflect: Which experience or strength could help you respond wisely? You do not need to approach a challenge exactly as someone else would.',
       },
       {
         id: 'step',
         title: 'Choose wise courage',
-        body: 'Everyday courage can mean telling the truth, apologising or asking for help. This story is not an invitation to take reckless risks or face danger alone. Faithful courage can include trusting a responsible adult or seeking support.\n\nTry this: Choose one honest, safe step toward a challenge you have been avoiding.',
+        body: 'In everyday life, courage may mean telling the truth, offering an apology or asking for help. Trust and good judgement belong together. Seeking advice, setting a boundary or involving someone with the right experience can be a faithful response.\n\nTry this: Choose one honest, responsible step toward the challenge you named. Decide who could support you as you take it.',
       },
     ],
     questions: [
@@ -152,13 +152,13 @@ export const lessons: Lesson[] = [
   {
     id: 'a-life-of-prayer',
     title: 'A moment with God',
-    subtitle: 'Make room for a little stillness.',
+    subtitle: 'Make space for honest prayer.',
     category: 'Prayer',
     scripture: 'Matthew 6:5–13',
     durationMinutes: 6,
     color: 'mint',
     intro:
-      'Sample lesson · Discover prayer as an honest conversation with God, starting with a quiet moment today.',
+      'Begin with the prayer Jesus taught. Explore a simple rhythm of gratitude, daily needs and forgiveness that you can bring into everyday life.',
     outcomes: [
       { title: 'Speak honestly', description: 'Bring your real concerns to God.' },
       { title: 'Learn a pattern', description: 'Explore the prayer Jesus taught.' },
@@ -170,17 +170,17 @@ export const lessons: Lesson[] = [
       {
         id: 'honest',
         title: 'Start honestly',
-        body: 'Jesus taught that prayer does not need to impress an audience. We can come to God with ordinary words and our real concerns. A quiet moment can help us pay attention, but there is no perfect place or polished speech required.\n\nReflect: What would you like to thank God for or ask about today?',
+        body: 'Jesus taught his followers to pray sincerely rather than to impress an audience. Prayer makes room for ordinary words and real concerns. A quiet moment may help us pay attention, but we do not have to find perfect words before we begin.\n\nReflect: What are you grateful for today? What concern have you found difficult to put into words?',
       },
       {
         id: 'pattern',
         title: 'Learn a helpful pattern',
-        body: 'In the Lord’s Prayer, Jesus taught his followers to honour God, ask for daily needs, seek forgiveness and ask for guidance. This gives us a pattern without turning prayer into a performance.\n\nTry this: Name one thing you are thankful for, one need and one person you want to remember.',
+        body: 'The Lord’s Prayer begins by honouring God and turns toward daily needs, forgiveness and guidance. It gives us a pattern to return to when we are unsure where to start. We can use these themes to bring the ordinary details of our lives before God.\n\nTry this: Pause over one phrase of the Lord’s Prayer. Connect it with a need, relationship or decision in your life today.',
       },
       {
         id: 'daily',
         title: 'Return through the day',
-        body: 'Prayer can become part of daily life: before a decision, during a worry or after receiving kindness. We can also pause to listen and reflect. Prayer does not guarantee that events unfold exactly as we ask. It is a way to bring our lives before God.\n\nTake it with you: Choose one regular moment for a short, honest prayer this week.',
+        body: 'Prayer can become part of an ordinary day: before a decision, in a moment of worry or after receiving kindness. We can speak, pause and reflect. Bringing a concern to God does not guarantee the outcome we want; it invites us to keep bringing our lives before him.\n\nTake it with you: Choose an existing daily rhythm, such as breakfast or your journey home, as a reminder to pause for a short, honest prayer.',
       },
     ],
     questions: [
@@ -226,15 +226,15 @@ export const lessons: Lesson[] = [
   {
     id: 'faith-like-a-seed',
     title: 'Small seeds of faith',
-    subtitle: 'Good things take time to grow.',
+    subtitle: 'Nurture a steady, everyday faith.',
     category: 'Faith',
     scripture: 'Mark 4:30–32',
     durationMinutes: 5,
     color: 'peach',
     intro:
-      'Sample lesson · Explore Jesus’ mustard seed picture and the value of small, faithful beginnings.',
+      'Jesus compared God’s kingdom to a mustard seed. Consider what this picture reveals about small beginnings, patient growth and making room for others.',
     outcomes: [
-      { title: 'Start small', description: 'Explore Jesus’ mustard seed picture.' },
+      { title: 'Explore the parable', description: 'Understand the mustard seed picture.' },
       { title: 'Be patient', description: 'Give steady growth time to happen.' },
       { title: 'Practise faith', description: 'Choose a small habit for this week.' },
       { title: 'Welcome others', description: 'Make room for someone to belong.' },
@@ -247,17 +247,17 @@ export const lessons: Lesson[] = [
       {
         id: 'small',
         title: 'Begin with something small',
-        body: 'Jesus compared God’s kingdom to a mustard seed: something small that grows far beyond its beginning. His picture helps us notice that a modest beginning can still matter.\n\nReflect: Have you ever seen one small act of care lead to something bigger?',
+        body: 'Jesus compared God’s kingdom to a mustard seed: a small beginning that grows far beyond what someone might expect. The image invites us to pay attention to what is easily overlooked. A modest start is still worth nurturing.\n\nReflect: Think of a relationship, habit or act of care that began quietly. What helped it grow?',
       },
       {
         id: 'grow',
         title: 'Give growth time',
-        body: 'A seed does not become a plant in a single afternoon. Learning and practising faith also take patience. Reading, asking honest questions, praying and learning alongside others can become steady habits.\n\nTry this: Choose one small practice you can return to this week, without comparing yourself with someone else.',
+        body: 'A seed grows over time. In our own lives, reading Scripture, asking honest questions, praying and learning with others can become steady practices. Growth may be difficult to see from one day to the next, and comparison can distract us from the next faithful step.\n\nTry this: Choose one practice you can return to this week. Keep it small enough to fit your daily responsibilities.',
       },
       {
         id: 'shelter',
         title: 'Grow toward others',
-        body: 'In Jesus’ picture, birds can find shelter in the branches. Growth is not only about becoming impressive; it can make room for others. A growing community can welcome people and offer care.\n\nTake it with you: Look for a simple way to make someone feel included this week.',
+        body: 'In Jesus’ picture, birds find shelter in the branches. The image turns our attention outward: growth can create room for others to find welcome and care. As we nurture faith, we can also ask who benefits from the way we live.\n\nTake it with you: Make space for someone this week. Invite them into a conversation, listen to their experience or offer a thoughtful welcome.',
       },
     ],
     questions: [

@@ -5,6 +5,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Changed
+- Refined the learner sample course and four lessons with adult-focused introductions, outcomes and reflection readings. Course guidance and quiz next steps use natural learning copy; Home now identifies a Featured lesson rather than an unsupported weekly schedule. Sample badges, lesson IDs, quiz answers, reading times and saved-progress behavior are preserved; owner review pending.
 - Aligned agent guidance and roadmap summaries: corrected Expo build commands and SDK-specific documentation rules, clarified lazy chart and publication-simulation boundaries, preserved owner-run verification, and linked current auth/backend decisions. Recreated the ignored local handoff without changing app behavior or connecting services.
 - Fixed the auth SVG web warning by replacing the forwarded native `accessible` boolean with `aria-hidden` on both decorative illustration roots.
 - Matched auth Google/Apple buttons to the reference's shorter secondary proportions, fine charcoal borders and consistent icon alignment, preserving responsive stacking and unavailable-provider feedback.

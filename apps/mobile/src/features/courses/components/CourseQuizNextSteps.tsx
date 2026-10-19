@@ -22,14 +22,14 @@ export function CourseQuizNextSteps({ lessonId }: { lessonId: string }) {
       </Text>
       {available && finished && (
         <Text variant="small">
-          You’ve finished every lesson quiz in this sample course. Revisit any lesson from the
-          curriculum.
+          You’ve completed every knowledge check in this course. Revisit a reflection and consider
+          how you’ll put it into practice.
         </Text>
       )}
       {canContinue && (
         <QuizNextAction
           title={`Continue with ${next.title}`}
-          description={`${nextModule?.title ?? 'Course lesson'} · ${next.durationMinutes} min. Open the lesson overview and pick up your saved place.`}
+          description={`${nextModule?.title ?? 'Course lesson'} · ${next.durationMinutes} min. Read, reflect and explore your next step.`}
           icon="arrow-right"
           tone="lavender"
           onPress={() => router.push(`/lessons/${next.id}`)}
@@ -37,7 +37,7 @@ export function CourseQuizNextSteps({ lessonId }: { lessonId: string }) {
       )}
       <QuizNextAction
         title="View course curriculum"
-        description="See both modules and choose a lesson. Your best quiz scores stay."
+        description="Explore both modules, revisit a reflection or choose your next lesson."
         icon="list"
         tone="mint"
         onPress={() => router.push('/lessons/course')}

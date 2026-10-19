@@ -38,7 +38,8 @@ export function CourseScreen() {
           </View>
         )}
         <Text variant="small" muted>
-          Read each lesson, then finish its quick knowledge check. Explore the modules in any order.
+          Read, reflect and check your understanding. Follow the modules in order or begin with a
+          lesson that speaks to you.
         </Text>
         {next && (
           <Button
@@ -76,7 +77,7 @@ export function CourseScreen() {
             const status = !available
               ? 'Progress unavailable'
               : state?.completed
-                ? 'Quiz finished'
+                ? 'Knowledge check complete'
                 : state
                   ? `Reading ${state.sectionIndex + 1} of ${lesson.sections.length}`
                   : 'Ready to start';
@@ -105,8 +106,8 @@ export function CourseScreen() {
         </Card>
       ))}
       <Text variant="caption" muted>
-        This sample groups the existing lessons into a course. Each lesson keeps its saved place,
-        bookmark and best quiz score.
+        Each lesson includes a Scripture reference, guided reflection and a short knowledge check.
+        Return to the curriculum whenever you want to revisit an idea.
       </Text>
     </Screen>
   );

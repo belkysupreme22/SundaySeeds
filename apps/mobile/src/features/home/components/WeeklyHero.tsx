@@ -12,16 +12,16 @@ export function WeeklyHero() {
     <Card tone="lavender" style={[styles.hero, stacked && styles.stacked]}>
       <View style={[styles.copy, stacked && styles.stackedCopy]}>
         <Text variant="caption" style={styles.eyebrow}>
-          THIS WEEK’S LESSON
+          FEATURED LESSON
         </Text>
         <Text variant="hero" style={styles.headline}>
           Small acts.{'\n'}Great love.
         </Text>
         <Text variant="small" style={[styles.description, stacked && styles.fullDescription]}>
-          Discover what it means to be a good neighbour.
+          Put compassion into practice with the Good Samaritan.
         </Text>
         <Button
-          label="Start learning"
+          label="Explore lesson"
           variant="dark"
           onPress={() => router.push('/lessons/good-samaritan')}
           style={styles.cta}

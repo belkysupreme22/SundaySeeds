@@ -22,7 +22,7 @@ export function CourseJourneyCard() {
           <Text variant="caption">SAMPLE COURSE · {sampleCourse.modules.length} MODULES</Text>
           <Text variant="title">{sampleCourse.title}</Text>
           <Text variant="small" muted>
-            {lessons.length} lessons · Prayer, trust, courage & kindness
+            {lessons.length} Bible studies · Prayer, trust, courage & kindness
           </Text>
         </View>
       </View>
@@ -40,7 +40,7 @@ export function CourseJourneyCard() {
       {available && started && next && (
         <Text variant="small" muted>
           {finished
-            ? 'Every lesson quiz is finished. Revisit a lesson whenever you like.'
+            ? 'You’ve completed every knowledge check. Return to a lesson for a fresh reflection.'
             : `Up next: ${next.title}`}
         </Text>
       )}
