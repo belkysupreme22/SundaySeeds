@@ -1,5 +1,17 @@
 # SundaySeeds implementation plan
 
+## Current checkpoint — 19 October 2026
+
+The owner approved a documentation cleanup after the agent-guidance audit: correct mobile commands/SDK guidance and web chart/simulation wording, align supporting instructions and current roadmap summaries, and recreate the ignored local handoff. No app behavior, service configuration or product policy changes are part of this increment. Verification is documentation/source and diff review only; tests, builds, typecheck/lint and runtime/native/visual checks remain owner-run and pending where not already evidenced.
+
+Source implementation includes the learner sample course journey (curriculum, Home/Lessons discovery and resume, post-quiz next steps), O1/O2, teacher T1–T6/editorial studio, admin A1–A4 and five account UI previews. Their implementation does not establish acceptance or connected services. The owner previously confirmed learner stroke visuals and optional name-setup replay; those confirmations do not accept later increments.
+
+Next sequence: owner reviews sign-in/signup, recovery, verification and new-password previews using [auth onboarding flow](auth-onboarding-flow.md); address bounded design feedback; resolve pilot/content ownership (B1-04), verification/recovery/class admission/staff identity (B1-05b) and admin authority (B1-06) in the [backend decision register](backend-contract-proposal.md). Agree the remaining release/assessment/lifecycle scope and explicitly approve connected implementation before migrations, auth configuration or integration. Adult email/password self-registration without an invitation is already confirmed; class membership and staff authority remain separate.
+
+## Historical checkpoints
+
+Dated notes below preserve the state of their increments. Their old next-step, dependency and instruction-withdrawal statements are historical and do not override the current owner instructions, applicable AGENTS files or current flow/decision docs.
+
 **16 October — SVG web warning fix:** Replaced the native-only `accessible={false}` prop on both auth SVG roots with `aria-hidden`, following a focused reproduction of the React DOM warning. See [auth flow checks](auth-onboarding-flow.md). Browser/native review remains pending; account-policy decisions and screen flow are unchanged.
 
 **16 October — social-button follow-up:** Refined Google/Apple button proportions, border weight and icon alignment against reference 03. Both auth screens share the correction; see [current auth flow](auth-onboarding-flow.md). No scope/backend decision changed; owner rendered review remains pending.
@@ -71,7 +83,7 @@ The app already contains functional versions of welcome, Home, lesson browsing/t
 
 Recent increments added lesson outcome tiles, completed-lesson revisiting, explicit storage-recovery retries and Home/lesson-card layout changes. The 12 October Home design increment is implemented but has not completed owner runtime or visual review. Earlier verification records remain in [verification](verification); they do not establish acceptance of later changes.
 
-There is no connected authentication, real class enrolment, teacher dashboard, notifications service or download manager.
+There is no connected authentication, real class enrolment, production teacher publishing, notifications service or download manager. Teacher/admin screen prototypes exist in `apps/teacher-web`; see the [LMS plan](lms-implementation-plan.md) for their current source status.
 
 ## Phase 1 — Complete the learner frontend designs
 
@@ -165,10 +177,10 @@ Phase 1 is accepted only when the complete learner journey and required native c
 
 ## Phase 2 — Connected pilot and authentication
 
-**Confirmed:** adult learners; system-wide super admin with sub-admin roles to be defined. **Dependencies:** confirm the first pilot group, curriculum owner, adult sign-in method, teacher provisioning, delegated admin scopes and content/translation permissions before implementing production account/access behavior. Backend planning and teacher/admin prototypes can proceed in parallel now.
+**Confirmed:** adult learners self-register with email/password without an invitation; account creation is separate from class membership and staff permissions. System-wide super admin with sub-admin roles to be defined. **Dependencies:** confirm the first pilot group, curriculum owner, verification/recovery and class-admission rules, teacher provisioning, delegated admin scopes and content/translation permissions before implementing production account/access behavior. Backend planning and teacher/admin prototypes can proceed in parallel now.
 
 1. Introduce Supabase schema/migrations and access rules for the agreed pilot.
-2. Implement login, signup and appropriate recovery/session states using [reference-03](references/reference-03.png). Offer only configured authentication methods; do not add decorative Google/Apple sign-in controls.
+2. Connect the existing login/signup/recovery previews through approved service outcomes, using [reference-03](references/reference-03.png) and the [auth flow](auth-onboarding-flow.md). Working authentication methods require configured providers. The owner-requested Google/Apple UI remains explicitly unavailable until configured; its presence is not approval of provider or account-linking policy.
 3. Implement class invitations and joining, published lesson access and saved attempts. Replace local data access behind the established feature boundaries.
 4. Decide explicitly whether/how sample device-local progress transfers to an account; do not silently upload or merge it. Add truthful loading, offline/session-expiry and retry states.
 

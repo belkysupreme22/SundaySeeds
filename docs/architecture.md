@@ -44,9 +44,10 @@ Teacher/admin screen prototypes now share a React + TypeScript review workspace 
 
 Backend entity, capability and access proposals are in [backend-contract-proposal.md](backend-contract-proposal.md). Add shared contract and Supabase implementation directories only when that work begins. The owner approved parallel prototypes and planning before the pilot; see [decision 0003](decisions/0003-parallel-prototypes-and-administration.md). Do not restore standalone HTML mockups as the dashboard implementation.
 
-## Decisions still required
+## Identity direction and remaining decisions
 
-- Adult learners are confirmed. Choose the adult sign-in and account-provisioning flow.
+- Adult learners self-register with email/password without a prior invitation, as confirmed on 16 October. Registration does not establish class membership or staff authority. The five account screens are unavailable-service UI previews; see the current [auth flow](auth-onboarding-flow.md).
+- Verification requirements, recovery/callback behavior, class admission and staff identity remain open under B1-05b in the [backend decision register](backend-contract-proposal.md). Google/Apple UI options do not establish configured providers or account-linking rules.
 - System-wide super admin and sub-admin roles are confirmed in principle. Define delegation, scope, revocation, auditing and initial provisioning before implementing permissions.
 - Pilot church, class and curriculum ownership.
 - How teachers join and who grants their permissions.

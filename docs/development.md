@@ -1,5 +1,15 @@
 # Development workflow
 
+## Current working agreement — 19 October 2026
+
+Follow the root and workspace AGENTS files and current owner instructions. The owner runs dependency installation, tests, typecheck/lint, builds and runtime/native/visual review unless explicitly delegated. Agents may inspect source and review documentation/diffs; report those separately from executed application checks. The two known mobile lint issues remain deferred. Older dated checkpoints, including the 16 October instruction-withdrawal note, preserve history and do not revoke the currently supplied working agreement.
+
+The approved documentation cleanup aligns agent guidance and current roadmap summaries and recreates the ignored local handoff. It changes no app behavior or backend policy. Next is owner review of the five account screens using [auth onboarding flow](auth-onboarding-flow.md), then B1-04/B1-05b/B1-06 decisions in the [backend proposal](backend-contract-proposal.md) before connected work is approved. Learner course and teacher/admin source implementation remain separate from pending acceptance.
+
+## Historical implementation and review checkpoints
+
+The dated notes below record their own increments. Earlier next-step and verification statements are historical; use the current working agreement and dedicated flow/decision docs for ongoing work.
+
 **16 October — auth SVG web compatibility:** The installed SVG web renderer forwards `accessible={false}` to the browser, triggering React's non-boolean-attribute warning. Auth SVG roots now use `aria-hidden`; native decorative wrappers remain hidden. A small render-only reproduction confirmed the bad prop and clean alternative. No dependency reinstall, server restart, build or broad checks were used. Owner browser/native review remains pending.
 
 **16 October — auth UI handoff:** Use [auth onboarding flow](auth-onboarding-flow.md) for current sign-in, self-registration, recovery, verification-preview and new-password-preview paths. The follow-up routes carry no email/password query parameters and perform no account, storage or network operations. Runtime, native, keyboard and visual checks remain with the owner; formatting/whitespace results must be recorded separately by the integrating lead.
@@ -258,8 +268,8 @@ The new flow uses existing dependencies, so there is no installation step.
 1. Choose one user-visible outcome and identify the affected files.
 2. Reuse existing visual tokens and components before adding alternatives.
 3. Keep screen layout, interaction logic and persistence separate.
-4. Run the available type, lint and relevant test checks.
-5. Exercise the changed flow and inspect rendered output.
+4. Provide relevant type, lint and test commands to the owner; run them only when explicitly delegated.
+5. Provide the changed flow and reference comparison steps for owner runtime/visual review; run review jobs only when explicitly delegated.
 6. Review the diff for unintended changes, secrets and generated files.
 7. Commit a coherent change and update the changelog when it affects behaviour or delivery.
 
@@ -273,7 +283,7 @@ Check navigation, loading, empty and error states alongside the happy path. Foll
 
 ## Parallel work
 
-Assign independent tasks with explicit file ownership. Establish shared component contracts before agents implement dependent screens. One integration owner reviews changes and runs combined checks; agents should not overwrite shared files or commit unrelated work. Use MCP tools where they provide useful inspection or integration, and record their actual results.
+Assign independent tasks with explicit file ownership. Establish shared component contracts before agents implement dependent screens. One integration owner reviews changes and records combined checks supplied by the owner, or runs them only when explicitly delegated. Agents should not overwrite shared files or commit unrelated work. Use MCP tools where they provide useful inspection or integration, and record their actual results.
 
 ## Git history and changelog
 

@@ -1,5 +1,15 @@
 # Parallel delivery plan
 
+## Current checkpoint — 19 October 2026
+
+Source milestones now include teacher LMS-T1–T6/LMS-S1, admin LMS-A1–A4, learner O1/O2 and LMS-L1 sample course discovery/resume/results. All five auth preview routes are implemented. Adult email/password self-registration without a prior invitation is confirmed; class admission and staff authority remain separate. No connected identity or production role behavior is implemented.
+
+Next is owner auth visual review using [the auth flow](auth-onboarding-flow.md), then B1-04 / B1-05b / B1-06 decisions in [the backend register](backend-contract-proposal.md) before approved connected work. Broader runtime/visual acceptance and owner-run checks remain pending. Existing lockfiles are committed; this does not certify installation, builds or runtime readiness.
+
+## Historical implementation checkpoints — 16 October
+
+The dated entries retain earlier evidence. Their next-task notes are historical; the current checkpoint and workstream tables determine active priorities.
+
 **16 October — current learner identity lane:** Continue the reference-informed mobile auth UI with verification and password-reset previews while backend decisions remain separate. [Auth onboarding flow](auth-onboarding-flow.md) is the current route/state and handoff guide. Teacher/admin prototypes are unchanged by this bounded increment; connected identity and class admission remain later tasks.
 
 **16 October learner identity lane:** Mobile sign-in/self-registration/recovery screen prototypes implemented separately from backend services, reachable from Settings. Reference 03 inspected. Existing Welcome/profile/progress flows remain. Owner visual/runtime acceptance and B1-05b recovery/verification/class-admission decisions are pending; staff authority and pilot decisions still gate connected work.
@@ -14,7 +24,9 @@
 
 **16 October — LMS-L1 sample learner course journey:** Lessons → Explore course opens Faith for everyday life, with two modules referencing the four existing sample lesson IDs. The curriculum shows reading duration, quiz-finished counts and per-lesson reading/completion state; Continue prioritizes an unfinished started lesson, then the first unfinished lesson. All finished offers Revisit course. Lessons stay freely accessible in any order and retain their existing overview/reader/quiz routes, bookmarks, reading positions and best scores. Lesson overviews link back to the curriculum. Progress loading/read failure is distinct from zero completion; the global recovery notice remains authoritative. No enrollment, certificate, publication/version policy, teacher-draft synchronization, storage schema or backend connection was introduced. Reference 07 informed the lavender course summary and grouped numbered curriculum; this is an intentional SundaySeeds sample adaptation. Owner review: Lessons → Explore course → lesson → read/quiz → return to curriculum; partial/all completion, saved lesson, recovery, direct route, narrow/larger text and bottom navigation. Source formatting/whitespace checks only; runtime/build/typecheck/lint and visual acceptance pending owner. Next: owner review of LMS-L1, then learner course discovery/resume refinements and LMS-B1 content/access decisions before connected work.
 
-Updated 14 October 2026. This supplements [the implementation plan](implementation-plan.md) with independent workstreams and integration gates. Task IDs below are handoff identifiers, not a claim that their work has shipped.
+## Current delivery plan
+
+Updated 19 October 2026. This supplements [the implementation plan](implementation-plan.md) with independent workstreams and integration gates. Task IDs below are handoff identifiers, not a claim that their work has shipped.
 
 ## Confirmed direction
 
@@ -35,14 +47,14 @@ Updated 14 October 2026. This supplements [the implementation plan](implementati
 | S2 / S2-F — implemented | Settings: full Account/App Settings/Support & About components, learning replay, light-gray outlines and Profile-active bottom navigation | Reference-12 right inspected. Existing editor/reset/recovery preserved; unavailable services/policies are explicitly identified in detail sheets. Owner runtime/visual acceptance pending |
 | O1 — source implemented | Welcome: finish three-page composition, imagery, cards, indicators and navigation | Reference-01. Preserve first-launch preference, replay and Skip/Back/Next/Get started |
 | O2 — source implemented | One optional minimal setup flow using the existing display name | References 02/04 are alternatives. Add topic preferences only if their effect is implemented; avoid unnecessary identity fields |
-| A1 | Owner acceptance of completed learner designs | D1–D4, L1–L3, P1, S1–S2 and A0 are implemented, with runtime/visual acceptance pending. Include O1/O2 as they land |
+| A1 | Owner acceptance of completed learner designs | D1–D4, L1–L3, P1, S1–S2 and A0 are implemented, with runtime/visual acceptance pending. Include source-complete O1/O2, LMS-L1 and the five auth previews |
 
 ## Workstream T — teacher dashboard
 
 | ID | Work / deliverable | Dependency and completion target |
 | --- | --- | --- |
-| T0 — source implemented | React teacher proposal: `apps/teacher-web/src/features/teacher` | Overview/Lessons/Classes tabs, in-memory draft create/edit/preview and an optional chart example. No class records or publishing. Dependencies and runtime/visual review pending; layout is not yet an approved production reference |
-| T1 | Confirm dashboard navigation, empty/loading/error states and content workflow from T0 | Owner design feedback plus agreed content/class boundaries. Record the approved proposal as the reference for subsequent implementation |
+| T0 — source implemented | React teacher prototype: `apps/teacher-web/src/features/teacher` | Overview/Courses/Lessons/Classes/Reports, LMS-S1 studio, structured lessons/quizzes, simulated lesson publication, course review and class/enrollment workflows, and labelled example reporting. LMS-T1–T6 source complete; owner runtime/visual acceptance pending |
+| T1 — design direction approved; acceptance pending | Review dashboard navigation, empty/loading/error states and content workflows | Approved prototype direction supports LMS-T1–T6/LMS-S1 source work. Owner runtime/visual acceptance and connected content/class boundaries remain pending |
 | T2 — authoring and publication simulation implemented | Extend the React shell and draft/preview editor after T1 | LMS-T1–T4 outlines, structured readings/covers, quizzes and simulated lesson versions exist. LMS-T5 classes/enrollment simulation is implemented; LMS-T6 example reporting is implemented; connected loading/error/data adapters remain; contract agreement precedes connected behavior |
 | T3 | Connect draft validation, preview and publish to versioned content | Requires B2–B5 and permission evidence. Published edits must not rewrite the meaning of previous attempts |
 | T4 | Connect assigned-class roster and genuine completion/results views | Requires membership scopes and B6. No fabricated production statistics or access to unassigned classes |
@@ -53,10 +65,10 @@ T0 can demonstrate a publishing interaction, but any such action is a clearly la
 
 | ID | Work / deliverable | Dependency and completion target |
 | --- | --- | --- |
-| M0 — source implemented | React admin proposal: `apps/teacher-web/src/features/admin` | Overview/People/Access tabs, empty directory filters, unsaved sub-admin scope proposal and optional chart example. No fabricated accounts or role grants. Dependencies and runtime/visual review pending |
+| M0 — source implemented | React admin prototype: `apps/teacher-web/src/features/admin` | Overview, shared People/Organizations/Invitations simulation, full-page Access proposals/assignment safeguards, Settings and Audit & operations. LMS-A1–A4 source complete; owner runtime/visual acceptance pending, with no real grants or live events |
 | M1 | Define super-admin bootstrap, sub-admin capabilities and assignment scopes | Owner decision before production role grants. Specify allowed resources/actions, scope, grant/revoke authority and delegation limits |
 | M2 | Approve admin layout and decide the production application boundary | Teacher/admin share a review shell under decision 0003. Use M0/T0 feedback and M1 to decide production routing/deployment; switching workspaces is not authorization |
-| M3 — directory and Access prototypes implemented | Implement scoped admin management and audit views | After B2/B3 permission boundaries and M1. Role changes require trusted authorization and an auditable outcome; client controls alone do not enforce access |
+| M3 — LMS-A1–A4 prototypes implemented | People/organizations/invitations, Access, Settings and Audit & operations UI | Owner acceptance pending. Connected management requires B2/B3 permission boundaries and M1; role changes need trusted authorization and an auditable outcome |
 | M4 | Implement operational lifecycle actions selected for the pilot | Define suspension/revocation, content visibility and data-retention effects first; exclude unagreed destructive/bulk actions |
 
 M0 is a design proposal, not a finalized permission model. “System-wide” does not by itself decide which learner records a particular sub-admin may inspect or alter.
@@ -67,7 +79,7 @@ The following sequence separates documents that can be prepared now from service
 
 | ID | Deliverable | Gate / required decisions |
 | --- | --- | --- |
-| B0 | Pilot decision record: first organization/class, curriculum owner, teacher grant authority, adult account ownership, content/translation rights and operating responsibilities | Adults and system-wide admin are confirmed. Exact pilot, sub-admin scopes, configured sign-in methods and content rights remain open |
+| B0 | Pilot decision record: first organization/class, curriculum owner, teacher grant authority, adult account ownership, content/translation rights and operating responsibilities | Adults, email/password self-registration without a prior invitation and system-wide admin direction are confirmed. Pilot ownership, verification/recovery, class admission, staff authority, configured services and content rights remain open |
 | B1 — draft ready | Contract proposal covering IDs, error states, pagination where needed, draft/published content, membership, progress and attempt submission | See [backend contract proposal](backend-contract-proposal.md). Naming and interaction requirements still require agreement; fields are not frozen |
 | B2 — conceptual draft ready | Schema/migration and access-matrix proposal | Candidate entities and deny-by-default access matrix are documented in the contract proposal. Concrete schema/migrations await B0/M1; introduce only agreed pilot entities |
 | B3 | Implement migrations, RLS and trusted privileged operations with permission checks | Requires B0/B2 and explicit start of connected implementation. Deny cross-class/learner access; teachers only assigned scope; no client-selected elevated roles or bundled privileged keys |
@@ -85,10 +97,10 @@ Keep existing sample progress separate from account data until an explicit trans
 
 | Lane | Exclusive initial file ownership | Integration boundary |
 | --- | --- | --- |
-| Learner lead | `apps/mobile` changes for A0, then S2/O1/O2 | Avoid shared-component changes by concurrent dashboard agents |
+| Learner lead | `apps/mobile` learner features and auth previews | Avoid shared-component changes by concurrent dashboard agents |
 | Teacher proposal | `apps/teacher-web/src/features/teacher` | Feature components/styles only; no shared dependency/config changes |
 | Admin proposal | `apps/teacher-web/src/features/admin` | Feature components/styles only; no role schema or production authorization code |
-| Web integrator | `apps/teacher-web` entry/config, shared styles/charts and package manifest | Owns shared dependencies, imports and integration; owner generates the initial lockfile during installation |
+| Web integrator | `apps/teacher-web` entry/config, shared styles/charts and package manifest | Owns shared dependencies, imports and integration; maintains the existing committed lockfile; installation and runtime acceptance remain separately evidenced |
 | Planning | `docs/parallel-delivery-plan.md`, `docs/backend-contract-proposal.md` | Main lead integrates status into the tracked roadmap and ignored handoff |
 
 One lead integrates and commits each bounded task separately, updates `CHANGELOG.md`, the tracked roadmap and `docs/AGENT_HANDOFF.local.md`, and assigns future ownership before implementation starts. The owner explicitly requires separate commits for shared foundations, teacher screens, admin screens and backend planning; do not combine independent workstreams. Agents report exact files, behavior, unresolved decisions and actual verification. They do not create user-visible Codex tasks for internal delegation.
@@ -112,11 +124,15 @@ The owner handles tests, builds, terminal-heavy checks and runtime/visual review
 
 ## Status at this checkpoint
 
-React + TypeScript teacher/admin screen source is implemented, A0 learner corrections are committed, and B1/B2 conceptual proposals are documented. The obsolete standalone teacher HTML artifact was superseded by the React workspace. Production backend/authentication/dashboard integration has not begun. Dependency installation, initial lockfile, typecheck/build and runtime/visual acceptance remain with the owner; source implementation does not certify those checks.
+Teacher LMS-T1–T6/LMS-S1, admin LMS-A1–A4, learner O1/O2 and LMS-L1 sample course discovery/resume/results source is implemented. The five auth UI preview routes are implemented; backend B1/B2 conceptual proposals remain open. The obsolete standalone teacher HTML artifact was superseded by the React workspace. Production backend/authentication/dashboard integration has not begun. Dependency manifests and lockfiles exist in source control; that does not establish installation, typecheck/build or runtime/visual acceptance. Required checks remain owner-run unless explicitly requested.
 
 Source task commits: shared React foundation `a91263a`, teacher screens `3e4bea7`, admin screens `4369e77`. Backend contracts and delivery documentation form a separate task commit.
 
-Next: LMS-T1–T4 authoring/publication simulation source is implemented. Continue LMS-T5 classes/enrollment prototypes and LMS-B1 contracts in [the LMS plan](lms-implementation-plan.md); teacher/admin tasks remain separate increments. Resolve B0/M1 before production access. Learner O1 → O2 remains queued after S2/S2-F. Owner confirmed learner stroke and structured lesson visuals; new quiz/publication and native/automated checks remain pending. [Review checks](../apps/teacher-web/README.md) include snapshots/next drafts, withdraw/archive/restore, keyboard focus, narrow screens and larger text.
+Next: owner auth visual review, then B1-04 / B1-05b / B1-06 decisions and approval of the relevant contracts before connected implementation. Use [the LMS plan](lms-implementation-plan.md) for detailed task status and [the auth flow](auth-onboarding-flow.md) for sign-in/self-registration/recovery/verification/new-password review. Teacher/admin and learner sample journey runtime/visual acceptance remains pending; [dashboard review checks](../apps/teacher-web/README.md) include snapshots/next drafts, withdraw/archive/restore, keyboard focus, narrow screens and larger text.
+
+## Historical delivery details — 15–16 October
+
+The entries below preserve earlier implementation evidence and next-task notes. Use the current checkpoint and status above for active priorities. The historical AGENTS-withdrawal note records that earlier conversation only; the currently supplied working agreement applies.
 
 **15 October priority update — LMS-S1 editorial studio:** the owner moved course creation ahead of LMS-T5 and authorized adapting the reference visual language to new studio features. Source now provides a full-page course brief (audience/outcomes), persistent ordered module/lesson outline, lesson reuse/removal, focused Details/Reading/Reflection/Quiz editing, unsaved preview, saved preview, independent saved-draft duplication, course content review and inline simulated-publication/version review. Confirmed course/module removal keeps independent lesson drafts. Dirty brief/lesson navigation asks before discarding. Explicit validated Save remains required; no autosave or durable service. Course review reports actual draft content, not learner analytics or whole-course release readiness. See decision 0004. Classes/enrollment remain next after studio feedback; backend contracts remain planning. Mobile O1 Welcome proceeds in parallel at the owner's explicit request, with its own task commit. Runtime/visual/build/typecheck/tests remain with the owner.
 

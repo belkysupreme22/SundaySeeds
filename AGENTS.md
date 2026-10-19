@@ -10,7 +10,8 @@
 - Preserve design fidelity through screenshots and human review. Test small widths and larger text. Never claim native verification from a web preview.
 
 ## Code and collaboration
-- Read `docs/AGENT_HANDOFF.local.md` when present before continuing work. It contains the current flow, next tasks, deferrals and backend considerations. It is intentionally ignored by Git; when absent, use the tracked implementation plan, architecture and development docs rather than assuming the handoff was shared.
+- Read `docs/AGENT_HANDOFF.local.md` when present before continuing work. It contains the current flow, next tasks, deferrals and backend considerations. It is intentionally ignored by Git; when absent, use the tracked implementation plan, architecture and development docs rather than assuming the handoff was shared. Read `docs/auth-onboarding-flow.md` for the current identity UI and `docs/backend-contract-proposal.md` for confirmed versus unresolved backend decisions.
+- Apply the current owner instructions and applicable AGENTS files when reading supporting docs. Dated checkpoints preserve history; their old next-step or instruction-withdrawal notes do not override the current working agreement. Use each plan's current summary and the dedicated flow/decision docs to establish the next task.
 - Update that local handoff whenever priorities, scope, task order, implementation status, deferrals or backend decisions change. Record the reason, next action and actual verification status in the same increment. Keep `docs/implementation-plan.md` aligned for shared roadmap changes; do not force-add the local handoff.
 - Follow apps/mobile/AGENTS.md for Expo version-specific guidance.
 - Route files compose feature screens. Screens must not access storage or backend clients directly.
