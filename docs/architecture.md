@@ -44,6 +44,8 @@ Teacher/admin screen prototypes now share a React + TypeScript review workspace 
 
 Backend entity, capability and access proposals are in [backend-contract-proposal.md](backend-contract-proposal.md). Add shared contract and Supabase implementation directories only when that work begins. The owner approved parallel prototypes and planning before the pilot; see [decision 0003](decisions/0003-parallel-prototypes-and-administration.md). Do not restore standalone HTML mockups as the dashboard implementation.
 
+The focused [learner identity/course-access contract draft](backend-contract-proposal.md#learner-identity-and-course-access-contract) now defines provider-managed identity, own presentation profile, independent course enrollment and invitation-only class membership as separate boundaries. Proposed HTTPS email-proof handling, credential persistence, callback hosting and session policies are review items, not configured architecture. Screens continue to invoke feature hooks/data adapters; one infrastructure client owns provider initialization only when the identity slice starts. No empty contract package or backend scaffold is required for the draft.
+
 ## Identity direction and remaining decisions
 
 - Adult learners self-register with email/password without a prior invitation, as confirmed on 16 October. Registration does not establish class membership or staff authority. The five account screens are unavailable-service UI previews; see the current [auth flow](auth-onboarding-flow.md).
@@ -53,4 +55,4 @@ Backend entity, capability and access proposals are in [backend-contract-proposa
 - How teachers join and who grants their permissions.
 - Content and Bible translation permissions before distributing real material.
 
-These decisions precede production authentication and enrolment. Sample content can support frontend development in the meantime.
+The applicable identity/callback/session and environment choices precede the bounded auth/profile implementation. Content/release and staff decisions precede their corresponding enrollment/publication/privileged workflows; they do not prevent isolated identity planning. Sample content can support frontend development in the meantime.

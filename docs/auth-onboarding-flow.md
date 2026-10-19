@@ -2,7 +2,9 @@
 
 Updated 19 October 2026. This is the current mobile identity UI handoff. Screen source, owner acceptance and connected services are separate states. Earlier account checkpoints in the broader plans remain historical; this document describes the current increment.
 
-**Owner visual approval, 19 October:** The optional account onboarding and learner sample-content increments (`752de75`, `f0b0792`) are visually approved. Platform, viewport/text-size coverage, native/accessibility, error-state/runtime and automated/build results were not supplied. Next is the learner identity/course-admission contract in the [backend proposal](backend-contract-proposal.md), using the new confirmed rules below.
+**Owner visual approval, 19 October:** The optional account onboarding and learner sample-content increments (`752de75`, `f0b0792`) are visually approved. Platform, viewport/text-size coverage, native/accessibility, error-state/runtime and automated/build results were not supplied. The [learner identity/course-access contract draft](backend-contract-proposal.md#learner-identity-and-course-access-contract) is now ready for review, using the confirmed rules below.
+
+**Planning-only follow-up:** The draft distinguishes pending email confirmation without a session, accepted request versus inbox delivery, and successful authentication versus missing/failed account profile. It recommends purpose-bound explicit-action email links with a PKCE alternative, preserves an existing signed-in identity when auth is canceled, and prevents another account's confirmation/recovery link from silently replacing it. The proposed provider flow requires Confirm Email enabled in each connected environment. Draft ID-01–08 defaults and callback/domain/sender inputs still need review; the current preview routes implement none of this and must not be treated as production callback/proof handlers.
 
 ## Confirmed scope
 
@@ -81,7 +83,7 @@ Connected implementation must use acknowledged identity-service outcomes for del
 ## Next implementation sequence
 
 1. Record the owner's visual approval of the onboarding/sample-content increments; keep unreported native/runtime/automated checks separate.
-2. Prepare the focused identity/course-admission contract in the existing backend proposal, using confirmed B1-05c/d. Resolve remaining delivery/recovery/profile/session/invitation questions; keep Google/Apple outside the first slice unless separately selected.
+2. Review the prepared identity/course-access contract and ID-01–08 proposals in the existing backend document, using confirmed B1-05c/d. Resolve remaining delivery/recovery/profile/session/invitation choices and environment inputs; keep Google/Apple outside the first slice unless separately selected.
 3. Refine course Join/Start and return-to-course designs against those contracts. Existing sample curriculum remains independently available. Real content access still needs pilot/content ownership and approved release rules.
 4. Approve the scoped identity contract and implementation start, then connect registration, sign-in, verification/recovery, own profile and Settings session behavior with real service outcomes. This planning step does not close LMS-B1/B3 or authorize production auth configuration.
 

@@ -2,7 +2,7 @@
 
 ## Current priority — identity and course-admission planning, 19 October 2026
 
-Onboarding `752de75` and learner sample polish `f0b0792` now have owner visual approval, without new native/runtime/automated evidence. The next planning lane is the [existing backend proposal](backend-contract-proposal.md): verified email before connected course start, direct course joining by verified learners and invitation-only classes are confirmed in B1-05c/d. Prepare identity/profile/recovery/session and admission contracts before a scoped implementation start; resolve content/staff/release gates before their services. Teacher/admin prototypes remain separate. This current priority supersedes earlier queued auth visual review below and configures no services.
+Onboarding `752de75` and learner sample polish `f0b0792` have owner visual approval, without new native/runtime/automated evidence. The [identity/course-access contract draft](backend-contract-proposal.md#learner-identity-and-course-access-contract) is prepared: review ID-01–08 and project/callback/sender inputs before the proposed identity/profile/recovery/session/Settings slice starts. Verified course start, direct course joining and invitation-only classes remain confirmed B1-05c/d; content/staff/release gates apply before their services. Planning/source review introduces no schema/configuration or connected services. Teacher/admin prototypes stay separate; earlier auth-review/contract-preparation next-step notes below are superseded.
 
 ## Current checkpoint — 19 October 2026
 
