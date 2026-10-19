@@ -4,7 +4,7 @@
 
 Follow the root and workspace AGENTS files and current owner instructions. The owner runs dependency installation, tests, typecheck/lint, builds and runtime/native/visual review unless explicitly delegated. Agents may inspect source and review documentation/diffs; report those separately from executed application checks. The two known mobile lint issues remain deferred. Older dated checkpoints, including the 16 October instruction-withdrawal note, preserve history and do not revoke the currently supplied working agreement.
 
-The approved documentation cleanup aligns agent guidance and current roadmap summaries and recreates the ignored local handoff. It changes no app behavior or backend policy. Next is owner review of the five account screens using [auth onboarding flow](auth-onboarding-flow.md), then B1-04/B1-05b/B1-06 decisions in the [backend proposal](backend-contract-proposal.md) before connected work is approved. Learner course and teacher/admin source implementation remain separate from pending acceptance.
+The first identity/profile source slice is prepared after owner approval. The owner explicitly delegated the three new package installs for this increment; installation succeeded. Follow the [Supabase setup walkthrough](supabase-setup.md) for project creation, profile SQL, Confirm Email, localhost/HTTPS callback URLs, templates, public environment values, delivery and acceptance. No intended development project or service is configured yet. See [auth flow](auth-onboarding-flow.md) for actual source behavior and pending owner checks. The broader backend proposal remains authoritative for confirmed versus deferred product scope.
 
 ## Historical implementation and review checkpoints
 

@@ -1,12 +1,12 @@
 # Parallel delivery plan
 
-## Current priority — identity and course-admission planning, 19 October 2026
+## Current priority — identity/profile setup and acceptance, 19 October 2026
 
-Onboarding `752de75` and learner sample polish `f0b0792` have owner visual approval, without new native/runtime/automated evidence. The [identity/course-access contract draft](backend-contract-proposal.md#learner-identity-and-course-access-contract) is prepared: review ID-01–08 and project/callback/sender inputs before the proposed identity/profile/recovery/session/Settings slice starts. Verified course start, direct course joining and invitation-only classes remain confirmed B1-05c/d; content/staff/release gates apply before their services. Planning/source review introduces no schema/configuration or connected services. Teacher/admin prototypes stay separate; earlier auth-review/contract-preparation next-step notes below are superseded.
+The owner approved first identity/profile source implementation and preparation for a new development Supabase project with configurable domain/sender. Profile SQL/RPC/RLS and permission-test sources are prepared in a separate commit; mobile configurable auth, explicit-action email-proof handlers, own-profile integration and Settings sign-out are implemented in source. The three dependencies were explicitly delegated and installed. No intended project/schema/email/hosting configuration or runtime/security verification is established. Follow [Supabase setup](supabase-setup.md) and [auth flow](auth-onboarding-flow.md) next. Confirmed B1-05c/d remain; authentic course joining, classes, staff and publication retain separate gates. Earlier planning-only/implementation-start notes below are historical.
 
 ## Current checkpoint — 19 October 2026
 
-Source milestones now include teacher LMS-T1–T6/LMS-S1, admin LMS-A1–A4, learner O1/O2 and LMS-L1 sample course discovery/resume/results. All five auth preview routes are implemented. Adult email/password self-registration without a prior invitation is confirmed; class admission and staff authority remain separate. No connected identity or production role behavior is implemented.
+Source milestones now include teacher LMS-T1–T6/LMS-S1, admin LMS-A1–A4, learner O1/O2 and LMS-L1 sample course discovery/resume/results. All five auth preview routes are implemented. Adult email/password self-registration without a prior invitation is confirmed; class admission and staff authority remain separate. Identity source is now prepared as recorded above; no deployed identity or production role behavior is established.
 
 Next is owner auth visual review using [the auth flow](auth-onboarding-flow.md), then B1-04 / B1-05b / B1-06 decisions in [the backend register](backend-contract-proposal.md) before approved connected work. Broader runtime/visual acceptance and owner-run checks remain pending. Existing lockfiles are committed; this does not certify installation, builds or runtime readiness.
 

@@ -66,8 +66,8 @@ const details: Record<SettingsDetailKey, DetailContent> = {
   data: {
     title: 'Data usage',
     paragraphs: [
-      'Your name, reading positions, quiz scores and bookmarks stay in this app on this device. They are not backed up to an account or synced with a class.',
-      'Reset learning progress removes quiz scores, reading positions and bookmarks. Your display name and introduction preference are kept.',
+      'Sample reading positions, quiz scores, bookmarks and your guest name stay on this device. Signing in does not upload or merge them. Your account display name is stored separately with your account.',
+      'Reset learning progress removes sample quiz scores, reading positions and bookmarks. Guest and account names and your introduction preference are kept.',
       'Wi-Fi-only and mobile-data preferences are not available yet.',
     ],
   },

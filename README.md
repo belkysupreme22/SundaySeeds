@@ -6,7 +6,7 @@ The mobile app lives in [`apps/mobile`](apps/mobile). The previous Kotlin projec
 
 ## First milestone
 
-We are building a frontend demo with sample lessons and progress stored on the device. Its scope is Home, lesson browsing and reading, quizzes, and progress. It does not represent a connected church service: authentication, class enrolment, teacher publishing and cloud sync are future work.
+We are building a frontend demo with sample lessons and progress stored on the device. Its scope is Home, lesson browsing and reading, quizzes, and progress. It does not represent a connected church service: class enrolment, teacher publishing and learning cloud sync remain future work. Configurable email/password identity and private profile source are prepared, with service setup/verification pending. Follow the [Supabase development walkthrough](docs/supabase-setup.md).
 
 The visual direction follows the supplied references: a pale background, lavender, mint and yellow accents, dark outlines, rounded cards and subtle offset shadows. Sunday school content replaces the reference's commercial course content.
 
@@ -14,7 +14,7 @@ The visual direction follows the supplied references: a pale background, lavende
 
 - React Native, Expo and TypeScript for the mobile app.
 - AsyncStorage for local demo progress.
-- Planned: Supabase for authentication, PostgreSQL and storage.
+- Supabase Auth/PostgreSQL identity and profile foundation prepared; development setup and verification pending. Media storage remains future work.
 - Planned: a small React teacher dashboard for lesson publishing.
 
 Android is the first release target. Shared implementation should remain compatible with iOS; iOS compatibility is not a claim that an iOS build has been tested.

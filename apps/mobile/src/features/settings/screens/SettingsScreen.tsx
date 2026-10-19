@@ -1,3 +1,5 @@
+import { useAuth } from '../../auth/hooks/useAuth';
+import { Card } from '../../../shared/ui/Card';
 import { useState } from 'react';
 import { router } from 'expo-router';
 import { StyleSheet, View } from 'react-native';
@@ -11,6 +13,8 @@ import { Button } from '../../../shared/ui/Button';
 import { colors } from '../../../shared/theme/tokens';
 
 export function SettingsScreen() {
+  const auth = useAuth();
+  const [notice, setNotice] = useState<string | null>(null);
   const [detail, setDetail] = useState<SettingsDetailKey | null>(null);
   return (
     <Screen tabs>
@@ -18,10 +22,22 @@ export function SettingsScreen() {
       <SettingsGroup title="Account">
         <SettingsRow
           icon="log-in"
-          title="Sign in or create an account"
-          value="Optional"
-          description="Sign in, create an account or keep exploring."
-          onPress={() => router.push('/sign-in')}
+          title={auth.user ? auth.user.email : 'Sign in or create an account'}
+          value={
+            !auth.hydrated
+              ? 'Loading…'
+              : auth.user
+                ? auth.user.verified
+                  ? 'Verified'
+                  : 'Verify email'
+                : 'Optional'
+          }
+          description={
+            auth.user
+              ? 'Manage your signed-in account.'
+              : 'Sign in, create an account or keep exploring.'
+          }
+          onPress={() => router.push(auth.user ? '/verify-email' : '/sign-in')}
         />
         <SettingsRow
           divider
@@ -34,9 +50,9 @@ export function SettingsScreen() {
           divider
           icon="lock"
           title="Change password"
-          value="Unavailable"
-          description="Account sign-in is not connected."
-          onPress={() => setDetail('password')}
+          value={auth.configured ? 'Email link' : 'Unavailable'}
+          description="Request an email to choose a new password."
+          onPress={() => router.push('/forgot-password')}
         />
         <SettingsRow
           divider
@@ -114,18 +130,25 @@ export function SettingsScreen() {
           onPress={() => setDetail('about')}
         />
       </SettingsGroup>
+      {(notice || auth.error) && (
+        <Card tone="lavender" shadow={false} stroke="soft">
+          <Text accessibilityLiveRegion="polite">{notice || auth.error}</Text>
+        </Card>
+      )}
       <LearningDataControls />
       <View style={styles.signOut}>
         <Button
           label="Log out"
           icon="log-out"
           variant="outline"
-          disabled
+          disabled={!auth.user || auth.busy || !auth.hydrated}
           style={styles.signOutButton}
-          onPress={() => {}}
+          onPress={() => {
+            void auth.signOut().then((result) => setNotice(result.message));
+          }}
         />
         <Text variant="caption" muted style={styles.center}>
-          No account is signed in.
+          {auth.user ? 'Signs out on this device.' : 'No account is signed in.'}
         </Text>
       </View>
       <Text variant="caption" muted style={styles.center}>

@@ -1,3 +1,4 @@
+import { AuthProvider } from '../features/auth/hooks/useAuth';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import {
@@ -59,9 +60,11 @@ export default function RootLayout() {
             </View>
           ) : (
             <LearningProgressProvider>
-              <LearnerProfileProvider>
-                <AppNavigator />
-              </LearnerProfileProvider>
+              <AuthProvider>
+                <LearnerProfileProvider>
+                  <AppNavigator />
+                </LearnerProfileProvider>
+              </AuthProvider>
             </LearningProgressProvider>
           )}
         </View>

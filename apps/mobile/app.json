@@ -1,10 +1,30 @@
 {
   "expo": {
-    "name": "SundaySeeds", "slug": "sundayseeds", "scheme": "sundayseeds", "version": "0.1.0",
-    "orientation": "portrait", "icon": "./assets/icon.png", "userInterfaceStyle": "light",
-    "ios": { "supportsTablet": true, "bundleIdentifier": "com.chobor.sundayseeds" },
-    "android": { "package": "com.chobor.sundayseeds", "adaptiveIcon": { "foregroundImage": "./assets/android-icon-foreground.png", "backgroundColor": "#DCD3FA" } },
-    "web": { "favicon": "./assets/favicon.png", "bundler": "metro" },
-    "plugins": ["expo-router", "expo-font"], "experiments": { "typedRoutes": true }
+    "name": "SundaySeeds",
+    "slug": "sundayseeds",
+    "scheme": "sundayseeds",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.chobor.sundayseeds"
+    },
+    "android": {
+      "package": "com.chobor.sundayseeds",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundColor": "#DCD3FA"
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro"
+    },
+    "plugins": ["expo-router", "expo-font", "expo-secure-store"],
+    "experiments": {
+      "typedRoutes": true
+    }
   }
 }

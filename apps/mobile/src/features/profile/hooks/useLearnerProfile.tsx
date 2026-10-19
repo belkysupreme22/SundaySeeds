@@ -1,3 +1,4 @@
+import { useAuth } from '../../auth/hooks/useAuth';
 import {
   createContext,
   useContext,
@@ -86,8 +87,29 @@ export function LearnerProfileProvider({ children }: PropsWithChildren) {
   );
 }
 
-export function useLearnerProfile() {
-  const profile = useContext(ProfileContext);
-  if (!profile) throw new Error('useLearnerProfile must be used inside LearnerProfileProvider.');
-  return profile;
+export function useLearnerProfile(): LearnerProfile {
+  const guest = useContext(ProfileContext);
+  const auth = useAuth();
+  const [saveError, setSaveError] = useState<string | null>(null);
+  useEffect(() => {
+    setSaveError(null);
+  }, [auth.user?.id]);
+  if (!guest) throw new Error('useLearnerProfile must be used inside LearnerProfileProvider.');
+  if (!auth.user) return { ...guest, hydrated: guest.hydrated && auth.hydrated };
+  return {
+    displayName: auth.profile?.displayName ?? '',
+    hydrated: auth.hydrated && Boolean(auth.profile || auth.profileError || auth.error),
+    loadError: !auth.profile ? auth.profileError || auth.error : null,
+    saveError: saveError || (auth.profile ? auth.profileError : null),
+    saving: auth.busy,
+    retryLoad: () => {
+      setSaveError(null);
+      void (auth.profile ? auth.retryProfile() : auth.checkVerification());
+    },
+    saveName: async (name) => {
+      const result = await auth.saveProfileName(name);
+      setSaveError(result.ok ? null : result.message);
+      return result.ok;
+    },
+  };
 }

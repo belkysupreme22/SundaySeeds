@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
+import { useFocusEffect } from 'expo-router';
+import { useAuth } from '../hooks/useAuth';
 import { Keyboard, Pressable, StyleSheet } from 'react-native';
 import { PasswordField } from '../components/PasswordField';
 import { AccountHero } from '../components/AccountHero';
@@ -25,6 +27,18 @@ export function AccountScreen({
   continueLabel?: string;
 }) {
   const navigate = navigation ?? createAccountNavigation('/settings');
+  const auth = useAuth();
+  const mounted = useRef(true);
+  const request = useRef(0);
+  useFocusEffect(
+    useCallback(() => {
+      mounted.current = true;
+      return () => {
+        mounted.current = false;
+        ++request.current;
+      };
+    }, []),
+  );
   const signup = mode === 'sign-up';
   const recovery = mode === 'recovery';
   const [name, setName] = useState('');
@@ -32,23 +46,38 @@ export function AccountScreen({
   const [password, setPassword] = useState('');
   const [confirmation, setConfirmation] = useState('');
   const [submitted, setSubmitted] = useState(false);
-  const [notice, setNotice] = useState(false);
+  const [notice, setNotice] = useState<string | null>(null);
   const [policy, setPolicy] = useState(false);
   const errors: Errors = {};
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim()))
     errors.email = 'Enter a valid email address.';
   if (!recovery && !password) errors.password = 'Enter your password.';
+  if (signup && password.length < 15)
+    errors.password = 'Use at least 15 characters. Spaces are welcome.';
   if (signup && (!confirmation || confirmation !== password))
     errors.confirmation = 'Both passwords must match.';
-  function submit() {
+  async function submit() {
     setSubmitted(true);
-    setNotice(false);
-    if (Object.keys(errors).length) return;
+    setNotice(null);
+    if (Object.keys(errors).length || auth.busy || !auth.hydrated) return;
     Keyboard.dismiss();
-    setNotice(true);
+    const version = ++request.current;
+    const result = recovery
+      ? await auth.requestRecovery(email.trim())
+      : signup
+        ? await auth.signUp(email.trim(), password, name)
+        : await auth.signIn(email.trim(), password);
+    if (!mounted.current || request.current !== version) return;
+    setNotice(result.message);
+    if (result.ok) {
+      setPassword('');
+      setConfirmation('');
+      if (signup) navigate.verify();
+      else if (!recovery) navigate.continueLearning();
+    }
   }
   function edit() {
-    setNotice(false);
+    setNotice(null);
   }
   return (
     <Screen contentStyle={styles.screenContent} backgroundColor="#F8F5FC">
@@ -144,8 +173,8 @@ export function AccountScreen({
             {policy && (
               <Card shadow={false} stroke="soft">
                 <Text variant="small">
-                  The Terms of Service and Privacy Policy are not published yet. Account
-                  registration will need the approved documents before it becomes available.
+                  The Terms of Service and Privacy Policy are not published yet. They must be
+                  approved before a public launch.
                 </Text>
               </Card>
             )}
@@ -164,7 +193,8 @@ export function AccountScreen({
         )}
         <Button
           label={recovery ? 'Request password reset' : signup ? 'Create account' : 'Sign in'}
-          onPress={submit}
+          disabled={auth.busy || !auth.hydrated}
+          onPress={() => void submit()}
         />
         {submitted && Object.keys(errors).length > 0 && (
           <Text variant="small" accessibilityLiveRegion="polite" style={styles.error}>
@@ -179,23 +209,12 @@ export function AccountScreen({
             style={styles.group}
             accessibilityLiveRegion="polite"
           >
-            <Text variant="label">
-              {recovery
-                ? 'Recovery is not available yet'
-                : signup
-                  ? 'Registration is not available yet'
-                  : 'Sign-in is not available yet'}
-            </Text>
-            <Text variant="small">
-              {recovery
-                ? 'No email has been sent. You can return to your lessons while recovery is unavailable.'
-                : 'Your details have not been submitted or saved. You can continue learning without an account.'}
-            </Text>
-            {(signup || recovery) && (
+            <Text variant="small">{notice}</Text>
+            {auth.pendingEmail && !recovery && (
               <Button
-                label={signup ? 'Preview email verification' : 'Preview password reset'}
+                label="Email verification options"
                 variant="outline"
-                onPress={signup ? navigate.verify : navigate.reset}
+                onPress={navigate.verify}
               />
             )}
           </Card>
@@ -215,7 +234,9 @@ export function AccountScreen({
         </Text>
       </Pressable>
       <Text variant="caption" muted style={styles.center}>
-        Account services are not available yet. You can still explore the lessons.
+        {auth.configured
+          ? 'An account is optional. You can keep exploring the sample lessons.'
+          : 'Account setup is not configured yet. You can still explore the lessons.'}
       </Text>
       <Pressable
         accessibilityRole="link"

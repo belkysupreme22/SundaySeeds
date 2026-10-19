@@ -1,12 +1,11 @@
 import { useState } from 'react';
-import { Keyboard, Pressable, StyleSheet, View } from 'react-native';
+import { Pressable, StyleSheet } from 'react-native';
+import { useAuth } from '../hooks/useAuth';
 import { AccountTopBar } from '../components/AccountTopBar';
 import { AccountRecoveryHero } from '../components/AccountRecoveryHero';
-import { PasswordField } from '../components/PasswordField';
 import { Screen, ContentGroup } from '../../../shared/ui/Screen';
 import { Button } from '../../../shared/ui/Button';
 import { Card } from '../../../shared/ui/Card';
-import { Icon } from '../../../shared/ui/Icon';
 import { Text } from '../../../shared/ui/Text';
 import { colors } from '../../../shared/theme/tokens';
 import { createAccountNavigation, type AccountNavigation } from '../navigation';
@@ -24,22 +23,12 @@ export function AccountFollowUpScreen({
   const navigate =
     navigation ??
     createAccountNavigation(verification ? '/sign-up' : '/forgot-password', 'replace');
-  const [password, setPassword] = useState('');
-  const [confirmation, setConfirmation] = useState('');
-  const [submitted, setSubmitted] = useState(false);
+  const auth = useAuth();
   const [notice, setNotice] = useState<string | null>(null);
-  const passwordError = !password ? 'Enter a new password.' : undefined;
-  const confirmationError =
-    !confirmation || confirmation !== password ? 'Both passwords must match.' : undefined;
-
-  function submitPassword() {
-    setSubmitted(true);
-    setNotice(null);
-    if (passwordError || confirmationError) return;
-    Keyboard.dismiss();
-    setNotice('Password reset is not connected yet. Your password has not been changed or saved.');
+  async function check(resend = false) {
+    const result = resend ? await auth.resendVerification() : await auth.checkVerification();
+    setNotice(result.message);
   }
-
   return (
     <Screen backgroundColor="#F8F5FC" contentStyle={styles.screen}>
       <AccountTopBar
@@ -47,104 +36,50 @@ export function AccountFollowUpScreen({
         onBack={navigate.back}
       />
       <AccountRecoveryHero mode={mode} />
-      <View style={styles.availability}>
-        <Icon name="info" size={17} color={colors.muted} />
-        <Text variant="small" muted style={styles.flex}>
-          {verification
-            ? 'Email verification is not available yet. No verification email has been sent.'
-            : 'Password reset is not available yet. Your password will not be changed.'}
-        </Text>
-      </View>
-      {verification ? (
-        <ContentGroup>
-          <Card shadow={false} stroke="soft" style={styles.card}>
-            <View style={styles.cardTitle}>
-              <View style={styles.mailTile}>
-                <Icon name="mail" size={22} />
-              </View>
-              <Text variant="title" style={styles.flex}>
-                Email verification
-              </Text>
-            </View>
-            <Text variant="small" muted>
-              This is where you’ll check whether your account email has been verified and request
-              another email if needed.
+      <ContentGroup>
+        <Card shadow={false} stroke="soft" style={styles.card}>
+          <Text variant="title">
+            {verification ? 'Confirm your email' : 'Open your recovery email'}
+          </Text>
+          <Text variant="small">
+            {!auth.configured
+              ? 'Account setup is not configured yet. You can keep exploring the lessons.'
+              : verification
+                ? 'Open the confirmation link in your email, confirm it, then sign in here. An accepted request does not guarantee delivery; check spam or request another email.'
+                : 'Use the latest password recovery link to choose a new password. After changing it, return here and sign in.'}
+          </Text>
+        </Card>
+        {verification && (
+          <>
+            <Button
+              label="Check verification"
+              disabled={auth.busy || !auth.hydrated}
+              onPress={() => void check()}
+            />
+            <Button
+              label="Resend verification email"
+              variant="outline"
+              disabled={auth.busy || !auth.hydrated}
+              onPress={() => void check(true)}
+            />
+          </>
+        )}
+        {notice && (
+          <Card tone="lavender" shadow={false} stroke="soft">
+            <Text variant="small" accessibilityLiveRegion="polite">
+              {notice}
             </Text>
           </Card>
-          <Button
-            label="Check verification"
-            onPress={() =>
-              setNotice(
-                'Verification status is unavailable until account services are connected. No verification check has been performed.',
-              )
-            }
-          />
-          <Pressable
-            accessibilityRole="button"
-            style={styles.link}
-            onPress={() =>
-              setNotice('Email delivery is not connected yet. No verification email has been sent.')
-            }
-          >
-            <Text variant="small" style={styles.accent}>
-              Resend verification email
-            </Text>
-          </Pressable>
-        </ContentGroup>
-      ) : (
-        <ContentGroup>
-          <ContentGroup>
-            <PasswordField
-              label="New password"
-              value={password}
-              newPassword
-              onChangeText={(value) => {
-                setPassword(value);
-                setNotice(null);
-              }}
-            />
-            {submitted && passwordError && (
-              <Text variant="small" style={styles.error} accessibilityLiveRegion="polite">
-                {passwordError}
-              </Text>
-            )}
-          </ContentGroup>
-          <ContentGroup>
-            <PasswordField
-              label="Confirm new password"
-              value={confirmation}
-              newPassword
-              onChangeText={(value) => {
-                setConfirmation(value);
-                setNotice(null);
-              }}
-            />
-            {submitted && confirmationError && (
-              <Text variant="small" style={styles.error} accessibilityLiveRegion="polite">
-                {confirmationError}
-              </Text>
-            )}
-          </ContentGroup>
-          <Button label="Reset password" onPress={submitPassword} />
-        </ContentGroup>
-      )}
-      {notice && (
-        <Card tone="lavender" shadow={false} stroke="soft" accessibilityLiveRegion="polite">
-          <Text variant="small">{notice}</Text>
-        </Card>
-      )}
+        )}
+      </ContentGroup>
+      <Button label="Sign in" onPress={navigate.signIn} />
       <Pressable
         accessibilityRole="link"
         style={styles.link}
         onPress={verification ? navigate.signUp : navigate.recover}
       >
         <Text variant="small" style={styles.accent}>
-          {verification ? 'Back to sign up' : 'Back to account recovery'}
-        </Text>
-      </Pressable>
-      <Pressable accessibilityRole="link" style={styles.link} onPress={navigate.signIn}>
-        <Text variant="small" muted>
-          Back to sign in
+          {verification ? 'Back to sign up' : 'Request a recovery email'}
         </Text>
       </Pressable>
       <Pressable accessibilityRole="link" style={styles.link} onPress={navigate.continueLearning}>

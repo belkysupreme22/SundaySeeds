@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useAuth } from '../../auth/hooks/useAuth';
+import { useEffect, useState } from 'react';
 import { router } from 'expo-router';
 import { StyleSheet, View } from 'react-native';
 import { DISPLAY_NAME_LIMIT } from '../data/profileStorage';
@@ -13,8 +14,18 @@ import { colors } from '../../../shared/theme/tokens';
 import { InputField } from '../../../shared/ui/InputField';
 
 export function EditProfileScreen() {
-  const { displayName, hydrated, loadError, retryLoad } = useLearnerProfile();
-  if (!hydrated || loadError) {
+  const { user } = useAuth();
+  return <ProfileNameForm key={user?.id ?? 'guest'} />;
+}
+
+function ProfileNameForm() {
+  const { displayName, hydrated, loadError, retryLoad, saveName, saving, saveError } =
+    useLearnerProfile();
+  const [name, setName] = useState<string | null>(hydrated && !loadError ? displayName : null);
+  useEffect(() => {
+    if (name === null && hydrated && !loadError) setName(displayName);
+  }, [name, displayName, hydrated, loadError]);
+  if (name === null) {
     return (
       <Screen>
         <PageHeader title="Make it yours" back />
@@ -25,15 +36,8 @@ export function EditProfileScreen() {
       </Screen>
     );
   }
-  return <ProfileNameForm initialName={displayName} />;
-}
-
-function ProfileNameForm({ initialName }: { initialName: string }) {
-  const [name, setName] = useState(initialName);
-  const { saveName, saving, saveError } = useLearnerProfile();
-
   async function save() {
-    if (await saveName(name)) closeEditor();
+    if (name !== null && hydrated && !loadError && (await saveName(name))) closeEditor();
   }
 
   return (
@@ -42,7 +46,7 @@ function ProfileNameForm({ initialName }: { initialName: string }) {
         <Button
           label={saving ? 'Saving…' : 'Save profile'}
           icon="check"
-          disabled={saving}
+          disabled={saving || !hydrated || !!loadError}
           onPress={() => void save()}
         />
       }
@@ -71,7 +75,7 @@ function ProfileNameForm({ initialName }: { initialName: string }) {
           maxLength={DISPLAY_NAME_LIMIT}
           autoCapitalize="words"
           autoCorrect={false}
-          editable={!saving}
+          editable={!saving && hydrated && !loadError}
           returnKeyType="done"
           onSubmitEditing={() => void save()}
         />
@@ -82,13 +86,17 @@ function ProfileNameForm({ initialName }: { initialName: string }) {
       <Card tone="mint" shadow={false} style={styles.note}>
         <Icon name="smartphone" />
         <Text variant="label">A familiar hello</Text>
-        <Text variant="small">
-          Your name appears on Home and Profile.
-        </Text>
+        <Text variant="small">Your name appears on Home and Profile.</Text>
       </Card>
-      {saveError && (
+      {(saveError || loadError) && (
         <Card tone="peach" shadow={false}>
-          <Text accessibilityRole="alert">{saveError}</Text>
+          <Text accessibilityRole="alert">{saveError || loadError}</Text>
+          <Button
+            label="Reload saved profile"
+            variant="outline"
+            disabled={saving}
+            onPress={retryLoad}
+          />
         </Card>
       )}
       <Button

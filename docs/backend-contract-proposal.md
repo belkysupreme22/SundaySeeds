@@ -1,12 +1,12 @@
 # Backend contract proposal
 
-## Current planning checkpoint — 19 October 2026
+## Current implementation checkpoint — 19 October 2026
 
-The owner visually approved optional account onboarding (`752de75`) and learner sample-content polish (`f0b0792`). That approval does not establish native/device, accessibility, automated or connected-service verification. The next work is **LMS-B1: learner identity and course-admission planning**, extending this proposal rather than creating another contract or configuring services.
+The owner approved the first identity/profile source slice after the contract draft, requested preparation for a new development Supabase project with configurable domain/sender and separately authorized the three dependencies. Private profile SQL/RPC/RLS source and rollback-only permission checks are prepared; mobile email/password, isolated explicit-action confirmation/recovery, own-profile editing and Settings session/sign-out are implemented in source. No intended project, SQL application, SMTP/hosting configuration or runtime/database verification is established. Follow [Supabase setup](supabase-setup.md) and [auth flow](auth-onboarding-flow.md).
 
-New owner decisions: **email verification is required before starting a connected course**; **signed-in, verified learners can join courses directly, while classes require an invitation**. Guest course browsing/details and optional onboarding remain the design direction. Registration, course enrollment, class membership and staff authority are separate concepts. These rules apply to future connected content; the existing guest sample lessons remain available.
+Confirmed product rules remain: email verification before connected course Start; verified learners directly join available courses; classes require invitations. Registration, enrollment, membership and staff authority are separate. Existing sample learning remains available without sign-in and does not upload/merge.
 
-The learner identity/course-access contract below is now drafted for review, including states, operations, data ownership, callback alternatives, failures and implementation slices. Its recommended defaults remain proposals; B1-05c/d are the confirmed product rules. Delivery/environment choices, authentic pilot content/authority and other register items remain unresolved. No migrations, providers, accounts or live services are configured by this document update.
+This slice applies explicit-action web links, optional independent 40-character account names, minimum 15-character passwords, local sign-out, fresh sign-in after reset and separate sample data (ID-01–05/08) as source implementation defaults under the owner's proceed instruction. Domain/hosting/sender/environment configuration remains open. ID-06 invitation lifecycle, ID-07 course return intent and unrelated content/staff/release policies remain proposals for later slices. The tables below retain the broader draft contract, not proof that its later services are implemented.
 
 ## Historical checkpoints — 16 October
 
@@ -18,13 +18,13 @@ The older unanswered verification/admission notes below are superseded by B1-05c
 
 ## Current contract proposal
 
-Updated 19 October 2026. **Discussion draft; not an approved schema, API or permission implementation.** The owner selected adult learners, **self-onboarding with email and password**, screen prototypes before a connected pilot, and backend planning in parallel. Adults can register without a prior invitation. Verified learners join courses directly; classes require invitations. Administration means a system-wide super admin with evolving sub-admin roles. Supabase is planned, not configured or connected. Verification/recovery delivery and callbacks, staff sign-in, class invitation lifecycle and privileges remain to be agreed.
+Updated 19 October 2026. **Broader discussion draft; the bounded identity/profile source implementation is recorded above. Later course/class/staff APIs and permissions remain proposals.** The owner selected adult learners, **self-onboarding with email and password**, screen prototypes before a connected pilot, and backend planning in parallel. Adults can register without a prior invitation. Verified learners join courses directly; classes require invitations. Administration means a system-wide super admin with evolving sub-admin roles. Supabase identity/profile source is prepared but no intended service is configured. Callback hosting/delivery configuration, staff sign-in, class invitation lifecycle and privileges remain open.
 
 This document supplies a shared vocabulary for the learner app and teacher/admin proposals. It defines capabilities and data concepts rather than finished HTTP routes, SQL or a commitment to a separate API service. See [parallel delivery plan](parallel-delivery-plan.md) for task order and integration gates.
 
 ## Current implementation and contract boundary
 
-Mobile email/password self-registration, sign-in and recovery have reference-based screen prototypes reachable through optional onboarding and Settings, including verification/reset previews. They validate fields and show service-unavailable outcomes; no identity provider, verification/reset delivery, policy consent or session exists. The signup name field does not update the learner profile; the separate optional name setup retains its device-profile behavior. The remaining B1-05b questions stay open and these screens do not constitute LMS-B3 implementation.
+Mobile account screens now use configurable feature-owned auth/profile hooks. Missing configuration remains unavailable; with intended settings they request real Auth operations. New `/auth/confirm` and `/auth/recover` pages accept purpose-bound token hashes only after explicit action and keep candidate sessions separate from any active account. Account names use own-profile RPCs and never silently copy the guest name. There is no connected enrollment/class/staff/learning service. Source preparation does not establish deployed connectivity or acceptance; environment/hosting/sender and owner verification remain pending.
 
 Teacher course/module authoring, structured lessons and automatic quizzes, preview/publication snapshots, class/enrollment examples and reports now have source prototypes. Administrator directory, scoped Access proposals, Settings and audit/operations examples also exist. Their state is session-only and does not establish real accounts, authorization, publication, invitations or audit history.
 
@@ -137,20 +137,20 @@ An agent may refine proposals and adapters' conceptual boundaries while these qu
 
 ## Learner identity and course-access contract
 
-Draft v1, 19 October 2026. This completes the focused planning deliverable; it is not a frozen schema or permission to implement/configure services. The operation names below are feature contracts, not promised HTTP endpoints. Confirmed product rules remain B1-02/05a/05c/05d. Everything labelled recommended or proposed requires review before its slice starts.
+Draft v1, 19 October 2026, with the first identity/profile source implementation authorized later that day as recorded above. Broader operation names are feature contracts, not promised HTTP endpoints. Confirmed product rules remain B1-02/05a/05c/05d. Remaining proposed course/class/staff slices require their own review.
 
-### Recommended defaults to review
+### Defaults and remaining review
 
 | ID | Proposed default | Why / remaining choice |
 | --- | --- | --- |
 | ID-01 | Email confirmation and password-recovery links, with an owned HTTPS landing page and an explicit confirmation action before proof consumption | Recommended for email opened on another device and prefetching mail clients. Requires a domain, hosting and proof/session handling design; PKCE-only same-device callbacks are an alternative below. No OTP entry UI is assumed |
 | ID-02 | Email/password plus optional display name only; retain the existing 40-character name limit and whitespace normalization | No date of birth, address, interests, avatar upload or class/staff role field. Device name can be explicitly offered for reuse, never silently copied; blank account name is valid |
-| ID-03 | Minimum 15-character passphrase, spaces/paste/password managers allowed, no silent trimming or truncation | Recommendation, not current form behavior or configured policy. Provider maximum/byte behavior and any additional checks must be confirmed and mirrored in signup/reset validation before enabling them |
+| ID-03 | Minimum 15-character passphrase, spaces/paste/password managers allowed, no silent trimming or truncation | Implemented in signup/reset source; configure provider minimum to match. Provider maximum/byte behavior and extra requirements need aligned validation before enabling them |
 | ID-04 | One active account per app installation; normal Settings sign-out targets this device/session explicitly | Clear account data locally; distinguish uncertain remote revocation. Do not silently use the SDK's broader default sign-out scope |
 | ID-05 | After successful password reset, clear the recovery context and require a fresh sign-in; request revocation of existing sessions | Report password-change success separately from revocation failure. Exact other-session policy remains to approve; do not promise immediate token invalidation |
 | ID-06 | An invitation is recipient-email-bound, single-use, expires after seven days, and initially admits a learner only | Proposed invitation policy, not implied by invitation-only classes. Issuer authority, reissue/revocation and staff invitations remain separate decisions |
 | ID-07 | One pending public course intent per installation, expiring after 24 hours; return to its details for an explicit Join/Start | Safe default avoids automatic enrollment on an email click. Only public course ID, intended action and creation time; no arbitrary redirect, password or invitation proof |
-| ID-08 | Keep sample progress separate and account progress initially empty; do not upload or invent attempts | Existing fixture isolation continues regardless. This is a proposed account migration policy under B1-10, not yet approved |
+| ID-08 | Keep sample progress separate and account progress initially empty; do not upload or invent attempts | Implemented sample isolation, with no automatic transfer. Any future explicit account migration remains open under B1-10 |
 
 No project, region, domain, sender, provider plan, support mailbox or staff identity is inferred. They are deployment inputs to supply before configuration; public terms/privacy and account lifecycle requirements also remain open.
 
@@ -298,7 +298,7 @@ None of these checks has run. Owner-run scenarios should record platform, input,
 
 ### Review and next action
 
-The reviewable contract is drafted. Next is owner review of ID-01–08 and the first slice's concrete environment inputs; these are recommendations, not confirmations added to B1-05c/d. Domain/sender/project/support ownership and published account policy documents must be supplied before configuration with real learners. B1-04/06/07/08/09/10 remain open for their corresponding content, privileged and lifecycle scopes. Approving this planning document alone does not create production resources or authorize broader services.
+The first identity/profile source is now prepared under owner authorization. Next are the intended development project, callback/sender setup and owner verification; ID-06/07 remain recommendations for later slices. Domain/sender/project/support ownership and published account policy documents must be supplied before configuration with real learners. B1-04/06/07/08/09/10 remain open for their corresponding content, privileged and lifecycle scopes. Approving this planning document alone does not create production resources or authorize broader services.
 
 Actual work for this increment: existing source/config/doc inspection, official Supabase/Expo documentation review and independent contract review. No app change, dependency install, SQL/schema, provider configuration, email send, tests/builds, permission tests or runtime/native checks are part of this draft.
 
@@ -332,4 +332,4 @@ These groups apply before their matching implementation slices; they do not requ
 4. **Content and assessment:** course/module hierarchy and publication/version lifecycle, old-version submissions, implementation of automatic checked-answer feedback, retry/completion rules and teacher result detail. Teacher review is not part of quiz completion.
 5. **Data lifecycle and reliability:** retention/export/deletion, revocation effects, cache isolation, sample-data transfer choice, acknowledged-save/offline behavior, backups and operational ownership.
 
-Next action: review the drafted learner identity/course-access contract and ID-01–08 recommendations, supply environment ownership/callback/sender inputs, and approve a bounded implementation slice before auth/profile migrations or configuration. Resolve B1-04/B1-06 and release/assessment/lifecycle choices before the corresponding course, staff and publication services. LMS-B1 as a whole remains open. Owner visual approval covers the latest onboarding/learner-content increments only; other acceptance and native/runtime/automated evidence remain separate. No backend code, service configuration, permission tests or runtime validation accompanies this document; the owner retains tests/builds/runtime review unless explicitly delegated.
+Next action: follow the new-project setup walkthrough for the source-prepared identity/profile slice, then perform owner acceptance before broader services. Resolve B1-04/B1-06 and release/assessment/lifecycle choices before the corresponding course, staff and publication services. LMS-B1 as a whole remains open. Owner visual approval covers the latest onboarding/learner-content increments only; other acceptance and native/runtime/automated evidence remain separate. Profile SQL/RPC/RLS, permission-test source and mobile identity integration now accompany this contract; SQL/services are not configured and permission/runtime checks have not run; the owner retains tests/builds/runtime review unless explicitly delegated.

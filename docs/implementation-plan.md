@@ -1,5 +1,17 @@
 # SundaySeeds implementation plan
 
+## Identity/profile source prepared — 19 October 2026
+
+The owner approved proceeding from the contract into the first identity/profile slice, requested preparation for a **new development Supabase project** and configurable domain/sender, and explicitly approved installing the Supabase client, SecureStore and URL polyfill. Database source is committed separately in `317b280`: private learner profiles, own-read RLS, actor-bound RPCs and expected revisions, with rollback-only permission checks written but not run.
+
+Mobile source now wires the existing email/password forms, explicit-action token-hash confirmation/recovery pages, native credential storage/browser tab sessions, validated account state, own profile/name editing and current-device Settings sign-out. Account and sample data remain separate; no enrollment/class/staff/connected-learning service is introduced. This implements the identity/profile source portion of the phased contract, not a working deployed backend or release acceptance. Related defaults ID-01–05/08 are applied for this bounded source slice; class invitation and course-return proposals ID-06/07 remain deferred. Account linking/social providers and public policy documents remain unresolved.
+
+Next: follow [Supabase setup](supabase-setup.md) to create/select the intended development project, apply/review profile SQL, enable Confirm Email, configure exact web callbacks/templates, public environment values and development delivery. Localhost review can begin on one computer; owned HTTPS callback hosting and SMTP are needed for wider device/learner review. The owner requested this walkthrough while implementation was ongoing. No unrelated existing Supabase project has been modified.
+
+Actual verification: the delegated package install succeeded with scripts disabled and a committed lockfile; reference 03/current official docs/installed SDK/source review informed the implementation. Formatting and whitespace checks are recorded separately. Tests, typecheck/lint, builds, SQL/security checks and runtime/native/rendered acceptance remain owner-run and pending. Installation reported 29 dependency audit findings; review is pending, no forced upgrades applied. After identity acceptance, scope authentic course catalog/enrollment using confirmed B1-05c/d; invitation/staff/content gates remain separate.
+
+Earlier dated checkpoints below preserve their own planning-only state; this checkpoint supersedes their next-step/implementation-start notes.
+
 ## Owner visual approval and backend planning — 19 October 2026
 
 The owner approved the visuals of optional account onboarding (`752de75`) and learner sample-content polish (`f0b0792`). Record this as visual approval of those increments only: no platform, viewport, native accessibility, runtime/error coverage or automated/build results were supplied. Other learner/teacher/admin acceptance remains separate.
