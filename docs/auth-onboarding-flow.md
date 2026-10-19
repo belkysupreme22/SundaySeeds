@@ -1,18 +1,23 @@
 # Auth onboarding flow
 
-Updated 16 October 2026. This is the current mobile identity UI handoff. Screen source, owner acceptance and connected services are separate states. Earlier account checkpoints in the broader plans remain historical; this document describes the current increment.
+Updated 19 October 2026. This is the current mobile identity UI handoff. Screen source, owner acceptance and connected services are separate states. Earlier account checkpoints in the broader plans remain historical; this document describes the current increment.
 
 ## Confirmed scope
 
 Adult learners self-register with email and password; a prior invitation is not required to create an account. Account creation does not establish class membership or staff permissions. Google and Apple options are requested UI components; provider configuration and account linking remain undecided.
 
-The existing first-run path remains **Welcome → optional display-name setup → Home**. Its saved welcome/name behavior is unchanged. Settings → Account → **Sign in or create an account** opens the account UI. Sample learning stays accessible through the existing app flow; these previews do not impose an authentication or email-verification gate.
+The owner approved **Welcome → optional account choice**, offering Create account, Sign in and **Skip for now**. Skip opens Home directly and saves the existing welcome-completed preference. **Add a name for your welcome** opens the existing optional display-name setup; its save/skip behavior is preserved and Back returns to account choice. Skipping the introduction still opens Home directly. Existing completed users retain Home and can revisit the new sequence through Settings → Learning → Replay the introduction, without resetting learning data.
+
+The forms are shared between onboarding and Settings → Account → **Sign in or create an account**. Inside onboarding, Skip for now is available from each form/follow-up page; it completes the welcome flow rather than restarting it. These steps are composed within the existing entry/replay routes using destination-only callbacks; they add no route or credential parameters. Standalone account routes remain available from Settings and direct links. Sample courses and lessons remain freely accessible; no authentication or email-verification gate is introduced.
+
+The future connected-course design direction is to allow course browsing/details before sign-in and request identity at a permitted Start/Join action, then return to that course. This increment implements no gate, enrollment, pending-course storage or authenticated return, and does not decide class admission or verified access. Those remain B1-05b/service-contract work.
 
 ## Current screen flow
 
 | Route | Entry and useful behavior | Outcome at this stage |
 | --- | --- | --- |
-| `/sign-in` | Settings account entry; email/password fields, independent password visibility, forgot-password and signup links, Google/Apple options | Invalid fields show validation. Valid sign-in and provider actions report service unavailable; no session is created |
+| Existing `/` entry and `/welcome` replay | Three-page introduction → account choice; Create account/Sign in open the shared form as onboarding steps; Skip opens Home; optional name link preserves setup | Welcome preference saves through its existing hook. Failed saves offer retry/Continue for now; account actions create no session |
+| `/sign-in` | Settings account entry or equivalent onboarding step; email/password fields, independent password visibility, forgot-password and signup links, Google/Apple options | Invalid fields show validation. Valid sign-in and provider actions report service unavailable; no session is created |
 | `/sign-up` | Sign-in switch link; optional display name, email, password and confirmation; terms/privacy availability information | Valid submission reports registration unavailable. Within that notice, **Preview email verification** opens `/verify-email`; it does not submit registration or send email |
 | `/forgot-password` | Sign-in recovery link; email field and mail illustration | Valid request reports recovery unavailable. Within that notice, **Preview password reset** opens `/reset-password`; it does not request or deliver a reset |
 | `/verify-email` | Explicit signup preview action or direct route | Neutral mail illustration, **Check verification** and **Resend email** actions. Both report service unavailable; no sent/verified state is simulated. Links allow return to account/signup/sign-in navigation |
@@ -20,9 +25,13 @@ The existing first-run path remains **Welcome → optional display-name setup �
 
 The follow-up pages show a concise service-availability note and meaningful return links. Recovery and follow-up pages do not show provider rows. Google/Apple remain on sign-in and signup.
 
-Social buttons follow reference 03's secondary proportions: 44px minimum height versus the primary CTA's 52px, white fill, fine charcoal border, 6px corners and medium labels. Equal 22px icon slots align the official Google asset and installed Apple mark. Side-by-side buttons retain narrow/large-text stacking; stacked buttons grow with their content. Provider actions remain unavailable, with no OAuth or session. Source formatting/whitespace passed; rendered review remains pending because the preview tool could not initialize.
+In onboarding, the table's account destinations refer to the same page components inside the entry/replay route; changing steps does not change the URL. Settings and direct links use the standalone routes listed above.
 
-All credentials are component state only. Navigation carries no email or password query parameters; follow-up direct routes do not require an existing registration, email, reset token or session. No new storage keys, profile updates, learning mutations, dependencies or network requests are part of this increment. No credential is logged or saved by these screens.
+Account choice adapts references 01/03 with the existing signup portrait/backdrop, lilac page, mint learning note and stacked Create account/Sign in/Skip actions. All actions scroll with their content for narrow/larger-text layouts. Account forms use concise service-availability language; explicit verification/reset preview actions remain inside the unavailable-service notice so navigation never implies a successful registration or reset request. Android Back is scoped to the focused onboarding route and returns through the current step; leaving optional name setup is blocked while its save is in flight. Browser history does not create an entry per internal step; use the in-app Back controls within onboarding. See [decision 0009](decisions/0009-optional-account-onboarding.md).
+
+Social buttons follow reference 03's secondary proportions: 44px minimum height versus the primary CTA's 52px, white fill, fine charcoal border, 6px corners and medium labels. Equal 22px icon slots align the official Google asset and installed Apple mark. Side-by-side buttons retain narrow/large-text stacking; stacked buttons grow with their content. Provider actions remain unavailable, with no OAuth or session. The 16 October source formatting/whitespace checks passed; that increment's preview tool could not initialize. Current rendered review remains pending owner.
+
+All credentials are component state only. Navigation carries no email or password query parameters; follow-up direct routes do not require an existing registration, email, reset token or session. Account forms do not update Profile or learning data. Optional name setup retains its existing profile save; Skip leaves that name untouched. No new storage keys, dependencies or network requests are introduced. No credential is logged or saved by these screens.
 
 ## Reference decisions
 
@@ -36,19 +45,24 @@ All credentials are component state only. Navigation carries no email or passwor
 
 ## Owner review and actual checks
 
+**19 October onboarding increment:** References 01/02/03 and installed-SDK Expo Router/React Native BackHandler docs were inspected. Changed source was formatted and reviewed; runtime, native, keyboard, browser, typecheck, lint, tests, builds and visual acceptance were not run. No dependencies, storage keys or service configuration changed. Earlier checks below apply only to their original increments.
+
 Web SVG correction: both decorative auth SVG roots use `aria-hidden` instead of `accessible={false}`. The installed SVG web renderer forwards `accessible` to React DOM, where a false value causes the non-boolean-attribute warning at `<Svg>`. A focused render-only reproduction confirmed the warning and the warning-free `aria-hidden` alternative. The existing art wrappers still hide decorative content on native. No artwork paths or placement changed. Browser/native rendered acceptance remains pending owner.
 
-The eight changed auth source files were formatted with the installed formatter. Source inspection and whitespace checks passed; these do not establish runtime acceptance. Runtime, build, typecheck, lint, native and visual checks have not been run for this increment. The owner retains terminal-heavy checks and rendered review. The existing deferred mobile lint issues are outside this task.
+**16 October source checks:** The eight changed auth source files were formatted with the installed formatter. Source inspection and whitespace checks passed; these do not establish runtime acceptance. Runtime, build, typecheck, lint, native and visual checks were not run for that increment. The owner retains terminal-heavy checks and rendered review. The existing deferred mobile lint issues are outside this task.
 
 Suggested owner review:
 
-1. Open Settings → Account, compare sign-in/signup against reference 03, including right-edge portraits, title/form spacing and restored CTA arrows.
-2. Try empty/invalid signup fields and mismatched confirmation. Enter matching fields, confirm registration remains unavailable, then open the explicit verification preview.
-3. Try both verification actions and return links; neither should announce that email was sent or verified.
-4. Open Forgot password, check empty/invalid email handling, then use a valid address to reveal the explicit reset preview.
-5. Check empty/mismatched reset fields, independent show/hide controls and the unavailable outcome for matching fields. No success or automatic sign-in should occur.
-6. Open both follow-up routes directly. Check back links, keyboard reachability, scrolling, narrow widths and larger text. Confirm recovery/follow-up pages have no Google/Apple row and existing auth pages still do.
-7. Confirm Welcome/name setup, sample learning and saved progress remain unchanged.
+1. Settings → Learning → Replay the introduction → Get started should open account choice. Try both forms and their switches/recovery/follow-up previews, then Skip for now from each to reach Home. Repeat introduction Skip and account-choice Back. Already completed users must keep Home after reload.
+2. From account choice, use Add a name for your welcome. Check save/blank/skip/Back, preserved existing name, Home/Profile greeting and learning progress; if saving fails, the typed name stays available. Failed welcome-preference saves offer retry and Continue for now.
+3. Check Android hardware Back through forms/follow-ups/name setup and a save in flight, separately from browser in-app Back. No credentials should be saved, passed in URLs or treated as a session.
+4. Open Settings → Account, compare sign-in/signup against reference 03, including right-edge portraits, title/form spacing and restored CTA arrows.
+5. Try empty/invalid signup fields and mismatched confirmation. Enter matching fields, confirm registration remains unavailable, then open the explicit verification preview.
+6. Try both verification actions and return links; neither should announce that email was sent or verified.
+7. Open Forgot password, check empty/invalid email handling, then use a valid address to reveal the explicit reset preview.
+8. Check empty/mismatched reset fields, independent show/hide controls and the unavailable outcome for matching fields. No success or automatic sign-in should occur.
+9. Open both follow-up routes directly. Check back links, keyboard reachability, scrolling, narrow widths and larger text. Confirm recovery/follow-up pages have no Google/Apple row and existing auth pages still do.
+10. Confirm optional name save/skip and sample learning/saved progress remain intact.
 
 ## Backend considerations and deferred work
 
@@ -62,7 +76,7 @@ Connected implementation must use acknowledged identity-service outcomes for del
 
 ## Next implementation sequence
 
-1. Owner reviews this bounded UI increment; record acceptance separately from source completion and automated checks.
+1. Owner reviews optional account onboarding, Settings entry and the five forms; record acceptance separately from source completion and automated checks. Refine sample learner content as a separate bounded increment.
 2. Resolve verification/recovery and class-admission decisions in B1-05b alongside pilot ownership/staff-authority decisions. Keep the Google/Apple UI request distinct from configured providers.
 3. Refine course discovery/joining designs against their own references once class-admission behavior is agreed. Existing sample curriculum can remain available independently.
 4. Approve the connected identity contract and backend implementation scope, then connect registration, sign-in, verification and recovery with real service outcomes and appropriate validation. This UI task does not close LMS-B1/B3 or authorize production auth configuration.

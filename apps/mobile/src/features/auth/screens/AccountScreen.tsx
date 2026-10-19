@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { router } from 'expo-router';
 import { Keyboard, Pressable, StyleSheet } from 'react-native';
 import { PasswordField } from '../components/PasswordField';
 import { AccountHero } from '../components/AccountHero';
@@ -12,10 +11,20 @@ import { Text } from '../../../shared/ui/Text';
 import { Card } from '../../../shared/ui/Card';
 import { Button } from '../../../shared/ui/Button';
 import { colors } from '../../../shared/theme/tokens';
+import { createAccountNavigation, type AccountNavigation } from '../navigation';
 
 type Mode = 'sign-in' | 'sign-up' | 'recovery';
 type Errors = { email?: string; password?: string; confirmation?: string };
-export function AccountScreen({ mode }: { mode: Mode }) {
+export function AccountScreen({
+  mode,
+  navigation,
+  continueLabel = 'Return to learning',
+}: {
+  mode: Mode;
+  navigation?: AccountNavigation;
+  continueLabel?: string;
+}) {
+  const navigate = navigation ?? createAccountNavigation('/settings');
   const signup = mode === 'sign-up';
   const recovery = mode === 'recovery';
   const [name, setName] = useState('');
@@ -45,7 +54,7 @@ export function AccountScreen({ mode }: { mode: Mode }) {
     <Screen contentStyle={styles.screenContent} backgroundColor="#F8F5FC">
       <AccountTopBar
         label={recovery ? 'Account recovery' : signup ? 'Create account' : 'Welcome back'}
-        onBack={() => (router.canGoBack() ? router.back() : router.replace('/settings'))}
+        onBack={navigate.back}
       />
       {recovery ? <AccountRecoveryHero mode="request" /> : <AccountHero mode={mode} />}
       <ContentGroup>
@@ -146,7 +155,7 @@ export function AccountScreen({ mode }: { mode: Mode }) {
           <Pressable
             accessibilityRole="link"
             style={[styles.link, styles.forgot]}
-            onPress={() => router.push('/forgot-password')}
+            onPress={navigate.recover}
           >
             <Text variant="small" style={styles.accent}>
               Forgot password?
@@ -179,14 +188,14 @@ export function AccountScreen({ mode }: { mode: Mode }) {
             </Text>
             <Text variant="small">
               {recovery
-                ? 'No email has been sent. Recovery and email verification still need to be configured.'
-                : 'Your fields are ready for this screen preview. Nothing has been submitted or saved to an account.'}
+                ? 'No email has been sent. You can return to your lessons while recovery is unavailable.'
+                : 'Your details have not been submitted or saved. You can continue learning without an account.'}
             </Text>
             {(signup || recovery) && (
               <Button
                 label={signup ? 'Preview email verification' : 'Preview password reset'}
                 variant="outline"
-                onPress={() => router.push(signup ? '/verify-email' : '/reset-password')}
+                onPress={signup ? navigate.verify : navigate.reset}
               />
             )}
           </Card>
@@ -196,7 +205,7 @@ export function AccountScreen({ mode }: { mode: Mode }) {
       <Pressable
         accessibilityRole="link"
         style={styles.switchLink}
-        onPress={() => router.replace(signup || recovery ? '/sign-in' : '/sign-up')}
+        onPress={signup || recovery ? navigate.signIn : navigate.signUp}
       >
         <Text variant="small" style={styles.center}>
           {signup ? 'Already have an account? ' : recovery ? '' : 'Don’t have an account? '}
@@ -206,16 +215,15 @@ export function AccountScreen({ mode }: { mode: Mode }) {
         </Text>
       </Pressable>
       <Text variant="caption" muted style={styles.center}>
-        Account services are not connected yet. No account is created, no sign-in occurs and no
-        recovery email is sent.
+        Account services are not available yet. You can still explore the lessons.
       </Text>
       <Pressable
         accessibilityRole="link"
         style={styles.switchLink}
-        onPress={() => router.replace('/')}
+        onPress={navigate.continueLearning}
       >
         <Text variant="small" muted>
-          Return to learning
+          {continueLabel}
         </Text>
       </Pressable>
     </Screen>

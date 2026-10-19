@@ -1,5 +1,11 @@
 # SundaySeeds implementation plan
 
+## Optional account onboarding — 19 October 2026
+
+The owner approved an optional account step after Welcome, with Create account, Sign in and Skip for now. First launch and Settings introduction replay share the account/form steps; Skip opens Home directly using the existing welcome preference. Add a name for your welcome retains the existing optional name flow, with Back to account options. Existing completed users keep Home; sample courses/lessons stay available without sign-in. Auth forms keep truthful unavailable outcomes and explicit follow-up previews; no session, enrollment, email verification policy, storage schema or backend connection is introduced. See [auth flow and owner checks](auth-onboarding-flow.md) and [decision 0009](decisions/0009-optional-account-onboarding.md).
+
+References 01/02/03 informed the new choice page and retained forms. Source formatting/review only; tests/build/typecheck/lint, browser/runtime/native and visual acceptance remain pending owner. Next: separately polish learner sample content for realistic product review, then owner reviews the full onboarding/course journey. Connected work still requires B1-04/B1-05b/B1-06 decisions and approved contracts; future sign-in at a connected course's Start/Join action is not implemented by this increment.
+
 ## Current checkpoint — 19 October 2026
 
 The owner approved a documentation cleanup after the agent-guidance audit: correct mobile commands/SDK guidance and web chart/simulation wording, align supporting instructions and current roadmap summaries, and recreate the ignored local handoff. No app behavior, service configuration or product policy changes are part of this increment. Verification is documentation/source and diff review only; tests, builds, typecheck/lint and runtime/native/visual checks remain owner-run and pending where not already evidenced.

@@ -19,8 +19,8 @@ export function SettingsScreen() {
         <SettingsRow
           icon="log-in"
           title="Sign in or create an account"
-          value="Preview"
-          description="Explore email and password self-onboarding."
+          value="Optional"
+          description="Sign in, create an account or keep exploring."
           onPress={() => router.push('/sign-in')}
         />
         <SettingsRow
@@ -81,7 +81,7 @@ export function SettingsScreen() {
         <SettingsRow
           icon="play-circle"
           title="Replay the introduction"
-          description="Look around again and revisit optional name setup."
+          description="Revisit account options and optional name setup."
           onPress={() => router.push('/welcome')}
         />
       </SettingsGroup>

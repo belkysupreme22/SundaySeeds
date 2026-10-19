@@ -160,7 +160,7 @@ function SetupFrame({
       <View style={styles.header}>
         <Pressable
           accessibilityRole="button"
-          accessibilityLabel="Back to introduction"
+          accessibilityLabel="Back to account options"
           accessibilityState={{ disabled: busy }}
           disabled={busy}
           onPress={onBack}

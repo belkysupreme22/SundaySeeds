@@ -14,6 +14,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 - Removed example-value autofill and hardcoded credentials from the mobile account screens; forms use manual entry.
 
 ### Added
+- Optional account choice after Welcome with Create account, Sign in and Skip for now, shared by first launch and Settings replay. Existing forms retain unavailable-service outcomes; skipping opens Home, optional name setup remains reachable and saved learning is preserved. Owner runtime/native/visual review pending.
 - Mobile email-verification and new-password screen previews, reached through explicit preview actions after valid signup/recovery forms. Verification/resend and password submission report unavailable services; no email, account verification or password change is claimed. New-password fields support independent visibility and missing/mismatch validation. Current routes, deferred policies and checks are documented in [auth onboarding flow](docs/auth-onboarding-flow.md).
 - Reference-based mobile email/password sign-in, self-registration and recovery screen prototypes, reachable from Settings. Shared inputs, password visibility and validation work without account creation, authentication or email delivery. Owner runtime/visual acceptance pending.
 - Backend contract refresh for implemented course/admin prototypes, with release/progress proposals and an explicit pilot decision register. Adult learner email/password sign-in is owner-confirmed; backend implementation and remaining policies stay pending.

@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { router } from 'expo-router';
 import { Keyboard, Pressable, StyleSheet, View } from 'react-native';
 import { AccountTopBar } from '../components/AccountTopBar';
 import { AccountRecoveryHero } from '../components/AccountRecoveryHero';
@@ -10,9 +9,21 @@ import { Card } from '../../../shared/ui/Card';
 import { Icon } from '../../../shared/ui/Icon';
 import { Text } from '../../../shared/ui/Text';
 import { colors } from '../../../shared/theme/tokens';
+import { createAccountNavigation, type AccountNavigation } from '../navigation';
 
-export function AccountFollowUpScreen({ mode }: { mode: 'verify' | 'reset' }) {
+export function AccountFollowUpScreen({
+  mode,
+  navigation,
+  continueLabel = 'Return to learning',
+}: {
+  mode: 'verify' | 'reset';
+  navigation?: AccountNavigation;
+  continueLabel?: string;
+}) {
   const verification = mode === 'verify';
+  const navigate =
+    navigation ??
+    createAccountNavigation(verification ? '/sign-up' : '/forgot-password', 'replace');
   const [password, setPassword] = useState('');
   const [confirmation, setConfirmation] = useState('');
   const [submitted, setSubmitted] = useState(false);
@@ -33,19 +44,15 @@ export function AccountFollowUpScreen({ mode }: { mode: 'verify' | 'reset' }) {
     <Screen backgroundColor="#F8F5FC" contentStyle={styles.screen}>
       <AccountTopBar
         label={verification ? 'Email verification' : 'Password reset'}
-        onBack={() =>
-          router.canGoBack()
-            ? router.back()
-            : router.replace(verification ? '/sign-up' : '/forgot-password')
-        }
+        onBack={navigate.back}
       />
       <AccountRecoveryHero mode={mode} />
       <View style={styles.availability}>
         <Icon name="info" size={17} color={colors.muted} />
         <Text variant="small" muted style={styles.flex}>
           {verification
-            ? 'Screen preview · Email verification is not connected. No verification email has been sent.'
-            : 'Screen preview · Password reset is not connected. This form cannot change a password yet.'}
+            ? 'Email verification is not available yet. No verification email has been sent.'
+            : 'Password reset is not available yet. Your password will not be changed.'}
         </Text>
       </View>
       {verification ? (
@@ -129,19 +136,20 @@ export function AccountFollowUpScreen({ mode }: { mode: 'verify' | 'reset' }) {
       <Pressable
         accessibilityRole="link"
         style={styles.link}
-        onPress={() => router.replace(verification ? '/sign-up' : '/forgot-password')}
+        onPress={verification ? navigate.signUp : navigate.recover}
       >
         <Text variant="small" style={styles.accent}>
           {verification ? 'Back to sign up' : 'Back to account recovery'}
         </Text>
       </Pressable>
-      <Pressable
-        accessibilityRole="link"
-        style={styles.link}
-        onPress={() => router.replace('/sign-in')}
-      >
+      <Pressable accessibilityRole="link" style={styles.link} onPress={navigate.signIn}>
         <Text variant="small" muted>
           Back to sign in
+        </Text>
+      </Pressable>
+      <Pressable accessibilityRole="link" style={styles.link} onPress={navigate.continueLearning}>
+        <Text variant="small" muted>
+          {continueLabel}
         </Text>
       </Pressable>
     </Screen>
