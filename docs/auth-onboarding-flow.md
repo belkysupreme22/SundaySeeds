@@ -2,15 +2,19 @@
 
 Updated 19 October 2026. This is the current mobile identity UI handoff. Screen source, owner acceptance and connected services are separate states. Earlier account checkpoints in the broader plans remain historical; this document describes the current increment.
 
+**Owner visual approval, 19 October:** The optional account onboarding and learner sample-content increments (`752de75`, `f0b0792`) are visually approved. Platform, viewport/text-size coverage, native/accessibility, error-state/runtime and automated/build results were not supplied. Next is the learner identity/course-admission contract in the [backend proposal](backend-contract-proposal.md), using the new confirmed rules below.
+
 ## Confirmed scope
 
 Adult learners self-register with email and password; a prior invitation is not required to create an account. Account creation does not establish class membership or staff permissions. Google and Apple options are requested UI components; provider configuration and account linking remain undecided.
+
+For future connected content, the owner confirmed email verification before course start, direct course joining for signed-in verified learners, and invitation-only class membership (B1-05c/d). Course enrollment does not create a class membership or staff grant. Delivery/callback/recovery and invitation-lifecycle details remain open; these decisions do not connect the current forms.
 
 The owner approved **Welcome → optional account choice**, offering Create account, Sign in and **Skip for now**. Skip opens Home directly and saves the existing welcome-completed preference. **Add a name for your welcome** opens the existing optional display-name setup; its save/skip behavior is preserved and Back returns to account choice. Skipping the introduction still opens Home directly. Existing completed users retain Home and can revisit the new sequence through Settings → Learning → Replay the introduction, without resetting learning data.
 
 The forms are shared between onboarding and Settings → Account → **Sign in or create an account**. Inside onboarding, Skip for now is available from each form/follow-up page; it completes the welcome flow rather than restarting it. These steps are composed within the existing entry/replay routes using destination-only callbacks; they add no route or credential parameters. Standalone account routes remain available from Settings and direct links. Sample courses and lessons remain freely accessible; no authentication or email-verification gate is introduced.
 
-The future connected-course design direction is to allow course browsing/details before sign-in and request identity at a permitted Start/Join action, then return to that course. This increment implements no gate, enrollment, pending-course storage or authenticated return, and does not decide class admission or verified access. Those remain B1-05b/service-contract work.
+The future connected-course design allows course browsing/details before sign-in and requests identity/verification at a permitted Start/Join action, then returns to that course. Verified learners join available courses directly; classes require invitations. This UI increment implements no gate, enrollment, pending-course storage or authenticated return. The trusted operations, callback behavior and class invitation lifecycle remain B1-05b/service-contract work.
 
 ## Current screen flow
 
@@ -66,19 +70,19 @@ Suggested owner review:
 
 ## Backend considerations and deferred work
 
-The backend contract remains a discussion draft. **B1-05b is open**, including the unanswered question: should learners verify their email before accessing courses? Implementing a preview screen is not approval of that policy.
+The backend contract remains a discussion draft. The owner has now answered the course-access questions in **B1-05c/d**: verified email before connected course start, direct joining for verified learners and invitations for class membership. **B1-05b remains open for the delivery/recovery/session/invitation-lifecycle details**, rather than reopening those confirmed choices.
 
-Before connecting these screens, agree verification/recovery method, destinations and callback behavior; whether and where verified identity is required; duplicate-account and unknown-address responses; resend/retry behavior and rate limits; expired or invalid proof handling; password policy and session behavior after a reset. These are required design/contract considerations, not configuration choices already made.
+Before connecting these screens, agree verification/recovery method, destinations and callback behavior; trusted enforcement of verified identity at connected course Start/Join/content access; duplicate-account and unknown-address responses; resend/retry behavior and rate limits; expired or invalid proof handling; password policy and session behavior after a reset. The access direction is selected; these implementation contracts/configurations are not yet agreed.
 
-Provider configuration, Google/Apple callbacks, account linking/email collisions, published terms/privacy, staff sign-in and authority, class discovery/admission, invitation rules and pilot ownership remain separate decisions. No class membership or privileged role should be inferred from self-registration.
+Provider configuration, Google/Apple callbacks, account linking/email collisions, published terms/privacy, staff sign-in and authority, class discovery, invitation lifecycle and pilot ownership remain separate decisions. No class membership or privileged role should be inferred from self-registration or direct course enrollment.
 
 Connected implementation must use acknowledged identity-service outcomes for delivery, verification, recovery and session state. Production callback/proof handling is outside these plain preview routes. Passwords must not be placed in navigation parameters or persisted by the app. Real pending/error/expired/retry/success states should be designed once the service behavior is agreed; no success state should be inferred merely from valid fields.
 
 ## Next implementation sequence
 
-1. Owner reviews optional account onboarding, Settings entry and the five forms, plus the separately implemented learner sample-content polish; record acceptance separately from source completion and automated checks.
-2. Resolve verification/recovery and class-admission decisions in B1-05b alongside pilot ownership/staff-authority decisions. Keep the Google/Apple UI request distinct from configured providers.
-3. Refine course discovery/joining designs against their own references once class-admission behavior is agreed. Existing sample curriculum can remain available independently.
-4. Approve the connected identity contract and backend implementation scope, then connect registration, sign-in, verification and recovery with real service outcomes and appropriate validation. This UI task does not close LMS-B1/B3 or authorize production auth configuration.
+1. Record the owner's visual approval of the onboarding/sample-content increments; keep unreported native/runtime/automated checks separate.
+2. Prepare the focused identity/course-admission contract in the existing backend proposal, using confirmed B1-05c/d. Resolve remaining delivery/recovery/profile/session/invitation questions; keep Google/Apple outside the first slice unless separately selected.
+3. Refine course Join/Start and return-to-course designs against those contracts. Existing sample curriculum remains independently available. Real content access still needs pilot/content ownership and approved release rules.
+4. Approve the scoped identity contract and implementation start, then connect registration, sign-in, verification/recovery, own profile and Settings session behavior with real service outcomes. This planning step does not close LMS-B1/B3 or authorize production auth configuration.
 
 Keep this document, the tracked roadmap checkpoints, changelog and ignored `docs/AGENT_HANDOFF.local.md` aligned whenever this flow or its decisions change. Commit this bounded auth UI task separately from independent teacher/admin/backend tasks; never force-add the ignored handoff.

@@ -1,5 +1,9 @@
 # LMS implementation plan
 
+## Current priority — identity and course-admission planning, 19 October 2026
+
+The owner visually approved onboarding `752de75` and learner sample polish `f0b0792`; native/runtime/automated coverage was not supplied. Next is the focused LMS-B1 identity/access contract in the [backend proposal](backend-contract-proposal.md): verified email before connected course start, verified learners join courses directly, and classes require invitations (new confirmed B1-05c/d). Delivery/recovery/session/profile and invitation lifecycle remain to be specified. Plan a scoped email/password identity/profile/Settings slice first, then authentic course access; staff/publishing scope retains its own unresolved gates. No migrations/configuration or connected-work start is implied. Earlier owner-auth-review next-step notes below are superseded.
+
 ## Current checkpoint — 19 October 2026
 
 Teacher LMS-T1–T6 and LMS-S1 studio, admin LMS-A1–A4, mobile O1/O2 and the LMS-L1 sample course discovery/resume/results journey have source implementations. The five learner auth preview routes are implemented: sign-in, self-registration, recovery, verification and new password. Adult email/password self-registration without a prior invitation is confirmed; class admission and staff permissions remain separate. These are UI/source milestones; connected services and owner runtime/visual acceptance remain pending.

@@ -47,7 +47,7 @@ Backend entity, capability and access proposals are in [backend-contract-proposa
 ## Identity direction and remaining decisions
 
 - Adult learners self-register with email/password without a prior invitation, as confirmed on 16 October. Registration does not establish class membership or staff authority. The five account screens are unavailable-service UI previews; see the current [auth flow](auth-onboarding-flow.md).
-- Verification requirements, recovery/callback behavior, class admission and staff identity remain open under B1-05b in the [backend decision register](backend-contract-proposal.md). Google/Apple UI options do not establish configured providers or account-linking rules.
+- The owner confirmed verified email before connected course start, direct course joining for verified learners and invitation-only classes on 19 October (B1-05c/d). Course enrollment is separate from class membership. Delivery/recovery/callback behavior, invitation lifecycle and staff identity remain open under B1-05b in the [backend decision register](backend-contract-proposal.md). Google/Apple UI options do not establish configured providers or account-linking rules.
 - System-wide super admin and sub-admin roles are confirmed in principle. Define delegation, scope, revocation, auditing and initial provisioning before implementing permissions.
 - Pilot church, class and curriculum ownership.
 - How teachers join and who grants their permissions.

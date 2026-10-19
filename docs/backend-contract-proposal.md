@@ -1,16 +1,30 @@
 # Backend contract proposal
 
+## Current planning checkpoint — 19 October 2026
+
+The owner visually approved optional account onboarding (`752de75`) and learner sample-content polish (`f0b0792`). That approval does not establish native/device, accessibility, automated or connected-service verification. The next work is **LMS-B1: learner identity and course-admission planning**, extending this proposal rather than creating another contract or configuring services.
+
+New owner decisions: **email verification is required before starting a connected course**; **signed-in, verified learners can join courses directly, while classes require an invitation**. Guest course browsing/details and optional onboarding remain the design direction. Registration, course enrollment, class membership and staff authority are separate concepts. These rules apply to future connected content; the existing guest sample lessons remain available.
+
+The immediate planning deliverable is the identity/access state flow, own-profile boundary, callback/recovery/session contract, course-enrollment versus class-invitation model, and owner-run acceptance scenarios below. Delivery/callback details, authentic pilot content/authority and other register items remain unresolved. No migrations, providers, accounts or live services are configured by this document update.
+
+## Historical checkpoints — 16 October
+
+The older unanswered verification/admission notes below are superseded by B1-05c/B1-05d in the current decision register. Other unresolved policies remain open.
+
 **16 October — auth follow-up UI scope:** Verification and new-password screens are explicitly reachable previews of future states; every service action remains unavailable. [Auth onboarding flow](auth-onboarding-flow.md) records the paths and backend considerations. No delivery method, code/token format, password policy, callback contract or verified-access gate is chosen. The question of requiring email verification before course access is unanswered; B1-05b remains open.
 
 **16 October provider UI request:** Owner requested Google and Apple options from the account reference. Both now exist as unavailable screen actions on mobile sign-in/sign-up. Email/password self-onboarding remains confirmed. Provider setup, callbacks, email collision/account linking, verification and recovery behavior remain undefined and unconfigured; adding buttons does not establish a working OAuth service.
 
-Updated 16 October 2026. **Discussion draft; not an approved schema, API or permission implementation.** The owner selected adult learners, **self-onboarding with email and password**, screen prototypes before a connected pilot, and backend planning in parallel. Adults can register without a prior invitation. Administration means a system-wide super admin with evolving sub-admin roles. Supabase is planned, not configured or connected. Registration selection does not settle email verification, recovery, staff sign-in, class admission or invitation policy.
+## Current contract proposal
+
+Updated 19 October 2026. **Discussion draft; not an approved schema, API or permission implementation.** The owner selected adult learners, **self-onboarding with email and password**, screen prototypes before a connected pilot, and backend planning in parallel. Adults can register without a prior invitation. Verified learners join courses directly; classes require invitations. Administration means a system-wide super admin with evolving sub-admin roles. Supabase is planned, not configured or connected. Verification/recovery delivery and callbacks, staff sign-in, class invitation lifecycle and privileges remain to be agreed.
 
 This document supplies a shared vocabulary for the learner app and teacher/admin proposals. It defines capabilities and data concepts rather than finished HTTP routes, SQL or a commitment to a separate API service. See [parallel delivery plan](parallel-delivery-plan.md) for task order and integration gates.
 
 ## Current implementation and contract boundary
 
-Mobile email/password self-registration, sign-in and recovery now have reference-based screen prototypes reachable from Settings. They validate fields and show service-unavailable outcomes; no identity provider, verification/reset delivery, policy consent or session exists. The optional name field does not update the learner profile. B1-05b remains open and these screens do not constitute LMS-B3 implementation.
+Mobile email/password self-registration, sign-in and recovery have reference-based screen prototypes reachable through optional onboarding and Settings, including verification/reset previews. They validate fields and show service-unavailable outcomes; no identity provider, verification/reset delivery, policy consent or session exists. The signup name field does not update the learner profile; the separate optional name setup retains its device-profile behavior. The remaining B1-05b questions stay open and these screens do not constitute LMS-B3 implementation.
 
 Teacher course/module authoring, structured lessons and automatic quizzes, preview/publication snapshots, class/enrollment examples and reports now have source prototypes. Administrator directory, scoped Access proposals, Settings and audit/operations examples also exist. Their state is session-only and does not establish real accounts, authorization, publication, invitations or audit history.
 
@@ -20,7 +34,8 @@ Mobile now groups four stable sample lesson IDs into one course with two modules
 
 | Concept | Relationship and proposed minimum responsibility |
 | --- | --- |
-| Auth identity and profile | An authenticated adult has a stable identity and display profile. Adults self-register with email and password (owner selected 16 October); verification/recovery, staff sign-in and staff-as-learner rules remain decisions. Self-registration does not establish class membership or a staff grant |
+| Auth identity and profile | An authenticated adult has a stable identity and display profile. Adults self-register with email/password and must verify email before connected course start (owner selected 16/19 October); delivery/recovery/callback, staff sign-in and staff-as-learner rules remain decisions. Self-registration does not establish class membership or a staff grant |
+| Course enrollment | A verified learner directly joins an available course independently of class membership (owner selected 19 October). The trusted enrollment operation checks session, verified status and course availability; release binding, repeat-join, withdrawal and revocation details remain contract proposals |
 | Organization, class and membership | An organization contains classes; an identity has explicit class memberships. Membership records distinguish learner participation from assigned teacher responsibility and track active/revoked state |
 | Scoped role grant | A staff identity receives an explicit capability set and scope from an authorized grantor. The system super-admin bootstrap and sub-admin grant/delegation rules must be agreed before implementation |
 | Invitation | Refers to an intended class/membership and, if required, recipient identity. Expiry, redemption limits, revocation and grant authority are enforced by a trusted operation |
@@ -36,7 +51,7 @@ Media ownership/access can be attached to lesson versions when images enter the 
 
 - Use stable opaque identifiers; the authenticated principal comes from the validated session, never a client-supplied owner or role assertion.
 - Responses distinguish available data, empty results and unavailable/error states. A transport success alone must not be interpreted as a durable mutation unless the operation acknowledges acceptance.
-- Proposed failure vocabulary: `unauthenticated`, `forbidden`, `not_found`, `validation_failed`, `conflict`, `expired`, `rate_limited` and `temporarily_unavailable`. Define safe error details, retry guidance and a diagnostic identifier where appropriate; avoid leaking restricted resource existence.
+- Proposed failure vocabulary: `unauthenticated`, `verification_required`, `forbidden`, `not_found`, `validation_failed`, `conflict`, `expired`, `rate_limited` and `temporarily_unavailable`. Define safe error details, retry guidance and a diagnostic identifier where appropriate; avoid leaking restricted resource existence.
 - Server-controlled timestamps describe server events. Client times may be diagnostic input but cannot establish trusted completion or audit history.
 - Reads return only authorized fields. The owner confirmed automatic knowledge checks: show the correct answer and explanation after the learner checks a response, with no teacher review. Define the trusted feedback operation and version binding before connected work; initial question payloads need not expose unchecked answers. These are learning interactions, not proctored examinations.
 - List operations need explicit ordering and bounded pagination when the dataset warrants it. Empty pages are not an authorization failure.
@@ -46,8 +61,10 @@ Media ownership/access can be attached to lesson versions when images enter the 
 | Consumer / capability | Request concepts | Response concepts and important failures |
 | --- | --- | --- |
 | Adult: self-register | Email, password and agreed minimal profile fields through the configured identity service; no caller-selected privileged role | Safe registration/verification state and next step; validation, rate limiting or temporary failure. Account creation is separate from class admission and staff grants; exact verification, duplicate-account messaging and recovery behavior remain to be agreed |
-| Mobile: browse/open course curriculum | Validated session, authorized class/collection and course release identifier | Ordered modules with exact lesson/version references and permitted lesson summaries; empty catalogue, unavailable release, lost access or failed load. No draft content or inaccessible lesson metadata |
-| Mobile: browse/open published lesson | Current session, class or visible collection, lesson/version identifier | Authorized lesson summary/content and version; empty collection, unavailable publication, lost membership or expired session |
+| Guest/mobile: browse course catalogue/details | Publicly visible course summary/identifier; no assumed session or membership | Public description and permitted curriculum summary only; no private drafts, answer keys, restricted class data or implied enrollment. The exact public fields need agreement |
+| Mobile: join an available course | Validated verified identity and available course identifier; no caller-selected class/staff grant | Acknowledged own course enrollment and allowed next destination, or verification required, unavailable course, conflict or temporary failure. Repeat-join semantics and release binding need agreement |
+| Mobile: open connected course curriculum | Verified session, authorized course enrollment or separately permitted class access, and course release identifier | Ordered modules with exact lesson/version references and permitted lesson summaries; unavailable release, lost access or failed load. Class membership must not be inferred from course joining |
+| Mobile: open connected published lesson | Verified session, authorized course/class context and lesson/version identifier | Authorized lesson content/version; unavailable publication, lost enrollment/membership or expired session. Guest sample content remains a separate source |
 | Mobile: save reading position/bookmark | Lesson/version, valid section or desired bookmark state, optional revision token | Acknowledged current state/revision; invalid section, stale version, lost access or temporary save failure |
 | Mobile: check a quiz answer | Authorized published version, question ID and selected choice | Automatic correct/incorrect feedback, correct answer and explanation for that version; invalid question/choice, revoked access or unavailable version. Checking one answer is not final attempt completion |
 | Mobile: submit quiz attempt | Published version, answers keyed by question, unique submission key | Accepted attempt ID, trusted score/completion and permitted feedback; incomplete/invalid answers, unavailable version, duplicate-key conflict, revoked access or uncertain network outcome |
@@ -107,7 +124,9 @@ No SQL, RLS policies, provider configuration, credentials, email delivery or net
 | B1-03 | Confirmed by owner | Automatic knowledge checks with answers and explanations; no teacher marking | Feedback operation implementation |
 | B1-04 | Owner decision required | First organization/class, curriculum owner, content/translation rights and permitted publisher/inviter | Real pilot data and content publication |
 | B1-05a | Confirmed by owner, 16 October | Adult learner self-onboarding: create an account without an invitation using email/password. Class admission and staff grants are separate | Registration UI/contract direction established; no service configured |
-| B1-05b | Owner decision required | Whether email verification is required before course access (question unanswered); verification/recovery method and destination; class discovery/admission or invitation rules; staff sign-in and staff-as-learner support | Remaining identity/enrollment workflow and connected implementation; follow-up UI previews do not settle these rules |
+| B1-05b | Remaining owner/contract decisions required; verification/admission direction settled in B1-05c/d | Verification/recovery method and destination, safe errors/retry/password/session policy, class invitation recipient/expiry/redemption lifecycle; staff sign-in and staff-as-learner support | Remaining identity/enrollment workflow and connected implementation |
+| B1-05c | Confirmed by owner, 19 October | Learners must verify their email before starting a connected course. Guest browsing/details remain available; existing sample learning is unchanged | Enforce verified identity at trusted connected course Start/Join/content operations; delivery/callback contract still pending |
+| B1-05d | Confirmed by owner, 19 October | Signed-in, verified learners join courses directly; class membership requires an invitation. Joining a course does not create class membership or staff authority | Separate course enrollment and class invitation contracts; trusted availability/scope/lifecycle enforcement |
 | B1-06 | Owner decision required | Super-admin bootstrap/backup/recovery, initial sub-admin capabilities/scopes, delegation and audit readers | Production grants/administrative authorization |
 | B1-07 | Proposal above; not accepted | Immutable course releases, class assignment pinning, withdrawal/revocation and older in-flight attempts | Schema and publishing/learning services |
 | B1-08 | Proposal above; not accepted | Completion without pass threshold, unlimited retries, version-bound best score and course denominator | Trusted attempts and reporting |
@@ -116,12 +135,26 @@ No SQL, RLS policies, provider configuration, credentials, email delivery or net
 
 An agent may refine proposals and adapters' conceptual boundaries while these questions are open. It must not mark them accepted, invent pilot identities, configure production access or import fixtures. Record each owner answer here and propagate it to the implementation plan and ignored handoff.
 
+## Next planning deliverable — learner identity and course admission
+
+The following defines work to prepare and review, not additional accepted policy or implementation authorization:
+
+1. **State flow:** guest catalogue/details → register/sign in → verification required → verified identity → permitted course Join/Start → intended course. Preserve the selected public course identifier across the auth round trip; validate it against trusted availability on return. Explicit cancellation, expired session/proof, denied access, delayed delivery and retry states must never create false success. Existing guest sample learning stays separate.
+2. **Identity and own profile:** specify minimal account fields and authorized own-profile read/update. Decide how the existing optional device name is offered to an account without silently copying or overwriting it. Registration cannot assign privileged roles or class membership.
+3. **Delivery, callbacks and recovery:** propose email verification/reset methods and mobile/web callback destinations; trusted proof exchange, safe duplicate/unknown-email responses, resend limits, invalid/expired links, password policy, reset session behavior and acknowledged delivery/status. Confirm the contract before configuring the provider or changing plain preview routes.
+4. **Access model:** map independently available courses and their enrollments separately from invitation-only classes. Agree public catalogue fields, available course/release ownership, invitation recipient/expiry/reuse rules, membership revocation and any class-restricted content. Direct course joining must not bypass private class scope.
+5. **Sessions and data isolation:** specify sign-out/account switching, session expiry, pending writes and per-identity caches. Retain current sample isolation while B1-10 transfer policy remains unapproved; do not convert summary best scores into historical attempts.
+6. **Owner-run acceptance scenarios:** guest browse; skip onboarding; register without invitation; unverified Start/Join denied; verified learner joins an available course; canceled/failed auth returns safely; class without valid invitation denied; valid invitation grants only the intended membership; expired/revoked/wrong-recipient invitation denied; sign-out/account switch reveals no other learner's data. These are planned checks, not passing evidence.
+
+The first proposed connected slice after its scoped contract and implementation start are approved is **email/password identity, verification/recovery, own profile and Settings session/sign-out**, preserving guest sample learning. Course Join/Start and return-to-course follow when the authentic catalogue/release access contract is agreed. Google/Apple, staff grants, publishing and audit producers remain separate scopes. Pilot/content rights and staff authority need resolution before the corresponding real content/privileged workflows; they do not prevent preparing the isolated identity contract now.
+
 ## Proposed permission matrix
 
 “Proposed” means a boundary to approve and enforce in database policies/trusted operations. UI visibility is not enforcement. Deny by default; test both authorized and forbidden cases before claiming readiness.
 
 | Capability | Adult learner | Assigned teacher | System super admin | Scoped sub-admin |
 | --- | --- | --- | --- | --- |
+| Join an independently available course | Verified own identity; no class/staff grant | Only through separately valid learner access | No impersonated enrollments | No impersonated enrollments |
 | Read published class content | Own active memberships | Assigned classes | Administrative scope to define | Denied until explicit capability/scope agreed |
 | Read/edit private lesson drafts | Denied | Authorized assigned scope; draft ownership rule unresolved | Content administration capability to define | Denied until defined |
 | Publish/unpublish | Denied | Proposed assigned scope, subject to curriculum authority | Publishing/override authority to define | Denied until defined |
@@ -137,8 +170,8 @@ Unknown sub-admin scopes must remain denied in production, even when the prototy
 
 1. **Pilot boundaries:** first organization/class, curriculum owner and who can invite/assign teachers; intended publication/class visibility and content/translation permissions.
 2. **Administrative authority:** super-admin bootstrap and recovery; initial sub-admin capabilities/scopes; who may delegate/revoke them; guardrails for the last authorized administrator and audit access.
-3. **Identity and membership:** adult email/password self-registration is selected. Define verification/recovery, class admission, staff sign-in and account-switch rules before connected implementation. Do not require an invitation to create an adult learner account or infer class/staff access from registration.
+3. **Identity and membership:** adult email/password self-registration, verification before connected course start, direct course joining for verified learners and invitation-only classes are selected. Define delivery/callback/recovery, invitation lifecycle, staff sign-in and account-switch rules before the relevant connected implementation. Do not require an invitation to create an adult learner account or infer class/staff access from registration/course joining.
 4. **Content and assessment:** course/module hierarchy and publication/version lifecycle, old-version submissions, implementation of automatic checked-answer feedback, retry/completion rules and teacher result detail. Teacher review is not part of quiz completion.
 5. **Data lifecycle and reliability:** retention/export/deletion, revocation effects, cache isolation, sample-data transfer choice, acknowledged-save/offline behavior, backups and operational ownership.
 
-Next deliverable: resolve B1-04, B1-05b and B1-06, then agree the release/assessment/lifecycle subset before drafting migrations or production auth/role behavior. Email/password learner self-onboarding is confirmed; LMS-B1 as a whole remains open. Teacher/admin layout feedback and learner runtime/visual acceptance can proceed independently. No backend code, service configuration, permission tests or runtime validation accompanies this document; the owner retains tests/builds/runtime review unless explicitly delegated.
+Next deliverable: prepare the focused identity/course-admission contract above using confirmed B1-05c/d; resolve the remaining B1-05b questions and agree its scoped implementation start before auth/profile migrations or configuration. Resolve B1-04/B1-06 and release/assessment/lifecycle choices before the corresponding course, staff and publication services. LMS-B1 as a whole remains open. Owner visual approval covers the latest onboarding/learner-content increments only; other acceptance and native/runtime/automated evidence remain separate. No backend code, service configuration, permission tests or runtime validation accompanies this document; the owner retains tests/builds/runtime review unless explicitly delegated.

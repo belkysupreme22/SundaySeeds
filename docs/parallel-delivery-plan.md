@@ -1,5 +1,9 @@
 # Parallel delivery plan
 
+## Current priority — identity and course-admission planning, 19 October 2026
+
+Onboarding `752de75` and learner sample polish `f0b0792` now have owner visual approval, without new native/runtime/automated evidence. The next planning lane is the [existing backend proposal](backend-contract-proposal.md): verified email before connected course start, direct course joining by verified learners and invitation-only classes are confirmed in B1-05c/d. Prepare identity/profile/recovery/session and admission contracts before a scoped implementation start; resolve content/staff/release gates before their services. Teacher/admin prototypes remain separate. This current priority supersedes earlier queued auth visual review below and configures no services.
+
 ## Current checkpoint — 19 October 2026
 
 Source milestones now include teacher LMS-T1–T6/LMS-S1, admin LMS-A1–A4, learner O1/O2 and LMS-L1 sample course discovery/resume/results. All five auth preview routes are implemented. Adult email/password self-registration without a prior invitation is confirmed; class admission and staff authority remain separate. No connected identity or production role behavior is implemented.
