@@ -154,9 +154,63 @@ were made; pending security/failure/native/automated checks remain separate.
 The owner requested onboarding that includes Bible-study familiarity, intended
 study time and other preferences suitable for SundaySeeds. They selected placement
 **after the first verified sign-in**, editable later in **Settings**, and confirmed
-that learners can skip setup and return later. This is the next scoped design/
-implementation task before connected course discovery/enrollment; it is not yet
-implemented and does not change the current signup or profile SQL.
+that learners can skip setup and return later. The approved flow is now implemented in source before connected course enrollment.
+Its separate preference table/RPC migration is applied to the development project;
+the existing signup and account-name profile contract are unchanged. Runtime and
+permission/concurrency acceptance remain pending.
+
+### Implementation checkpoint
+
+- `/learning-profile` composes a feature-owned four-step editor. Verified Home
+  entry opens it when the preference load succeeds with no saved row. Existing
+  verified accounts also receive this one-time setup. Email-proof pages are never
+  intercepted; unavailable loads never masquerade as a new account.
+- `/learning-profile?mode=edit` is reachable from Settings → Learning profile.
+  Back retains the draft; Cancel exits without starting a save. After Save has
+  started, exit labels say Return/Continue and explain that navigation does not
+  cancel the already submitted request. Session refresh retains the form draft;
+  identity changes remount the form and mask the previous account's data.
+- Skip exits to Home immediately and attempts answer-preserving dismissal. Local
+  session suppression works even if persistence fails; only an acknowledged saved
+  dismissal prevents prompting after another login/reload. Initial load failure
+  offers retry/exit instead of writing guessed empty preferences.
+- Final Save shows the acknowledged preference summary plus the actual sample
+  course, with an optional topic/time-based lesson hint. `/courses` is a browsable
+  course directory reachable from the result or Home → Browse courses. It contains
+  the one bundled sample course; there is no connected content/enrollment service.
+- Native/browser clients use actor-pinned requests, response validation and explicit
+  revision conflicts. Screens use feature hooks, never storage/backend clients.
+  Auth's validated-actor helper carries the existing session-generation guard.
+- `20261020114334_learner_learning_preferences.sql` was applied to `sundayseeds-dev`
+  through Supabase MCP; migration-list metadata confirms that actual version/name.
+  The CLI is absent, so the remote-generated migration version was mirrored into
+  source without a CLI install or invented timestamp. The original profile table
+  was not replayed; its earlier manual-application history remains unreconciled.
+
+Source/reference review, scoped formatting and whitespace review completed.
+Independent reviews covered catalog truthfulness, actor isolation, revisions,
+optional exits and navigation. MCP DDL success/history is deployment evidence only.
+No tests, typecheck/lint, builds, advisors, SQL permission/concurrency probes,
+browser/native runtime or rendered review ran for this increment. The owner owns
+those checks; `.env.local` was neither read nor changed and no dependencies added.
+
+Owner review:
+
+1. Reload the running app; sign in with a verified account with no preferences.
+   Check intention → topics (at most three) → familiarity → session time; Continue
+   works unanswered, selected choices clear, Back preserves answers.
+2. Save and inspect the summary, sample course and relevant lesson hint. View course
+   opens the curriculum; View all courses opens the one-course directory. No course
+   or class enrollment is created. Reopen Settings → Learning profile and check the
+   saved answers, change/save, Cancel and reload/sign-out/sign-in persistence.
+3. On an account without setup, Skip should return Home and, when acknowledged by
+   the service, remain dismissed after reload/sign-in. Set up later in Settings.
+   Simulate offline/failed loading/saving and ensure retry/exit retains the draft;
+   session-only dismissal must not be mistaken for durable success.
+4. Review session refresh while drafting, account switch isolation, slow Save then
+   Back/exit, two-client revision conflicts and explicit reload/retry. Check Android
+   Back, 360/390 widths, 150%/200% text, keyboard/focus and native/web separately.
+   Database permissions/verification/concurrency acceptance follows the README.
 
 ### Research basis and limits
 
@@ -184,8 +238,8 @@ its [official FAQ](https://disciplr.com/faq/) says the platform closed in August
 
 Use four short optional pages followed by actual course choices. Adapt reference
 02's pastel choice cards, fine outlines, progress indicator and accessible controls.
-Do not repeat the signup name/email. Exact wording/options remain proposed;
-placement, skipping and later Settings editing are owner-confirmed.
+Do not repeat the signup name/email. These wording/options are the approved proposal now implemented in source;
+placement, skipping and later Settings editing remain owner-confirmed.
 
 | Order | Question and proposed choices | How the answer changes the experience |
 | --- | --- | --- |
@@ -256,9 +310,8 @@ act on it; an answer can never create membership or staff authority.
   membership, course ordering, completion or saved progress. Knowledge/time choices
   never authorize access. Do not show fake analysis/loading activity.
 
-Next: design the four-page/result/Settings screens against the references and
-specify their account-preference and course-metadata contracts together, then
-implement the bounded slice. Broad error/copy polishing remains in the consolidated
-sprint. Existing identity proof/failure/native/permission acceptance remains pending.
-This research/planning revision changes no route, UI, schema, live project,
-dependency or runtime behavior; no tests/build/runtime checks were run.
+Next: owner reviews this implemented slice and its deployed preference contract,
+then scope authentic course content/catalog/admission. The current lesson hint
+uses authored sample topic/time data; broader goal/level ranking still needs real
+course metadata. Broad error/copy polishing remains in the consolidated sprint;
+existing identity proof/failure/native/permission acceptance remains pending.

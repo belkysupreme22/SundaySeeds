@@ -1,5 +1,7 @@
 import { useAuth } from '../../auth/hooks/useAuth';
-import { router } from 'expo-router';
+import { useCallback } from 'react';
+import { router, useFocusEffect } from 'expo-router';
+import { useLearningProfile } from '../../learning-profile/hooks/useLearningProfile';
 import { Pressable, StyleSheet, useWindowDimensions, View } from 'react-native';
 import { lessons } from '../../lessons/data/lessons';
 import { useLearningProgress } from '../../progress/hooks/useLearningProgress';
@@ -16,6 +18,12 @@ import { ContinueLearning } from '../components/ContinueLearning';
 import { CourseJourneyCard } from '../../courses/components/CourseJourneyCard';
 import { useLearnerProfile } from '../../profile/hooks/useLearnerProfile';
 export function HomeScreen() {
+  const { shouldPrompt } = useLearningProfile();
+  useFocusEffect(
+    useCallback(() => {
+      if (shouldPrompt) router.replace('/learning-profile');
+    }, [shouldPrompt]),
+  );
   const { width, fontScale } = useWindowDimensions();
   const wrapShortcuts = width < 360 || fontScale > 1.2;
   const { user } = useAuth();
@@ -105,7 +113,11 @@ export function HomeScreen() {
       </ContentGroup>
       <ContinueLearning />
       <ContentGroup>
-        <SectionHeading title="Your course journey" />
+        <SectionHeading
+          title="Your course journey"
+          action="Browse courses"
+          onPress={() => router.push('/courses')}
+        />
         <CourseJourneyCard />
       </ContentGroup>
       <ContentGroup>

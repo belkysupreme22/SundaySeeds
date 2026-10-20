@@ -501,6 +501,18 @@ export function AuthProvider({ children }: PropsWithChildren) {
     });
   }
 
+  async function getValidatedActor() {
+    const context = await currentActor();
+    if (!context) return null;
+    return {
+      ...context.actor,
+      isCurrent: () =>
+        isCurrent(context.actor.userId, context.version) &&
+        validatedActor.current?.id === context.actor.userId &&
+        validatedActor.current.version === context.version,
+    };
+  }
+
   function saveProfileName(value: string) {
     return run(async () => {
       const name = normalizeAccountName(value);
@@ -559,6 +571,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
         signOut,
         retryProfile,
         saveProfileName,
+        getValidatedActor,
       }}
     >
       {children}

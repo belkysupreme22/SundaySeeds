@@ -18,6 +18,7 @@ import { colors } from '../shared/theme/tokens';
 import { LearnerProfileProvider } from '../features/profile/hooks/useLearnerProfile';
 import { Text } from '../shared/ui/Text';
 import { LearningStorageNotice } from '../features/progress/components/LearningStorageNotice';
+import { LearningProfileProvider } from '../features/learning-profile/hooks/useLearningProfile';
 
 function AppNavigator() {
   const { hydrated } = useLearningProgress();
@@ -62,7 +63,9 @@ export default function RootLayout() {
             <LearningProgressProvider>
               <AuthProvider>
                 <LearnerProfileProvider>
-                  <AppNavigator />
+                  <LearningProfileProvider>
+                    <AppNavigator />
+                  </LearningProfileProvider>
                 </LearnerProfileProvider>
               </AuthProvider>
             </LearningProgressProvider>

@@ -117,6 +117,14 @@ export function SettingsScreen() {
       </SettingsGroup>
       <SettingsGroup title="Learning">
         <SettingsRow
+          icon="compass"
+          title="Learning profile"
+          description="Choose your interests, starting point and study rhythm."
+          value={auth.user?.verified ? undefined : 'Optional'}
+          onPress={() => router.push('/learning-profile?mode=edit')}
+        />
+        <SettingsRow
+          divider
           icon="play-circle"
           title="Replay the introduction"
           description="Revisit account options and optional name setup."

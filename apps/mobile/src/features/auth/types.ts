@@ -13,6 +13,13 @@ export type AccountProfile = {
 
 export type AuthResult = { ok: boolean; message: string };
 
+// Feature hooks use a pinned, validated actor; screens never receive credentials.
+export type ValidatedAccountActor = {
+  userId: string;
+  accessToken: string;
+  isCurrent: () => boolean;
+};
+
 export type AuthContextValue = {
   user: AccountIdentity | null;
   profile: AccountProfile | null;
@@ -30,4 +37,5 @@ export type AuthContextValue = {
   signOut: (expectedUserId?: string) => Promise<AuthResult>;
   retryProfile: () => Promise<AuthResult>;
   saveProfileName: (name: string) => Promise<AuthResult>;
+  getValidatedActor: () => Promise<ValidatedAccountActor | null>;
 };
