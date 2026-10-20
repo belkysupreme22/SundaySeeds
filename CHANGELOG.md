@@ -22,6 +22,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 - Removed example-value autofill and hardcoded credentials from the mobile account screens; forms use manual entry.
 
 ### Added
+- Shared locally bundled LottieFiles pastel loading dots, Expo-compatible native and SVG web players, opt-in button/status presentation, reduced-motion/static fallback and creator/license records. Owner runtime/native/visual checks remain pending.
 - Optional four-step learning-profile onboarding after verified Home entry, with Skip, later Settings editing, account-owned preferences, saved summary and revision-safe reloads. Added a browsable sample course directory and honest topic/time-based lesson hints. Runtime/native/automated acceptance remains pending.
 - Separate private learning-preferences table and verified actor-bound save/dismiss RPCs, with optional answer validation, revision conflicts and answer-preserving dismissal. Applied the additive development migration through Supabase MCP; runtime, advisors and permission/concurrency checks remain pending.
 - Configurable learner email/password identity source, explicit-action isolated confirmation/recovery pages, validated session restoration, native SecureStore/browser tab sessions, own account-profile editing and Settings local sign-out. Sample progress/guest names stay separate; project/email/hosting setup and owner runtime/security checks remain pending. Added a step-by-step Supabase development setup walkthrough.

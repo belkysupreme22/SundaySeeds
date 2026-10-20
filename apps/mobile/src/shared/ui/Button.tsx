@@ -2,6 +2,7 @@ import { Pressable, StyleSheet, View, type StyleProp, type ViewStyle } from 'rea
 import { colors } from '../theme/tokens';
 import { Text } from './Text';
 import { Icon, type IconName } from './Icon';
+import { LoadingIndicator } from './LoadingIndicator';
 
 export function Button({
   label,
@@ -9,6 +10,7 @@ export function Button({
   icon = 'arrow-right',
   variant = 'primary',
   disabled,
+  loading = false,
   style,
 }: {
   label: string;
@@ -16,18 +18,19 @@ export function Button({
   icon?: IconName | false;
   variant?: 'primary' | 'dark' | 'outline';
   disabled?: boolean;
+  loading?: boolean;
   style?: StyleProp<ViewStyle>;
 }) {
   return (
     <Pressable
       accessibilityRole="button"
-      accessibilityState={{ disabled }}
-      disabled={disabled}
+      accessibilityState={{ disabled: disabled || loading, busy: loading }}
+      disabled={disabled || loading}
       onPress={onPress}
       style={({ pressed }) => [
         styles.button,
         styles[variant],
-        disabled && styles.disabled,
+        disabled && !loading && styles.disabled,
         pressed && styles.pressed,
         style,
       ]}
@@ -35,8 +38,12 @@ export function Button({
       <Text variant="label" style={[styles.label, variant === 'dark' && { color: colors.white }]}>
         {label}
       </Text>
-      {icon && (
-        <Icon name={icon} size={19} color={variant === 'dark' ? colors.white : colors.ink} />
+      {loading ? (
+        <LoadingIndicator small />
+      ) : (
+        icon && (
+          <Icon name={icon} size={19} color={variant === 'dark' ? colors.white : colors.ink} />
+        )
       )}
     </Pressable>
   );
