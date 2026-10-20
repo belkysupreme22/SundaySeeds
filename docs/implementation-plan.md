@@ -1,5 +1,30 @@
 # SundaySeeds implementation plan
 
+## Current priority: real-world course model and operating scenarios — 20 October 2026
+
+The owner reports reviewing onboarding and approved course-library contract planning.
+When asked about initial course content and edition updates, they requested deeper
+research and emphasized actual learner/teacher/Sunday-school use rather than further
+design-led assumptions. [Course-model research](course-model-research.md) now compares
+official LMS and adult Bible-study structures and walks eight operational scenarios.
+
+Findings support course → modules where useful → lessons/activities, separate from
+classes and dated meetings. Reflection, knowledge checks, completion and permission
+have different meanings; weekly curriculum length is not a personal session estimate.
+The report explains living courses versus stable editions through a concrete progress
+example. Neither the existing sample as connected content nor the edition policy is
+owner-selected yet. No approved automatic-feedback rule is changed by competitor
+research; teacher visibility and completion criteria remain our own decisions.
+
+Next bounded deliverable: one reviewable course blueprint (audience/outcomes, Scripture
+and rights/reviewer, lesson sequence, activities, estimate basis, completion and update
+example). Use current content as a candidate, not an automatic production import.
+Then finalize public catalog/enrollment/content-access contracts and start additive
+schema/adapters in their own implementation increment. Classes/staff authority,
+connected progress and the consolidated polishing sprint remain separate workstreams.
+Official-source/source review and whitespace review only; no app/schema/service,
+credentials, tests/build/typecheck/lint/runtime changes in this research increment.
+
 ## Loader appearance correction — 20 October 2026
 
 Owner requested a transparent loader with the selected Lottie file's exact original
@@ -31,7 +56,7 @@ completion, reduced motion/background behavior and small widths/larger text on w
 and native separately. This requested animation slice does not complete the deferred
 app-wide copy/error polishing sprint or outstanding learning-profile acceptance.
 
-## Next priority: optional learning-profile onboarding — 20 October 2026
+## Learning-profile source and owner review — 20 October 2026
 
 The owner approved the research-based intention → interests → Bible-study familiarity → session time → course choices flow. Source now includes four optional pages, Back/deselect/Skip, saved preference summary, Settings editing, a one-course directory and truthful sample lesson hints. Verified Home entry opens setup only after an acknowledged missing preference row; completed/dismissed rows prevent repeated prompts. Initial load failures offer retry/exit without overwriting values. Skip immediately suppresses prompting for this session and attempts durable dismissal. See [implemented flow and owner review](auth-onboarding-flow.md#next-slice-optional-learning-profile--20-october-2026).
 
@@ -39,7 +64,7 @@ Separate private preference SQL/RPCs were committed as `8866fda` and applied add
 
 The current app still contains one bundled sample course. Recommendations can explain an included topic and hint at a lesson using actual duration metadata; authored course-level goal/level matching and connected course content/enrollment remain later work. No fictional course inventory, history, progress, membership or enrollment was introduced. Guest learning and owner environment files stay separate.
 
-Actual verification: reference/source review, independent bounded source reviews, scoped formatting and whitespace review; MCP DDL success and migration-list metadata confirm application only. Owner-run tests/typecheck/lint/builds, runtime/rendered/native review and database permission/concurrency/advisor checks remain pending. Next: review first verified entry/skip, Settings save/reopen/Cancel, course directory/results, session refresh/account switching, failure/conflict paths, narrow widths and larger text. Consolidated polishing and remaining identity acceptance stay queued; authentic catalog/admission follows this slice.
+Actual verification: reference/source review, independent bounded source reviews, scoped formatting and whitespace review; MCP DDL success and migration-list metadata confirm application only. Owner-run tests/typecheck/lint/builds, runtime/rendered/native review and database permission/concurrency/advisor checks remain pending. The owner reports reviewing the onboarding flow; no detailed platform/error/security coverage or automated results were supplied. Outstanding coverage includes session refresh/account switching, failure/conflict paths, narrow widths/larger text and database permissions. Consolidated polishing remains queued; real-world course-model research now precedes authentic catalog/admission.
 
 ## Identity owner checks and log review — 20 October 2026
 

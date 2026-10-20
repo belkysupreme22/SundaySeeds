@@ -1,6 +1,29 @@
 # Backend contract proposal
 
-## Current implementation checkpoint — 19 October 2026
+## Current planning checkpoint — 20 October 2026
+
+The development identity/profile and optional learning-preference source now exist;
+profile/preferences definitions have been applied to the intended development
+project as recorded in the auth flow and decisions 0010–0012. The owner reported
+identity happy paths and has reviewed onboarding. This does not establish connected
+courses, real memberships, publishing or account learning-progress synchronization.
+
+The owner authorized moving to the connected course-library contract, then asked
+for deeper research and real-world scenarios before selecting first content or
+course-update rules. [Course-model research and scenarios](course-model-research.md)
+now document self-paced study, weekly Sunday school, teacher publishing, course
+changes, interruption/retry, cross-device study, withdrawal and substitute access.
+Next is a concrete course blueprint to review, followed by the focused contract.
+No course content import, schema/service/app change or new database operation is
+part of this research. First course selection and B1-07 remain unresolved; neither
+an unfamiliar choice nor a request to explain it is acceptance of a proposed default.
+
+The dated identity checkpoint and broader drafts below retain their historical
+source/setup state. This checkpoint and the dedicated auth flow describe current
+implementation; confirmed product rules and unaccepted course/staff decisions remain
+as identified in the decision register.
+
+## Identity source checkpoint — 19 October 2026 (historical)
 
 The owner approved the first identity/profile source slice after the contract draft, requested preparation for a new development Supabase project with configurable domain/sender and separately authorized the three dependencies. Private profile SQL/RPC/RLS source and rollback-only permission checks are prepared; mobile email/password, isolated explicit-action confirmation/recovery, own-profile editing and Settings session/sign-out are implemented in source. No intended project, SQL application, SMTP/hosting configuration or runtime/database verification is established. Follow [Supabase setup](supabase-setup.md) and [auth flow](auth-onboarding-flow.md).
 
@@ -132,6 +155,13 @@ No SQL, RLS policies, provider configuration, credentials, email delivery or net
 | B1-08 | Proposal above; not accepted | Completion without pass threshold, unlimited retries, version-bound best score and course denominator | Trusted attempts and reporting |
 | B1-09 | Owner decision required | Media ownership/access, retention/deletion/export, backup owner and supported offline/retry behavior | Storage and release readiness |
 | B1-10 | Proposed isolation; not accepted migration policy | Keep sample progress separate; determine whether any explicit transfer is wanted | Learner integration/account-switch behavior |
+
+For the independent public-course slice, separate B1-04's content inputs from its
+later class inputs: accountable curriculum owner/reviewer, permitted publisher and
+source/translation rights are needed before publication; a first class/organization
+and invitation issuer can wait for the class slice. This scope clarification grants
+no content or staff authority. The 20 October research does not settle edition,
+completion, privacy, withdrawal or first-course decisions.
 
 An agent may refine proposals and adapters' conceptual boundaries while these questions are open. It must not mark them accepted, invent pilot identities, configure production access or import fixtures. Record each owner answer here and propagate it to the implementation plan and ignored handoff.
 

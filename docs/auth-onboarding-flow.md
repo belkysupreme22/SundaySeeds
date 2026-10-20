@@ -161,6 +161,12 @@ permission/concurrency acceptance remain pending.
 
 ### Implementation checkpoint
 
+Owner update: the onboarding flow has been reviewed. No detailed platform, failure,
+accessibility or automated coverage was supplied, so the remaining checks below
+stay open. The next priority is [real-world course-model research and scenarios](course-model-research.md),
+then a course blueprint and focused catalog contract. This review does not select
+the sample course for connected publication or accept the proposed edition policy.
+
 - `/learning-profile` composes a feature-owned four-step editor. Verified Home
   entry opens it when the preference load succeeds with no saved row. Existing
   verified accounts also receive this one-time setup. Email-proof pages are never

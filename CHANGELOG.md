@@ -25,6 +25,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 - Removed example-value autofill and hardcoded credentials from the mobile account screens; forms use manual entry.
 
 ### Added
+- Research report comparing real LMS and adult Sunday-school course structures, with eight learner/teacher/operational scenarios, an explanation of course-edition choices and a current-capability gap table. Prioritized a reviewed course blueprint before catalog schema/import; no app or service behavior changed.
 - Shared locally bundled LottieFiles pastel loading dots, Expo-compatible native and SVG web players, opt-in button/status presentation, reduced-motion/static fallback and creator/license records. Owner runtime/native/visual checks remain pending.
 - Optional four-step learning-profile onboarding after verified Home entry, with Skip, later Settings editing, account-owned preferences, saved summary and revision-safe reloads. Added a browsable sample course directory and honest topic/time-based lesson hints. Runtime/native/automated acceptance remains pending.
 - Separate private learning-preferences table and verified actor-bound save/dismiss RPCs, with optional answer validation, revision conflicts and answer-preserving dismissal. Applied the additive development migration through Supabase MCP; runtime, advisors and permission/concurrency checks remain pending.
