@@ -158,40 +158,107 @@ that learners can skip setup and return later. This is the next scoped design/
 implementation task before connected course discovery/enrollment; it is not yet
 implemented and does not change the current signup or profile SQL.
 
-Proposed reference-02 adaptation: three short pages, reusing the established pastel
-choice cards, fine outlines, progress indicator and accessible Back/Continue/Skip
-controls. Keep the existing signup name; do not repeat name/email collection.
+### Research basis and limits
 
-| Page | Suggested question and choices | Purpose |
+The owner requested more varied, purposeful questions and a course-list result,
+then specifically asked for LMS platforms such as Udemy and Sunday school apps.
+Official product/help documentation was reviewed on 20 October 2026; no live signup
+flows were exercised and no private recommendation algorithms were inspected.
+These are documented patterns, followed by a SundaySeeds design proposal:
+
+| Product | Documented behavior | Transfer to SundaySeeds |
 | --- | --- | --- |
-| Starting point | How familiar are you with Bible study? Just starting; building my foundations; comfortable exploring deeper | Optional self-description, not a test or ranking of faith |
-| Learning intention | What would you like to focus on? Understanding the Bible; building a prayer habit; living out my faith | A learner-selected intention, not an inferred religious judgment |
-| Learning rhythm | How much time would you like to set aside? 5, 10, 15 or 20 minutes a day; at my own pace | Flexible intended commitment, not a claim of time studied |
+| [Udemy learner onboarding](https://support.udemy.com/hc/en-us/articles/17015232224023-Personalize-Your-Learning-Experience-on-Udemy) | Questions about field, skills and professional goals lead to recommendations based on role/interests; Save and Exit and later editing are supported | Ask intent and interests, deliver a useful course choice, allow exit and revision. Career/occupation questions do not fit this learner flow |
+| [Coursera course discovery](https://blog.coursera.org/from-catalog-to-compass/) | Career aspirations guide content recommendations | Connect a stated outcome to relevant available content; do not copy career labels or imply our app has an AI recommendation service |
+| [BibleProject Classroom](https://bibleproject.com/classroom/) and [app getting started](https://help.bibleproject.com/hc/en-us/articles/4478975400727-I-m-new-to-the-app-How-do-I-get-started) | A foundational class is suggested for new Bible students; self-paced course and session lengths are distinct; app Home/Search support discovery and continuation | Offer a gentle starting suggestion, explain expected session time and preserve independent browsing |
+| [Bible Engagement Project FAQ](https://bibleengagementproject.com/faq) | Adult/youth curriculum supports Sunday school; accounts access the library, Listen → Learn → Live is suggested but any order is possible, and groups require invitations | Give an understandable suggested progression while keeping course choice separate from joining a class |
+| [Lifeway Bible Studies for Life](https://www.lifeway.com/en/shop/bible-studies-for-life) | Sunday school curriculum separates age audiences and emphasizes discussion and daily application | Show audience and practical outcomes on course details. This is church curriculum, not evidence of a learner onboarding questionnaire |
 
-Knowledge/time collection and placement/skip behavior are owner requested; the
-exact labels/options and learning-intention page are proposed adaptations for the
-next increment. Do not add denomination, church membership, demographics, reminder
-permissions, scores or unrelated personal questions to this scope.
+Other learning-app examples informed earlier exploration, but these LMS and
+Sunday-school sources are the primary basis for this revision. Public descriptions
+do not establish exact screen ordering, conversion improvements or scoring rules.
+Disciplr's old fit-assessment marketing is excluded from current-product examples:
+its [official FAQ](https://disciplr.com/faq/) says the platform closed in August 2025.
 
-- Every answer is optional; Continue must allow an unanswered page. Back preserves
-  the in-progress draft. Skip for now exits the setup to Home and leaves saved
-  answers intact. Skipped setup remains reachable through Settings without an
-  automatic full-screen prompt on every login.
-- Settings → Learning profile opens the same editor. Cancel leaves stored values
-  intact. Do not tie skipping to course enrollment/lesson access or require these
-  answers as proof of email verification, knowledge, membership or staff authority.
-- Future implementation stores optional preferences and setup completion/dismissal
-  separately from the introduction preference, with actor-bound access and existing
-  profile concurrency/session-isolation practices. Guest data never silently moves
-  into these account preferences. Missing/failed loads cannot overwrite stored
-  answers, and failed saves must retain the draft and allow continuing without setup.
-- Preferences should have an honest first consumer, such as an editable learning
-  intention summary. Match course suggestions to familiarity/time/goal only when
-  authentic course metadata and that matching behavior exist. Do not promise
-  personalized recommendations or completed study minutes from these answers alone.
+### Proposed questions and their immediate purpose
 
-Next: implement/review this bounded optional learning-profile slice, with UI,
-account-owned data contract and meaningful preference display. Broad error/copy
-polishing remains in the consolidated sprint. Existing proof/failure/native/
-permission-check acceptance remains pending. No new route, UI, schema, live project
-change, dependency or runtime/test check accompanies this planning checkpoint.
+Use four short optional pages followed by actual course choices. Adapt reference
+02's pastel choice cards, fine outlines, progress indicator and accessible controls.
+Do not repeat the signup name/email. Exact wording/options remain proposed;
+placement, skipping and later Settings editing are owner-confirmed.
+
+| Order | Question and proposed choices | How the answer changes the experience |
+| --- | --- | --- |
+| 1. Intention — choose one | **What would you like help with first?** Explore Christian faith; understand the Bible; build a prayer habit; put faith into everyday practice; deepen my Bible study; just browsing | Prioritizes courses whose authored outcomes address the chosen goal. Just browsing uses the ordinary catalog |
+| 2. Interests — choose up to three | **What would you like to explore?** Show topics actually represented by available content. Current sample: Faith, Prayer, Kindness and Courage | Narrows the suggested subject matter without hiding the complete catalog. Future Bible overview, Jesus/Gospels or other topics appear only when supported by real available content |
+| 3. Starting point — choose one | **How familiar are you with studying the Bible?** I'm new to it; I know some stories and ideas; I study it regularly; I'm not sure | Adds a foundational or deeper-study suggestion only where course metadata supports it. This is a self-description, not a placement test or a measure of faith |
+| 4. Session time — choose one | **How much time would you like for a study session?** About 5, 10, 15 or 20 minutes; it varies | Helps choose a manageable first lesson/session. It does not filter out an entire course, promise a finish date or claim time already studied |
+
+Intent asks *why*, interests ask *what*, familiarity asks *where to begin*, and time
+asks *what fits now*. Keep those purposes distinct rather than asking the same goal
+in several forms. Returning after a break is context, not automatically low knowledge.
+Avoid denomination, church membership, demographics, spiritual scores and sensitive
+personal disclosures. Do not add video/audio preferences or reminders before those
+capabilities exist.
+
+A later conditional question, **What would make getting started easier?**, could
+offer help choosing a starting point, understanding passages or finding a short
+session. Include it only when each answer has a real guidance action; defer it for
+the first increment instead of lengthening the survey with unused data. Learning
+alone versus with a group is likewise deferred until a real invitation journey can
+act on it; an answer can never create membership or staff authority.
+
+### Result: available courses and a clear next action
+
+- Finish with **A few places to start**: up to three genuinely available course
+  cards, each with its actual title, concise outcome and a truthful reason such as
+  “Matches your interest in prayer.” Show level, lesson count and duration only when
+  those values exist; distinguish session estimates from total course length.
+- Include **View all courses** and **Edit preferences**. Open course details before
+  an explicit Join/Start action; never auto-enroll or grant a class membership.
+  Existing email verification/course-admission rules still apply independently.
+- Recommendations are an explicit proposed rule set, not a claim about competitor
+  internals: first apply trusted availability/access rules; then prioritize authored
+  goal match, topic overlap and known starting-level fit, with stable editorial
+  ordering for ties. Session time guides the first lesson, not course eligibility.
+  Missing answers or metadata contribute no assumed match.
+- With no answers, show the ordinary catalog. With weak matches, offer available
+  alternatives without claiming a perfect fit. One course means one card; no
+  available courses means an honest empty state, never invented stock.
+- The current mobile catalog contains **one bundled sample course**, *Faith for
+  everyday life*, with four lessons and two modules. It has lesson topics/time
+  estimates but no authored course-level goal/level classification. Do not present
+  it as a connected catalog or fabricate several available courses. A prayer
+  interest can point to *A moment with God* (6-minute estimate) **within that sample
+  course**, clearly distinguishing a lesson suggestion from another course.
+- Couple the next design with the catalog projection/metadata contract so answers
+  produce an actual discovery benefit. Broader personalized course ranking awaits
+  genuine authored metadata and an available course source; an editable preference
+  summary alone does not fulfill the requested course-list result.
+
+### Optionality, persistence and implementation boundary
+
+- Every answer is optional; Continue allows an unanswered page. Back preserves the
+  draft. Skip for now exits to Home without overwriting saved answers and remembers
+  dismissal, so it does not reopen full-screen on each login. Home retains access
+  to the ordinary course list. No confirmation modal is required simply to skip.
+- Settings → Learning profile opens the same editor. Explicit Save persists edits;
+  Cancel leaves saved values intact. In first-run setup, the final course-choice
+  action saves answered preferences; Skip leaves the draft unsaved. Explain save
+  failure and allow retry or continuing without setup. Do not silently discard
+  existing saved answers or report unsaved preferences as saved.
+- Store optional preferences and completion/dismissal independently of introduction
+  completion, with account ownership and existing concurrency/session-isolation
+  practices. Guest data never silently moves into account preferences. Failed or
+  missing loads cannot overwrite stored values. A persistence outage must not trap
+  a learner in setup; keep a session-local dismissal when durable dismissal fails.
+- Editing preferences may update suggestions, never existing enrollment, class
+  membership, course ordering, completion or saved progress. Knowledge/time choices
+  never authorize access. Do not show fake analysis/loading activity.
+
+Next: design the four-page/result/Settings screens against the references and
+specify their account-preference and course-metadata contracts together, then
+implement the bounded slice. Broad error/copy polishing remains in the consolidated
+sprint. Existing identity proof/failure/native/permission acceptance remains pending.
+This research/planning revision changes no route, UI, schema, live project,
+dependency or runtime behavior; no tests/build/runtime checks were run.
