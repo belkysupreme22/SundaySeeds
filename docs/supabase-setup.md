@@ -132,6 +132,23 @@ mailbox. Sandbox access exposes the captured auth links; limit access to the
 project's developers. Do not use this transport for real learner onboarding.
 [Mailtrap sandbox SMTP setup](https://docs.mailtrap.io/email-sandbox/setup/sandbox-smtp-integration)
 
+### Diagnose a domain rejection during sandbox setup
+
+If signup shows a generic email-request failure and Supabase Auth logs contain
+`550 5.7.1 Sending from domain gmail.com is not allowed`, the app reached Auth
+and the SMTP service rejected the From domain. This is not evidence of a browser
+network outage. Mailtrap documents this error for its live delivery service when
+the From domain is not the verified sending domain.
+
+For the no-domain development path, confirm the Supabase SMTP host is
+`sandbox.smtp.mailtrap.io` and replace **all** credentials with those from
+**Email Sandbox → My Sandbox → Integration → SMTP**. Live delivery uses
+`live.smtp.mailtrap.io` and separate credentials/domain requirements. Changing
+only the host while keeping live credentials is insufficient. A personal Gmail
+From address is not suitable for Mailtrap live delivery; earlier personal-address
+advice applies only to the captured-mail sandbox setup. Keep Confirm Email on.
+[Mailtrap domain rejection](https://docs.mailtrap.io/email-api-smtp/help/troubleshooting/sending-from-domain-not-allowed)
+
 ### Real learner delivery: provider and verified sender
 
 To configure custom SMTP:

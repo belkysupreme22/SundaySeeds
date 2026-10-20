@@ -5,6 +5,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Changed
+- Clarified Mailtrap sandbox versus live SMTP credentials and diagnosis of sender-domain rejection in the Supabase walkthrough; personal sender-address guidance applies only to captured-mail development.
 - Added a no-domain development path using Mailtrap Email Sandbox for Supabase custom SMTP. Captured-mail testing is distinguished from real learner delivery; no provider was configured or tested.
 - Corrected the Supabase setup walkthrough for the custom-SMTP prerequisite on new Free projects: default templates cannot implement the prepared token-hash confirmation/recovery flow. Public app settings can proceed while sender setup remains pending; Confirm Email stays enabled.
 - Recorded owner visual approval of optional account onboarding and learner sample-content polish. Backend planning now records verified email before connected course start, direct course joining for verified learners and invitation-only classes; delivery/session/admission contracts and implementation remain pending.
