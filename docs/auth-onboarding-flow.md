@@ -148,3 +148,50 @@ new password identical to the current one. Current reset source shows generic
 feedback for that provider error. Owner explicitly deferred this copy correction
 and other feedback polish to one consolidated app-wide sprint. No code/UI changes
 were made; pending security/failure/native/automated checks remain separate.
+
+## Next slice: optional learning profile — 20 October 2026
+
+The owner requested onboarding that includes Bible-study familiarity, intended
+study time and other preferences suitable for SundaySeeds. They selected placement
+**after the first verified sign-in**, editable later in **Settings**, and confirmed
+that learners can skip setup and return later. This is the next scoped design/
+implementation task before connected course discovery/enrollment; it is not yet
+implemented and does not change the current signup or profile SQL.
+
+Proposed reference-02 adaptation: three short pages, reusing the established pastel
+choice cards, fine outlines, progress indicator and accessible Back/Continue/Skip
+controls. Keep the existing signup name; do not repeat name/email collection.
+
+| Page | Suggested question and choices | Purpose |
+| --- | --- | --- |
+| Starting point | How familiar are you with Bible study? Just starting; building my foundations; comfortable exploring deeper | Optional self-description, not a test or ranking of faith |
+| Learning intention | What would you like to focus on? Understanding the Bible; building a prayer habit; living out my faith | A learner-selected intention, not an inferred religious judgment |
+| Learning rhythm | How much time would you like to set aside? 5, 10, 15 or 20 minutes a day; at my own pace | Flexible intended commitment, not a claim of time studied |
+
+Knowledge/time collection and placement/skip behavior are owner requested; the
+exact labels/options and learning-intention page are proposed adaptations for the
+next increment. Do not add denomination, church membership, demographics, reminder
+permissions, scores or unrelated personal questions to this scope.
+
+- Every answer is optional; Continue must allow an unanswered page. Back preserves
+  the in-progress draft. Skip for now exits the setup to Home and leaves saved
+  answers intact. Skipped setup remains reachable through Settings without an
+  automatic full-screen prompt on every login.
+- Settings → Learning profile opens the same editor. Cancel leaves stored values
+  intact. Do not tie skipping to course enrollment/lesson access or require these
+  answers as proof of email verification, knowledge, membership or staff authority.
+- Future implementation stores optional preferences and setup completion/dismissal
+  separately from the introduction preference, with actor-bound access and existing
+  profile concurrency/session-isolation practices. Guest data never silently moves
+  into these account preferences. Missing/failed loads cannot overwrite stored
+  answers, and failed saves must retain the draft and allow continuing without setup.
+- Preferences should have an honest first consumer, such as an editable learning
+  intention summary. Match course suggestions to familiarity/time/goal only when
+  authentic course metadata and that matching behavior exist. Do not promise
+  personalized recommendations or completed study minutes from these answers alone.
+
+Next: implement/review this bounded optional learning-profile slice, with UI,
+account-owned data contract and meaningful preference display. Broad error/copy
+polishing remains in the consolidated sprint. Existing proof/failure/native/
+permission-check acceptance remains pending. No new route, UI, schema, live project
+change, dependency or runtime/test check accompanies this planning checkpoint.

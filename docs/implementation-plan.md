@@ -1,5 +1,11 @@
 # SundaySeeds implementation plan
 
+## Next priority: optional learning-profile onboarding — 20 October 2026
+
+Before connected course discovery/enrollment, the owner requested a learning-profile flow for Bible-study familiarity and intended study time, with other theme-appropriate preferences. Placement confirmed: after the first verified sign-in, editable later in Settings. Skipping is explicitly allowed; questions remain optional, answers can be set later, and dismissal must prevent repeated full-screen prompting each login. Proposed reference-02 adaptation: starting point → learning intention → study rhythm (5/10/15/20 minutes or flexible), with final labels/goal choices and honest first consumers defined in [auth onboarding flow](auth-onboarding-flow.md#next-slice-optional-learning-profile--20-october-2026). No repeated name/email fields or inferred spiritual scores.
+
+This checkpoint records the agreed flow and proposed field design only. Next bounded task is its UI/account-owned preference contract and implementation, keeping guest data separate and preserving optional access. Course suggestions wait for real matching metadata; chosen time is an intention, not tracked study time. No UI/schema/service changes or tests/build/runtime checks performed for this planning increment. The consolidated polishing sprint and remaining identity edge-case acceptance stay queued; connected course access follows learning-profile work.
+
 ## Identity owner checks and log review — 20 October 2026
 
 The owner confirms signup/email verification/sign-in, logout → generic Home, account name save/refresh/re-sign-in and password recovery work in the development sandbox flow. Requested read-only Supabase Auth log review shows recovery POST `/recover` 200, proof POST `/verify` 200, password PUT `/user` 200, logout POST `/logout` 204 and subsequent login POST `/token` 200. A preceding password-update rejection is 422 `same_password` (“New password should be different from the old password”), so the observed reuse error is correct backend validation during reset, not evidence of a connection problem. Logs contain no password values and do not establish which password was submitted to a login request.

@@ -21,6 +21,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 - Removed example-value autofill and hardcoded credentials from the mobile account screens; forms use manual entry.
 
 ### Added
+- Scoped optional learning-profile onboarding after the first verified sign-in, with owner-confirmed skipping and later Settings editing. Proposed Bible-study familiarity, learning intention and study-time pages adapt reference 02; UI/data implementation is the next task.
 - Configurable learner email/password identity source, explicit-action isolated confirmation/recovery pages, validated session restoration, native SecureStore/browser tab sessions, own account-profile editing and Settings local sign-out. Sample progress/guest names stay separate; project/email/hosting setup and owner runtime/security checks remain pending. Added a step-by-step Supabase development setup walkthrough.
 - Supabase PostgreSQL learner-profile migration source with own-read RLS, actor-bound provisioning/update RPCs and revision checks. Includes rollback-only permission checks and setup notes; no project selected, SQL applied or database tests run.
 - Learner identity/course-access contract draft with identity states, operations and failures, own-profile/session boundaries, email callback alternatives, direct course enrollment versus class invitations, proposed defaults and phased implementation/acceptance scenarios. Existing confirmed access choices remain; no backend or provider configuration was introduced.
