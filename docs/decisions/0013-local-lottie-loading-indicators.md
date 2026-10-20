@@ -2,6 +2,13 @@
 
 20 October 2026. Implemented in source; owner runtime/native/visual acceptance pending.
 
+Latest owner correction: preserve the selected file's original blue-to-purple
+colors and remove the loader background. The source asset is restored from the
+original download with only the canvas crop and license metadata retained. Original
+fill/opacity/shape keyframes are unchanged; static fallback matches original fills.
+The centered overlay has no panel fill, wash, border or shadow. This supersedes the
+initial pastel recoloring and white-panel treatment described historically below.
+
 The owner requested LottieFiles loaders wherever appropriate. Use the freely
 published **Loading dots** by **Kyle McGahey**, adapted to SundaySeeds' lavender,
 mint, yellow and peach with fine ink outlines. The owner subsequently requested a clearly visible page-centered loader rather

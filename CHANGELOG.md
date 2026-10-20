@@ -5,6 +5,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Changed
+- Removed the loader’s white panel and page wash; restored the selected Lottie animation’s original blue-to-purple colors, opacity and unoutlined shapes. Static fallback dots use the same colors. Centering and smooth playback are preserved; owner visual review pending.
 - Moved Lottie animations out of buttons into larger, centered page overlays for real pending requests and initial profile/welcome waits. Slowed playback to a roughly two-second loop with a 180 ms entry fade; preserved reduced motion, immediate completion and existing exit actions. Owner visual/native review pending.
 - Applied Lottie dots to actual startup/welcome/profile loads and pending account, verification, password and profile-save actions. Loading buttons keep labels and busy semantics; static errors/instructions and existing completion/Skip behavior remain. Added creator credit in Settings → About; owner runtime/native/visual review pending.
 - Refined the optional learning-profile proposal using official Udemy/Coursera and BibleProject/Sunday-school curriculum documentation: intention, catalog-backed interests, familiarity and session time lead to actual available course choices. Preserved Skip/Settings editing and documented the current single-sample-course limitation; no app or service behavior changed.

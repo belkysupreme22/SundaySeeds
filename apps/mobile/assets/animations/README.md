@@ -11,9 +11,9 @@ License (FL 9.13.21), https://lottiefiles.com/page/license. See LICENSE.txt in t
 folder. The derivative animation remains under that license. The JSON metadata
 also embeds the license so bundled app distributions retain its terms.
 
-Changes: cropped unused canvas margins; recolored four dots lavender/mint/yellow/
-peach; added fine ink outlines and raised minimum opacity. Original bounce/scale
-keyframes remain. JSON contains no external images/fonts/assets. It is bundled
+Changes: cropped unused canvas margins only; original blue-to-purple fills,
+opacity, shapes and bounce/scale keyframes are preserved. The page overlay is
+transparent, with no background panel, border, shadow or page wash. JSON contains no external images/fonts/assets. It is bundled
 with the app; neither a LottieFiles account nor a runtime asset/CDN request is used.
 Native rendering uses Expo's compatible lottie-react-native. Browser rendering uses
 lottie-web SVG with the same bundled JSON, avoiding remote WASM dependencies.

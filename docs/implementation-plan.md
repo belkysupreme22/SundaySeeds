@@ -1,5 +1,14 @@
 # SundaySeeds implementation plan
 
+## Loader appearance correction — 20 October 2026
+
+Owner requested a transparent loader with the selected Lottie file's exact original
+colors. Restored original blue-to-purple fills, opacity keyframes and unoutlined
+shapes from the downloaded source; retained only the canvas crop. Static fallback
+uses the same colors. Removed the white panel, border, shadow and translucent page
+wash. Large centered placement,0.65speed,180ms entryfade and immediate completion
+remain. Source/formatting/whitespace review only; owner visual/native checks pending.
+
 ## Lottie loading treatment — 20 October 2026
 
 Owner requested LottieFiles loaders where appropriate. Source now uses a locally

@@ -36,17 +36,11 @@ const styles = StyleSheet.create({
     zIndex: 20,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'rgba(252, 250, 255, 0.78)',
     padding: 24,
   },
   panel: {
     width: '100%',
     maxWidth: 304,
     padding: 20,
-    borderRadius: 16,
-    borderWidth: 1,
-    borderColor: '#DED9E5',
-    backgroundColor: '#FFFFFF',
-    boxShadow: '0px 8px 28px rgba(25, 23, 29, 0.08)',
   },
 });

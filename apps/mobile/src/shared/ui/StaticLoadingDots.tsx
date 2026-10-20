@@ -1,13 +1,12 @@
 import { StyleSheet, View } from 'react-native';
-import { colors } from '../theme/tokens';
 
 export function StaticLoadingDots({ small = false }: { small?: boolean }) {
   return (
     <View style={[styles.row, small && styles.smallRow]}>
-      {(['primary', 'mint', 'yellow', 'peach'] as const).map((tone) => (
+      {['#515FF0', '#5B57E8', '#654FE2', '#6E48DC'].map((color) => (
         <View
-          key={tone}
-          style={[styles.dot, small && styles.smallDot, { backgroundColor: colors[tone] }]}
+          key={color}
+          style={[styles.dot, small && styles.smallDot, { backgroundColor: color }]}
         />
       ))}
     </View>
@@ -24,6 +23,6 @@ const styles = StyleSheet.create({
     gap: 22,
   },
   smallRow: { gap: 4 },
-  dot: { width: 24, height: 24, borderRadius: 12, borderWidth: 1, borderColor: colors.ink },
-  smallDot: { width: 5, height: 5, borderRadius: 3, borderWidth: 0.5 },
+  dot: { width: 24, height: 24, borderRadius: 12 },
+  smallDot: { width: 5, height: 5, borderRadius: 3 },
 });

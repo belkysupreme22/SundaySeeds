@@ -8,6 +8,13 @@ The first identity/profile source slice is prepared after owner approval. The ow
 
 ## Lottie loader review — 20 October 2026
 
+Latest appearance correction: loader background/panel/page wash are transparent.
+Blue-to-purple fills and original opacity/shapes were restored from the downloaded
+Lottie source. Review that both animation and reduced-motion fallback keep those
+colors, with no white card, outline or shadow. Existing page background stays as-is.
+Centering, slower playback and immediate completion are preserved. Visual/native
+checks remain owner-run and pending; no runtime/build/test check was performed.
+
 Owner correction: loader animation belongs in the center of the page, visibly
 larger, rather than inside buttons. Screen.loadingMessage now drives a nonmodal
 centered overlay outside scrolling content/footer; only focused screens display it.
