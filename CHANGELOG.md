@@ -22,6 +22,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 - Removed example-value autofill and hardcoded credentials from the mobile account screens; forms use manual entry.
 
 ### Added
+- Separate private learning-preferences table and verified actor-bound save/dismiss RPCs, with optional answer validation, revision conflicts and answer-preserving dismissal. Applied the additive development migration through Supabase MCP; runtime, advisors and permission/concurrency checks remain pending.
 - Scoped optional learning-profile onboarding after the first verified sign-in, with owner-confirmed skipping and later Settings editing. Proposed Bible-study familiarity, learning intention and study-time pages adapt reference 02; UI/data implementation is the next task.
 - Configurable learner email/password identity source, explicit-action isolated confirmation/recovery pages, validated session restoration, native SecureStore/browser tab sessions, own account-profile editing and Settings local sign-out. Sample progress/guest names stay separate; project/email/hosting setup and owner runtime/security checks remain pending. Added a step-by-step Supabase development setup walkthrough.
 - Supabase PostgreSQL learner-profile migration source with own-read RLS, actor-bound provisioning/update RPCs and revision checks. Includes rollback-only permission checks and setup notes; no project selected, SQL applied or database tests run.

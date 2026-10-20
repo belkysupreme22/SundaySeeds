@@ -66,3 +66,79 @@ these checks is not evidence that they pass.
 Implementation references:
 [Supabase RLS](https://supabase.com/docs/guides/database/postgres/row-level-security)
 and [database function security](https://supabase.com/docs/guides/database/functions).
+
+## Optional learning preferences — development migration applied
+
+The original foundation's application notes above are historical: the development
+project now has the profile table and the owner has confirmed identity happy paths.
+Its CLI migration history has not been reconciled. **Do not replay the original
+profile migration or push all local migrations blindly.**
+
+`migrations/20261020114334_learner_learning_preferences.sql` contains the additive
+preferences table and RPCs applied to `sundayseeds-dev` through the available
+Supabase MCP on 20 October 2026. The application tool returned success and subsequent
+`list_migrations` returned version `20261020114334`, name
+`learner_learning_preferences`; the filename uses that actual remote version.
+Preflight catalog inspection found the preferences relation absent and the profile
+relation present. No user records were queried, inserted or modified for checking.
+
+The Supabase CLI is not installed in this workspace (`supabase --version` returned
+command not found). No CLI or dependencies were installed. The MCP deployment
+replaced the initially planned CLI generation step; no migration filename was
+invented. The old profile migration's history remains unreconciled even though its
+table exists. No production deployment occurred.
+
+Next owner steps are to review/reconcile the existing profile migration history
+before any history-based push, then run advisors and the permission/concurrency/
+runtime checks below in an appropriate disposable environment. No such checks have
+run here. The preferences migration is already applied in development; do not
+reapply it simply to test it. Tool success establishes DDL application and migration
+registration, not permission or behavior acceptance.
+
+### Client contract
+
+Authenticated clients select their own `learner_learning_preferences` row using
+`maybeSingle()`. No row means not started; it is not an error. Both RPCs return
+exactly one row on success, suitable for `.single()`:
+
+- `save_learner_learning_preferences(p_intention text, p_interests text[],
+  p_familiarity text, p_session_minutes integer, p_expected_revision bigint)`
+  replaces optional answers and sets `setup_status = 'completed'`.
+- `dismiss_learner_learning_preferences(p_expected_revision bigint)` records
+  dismissal while preserving stored answers. New dismissal creates empty answers.
+
+No RPC accepts an actor ID. Both require trusted verified email from `auth.users`.
+An expected revision of zero creates only; a positive revision updates only that
+exact actor revision. Save or dismissal increments the revision and uses the server
+timestamp. Never silently retry a conflict with a newer revision.
+
+The returned shape is `{ user_id, intention, interests, familiarity,
+session_minutes, setup_status, revision, updated_at }`. Accept only safe integer
+revisions in the adapter, as with identity profiles.
+
+| Field | Accepted values |
+| --- | --- |
+| `intention` | `null`, `explore_faith`, `understand_bible`, `prayer_habit`, `daily_practice`, `deeper_study`, `browsing` |
+| `interests` | Unique one-dimensional array, up to three of `Faith`, `Prayer`, `Kindness`, `Courage`; empty allowed |
+| `familiarity` | `null`, `new`, `some`, `regular`, `unsure` |
+| `session_minutes` | `null`, `5`, `10`, `15`, `20` |
+| `setup_status` | `completed` or `dismissed`, chosen by the RPC |
+
+| SQLSTATE | Message | Meaning |
+| --- | --- | --- |
+| `42501` | `authentication_required` | Actor missing or no longer exists |
+| `42501` | `email_verification_required` | Trusted email verification absent |
+| `22023` | `invalid_expected_revision` | Missing or negative revision |
+| `22023` | `invalid_learning_preferences` | Save input violates the field contract |
+| `40001` | `learning_preferences_revision_conflict` | Stale revision, missing expected row, or competing first insert |
+
+Permission denials also use `42501`. Map errors to safe feature feedback; do not
+display raw database messages. Successful preferences do not create enrollment,
+class membership, learning progress, assessed proficiency or guest-data transfer.
+
+**Pending owner checks:** own SELECT/missing-row behavior; anonymous, direct-write
+and cross-account denial; unverified-user RPC rejection including forged metadata;
+all allowed optional fields; malformed/duplicate/unknown/null interests; save versus
+dismiss preservation; simultaneous first save/dismiss; stale revision rejection;
+account deletion; verified mobile/web edit and skip persistence. No SQL check file
+or database fixture was added or executed for this increment.
