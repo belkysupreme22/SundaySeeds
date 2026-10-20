@@ -5,6 +5,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Changed
+- Recorded owner checks of the development identity flow and read-only Auth log confirmation of password recovery/change/login. Documented expected `same_password` rejection and deferred actionable error messaging to the owner-requested consolidated polishing sprint. No authentication code changed.
 - Settings logout now returns to Home after successful current-device sign-out. Signed-out Home uses “Hello, learner!” by owner choice; account greetings resume on sign-in, while guest names and sample progress remain saved. Added a guard against late logout navigation after leaving Settings and aligned name-setup copy. Owner runtime review pending.
 - Clarified Mailtrap sandbox versus live SMTP credentials and diagnosis of sender-domain rejection in the Supabase walkthrough; personal sender-address guidance applies only to captured-mail development.
 - Added a no-domain development path using Mailtrap Email Sandbox for Supabase custom SMTP. Captured-mail testing is distinguished from real learner delivery; no provider was configured or tested.

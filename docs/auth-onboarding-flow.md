@@ -11,8 +11,8 @@ The owner has since configured development environment values, Mailtrap sandbox
 SMTP and both templates, and reports signup/email confirmation/sign-in reaching
 Verified status. MCP catalog inspection found the expected profile table, policy,
 functions and access grants in `sundayseeds-dev`; permission and runtime tests were
-not run by the agent. Own-profile persistence, password recovery and broader
-platform/accessibility/security acceptance remain unreported. Missing environment
+not run by the agent. The owner subsequently confirmed own-profile persistence and password recovery.
+Broader platform/accessibility/security acceptance remains unreported. Missing environment
 values still produce honest unavailable outcomes.
 
 ## Product boundaries
@@ -138,3 +138,13 @@ and source/whitespace review only. Owner checks: log out → Home → generic gr
 refresh while signed out, sign in → own greeting, retained guest Profile name and
 sample progress, and failed/slow logout after navigating away. Runtime/native and
 automated checks remain pending.
+
+## Password recovery acceptance and deferred polish — 20 October
+
+Owner reports recovery passed. Requested read-only Auth logs confirm recovery and
+proof exchange 200, password update 200, logout 204 and subsequent sign-in 200.
+An earlier reset submission returned 422 `same_password`, correctly rejecting a
+new password identical to the current one. Current reset source shows generic
+feedback for that provider error. Owner explicitly deferred this copy correction
+and other feedback polish to one consolidated app-wide sprint. No code/UI changes
+were made; pending security/failure/native/automated checks remain separate.
