@@ -8,7 +8,7 @@ import {
   Poppins_600SemiBold,
   Poppins_700Bold,
 } from '@expo-google-fonts/poppins';
-import { ActivityIndicator, Platform, StyleSheet, View, Text as NativeText } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import {
   LearningProgressProvider,
@@ -16,7 +16,7 @@ import {
 } from '../features/progress/hooks/useLearningProgress';
 import { colors } from '../shared/theme/tokens';
 import { LearnerProfileProvider } from '../features/profile/hooks/useLearnerProfile';
-import { Text } from '../shared/ui/Text';
+import { LoadingState } from '../shared/ui/LoadingState';
 import { LearningStorageNotice } from '../features/progress/components/LearningStorageNotice';
 import { LearningProfileProvider } from '../features/learning-profile/hooks/useLearningProfile';
 
@@ -25,8 +25,7 @@ function AppNavigator() {
   if (!hydrated)
     return (
       <View style={styles.loading}>
-        <ActivityIndicator color={colors.ink} />
-        <Text>Opening your learning space…</Text>
+        <LoadingState label="Opening your learning space…" />
       </View>
     );
   return (
@@ -56,8 +55,7 @@ export default function RootLayout() {
           <StatusBar style="dark" />
           {!loaded && !error ? (
             <View style={styles.loading}>
-              <ActivityIndicator color={colors.ink} />
-              <NativeText>Preparing SundaySeeds…</NativeText>
+              <LoadingState label="Preparing SundaySeeds…" bootstrap />
             </View>
           ) : (
             <LearningProgressProvider>

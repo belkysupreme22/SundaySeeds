@@ -12,6 +12,7 @@ import { Button, IconButton } from '../../../shared/ui/Button';
 import { Card } from '../../../shared/ui/Card';
 import { Text } from '../../../shared/ui/Text';
 import { colors } from '../../../shared/theme/tokens';
+import { LoadingState } from '../../../shared/ui/LoadingState';
 
 export function LearningProfileScreen() {
   const { user } = useAuth();
@@ -32,6 +33,7 @@ function LearningProfileForm({ editing }: { editing: boolean }) {
   const [flexible, setFlexible] = useState(false);
   const [result, setResult] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
+  const [saving, setSaving] = useState(false);
   const focus = useRef({ active: false, generation: 0 });
   const pending = useRef(false);
 
@@ -98,6 +100,7 @@ function LearningProfileForm({ editing }: { editing: boolean }) {
     if (!draft || pending.current || profile.busy || profile.conflict || !profile.loaded) return;
     const generation = focus.current.generation;
     pending.current = true;
+    setSaving(true);
     setMessage(null);
     try {
       const response = await profile.save(draft);
@@ -106,6 +109,7 @@ function LearningProfileForm({ editing }: { editing: boolean }) {
       else setMessage(response.message);
     } finally {
       pending.current = false;
+      setSaving(false);
     }
   }
 
@@ -134,13 +138,17 @@ function LearningProfileForm({ editing }: { editing: boolean }) {
           Your learning profile
         </Text>
         <Card tone={profile.error || unavailable ? 'peach' : 'lavender'} shadow={false}>
-          <Text accessibilityLiveRegion="polite">
-            {unavailable
-              ? user
-                ? 'Verify your email before setting up account learning preferences.'
-                : 'Sign in to save your learning preferences.'
-              : (profile.error ?? 'Opening your learning profile…')}
-          </Text>
+          {profile.error || unavailable ? (
+            <Text accessibilityLiveRegion="polite">
+              {unavailable
+                ? user
+                  ? 'Verify your email before setting up account learning preferences.'
+                  : 'Sign in to save your learning preferences.'
+                : profile.error}
+            </Text>
+          ) : (
+            <LoadingState label="Opening your learning profile…" />
+          )}
         </Card>
         {profile.error && (
           <Button
@@ -197,6 +205,7 @@ function LearningProfileForm({ editing }: { editing: boolean }) {
       footer={
         <View style={styles.footer}>
           <Button
+            loading={profile.busy && saving && step === 3}
             label={
               profile.busy
                 ? 'Saving…'

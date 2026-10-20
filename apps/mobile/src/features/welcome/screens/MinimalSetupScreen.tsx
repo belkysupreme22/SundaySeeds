@@ -9,6 +9,7 @@ import { Icon } from '../../../shared/ui/Icon';
 import { InputField } from '../../../shared/ui/InputField';
 import { Screen } from '../../../shared/ui/Screen';
 import { Text } from '../../../shared/ui/Text';
+import { LoadingState } from '../../../shared/ui/LoadingState';
 
 type Props = {
   finishing: boolean;
@@ -35,9 +36,11 @@ export function MinimalSetupScreen(props: Props) {
         }
       >
         <Card tone={profile.loadError ? 'peach' : 'lavender'} shadow={false}>
-          <Text accessibilityLiveRegion="polite">
-            {profile.loadError ?? 'Opening your saved name…'}
-          </Text>
+          {profile.loadError ? (
+            <Text accessibilityLiveRegion="polite">{profile.loadError}</Text>
+          ) : (
+            <LoadingState label="Opening your saved name…" />
+          )}
         </Card>
         {profile.loadError && (
           <Button
@@ -79,6 +82,7 @@ function SetupNameForm({ initialName, ...props }: Props & { initialName: string 
           <Button
             label={busy ? 'One moment…' : 'Start learning'}
             disabled={busy}
+            loading={busy}
             onPress={() => void finish()}
           />
           <Button

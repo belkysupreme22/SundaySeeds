@@ -15,6 +15,7 @@ import { colors } from '../../../shared/theme/tokens';
 export function SettingsScreen() {
   const auth = useAuth();
   const [notice, setNotice] = useState<string | null>(null);
+  const [loggingOut, setLoggingOut] = useState(false);
   const [detail, setDetail] = useState<SettingsDetailKey | null>(null);
   const focused = useRef(false);
   const logoutAttempt = useRef(0);
@@ -33,7 +34,9 @@ export function SettingsScreen() {
     if (!userId || auth.busy) return;
     const attempt = ++logoutAttempt.current;
     setNotice(null);
+    setLoggingOut(true);
     const result = await auth.signOut(userId);
+    setLoggingOut(false);
     if (!focused.current || logoutAttempt.current !== attempt) return;
     if (result.ok) router.replace('/home');
     else setNotice(result.message);
@@ -172,6 +175,7 @@ export function SettingsScreen() {
           icon="log-out"
           variant="outline"
           disabled={!auth.user || auth.busy || !auth.hydrated}
+          loading={loggingOut && auth.busy}
           style={styles.signOutButton}
           onPress={() => void logout()}
         />

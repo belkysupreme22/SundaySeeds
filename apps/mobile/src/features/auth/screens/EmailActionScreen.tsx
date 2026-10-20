@@ -53,6 +53,7 @@ export function EmailActionScreen({
           </Text>
           <Button
             label={proof.busy ? 'Checking link…' : 'Continue with email link'}
+            loading={proof.busy}
             disabled={proof.busy}
             onPress={() => void proof.begin()}
           />
@@ -81,6 +82,7 @@ export function EmailActionScreen({
           )}
           <Button
             label={proof.busy ? 'Changing password…' : 'Reset password'}
+            loading={proof.busy}
             disabled={proof.busy}
             onPress={() => void reset()}
           />

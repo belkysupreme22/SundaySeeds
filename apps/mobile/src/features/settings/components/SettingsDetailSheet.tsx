@@ -103,6 +103,7 @@ const details: Record<SettingsDetailKey, DetailContent> = {
     paragraphs: [
       'A little faith, every day.',
       `Explore ${lessons.length} sample lessons with scripture, reflection and short quizzes.`,
+      'Loading animation: “Loading dots” by Kyle McGahey on LottieFiles, adapted for SundaySeeds under the Lottie Simple License.',
     ],
   },
 };

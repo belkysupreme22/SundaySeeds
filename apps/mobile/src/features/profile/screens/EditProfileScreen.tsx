@@ -12,6 +12,7 @@ import { Button } from '../../../shared/ui/Button';
 import { Card } from '../../../shared/ui/Card';
 import { colors } from '../../../shared/theme/tokens';
 import { InputField } from '../../../shared/ui/InputField';
+import { LoadingState } from '../../../shared/ui/LoadingState';
 
 export function EditProfileScreen() {
   const { user } = useAuth();
@@ -30,7 +31,11 @@ function ProfileNameForm() {
       <Screen>
         <PageHeader title="Make it yours" back />
         <Card tone={loadError ? 'peach' : 'lavender'} shadow={false}>
-          <Text accessibilityLiveRegion="polite">{loadError ?? 'Opening your profile…'}</Text>
+          {loadError ? (
+            <Text accessibilityLiveRegion="polite">{loadError}</Text>
+          ) : (
+            <LoadingState label="Opening your profile…" />
+          )}
         </Card>
         {loadError && <Button label="Try again" icon="refresh-cw" onPress={retryLoad} />}
       </Screen>
@@ -46,6 +51,7 @@ function ProfileNameForm() {
         <Button
           label={saving ? 'Saving…' : 'Save profile'}
           icon="check"
+          loading={saving}
           disabled={saving || !hydrated || !!loadError}
           onPress={() => void save()}
         />

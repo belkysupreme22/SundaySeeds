@@ -6,6 +6,24 @@ Follow the root and workspace AGENTS files and current owner instructions. The o
 
 The first identity/profile source slice is prepared after owner approval. The owner explicitly delegated the three new package installs for this increment; installation succeeded. Follow the [Supabase setup walkthrough](supabase-setup.md) for project creation, profile SQL, Confirm Email, localhost/HTTPS callback URLs, templates, public environment values, delivery and acceptance. No intended development project or service is configured yet. See [auth flow](auth-onboarding-flow.md) for actual source behavior and pending owner checks. The broader backend proposal remains authoritative for confirmed versus deferred product scope.
 
+## Lottie loader review — 20 October 2026
+
+Restart Expo after the newly installed `lottie-react-native~7.3.8` and
+`lottie-web^5.13.0` dependencies. Shared loading presentation uses a bundled
+LottieFiles asset with source/license records in `apps/mobile/assets/animations`.
+The web platform file renders SVG after mount rather than importing the native
+player's optional web peer or fetching a remote animation/WASM file. Before fonts
+load, bootstrap status uses NativeText. No app credentials/configuration changed.
+
+Owner review: actual startup/welcome and profile loading; sign-in/signup/recovery,
+verification/resend, email proof/password change, profile/preference save and logout
+requests; failure and retry (static errors); duplicate presses; reduced-motion
+system/browser preference; background/foreground or hidden tab; 360/390 widths and
+150%/200% text. Confirm loops end when work ends, labels remain readable and the
+preference Skip/Cancel paths still work. Fast requests may finish before motion is
+noticeable; do not add minimum waits. Native and browser verification are separate.
+No agent-run tests/typecheck/lint/build/runtime/rendered checks established these.
+
 ## Historical implementation and review checkpoints
 
 The dated notes below record their own increments. Earlier next-step and verification statements are historical; use the current working agreement and dedicated flow/decision docs for ongoing work.

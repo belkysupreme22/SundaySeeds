@@ -193,6 +193,7 @@ export function AccountScreen({
         )}
         <Button
           label={recovery ? 'Request password reset' : signup ? 'Create account' : 'Sign in'}
+          loading={auth.busy}
           disabled={auth.busy || !auth.hydrated}
           onPress={() => void submit()}
         />

@@ -1,7 +1,5 @@
-import { ActivityIndicator } from 'react-native';
-import { colors } from '../../../shared/theme/tokens';
 import { Screen } from '../../../shared/ui/Screen';
-import { Text } from '../../../shared/ui/Text';
+import { LoadingState } from '../../../shared/ui/LoadingState';
 import { HomeScreen } from '../../home/screens/HomeScreen';
 import { useWelcome } from '../hooks/useWelcome';
 import { WelcomeFlow } from './WelcomeFlow';
@@ -11,8 +9,7 @@ export function WelcomeEntryScreen() {
   if (!welcome.ready) {
     return (
       <Screen>
-        <ActivityIndicator color={colors.ink} />
-        <Text>Welcome to SundaySeeds…</Text>
+        <LoadingState label="Welcome to SundaySeeds…" />
       </Screen>
     );
   }

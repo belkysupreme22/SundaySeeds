@@ -25,9 +25,16 @@ export function AccountFollowUpScreen({
     createAccountNavigation(verification ? '/sign-up' : '/forgot-password', 'replace');
   const auth = useAuth();
   const [notice, setNotice] = useState<string | null>(null);
+  const [checking, setChecking] = useState<'verification' | 'resend' | null>(null);
   async function check(resend = false) {
-    const result = resend ? await auth.resendVerification() : await auth.checkVerification();
-    setNotice(result.message);
+    if (checking || auth.busy || !auth.hydrated) return;
+    setChecking(resend ? 'resend' : 'verification');
+    try {
+      const result = resend ? await auth.resendVerification() : await auth.checkVerification();
+      setNotice(result.message);
+    } finally {
+      setChecking(null);
+    }
   }
   return (
     <Screen backgroundColor="#F8F5FC" contentStyle={styles.screen}>
@@ -53,12 +60,14 @@ export function AccountFollowUpScreen({
           <>
             <Button
               label="Check verification"
+              loading={auth.busy && checking === 'verification'}
               disabled={auth.busy || !auth.hydrated}
               onPress={() => void check()}
             />
             <Button
               label="Resend verification email"
               variant="outline"
+              loading={auth.busy && checking === 'resend'}
               disabled={auth.busy || !auth.hydrated}
               onPress={() => void check(true)}
             />

@@ -1,5 +1,23 @@
 # SundaySeeds implementation plan
 
+## Lottie loading treatment — 20 October 2026
+
+Owner requested LottieFiles loaders where appropriate. Source now uses a locally
+bundled adaptation of Kyle McGahey's Loading dots in SundaySeeds pastels: large
+startup/welcome/profile status and compact account/profile request buttons. Actual
+pending states control visibility; errors and verification instructions remain
+static. Reduced motion/player failure retains still dots and useful labels. Native
+and browser players are separate; no runtime LottieFiles fetch or synthetic wait.
+See [decision0013](decisions/0013-local-lottie-loading-indicators.md).
+
+The Expo-compatible native and SVG web players were installed with scripts disabled.
+Only source/installed API and documentation review, independent source review,
+formatting and whitespace review ran. Next owner restarts Expo and reviews startup,
+profile loading/save, sign-in/signup/recovery/verification/reset requests, failure
+completion, reduced motion/background behavior and small widths/larger text on web
+and native separately. This requested animation slice does not complete the deferred
+app-wide copy/error polishing sprint or outstanding learning-profile acceptance.
+
 ## Next priority: optional learning-profile onboarding — 20 October 2026
 
 The owner approved the research-based intention → interests → Bible-study familiarity → session time → course choices flow. Source now includes four optional pages, Back/deselect/Skip, saved preference summary, Settings editing, a one-course directory and truthful sample lesson hints. Verified Home entry opens setup only after an acknowledged missing preference row; completed/dismissed rows prevent repeated prompts. Initial load failures offer retry/exit without overwriting values. Skip immediately suppresses prompting for this session and attempts durable dismissal. See [implemented flow and owner review](auth-onboarding-flow.md#next-slice-optional-learning-profile--20-october-2026).
