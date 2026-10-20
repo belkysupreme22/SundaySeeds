@@ -1,5 +1,9 @@
 # SundaySeeds implementation plan
 
+## No-domain development option — 20 October 2026
+
+The owner still has no domain. A domain purchase is not required to continue development: the walkthrough now offers Mailtrap Email Sandbox as custom SMTP, with captured confirmation/reset messages in a private development inbox. It keeps the existing hosted Supabase project, Confirm Email and custom token-hash callback contract. This is a recommended setup path based on official SMTP documentation, not a selected/configured/tested provider. Captured-mail flow testing does not verify real inbox delivery or email ownership; proper sender/domain delivery remains a pilot prerequisite. Owner env configuration and guest/form checks are reported complete; connected identity acceptance remains pending.
+
 ## Setup prerequisite correction — 20 October 2026
 
 The owner reported that Confirm signup source editing requires custom SMTP. Current official Supabase documentation confirms that new Free projects created from 3 June 2026 cannot edit templates while using default SMTP. The walkthrough now puts custom SMTP/verified sender setup before template editing and distinguishes localhost destinations from mail-service configuration. Default templates do not satisfy our implemented token-hash callback contract; keep Confirm Email enabled. Public app configuration can proceed, but email confirmation/reset acceptance awaits a configured sender and both templates. No paid plan, provider/domain purchase, configuration bypass or alternate callback implementation was introduced. Documentation/source and whitespace review only; service/runtime checks remain pending.

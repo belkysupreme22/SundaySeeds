@@ -104,6 +104,36 @@ links below. The default templates do not implement this callback contract; do
 not treat them as an equivalent fallback or turn Confirm Email off to bypass the
 setup. Localhost changes the destination only, not this mail-provider restriction.
 
+### Development without a domain: Mailtrap Email Sandbox
+
+You do not need to purchase a domain to develop this email flow. A hosted SMTP
+sandbox captures messages in its own private test inbox instead of delivering
+them to learners. It can serve as the custom SMTP transport for this development
+project while retaining the token-hash templates and Confirm Email requirement.
+This integration is recommended from the documented SMTP interfaces; it has not
+yet been configured or tested for SundaySeeds.
+
+1. Create a Mailtrap account and select **Email Testing / Email Sandbox**. Open
+   **My Sandbox → Integration → SMTP**. This is the sandbox product, separate
+   from Mailtrap's live email delivery/domain setup.
+2. Copy that sandbox's SMTP host, port, username and password into Supabase's
+   custom SMTP settings. The documented host is `sandbox.smtp.mailtrap.io`;
+   port `587` is supported. Use the credentials shown for your actual sandbox.
+3. Use sender name `SundaySeeds` and an address you control as the sender for
+   this development configuration. Keep SMTP credentials in Supabase only.
+4. Save, then edit both templates below. Keep Confirm Email enabled.
+5. Trigger signup/recovery from the app for your controlled test accounts. Open
+   captured messages in Mailtrap's private sandbox inbox and follow the link on
+   the same computer while Expo runs at the configured localhost origin.
+
+Mailtrap captures the message regardless of the recipient's real inbox, so this
+checks the technical auth flow, not delivery or ownership of that recipient's real
+mailbox. Sandbox access exposes the captured auth links; limit access to the
+project's developers. Do not use this transport for real learner onboarding.
+[Mailtrap sandbox SMTP setup](https://docs.mailtrap.io/email-sandbox/setup/sandbox-smtp-integration)
+
+### Real learner delivery: provider and verified sender
+
 To configure custom SMTP:
 
 1. Choose an email delivery service supporting SMTP and create its account.
@@ -117,7 +147,7 @@ To configure custom SMTP:
 5. Save the SMTP settings, return to **Email Templates**, and edit both templates
    below. Check delivery only after saving the templates and app settings.
 
-If a sender is not available yet, continue with Step 6's public app settings.
+If neither a sandbox nor a real sender is configured yet, continue with Step 6's public app settings.
 Email confirmation/reset acceptance remains pending until this prerequisite is
 complete. Guest learning is still available. No provider account, domain purchase
 or SMTP configuration is performed by this guide.
@@ -175,7 +205,9 @@ in this checkout; a fresh clone uses `npm ci` in `apps/mobile`.
 ## 7. Test email delivery with your own address
 
 Complete Step 5's SMTP and custom-template setup first for this app's callback
-flow. Test with an address allowed by your chosen provider's sandbox/domain rules
+flow. With Mailtrap Email Sandbox, read messages in the private sandbox inbox;
+with a real delivery provider, read them in your controlled recipient inbox.
+Test with an address allowed by your chosen provider's sandbox/domain rules
 and check its delivery logs if an accepted request does not arrive. Do not assume
 an accepted request proves inbox delivery. Check your provider's rate limits and
 review the delivered confirmation/recovery links before inviting learners.
