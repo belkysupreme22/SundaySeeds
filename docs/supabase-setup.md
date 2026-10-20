@@ -1,6 +1,6 @@
 # SundaySeeds Supabase development setup
 
-Updated 19 October 2026. Follow this in a **new development project**. The app
+Updated 20 October 2026. Follow this in a **new development project**. The app
 source and profile migration are prepared; no SundaySeeds project, migration,
 sender or callback hosting has been configured by the agent. Tests and runtime
 review remain owner-run. PostgreSQL stores profiles; Supabase Auth manages
@@ -90,7 +90,37 @@ then the learner signs in normally in the mobile app. Recovery similarly changes
 the password on the landing page, followed by normal sign-in. Native app tokens
 are not passed through a custom-scheme URL. [Redirect URL configuration](https://supabase.com/docs/guides/auth/redirect-urls)
 
-## 5. Set the two email templates
+## 5. Configure a sender, then set the two email templates
+
+**Prerequisite for new Free projects:** Supabase projects created from 3 June
+2026 using the default SMTP service cannot customize authentication templates.
+If the editor says “Set up custom SMTP,” this is expected. Configure your own
+SMTP provider first to unlock the subject/body editor. Paid plans are exempt
+from this particular restriction; upgrading is not required if you configure
+custom SMTP. [Supabase template restriction](https://supabase.com/changelog/46599-changes-to-email-template-customisation-on-free-tier)
+
+Our explicit-action confirmation/recovery pages require the custom token-hash
+links below. The default templates do not implement this callback contract; do
+not treat them as an equivalent fallback or turn Confirm Email off to bypass the
+setup. Localhost changes the destination only, not this mail-provider restriction.
+
+To configure custom SMTP:
+
+1. Choose an email delivery service supporting SMTP and create its account.
+2. Verify a sender/domain according to that provider's requirements. Domain and
+   sender are still undecided for SundaySeeds; do not invent them.
+3. Open **Authentication → SMTP Settings** (or the **Set up custom SMTP** button).
+   Enter the provider's SMTP host, port, username and SMTP password, plus the
+   verified sender address and sender name `SundaySeeds`.
+4. Use the provider's SMTP credential, not your Supabase/database password. Keep
+   it out of chat, Git and Expo public variables. Disable email click tracking.
+5. Save the SMTP settings, return to **Email Templates**, and edit both templates
+   below. Check delivery only after saving the templates and app settings.
+
+If a sender is not available yet, continue with Step 6's public app settings.
+Email confirmation/reset acceptance remains pending until this prerequisite is
+complete. Guest learning is still available. No provider account, domain purchase
+or SMTP configuration is performed by this guide.
 
 In **Authentication → Email Templates**, update the relevant link in **Confirm
 signup** to:
@@ -144,17 +174,20 @@ in this checkout; a fresh clone uses `npm ci` in `apps/mobile`.
 
 ## 7. Test email delivery with your own address
 
-Without custom SMTP, Supabase's default mail service restricts recipients to
-project organization team addresses and currently has a low project-wide limit
-of two emails per hour. It is for limited development, with no delivery SLA.
-Use your own organization-member email for the first signup; signup/resend/reset
-requests share those constraints. An accepted request is not proof of inbox
-delivery. [Default SMTP limitations](https://supabase.com/docs/guides/auth/auth-smtp)
+Complete Step 5's SMTP and custom-template setup first for this app's callback
+flow. Test with an address allowed by your chosen provider's sandbox/domain rules
+and check its delivery logs if an accepted request does not arrive. Do not assume
+an accepted request proves inbox delivery. Check your provider's rate limits and
+review the delivered confirmation/recovery links before inviting learners.
 
-For other learners, choose an email provider, verify a sender/domain and configure
-**Authentication → SMTP Settings**. Keep SMTP credentials in the service settings,
-not the mobile app. Set appropriate rate limits and review delivered messages
-before the pilot. Domain/sender selection remains open, as requested.
+For context, Supabase's default SMTP restricts recipients to organization-team
+addresses and currently limits the project to two messages per hour, with no
+SLA. These developer-recipient allowances do **not** unlock custom templates on
+new Free projects, so they do not complete our token-hash flow. [Default SMTP
+limitations](https://supabase.com/docs/guides/auth/auth-smtp)
+
+Domain/sender selection and SMTP setup remain owner actions; credentials belong
+only in the service settings, not the mobile app.
 
 ## 8. Walk through the app
 

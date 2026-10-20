@@ -1,5 +1,9 @@
 # SundaySeeds implementation plan
 
+## Setup prerequisite correction — 20 October 2026
+
+The owner reported that Confirm signup source editing requires custom SMTP. Current official Supabase documentation confirms that new Free projects created from 3 June 2026 cannot edit templates while using default SMTP. The walkthrough now puts custom SMTP/verified sender setup before template editing and distinguishes localhost destinations from mail-service configuration. Default templates do not satisfy our implemented token-hash callback contract; keep Confirm Email enabled. Public app configuration can proceed, but email confirmation/reset acceptance awaits a configured sender and both templates. No paid plan, provider/domain purchase, configuration bypass or alternate callback implementation was introduced. Documentation/source and whitespace review only; service/runtime checks remain pending.
+
 ## Identity/profile source prepared — 19 October 2026
 
 The owner approved proceeding from the contract into the first identity/profile slice, requested preparation for a **new development Supabase project** and configurable domain/sender, and explicitly approved installing the Supabase client, SecureStore and URL polyfill. Database source is committed separately in `317b280`: private learner profiles, own-read RLS, actor-bound RPCs and expected revisions, with rollback-only permission checks written but not run.
