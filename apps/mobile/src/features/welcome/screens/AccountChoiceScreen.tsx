@@ -30,7 +30,11 @@ export function AccountChoiceScreen({
   onContinueForNow,
 }: Props) {
   return (
-    <Screen backgroundColor="#F8F5FC" contentStyle={styles.content}>
+    <Screen
+      backgroundColor="#F8F5FC"
+      contentStyle={styles.content}
+      loadingMessage={saving ? 'Opening your lessons…' : undefined}
+    >
       <View
         pointerEvents={saving ? 'none' : 'auto'}
         accessibilityState={{ disabled: saving }}

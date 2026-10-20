@@ -9,7 +9,6 @@ import { Icon } from '../../../shared/ui/Icon';
 import { InputField } from '../../../shared/ui/InputField';
 import { Screen } from '../../../shared/ui/Screen';
 import { Text } from '../../../shared/ui/Text';
-import { LoadingState } from '../../../shared/ui/LoadingState';
 
 type Props = {
   finishing: boolean;
@@ -25,6 +24,7 @@ export function MinimalSetupScreen(props: Props) {
     return (
       <SetupFrame
         busy={props.finishing}
+        loadingMessage={profile.loadError ? undefined : 'Opening your saved name…'}
         onBack={props.onBack}
         onSkip={() => void props.onFinish()}
         footer={
@@ -35,13 +35,11 @@ export function MinimalSetupScreen(props: Props) {
           />
         }
       >
-        <Card tone={profile.loadError ? 'peach' : 'lavender'} shadow={false}>
-          {profile.loadError ? (
+        {profile.loadError && (
+          <Card tone="peach" shadow={false}>
             <Text accessibilityLiveRegion="polite">{profile.loadError}</Text>
-          ) : (
-            <LoadingState label="Opening your saved name…" />
-          )}
-        </Card>
+          </Card>
+        )}
         {profile.loadError && (
           <Button
             label="Try again"
@@ -75,6 +73,7 @@ function SetupNameForm({ initialName, ...props }: Props & { initialName: string 
   return (
     <SetupFrame
       busy={busy}
+      loadingMessage={busy ? 'Preparing your learning space…' : undefined}
       onBack={props.onBack}
       onSkip={() => void props.onFinish()}
       footer={
@@ -152,15 +151,17 @@ function SetupFrame({
   onSkip,
   footer,
   children,
+  loadingMessage,
 }: {
   busy: boolean;
   onBack: () => void;
   onSkip: () => void;
   footer: ReactNode;
   children: ReactNode;
+  loadingMessage?: string;
 }) {
   return (
-    <Screen footer={footer}>
+    <Screen footer={footer} loadingMessage={loadingMessage}>
       <View style={styles.header}>
         <Pressable
           accessibilityRole="button"

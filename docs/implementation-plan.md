@@ -4,7 +4,11 @@
 
 Owner requested LottieFiles loaders where appropriate. Source now uses a locally
 bundled adaptation of Kyle McGahey's Loading dots in SundaySeeds pastels: large
-startup/welcome/profile status and compact account/profile request buttons. Actual
+startup/welcome/profile status and centered page overlays for account/profile
+requests. The owner corrected the initial button placement: buttons now retain only
+busy/disabled semantics; animation is page-centered at 208×68. Shared 0.65 speed
+produces a roughly two-second loop with 180 ms entry fade, immediate disappearance
+on completion and static reduced motion. Actual
 pending states control visibility; errors and verification instructions remain
 static. Reduced motion/player failure retains still dots and useful labels. Native
 and browser players are separate; no runtime LottieFiles fetch or synthetic wait.

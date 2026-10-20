@@ -46,6 +46,7 @@ export function AccountScreen({
   const [password, setPassword] = useState('');
   const [confirmation, setConfirmation] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [notice, setNotice] = useState<string | null>(null);
   const [policy, setPolicy] = useState(false);
   const errors: Errors = {};
@@ -61,12 +62,14 @@ export function AccountScreen({
     setNotice(null);
     if (Object.keys(errors).length || auth.busy || !auth.hydrated) return;
     Keyboard.dismiss();
+    setSubmitting(true);
     const version = ++request.current;
     const result = recovery
       ? await auth.requestRecovery(email.trim())
       : signup
         ? await auth.signUp(email.trim(), password, name)
         : await auth.signIn(email.trim(), password);
+    setSubmitting(false);
     if (!mounted.current || request.current !== version) return;
     setNotice(result.message);
     if (result.ok) {
@@ -80,7 +83,19 @@ export function AccountScreen({
     setNotice(null);
   }
   return (
-    <Screen contentStyle={styles.screenContent} backgroundColor="#F8F5FC">
+    <Screen
+      contentStyle={styles.screenContent}
+      backgroundColor="#F8F5FC"
+      loadingMessage={
+        submitting && auth.busy
+          ? recovery
+            ? 'Sending your recovery request…'
+            : signup
+              ? 'Creating your account…'
+              : 'Signing you in…'
+          : undefined
+      }
+    >
       <AccountTopBar
         label={recovery ? 'Account recovery' : signup ? 'Create account' : 'Welcome back'}
         onBack={navigate.back}

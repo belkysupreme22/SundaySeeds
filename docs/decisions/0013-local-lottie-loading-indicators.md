@@ -4,8 +4,9 @@
 
 The owner requested LottieFiles loaders wherever appropriate. Use the freely
 published **Loading dots** by **Kyle McGahey**, adapted to SundaySeeds' lavender,
-mint, yellow and peach with fine ink outlines. Keep one restrained animation in
-large status and compact button treatments. Source, download URL, modifications
+mint, yellow and peach with fine ink outlines. The owner subsequently requested a clearly visible page-centered loader rather
+than a button animation, plus slower/smoother motion. Use a 208×68 animation in
+a centered screen overlay or the centered startup status. Source, download URL, modifications
 and full Lottie Simple License are in `apps/mobile/assets/animations/`; metadata
 inside the JSON also carries its license. Settings → About exposes creator credit.
 
@@ -16,13 +17,17 @@ This avoids the native package's optional dotLottie React web peer and remote WA
 loading. No LottieFiles subscription, login or hosted player URL is used at runtime.
 The loader owns and destroys its web player; each instance clones mutable JSON.
 
-Shared LoadingState and LoadingIndicator own presentation only. An opt-in Button
-loading prop replaces its icon, retains the label, disables repeat presses and
-reports busy to accessibility. Existing nonloading button styles stay the same.
+Shared LoadingState and LoadingIndicator own presentation only. Button loading now retains its icon/label, disables repeat presses and reports
+busy to accessibility; it renders no animation. Screen accepts a loadingMessage
+for an absolute centered overlay outside scrolling content and footers. It renders
+only while focused, dismisses the keyboard and allows existing exit actions to
+receive input. This is a nonmodal presentation, not a new request or navigation gate.
 NativeText is used before Poppins loads. Real font/progress/welcome/profile waits
 and submitted account/profile actions drive visibility; errors, verification
-instructions and unavailable data stay static. No artificial delay, fake percent,
-completion event, modal, enrollment or backend behavior is added.
+instructions and unavailable data stay static. A shared playback speed of 0.65 gives an approximately 2.08-second loop; a 180 ms
+opacity ease introduces the page overlay when motion is allowed. Completion
+unmounts immediately. No artificial wait, fake percent, completion event, modal,
+enrollment or backend behavior is added.
 
 Reduced-motion preference starts conservatively still until known and updates
 with the system setting. Background/inactive apps stop animated playback. Player

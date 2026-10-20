@@ -37,6 +37,7 @@ export function WelcomeScreen({
 
   return (
     <Screen
+      loadingMessage={saving ? 'Opening your learning space…' : undefined}
       key={index}
       footer={
         <View style={[styles.actions, stackActions && styles.stackedActions]}>

@@ -1,8 +1,18 @@
 import type { ReactNode } from 'react';
-import { ScrollView, StyleSheet, View, type StyleProp, type ViewStyle } from 'react-native';
+import { useCallback, useEffect, useState } from 'react';
+import { useFocusEffect } from 'expo-router';
+import {
+  Keyboard,
+  ScrollView,
+  StyleSheet,
+  View,
+  type StyleProp,
+  type ViewStyle,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { colors } from '../theme/tokens';
 import { BottomNav } from './BottomNav';
+import { PageLoadingOverlay } from './PageLoadingOverlay';
 
 export function Screen({
   children,
@@ -10,13 +20,25 @@ export function Screen({
   footer,
   contentStyle,
   backgroundColor,
+  loadingMessage,
 }: {
   children: ReactNode;
   tabs?: boolean;
   footer?: ReactNode;
   contentStyle?: StyleProp<ViewStyle>;
   backgroundColor?: string;
+  loadingMessage?: string;
 }) {
+  const [focused, setFocused] = useState(false);
+  useFocusEffect(
+    useCallback(() => {
+      setFocused(true);
+      return () => setFocused(false);
+    }, []),
+  );
+  useEffect(() => {
+    if (loadingMessage && focused) Keyboard.dismiss();
+  }, [loadingMessage, focused]);
   return (
     <SafeAreaView
       style={[styles.safe, backgroundColor ? { backgroundColor } : undefined]}
@@ -35,6 +57,7 @@ export function Screen({
         </SafeAreaView>
       )}
       {tabs && <BottomNav />}
+      {loadingMessage && focused && <PageLoadingOverlay label={loadingMessage} />}
     </SafeAreaView>
   );
 }

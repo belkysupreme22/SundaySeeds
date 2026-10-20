@@ -39,7 +39,16 @@ export function EmailActionScreen({
     }
   }
   return (
-    <Screen backgroundColor="#F8F5FC">
+    <Screen
+      backgroundColor="#F8F5FC"
+      loadingMessage={
+        proof.busy
+          ? proof.stage === 'password'
+            ? 'Changing your password…'
+            : 'Checking your email link…'
+          : undefined
+      }
+    >
       <AccountTopBar
         label={kind === 'confirmation' ? 'Confirm email' : 'Recover account'}
         onBack={() => router.replace('/sign-in')}

@@ -8,6 +8,17 @@ The first identity/profile source slice is prepared after owner approval. The ow
 
 ## Lottie loader review — 20 October 2026
 
+Owner correction: loader animation belongs in the center of the page, visibly
+larger, rather than inside buttons. Screen.loadingMessage now drives a nonmodal
+centered overlay outside scrolling content/footer; only focused screens display it.
+Startup remains centered. Button.loading retains disabled/busy semantics and icon,
+with no dots. Playback is 0.65 on both platforms (~2.08 seconds/cycle), with a 180 ms
+entry opacity ease when motion is allowed and immediate unmount on completion.
+No minimum wait was added. Keyboard dismissal keeps the page status visible;
+Skip/Cancel behavior stays available through the presentation overlay. Review
+centering after scrolling/keyboard use, real requests, immediate error/success exit
+and reduced motion. Source/formatting review only; rendered/native checks pending.
+
 Restart Expo after the newly installed `lottie-react-native~7.3.8` and
 `lottie-web^5.13.0` dependencies. Shared loading presentation uses a bundled
 LottieFiles asset with source/license records in `apps/mobile/assets/animations`.

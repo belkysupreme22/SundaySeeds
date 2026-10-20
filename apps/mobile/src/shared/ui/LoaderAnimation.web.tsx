@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import type { AnimationItem } from 'lottie-web';
 import animation from '../../../assets/animations/loading-dots.json';
 import { StaticLoadingDots } from './StaticLoadingDots';
+import { LOADER_PLAYBACK_SPEED } from './loadingMotion';
 
 // Same contract as the native player, without importing native/web optional peers.
 export function LoaderAnimation({ animate, small }: { animate: boolean; small?: boolean }) {
@@ -27,7 +28,7 @@ export function LoaderAnimation({ animate, small }: { animate: boolean; small?: 
           });
           const start = () => {
             if (disposed || !player) return;
-            player.setSpeed(0.85);
+            player.setSpeed(LOADER_PLAYBACK_SPEED);
             setReady(true);
             player.play();
           };

@@ -2,7 +2,6 @@ import { Pressable, StyleSheet, View, type StyleProp, type ViewStyle } from 'rea
 import { colors } from '../theme/tokens';
 import { Text } from './Text';
 import { Icon, type IconName } from './Icon';
-import { LoadingIndicator } from './LoadingIndicator';
 
 export function Button({
   label,
@@ -38,12 +37,8 @@ export function Button({
       <Text variant="label" style={[styles.label, variant === 'dark' && { color: colors.white }]}>
         {label}
       </Text>
-      {loading ? (
-        <LoadingIndicator small />
-      ) : (
-        icon && (
-          <Icon name={icon} size={19} color={variant === 'dark' ? colors.white : colors.ink} />
-        )
+      {icon && (
+        <Icon name={icon} size={19} color={variant === 'dark' ? colors.white : colors.ink} />
       )}
     </Pressable>
   );

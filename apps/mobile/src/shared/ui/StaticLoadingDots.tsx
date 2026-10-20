@@ -21,9 +21,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    gap: 11,
+    gap: 22,
   },
   smallRow: { gap: 4 },
-  dot: { width: 13, height: 13, borderRadius: 7, borderWidth: 0.7, borderColor: colors.ink },
+  dot: { width: 24, height: 24, borderRadius: 12, borderWidth: 1, borderColor: colors.ink },
   smallDot: { width: 5, height: 5, borderRadius: 3, borderWidth: 0.5 },
 });

@@ -21,3 +21,7 @@ lottie-web SVG with the same bundled JSON, avoiding remote WASM dependencies.
 Animation renders only during actual pending work. Reduced-motion preference uses
 static dots; no minimum wait, synthetic percent or delayed completion is added.
 Runtime, accessibility and native/web visual review remain owner-run.
+
+Current placement: centered page/startup status; no button animation. Playback
+speed 0.65 produces a roughly 2.08-second cycle. Screen overlays ease in over 180 ms
+when motion is allowed and disappear immediately when the operation finishes.

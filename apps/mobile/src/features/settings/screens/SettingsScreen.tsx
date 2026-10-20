@@ -42,7 +42,7 @@ export function SettingsScreen() {
     else setNotice(result.message);
   }
   return (
-    <Screen tabs>
+    <Screen tabs loadingMessage={loggingOut && auth.busy ? 'Signing out…' : undefined}>
       <PageHeader title="Settings" subtitle="Make SundaySeeds your own." back />
       <SettingsGroup title="Account">
         <SettingsRow

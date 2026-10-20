@@ -12,7 +12,6 @@ import { Button, IconButton } from '../../../shared/ui/Button';
 import { Card } from '../../../shared/ui/Card';
 import { Text } from '../../../shared/ui/Text';
 import { colors } from '../../../shared/theme/tokens';
-import { LoadingState } from '../../../shared/ui/LoadingState';
 
 export function LearningProfileScreen() {
   const { user } = useAuth();
@@ -133,12 +132,16 @@ function LearningProfileForm({ editing }: { editing: boolean }) {
   if (!hydrated || !profile.eligible || draft === null) {
     const unavailable = hydrated && (!user || !user.verified);
     return (
-      <Screen>
+      <Screen
+        loadingMessage={
+          !profile.error && !unavailable ? 'Opening your learning profile…' : undefined
+        }
+      >
         <Text variant="heading" accessibilityRole="header">
           Your learning profile
         </Text>
-        <Card tone={profile.error || unavailable ? 'peach' : 'lavender'} shadow={false}>
-          {profile.error || unavailable ? (
+        {(profile.error || unavailable) && (
+          <Card tone="peach" shadow={false}>
             <Text accessibilityLiveRegion="polite">
               {unavailable
                 ? user
@@ -146,10 +149,8 @@ function LearningProfileForm({ editing }: { editing: boolean }) {
                   : 'Sign in to save your learning preferences.'
                 : profile.error}
             </Text>
-          ) : (
-            <LoadingState label="Opening your learning profile…" />
-          )}
-        </Card>
+          </Card>
+        )}
         {profile.error && (
           <Button
             label="Try again"
@@ -202,6 +203,13 @@ function LearningProfileForm({ editing }: { editing: boolean }) {
 
   return (
     <Screen
+      loadingMessage={
+        profile.busy
+          ? saving
+            ? 'Saving your learning preferences…'
+            : 'Loading your learning preferences…'
+          : undefined
+      }
       footer={
         <View style={styles.footer}>
           <Button

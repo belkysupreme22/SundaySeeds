@@ -37,7 +37,17 @@ export function AccountFollowUpScreen({
     }
   }
   return (
-    <Screen backgroundColor="#F8F5FC" contentStyle={styles.screen}>
+    <Screen
+      backgroundColor="#F8F5FC"
+      contentStyle={styles.screen}
+      loadingMessage={
+        auth.busy && checking
+          ? checking === 'resend'
+            ? 'Sending your verification email…'
+            : 'Checking your verification…'
+          : undefined
+      }
+    >
       <AccountTopBar
         label={verification ? 'Email verification' : 'Password reset'}
         onBack={navigate.back}
