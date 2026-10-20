@@ -1,15 +1,19 @@
 # Auth onboarding flow
 
-Updated 19 October 2026. The owner authorized the first identity/profile source
+Updated 20 October 2026. The owner authorized the first identity/profile source
 slice after contract draft v1, requested preparation for a new development project
 with configurable domain/sender, and explicitly delegated the three dependency
 installs. Source implementation is separate from service setup and acceptance.
 Use the [Supabase setup walkthrough](supabase-setup.md) for the owner setup steps.
 
 The earlier optional onboarding/content visuals (`752de75`, `f0b0792`) were approved.
-The new identity behavior and changed follow-up screens have not been reviewed at
-runtime. No intended Supabase project, schema, email service or hosting is yet
-configured. Missing environment values produce honest unavailable outcomes.
+The owner has since configured development environment values, Mailtrap sandbox
+SMTP and both templates, and reports signup/email confirmation/sign-in reaching
+Verified status. MCP catalog inspection found the expected profile table, policy,
+functions and access grants in `sundayseeds-dev`; permission and runtime tests were
+not run by the agent. Own-profile persistence, password recovery and broader
+platform/accessibility/security acceptance remain unreported. Missing environment
+values still produce honest unavailable outcomes.
 
 ## Product boundaries
 
@@ -25,8 +29,14 @@ now. Skip opens Home through the existing welcome preference; Add a name retains
 optional name setup. First launch and Settings introduction replay share internal
 steps. Standalone account routes remain reachable from Settings. The signup name
 is an independent optional account name, up to 40 characters; no guest-name copy
-happens automatically. Profile/Home use the account name while signed in and the
-preserved guest name after sign-out.
+happens automatically. Signed-in Home uses the account name; signed-out Home uses
+“Hello, learner!” regardless of a retained guest name (owner choice, 20 October).
+Profile still uses the preserved guest name while signed out. Logout from Settings
+returns to `/home` after acknowledged current-device sign-out. The dedicated Home
+route avoids replaying incomplete onboarding on logout; the Home tab also targets
+this route while recognizing `/` as Home when rendered after onboarding. Failed sign-out stays
+in Settings with feedback; leaving Settings while a request is pending prevents a
+late navigation from pulling the learner back.
 
 ## Current source flow
 
@@ -40,7 +50,7 @@ preserved guest name after sign-out.
 | `/reset-password` | Explains that the latest recovery email is required; no unproven password form |
 | `/auth/confirm?token_hash=…&type=email` | Explicit-action confirmation landing page. Captures proof in memory and strips parameters; only Continue exchanges it in an isolated client, clears the candidate and offers normal sign-in |
 | `/auth/recover?token_hash=…&type=recovery` | Explicit-action recovery. Continue verifies the proof in an isolated client; shows the target email before password submission. Password success and session-revocation uncertainty are distinct. Fresh sign-in follows |
-| `/settings` | Account email/verification status, verification entry, recovery entry and current-device sign-out; unavailable social/email-preference features remain honest |
+| `/settings` | Account email/verification status, verification entry, recovery entry and current-device sign-out to Home; unavailable social/email-preference features remain honest |
 | `/profile` and `/edit-profile` | Own account name through feature hooks/RPCs while signed in; guest name through existing device storage otherwise. Profile provisioning/load failures are separate from authentication and support retry |
 
 Proof routes are source-prepared for web hosting, not deployed endpoints. Standard
@@ -115,3 +125,16 @@ been run for this increment. The two previously deferred lint issues remain.
 Next: follow the new-project walkthrough, configure intended development settings,
 perform owner acceptance, then scope authentic catalog/course joining. Class
 invitation lifecycle and staff/publishing services retain their own decisions.
+
+## Logout follow-up — 20 October
+
+Owner requested logout → Home and chose a generic signed-out greeting after seeing
+“Hello test.” Source review showed account state already clears on sign-out; Home
+then restored the independent guest name. Home now reserves personalization for
+signed-in accounts, preserving guest name/progress storage. Name setup/editor copy
+points to Profile to match this behavior. No layout/stroke defaults changed.
+Reference artwork and official SDK57/Router docs were inspected; scoped formatting
+and source/whitespace review only. Owner checks: log out → Home → generic greeting,
+refresh while signed out, sign in → own greeting, retained guest Profile name and
+sample progress, and failed/slow logout after navigating away. Runtime/native and
+automated checks remain pending.

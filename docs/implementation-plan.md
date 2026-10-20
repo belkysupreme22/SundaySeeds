@@ -1,5 +1,9 @@
 # SundaySeeds implementation plan
 
+## Logout navigation and greeting — 20 October 2026
+
+The owner reports sandbox signup/email confirmation/sign-in now reaches Verified status. This is bounded owner acceptance; profile persistence, recovery, cross-account/failure/native/automated checks are not yet confirmed. The owner then requested logout → Home and explicitly chose a generic greeting when signed out. Settings now navigates Home only after acknowledged sign-out, with an initiating-account/focus guard. Home personalizes only while signed in; saved guest names and sample learning remain unchanged, with guest name still available on Profile. Name setup/editor copy is aligned. Source formatting, independent source review and whitespace checks only; runtime/native/tests remain owner-run and pending. Next owner reviews logout/greeting, then completes own-profile persistence and password-reset acceptance; content/admission services stay separate.
+
 ## No-domain development option — 20 October 2026
 
 The owner still has no domain. A domain purchase is not required to continue development: the walkthrough now offers Mailtrap Email Sandbox as custom SMTP, with captured confirmation/reset messages in a private development inbox. It keeps the existing hosted Supabase project, Confirm Email and custom token-hash callback contract. This is a recommended setup path based on official SMTP documentation, not a selected/configured/tested provider. Captured-mail flow testing does not verify real inbox delivery or email ownership; proper sender/domain delivery remains a pilot prerequisite. Owner env configuration and guest/form checks are reported complete; connected identity acceptance remains pending.

@@ -1,3 +1,4 @@
+import { useAuth } from '../../auth/hooks/useAuth';
 import { router } from 'expo-router';
 import { Pressable, StyleSheet, useWindowDimensions, View } from 'react-native';
 import { lessons } from '../../lessons/data/lessons';
@@ -17,7 +18,9 @@ import { useLearnerProfile } from '../../profile/hooks/useLearnerProfile';
 export function HomeScreen() {
   const { width, fontScale } = useWindowDimensions();
   const wrapShortcuts = width < 360 || fontScale > 1.2;
+  const { user } = useAuth();
   const { displayName } = useLearnerProfile();
+  const greetingName = user ? displayName || 'learner' : 'learner';
   const { bookmarks, progress } = useLearningProgress();
   const completed = Object.values(progress).filter((p) => p.completed).length;
   const shortcuts: {
@@ -64,7 +67,7 @@ export function HomeScreen() {
             <Icon name="sun" size={21} />
           </View>
           <View style={styles.greeting}>
-            <Text variant="title">Hello, {displayName || 'learner'}! ☀</Text>
+            <Text variant="title">Hello, {greetingName}! ☀</Text>
             <Text variant="caption" muted>
               A little learning. A little growing.
             </Text>

@@ -41,3 +41,18 @@ domain/email sender, then a setup walkthrough. No unrelated project is modified.
 HTTPS hosting/templates, SMTP, production policies and runtime/permission checks
 remain pending; localhost callbacks support computer-only development. Course
 catalog/enrollment, invitations, staff and publication remain distinct slices.
+
+## Logout presentation follow-up — 20 October 2026
+
+Owner chose generic signed-out Home greetings and logout returning to Home.
+Account names personalize Home only while signed in. Guest names remain saved and
+visible on Profile; sign-out does not delete guest names or sample progress.
+Navigation follows acknowledged current-device sign-out only, and a focused
+Settings request guard prevents a late result from overriding subsequent navigation.
+Owner reports signup/confirmation/sign-in reaching Verified in the sandbox setup;
+this new presentation change and remaining identity checks await owner review.
+
+The explicit `/home` route and Home tab destination bypass the first-run entry
+check on logout, including accounts opened through direct links before welcome
+completion. `/` retains its existing introduction/entry behavior and is recognized
+as the active Home tab when it renders Home. No welcome preference is overwritten.

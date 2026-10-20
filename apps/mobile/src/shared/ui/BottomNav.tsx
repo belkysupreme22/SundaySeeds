@@ -6,7 +6,7 @@ import { Icon, type IconName } from './Icon';
 import { Text } from './Text';
 
 const tabs: { label: string; href: Href; icon: IconName }[] = [
-  { label: 'Home', href: '/', icon: 'home' },
+  { label: 'Home', href: '/home', icon: 'home' },
   { label: 'Lessons', href: '/lessons', icon: 'book-open' },
   { label: 'Progress', href: '/progress', icon: 'bar-chart-2' },
   { label: 'Profile', href: '/profile', icon: 'user' },
@@ -19,6 +19,7 @@ export function BottomNav() {
         {tabs.map((tab) => {
           const selected =
             pathname === tab.href ||
+            (tab.href === '/home' && pathname === '/') ||
             (tab.href === '/lessons' && pathname.startsWith('/lessons/')) ||
             (tab.href === '/profile' && pathname === '/settings');
           return (

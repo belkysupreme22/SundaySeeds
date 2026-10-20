@@ -109,7 +109,7 @@ export function AccountChoiceScreen({
           ]}
         >
           <Text variant="small" style={styles.nameCopy}>
-            Add a name for your welcome
+            Add a name for your profile
           </Text>
         </Pressable>
       </View>

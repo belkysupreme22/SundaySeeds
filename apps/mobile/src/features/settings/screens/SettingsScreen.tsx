@@ -1,7 +1,7 @@
 import { useAuth } from '../../auth/hooks/useAuth';
 import { Card } from '../../../shared/ui/Card';
-import { useState } from 'react';
-import { router } from 'expo-router';
+import { useCallback, useRef, useState } from 'react';
+import { router, useFocusEffect } from 'expo-router';
 import { StyleSheet, View } from 'react-native';
 import { LearningDataControls } from '../components/LearningDataControls';
 import { SettingsGroup, SettingsRow } from '../components/SettingsGroup';
@@ -16,6 +16,28 @@ export function SettingsScreen() {
   const auth = useAuth();
   const [notice, setNotice] = useState<string | null>(null);
   const [detail, setDetail] = useState<SettingsDetailKey | null>(null);
+  const focused = useRef(false);
+  const logoutAttempt = useRef(0);
+  useFocusEffect(
+    useCallback(() => {
+      focused.current = true;
+      return () => {
+        focused.current = false;
+        ++logoutAttempt.current;
+      };
+    }, []),
+  );
+
+  async function logout() {
+    const userId = auth.user?.id;
+    if (!userId || auth.busy) return;
+    const attempt = ++logoutAttempt.current;
+    setNotice(null);
+    const result = await auth.signOut(userId);
+    if (!focused.current || logoutAttempt.current !== attempt) return;
+    if (result.ok) router.replace('/home');
+    else setNotice(result.message);
+  }
   return (
     <Screen tabs>
       <PageHeader title="Settings" subtitle="Make SundaySeeds your own." back />
@@ -143,9 +165,7 @@ export function SettingsScreen() {
           variant="outline"
           disabled={!auth.user || auth.busy || !auth.hydrated}
           style={styles.signOutButton}
-          onPress={() => {
-            void auth.signOut().then((result) => setNotice(result.message));
-          }}
+          onPress={() => void logout()}
         />
         <Text variant="caption" muted style={styles.center}>
           {auth.user ? 'Signs out on this device.' : 'No account is signed in.'}

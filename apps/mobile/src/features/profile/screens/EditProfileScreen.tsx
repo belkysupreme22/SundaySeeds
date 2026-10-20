@@ -86,7 +86,7 @@ function ProfileNameForm() {
       <Card tone="mint" shadow={false} style={styles.note}>
         <Icon name="smartphone" />
         <Text variant="label">A familiar hello</Text>
-        <Text variant="small">Your name appears on Home and Profile.</Text>
+        <Text variant="small">Your name appears on Profile.</Text>
       </Card>
       {(saveError || loadError) && (
         <Card tone="peach" shadow={false}>

@@ -124,7 +124,7 @@ function SetupNameForm({ initialName, ...props }: Props & { initialName: string 
         <View style={styles.noteCopy}>
           <Text variant="label">A familiar hello</Text>
           <Text variant="small">
-            Your name appears on Home and Profile. You can change it in Profile whenever you like.
+            Your name appears on Profile. You can change it there whenever you like.
           </Text>
         </View>
       </Card>
@@ -196,8 +196,7 @@ function SetupFrame({
           Make it yours
         </Text>
         <Text variant="small">
-          What should we call you? Add a name for a warmer welcome, or jump straight into your
-          lessons.
+          What should we call you? Add a name for your profile, or jump straight into your lessons.
         </Text>
       </View>
       {children}
