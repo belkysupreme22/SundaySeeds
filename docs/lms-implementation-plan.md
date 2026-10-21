@@ -1,5 +1,19 @@
 # LMS implementation plan
 
+## Current priority — connected course delivery, 21 October 2026
+
+Use the [21–28 October delivery plan](production-delivery-plan.md) for the current
+cross-app sequence and evidence requirements. Development identity/profile/preferences
+now exist, with owner-reported happy-path/onboarding review. Teacher/admin authoring,
+publication, membership, authority and reports remain session-only prototypes.
+
+The [first-course blueprint](first-course-blueprint.md) and [catalog/access contract](course-library-contract.md)
+are prepared for review. Next implementation is the additive course/release/enrollment
+foundation and mobile public catalog/details, followed by verified Join and authorized
+lesson reads. Durable teacher publication, trusted progress and scoped classes/admin
+follow their separate decisions. No new policy, import, course service or 80% readiness
+is implied. The older dated priorities below preserve history and are superseded here.
+
 ## Current priority — identity and course-admission planning, 19 October 2026
 
 The owner visually approved onboarding `752de75` and learner sample polish `f0b0792`; native/runtime/automated coverage was not supplied. The focused [LMS-B1 identity/course-access contract draft](backend-contract-proposal.md#learner-identity-and-course-access-contract) is prepared with states, operation/outcome tables, callback/session/profile boundaries, course-versus-class access, implementation slices and planned owner checks. B1-05c/d remain confirmed; proposed defaults ID-01–08 and environment inputs need review. Start with a scoped email/password identity/profile/Settings slice after approval, then authentic course access; staff/publishing scope retains its own unresolved gates. No migrations/configuration or connected-work start is implied. Earlier queued auth visual review and contract-preparation notes below are superseded.

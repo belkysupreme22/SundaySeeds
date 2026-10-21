@@ -1,5 +1,22 @@
 # Parallel delivery plan
 
+## Current priority — connected workflow, 21 October 2026
+
+The [21–28 October delivery plan](production-delivery-plan.md) supersedes older
+next-task notes below. The owner wants to accelerate toward 80% overall; this is a
+target, not verified readiness. Identity/profile/preferences are connected in the
+development project with owner-reported happy-path/onboarding checks. Teacher/admin
+remain session-only prototypes; connected course, publication and progress work
+have not been implemented.
+
+Bounded independent agents prepared the [course blueprint](first-course-blueprint.md)
+and [catalog/access contract](course-library-contract.md); lead integrates the shared
+roadmap. Next lanes follow one agreed release/access model: backend catalog/enrollment,
+mobile discovery/Join/content, durable teacher publishing, then trusted progress,
+classes/reporting and minimum admin authority. Keep each implementation lane in its
+own commit. Owner decisions and actual permission/runtime checks remain dependencies;
+parallel source work does not establish acceptance or staff authority.
+
 ## Current priority — identity/profile setup and acceptance, 19 October 2026
 
 The owner approved first identity/profile source implementation and preparation for a new development Supabase project with configurable domain/sender. Profile SQL/RPC/RLS and permission-test sources are prepared in a separate commit; mobile configurable auth, explicit-action email-proof handlers, own-profile integration and Settings sign-out are implemented in source. The three dependencies were explicitly delegated and installed. No intended project/schema/email/hosting configuration or runtime/security verification is established. Follow [Supabase setup](supabase-setup.md) and [auth flow](auth-onboarding-flow.md) next. Confirmed B1-05c/d remain; authentic course joining, classes, staff and publication retain separate gates. Earlier planning-only/implementation-start notes below are historical.

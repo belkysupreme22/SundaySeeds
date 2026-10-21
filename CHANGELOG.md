@@ -5,6 +5,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Changed
+- Added the first-course blueprint, proposed connected catalog/enrollment/access contract and a 21–28 October delivery plan across mobile, teacher and admin. Records the 80% ambition as a target with verification dependencies; no course import, publication policy, staff grant or backend implementation is implied.
 - Removed the loader’s white panel and page wash; restored the selected Lottie animation’s original blue-to-purple colors, opacity and unoutlined shapes. Static fallback dots use the same colors. Centering and smooth playback are preserved; owner visual review pending.
 - Moved Lottie animations out of buttons into larger, centered page overlays for real pending requests and initial profile/welcome waits. Slowed playback to a roughly two-second loop with a 180 ms entry fade; preserved reduced motion, immediate completion and existing exit actions. Owner visual/native review pending.
 - Applied Lottie dots to actual startup/welcome/profile loads and pending account, verification, password and profile-save actions. Loading buttons keep labels and busy semantics; static errors/instructions and existing completion/Skip behavior remain. Added creator credit in Settings → About; owner runtime/native/visual review pending.

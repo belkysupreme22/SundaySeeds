@@ -1,5 +1,27 @@
 # SundaySeeds implementation plan
 
+## Current priority: connected workflow and 28 October checkpoint — 21 October 2026
+
+The owner asked to accelerate toward 80% overall by next week. The target checkpoint
+is 28 October; no measured backlog currently supports a guaranteed percentage.
+[Production delivery plan](production-delivery-plan.md) sequences the backend,
+mobile, teacher and admin work and separates source, deployment and owner acceptance.
+
+Completed this bounded planning task: [first-course blueprint](first-course-blueprint.md)
+and [focused catalog/access contract](course-library-contract.md). The existing
+Faith for everyday life course is a development candidate, not an approved import.
+Stable editions, no-pass-mark completion and safe auth return are explicit
+recommendations for review, not newly confirmed policies. Content/staff authority
+and report visibility remain gates for the relevant implementation batches.
+
+Next implementation unit: additive course/release/enrollment access foundation and
+mobile public catalog/details, then verified Join and authorized lesson reads.
+Resolve the concrete draft choices before dependent behavior is enabled. Durable
+teacher publication, trusted progress, classes/reporting and admin authority follow
+in separate commits. Current learner identity/profile/preferences are connected in
+development; teacher/admin remain session-only prototypes. No app/schema/service
+change or runtime/test/build verification is included in this planning increment.
+
 ## Current priority: real-world course model and operating scenarios — 20 October 2026
 
 The owner reports reviewing onboarding and approved course-library contract planning.

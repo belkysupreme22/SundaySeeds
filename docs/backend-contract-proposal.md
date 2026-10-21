@@ -1,5 +1,21 @@
 # Backend contract proposal
 
+## Focused course contract and delivery checkpoint — 21 October 2026
+
+[First-course blueprint](first-course-blueprint.md) now describes the actual two-module,
+four-lesson candidate, activities, estimate basis, review responsibilities and a
+concrete edition-change example. [Course-library contract](course-library-contract.md)
+defines proposed public discovery, verified/idempotent Join, edition-aware access,
+privacy and eight implementation acceptance scenarios. These are review drafts;
+B1-04/06/07/08/09 and ID-07 are not accepted merely by preparing them.
+
+The owner wants approximately 80% overall by next week. The [21–28 October delivery
+plan](production-delivery-plan.md) targets a connected publishing → joining → study →
+permitted-results workflow and records dependencies and owner-run verification.
+No content import, course schema, grant or service deployment occurred in this task.
+Next: owner review of the concrete recommendations, then additive catalog/access
+implementation in its own increment; do not replay the applied profile foundation.
+
 ## Current planning checkpoint — 20 October 2026
 
 The development identity/profile and optional learning-preference source now exist;
