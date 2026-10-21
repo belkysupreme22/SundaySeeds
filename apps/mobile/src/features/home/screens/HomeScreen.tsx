@@ -9,7 +9,7 @@ import { LessonCard } from '../../lessons/components/LessonCard';
 import { Screen, ContentGroup } from '../../../shared/ui/Screen';
 import { Text } from '../../../shared/ui/Text';
 import { Icon, type IconName } from '../../../shared/ui/Icon';
-import { IconButton } from '../../../shared/ui/Button';
+import { Button, IconButton } from '../../../shared/ui/Button';
 import { Card } from '../../../shared/ui/Card';
 import { SectionHeading } from '../../../shared/ui/SectionHeading';
 import { colors, type Pastel } from '../../../shared/theme/tokens';
@@ -83,6 +83,12 @@ export function HomeScreen() {
         </View>
         <IconButton name="user" label="Your profile" onPress={() => router.replace('/profile')} />
       </View>
+      <Button
+        label="Browse courses"
+        icon="book-open"
+        variant="outline"
+        onPress={() => router.push('/courses')}
+      />
       <WeeklyHero />
       <ContentGroup>
         <SectionHeading title="Quick access" />
@@ -113,11 +119,7 @@ export function HomeScreen() {
       </ContentGroup>
       <ContinueLearning />
       <ContentGroup>
-        <SectionHeading
-          title="Your course journey"
-          action="Browse courses"
-          onPress={() => router.push('/courses')}
-        />
+        <SectionHeading title="Your course journey" />
         <CourseJourneyCard />
       </ContentGroup>
       <ContentGroup>

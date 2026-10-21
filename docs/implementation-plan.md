@@ -1,5 +1,16 @@
 # SundaySeeds implementation plan
 
+## Home course-library discoverability — 21 October 2026
+
+Owner could not find Browse courses on Home. Source had a small section-header
+link below the hero, shortcuts and continue-learning area; actual rendered cause
+was not observed. Moved the action to a full-width existing outline Button directly
+below the greeting and removed the duplicate lower link. It still opens `/courses`;
+no shared defaults, backend or sample journey changes. Source/whitespace review
+only, no tests/build/typecheck/lint/runtime/native checks. Owner reloads Home and
+checks visible Browse courses → Course library, narrow widths and larger text.
+The connected quiz/progress priority remains unchanged after this navigation fix.
+
 ## Mobile verified Join and connected reading — 21 October 2026
 
 Course details now load own enrollment through actor-scoped hooks and show explicit
