@@ -1,8 +1,8 @@
 # Connected course-library contract — review draft
 
 Prepared 21 October 2026 for owner review alongside the [first-course blueprint](first-course-blueprint.md).
-This is the next planning deliverable, not an accepted release policy or an implemented service.
-The owner's instruction to proceed authorizes this draft; it does not accept every proposed default below.
+Update 21 October: owner accepted the development candidate, preserving joined editions and the first-course completion rule ([decision0014](decisions/0014-first-connected-course.md)). Catalog/details foundation and metadata import are now applied in development; enrollment/content/attempt operations below are still unimplemented.
+Remaining defaults below are still proposals; three explicit answers do not accept the whole contract.
 Read with the [backend decision register](backend-contract-proposal.md), [real-world scenarios](course-model-research.md) and [auth flow](auth-onboarding-flow.md).
 
 ## Scope and established rules
@@ -10,16 +10,16 @@ Read with the [backend decision register](backend-contract-proposal.md), [real-w
 V1 connects public discovery and course details, verified direct joining and authorized curriculum/lesson reads.
 Registration, verification, viewing details and recovery never enroll a learner. Classes still require invitations;
 course joining establishes neither class membership nor staff authority. Automatic knowledge-check feedback is confirmed,
-but trusted attempts, completion, retries, scoring and progress synchronization are a separate B1-08 implementation gate.
+and the first-course completion rule is now accepted. Trusted attempts, score/retry details and progress synchronization remain a separate implementation gate.
 Existing guest sample learning remains available independently.
 
-Current source has identity/profile/preferences integration and a device-only sample course. It has no connected
-catalog, enrollment, content-access or publication service. Teacher/admin prototypes are not authoritative records.
-This increment defines no SQL, deployed configuration, final API paths, staff grants or content import.
+Current source has identity/profile/preferences integration and a device-only sample course. It now has connected catalog/details source and a development metadata import, but no
+enrollment, content-access or publication service. Teacher/admin prototypes are not authoritative records.
+The original draft defined no SQL or deployment. The catalog foundation now implements the list/details subset; no staff grants, enrollment or teaching-content import are included.
 
 ## Recommended defaults requiring review
 
-These recommendations refine B1-07 and ID-07; they remain proposals until explicitly accepted.
+Keeping the joined edition is accepted. The other recommendations refine B1-07 and ID-07 and remain proposals until explicitly accepted.
 
 | Question | Recommended V1 behavior |
 | --- | --- |
@@ -98,8 +98,8 @@ Clear on cancel, sign-out, account switch or expiry; retain through ordinary sam
 Return to refreshed details and recheck verification/current availability before an explicit Join/Start.
 Email confirmation and recovery links never enroll automatically; optional profile questions remain skippable.
 
-The first-course blueprint is a review candidate. No sample import is approved. If approved later, create explicit
-connected identifiers and reviewed publication data; do not treat guest lesson IDs as existing server records.
+The first-course blueprint is approved for development. Its metadata/outline-only import uses generated
+connected course/release identifiers; no lesson bodies or attempts have been imported. Guest lesson IDs do not become server records or trusted account history. Production publication still requires review.
 Keep sample storage and connected caches separate. A failed connected read must never silently fall back to sample
 content, progress or history. No automatic transfer, merge or cross-course credit from shared lesson identities.
 
@@ -116,11 +116,10 @@ content, progress or history. No automatic transfer, merge or cross-course credi
 
 ## Ordered implementation gates
 
-1. Review the blueprint and accept/revise B1-07 defaults and ID-07; identify content owner/reviewer/publisher and rights under B1-04. No production publication before these decisions.
+1. Blueprint development use, joined-edition preservation and first-course completion are accepted. Resolve remaining B1-07 defaults and ID-07; identify content owner/reviewer/publisher and rights under B1-04 before production publication.
 2. Prepare reviewed publication data and the minimal public projection/access boundaries; then feature-owned source adapters and truthful list/details/empty/error states. Screens and routes never call storage/backend clients directly.
 3. Implement trusted verified/idempotent Join and own-enrollment reads, including stale offering, revocation, actor change and uncertain-response reconciliation. Add safe auth return after ID-07 agreement.
 4. Connect curriculum/lesson reads only with enforced current release/enrollment/membership authorization. Enable Start only when this real path exists; no route into fixtures masquerading as enrolled content.
 5. Schedule trusted submissions/progress as the following slice after B1-07/08/09 policies; class invitations and staff publishing stay gated by their separate authority decisions. Owner runs runtime/tests/build checks unless explicitly delegated.
 
-Verification for this deliverable: repository/source and document review only. No schema, services, imports,
-tests, builds, runtime or native checks were performed; acceptance scenarios are future checks, not passing results.
+Verification for this deliverable: repository/source and document review only. The original draft involved no implementation. Subsequent catalog application and source are recorded in [the database guide](../supabase/course-library.md); tests, builds, runtime and native checks remain pending. Acceptance scenarios are future checks, not passing results.

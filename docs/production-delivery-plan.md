@@ -2,6 +2,16 @@
 
 Status: delivery plan, not a readiness certification. The owner wants approximately 80% overall completion by next week, across mobile and teacher/admin. Use **28 October** as the checkpoint. The earlier roughly 35% overall estimate was qualitative; there is no weighted, estimated backlog from which to calculate a defensible new percentage. Do not report planning, source implementation or prototype screens as verified production workflows.
 
+## 21 October update
+
+Owner accepted the existing course for development, keeping joined editions and
+all-four-checks completion with retries/explanations, no pass mark and optional
+private reflection (decision0014). These three choices in the review list below
+are now confirmed; the remaining rules and named roles still need resolution.
+The additive catalog foundation and metadata-only development import are applied;
+Join, lesson bodies and account progress remain unimplemented. This advances the
+catalog portion of the 22 October target, not the full enrollment/access batch.
+
 ## Outcome and scope
 
 Prioritize one connected development workflow: an authorized teacher saves and publishes a reviewed course; a verified learner joins, studies and submits a knowledge check; progress survives another device; the teacher sees only the permitted class-level learning results. Admin must be able to provision/revoke the required scoped authority with an audit trail. This is the first meaningful production-oriented milestone, not the whole product.
@@ -46,7 +56,7 @@ The [first-course blueprint](first-course-blueprint.md) and [course-library cont
 4. Recommend returning from sign-in/verification to refreshed course details, then requiring an explicit Join. One public course intent expires after 24 hours and clears on account change/cancel/sign-out (ID-07).
 5. Name the accountable content owner/reviewer/publisher and initial staff administrator. Agree staff recovery, permission scope and exactly which class results a teacher may see before implementing grants/reporting (B1-04/06).
 
-These remain recommendations until owner acceptance. Public production publication also requires actual rights review; a deadline does not substitute for it. Media, deletion/export, retention/offline behavior and backup/recovery policies remain B1-09 work rather than silently assumed defaults.
+Items 1–3 above are now accepted only to the extent recorded in decision0014; item 4, named roles and remaining policy details are still recommendations/unresolved. Public production publication also requires actual rights review; a deadline does not substitute for it. Media, deletion/export, retention/offline behavior and backup/recovery policies remain B1-09 work rather than silently assumed defaults.
 
 ## Tracking without inflated percentages
 

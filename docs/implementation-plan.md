@@ -1,5 +1,28 @@
 # SundaySeeds implementation plan
 
+## Current checkpoint: development catalog foundation — 21 October 2026
+
+Owner explicitly accepted the first development course, preserving joined editions
+and all-four-checks completion without a minimum score, with retries/explanations
+and optional private reflection. See [decision0014](decisions/0014-first-connected-course.md).
+Remaining access/attempt/lifecycle/staff decisions are not blanket-approved.
+
+Applied additive catalog migration `20261021074729_course_library_foundation`
+through MCP to the intended development project. Separately imported the approved
+course metadata/outline with generated connected IDs, development label and joins
+closed. Public list/details use invoker RPCs/RLS and exact immutable snapshots;
+no lesson bodies, answers, enrollment, attempts or guest history were imported.
+See [deployment evidence and API](../supabase/course-library.md). Foundation history
+was not replayed; no CLI/dependencies/env changes. Enrollment is deferred to the
+actual verified/idempotent Join slice rather than adding a premature empty table.
+
+Source/security/document review and application acknowledgements only; owner
+permission/concurrency/build/runtime/native checks remain pending. No advisors or
+behavioral SQL tests were run under the owner-run verification agreement. Future
+staff mutations must resolve the documented offering/release lock-order concern.
+Next: connected mobile discovery/details, then verified enrollment plus authorized
+lesson reads, keeping development/sample and account progress separate.
+
 ## Current priority: connected workflow and 28 October checkpoint — 21 October 2026
 
 The owner asked to accelerate toward 80% overall by next week. The target checkpoint

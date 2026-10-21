@@ -1,6 +1,6 @@
 # First course blueprint: Faith for everyday life
 
-Status: **development candidate for owner and content review**, 21 October 2026. This describes the existing bundled sample and proposes a usable first course. It does not approve a database import, publication, doctrinal position or connected implementation.
+Status: **owner-approved development candidate**, 21 October 2026. The owner accepted this first course for development, stable joined editions and the completion rule below; see [decision0014](decisions/0014-first-connected-course.md). A metadata/outline-only development import is now applied. Teaching and Scripture-rights review, production publication and staff authority remain pending.
 
 ## Audience and purpose
 
@@ -66,14 +66,14 @@ Each existing lesson has three reading sections and three knowledge-check questi
 
 These reflections and practices already exist as authored prompts. This blueprint does not introduce submitted answers, stored personal reflections, teacher access to private responses or proof-of-practice requirements.
 
-## Completion proposal — decision B1-08 remains open
+## Accepted first-course completion — B1-08 subset
 
-- Proposed required work: finish all four lesson knowledge checks, with retries and answer explanations available. No pass mark is proposed for this first course; finishing a check and answering every item correctly are different facts.
+- Accepted required work: finish all four lesson knowledge checks, with retries and answer explanations available. No pass mark is required for this first course; finishing a check and answering every item correctly are different facts.
 - Track reading position or reading completion separately from check completion. Opening a lesson must not imply it was read or understood.
 - Reflections, memory practice and real-life actions are optional and ungraded. Do not infer completion, attendance or spiritual growth from them.
 - Completion wording must explain the chosen rule. No certificate, graded qualification or prerequisite unlock is included in this candidate.
 
-The owner must accept or revise this rule before connected completion is implemented. It must not be recorded as a confirmed backend decision yet.
+The owner accepted this rule. Trusted attempt/score/retry-limit/reporting semantics still need definition before connected completion is implemented; source planning is not a working progress service.
 
 ## Two journeys using the same content
 
@@ -102,13 +102,13 @@ Content review checklist:
 - Review reading level, understandable instructions and alternatives for learners who cannot complete a suggested real-life action.
 - Confirm reflection remains optional and private unless a separate, explicit sharing flow is designed and approved.
 - Validate the estimated reading time with readers; state additional study effort honestly.
-- Assign the named roles above and resolve content ownership/Scripture permissions before approving publication or import.
+- Assign the named roles above and resolve content ownership/Scripture permissions before teaching-content import or production publication.
 
-## Edition example — recommendation, not an accepted policy
+## Edition example — joined edition accepted
 
-Suppose a learner joins edition 1 with four required checks and finishes two. Adding two required lessons to the same live course would change 2/4 (50%) into 2/6 (33%). Recommended default: keep that enrollment on its stable edition for material curriculum changes and offer a clear move to a new edition. This recommendation does not settle B1-07 or define progress transfer.
+Suppose a learner joins edition 1 with four required checks and finishes two. Adding two required lessons to the same live course would change 2/4 (50%) into 2/6 (33%). Accepted default: keep that enrollment on its stable edition for material curriculum changes and offer an explicit choice to move. This accepts the joined-edition subset of B1-07; it does not define progress transfer.
 
-Minor corrections and urgent rights/safety withdrawals need an explicit correction policy; stable editions must not guarantee continued access to withdrawn material. The owner still needs to choose edition behaviour, completion rules and accountable content roles before the connected catalog contract can be finalised.
+Minor corrections and urgent rights/safety withdrawals need an explicit correction policy; stable editions must not guarantee continued access to withdrawn material. Accountable content roles and the remaining correction/transfer/access rules still need resolution before their publication/access operations are enabled.
 
 ## Source of this candidate
 
@@ -116,4 +116,4 @@ Minor corrections and urgent rights/safety withdrawals need an explicit correcti
 - Existing teaching, prompts, quiz answers, verse labels and estimates: `apps/mobile/src/features/lessons/data/lessons.ts`.
 - Research rationale and unresolved model choices: `docs/course-model-research.md` and `docs/backend-contract-proposal.md`.
 
-This increment is a documentation draft based on source inspection. Content expert review, learner timing and owner decisions remain pending; it does not establish runtime or publication verification.
+This increment is a documentation draft based on source inspection. Content expert review, learner timing and the remaining policy choices are pending; it does not establish runtime or production-publication verification.

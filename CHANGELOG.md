@@ -5,6 +5,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Changed
+- Applied the additive development course-catalog foundation with immutable metadata snapshots, RLS-protected public discovery/details and a separate approved four-lesson development outline import. Joins stay closed; no lesson bodies, answers, enrollment or account progress imported. Recorded accepted joined-edition and first-course completion choices; permission/concurrency/runtime acceptance remains pending.
 - Added the first-course blueprint, proposed connected catalog/enrollment/access contract and a 21–28 October delivery plan across mobile, teacher and admin. Records the 80% ambition as a target with verification dependencies; no course import, publication policy, staff grant or backend implementation is implied.
 - Removed the loader’s white panel and page wash; restored the selected Lottie animation’s original blue-to-purple colors, opacity and unoutlined shapes. Static fallback dots use the same colors. Centering and smooth playback are preserved; owner visual review pending.
 - Moved Lottie animations out of buttons into larger, centered page overlays for real pending requests and initial profile/welcome waits. Slowed playback to a roughly two-second loop with a 180 ms entry fade; preserved reduced motion, immediate completion and existing exit actions. Owner visual/native review pending.

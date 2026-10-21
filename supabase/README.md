@@ -1,5 +1,14 @@
 # Learner identity database foundation
 
+## Current development catalog — 21 October 2026
+
+The additive course-library migration and explicit development outline import are
+now applied to the intended development project. See [course-library API/deployment
+notes](course-library.md). Catalog/details only; no enrollment, connected lesson
+body, trusted progress or staff publication service exists yet. Original profile
+setup text below is historical; do not replay it or run a blanket migration push.
+
+
 The planned database is **Supabase Postgres**. These source files introduce only
 private learner presentation profiles. They have not been applied to a database
 or verified against a running Supabase service. Auth credentials/sessions stay

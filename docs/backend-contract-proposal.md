@@ -1,5 +1,23 @@
 # Backend contract proposal
 
+## Accepted first-course choices and catalog foundation — 21 October 2026
+
+The owner explicitly approved Faith for everyday life **for development**, keeping
+the edition a learner joined, and completion after all four checks with retries,
+answer explanations, no minimum score and optional private reflection. See
+[decision0014](decisions/0014-first-connected-course.md). This accepts the stated
+B1-07/08 subset, not class pinning, correction/withdrawal/in-flight behavior,
+score aggregation, retry limits, staff reporting or production content rights.
+
+The course catalog foundation is applied additively to development; the approved
+metadata/outline import is separate and joining remains closed. See [actual API,
+application evidence and pending checks](../supabase/course-library.md). Immutable
+metadata snapshots and public discovery/details are implemented; enrollment,
+lesson content, assessment/progress, teacher publication and admin grants are not.
+ID-07 and remaining B1-04/06/07/08/09 decisions retain their separate gates.
+The dated drafts below preserve history; this checkpoint and decision0014 override
+older claims that all edition/completion/content-selection choices remain open.
+
 ## Focused course contract and delivery checkpoint — 21 October 2026
 
 [First-course blueprint](first-course-blueprint.md) now describes the actual two-module,
@@ -167,8 +185,8 @@ No SQL, RLS policies, provider configuration, credentials, email delivery or net
 | B1-05c | Confirmed by owner, 19 October | Learners must verify their email before starting a connected course. Guest browsing/details remain available; existing sample learning is unchanged | Enforce verified identity at trusted connected course Start/Join/content operations; delivery/callback contract still pending |
 | B1-05d | Confirmed by owner, 19 October | Signed-in, verified learners join courses directly; class membership requires an invitation. Joining a course does not create class membership or staff authority | Separate course enrollment and class invitation contracts; trusted availability/scope/lifecycle enforcement |
 | B1-06 | Owner decision required | Super-admin bootstrap/backup/recovery, initial sub-admin capabilities/scopes, delegation and audit readers | Production grants/administrative authorization |
-| B1-07 | Proposal above; not accepted | Immutable course releases, class assignment pinning, withdrawal/revocation and older in-flight attempts | Schema and publishing/learning services |
-| B1-08 | Proposal above; not accepted | Completion without pass threshold, unlimited retries, version-bound best score and course denominator | Trusted attempts and reporting |
+| B1-07 | Partially accepted 21 Oct: keep joined edition; other rules open | Immutable course releases, class assignment pinning, withdrawal/revocation and older in-flight attempts | Schema and publishing/learning services |
+| B1-08 | Partially accepted 21 Oct: first course all four checks, no pass mark, retries/explanations; other rules open | Completion without pass threshold, unlimited retries, version-bound best score and course denominator | Trusted attempts and reporting |
 | B1-09 | Owner decision required | Media ownership/access, retention/deletion/export, backup owner and supported offline/retry behavior | Storage and release readiness |
 | B1-10 | Proposed isolation; not accepted migration policy | Keep sample progress separate; determine whether any explicit transfer is wanted | Learner integration/account-switch behavior |
 
@@ -246,7 +264,7 @@ These are proposed records/fields, not SQL. IDs and timestamps come from trusted
 
 Never authorize using profile names or user-editable metadata. Trusted course/class operations check current enrollment/membership and publication state; stale token claims cannot stand in for current revocation checks. These boundaries follow [Supabase RLS guidance](https://supabase.com/docs/guides/database/postgres/row-level-security); concrete policy SQL and restricted function permissions belong to the implementation slice.
 
-Release pinning/version replacement is still B1-07, not settled by this table. Until it is approved there is no connected enrollment schema or content integration to implement. Class membership also does not silently enroll someone in independently offered courses: class-assigned content rules need their own approved release/access mapping.
+The owner accepted keeping the joined edition on 21 October (decision0014). Version replacement/transfer and other B1-07 policies remain open; this table alone does not settle them. Enrollment and content integration follow the catalog foundation as separate implementation slices. Class membership also does not silently enroll someone in independently offered courses: class-assigned content rules need their own approved release/access mapping.
 
 ### Feature operations and acknowledgement
 
