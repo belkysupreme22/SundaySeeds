@@ -1,5 +1,30 @@
 # SundaySeeds implementation plan
 
+## Mobile connected catalog source — 21 October 2026
+
+`/courses` now requests the real public catalog, with separate loading, empty,
+error and unavailable-configuration states. `/courses/[id]` shows the acknowledged
+metadata, outcomes, time basis and ordered module/lesson outline. UUID/revision,
+availability and nested payload validation sit in the course adapter; focused hooks
+ignore superseded responses. Routes compose screens, and screens do not call SDKs.
+
+The approved development outline is labelled Development course; the existing guest
+journey is an explicit separate Sample course entry. No fallback into fixtures on
+request failure, invented matching/progress or operational Join/Start action. The
+connected detail page explains enrollment is forthcoming and has no lesson links.
+Existing onboarding suggestions still describe the sample; connected preference
+ranking remains later work. Teacher/admin remain session-only prototypes.
+
+Visual adaptation uses existing discovery cards, lavender summary, mint status and
+yellow sample treatment with shared outlines/offset shadows; shared defaults are
+unchanged. No new assets/dependencies or environment changes. Source/API/security
+and whitespace review only; no tests/build/typecheck/lint/runtime/visual/native
+verification. Owner next: Home → Browse courses → View course; check two modules,
+four lessons, 26min reading label, unavailable ID, retry/failure and separate sample
+journey, narrow widths/larger text and native separately. Next implementation is
+verified/idempotent enrollment plus authorized edition-bound lesson content; clarify
+remaining auth-return/access rules before enabling that path.
+
 ## Current checkpoint: development catalog foundation — 21 October 2026
 
 Owner explicitly accepted the first development course, preserving joined editions

@@ -15,6 +15,15 @@ not run by the agent. The owner subsequently confirmed own-profile persistence a
 Broader platform/accessibility/security acceptance remains unreported. Missing environment
 values still produce honest unavailable outcomes.
 
+## Course discovery checkpoint — 21 October 2026
+
+Home → Browse courses (`/courses`) now loads public connected metadata; selecting
+View course opens `/courses/[id]` with its real outline. The development course is
+labelled and joining remains closed. The separate Sample course action preserves
+the guest journey. These new screens do not create enrollment or connected progress.
+Optional profile suggestions still describe sample content; account preferences
+are not yet used to rank this connected catalog. Owner runtime/native checks pending.
+
 ## Product boundaries
 
 Adults self-register with email/password without invitations. Registration, course

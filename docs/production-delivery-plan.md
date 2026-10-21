@@ -9,6 +9,7 @@ all-four-checks completion with retries/explanations, no pass mark and optional
 private reflection (decision0014). These three choices in the review list below
 are now confirmed; the remaining rules and named roles still need resolution.
 The additive catalog foundation and metadata-only development import are applied;
+mobile catalog/details source now consumes those RPCs, with owner checks pending.
 Join, lesson bodies and account progress remain unimplemented. This advances the
 catalog portion of the 22 October target, not the full enrollment/access batch.
 

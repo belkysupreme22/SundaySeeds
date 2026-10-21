@@ -1,5 +1,16 @@
 # Parallel delivery plan
 
+## Catalog implementation update — 21 October 2026
+
+The approved development course metadata/outline and additive catalog schema are
+applied. Mobile public discovery/details source now uses those RPCs; separate sample
+learning remains reachable, with no fake Join/Start or progress. See [current mobile
+and database checkpoints](implementation-plan.md) and [decision0014](decisions/0014-first-connected-course.md).
+Source review/application acknowledgements are recorded; owner runtime/permission
+and native acceptance remain pending. Next: verified/idempotent enrollment and real
+edition-bound lesson access, followed by teacher publication/progress/classes/admin
+under the remaining decisions. Teacher/admin source remains session-only.
+
 ## Current priority — connected workflow, 21 October 2026
 
 The [21–28 October delivery plan](production-delivery-plan.md) supersedes older
