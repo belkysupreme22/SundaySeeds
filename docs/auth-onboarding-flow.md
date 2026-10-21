@@ -15,6 +15,17 @@ not run by the agent. The owner subsequently confirmed own-profile persistence a
 Broader platform/accessibility/security acceptance remains unreported. Missing environment
 values still produce honest unavailable outcomes.
 
+## Verified course joining and reading — 21 October 2026
+
+`/courses/[id]` now loads the verified actor’s own enrollment, offers explicit Join
+for an open course and shows the learner’s pinned edition. Guest/unverified users
+can open the existing sign-in/registration/verification routes, then return manually
+through Browse courses. No stored return intent or automatic enrollment was added.
+`/courses/[id]/lessons/[lessonId]` reads real teaching text only with current verified
+session, active enrollment and exact available edition membership. Actor/session
+changes discard old results and hide owned content. Sample learning stays separate;
+connected quiz/learning-progress services remain next. Owner checks are pending.
+
 ## Course discovery checkpoint — 21 October 2026
 
 Home → Browse courses (`/courses`) now loads public connected metadata; selecting

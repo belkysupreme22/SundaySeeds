@@ -1,5 +1,32 @@
 # SundaySeeds implementation plan
 
+## Mobile verified Join and connected reading — 21 October 2026
+
+Course details now load own enrollment through actor-scoped hooks and show explicit
+Join only after a confirmed missing enrollment and open offering. The client pins
+the initiating JWT, fences actor/session/focus changes and reconciles own membership
+before retrying. A stale offering requires refreshed details and another explicit
+Join; uncertain outcomes are not presented as failure or success.
+
+Enrolled learners see their pinned edition and module/lesson links separately from
+the current offered outline. `/courses/[id]/lessons/[lessonId]` loads authorized real
+teaching text through its feature adapter/hook, never sample fixtures. It shows
+outcomes, sections, Scripture and memory verse, with no sample bookmarks, reading
+position, quiz scoring or fabricated progress. Optional reflection remains a prompt,
+not a submitted response. Guest/unverified learners enter existing identity routes
+and manually return through Browse courses; persisted ID-07 intent stays deferred.
+
+Existing cards/pastels/strokes and centered page loaders are reused; shared defaults
+and environment/dependencies are unchanged. Source/API/security and whitespace
+review only; tests/build/typecheck/lint/advisors/runtime/native/visual checks remain
+owner-run. Review verified Join → edition 1 → each reading; reopen/reload/sign in
+on another device to confirm enrollment; sign out/account switch without old owned
+data; guest/unverified/direct unauthorized lesson; failed requests/stale offering;
+narrow widths/larger text and native separately. Broader SQL permission/concurrency
+cases are in the enrollment guide. Next implementation: trusted knowledge checks
+and synced account learning progress, with remaining retry/score/in-flight semantics
+resolved before enabling submissions. Teacher/admin remain session-only prototypes.
+
 ## Enrollment and authorized reading foundation — 21 October 2026
 
 Owner’s next-step instruction continues the approved connected development flow.

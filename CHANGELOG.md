@@ -5,6 +5,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Changed
+- Added mobile verified Join, saved-edition curriculum and server-authorized lesson reading. Handles stale offerings, uncertain joins and account changes; keeps sample data separate and explains forthcoming connected knowledge checks/progress. Guest authentication returns manually through the catalog; owner runtime/native/visual review pending.
 - Applied verified, idempotent development course enrollment and authorized edition-bound reading. Imported the four approved readings without quiz answers or guest history; development joining opens only with complete immutable content. Enforced current actor/session, membership, availability and revocation checks; owner permission/concurrency/runtime acceptance pending.
 - Connected mobile Course library and course details to the development catalog, with real outline/outcomes/reading-time metadata and distinct loading, empty, unavailable and retry states. Kept sample learning explicitly separate; no enrollment or connected lesson access yet. Owner runtime/native/visual checks pending.
 - Applied the additive development course-catalog foundation with immutable metadata snapshots, RLS-protected public discovery/details and a separate approved four-lesson development outline import. Joins stay closed; no lesson bodies, answers, enrollment or account progress imported. Recorded accepted joined-edition and first-course completion choices; permission/concurrency/runtime acceptance remains pending.

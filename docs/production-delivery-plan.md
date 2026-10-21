@@ -2,6 +2,16 @@
 
 Status: delivery plan, not a readiness certification. The owner wants approximately 80% overall completion by next week, across mobile and teacher/admin. Use **28 October** as the checkpoint. The earlier roughly 35% overall estimate was qualitative; there is no weighted, estimated backlog from which to calculate a defensible new percentage. Do not report planning, source implementation or prototype screens as verified production workflows.
 
+## Enrollment/reading delivery update — 21 October 2026
+
+The verified Join and authorized reading batch is now implemented in source and
+applied to development, with the four real readings and admission opened. Mobile
+uses actor-scoped enrollment/pinned curriculum and the actual lesson RPC. This
+advances the source/deployment portions of the 22–23 October targets; owner
+permission/concurrency/runtime/native acceptance is pending. Quizzes and learning
+progress, durable teacher publication, classes/reporting and admin grants remain
+unfinished. No revised overall percentage is inferred from this increment.
+
 ## 21 October update
 
 Owner accepted the existing course for development, keeping joined editions and

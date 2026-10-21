@@ -1,5 +1,17 @@
 # LMS implementation plan
 
+## Enrollment and reading update — 21 October 2026
+
+Verified/idempotent Join, own edition-pinned enrollment and authorized real reading
+are now implemented in source and applied to development. Mobile course details
+and new lesson route consume those operations, with no sample fallback or invented
+progress. See [current implementation and owner checks](implementation-plan.md) and
+[decision0015](decisions/0015-enrollment-and-authorized-reading.md). Deployment/source
+review does not establish runtime, permission or native acceptance. Next trusted
+knowledge checks and synced progress; remaining teacher/admin services retain their
+separate authority/publication/reporting gates. Older catalog-only notes below are
+historical.
+
 ## Catalog implementation update — 21 October 2026
 
 The approved development course metadata/outline and additive catalog schema are

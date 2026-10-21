@@ -1,6 +1,8 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import { StyleSheet, View } from 'react-native';
 import { useCourseOffering } from '../hooks/useCourseOffering';
+import { useCourseEnrollment } from '../hooks/useCourseEnrollment';
+import { CourseEnrollmentPanel } from '../components/CourseEnrollmentPanel';
 import { courseTimeLabel } from '../types/catalog';
 import { colors } from '../../../shared/theme/tokens';
 import { Button } from '../../../shared/ui/Button';
@@ -12,14 +14,42 @@ import { Text } from '../../../shared/ui/Text';
 
 export function ConnectedCourseScreen() {
   const { id } = useLocalSearchParams<{ id?: string | string[] }>();
-  const { state, reload } = useCourseOffering(typeof id === 'string' ? id : '');
+  const courseId = typeof id === 'string' ? id : '';
+  const { state, reload } = useCourseOffering(courseId);
+  const access = useCourseEnrollment(courseId);
   const course = state.status === 'ready' ? state.data : null;
   const time = course ? courseTimeLabel(course) : null;
   const lessonCount =
     course?.modules.reduce((total, module) => total + module.lessons.length, 0) ?? 0;
 
+  const accessPanel = (
+    <CourseEnrollmentPanel
+      course={course}
+      state={access.state}
+      onJoin={(revision) => {
+        void access.join(revision);
+      }}
+      onReload={access.reload}
+      onRefreshCourse={() => {
+        reload();
+        access.reload();
+      }}
+    />
+  );
+
   return (
-    <Screen tabs loadingMessage={state.status === 'loading' ? 'Loading the course…' : undefined}>
+    <Screen
+      tabs
+      loadingMessage={
+        state.status === 'loading'
+          ? 'Loading the course…'
+          : access.state.status === 'joining'
+            ? 'Joining your course…'
+            : access.state.status === 'loading'
+              ? 'Checking your course access…'
+              : undefined
+      }
+    >
       <PageHeader title="Course details" back />
       {(state.status === 'error' || state.status === 'unconfigured') && (
         <Card style={styles.group} shadow={false}>
@@ -45,6 +75,7 @@ export function ConnectedCourseScreen() {
           <Button label="View course library" onPress={() => router.replace('/courses')} />
         </Card>
       )}
+      {!course && accessPanel}
       {course && (
         <>
           <Card tone="lavender" style={styles.group}>
@@ -89,8 +120,9 @@ export function ConnectedCourseScreen() {
               ))}
             </View>
           )}
+          {accessPanel}
           <Text variant="title" accessibilityRole="header">
-            Course outline
+            Offered course outline
           </Text>
           {course.modules.map((module, index) => (
             <Card key={module.id} shadow={false} style={styles.module}>
@@ -115,13 +147,6 @@ export function ConnectedCourseScreen() {
               ))}
             </Card>
           ))}
-          <Card tone="mint" shadow={false} style={styles.group}>
-            <Text variant="title">Enrollment opens soon</Text>
-            <Text variant="small">
-              You can explore the outline now. Joining and studying this course will be available in
-              a future update.
-            </Text>
-          </Card>
         </>
       )}
     </Screen>
