@@ -1,5 +1,12 @@
 # Parallel delivery plan
 
+## Current owner priority — 21 October 2026
+
+Follow the [ordered learner screen audit](learner-screen-audit.md), starting at
+onboarding and preserving each screen’s composition. Broad unreviewed changes
+were reverted; source findings and pending visual/runtime checks are recorded there.
+Audit and isolated corrections precede further connected quiz/progress work.
+
 ## Enrollment and reading update — 21 October 2026
 
 Verified/idempotent Join, own edition-pinned enrollment and authorized real reading

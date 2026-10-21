@@ -15,6 +15,17 @@ not run by the agent. The owner subsequently confirmed own-profile persistence a
 Broader platform/accessibility/security acceptance remains unreported. Missing environment
 values still produce honest unavailable outcomes.
 
+## Audit checkpoint — 21 October 2026
+
+The owner requires screen-by-screen preservation and an audit checklist starting
+at first launch. Follow [learner-screen audit](learner-screen-audit.md) before new
+screen fixes. The unreviewed broad rewrite was reverted. Existing routes and
+onboarding/auth behavior below remain the baseline; source-review findings include
+stale account-choice availability copy, competing post-preference destinations,
+verified Settings routing and pending edit-profile navigation review. Rendered/native
+checks have not established visual acceptance. Do not redesign Home or shared UI
+while fixing an individual identity screen.
+
 ## Verified course joining and reading — 21 October 2026
 
 `/courses/[id]` now loads the verified actor’s own enrollment, offers explicit Join

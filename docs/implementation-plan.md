@@ -1,5 +1,29 @@
 # SundaySeeds implementation plan
 
+## Current priority: ordered learner screen audit — 21 October 2026
+
+Owner reported overlapping course/lesson entry points and that recent changes
+messed up Home. They explicitly require a screen-by-screen checklist beginning at
+onboarding, with no screen changed incidentally while another is fixed. The
+unreviewed multi-screen rewrite from this turn was fully reverted; current app
+source remains committed baseline `d6d3beb`, including its Home Browse button,
+which is an audit finding rather than accepted composition.
+
+[Ordered audit checklist and source findings](learner-screen-audit.md) covers first
+launch/introduction, identity/proofs, all optional questions, Home, catalog/enrollment,
+both learning paths, quiz/review/progress, Profile, every Settings sheet, replay and
+logout. References01–12 and source reviewed with bounded independent read-only
+lanes; actual rendered comparison/native acceptance remains pending. Useful context
+and learning feedback must not be removed simply because content appears twice.
+
+Requested regression baseline on restored source: typecheck fails with two errors
+(missing useCallback dependencies argument; unsupported typed absoluteFillObject).
+Tests:16pass/1fail, the latter requiring repeated Sample lesson wording in every
+intro. No fixes from this audit remain in app/test source. No lint/build/browser/
+native/DB behavioral checks or service/environment changes. Next: follow checklist
+A01 onward and apply only isolated, reference-supported corrections; shared changes
+need their own caller checks. Connected quiz/progress work waits behind this audit.
+
 ## Home course-library discoverability — 21 October 2026
 
 Owner could not find Browse courses on Home. Source had a small section-header

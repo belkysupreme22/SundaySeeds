@@ -2,6 +2,13 @@
 
 Status: delivery plan, not a readiness certification. The owner wants approximately 80% overall completion by next week, across mobile and teacher/admin. Use **28 October** as the checkpoint. The earlier roughly 35% overall estimate was qualitative; there is no weighted, estimated backlog from which to calculate a defensible new percentage. Do not report planning, source implementation or prototype screens as verified production workflows.
 
+## Owner priority change — 21 October 2026
+
+The owner requires a screen-by-screen learner audit beginning at onboarding before
+further feature or layout changes. Follow the [ordered checklist](learner-screen-audit.md).
+The unreviewed broad rewrite was reverted. The dated delivery targets below remain
+planning targets; audit and per-screen acceptance now precede quiz/progress work.
+
 ## Enrollment/reading delivery update — 21 October 2026
 
 The verified Join and authorized reading batch is now implemented in source and
