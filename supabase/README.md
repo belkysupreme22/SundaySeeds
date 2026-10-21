@@ -1,5 +1,15 @@
 # Learner identity database foundation
 
+## Verified enrollment and reading — 21 October 2026
+
+The next additive migration and four-reading development import are now applied.
+Development joining is open only after complete reading coverage; enrollment and
+content RPCs enforce verified current actors and pinned editions. See [enrollment
+and authorized reading](course-enrollment.md) for APIs, application evidence and
+pending owner checks. There are still no trusted assessments/progress or staff
+publication services. Older catalog-only checkpoints below preserve prior scope.
+
+
 ## Current development catalog — 21 October 2026
 
 The additive course-library migration and explicit development outline import are

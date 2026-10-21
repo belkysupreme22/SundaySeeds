@@ -1,5 +1,10 @@
 # Course-library database foundation
 
+Later increment: [verified enrollment and reading](course-enrollment.md) is now
+applied in development, with an explicit four-reading import and admission opened.
+The catalog-only migration and initial seed below preserve their original scope.
+
+
 Source: `migrations/20261021074729_course_library_foundation.sql`. Applied additively to `sundayseeds-dev` (`ypykbtwwyebsfqtdvodj`) through Supabase MCP on 21 October 2026. The tool reported success; migration history returned actual version `20261021074729`, used for this filename. No migration filename was invented. The migration contains no course seed, account data, staff grants, enrollment or publication operation. The owner approved the existing course for development, stable joined editions and all-four-checks completion; production content/rights review and remaining policies are separate.
 
 ## Public client contract

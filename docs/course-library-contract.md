@@ -1,5 +1,12 @@
 # Connected course-library contract — review draft
 
+Implementation update: 21 October, verified idempotent Join, own pinned enrollment
+and authorized reading are now applied in development ([decision0015](decisions/0015-enrollment-and-authorized-reading.md)).
+Admission opened after importing all four approved readings. Quizzes/attempts/progress,
+staff publishing and persisted auth-return intent remain unimplemented. The earlier
+catalog-only checkpoint below preserves the preceding slice; actual APIs and pending
+acceptance are in [the enrollment guide](../supabase/course-enrollment.md).
+
 Prepared 21 October 2026 for owner review alongside the [first-course blueprint](first-course-blueprint.md).
 Update 21 October: owner accepted the development candidate, preserving joined editions and the first-course completion rule ([decision0014](decisions/0014-first-connected-course.md)). Catalog/details foundation and metadata import are now applied in development; enrollment/content/attempt operations below are still unimplemented.
 Remaining defaults below are still proposals; three explicit answers do not accept the whole contract.

@@ -2,6 +2,12 @@
 
 Status: **owner-approved development candidate**, 21 October 2026. The owner accepted this first course for development, stable joined editions and the completion rule below; see [decision0014](decisions/0014-first-connected-course.md). A metadata/outline-only development import is now applied. Teaching and Scripture-rights review, production publication and staff authority remain pending.
 
+Development implementation update: the existing four readings are now imported
+behind verified enrollment and edition-bound authorization. Questions/answers and
+guest progress were excluded. Joining is open for this development offering; this
+is not production teaching/Scripture-rights approval. Trusted knowledge checks and
+completion computation remain the next slice. See [decision0015](decisions/0015-enrollment-and-authorized-reading.md).
+
 ## Audience and purpose
 
 Proposed audience: adults beginning or renewing a Christian study practice, including learners unfamiliar with Bible study. No prior course or assessed knowledge is proposed as a prerequisite. The intended reading level, accessibility and theological framing require content review; these have not been validated with learners.

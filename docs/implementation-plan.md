@@ -1,5 +1,28 @@
 # SundaySeeds implementation plan
 
+## Enrollment and authorized reading foundation — 21 October 2026
+
+Owner’s next-step instruction continues the approved connected development flow.
+Applied migration `20261021080323_verified_course_enrollment` additively through MCP;
+mirrored actual remote version, no CLI install or old-migration replay. Private
+actor/course enrollments and immutable lesson readings have no client table grants.
+Narrow operations require trusted verified identity and current session; Join is
+idempotent and edition-pinned, and lesson body reads enforce current access and
+exact membership in the same query. See [decision0015](decisions/0015-enrollment-and-authorized-reading.md).
+
+Imported the four approved development readings without quiz questions/answers,
+sample progress or account history; development admission opened only after full
+outline coverage. [Database evidence and pending checks](../supabase/course-enrollment.md)
+separate source/application from acceptance. Source and independent security/API
+review only; no tests/build/typecheck/lint/advisors/behavioral SQL/native/runtime
+checks. Broader staff, correction/transfer, in-flight assessment and lifecycle
+policies remain open; the known direct administrative lock-order concern is not
+claimed resolved. No persisted ID-07 auth-return intent is introduced.
+
+Next mobile increment wires explicit Join, own pinned curriculum and server-loaded
+reading. Trusted knowledge-check submissions and synced learning progress follow;
+first-course completion is accepted but not yet computed by the backend.
+
 ## Mobile connected catalog source — 21 October 2026
 
 `/courses` now requests the real public catalog, with separate loading, empty,

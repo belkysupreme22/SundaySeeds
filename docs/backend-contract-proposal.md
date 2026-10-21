@@ -1,5 +1,24 @@
 # Backend contract proposal
 
+## Verified enrollment and authorized reading — 21 October 2026
+
+Owner requested the next implementation step. Additive migration
+`20261021080323_verified_course_enrollment` is applied in development, followed by
+an explicit import of the approved four readings and opening development admission.
+[Decision0015](decisions/0015-enrollment-and-authorized-reading.md) records the
+architecture; [RPC/deployment evidence](../supabase/course-enrollment.md) records
+actual scope and pending checks. Actor-bound own enrollment, idempotent verified
+Join and edition-bound reading are implemented. No fixture user/enrollment, quiz
+answer, sample history or trusted completion was created.
+
+Implementation defaults enforce explicit Join, stale-offering review, current
+availability/revocation and strict actor/session isolation. This does not settle
+unimplemented staff publication, lifecycle, correction/withdrawal operations,
+edition transfer, in-flight attempts or reports. Persisted ID-07 return intent
+remains deferred; manual return through the catalog is supported. Source review
+and deployment acknowledgements only; owner permission/concurrency/runtime checks
+remain pending. Teacher/admin continue as session-only prototypes.
+
 ## Accepted first-course choices and catalog foundation — 21 October 2026
 
 The owner explicitly approved Faith for everyday life **for development**, keeping
