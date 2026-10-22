@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
   row: { flexDirection: 'row', gap: 12, alignItems: 'stretch' },
   stacked: { flexDirection: 'column' },
   tile: { flex: 1, minWidth: 0, padding: 14, gap: 5, borderRadius: 9 },
-  stackedTile: { flex: 0 },
+  stackedTile: { flexGrow: 0, flexShrink: 0, flexBasis: 'auto' },
   valueRow: { flexDirection: 'row', alignItems: 'center', gap: 10 },
   value: { flex: 1, flexShrink: 1 },
 });

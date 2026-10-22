@@ -448,6 +448,34 @@ of an unfinished attempt remain pending. Shared small-thumbnail face cropping is
 unchanged and remains a caller-aware follow-up rather than a global artwork edit.
 Next: A38 Progress, then A39–A43 Profile, Settings and signed-out return.
 
+## A38 Progress and narrow layout — 22 October 2026
+
+Reference05/09 progress roles remain: hero, overall completion, aggregate stats and
+per-lesson evidence. The owner explicitly requested word/image overlap and shrinking
+fixes on smaller screens. Actual 320px screenshots reproduced hero copy under the
+portrait and collapsed stat cards. Natural-height stacked flex sizing now reserves
+space for hero text, tiles and row copy, preserving regular layout, colors/strokes,
+portrait assets, counts and reading-versus-completion semantics. Header identifies
+sample learning once; no device-storage disclaimers added.
+
+Fourteen browser cases at 320px/390px passed empty, saved-only, partial (including
+recorded 0% score), all-complete (average 50%), save failure, read failure and malformed
+storage. Read faults suppress false zero/history, preserve stored bytes and recover
+through the existing notice. Malformed fixture recovery repaired disposable bytes
+before Retry, not an app reset test. Save recovery retains in-memory progress and
+persists on Retry. Row bounds, hero separation and stat heights checked; lesson
+links open overview and return, Explore lessons destination and reload verified.
+Final screenshots inspected; zero page errors/external requests. Evidence ignored
+`.artifacts/progress-audit-2026-10-22/`. No owner/session/backend/env changes.
+
+Shared ProgressBar's web numeric ARIA value is missing despite its native
+accessibilityValue; visible fill/count is correct. This is recorded for A45 with
+all quiz/reader/summary callers, not silently treated as accessibility acceptance.
+Initial slow hydration, native Back/text scaling/assistive tech remain pending.
+Typecheck retains only existing PageLoadingOverlay issue; no lint/build/unit rerun.
+Next owner-steered responsive correction: recovery/verification hero callers and
+Profile header/stat tiles, then resume full A39–A43 Profile/Settings/return audit.
+
 ## Ordered screen inventory
 
 Work through IDs in this order. Each row includes a screen or a distinct state that can regress independently. “Pending” below means rendered/runtime acceptance, not that its source is necessarily unread.
@@ -491,7 +519,7 @@ Work through IDs in this order. Each row includes a screen or a distinct state t
 | A35 | Quiz result / saved-or-unsaved score | Quiz result state | 07 finish adaptation | Reviewed / scoped corrections | Web checked; native pending |
 | A36 | Answer review / retry | Quiz result variant | 08 feedback adaptation | Reviewed / scoped corrections | Web checked; native pending |
 | A37 | Post-quiz next lesson / all finished | Course quiz next steps | 07 curriculum/finish adaptation | Reviewed / scoped corrections | Web checked; native pending |
-| A38 | Progress: loading/failure/empty/partial/complete | `/progress` | 05 right / 09 right | Reviewed | Pending |
+| A38 | Progress: loading/failure/empty/partial/complete | `/progress` | 05 right / 09 right | Reviewed / scoped correction | Web checked; native pending |
 | A39 | Profile: guest/account/profile failure | `/profile` | 12 left | Reviewed | Pending |
 | A40 | Edit profile / save / revision conflict | `/edit-profile` | 12 left adaptation | Reviewed | Pending |
 | A41 | Settings and its sheets | `/settings` | 12 right | Reviewed | Pending |

@@ -80,5 +80,5 @@ const styles = StyleSheet.create({
   action: { flexDirection: 'row', alignItems: 'center', gap: 8 },
   actionLabel: { flex: 1 },
   stacked: { flexDirection: 'column', alignItems: 'stretch' },
-  stackedCopy: { flex: 0 },
+  stackedCopy: { flexGrow: 0, flexShrink: 0, flexBasis: 'auto' },
 });

@@ -31,7 +31,7 @@ export function ProgressScreen() {
   if (!hydrated || errorKind === 'load') {
     return (
       <Screen tabs>
-        <PageHeader title="Your progress" subtitle="Every little step matters." />
+        <PageHeader title="Your progress" subtitle="Sample lessons · Every little step matters." />
         <Card
           tone={errorKind === 'load' ? 'peach' : 'lavender'}
           style={styles.state}
@@ -53,7 +53,7 @@ export function ProgressScreen() {
 
   return (
     <Screen tabs>
-      <PageHeader title="Your progress" subtitle="Every little step matters." />
+      <PageHeader title="Your progress" subtitle="Sample lessons · Every little step matters." />
       <ProgressHero
         completed={completed}
         total={lessons.length}

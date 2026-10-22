@@ -70,6 +70,6 @@ const styles = StyleSheet.create({
   },
   portrait: { position: 'absolute', right: -8, width: '185%', height: '100%' },
   stacked: { flexDirection: 'column', alignItems: 'stretch' },
-  stackedCopy: { flex: 0 },
+  stackedCopy: { flexGrow: 0, flexShrink: 0, flexBasis: 'auto' },
   stackedArt: { width: 118, height: 145, alignSelf: 'center' },
 });

@@ -1,5 +1,15 @@
 # SundaySeeds implementation plan
 
+## Progress and responsive continuation — 22 October 2026
+
+A38 Progress now uses natural stacked heights for hero/stats/row copy and identifies
+sample scope near the header. Fourteen browser state/recovery/navigation cases passed
+at 320px/390px; metrics/store/regular layout unchanged. Shared ProgressBar web ARIA
+value remains an all-caller A45 follow-up; native acceptance and loader type error
+remain. Owner explicitly prioritized small-screen word/image overlap and shrinking:
+next bounded fixes cover reproduced recovery/verification and Profile stacked
+collapse, then full Profile/Settings/return audit.
+
 ## Ordered quiz/result audit A34–A37 — 22 October 2026
 
 Finish now waits for available saved learning, retaining checked answers through
