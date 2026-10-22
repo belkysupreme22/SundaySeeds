@@ -6,7 +6,7 @@ Date: 21 October 2026. Scope: the mobile learner app, from first launch through 
 
 Audit one screen at a time. Preserve its established composition and the reference’s visual language. Do not remove Home sections, change the tab model, or alter shared components as a side effect of fixing another screen. Record the smallest proposed correction, affected callers and regression cases before implementation. Give each eventual fix a bounded commit and review its affected screen before moving on.
 
-The unreviewed multi-screen rewrite from this audit was fully reverted, including the Home rewrite. Current app source is the committed baseline `d6d3beb`. The older standalone Browse courses button from that commit remains an audit finding; restoring baseline does not certify that layout as accepted.
+The unreviewed multi-screen rewrite from this audit was fully reverted, including the Home rewrite. The audit baseline was committed source `d6d3beb`; subsequent bounded fixes are recorded below. The older standalone Browse courses button from that commit remains an audit finding; restoring baseline does not certify that layout as accepted.
 
 ## Checklist used on every screen
 
@@ -23,16 +23,38 @@ The unreviewed multi-screen rewrite from this audit was fully reverted, includin
 
 A source finding does not pass a visual or runtime checkbox. References are evidence of hierarchy/style, not permission to copy unsupported certificates, analytics, grading, community or account features.
 
+## Pass 1: first launch and introduction — 22 October 2026
+
+A01–A04 browser evidence is now available at 390×844 and 320×568 using isolated
+guest contexts against Expo. Reference01’s composition, artwork, feature-card
+arrow, pagination and footer controls are preserved. No Home, tab, storage or
+shared-style implementation changed.
+
+- [x] Fresh entry renders the introduction; acknowledged completion reloads to Home.
+- [x] Three pages, footer Next/Back, feature-card advancement, Get started and account-choice Back were exercised in the browser.
+- [x] Welcome read/write failure warnings and Continue for now were exercised using disposable browser-only storage faults.
+- [x] Shared introduction replay’s visible Back path was exercised; this is caller coverage, not full A42 acceptance.
+- [x] Standard and narrow screenshots were inspected; at 320px, longer content remains scrollable above the footer.
+- [x] Added focused **Android-only** Back handling inside WelcomeScreen: previous slide after page 1, consume during saving, leave normal OS behavior on the first idle page. This changes no layout.
+- [ ] Actual Android hardware Back, native text scaling, screen readers and keyboard acceptance.
+- [ ] A04 wording review about sample versus connected progress remains open; this pass did not rewrite approved introduction copy.
+
+Local ignored evidence: `.artifacts/onboarding-audit-2026-10-22/results.json` and
+`A02-intro-1-{390,320}.png`, `A03-intro-2-390.png`, `A04-intro-3-390.png`.
+The flow cases also cover the optional-name/Skip boundary; no account form was
+submitted, email sent or server record mutated. Six browser case groups completed
+with zero page errors. Browser evidence does not establish native acceptance.
+
 ## Ordered screen inventory
 
 Work through IDs in this order. Each row includes a screen or a distinct state that can regress independently. “Pending” below means rendered/runtime acceptance, not that its source is necessarily unread.
 
 | ID | Screen / state | Route or host | Reference | Source audit | Visual/runtime |
 | --- | --- | --- | --- | --- | --- |
-| A01 | Startup and first-launch routing | `/`, root layout | 01/03 adaptation | Reviewed | Pending |
-| A02 | Introduction page 1 | Welcome flow | 01 left | Reviewed | Pending |
-| A03 | Introduction page 2 | Welcome flow | 01 middle | Reviewed | Pending |
-| A04 | Introduction page 3 / Get started | Welcome flow | 01 right | Reviewed | Pending |
+| A01 | Startup and first-launch routing | `/`, root layout | 01/03 adaptation | Reviewed / scoped fix | Web checked; native pending |
+| A02 | Introduction page 1 | Welcome flow | 01 left | Reviewed / scoped fix | Web checked; native pending |
+| A03 | Introduction page 2 | Welcome flow | 01 middle | Reviewed / scoped fix | Web checked; native pending |
+| A04 | Introduction page 3 / Get started | Welcome flow | 01 right | Reviewed / scoped fix | Web checked; native pending |
 | A05 | Create account / Sign in / Skip choice | Welcome flow | 03 adaptation | Reviewed | Pending |
 | A06 | Optional guest name setup | Welcome flow | 02/04 adaptation | Reviewed | Pending |
 | A07 | Create account | `/sign-up` and welcome step | 03 right | Reviewed | Pending |

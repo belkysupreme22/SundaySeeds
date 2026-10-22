@@ -1,5 +1,23 @@
 # SundaySeeds implementation plan
 
+## Ordered audit pass 1: introduction — 22 October 2026
+
+Continued A01–A04 in checklist order, preserving the existing reference01 layout.
+Added a local focused Android Back listener to WelcomeScreen, including saving
+and first-page behavior; shared replay is an affected caller. No Home/navigation,
+storage, database or global style change. Browser first-entry, visible Next/Back,
+feature-card Next, Skip, completion reload, welcome-storage failure recovery and
+replay boundary checks passed in isolated guest contexts at 390×844/320×568 with
+screenshots inspected. Native Back and native larger-text/keyboard checks remain
+pending. See [per-screen results](learner-screen-audit.md).
+
+The requested typecheck still reports the same two baseline errors in learning
+profile and shared loader code; this pass does not fix other screens incidentally.
+Browser automation uses the bundled Playwright library; an approved cache-only
+headless-browser download supplied its missing binary, with no app dependency or
+lockfile changes. The running Expo web preview was started for this audit; owner
+environment files were not manually read or changed.
+
 ## Current priority: ordered learner screen audit — 21 October 2026
 
 Owner reported overlapping course/lesson entry points and that recent changes

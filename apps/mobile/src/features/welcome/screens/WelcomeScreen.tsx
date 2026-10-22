@@ -1,5 +1,14 @@
-import { useState } from 'react';
-import { Image, Pressable, StyleSheet, useWindowDimensions, View } from 'react-native';
+import { useCallback, useState } from 'react';
+import { useFocusEffect } from 'expo-router';
+import {
+  BackHandler,
+  Image,
+  Platform,
+  Pressable,
+  StyleSheet,
+  useWindowDimensions,
+  View,
+} from 'react-native';
 import { colors } from '../../../shared/theme/tokens';
 import { Button } from '../../../shared/ui/Button';
 import { Card } from '../../../shared/ui/Card';
@@ -30,6 +39,16 @@ export function WelcomeScreen({
   const slide = welcomeSlides[index];
   const isLast = index === welcomeSlides.length - 1;
   const stackActions = width < 350 || fontScale >= 1.5;
+  useFocusEffect(
+    useCallback(() => {
+      if (Platform.OS !== 'android' || (index === 0 && !saving)) return;
+      const subscription = BackHandler.addEventListener('hardwareBackPress', () => {
+        if (!saving) setIndex((page) => Math.max(0, page - 1));
+        return true;
+      });
+      return () => subscription.remove();
+    }, [index, saving]),
+  );
   function advance() {
     if (isLast) onFinish();
     else setIndex((page) => Math.min(page + 1, welcomeSlides.length - 1));

@@ -15,6 +15,14 @@ not run by the agent. The owner subsequently confirmed own-profile persistence a
 Broader platform/accessibility/security acceptance remains unreported. Missing environment
 values still produce honest unavailable outcomes.
 
+## Introduction audit correction — 22 October 2026
+
+WelcomeScreen now handles Android Back locally while focused: later slides move
+back one page, saving consumes Back, and the first idle slide leaves normal OS
+behavior. Introduction composition and both reference-supported Next controls are
+preserved. Browser visible navigation, Skip, storage-recovery and replay caller
+checks passed; actual Android hardware Back remains pending. See [audit evidence](learner-screen-audit.md).
+
 ## Audit checkpoint — 21 October 2026
 
 The owner requires screen-by-screen preservation and an audit checklist starting
