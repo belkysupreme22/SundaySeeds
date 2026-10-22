@@ -204,6 +204,31 @@ After the preceding scoped Back dependency fix, whole-project typecheck now repo
 one remaining baseline error in PageLoadingOverlay; the learning-profile error is
 resolved. No lint/build or existing unit-suite rerun in this pass.
 
+## A19 Settings edit result and recovery states — 22 October 2026
+
+Reproduced Settings edit saving into the first-setup discovery result. In editing
+mode only, the result now retains the saved summary and Edit preferences, omits
+course suggestions and uses the existing exit action to return to Settings. Initial
+setup's course suggestions and Home exit remain unchanged. No shared styles,
+question layouts, Home/navigation model or preference API changed. Independent
+source review found no blocker; standard/narrow result screenshots were inspected.
+
+At both widths, browser checks also passed load failure/retry, failed save staying
+on the question, revision conflict disabling save, reload preserving the draft and
+saving against the newly loaded revision, slow-save exit without late navigation,
+entirely unanswered save, Skip preserving saved answers and Home remaining on reload.
+Result Back reopens the last question; Edit preferences reopens the first. Edit
+Cancel does not save. All role/state and flow checks completed with zero page errors.
+Auth/profile/preferences endpoints were intercepted with synthetic responses;
+this establishes UI behavior, not real persistence, RLS or session security.
+
+The final whole-project typecheck still has one baseline error in PageLoadingOverlay.
+Native Back/text scaling/screen readers, real preference persistence, cross-account
+and revoked-session acceptance remain pending. First-setup result's competing sample
+course/catalog/Home destinations remain a separate finding; this change deliberately
+addresses Settings' return purpose only. Next ordered screen is A20 Home, where the
+original overlapping course-entry report must be resolved without redesigning tabs.
+
 ## Ordered screen inventory
 
 Work through IDs in this order. Each row includes a screen or a distinct state that can regress independently. “Pending” below means rendered/runtime acceptance, not that its source is necessarily unread.
@@ -223,12 +248,12 @@ Work through IDs in this order. Each row includes a screen or a distinct state t
 | A11 | Confirmation link: initial/pending/success/invalid | `/auth/confirm` | 03 adaptation | Reviewed / URL cleanup fixed | Web invalid/simulated expiry/exit checked; success/native pending |
 | A12 | Reset-link guidance | `/reset-password` | 03 adaptation | Reviewed / stage copy fixed | Web copy/layout checked; native pending |
 | A13 | Recovery proof / new password / success/failure | `/auth/recover` | 03 adaptation | Reviewed / URL cleanup fixed | Web invalid/simulated expiry/exit checked; password/success/native pending |
-| A14 | Learning-profile initial load/error/exit | `/learning-profile` | 02/04 adaptation | Reviewed | Pending |
-| A15 | Intention question | Learning-profile step 1 | 02/04 adaptation | Reviewed | Pending |
-| A16 | Interests question | Learning-profile step 2 | 02/04 adaptation | Reviewed | Pending |
-| A17 | Familiarity question | Learning-profile step 3 | 02/04 adaptation | Reviewed | Pending |
-| A18 | Study-time question / save | Learning-profile step 4 | 02/04 adaptation | Reviewed | Pending |
-| A19 | Preference result / edit / Skip and return | Learning-profile variants | 02/04 adaptation | Reviewed | Pending |
+| A14 | Learning-profile initial load/error/exit | `/learning-profile` | 02/04 adaptation | Reviewed | Web guest/load retry/exit checked; real/native pending |
+| A15 | Intention question | Learning-profile step 1 | 02/04 adaptation | Reviewed / web state fixed | Web selection/deselection/Back checked; native pending |
+| A16 | Interests question | Learning-profile step 2 | 02/04 adaptation | Reviewed / web state fixed | Web three-topic cap/draft checked; native pending |
+| A17 | Familiarity question | Learning-profile step 3 | 02/04 adaptation | Reviewed / web state fixed | Web optional selection/deselection checked; native pending |
+| A18 | Study-time question / save | Learning-profile step 4 | 02/04 adaptation | Reviewed / estimate copy fixed | Web time/save/error/conflict checked; real/native pending |
+| A19 | Preference result / edit / Skip and return | Learning-profile variants | 02/04 adaptation | Reviewed / Settings return fixed | Web result/edit/Skip/slow exit checked; setup hierarchy/real/native pending |
 | A20 | Home: new / returning / guest / verified | `/home` | 05 left | Reviewed | Pending |
 | A21 | Home: Continue learning states | Home continuation | 05 middle adaptation | Reviewed | Pending |
 | A22 | Course library: available/empty/error | `/courses` | 06 left | Reviewed | Pending |

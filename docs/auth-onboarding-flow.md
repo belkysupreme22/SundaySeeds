@@ -17,6 +17,12 @@ values still produce honest unavailable outcomes.
 
 ## Account-choice and narrow hero audit — 22 October 2026
 
+Learning-profile editing from Settings now shows the saved summary with a return
+to Settings; it no longer repeats first-setup course discovery. Initial setup keeps
+its course result. Browser 320px/390px checks cover load/save recovery, conflict
+draft retention, Skip, unanswered save and slow exit using intercepted synthetic
+data. Real persistence, cross-account/security and native acceptance remain pending.
+
 Learning-profile time guidance distinguishes a preferred session from authored
 reading estimates. Sample hints now say “minutes of reading”; no full-lesson time
 promise or different persistence for unanswered versus flexible time is introduced.

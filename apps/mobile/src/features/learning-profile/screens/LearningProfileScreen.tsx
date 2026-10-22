@@ -176,7 +176,14 @@ function LearningProfileForm({ editing }: { editing: boolean }) {
 
   if (result)
     return (
-      <Screen footer={<Button label="Go to Home" onPress={() => router.replace('/home')} />}>
+      <Screen
+        footer={
+          <Button
+            label={editing ? 'Back to Settings' : 'Go to Home'}
+            onPress={editing ? exit : () => router.replace('/home')}
+          />
+        }
+      >
         <View style={styles.top}>
           <IconButton name="arrow-left" label="Back to preferences" onPress={back} />
           <View style={styles.badge}>
@@ -184,11 +191,13 @@ function LearningProfileForm({ editing }: { editing: boolean }) {
           </View>
         </View>
         <LearningPreferencesSummary preferences={profile.preferences ?? draft} />
-        <CourseSuggestions
-          preferences={profile.preferences ?? draft}
-          onViewCourse={() => router.replace('/lessons/course')}
-          onBrowse={() => router.replace('/courses')}
-        />
+        {!editing && (
+          <CourseSuggestions
+            preferences={profile.preferences ?? draft}
+            onViewCourse={() => router.replace('/lessons/course')}
+            onBrowse={() => router.replace('/courses')}
+          />
+        )}
         <Button
           label="Edit preferences"
           variant="outline"

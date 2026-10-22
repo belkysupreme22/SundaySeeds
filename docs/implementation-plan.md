@@ -2,6 +2,15 @@
 
 ## Ordered audit A14–A19: optional learning profile — 22 October 2026
 
+Settings edit success now stays focused on saved preferences and returns to Settings;
+discovery is omitted only in editing mode. First-setup result and question layouts
+are unchanged. Browser 320px/390px checks cover result Back/Edit/return, load retry,
+failed saves, revision conflict/reload with draft retention, slow exit, unanswered
+save and Skip/reload. All service responses intercepted; real persistence/security
+and native checks remain pending. Final typecheck has only the existing loader error.
+Next A20–A21 Home audit, preserving sections/tab model and treating course-entry
+duplication explicitly. Setup-result action hierarchy remains separately recorded.
+
 Session guidance now describes pausing between readings; sample hints explicitly
 say minutes of reading. No ranking, choices, duration values or layout changes.
 Browser copy/flow checked at 320px/390px. Typecheck after the scoped Back correction
@@ -13,7 +22,7 @@ appearance, deselection, three-topic cap, draft retention and Cancel. Fixed miss
 web checked/disabled semantics in the feature choice cards and the existing missing
 Back callback dependency argument in the audited screen. Native Back/screen-reader/
 text scaling remain pending. See [per-screen evidence](learner-screen-audit.md).
-Time wording and Settings-result correction remain separate scoped increments.
+Time wording and Settings-result corrections were kept in separate scoped increments.
 
 ## Ordered audit A09–A13: recovery and proof boundaries — 22 October 2026
 

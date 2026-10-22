@@ -5,6 +5,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Changed
+- Kept Settings learning-profile save results focused on the saved summary and return to Settings, omitting onboarding discovery only in editing mode. Browser recovery/conflict/Skip/slow-exit checks passed at 320px/390px with simulated responses; real persistence/native checks pending.
 - Clarified optional study-time guidance and labelled sample lesson hints as reading estimates, preserving duration values, choices, ranking and layouts. Browser flow/copy checked at 320px/390px.
 - Restored web checkbox-state semantics for optional learning-profile choices and corrected the audited screen's Back callback dependencies. Preserved card layouts and optional answers; question controls/draft retention checked at 320px/390px using intercepted responses. Native acceptance pending.
 - Clarified invalid email-link buttons: confirmation returns to signup, recovery opens the recovery-email form. Preserved their existing destinations and styles; browser destination checks passed at 320px/390px.
