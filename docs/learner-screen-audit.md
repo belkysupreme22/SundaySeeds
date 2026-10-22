@@ -489,6 +489,19 @@ repeat of every auth state. Browser text stress does not verify native fontScale
 Evidence ignored `.artifacts/responsive-audit-2026-10-22/`. Profile and shared-tab
 responsive corrections follow as separate bounded commits; full A39–43 remains next.
 
+## A39 responsive Profile correction — 22 October 2026
+
+Owner-steered layout slice only: Profile stacked header copy and stat tiles now
+retain natural height. Baseline 280px/320px screenshots showed collapsed tiles with
+labels outside their borders; final bounds and screenshots keep names/stats inside.
+Guest long-name fixture checked at 280px/320px/390px, with additional 150% browser
+text stress. Reference12's avatar/edit/header, lighter strokes, colors and regular
+layout are preserved. No name persistence, account flow, metrics or navigation
+behavior changed. This does not complete full A39/A40 Profile/edit acceptance.
+Native system font scaling and signed-in/error variants remain pending. Evidence:
+ignored responsive-audit screenshots and result JSON. Shared large-text tab labels
+are a separate all-caller correction; no font reduction or truncation added.
+
 ## Ordered screen inventory
 
 Work through IDs in this order. Each row includes a screen or a distinct state that can regress independently. “Pending” below means rendered/runtime acceptance, not that its source is necessarily unread.

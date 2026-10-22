@@ -5,6 +5,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Changed
+- Fixed narrow Profile header/stat sizing so long names and summary labels retain their height. Preserved avatar, colors, edit action and regular layout; checked 280px/320px/390px and 150% browser text. Full Profile behavior/native audit remains pending.
 - Reserved natural text height in narrow account recovery/verification heroes so artwork follows the copy instead of sharing a collapsed text box. Five caller routes checked at 280px/320px/390px and with 150% browser text; native font scaling pending.
 - Fixed collapsed Progress hero text, stat tiles and lesson-row copy on narrow screens while preserving the regular layout and metrics. Identified sample scope near the header; 14 browser state/recovery/navigation cases passed at 320px/390px. Native acceptance pending.
 - Paused final sample-quiz completion while saved learning is unavailable, preserving checked answers until recovery so results cannot silently go unrecorded. Added explicit web answer/review states and clarified sample-course scope. Quiz/result browser checks cover attempts, review, retry, destinations and storage recovery at 320px/390px; native acceptance pending.

@@ -72,5 +72,5 @@ const styles = StyleSheet.create({
   },
   copy: { flex: 1, minWidth: 0, gap: 4 },
   stacked: { flexDirection: 'column', alignItems: 'flex-start' },
-  stackedCopy: { flex: 0, alignSelf: 'stretch' },
+  stackedCopy: { flexGrow: 0, flexShrink: 0, flexBasis: 'auto', alignSelf: 'stretch' },
 });

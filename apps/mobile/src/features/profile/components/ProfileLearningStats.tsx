@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: 6,
   },
-  stackedTile: { flex: 0 },
+  stackedTile: { flexGrow: 0, flexShrink: 0, flexBasis: 'auto' },
   valueRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 6 },
   icon: { padding: 3, borderRadius: 5 },
   value: { flexShrink: 1 },
