@@ -47,7 +47,13 @@ export function SettingsScreen() {
       <SettingsGroup title="Account">
         <SettingsRow
           icon="log-in"
-          title={auth.user ? auth.user.email : 'Sign in or create an account'}
+          title={
+            !auth.hydrated
+              ? 'Account'
+              : auth.user
+                ? auth.user.email
+                : 'Sign in or create an account'
+          }
           value={
             !auth.hydrated
               ? 'Loading…'
@@ -58,11 +64,19 @@ export function SettingsScreen() {
                 : 'Optional'
           }
           description={
-            auth.user
-              ? 'Manage your signed-in account.'
-              : 'Sign in, create an account or keep exploring.'
+            !auth.hydrated
+              ? 'Loading your account status…'
+              : auth.user
+                ? auth.user.verified
+                  ? 'Signed in on this device.'
+                  : 'Confirm your email to join connected courses.'
+                : 'Sign in, create an account or keep exploring.'
           }
-          onPress={() => router.push(auth.user ? '/verify-email' : '/sign-in')}
+          onPress={
+            auth.hydrated && !auth.user?.verified
+              ? () => router.push(auth.user ? '/verify-email' : '/sign-in')
+              : undefined
+          }
         />
         <SettingsRow
           divider
@@ -84,7 +98,7 @@ export function SettingsScreen() {
           icon="mail"
           title="Email preferences"
           value="Unavailable"
-          description="Email delivery is not connected."
+          description="Learning-email preferences are not available yet."
           onPress={() => setDetail('email')}
         />
       </SettingsGroup>

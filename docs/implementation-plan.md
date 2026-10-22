@@ -5,9 +5,10 @@
 A39/A40 now fence late editor-save navigation and duplicate submissions while
 preserving drafts, revision recovery and layouts. Six guest/verified/unverified
 browser cases at 320px/390px passed; native/real persistence/account-switch cases
-remain pending. Profile scope explicitly identifies sample learning. Settings copy,
-sample reset and replay completion are separate bounded increments in this pass;
-no backend or shared-layout changes.
+remain pending. Profile scope explicitly identifies sample learning. Settings now uses accurate verified/email/Help/reset scope with six browser
+contexts covering all ten sheets, reset Cancel/failure/retry, local logout/generic
+Home and pending logout exit. Replay completion is a separate bounded increment;
+no backend/store/shared-layout changes. Native and real-service acceptance pending.
 
 ## Progress and responsive continuation — 22 October 2026
 

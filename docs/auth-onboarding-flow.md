@@ -15,6 +15,17 @@ not run by the agent. The owner subsequently confirmed own-profile persistence a
 Broader platform/accessibility/security acceptance remains unreported. Missing environment
 values still produce honest unavailable outcomes.
 
+## Settings account status — 22 October 2026
+
+Verified Settings account status is now informational rather than an action to a
+verification screen labelled account management. Unverified accounts can still open
+verification, guests can sign in, and loading status is non-actionable. Learning-email
+preferences remain unavailable; confirmation/recovery actions are separate. Local
+logout behavior is unchanged: focused success returns to Home with a generic greeting,
+while sample data and the separate guest Profile name remain. Synthetic browser
+checks cover normal, server-error local clearing and pending-exit behavior at
+320px/390px; real session revocation and native acceptance remain pending.
+
 ## Account-choice and narrow hero audit — 22 October 2026
 
 Learning-profile editing from Settings now shows the saved summary with a return

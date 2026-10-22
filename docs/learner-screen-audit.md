@@ -549,6 +549,43 @@ account switching during a save and Unicode-limit acceptance remain pending. The
 existing typecheck loader error remains; no lint/build/unit suite rerun. Settings
 and replay/logout evidence are recorded separately below.
 
+## A41 Settings sheets/reset and A43 logout — 22 October 2026
+
+Reference12 group order, lighter strokes, sheet layout, controls and navigation are
+preserved. Verified account status is static; unverified accounts retain the email
+verification action, guests retain sign-in, and loading status is non-actionable.
+Learning-email preferences are distinguished from confirmation/recovery emails.
+Removed the unreachable obsolete password-detail entry; Change password keeps its
+existing recovery-email route. Help now covers connected library/explicit verified
+Join/edition reading and distinguishes unavailable synced checks from sample progress.
+
+Reset is labelled sample learning in its trigger, confirmation and outcome. Copy
+identifies sample scores/positions/bookmarks and retained names, account learning
+preferences, enrollment and introduction preference. Save-failure wording reflects
+an unconfirmed reset save; underlying store behavior is unchanged. Device-only sample
+storage remains explained in Data usage, not repeated across learner screens.
+
+Six browser contexts at 320px/390px (guest/verified/unverified) passed all ten sheets,
+Done/X/Escape dismissal, verified static row/unverified verification entry, reset
+Cancel, failed reset save/preserved bytes, retry and successful sample reset. Name,
+welcome and mock account profile remain; no account-data mutation request is made.
+Sheets were captured after fade completion, including scrollable narrow Help. No
+new sheet contents/actions were invented to match unsupported reference features.
+
+Logout uses existing expected-actor/focus fencing and local scope. Verified logout
+returns to /home; the greeting stays generic after reload while the independent
+guest Profile name remains. A mocked server 500 also clears the local session under
+the installed SDK and returns Home; this does not verify server revocation. Pending
+logout followed by browser Back stays on Profile after response and shows the guest
+identity. Guest logout remains disabled. No logout implementation changed.
+
+Zero page errors/external requests; all Auth/profile/preferences responses synthetic,
+no real account, env or owner storage touched. Evidence ignored in profile-settings
+audit folder. Independent source review found no blocker. Native modal Back/focus/
+assistive tech, real account/server revocation, unconfigured-service variants and
+full account-switch/concurrency acceptance remain pending. Existing loader typecheck
+error remains; no lint/build/unit-suite rerun. Replay is recorded separately below.
+
 ## Ordered screen inventory
 
 Work through IDs in this order. Each row includes a screen or a distinct state that can regress independently. “Pending” below means rendered/runtime acceptance, not that its source is necessarily unread.
@@ -595,9 +632,9 @@ Work through IDs in this order. Each row includes a screen or a distinct state t
 | A38 | Progress: loading/failure/empty/partial/complete | `/progress` | 05 right / 09 right | Reviewed / scoped correction | Web checked; native pending |
 | A39 | Profile: guest/account/profile failure | `/profile` | 12 left | Reviewed / scoped correction | Web checked; native pending |
 | A40 | Edit profile / save / revision conflict | `/edit-profile` | 12 left adaptation | Reviewed / scoped correction | Web checked; native pending |
-| A41 | Settings and its sheets | `/settings` | 12 right | Reviewed | Pending |
+| A41 | Settings and its sheets | `/settings` | 12 right | Reviewed / scoped correction | Web checked; native pending |
 | A42 | Introduction replay and exit | `/welcome` from Settings | 01 | Reviewed | Pending |
-| A43 | Logout and signed-out return | Settings → Home | 12 right adaptation | Reviewed | Pending |
+| A43 | Logout and signed-out return | Settings → Home | 12 right adaptation | Reviewed / scoped correction | Web checked; native pending |
 | A44 | Unknown route / missing lesson | Not-found variants | Existing shared UI | Reviewed | Pending |
 | A45 | Shared tab selection, Back and page loaders | All callers | 05–08 / 12 | Reviewed | Pending |
 

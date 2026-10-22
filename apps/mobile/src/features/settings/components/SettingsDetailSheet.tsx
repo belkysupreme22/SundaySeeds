@@ -6,7 +6,6 @@ import { Button, IconButton } from '../../../shared/ui/Button';
 import { Text } from '../../../shared/ui/Text';
 
 export type SettingsDetailKey =
-  | 'password'
   | 'email'
   | 'appearance'
   | 'language'
@@ -21,18 +20,12 @@ export type SettingsDetailKey =
 type DetailContent = { title: string; status?: string; paragraphs: string[] };
 
 const details: Record<SettingsDetailKey, DetailContent> = {
-  password: {
-    title: 'Change password',
-    status: 'Account sign-in is not available yet',
-    paragraphs: [
-      'There is no password to change in this version. Password settings will be available when account sign-in is connected.',
-    ],
-  },
   email: {
     title: 'Email preferences',
-    status: 'Email delivery is not connected',
+    status: 'Learning-email preferences are not available yet',
     paragraphs: [
-      'SundaySeeds does not send learning emails in this version. Email preferences will become available with an account and email service.',
+      'Learning reminders and course-update emails are not available yet. There are no learning-email preferences to change here.',
+      'Account confirmation and password-recovery emails are separate from learning emails. Use the account verification or Change password actions for those requests.',
     ],
   },
   appearance: {
@@ -67,7 +60,8 @@ const details: Record<SettingsDetailKey, DetailContent> = {
     title: 'Data usage',
     paragraphs: [
       'Sample reading positions, quiz scores, bookmarks and your guest name stay on this device. Signing in does not upload or merge them. Your account display name is stored separately with your account.',
-      'Reset learning progress removes sample quiz scores, reading positions and bookmarks. Guest and account names and your introduction preference are kept.',
+      'Account learning preferences and joined-course access are separate from sample learning. Connected quizzes and synced progress are not available yet.',
+      'Reset sample learning removes sample quiz scores, reading positions and bookmarks. Names, account learning preferences, course enrollments and your introduction preference are kept.',
       'Wi-Fi-only and mobile-data preferences are not available yet.',
     ],
   },
@@ -75,11 +69,13 @@ const details: Record<SettingsDetailKey, DetailContent> = {
     title: 'Help Center',
     paragraphs: [
       'Find a lesson: open Lessons to browse the sample collection, search by title or scripture, or use the filter icon. You can leave all filters off.',
-      'Start learning: open a lesson and choose Start or Continue. Read each section, then move to the quiz.',
-      'Take a quiz: choose an answer, tap Check answer, read the explanation and continue. Finish all questions to record completion.',
-      'See your progress: open Progress for completed lessons and best quiz scores. Use the bookmark icon on a lesson to save it for later.',
-      'Start fresh: use Reset learning progress in Settings. You can cancel before confirming.',
-      'If a storage warning appears, use Try loading again or Try saving again in that notice. A warning means your changes may not have been saved.',
+      'Start a sample lesson: open its overview and choose Start or Continue. Read each section, then move to the quiz.',
+      'Take a sample quiz: choose an answer, tap Check answer, read the explanation and continue. Finish all questions to record completion.',
+      'See sample progress: open Progress for completed lessons and best quiz scores. Use the bookmark icon on a lesson to save it for later.',
+      'Browse connected courses: choose Courses on Home to open the Course library. An available course shows its outline; joining requires a verified account and an explicit Join action. Open joined readings from your saved-edition curriculum.',
+      'Connected readings are separate from sample lessons. Connected knowledge checks and synced learning progress are not available yet.',
+      'Start fresh: use Reset sample learning in Settings. You can cancel before confirming; account enrollments are kept.',
+      'If saved learning cannot load, changes pause to protect it. Use Try loading again in the notice. If changes cannot save, keep the app open and use Try saving again.',
     ],
   },
   privacy: {

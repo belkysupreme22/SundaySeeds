@@ -23,9 +23,9 @@ export function LearningDataControls() {
     try {
       await resetProgress();
       setConfirm(false);
-      setMessage('Your progress and bookmarks have been reset.');
+      setMessage('Your sample reading positions, quiz scores and bookmarks have been reset.');
     } catch {
-      setMessage('We could not reset your progress. Please try again.');
+      setMessage('We could not save the sample learning reset. Keep the app open and try again.');
     } finally {
       resetting.current = false;
       setBusy(false);
@@ -42,13 +42,13 @@ export function LearningDataControls() {
       {confirm ? (
         <Card tone="peach" shadow={false} style={styles.confirmation}>
           <View style={styles.confirmationContent}>
-            <Text variant="label">Start fresh?</Text>
+            <Text variant="label">Reset sample learning?</Text>
             <Text variant="small">
-              This removes your saved quiz scores, reading positions and bookmarks. Your display
-              name and introduction preference are kept.
+              This removes sample quiz scores, reading positions and bookmarks. Names, account
+              learning preferences, course enrollments and your introduction preference are kept.
             </Text>
             <Button
-              label={busy ? 'Resetting…' : 'Yes, reset my progress'}
+              label={busy ? 'Resetting…' : 'Yes, reset sample learning'}
               icon="refresh-cw"
               variant="outline"
               style={styles.confirmButton}
@@ -56,7 +56,7 @@ export function LearningDataControls() {
               onPress={() => void reset()}
             />
             <Button
-              label="Keep my progress"
+              label="Keep sample learning"
               icon={false}
               variant="outline"
               style={styles.confirmButton}
@@ -71,8 +71,8 @@ export function LearningDataControls() {
       ) : (
         <Pressable
           accessibilityRole="button"
-          accessibilityLabel="Reset learning progress"
-          accessibilityHint="Opens a confirmation before removing your learning progress."
+          accessibilityLabel="Reset sample learning"
+          accessibilityHint="Opens a confirmation before removing sample scores, reading positions and bookmarks."
           style={({ pressed }) => [styles.resetRow, pressed && styles.pressed]}
           onPress={() => {
             setMessage('');
@@ -81,7 +81,7 @@ export function LearningDataControls() {
         >
           <Icon name="refresh-cw" size={16} color={colors.danger} />
           <Text variant="label" style={styles.resetLabel}>
-            Reset learning progress
+            Reset sample learning
           </Text>
         </Pressable>
       )}
