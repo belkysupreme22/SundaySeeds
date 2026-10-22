@@ -3,13 +3,12 @@ import { useCallback } from 'react';
 import { router, useFocusEffect } from 'expo-router';
 import { useLearningProfile } from '../../learning-profile/hooks/useLearningProfile';
 import { Pressable, StyleSheet, useWindowDimensions, View } from 'react-native';
-import { lessons } from '../../lessons/data/lessons';
 import { useLearningProgress } from '../../progress/hooks/useLearningProgress';
 import { LessonCard } from '../../lessons/components/LessonCard';
 import { Screen, ContentGroup } from '../../../shared/ui/Screen';
 import { Text } from '../../../shared/ui/Text';
 import { Icon, type IconName } from '../../../shared/ui/Icon';
-import { Button, IconButton } from '../../../shared/ui/Button';
+import { IconButton } from '../../../shared/ui/Button';
 import { Card } from '../../../shared/ui/Card';
 import { SectionHeading } from '../../../shared/ui/SectionHeading';
 import { colors, type Pastel } from '../../../shared/theme/tokens';
@@ -17,6 +16,7 @@ import { WeeklyHero } from '../components/WeeklyHero';
 import { ContinueLearning } from '../components/ContinueLearning';
 import { CourseJourneyCard } from '../../courses/components/CourseJourneyCard';
 import { useLearnerProfile } from '../../profile/hooks/useLearnerProfile';
+import { getHomeLessons } from '../data/homeLessons';
 export function HomeScreen() {
   const { shouldPrompt } = useLearningProfile();
   useFocusEffect(
@@ -29,25 +29,28 @@ export function HomeScreen() {
   const { user } = useAuth();
   const { displayName } = useLearnerProfile();
   const greetingName = user ? displayName || 'learner' : 'learner';
-  const { bookmarks, progress } = useLearningProgress();
+  const { bookmarks, progress, errorKind } = useLearningProgress();
+  const { continuing, suggestions } = getHomeLessons(progress);
   const completed = Object.values(progress).filter((p) => p.completed).length;
   const shortcuts: {
     title: string;
     subtitle: string;
+    label?: string;
     tone: Pastel;
     icon: IconName;
     action: () => void;
   }[] = [
     {
-      title: 'My lessons',
-      subtitle: `${lessons.length} lessons`,
+      title: 'Courses',
+      subtitle: 'Browse library',
+      label: 'Browse courses',
       tone: 'yellow',
       icon: 'book-open',
-      action: () => router.replace('/lessons'),
+      action: () => router.push('/courses'),
     },
     {
       title: 'Saved',
-      subtitle: `${bookmarks.length} saved`,
+      subtitle: errorKind === 'load' ? 'Unavailable' : `${bookmarks.length} saved`,
       tone: 'mint',
       icon: 'bookmark',
       action: () => router.replace('/lessons?filter=saved'),
@@ -61,7 +64,7 @@ export function HomeScreen() {
     },
     {
       title: 'My growth',
-      subtitle: `${completed} finished`,
+      subtitle: errorKind === 'load' ? 'Unavailable' : `${completed} finished`,
       tone: 'peach',
       icon: 'award',
       action: () => router.replace('/progress'),
@@ -83,12 +86,6 @@ export function HomeScreen() {
         </View>
         <IconButton name="user" label="Your profile" onPress={() => router.replace('/profile')} />
       </View>
-      <Button
-        label="Browse courses"
-        icon="book-open"
-        variant="outline"
-        onPress={() => router.push('/courses')}
-      />
       <WeeklyHero />
       <ContentGroup>
         <SectionHeading title="Quick access" />
@@ -97,6 +94,7 @@ export function HomeScreen() {
             <Pressable
               key={item.title}
               accessibilityRole="button"
+              accessibilityLabel={item.label ?? `${item.title}, ${item.subtitle}`}
               onPress={item.action}
               style={[
                 styles.shortcut,
@@ -117,7 +115,7 @@ export function HomeScreen() {
           ))}
         </View>
       </ContentGroup>
-      <ContinueLearning />
+      <ContinueLearning lessons={continuing} />
       <ContentGroup>
         <SectionHeading title="Your course journey" />
         <CourseJourneyCard />
@@ -128,7 +126,7 @@ export function HomeScreen() {
           action="View all"
           onPress={() => router.replace('/lessons')}
         />
-        {lessons.slice(0, 2).map((lesson) => (
+        {suggestions.map((lesson) => (
           <LessonCard key={lesson.id} lesson={lesson} />
         ))}
       </ContentGroup>

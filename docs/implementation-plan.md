@@ -2,6 +2,21 @@
 
 ## Ordered Home audit A20–A21 — 22 October 2026
 
+After owner feedback, final Home portrait uses measured card width/proportional
+scaling and keeps a compact side-by-side layout at normal mobile widths; very small
+cards/large native fontScale retain a safe stacked frame. Checked 280–430px. Restored
+header→hero→four shortcuts; Courses now occupies the first existing shortcut instead
+of the extra Browse row. Kept sample curriculum, other sections and all tabs/screens.
+Home suggestions exclude featured/visible Continue lessons through a feature selector.
+Resume still opens saved reading; storage-failure shortcut counts show Unavailable.
+
+Ten browser progress-state cases passed at 320px/390px, including destination/Back,
+bookmark/reload and resume-index checks. No real account/server mutation; course
+requests intercepted. Source independent review found no blocker. Typecheck still
+has the one loader baseline error. Native text-scale/Back/assistive-tech and identity
+variants remain pending; shared LessonCard unknown-progress labeling stays for its
+all-caller audit. Next A22–A26 course discovery/details/join/reading; no tab redesign.
+
 Reference05 and actual 320px Home exposed a collapsed featured-hero copy box, letting
 the portrait cover its action/text. Minimal Home-only responsive sizing now reserves
 text height; 320px/390px screenshots checked, no assets/shared styles changed. Next

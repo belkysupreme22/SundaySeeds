@@ -1,6 +1,6 @@
 import { router } from 'expo-router';
 import { Pressable, StyleSheet, View } from 'react-native';
-import { lessons } from '../../lessons/data/lessons';
+import type { Lesson } from '../../lessons/types';
 import { LessonArtwork } from '../../lessons/components/LessonArtwork';
 import { useLearningProgress } from '../../progress/hooks/useLearningProgress';
 import { colors } from '../../../shared/theme/tokens';
@@ -11,14 +11,10 @@ import { ContentGroup } from '../../../shared/ui/Screen';
 import { SectionHeading } from '../../../shared/ui/SectionHeading';
 import { Text } from '../../../shared/ui/Text';
 
-export function ContinueLearning() {
+export function ContinueLearning({ lessons }: { lessons: Lesson[] }) {
   const { progress } = useLearningProgress();
-  const unfinished = lessons.filter((lesson) => {
-    const entry = progress[lesson.id];
-    return entry && !entry.completed;
-  });
 
-  if (!unfinished.length) return null;
+  if (!lessons.length) return null;
 
   return (
     <ContentGroup>
@@ -28,9 +24,9 @@ export function ContinueLearning() {
         onPress={() => router.replace('/lessons?filter=in-progress')}
       />
       <Text variant="small" muted>
-        Pick up where you left off.
+        Pick up your sample lessons where you left off.
       </Text>
-      {unfinished.slice(0, 2).map((lesson) => {
+      {lessons.map((lesson) => {
         const index = progress[lesson.id].sectionIndex;
         return (
           <Pressable

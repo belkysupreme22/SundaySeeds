@@ -6,7 +6,7 @@ Date: 21 October 2026. Scope: the mobile learner app, from first launch through 
 
 Audit one screen at a time. Preserve its established composition and the reference’s visual language. Do not remove Home sections, change the tab model, or alter shared components as a side effect of fixing another screen. Record the smallest proposed correction, affected callers and regression cases before implementation. Give each eventual fix a bounded commit and review its affected screen before moving on.
 
-The unreviewed multi-screen rewrite from this audit was fully reverted, including the Home rewrite. The audit baseline was committed source `d6d3beb`; subsequent bounded fixes are recorded below. The older standalone Browse courses button from that commit remains an audit finding; restoring baseline does not certify that layout as accepted.
+The unreviewed multi-screen rewrite from this audit was fully reverted, including the Home rewrite. The audit baseline was committed source `d6d3beb`; subsequent bounded fixes are recorded below. The standalone Browse courses row from that baseline was reviewed and replaced within the existing shortcut structure during the A20 pass below.
 
 ## Checklist used on every screen
 
@@ -245,6 +245,46 @@ Home entry-point and recommendation corrections are a separate bounded increment
 restore greeting → hero → four shortcuts, use the first shortcut for the catalog,
 preserve sample curriculum and remove repeated featured/resume lesson promotions.
 
+## A20–A21 Home hierarchy, distinct actions and responsive portrait — 22 October 2026
+
+Owner then reported the narrow portrait still looked poor. The final Home hero
+measures its own card width, scales the existing portrait proportionally, uses a
+compact headline when space requires it and keeps the reference's side-by-side
+composition at ordinary phone widths. Artwork has its own clipped column; the CTA
+is constrained to the copy width. Stacking is reserved for cards below 250px or
+system fontScale ≥1.5; that layout fills a 3:2 artwork frame without the earlier
+offset image panel. This supersedes the earlier normal-narrow stacked layout.
+No new asset, shared style, other portrait or screen was changed.
+
+Reference05 hierarchy is restored: greeting → featured lesson → four quick-access
+cards. Removed only the added standalone Browse row. The existing first shortcut
+now reads Courses / Browse library, with accessible Browse courses → `/courses`.
+Saved, Practice, My growth, sample curriculum, lesson suggestions and verse remain.
+The Lessons tab and all destination screens are unchanged. Dynamic shortcut counts
+remain in their spoken labels; unavailable saved data shows Unavailable, not zero.
+
+A Home feature selector shares the two visible unfinished lessons with Continue
+learning and excludes those IDs plus the featured lesson from the two suggestion
+slots. Small inventory can produce one suggestion; no replacement content is
+invented. Resume cards keep their saved section and existing reader destination.
+Their support copy makes sample-learning scope clear. The sample curriculum card
+is preserved: its course outline and resume links have a distinct contextual role.
+
+- [x] Inspected portrait/composition at 280, 320, 350, 360, 375, 390 and 430px; checked action/art bounds at each breakpoint.
+- [x] Ten isolated browser cases at 320px/390px: new, partial, all started, all complete, storage read failure; all existing Home sections retained and no featured/visible-resume duplicate in suggestions.
+- [x] Courses → catalog → Back, featured → lesson overview, sample course → curriculum, Saved/Practice/My growth destinations, suggestion opening and bookmark/reload.
+- [x] Continue → actual saved reading index, with existing progress retained; generic signed-out greeting despite retained guest name.
+- [x] Zero page errors, no external Supabase calls. Any course-library requests were intercepted; this is not catalog-service acceptance.
+- [x] Independent source review found no blocker. Whole-project typecheck still reports only the existing PageLoadingOverlay error; no lint/build/unit-suite rerun.
+- [ ] Native font scaling/Back, screen-reader announcements and verified/unverified Home variants remain pending.
+- [ ] Shared LessonCard can still show default not-started metadata after a storage read failure. Review it with all callers in the lesson/shared audit; no global component patch was bundled here.
+
+Evidence: ignored `.artifacts/home-audit-2026-10-22/results.json`,
+`responsive-results.json`, `browser-audit.cjs`, before/final screenshots. Browser
+contexts contained disposable sample progress only; no owner session/storage/env or
+server record changed. Final native/owner visual acceptance is still pending.
+Next A22–A26: course library, detail/join and authorized reading, preserving layouts.
+
 ## Ordered screen inventory
 
 Work through IDs in this order. Each row includes a screen or a distinct state that can regress independently. “Pending” below means rendered/runtime acceptance, not that its source is necessarily unread.
@@ -270,8 +310,8 @@ Work through IDs in this order. Each row includes a screen or a distinct state t
 | A17 | Familiarity question | Learning-profile step 3 | 02/04 adaptation | Reviewed / web state fixed | Web optional selection/deselection checked; native pending |
 | A18 | Study-time question / save | Learning-profile step 4 | 02/04 adaptation | Reviewed / estimate copy fixed | Web time/save/error/conflict checked; real/native pending |
 | A19 | Preference result / edit / Skip and return | Learning-profile variants | 02/04 adaptation | Reviewed / Settings return fixed | Web result/edit/Skip/slow exit checked; setup hierarchy/real/native pending |
-| A20 | Home: new / returning / guest / verified | `/home` | 05 left | Reviewed | Pending |
-| A21 | Home: Continue learning states | Home continuation | 05 middle adaptation | Reviewed | Pending |
+| A20 | Home: new / returning / guest / verified | `/home` | 05 left | Reviewed / Home-scoped fixes | Guest/state web checked; portrait 280–430px checked; identity/native pending |
+| A21 | Home: Continue learning states | Home continuation | 05 middle adaptation | Reviewed / suggestion deduplication | Web progress/resume states checked; real/native pending |
 | A22 | Course library: available/empty/error | `/courses` | 06 left | Reviewed | Pending |
 | A23 | Course details: guest/unverified/not joined | `/courses/[id]` | 07 left | Reviewed | Pending |
 | A24 | Join: pending/stale/uncertain/retry | Course details enrollment panel | 07 adaptation | Reviewed | Pending |
