@@ -7,8 +7,11 @@ preserving drafts, revision recovery and layouts. Six guest/verified/unverified
 browser cases at 320px/390px passed; native/real persistence/account-switch cases
 remain pending. Profile scope explicitly identifies sample learning. Settings now uses accurate verified/email/Help/reset scope with six browser
 contexts covering all ten sheets, reset Cancel/failure/retry, local logout/generic
-Home and pending logout exit. Replay completion is a separate bounded increment;
-no backend/store/shared-layout changes. Native and real-service acceptance pending.
+Home and pending logout exit. Replay now fences delayed completion after exit and duplicate finishes; all six
+browser contexts passed slow exit/success/failure recovery. No backend/store/shared
+layout changes. Native and real-service acceptance pending. Next A44–A45 audit tail
+(missing routes, shared navigation/ARIA/loaders), then connected checks/synced
+progress as the next separate backend slice.
 
 ## Progress and responsive continuation — 22 October 2026
 

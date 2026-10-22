@@ -586,6 +586,30 @@ assistive tech, real account/server revocation, unconfigured-service variants an
 full account-switch/concurrency acceptance remain pending. Existing loader typecheck
 error remains; no lint/build/unit-suite rerun. Replay is recorded separately below.
 
+## A42 introduction replay completion — 22 October 2026
+
+The replay host now fences navigation by focus/attempt and rejects duplicate finish
+calls synchronously. Saving continues, but a response after leaving cannot replace
+the new screen. Introduction pages, account/name steps, normal root Home destination
+and continue-for-now recovery remain unchanged; shared startup/first-launch hooks
+were not modified.
+
+Six guest/verified/unverified browser contexts at 320px/390px passed delayed welcome
+save → browser Back → Settings with no later navigation, ordinary Skip completion
+to the existing / Home alias, and failed save → visible recovery → Continue for now.
+Synthetic Storage override returned a deferred Promise through the installed web
+AsyncStorage adapter; no owner preference was modified. Zero page errors/external
+requests. Prior introduction page/optional-boundary evidence still applies; this
+host-only correction does not claim every replay identity branch was rerun.
+Independent source review found no blocker after the in-flight guard. Native
+hardware Back/gestures, large system text, assistive-tech and real slow storage
+remain pending. Evidence: ignored profile-settings script and settings-results JSON.
+
+A39–A43 source/browser pass is complete within recorded limits. Next ordered tail:
+A44 missing routes/lessons, then A45 shared navigation/ARIA/loaders with all callers.
+Connected quizzes and synced progress follow that audit tail as a separate backend
+slice, not part of these UI corrections.
+
 ## Ordered screen inventory
 
 Work through IDs in this order. Each row includes a screen or a distinct state that can regress independently. “Pending” below means rendered/runtime acceptance, not that its source is necessarily unread.
@@ -633,7 +657,7 @@ Work through IDs in this order. Each row includes a screen or a distinct state t
 | A39 | Profile: guest/account/profile failure | `/profile` | 12 left | Reviewed / scoped correction | Web checked; native pending |
 | A40 | Edit profile / save / revision conflict | `/edit-profile` | 12 left adaptation | Reviewed / scoped correction | Web checked; native pending |
 | A41 | Settings and its sheets | `/settings` | 12 right | Reviewed / scoped correction | Web checked; native pending |
-| A42 | Introduction replay and exit | `/welcome` from Settings | 01 | Reviewed | Pending |
+| A42 | Introduction replay and exit | `/welcome` from Settings | 01 | Reviewed / scoped correction | Web checked; native pending |
 | A43 | Logout and signed-out return | Settings → Home | 12 right adaptation | Reviewed / scoped correction | Web checked; native pending |
 | A44 | Unknown route / missing lesson | Not-found variants | Existing shared UI | Reviewed | Pending |
 | A45 | Shared tab selection, Back and page loaders | All callers | 05–08 / 12 | Reviewed | Pending |

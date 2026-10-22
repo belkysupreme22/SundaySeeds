@@ -5,6 +5,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Changed
+- Prevented a delayed introduction-replay save from navigating after the learner leaves, with duplicate-submit protection. Preserved normal Home completion and continue-for-now recovery; slow-exit/success/failure browser checks passed at 320px/390px. Native gestures/Back pending.
 - Updated Settings to show verified account status without a misleading management action, distinguish learning-email preferences from account emails, and explain connected course access in Help. Reset explicitly targets sample learning and keeps names/account data separate; sheet/reset/logout browser checks passed at 320px/390px with synthetic responses. Native/service acceptance pending.
 - Kept successful profile saves from navigating after the editor is left, with synchronous duplicate-submit protection. Clarified Profile’s sample-learning scope; guest/account save/cancel/error/conflict/slow-exit browser checks passed at 320px/390px. Native/account-switch acceptance pending.
 - Kept bottom-navigation labels within their tabs and reclaimed horizontal spacing below 320px, preventing larger labels from touching without shrinking text. Preserved four tabs, routes, icons and regular spacing; caller layouts checked at 280px/320px/390px with ordinary and 150% browser text. Native acceptance pending.
