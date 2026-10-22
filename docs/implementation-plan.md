@@ -2,6 +2,11 @@
 
 ## Ordered audit A09–A13: recovery and proof boundaries — 22 October 2026
 
+A12 guidance now correctly asks the learner to open the recovery email; a distinct
+hero mode preserves the actual proof/password instruction and existing artwork.
+Both contexts' copy checked at 320px/390px, guidance screenshots inspected. No
+shared sizing or other screen layout changes; native text scaling remains pending.
+
 Browser recovery validation/simulated responses/pending exit and no-account
 verification guidance checked at 320px/390px. Both email-proof routes now defer
 parameter clearing until linking listeners mount; direct links previously retained

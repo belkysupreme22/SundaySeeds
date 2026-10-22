@@ -52,7 +52,7 @@ export function AccountFollowUpScreen({
         label={verification ? 'Email verification' : 'Password reset'}
         onBack={navigate.back}
       />
-      <AccountRecoveryHero mode={mode} />
+      <AccountRecoveryHero mode={verification ? 'verify' : 'reset-guidance'} />
       <ContentGroup>
         <Card shadow={false} stroke="soft" style={styles.card}>
           <Text variant="title">

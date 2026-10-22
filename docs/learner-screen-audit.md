@@ -145,6 +145,16 @@ corrections; this proof cleanup does not change those screens' wording.
 Whole-project typecheck after the hook change still reports only the two recorded
 baseline errors in LearningProfileScreen and PageLoadingOverlay; it is not passing.
 
+## A12 guidance copy correction — 22 October 2026
+
+The guidance-only `/reset-password` screen now says “Open your recovery email to
+continue.” Its existing hero has an explicit guidance mode with the same title,
+lock artwork, styles and layout. The actual recovery-proof route keeps “Choose a
+new password for your account.” No password fields or new actions were added to
+guidance. Both routes' copy was checked at 320px/390px; guidance screenshots were
+inspected. No speculative shared sizing fix was made from source alone. Native
+larger-text/keyboard acceptance remains pending.
+
 ## Ordered screen inventory
 
 Work through IDs in this order. Each row includes a screen or a distinct state that can regress independently. “Pending” below means rendered/runtime acceptance, not that its source is necessarily unread.
@@ -162,7 +172,7 @@ Work through IDs in this order. Each row includes a screen or a distinct state t
 | A09 | Forgot password / request accepted | `/forgot-password` | 03 adaptation | Reviewed | Web validation/simulated responses/pending exit checked; real/native pending |
 | A10 | Email verification guidance/resend/check | `/verify-email` | 03 adaptation | Reviewed | No-account web checked; other identities/native pending |
 | A11 | Confirmation link: initial/pending/success/invalid | `/auth/confirm` | 03 adaptation | Reviewed / URL cleanup fixed | Web invalid/simulated expiry/exit checked; success/native pending |
-| A12 | Reset-link guidance | `/reset-password` | 03 adaptation | Reviewed | Pending |
+| A12 | Reset-link guidance | `/reset-password` | 03 adaptation | Reviewed / stage copy fixed | Web copy/layout checked; native pending |
 | A13 | Recovery proof / new password / success/failure | `/auth/recover` | 03 adaptation | Reviewed / URL cleanup fixed | Web invalid/simulated expiry/exit checked; password/success/native pending |
 | A14 | Learning-profile initial load/error/exit | `/learning-profile` | 02/04 adaptation | Reviewed | Pending |
 | A15 | Intention question | Learning-profile step 1 | 02/04 adaptation | Reviewed | Pending |

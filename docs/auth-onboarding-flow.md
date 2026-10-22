@@ -17,6 +17,11 @@ values still produce honest unavailable outcomes.
 
 ## Account-choice and narrow hero audit — 22 October 2026
 
+Reset-link guidance uses a distinct hero copy mode: open the recovery email before
+choosing a password. The actual recovery-proof screen keeps its existing password
+instruction; illustrations/layouts and proof requirements are unchanged. Both copy
+contexts were browser checked at 320px/390px; native acceptance remains pending.
+
 Recovery/proof browser follow-up found initial URL cleanup ran before linking
 listeners mounted. The proof hook now schedules parameter removal after those
 mount effects, cancels obsolete cleanup and skips unfocused callbacks. Explicit

@@ -5,6 +5,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Changed
+- Aligned password-reset guidance with its email-link stage, preserving the actual recovery password instruction, lock artwork and existing layout. Browser copy/layout checked at 320px/390px; native checks pending.
 - Fixed email-link tokens remaining in the browser URL on direct entry by clearing parameters after navigation listeners mount. Preserved explicit proof confirmation and isolated sessions; synthetic invalid/expired-link and pending-exit browser checks passed at 320px/390px. Real service/native acceptance remains pending.
 - Disclosed Google/Apple sign-in availability before activation, with descriptive information-action labels. Preserved auth layouts; checked validation, password reveal, simulated sign-in failure and pending/Back navigation at 320px/390px. Real service submissions and native accessibility remain pending.
 - Fixed collapsed auth-hero text overlapping the portrait at narrow widths. Preserved existing assets and regular layout; inspected account choice, Sign in and Sign up at 320px/390px. Native keyboard/text-scale checks remain pending; Home and navigation were not changed.

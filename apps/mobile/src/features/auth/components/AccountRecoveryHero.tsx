@@ -3,11 +3,12 @@ import Svg, { Circle, G, Path, Rect } from 'react-native-svg';
 import { Text } from '../../../shared/ui/Text';
 import { colors } from '../../../shared/theme/tokens';
 
-type Mode = 'request' | 'verify' | 'reset';
+type Mode = 'request' | 'verify' | 'reset' | 'reset-guidance';
 const copy = {
   request: { title: 'Forgot password?', body: 'A little help getting back to your learning.' },
   verify: { title: 'Verify your email', body: 'One small step toward your learning journey.' },
   reset: { title: 'A fresh start', body: 'Choose a new password for your account.' },
+  'reset-guidance': { title: 'A fresh start', body: 'Open your recovery email to continue.' },
 };
 
 // The references do not include recovery screens. These original vectors extend
@@ -15,7 +16,7 @@ const copy = {
 export function AccountRecoveryHero({ mode }: { mode: Mode }) {
   const { width, fontScale } = useWindowDimensions();
   const stacked = width < 360 || fontScale > 1.2;
-  const reset = mode === 'reset';
+  const reset = mode === 'reset' || mode === 'reset-guidance';
   return (
     <View style={[styles.hero, stacked && styles.stacked]}>
       <View style={[styles.copy, stacked && styles.stackedCopy]}>
