@@ -15,6 +15,16 @@ not run by the agent. The owner subsequently confirmed own-profile persistence a
 Broader platform/accessibility/security acceptance remains unreported. Missing environment
 values still produce honest unavailable outcomes.
 
+## Account-choice and narrow hero audit — 22 October 2026
+
+Account choice now states that accounts are optional rather than claiming Auth is
+unavailable. Its controls and composition stay intact. A minimal AccountHero sizing
+fix reserves text height below 360px; choice/sign-in/signup were all rendered at
+320px and 390px to check this shared change. Basic guest Skip/name/reload/recovery
+boundaries passed; identity-form submissions and native checks remain pending.
+See [screen checklist/evidence](learner-screen-audit.md); this does not change auth,
+enrollment, profile storage or Home/navigation behavior.
+
 ## Introduction audit correction — 22 October 2026
 
 WelcomeScreen now handles Android Back locally while focused: later slides move

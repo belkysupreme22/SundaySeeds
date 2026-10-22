@@ -58,6 +58,37 @@ basic guest browser cases. Its layout and both existing Skip positions were left
 intact. Native keyboard, text scaling, slow-save/error and account-name variants
 still need acceptance; this does not complete every optional-name state.
 
+## A05 narrow hero correction and caller checks — 22 October 2026
+
+The actual 320px account-choice screenshot exposed text overlapping the portrait:
+AccountHero’s stacked copy used `flex: 0`, which collapsed its text box. Replaced
+the shorthand with explicit grow/shrink/basis values, reserving natural text height
+in the stacked layout and preserving the existing 390px horizontal layout. No
+portrait, backdrop, typography, spacing token or form structure was replaced.
+
+Because AccountHero is shared, **all three callers** were rendered and inspected
+at 320×568 and 390×844: account choice, Sign in and Sign up. Narrow description text
+clears the portrait on each; regular layouts retain the existing reference03
+composition. This is layout caller coverage for A07/A08, not completion of their
+form/error/submission audit. No account form was submitted or email sent.
+
+- [x] Reproduced the 320px text/portrait overlap before changing the component.
+- [x] Checked copy-box and visible-text bounds after the fix on all three callers.
+- [x] Inspected six final browser screenshots after image decoding and paint settled.
+- [x] Preserved Home, tabs, other screen compositions, shared UI defaults and all image assets.
+- [ ] Native keyboard, Android Back and larger system-text acceptance.
+
+An earlier image-only loading snapshot initially appeared to have no portrait.
+Waiting for decode and painting showed the existing image correctly; no asset fix
+was needed. Evidence is local/ignored in `.artifacts/onboarding-audit-2026-10-22/`:
+`A05-account-choice-{320,390}-after.png`, `A07-sign-up-{320,390}-after.png`,
+`A08-sign-in-{320,390}-after.png` and `responsive-results.json`.
+
+The whole-project typecheck was repeated after this bounded change. It still
+reports only the same two baseline errors in LearningProfileScreen and
+PageLoadingOverlay; those screens were not modified incidentally. The previous
+16/17 existing-test baseline was not rerun or claimed passing in this slice.
+
 ## Ordered screen inventory
 
 Work through IDs in this order. Each row includes a screen or a distinct state that can regress independently. “Pending” below means rendered/runtime acceptance, not that its source is necessarily unread.
@@ -70,8 +101,8 @@ Work through IDs in this order. Each row includes a screen or a distinct state t
 | A04 | Introduction page 3 / Get started | Welcome flow | 01 right | Reviewed / scoped fix | Web checked; native pending |
 | A05 | Create account / Sign in / Skip choice | Welcome flow | 03 adaptation | Reviewed | Basic guest web checked; native/other states pending |
 | A06 | Optional guest name setup | Welcome flow | 02/04 adaptation | Reviewed | Basic guest web checked; native/other states pending |
-| A07 | Create account | `/sign-up` and welcome step | 03 right | Reviewed | Pending |
-| A08 | Sign in | `/sign-in` and welcome step | 03 middle | Reviewed | Pending |
+| A07 | Create account | `/sign-up` and welcome step | 03 right | Reviewed | Hero web checked; form/native pending |
+| A08 | Sign in | `/sign-in` and welcome step | 03 middle | Reviewed | Hero web checked; form/native pending |
 | A09 | Forgot password / request accepted | `/forgot-password` | 03 adaptation | Reviewed | Pending |
 | A10 | Email verification guidance/resend/check | `/verify-email` | 03 adaptation | Reviewed | Pending |
 | A11 | Confirmation link: initial/pending/success/invalid | `/auth/confirm` | 03 adaptation | Reviewed | Pending |

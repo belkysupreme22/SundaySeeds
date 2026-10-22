@@ -1,5 +1,22 @@
 # SundaySeeds implementation plan
 
+## Onboarding boundary and responsive hero — 22 October 2026
+
+A05 caption now truthfully presents optional accounts; its layout is unchanged.
+Basic A06 guest name/Back/save/Skip and welcome failure/reload boundaries passed
+browser checks. An actual 320px screenshot then reproduced AccountHero text/portrait
+overlap from collapsed stacked copy. The minimal shared sizing correction was
+rendered on **each caller** (choice/Sign in/Sign up) at 320×568 and 390×844; visible
+text clears the portrait and regular layouts are retained. No Home/tab changes,
+new assets, app dependencies, account submissions or service mutations.
+
+See [per-screen evidence](learner-screen-audit.md). Native Back/text-scale/keyboard
+and remaining A06 name-error/account variants are pending. A07/A08 received hero
+layout caller checks only; full auth-form auditing follows in order. Whole-project
+typecheck still has only the two known baseline errors, not a green check. Shared
+Card/Button/loader defaults remain untouched. Continue with A07–A13 account forms
+and proof states, without redesigning Home or bundling other screens’ fixes.
+
 ## Ordered audit pass 1: introduction — 22 October 2026
 
 Continued A01–A04 in checklist order, preserving the existing reference01 layout.

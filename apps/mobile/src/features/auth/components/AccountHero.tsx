@@ -58,9 +58,23 @@ const styles = StyleSheet.create({
     // The reference bleeds the portrait/backdrop to the viewport; fields keep their inset.
     marginRight: -20,
   },
-  copy: { flex: 1, gap: 6, paddingTop: 22, paddingBottom: 20, zIndex: 1 },
+  copy: {
+    flexGrow: 1,
+    flexShrink: 1,
+    flexBasis: 0,
+    gap: 6,
+    paddingTop: 22,
+    paddingBottom: 20,
+    zIndex: 1,
+  },
   stacked: { flexDirection: 'column' },
-  stackedCopy: { flex: 0, paddingTop: 4, paddingBottom: 8 },
+  stackedCopy: {
+    flexGrow: 0,
+    flexShrink: 0,
+    flexBasis: 'auto',
+    paddingTop: 4,
+    paddingBottom: 8,
+  },
   art: { width: '55%', height: 225, alignSelf: 'flex-end' },
   stackedArt: { width: 220, height: 225, marginTop: -5 },
   // Shift the person too: the cutout's transparent margin must not recreate a form-width inset.
