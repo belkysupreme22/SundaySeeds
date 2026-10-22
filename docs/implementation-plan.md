@@ -2,6 +2,21 @@
 
 ## Ordered connected-course audit A22–A26 — 22 October 2026
 
+A23/A25 now distinguish a missing current offering from an available joined edition,
+wait for access checks before the missing banner, and omit the duplicate public
+outline for the same accessible edition. Older-edition comparison and pinned lesson
+links remain. Missing offerings no longer invite acquisition or promise enrollment
+will open; closed-offering copy is neutral. Hooks, permissions, APIs, Home and tabs
+are unchanged. Connected reader layout required no correction in this pass.
+
+320px/390px browser cases passed guest/unverified gates, explicit/pending/stale/
+uncertain Join and reconciliation, same/older/missing-offering pins, revoked or
+unavailable access, reading denial/retry/Back. All responses intercepted; no service
+writes. Source independent review found no blocker. Typecheck still has the existing
+loader error. Real service/concurrency/account-switching and native acceptance remain
+pending. Next A27–A33 sample discovery/curriculum/reader, then quiz/results; preserve
+their layouts and review shared components with all callers.
+
 A22 library keeps its connected cards and sample path, replacing only the repeated
 sample course title with an account-free exploration callout. Ready/empty/error/
 retry and pending exit checked at 320px/390px with intercepted responses; no service

@@ -18,6 +18,9 @@ export function ConnectedCourseScreen() {
   const { state, reload } = useCourseOffering(courseId);
   const access = useCourseEnrollment(courseId);
   const course = state.status === 'ready' ? state.data : null;
+  const enrollment = access.state.status === 'ready' ? access.state.enrollment : null;
+  const joinedEditionAvailable = enrollment?.state === 'active' && enrollment.available;
+  const showOfferedOutline = !joinedEditionAvailable || enrollment?.releaseId !== course?.releaseId;
   const time = course ? courseTimeLabel(course) : null;
   const lessonCount =
     course?.modules.reduce((total, module) => total + module.lessons.length, 0) ?? 0;
@@ -56,7 +59,7 @@ export function ConnectedCourseScreen() {
           <Text variant="title">
             {state.status === 'unconfigured'
               ? 'Course library unavailable'
-              : 'We couldn’t load this course'}
+              : 'We couldn’t load the current course details'}
           </Text>
           <Text variant="small">
             {state.status === 'unconfigured'
@@ -66,15 +69,19 @@ export function ConnectedCourseScreen() {
           <Button label="Try again" variant="outline" icon="refresh-cw" onPress={reload} />
         </Card>
       )}
-      {state.status === 'ready' && !course && (
-        <Card style={styles.group} shadow={false}>
-          <Text variant="title">This course is unavailable</Text>
-          <Text variant="small">
-            It may no longer be offered. Visit the library to explore the available courses.
-          </Text>
-          <Button label="View course library" onPress={() => router.replace('/courses')} />
-        </Card>
-      )}
+      {state.status === 'ready' &&
+        !course &&
+        access.state.status !== 'loading' &&
+        access.state.status !== 'joining' &&
+        !joinedEditionAvailable && (
+          <Card style={styles.group} shadow={false}>
+            <Text variant="title">This course is unavailable</Text>
+            <Text variant="small">
+              It may no longer be offered. Visit the library to explore the available courses.
+            </Text>
+            <Button label="View course library" onPress={() => router.replace('/courses')} />
+          </Card>
+        )}
       {!course && accessPanel}
       {course && (
         <>
@@ -121,32 +128,36 @@ export function ConnectedCourseScreen() {
             </View>
           )}
           {accessPanel}
-          <Text variant="title" accessibilityRole="header">
-            Offered course outline
-          </Text>
-          {course.modules.map((module, index) => (
-            <Card key={module.id} shadow={false} style={styles.module}>
-              <View style={styles.moduleHeader}>
-                <Text variant="caption">
-                  MODULE {index + 1} · {module.lessons.length} LESSONS
-                </Text>
-                <Text variant="title">{module.title}</Text>
-              </View>
-              {module.lessons.map((lesson, lessonIndex) => (
-                <View key={lesson.id} style={styles.lesson}>
-                  <Icon name="book-open" size={19} />
-                  <View style={styles.words}>
-                    <Text variant="label">
-                      {index + 1}.{lessonIndex + 1} {lesson.title}
+          {showOfferedOutline && (
+            <>
+              <Text variant="title" accessibilityRole="header">
+                Offered course outline
+              </Text>
+              {course.modules.map((module, index) => (
+                <Card key={module.id} shadow={false} style={styles.module}>
+                  <View style={styles.moduleHeader}>
+                    <Text variant="caption">
+                      MODULE {index + 1} · {module.lessons.length} LESSONS
                     </Text>
-                    <Text variant="small" muted>
-                      {lesson.scripture}
-                    </Text>
+                    <Text variant="title">{module.title}</Text>
                   </View>
-                </View>
+                  {module.lessons.map((lesson, lessonIndex) => (
+                    <View key={lesson.id} style={styles.lesson}>
+                      <Icon name="book-open" size={19} />
+                      <View style={styles.words}>
+                        <Text variant="label">
+                          {index + 1}.{lessonIndex + 1} {lesson.title}
+                        </Text>
+                        <Text variant="small" muted>
+                          {lesson.scripture}
+                        </Text>
+                      </View>
+                    </View>
+                  ))}
+                </Card>
               ))}
-            </Card>
-          ))}
+            </>
+          )}
         </>
       )}
     </Screen>

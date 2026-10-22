@@ -87,6 +87,13 @@ while fixing an individual identity screen.
 
 ## Verified course joining and reading — 21 October 2026
 
+22 October UI audit: missing current offerings suppress registration/join prompts
+while preserving available own joined-edition content and access-recovery panels.
+Guest/unverified gates, pending/stale/uncertain Join and reader denial/retry were
+browser checked at 320px/390px with synthetic intercepted responses. No authorization,
+auth-return, session or enrollment-service behavior changed; real/native checks remain
+pending. See [audit evidence](learner-screen-audit.md).
+
 `/courses/[id]` now loads the verified actor’s own enrollment, offers explicit Join
 for an open course and shows the learner’s pinned edition. Guest/unverified users
 can open the existing sign-in/registration/verification routes, then return manually

@@ -20,7 +20,8 @@ export function CourseEnrollmentPanel({
   onRefreshCourse: () => void;
 }) {
   if (state.status === 'loading' || state.status === 'joining') return null;
-  if (state.status === 'signed_out' || state.status === 'unverified')
+  if (state.status === 'signed_out' || state.status === 'unverified') {
+    if (!course) return null;
     return (
       <Card tone="mint" shadow={false} style={styles.group}>
         <Text variant="title">
@@ -46,6 +47,7 @@ export function CourseEnrollmentPanel({
         )}
       </Card>
     );
+  }
   if (state.status === 'error' || state.status === 'uncertain' || state.status === 'changed')
     return (
       <Card shadow={false} style={styles.group}>
@@ -69,11 +71,12 @@ export function CourseEnrollmentPanel({
     );
   if (state.status !== 'ready') return null;
   const enrolled = state.enrollment;
-  if (!enrolled)
+  if (!enrolled) {
+    if (!course) return null;
     return (
       <Card tone="mint" shadow={false} style={styles.group}>
         <Text variant="title">
-          {course?.joinsOpen ? 'Begin this study' : 'Enrollment opens soon'}
+          {course.joinsOpen ? 'Begin this study' : 'Enrollment is closed'}
         </Text>
         <Text variant="small">
           {course?.joinsOpen
@@ -85,6 +88,7 @@ export function CourseEnrollmentPanel({
         )}
       </Card>
     );
+  }
   if (enrolled.state === 'revoked' || !enrolled.available)
     return (
       <Card shadow={false} style={styles.group}>

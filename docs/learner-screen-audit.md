@@ -302,6 +302,47 @@ errors; all Supabase responses were intercepted. Evidence: ignored
 unconfigured settings and actual catalog-service acceptance remain pending. Shared
 tab selection remains the separate A45 finding; no tab model was changed here.
 
+## A23–A26 joined editions, joining and reading — 22 October 2026
+
+Reproduced the same-edition curriculum twice and the “course unavailable” banner
+above a usable older joined edition at both widths. Course details now show the
+actionable joined curriculum once when it matches the current offering. A different
+offered edition keeps its separate read-only outline and existing edition explanation;
+lesson links still target the joined edition. Missing-offering banners wait for
+access checks and are omitted when an active available joined edition is confirmed.
+Offering-fetch failures name current course details rather than implying all joined
+content is unavailable.
+
+The enrollment panel no longer invites registration/joining without an offering or
+claims missing courses will open soon. Existing enrollment, revoked/unavailable and
+access-recovery panels remain. A closed offering says “Enrollment is closed” without
+promising a reopening date. No Join hook, actor/focus fence, request adapter, SQL,
+stored edition or authorization rule changed. No Home/shared UI/tab change.
+
+At 320×568 and 390×844, isolated browser checks passed:
+
+- [x] Guest and synthetic unverified course/reader gates; neither requested private lesson bodies.
+- [x] Verified explicit Join, pending action removal, late response after leaving without navigation, and re-entry to existing enrollment.
+- [x] Same-edition outline once; older joined edition/current-offering comparison; accessible pin without a current offering and during offering-fetch failure.
+- [x] Revoked/unavailable enrollment has no lesson actions; missing course has no enrollment promise/Join action.
+- [x] Stale offering requires refresh and explicit Join; uncertain response requires checking enrollment and does not silently repeat Join.
+- [x] Connected reading title/outcomes/body/verse/reflection, denial without body, retry and Back to course. No quiz/completion/progress action fabricated.
+
+Reference07's public detail versus actionable curriculum roles and reference08's
+reading/outcome/verse language remain intentional adaptations. Screenshots were
+inspected; zero page errors and no unexpected service endpoints. All Auth/catalog/
+enrollment/reading responses were intercepted with synthetic records, so these
+checks establish UI transitions only. No real enrollment, email, session, password,
+server policy or data changed. Evidence: ignored `.artifacts/catalog-audit-2026-10-22/`
+baseline/results JSON, screenshots and browser-audit.cjs.
+
+Independent source review found no blocker. Typecheck still reports only the existing
+PageLoadingOverlay error; no lint/build/unit-suite rerun. Native/system text/screen
+readers, real service/RLS/concurrency, account switching/revocation timing, malformed
+payload variants and unconfigured service settings remain pending. Courses still
+has no selected tab (A45); manual auth return remains the existing scope. Next:
+A27–A33 sample discovery, curriculum, overview and reader, followed by quizzes.
+
 ## Ordered screen inventory
 
 Work through IDs in this order. Each row includes a screen or a distinct state that can regress independently. “Pending” below means rendered/runtime acceptance, not that its source is necessarily unread.
@@ -330,10 +371,10 @@ Work through IDs in this order. Each row includes a screen or a distinct state t
 | A20 | Home: new / returning / guest / verified | `/home` | 05 left | Reviewed / Home-scoped fixes | Guest/state web checked; portrait 280–430px checked; identity/native pending |
 | A21 | Home: Continue learning states | Home continuation | 05 middle adaptation | Reviewed / suggestion deduplication | Web progress/resume states checked; real/native pending |
 | A22 | Course library: available/empty/error | `/courses` | 06 left | Reviewed / sample callout clarified | Web ready/empty/error/retry/pending exit checked; real/native pending |
-| A23 | Course details: guest/unverified/not joined | `/courses/[id]` | 07 left | Reviewed | Pending |
-| A24 | Join: pending/stale/uncertain/retry | Course details enrollment panel | 07 adaptation | Reviewed | Pending |
-| A25 | Joined curriculum: same/older/unavailable edition | Course details enrollment panel | 07 middle | Reviewed | Pending |
-| A26 | Connected lesson: authorized/denied/retry | `/courses/[id]/lessons/[lessonId]` | 08 left/middle adaptation | Reviewed | Pending |
+| A23 | Course details: guest/unverified/not joined | `/courses/[id]` | 07 left | Reviewed / missing-offering prompts fixed | Web identity/availability states checked; real/native pending |
+| A24 | Join: pending/stale/uncertain/retry | Course details enrollment panel | 07 adaptation | Reviewed / neutral closed copy | Web simulated Join/reconciliation/pending exit checked; real/native pending |
+| A25 | Joined curriculum: same/older/unavailable edition | Course details enrollment panel | 07 middle | Reviewed / same-edition duplication fixed | Web pinned/older/revoked/unavailable checked; real/native pending |
+| A26 | Connected lesson: authorized/denied/retry | `/courses/[id]/lessons/[lessonId]` | 08 left/middle adaptation | Reviewed / layout preserved | Web synthetic reading/gates/denial/retry/Back checked; real/native pending |
 | A27 | Sample lesson list and saved/completed views | `/lessons` | 06 left | Reviewed | Pending |
 | A28 | Sample topics and selection return | `/lessons/topics` | 06 middle | Reviewed | Pending |
 | A29 | Sample search and result/empty states | `/lessons/search` | 06 right | Reviewed | Pending |
