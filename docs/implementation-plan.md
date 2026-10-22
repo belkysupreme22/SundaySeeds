@@ -9,8 +9,9 @@ value remains an all-caller A45 follow-up; native acceptance and loader type err
 remain. Owner explicitly prioritized small-screen word/image overlap and shrinking:
 recovery/verification stacked copy is now corrected with five caller routes checked
 at 280–390px plus browser text stress. Profile stacked collapse is also corrected (long-name and browser text stress
-checked). Shared tab-label containment follows separately, then full
-Profile/Settings/return behavior audit.
+checked). Shared tab-label containment is corrected with all 11 tabbed surfaces checked at
+280/320/390px, ordinary and 150% browser text. Native acceptance remains pending;
+next is full Profile/Settings/return behavior audit.
 
 ## Ordered quiz/result audit A34–A37 — 22 October 2026
 

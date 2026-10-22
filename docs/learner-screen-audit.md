@@ -502,6 +502,29 @@ Native system font scaling and signed-in/error variants remain pending. Evidence
 ignored responsive-audit screenshots and result JSON. Shared large-text tab labels
 are a separate all-caller correction; no font reduction or truncation added.
 
+## A45 responsive tab-label containment — 22 October 2026
+
+Owner-requested responsive slice only: 150% browser text at 280px showed adjacent
+bottom-tab labels touching. Labels now stretch/center inside equal tab widths;
+below 320px, compact outer/inner padding and gaps reclaim space without reducing
+fonts. Larger labels retain natural wrapping as necessary. Same four tabs, routes,
+icons, active-state logic and normal 320px+ spacing. No screen composition changed.
+
+All 11 tabbed route surfaces checked at 280px/320px/390px with ordinary and 150%
+browser text: Home, list, topics, search, sample curriculum, Progress, Profile,
+Settings, catalog, course details and connected reading's guest gate. Connected
+catalog/details use intercepted empty/unavailable responses, not real account
+content. Every tab label stays within its target bounds; screenshots inspected,
+including 280px larger text with labels fitting on one line. This is shared-layout
+caller coverage, not full tab-selection/accessibility or connected-content acceptance.
+No external service writes, env/session/owner-storage access. Native large fontScale
+remains pending; browser text stress is explicitly a different check. Evidence:
+ignored responsive-audit tabs/text-stress JSON and screenshots.
+
+Remaining A45 items include shared progressbar web numeric ARIA, active-tab logic
+for connected course routes, page-loader type error and native Back/accessibility.
+Next full ordered scope remains A39–A43 Profile/edit/Settings/replay/logout.
+
 ## Ordered screen inventory
 
 Work through IDs in this order. Each row includes a screen or a distinct state that can regress independently. “Pending” below means rendered/runtime acceptance, not that its source is necessarily unread.

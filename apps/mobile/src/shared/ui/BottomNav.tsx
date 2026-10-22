@@ -1,5 +1,5 @@
 import { router, usePathname, type Href } from 'expo-router';
-import { Pressable, StyleSheet, View } from 'react-native';
+import { Pressable, StyleSheet, View, useWindowDimensions } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { colors } from '../theme/tokens';
 import { Icon, type IconName } from './Icon';
@@ -13,9 +13,11 @@ const tabs: { label: string; href: Href; icon: IconName }[] = [
 ];
 export function BottomNav() {
   const pathname = usePathname();
+  const { width } = useWindowDimensions();
+  const compact = width < 320;
   return (
-    <SafeAreaView edges={['bottom']} style={styles.safe}>
-      <View style={styles.bar}>
+    <SafeAreaView edges={['bottom']} style={[styles.safe, compact && styles.compactSafe]}>
+      <View style={[styles.bar, compact && styles.compactBar]}>
         {tabs.map((tab) => {
           const selected =
             pathname === tab.href ||
@@ -34,7 +36,9 @@ export function BottomNav() {
               style={[styles.tab, selected && styles.active]}
             >
               <Icon name={tab.icon} size={21} />
-              <Text variant="caption">{tab.label}</Text>
+              <Text variant="caption" style={styles.label}>
+                {tab.label}
+              </Text>
             </Pressable>
           );
         })}
@@ -62,6 +66,7 @@ const styles = StyleSheet.create({
   },
   tab: {
     flex: 1,
+    minWidth: 0,
     gap: 4,
     alignItems: 'center',
     justifyContent: 'center',
@@ -69,5 +74,8 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
     borderRadius: 6,
   },
+  label: { alignSelf: 'stretch', textAlign: 'center' },
   active: { backgroundColor: colors.lavender },
+  compactSafe: { paddingHorizontal: 4 },
+  compactBar: { padding: 2, gap: 0 },
 });
