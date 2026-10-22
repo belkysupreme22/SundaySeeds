@@ -89,6 +89,33 @@ reports only the same two baseline errors in LearningProfileScreen and
 PageLoadingOverlay; those screens were not modified incidentally. The previous
 16/17 existing-test baseline was not rerun or claimed passing in this slice.
 
+## A07–A08 form-state audit — 22 October 2026
+
+Reference03 artwork, fields, optional account name, primary actions and social-button
+composition are preserved. The sole implementation change is upfront Google/Apple
+availability copy and accessible labels describing their informational actions.
+Both existing provider buttons still explain their unavailable status when tapped.
+Email authentication, request guards, validation and navigation logic are unchanged.
+
+- [x] At 320×568 and 390×844: empty/malformed email, short signup password and mismatched confirmation show inline feedback without an Auth request.
+- [x] Password and confirmation visibility controls independently toggle masking.
+- [x] Optional-name field and unpublished-policy information retain their existing roles; no new required consent or personal fields.
+- [x] Both providers disclose unavailable status before activation; their information actions make no Auth request. Stacked and horizontal layouts inspected.
+- [x] Sign-in accepts a short existing password for submission; an intercepted invalid-credentials response displays the existing safe error.
+- [x] Pending sign-in displays the centered loading label and disables submit. Switching to signup before the intercepted response finishes leaves signup active with no stale error/navigation.
+- [x] Embedded introduction → account choice → signup → Back, and sign-in → recovery → Back → account choice work at both widths. Standalone form switching and Return to learning were exercised.
+- [ ] Real signup/sign-in success, duplicate signup, email-unconfirmed branch, active-account replacement, unconfigured settings, native keyboard/Back, system text scaling and screen-reader error/focus acceptance remain outside this browser pass.
+
+Two isolated Chromium contexts completed with zero page errors. All Supabase-domain
+requests were intercepted and returned fabricated failures inside the test browser;
+no account, email, session or server record was created. These results verify UI
+behavior under a simulated failure, not Supabase connectivity or service acceptance.
+Evidence: ignored `.artifacts/auth-form-audit-2026-10-22/results.json` and screenshots.
+The screenshots capture the current scroll position; they are not whole-scroll-view
+exports. Source review was independent/read-only. No tests/typecheck/lint/build were
+rerun for the copy-only change; the previously recorded baseline failures remain.
+Next ordered pass: A09 recovery request, then verification/proof states A10–A13.
+
 ## Ordered screen inventory
 
 Work through IDs in this order. Each row includes a screen or a distinct state that can regress independently. “Pending” below means rendered/runtime acceptance, not that its source is necessarily unread.
@@ -101,8 +128,8 @@ Work through IDs in this order. Each row includes a screen or a distinct state t
 | A04 | Introduction page 3 / Get started | Welcome flow | 01 right | Reviewed / scoped fix | Web checked; native pending |
 | A05 | Create account / Sign in / Skip choice | Welcome flow | 03 adaptation | Reviewed | Basic guest web checked; native/other states pending |
 | A06 | Optional guest name setup | Welcome flow | 02/04 adaptation | Reviewed | Basic guest web checked; native/other states pending |
-| A07 | Create account | `/sign-up` and welcome step | 03 right | Reviewed | Hero web checked; form/native pending |
-| A08 | Sign in | `/sign-in` and welcome step | 03 middle | Reviewed | Hero web checked; form/native pending |
+| A07 | Create account | `/sign-up` and welcome step | 03 right | Reviewed / availability copy fixed | Web validation/navigation checked; real submission/native pending |
+| A08 | Sign in | `/sign-in` and welcome step | 03 middle | Reviewed / availability copy fixed | Web validation/simulated failure/navigation checked; real submission/native pending |
 | A09 | Forgot password / request accepted | `/forgot-password` | 03 adaptation | Reviewed | Pending |
 | A10 | Email verification guidance/resend/check | `/verify-email` | 03 adaptation | Reviewed | Pending |
 | A11 | Confirmation link: initial/pending/success/invalid | `/auth/confirm` | 03 adaptation | Reviewed | Pending |

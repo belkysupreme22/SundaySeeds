@@ -5,6 +5,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Changed
+- Disclosed Google/Apple sign-in availability before activation, with descriptive information-action labels. Preserved auth layouts; checked validation, password reveal, simulated sign-in failure and pending/Back navigation at 320px/390px. Real service submissions and native accessibility remain pending.
 - Fixed collapsed auth-hero text overlapping the portrait at narrow widths. Preserved existing assets and regular layout; inspected account choice, Sign in and Sign up at 320px/390px. Native keyboard/text-scale checks remain pending; Home and navigation were not changed.
 - Corrected account-choice guidance that still claimed accounts were unavailable. Kept the existing portrait, controls and layout; basic guest Skip/name browser flows checked, native/keyboard and other identity states remain pending.
 - Kept the introduction layout intact while adding focused Android Back handling for previous slides and pending saves. Browser introduction/Skip/reload/recovery/replay checks passed at standard and narrow widths; native Back and text-scale acceptance remain pending.

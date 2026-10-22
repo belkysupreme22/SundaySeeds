@@ -17,6 +17,13 @@ values still produce honest unavailable outcomes.
 
 ## Account-choice and narrow hero audit — 22 October 2026
 
+Follow-up A07/A08 audit adds upfront Google/Apple unavailable guidance and accessible
+information-action labels without changing the forms or provider behavior. Browser
+validation, masking, simulated sign-in failure, pending exit and embedded Back paths
+passed at 320px/390px. Supabase requests were intercepted; this is UI evidence, not
+new service acceptance. Real submission and native/accessibility states remain
+pending; see [the ordered audit](learner-screen-audit.md).
+
 Account choice now states that accounts are optional rather than claiming Auth is
 unavailable. Its controls and composition stay intact. A minimal AccountHero sizing
 fix reserves text height below 360px; choice/sign-in/signup were all rendered at

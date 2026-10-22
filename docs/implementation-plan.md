@@ -1,5 +1,17 @@
 # SundaySeeds implementation plan
 
+## Ordered audit A07–A08: account forms — 22 October 2026
+
+Added upfront Google/Apple unavailable guidance and descriptive informational-action
+labels while preserving reference03 buttons/artwork/fields. Isolated browser checks
+at 320px/390px passed validation, password reveal, provider information, intercepted
+sign-in failure, pending exit and embedded onboarding/recovery Back navigation.
+No external Auth request or service mutation; Home/navigation logic unchanged.
+See [actual coverage and pending states](learner-screen-audit.md). Real submissions,
+native keyboard/Back/text scaling and screen-reader acceptance remain pending.
+No automated suite/typecheck/lint/build rerun for this copy-only change; existing
+baseline failures remain. Continue in order with A09 then A10–A13 proof states.
+
 ## Onboarding boundary and responsive hero — 22 October 2026
 
 A05 caption now truthfully presents optional accounts; its layout is unchanged.

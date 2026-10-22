@@ -13,16 +13,19 @@ export function AccountProviders() {
       <View style={styles.divider}>
         <View style={styles.rule} />
         <Text variant="caption" muted>
-          or continue with
+          Other sign-in options
         </Text>
         <View style={styles.rule} />
       </View>
+      <Text variant="caption" muted>
+        Google and Apple sign-in are not available yet.
+      </Text>
       <View style={[styles.row, stacked && styles.stacked]}>
         {(['Google', 'Apple'] as const).map((name) => (
           <Pressable
             key={name}
             accessibilityRole="button"
-            accessibilityLabel={`Continue with ${name}`}
+            accessibilityLabel={`${name} sign-in information, currently unavailable`}
             onPress={() => setProvider(name)}
             style={({ pressed }) => [
               styles.button,
