@@ -7,8 +7,9 @@ sample scope near the header. Fourteen browser state/recovery/navigation cases p
 at 320px/390px; metrics/store/regular layout unchanged. Shared ProgressBar web ARIA
 value remains an all-caller A45 follow-up; native acceptance and loader type error
 remain. Owner explicitly prioritized small-screen word/image overlap and shrinking:
-next bounded fixes cover reproduced recovery/verification and Profile stacked
-collapse, then full Profile/Settings/return audit.
+recovery/verification stacked copy is now corrected with five caller routes checked
+at 280–390px plus browser text stress. Profile stacked collapse and tab-label
+containment follow as separate increments, then full Profile/Settings/return audit.
 
 ## Ordered quiz/result audit A34–A37 — 22 October 2026
 

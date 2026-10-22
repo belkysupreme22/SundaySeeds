@@ -476,6 +476,19 @@ Typecheck retains only existing PageLoadingOverlay issue; no lint/build/unit rer
 Next owner-steered responsive correction: recovery/verification hero callers and
 Profile header/stat tiles, then resume full A39–A43 Profile/Settings/return audit.
 
+## Owner-steered small-screen recovery correction — 22 October 2026
+
+Narrow recovery/verification heroes exposed a 16px copy box despite multiple lines
+of text. Natural-height stacked copy now stretches within its available width and
+reserves space before artwork. Existing vectors, colors, spacing and regular layout
+are retained. All five routes (forgot password, verification, reset guidance,
+confirmation and recovery) checked at 280px/320px/390px, then with 150% browser text.
+Bounds confirm stacked copy clears artwork; screenshots inspected. No form submit,
+email proof, auth/session or backend change. This is layout caller coverage, not a
+repeat of every auth state. Browser text stress does not verify native fontScale.
+Evidence ignored `.artifacts/responsive-audit-2026-10-22/`. Profile and shared-tab
+responsive corrections follow as separate bounded commits; full A39–43 remains next.
+
 ## Ordered screen inventory
 
 Work through IDs in this order. Each row includes a screen or a distinct state that can regress independently. “Pending” below means rendered/runtime acceptance, not that its source is necessarily unread.

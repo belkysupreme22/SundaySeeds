@@ -91,5 +91,12 @@ const styles = StyleSheet.create({
   copy: { flex: 1, minWidth: 0, paddingTop: 20, paddingBottom: 12, gap: 8 },
   art: { width: '48%', maxWidth: 190, height: 205, alignSelf: 'flex-end' },
   stacked: { flexDirection: 'column' },
-  stackedCopy: { flex: 0, paddingTop: 4, paddingRight: 20 },
+  stackedCopy: {
+    flexGrow: 0,
+    flexShrink: 0,
+    flexBasis: 'auto',
+    alignSelf: 'stretch',
+    paddingTop: 4,
+    paddingRight: 20,
+  },
 });
