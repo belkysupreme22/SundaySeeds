@@ -1,5 +1,16 @@
 # SundaySeeds implementation plan
 
+## Ordered quiz/result audit A34–A37 — 22 October 2026
+
+Finish now waits for available saved learning, retaining checked answers through
+recovery instead of displaying an unrecorded completion. Explicit web choice/review
+states and sample-course/reading-time copy preserve layouts and scoring. Ten browser
+cases at 320px/390px cover correct/incorrect attempts, higher best score, course
+finish, review/retry, destinations and load/save recovery. Native/accessibility and
+slow initial hydration remain pending; existing loader type error persists. No
+backend/storage/shared-style change. Next A38 Progress, then Profile/Settings/return.
+See [audit evidence](learner-screen-audit.md).
+
 ## Ordered sample-lesson audit A27–A33 — 22 October 2026
 
 Discovery keeps course promotion in the unfiltered list and names filtered views;

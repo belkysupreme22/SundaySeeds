@@ -25,6 +25,7 @@ export function QuizNextAction({
       accessibilityRole="button"
       accessibilityLabel={`${title}. ${description}`}
       accessibilityState={expanded === undefined ? undefined : { expanded }}
+      aria-expanded={expanded}
       onPress={onPress}
       style={({ pressed }) => [styles.row, pressed && styles.pressed]}
     >

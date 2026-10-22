@@ -35,6 +35,8 @@ export function QuizChoice({
       accessibilityRole="radio"
       accessibilityLabel={`${label}${status ? `, ${status}` : ''}`}
       accessibilityState={{ checked: selected, disabled: checked }}
+      aria-checked={selected}
+      aria-disabled={checked}
       disabled={checked}
       onPress={onSelect}
       style={({ pressed }) => [

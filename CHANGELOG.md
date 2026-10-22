@@ -5,6 +5,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Changed
+- Paused final sample-quiz completion while saved learning is unavailable, preserving checked answers until recovery so results cannot silently go unrecorded. Added explicit web answer/review states and clarified sample-course scope. Quiz/result browser checks cover attempts, review, retry, destinations and storage recovery at 320px/390px; native acceptance pending.
 - Distinguished unavailable saved learning from empty results and unstarted lessons across sample discovery, search and card callers. Paused reading controls now reflect a load failure and recover to the saved position after retry. Eight browser state cases passed at 320px/390px; native acceptance pending.
 - Fixed lesson overview title/portrait overlap and collapsed facts at narrow widths. Large Prayer and Good Samaritan portraits now keep faces visible; thumbnails and contextual course links are preserved. All four overviews checked at 280–430px; native text scaling pending.
 - Kept filtered sample lesson views focused on their results, restored explicit web filter selection/expanded state and adapted the discovery portrait to card width. Preserved unfiltered composition and filter drafts; browser search/topic/Cancel/Apply checks passed at 320px/390px. Native checks pending.

@@ -16,7 +16,8 @@ import { ProgressBar } from '../../../shared/ui/ProgressBar';
 
 export function QuizScreen({ lessonId }: { lessonId: string }) {
   const lesson = getLesson(lessonId);
-  const { completeQuiz } = useLearningProgress();
+  const { completeQuiz, hydrated, errorKind } = useLearningProgress();
+  const canRecord = hydrated && errorKind !== 'load';
   const [index, setIndex] = useState(0);
   const [answers, setAnswers] = useState<(number | null)[]>(
     () => lesson?.questions.map(() => null) ?? [],
@@ -39,6 +40,7 @@ export function QuizScreen({ lessonId }: { lessonId: string }) {
   function next() {
     if (!lesson) return;
     if (last) {
+      if (!canRecord) return;
       const score = scoreQuiz(lesson.questions, answers);
       completeQuiz(lesson.id, score.percentage);
       setResult(score);
@@ -68,12 +70,12 @@ export function QuizScreen({ lessonId }: { lessonId: string }) {
         <Button
           label={!checked ? 'Check answer' : last ? 'Finish quiz' : 'Next question'}
           icon={!checked ? 'check' : 'arrow-right'}
-          disabled={selected === null}
+          disabled={selected === null || (checked && last && !canRecord)}
           onPress={() => (checked ? next() : setChecked(true))}
         />
       }
     >
-      <PageHeader title="Quiz time" subtitle={lesson.title} back />
+      <PageHeader title="Quiz time" subtitle={`Sample lesson · ${lesson.title}`} back />
       <View style={styles.progress}>
         <View style={styles.between}>
           <Text variant="label">
@@ -118,10 +120,14 @@ export function QuizScreen({ lessonId }: { lessonId: string }) {
           <Text variant="small">{question.explanation}</Text>
         </Card>
       )}
-      <Text variant="caption" muted>
-        {checked && last
-          ? 'All answers checked. Tap Finish quiz to record your result.'
-          : 'Take your time. Choose an answer, then check it to learn more.'}
+      <Text variant="caption" muted accessibilityLiveRegion="polite">
+        {checked && last && !canRecord
+          ? !hydrated
+            ? 'Your checked answers are ready. Wait for saved learning to finish loading, then finish the quiz.'
+            : 'Your checked answers are ready. Load saved learning using the notice above, then finish the quiz.'
+          : checked && last
+            ? 'All answers checked. Tap Finish quiz to record your result.'
+            : 'Take your time. Choose an answer, then check it to learn more.'}
       </Text>
     </Screen>
   );

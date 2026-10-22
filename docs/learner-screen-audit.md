@@ -409,6 +409,45 @@ Bookmark controls still appear actionable during a load failure despite paused
 writes; caller-aware disabled/unknown semantics remain a recorded follow-up.
 Next ordered pass: A34–A37 quiz, results and retry/exit behavior.
 
+## A34–A37 sample quiz, results and return — 22 October 2026
+
+Reference08 quiz hierarchy remains: question/count, choices, teaching explanation
+and checked-answer advancement. Reference07 finish is an intentional quiz-result
+adaptation, without certificates or invented account completion. Quiz and course
+journey copy now explicitly identifies sample learning; next-lesson time is a reading
+estimate. Choice web checked/disabled state and review expanded state are explicit,
+while native accessibilityState and the approved layouts remain.
+
+Reproduced a load-failure defect: Finish displayed a result although the store had
+paused writes; recovery could then imply an unrecorded attempt was kept. Finish now
+waits for hydration/successful loading, preserves checked answers, and records only
+after recovery. Loading and failed-load guidance differ. Store/scoring semantics,
+save-failure in-memory results and best-score retention are unchanged.
+
+Ten isolated browser cases at 320px/390px cover new attempts, an existing higher
+best score, all-course completion, load failure and save failure. Checks passed for
+unanswered disabled state, selected/locked choices, correct/incorrect feedback,
+checked count, final recording, answer review/expanded semantics, retry reset,
+load/save retry, and persistence. New-attempt destination checks cover next lesson,
+curriculum and their return, progress exit after a lower retry, and fresh quiz entry.
+Leaving an unfinished checked question is checked separately within the new cases;
+it must not create completion. No answer-review history is promised after exit.
+
+Result score/review screenshots inspected at both widths: content remains readable
+and scrollable, including stacked narrow score cards. Kept See my progress as the
+existing footer action, course navigation as contextual study actions and review/
+retry as supporting actions; no unsupported redesign or deletion of teaching feedback.
+Zero page errors/external requests; disposable guest storage and intercepted HTTPS,
+no owner data/environment/backend operation. Evidence ignored in
+`.artifacts/quiz-audit-2026-10-22/` (script, results and screenshots).
+Independent source review found no behavior blocker; its pending-hydration copy
+finding was corrected. Typecheck still reports only the existing loader
+absoluteFillObject issue. No lint/build/unit-suite rerun. Native Back/text scaling,
+VoiceOver/TalkBack, keyboard focus/announcements, slow initial hydration and reload
+of an unfinished attempt remain pending. Shared small-thumbnail face cropping is
+unchanged and remains a caller-aware follow-up rather than a global artwork edit.
+Next: A38 Progress, then A39–A43 Profile, Settings and signed-out return.
+
 ## Ordered screen inventory
 
 Work through IDs in this order. Each row includes a screen or a distinct state that can regress independently. “Pending” below means rendered/runtime acceptance, not that its source is necessarily unread.
@@ -448,10 +487,10 @@ Work through IDs in this order. Each row includes a screen or a distinct state t
 | A31 | Sample course curriculum | `/lessons/course` | 07 middle adaptation | Reviewed / scoped corrections | Web checked; native pending |
 | A32 | Sample lesson overview: new/started/completed | `/lessons/[id]` | 07 left adaptation | Reviewed / scoped corrections | Web checked; native pending |
 | A33 | Sample reader: first/middle/last reading | `/read/[id]` | 08 left/middle adaptation | Reviewed / scoped corrections | Web checked; native pending |
-| A34 | Quiz: unanswered/selected/checked/final | `/quiz/[id]` | 08 right | Reviewed | Pending |
-| A35 | Quiz result / saved-or-unsaved score | Quiz result state | 07 finish adaptation | Reviewed | Pending |
-| A36 | Answer review / retry | Quiz result variant | 08 feedback adaptation | Reviewed | Pending |
-| A37 | Post-quiz next lesson / all finished | Course quiz next steps | 07 curriculum/finish adaptation | Reviewed | Pending |
+| A34 | Quiz: unanswered/selected/checked/final | `/quiz/[id]` | 08 right | Reviewed / scoped corrections | Web checked; native pending |
+| A35 | Quiz result / saved-or-unsaved score | Quiz result state | 07 finish adaptation | Reviewed / scoped corrections | Web checked; native pending |
+| A36 | Answer review / retry | Quiz result variant | 08 feedback adaptation | Reviewed / scoped corrections | Web checked; native pending |
+| A37 | Post-quiz next lesson / all finished | Course quiz next steps | 07 curriculum/finish adaptation | Reviewed / scoped corrections | Web checked; native pending |
 | A38 | Progress: loading/failure/empty/partial/complete | `/progress` | 05 right / 09 right | Reviewed | Pending |
 | A39 | Profile: guest/account/profile failure | `/profile` | 12 left | Reviewed | Pending |
 | A40 | Edit profile / save / revision conflict | `/edit-profile` | 12 left adaptation | Reviewed | Pending |

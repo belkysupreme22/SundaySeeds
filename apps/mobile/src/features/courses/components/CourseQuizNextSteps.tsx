@@ -15,7 +15,7 @@ export function CourseQuizNextSteps({ lessonId }: { lessonId: string }) {
     : undefined;
   return (
     <ContentGroup>
-      <Text variant="title">Your course journey</Text>
+      <Text variant="title">Your sample course journey</Text>
       <Text variant="label">{sampleCourse.title}</Text>
       <Text variant="small" muted>
         {status}
@@ -29,7 +29,7 @@ export function CourseQuizNextSteps({ lessonId }: { lessonId: string }) {
       {canContinue && (
         <QuizNextAction
           title={`Continue with ${next.title}`}
-          description={`${nextModule?.title ?? 'Course lesson'} · ${next.durationMinutes} min. Read, reflect and explore your next step.`}
+          description={`${nextModule?.title ?? 'Course lesson'} · ${next.durationMinutes} minutes of reading. Read, reflect and explore your next step.`}
           icon="arrow-right"
           tone="lavender"
           onPress={() => router.push(`/lessons/${next.id}`)}
