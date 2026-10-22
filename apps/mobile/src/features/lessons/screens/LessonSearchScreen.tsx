@@ -1,6 +1,7 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import { Pressable, StyleSheet, View } from 'react-native';
 import { getLessonTopic } from '../data/lessonTopics';
+import { useLearningProgress } from '../../progress/hooks/useLearningProgress';
 import { getLessonFilter, useLessonResults } from '../hooks/useLessonResults';
 import { LessonCard } from '../components/LessonCard';
 import { LessonFilters } from '../components/LessonFilters';
@@ -19,6 +20,8 @@ export function LessonSearchScreen() {
   const filter = getLessonFilter(params.filter);
   const narrowed = Boolean(topic || filter !== 'all');
   const visible = useLessonResults({ query, topic: topic?.name, filter });
+  const { errorKind } = useLearningProgress();
+  const savedViewUnavailable = errorKind === 'load' && filter !== 'all';
   const clearQuery = () => router.setParams({ query: '' });
   const clearFilters = () => router.setParams({ topic: '', filter: 'all' });
 
@@ -81,8 +84,9 @@ export function LessonSearchScreen() {
       <ContentGroup>
         <View style={styles.summary}>
           <Text variant="label" accessibilityLiveRegion="polite" style={styles.words}>
-            {visible.length} {visible.length === 1 ? 'lesson' : 'lessons'}
-            {query.trim() ? ' found' : ' to explore'}
+            {savedViewUnavailable
+              ? 'Saved learning unavailable'
+              : `${visible.length} ${visible.length === 1 ? 'lesson' : 'lessons'}${query.trim() ? ' found' : ' to explore'}`}
           </Text>
           {narrowed && (
             <Pressable accessibilityRole="button" onPress={clearFilters} style={styles.clear}>
@@ -93,7 +97,13 @@ export function LessonSearchScreen() {
         {visible.map((lesson) => (
           <LessonCard key={lesson.id} lesson={lesson} />
         ))}
-        {!visible.length && (
+        {savedViewUnavailable && (
+          <Card tone="peach" shadow={false} style={styles.empty}>
+            <Text variant="title">Saved learning is unavailable</Text>
+            <Text>Use the recovery notice above to load your saved lessons and progress.</Text>
+          </Card>
+        )}
+        {!visible.length && !savedViewUnavailable && (
           <Card tone="lavender" shadow={false} style={styles.empty}>
             <Icon name="search" size={26} />
             <Text variant="title">No matching lessons</Text>

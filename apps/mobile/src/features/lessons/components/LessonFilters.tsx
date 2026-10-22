@@ -12,6 +12,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { lessonTopics } from '../data/lessonTopics';
 import { lessonFilters, useLessonResults, type LessonFilter } from '../hooks/useLessonResults';
 import type { LessonCategory } from '../types';
+import { useLearningProgress } from '../../progress/hooks/useLearningProgress';
 import { colors } from '../../../shared/theme/tokens';
 import { Text } from '../../../shared/ui/Text';
 import { Icon } from '../../../shared/ui/Icon';
@@ -28,6 +29,8 @@ export function LessonFilters({
   const [open, setOpen] = useState(false);
   const [draft, setDraft] = useState<Selection>({ topic, filter });
   const matches = useLessonResults({ ...draft, query });
+  const { errorKind } = useLearningProgress();
+  const savedMatchesUnavailable = errorKind === 'load' && draft.filter !== 'all';
   const activeCount = Number(Boolean(topic)) + Number(filter !== 'all');
   const close = () => setOpen(false);
 
@@ -100,11 +103,14 @@ export function LessonFilters({
               </View>
               <View style={styles.preview}>
                 <Text variant="label" accessibilityLiveRegion="polite">
-                  {matches.length} {matches.length === 1 ? 'lesson matches' : 'lessons match'}
+                  {savedMatchesUnavailable
+                    ? 'Saved learning unavailable'
+                    : `${matches.length} ${matches.length === 1 ? 'lesson matches' : 'lessons match'}`}
                 </Text>
                 <Text variant="small">
-                  {query.trim() ? 'Your search text stays applied.' : 'From the sample collection.'}
-                  {matches.length === 0 ? ' Try another combination or clear the filters.' : ''}
+                  {savedMatchesUnavailable
+                    ? 'Close filters and use the recovery notice to load your saved learning.'
+                    : `${query.trim() ? 'Your search text stays applied.' : 'From the sample collection.'}${matches.length === 0 ? ' Try another combination or clear the filters.' : ''}`}
                 </Text>
               </View>
               <Button

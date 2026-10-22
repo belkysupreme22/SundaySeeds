@@ -14,7 +14,8 @@ import { ProgressBar } from '../../../shared/ui/ProgressBar';
 import { colors } from '../../../shared/theme/tokens';
 export function ReaderScreen({ lessonId }: { lessonId: string }) {
   const lesson = getLesson(lessonId);
-  const { progress, setSection, error } = useLearningProgress();
+  const { progress, setSection, error, errorKind } = useLearningProgress();
+  const progressAvailable = errorKind !== 'load';
   const { width, fontScale } = useWindowDimensions();
   const stackedActions = width < 350 || fontScale >= 1.5;
   const started = Boolean(progress[lessonId]);
@@ -48,12 +49,13 @@ export function ReaderScreen({ lessonId }: { lessonId: string }) {
               label="Previous"
               icon="arrow-left"
               variant="outline"
-              disabled={index === 0}
+              disabled={index === 0 || !progressAvailable}
               onPress={() => setSection(lesson.id, index - 1)}
               style={[styles.previous, stackedActions && styles.stackedButton]}
             />
             <Button
               label={last ? 'Take the quiz' : 'Next reading'}
+              disabled={!progressAvailable}
               onPress={advance}
               style={[styles.next, stackedActions && styles.stackedButton]}
             />
@@ -63,16 +65,22 @@ export function ReaderScreen({ lessonId }: { lessonId: string }) {
     >
       <PageHeader title={lesson.title} subtitle="Read, reflect and grow." back />
       <View style={styles.position}>
-        <Text variant="small">{positionLabel}</Text>
-        <ProgressBar
-          value={((index + 1) / lesson.sections.length) * 100}
-          label="Current reading position"
-          valueText={positionLabel}
-        />
+        <Text variant="small">
+          {progressAvailable ? positionLabel : 'Saved progress unavailable'}
+        </Text>
+        {progressAvailable && (
+          <ProgressBar
+            value={((index + 1) / lesson.sections.length) * 100}
+            label="Current reading position"
+            valueText={positionLabel}
+          />
+        )}
         <Text variant="caption" muted>
-          {progress[lesson.id]?.completed
-            ? 'Lesson completed · Revisiting your readings'
-            : 'Quiz not finished · Reading position is separate from completion'}
+          {!progressAvailable
+            ? 'Load saved learning to resume your reading position.'
+            : progress[lesson.id]?.completed
+              ? 'Lesson completed · Revisiting your readings'
+              : 'Quiz not finished · Reading position is separate from completion'}
         </Text>
       </View>
       <Card tone={lesson.color} shadow={false} style={styles.cover}>
@@ -104,9 +112,16 @@ export function ReaderScreen({ lessonId }: { lessonId: string }) {
         </Text>
         <Pressable
           accessibilityRole="button"
+          disabled={!progressAvailable}
+          accessibilityState={{ disabled: !progressAvailable }}
+          aria-disabled={!progressAvailable}
           accessibilityLabel={last ? 'Take the lesson quiz' : `Next reading: ${nextTitle}`}
           onPress={advance}
-          style={({ pressed }) => [styles.nextCard, pressed && styles.pressed]}
+          style={({ pressed }) => [
+            styles.nextCard,
+            !progressAvailable && styles.disabled,
+            pressed && styles.pressed,
+          ]}
         >
           <View style={[styles.nextIcon, last && styles.quizIcon]}>
             <Icon name={last ? 'edit-3' : 'book-open'} size={25} />
@@ -158,4 +173,5 @@ const styles = StyleSheet.create({
   nextIcon: { padding: 12, borderRadius: 6, backgroundColor: colors.lavender },
   quizIcon: { backgroundColor: colors.yellow },
   pressed: { opacity: 0.72 },
+  disabled: { opacity: 0.5 },
 });

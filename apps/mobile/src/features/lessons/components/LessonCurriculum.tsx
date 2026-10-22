@@ -10,11 +10,13 @@ import { ContentGroup } from '../../../shared/ui/Screen';
 export function LessonCurriculum({
   lesson,
   progress,
+  readingEnabled = true,
   onRead,
   onQuiz,
 }: {
   lesson: Lesson;
   progress?: LessonProgress;
+  readingEnabled?: boolean;
   onRead: (index: number) => void;
   onQuiz: () => void;
 }) {
@@ -39,10 +41,14 @@ export function LessonCurriculum({
             <Pressable
               key={section.id}
               accessibilityRole="button"
+              disabled={!readingEnabled}
+              accessibilityState={{ disabled: !readingEnabled }}
+              aria-disabled={!readingEnabled}
               accessibilityLabel={`Read ${section.title}${resumeHere ? ', current reading position' : ''}`}
               onPress={() => onRead(index)}
               style={({ pressed }) => [
                 styles.row,
+                !readingEnabled && styles.disabled,
                 resumeHere && styles.resume,
                 pressed && styles.pressed,
               ]}
@@ -107,4 +113,5 @@ const styles = StyleSheet.create({
   resume: { backgroundColor: colors.lavender },
   quiz: { backgroundColor: colors.mint },
   pressed: { opacity: 0.72 },
+  disabled: { opacity: 0.5 },
 });

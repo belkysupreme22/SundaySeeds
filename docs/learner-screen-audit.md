@@ -379,6 +379,36 @@ no global deduplication or shared-style replacement. Evidence: ignored
 `.artifacts/sample-audit-2026-10-22/overview-results.json` and A32 screenshots.
 Native text scaling and assistive technology remain pending.
 
+## A27–A33 progress states and reading journey — 22 October 2026
+
+Unknown saved learning now displays unavailable status, rather than zero results,
+Not started or an unearned quiz status. This covers status-filter list/search,
+filter previews and every LessonCard caller (Home, list and search). Metadata-only
+browsing remains accessible. A load failure permits first-reading access but disables
+section jumps, Previous/Next and Up next while the existing store pauses writes.
+The existing recovery notice restores the saved reading position after successful
+retry. Save failures retain usable in-memory reading; storage behavior is unchanged.
+
+Eight disposable browser cases (new/partial/completed/load-failure at 320px/390px)
+passed filters, search, topic return, curriculum entry, start/resume/revisit, reading
+advance/Previous/reload and quiz-route entry. Curriculum Start correctly opens Prayer,
+the actual first lesson. Completed revisits preserve completion and best score.
+Fault recovery preserved the stored second reading before restoring it on retry.
+Zero page errors and external requests; Supabase intercepted, no real account,
+owner storage or environment files touched. Independent source review found no
+blocker. No quiz answers submitted or invented completion records.
+
+Reference07 curriculum requires no layout correction. Retained overview course
+context and reference08's footer plus contextual Up next; repeated destinations
+serve distinct navigation roles. Home layout and connected reader are unchanged.
+Evidence: ignored `.artifacts/sample-audit-2026-10-22/` results, script and screenshots.
+Typecheck reports only the existing PageLoadingOverlay absoluteFillObject error;
+no lint/build/unit-suite rerun. Native Back/text scaling/keyboard/screen readers,
+malformed-storage/reset and explicit save-failure runtime cases remain pending.
+Bookmark controls still appear actionable during a load failure despite paused
+writes; caller-aware disabled/unknown semantics remain a recorded follow-up.
+Next ordered pass: A34–A37 quiz, results and retry/exit behavior.
+
 ## Ordered screen inventory
 
 Work through IDs in this order. Each row includes a screen or a distinct state that can regress independently. “Pending” below means rendered/runtime acceptance, not that its source is necessarily unread.
@@ -411,13 +441,13 @@ Work through IDs in this order. Each row includes a screen or a distinct state t
 | A24 | Join: pending/stale/uncertain/retry | Course details enrollment panel | 07 adaptation | Reviewed / neutral closed copy | Web simulated Join/reconciliation/pending exit checked; real/native pending |
 | A25 | Joined curriculum: same/older/unavailable edition | Course details enrollment panel | 07 middle | Reviewed / same-edition duplication fixed | Web pinned/older/revoked/unavailable checked; real/native pending |
 | A26 | Connected lesson: authorized/denied/retry | `/courses/[id]/lessons/[lessonId]` | 08 left/middle adaptation | Reviewed / layout preserved | Web synthetic reading/gates/denial/retry/Back checked; real/native pending |
-| A27 | Sample lesson list and saved/completed views | `/lessons` | 06 left | Reviewed | Pending |
-| A28 | Sample topics and selection return | `/lessons/topics` | 06 middle | Reviewed | Pending |
-| A29 | Sample search and result/empty states | `/lessons/search` | 06 right | Reviewed | Pending |
-| A30 | Topic/status filter sheet | List/search overlay | 06 controls adaptation | Reviewed | Pending |
-| A31 | Sample course curriculum | `/lessons/course` | 07 middle adaptation | Reviewed | Pending |
-| A32 | Sample lesson overview: new/started/completed | `/lessons/[id]` | 07 left adaptation | Reviewed | Pending |
-| A33 | Sample reader: first/middle/last reading | `/read/[id]` | 08 left/middle adaptation | Reviewed | Pending |
+| A27 | Sample lesson list and saved/completed views | `/lessons` | 06 left | Reviewed / scoped corrections | Web checked; native pending |
+| A28 | Sample topics and selection return | `/lessons/topics` | 06 middle | Reviewed / scoped corrections | Web checked; native pending |
+| A29 | Sample search and result/empty states | `/lessons/search` | 06 right | Reviewed / scoped corrections | Web checked; native pending |
+| A30 | Topic/status filter sheet | List/search overlay | 06 controls adaptation | Reviewed / scoped corrections | Web checked; native pending |
+| A31 | Sample course curriculum | `/lessons/course` | 07 middle adaptation | Reviewed / scoped corrections | Web checked; native pending |
+| A32 | Sample lesson overview: new/started/completed | `/lessons/[id]` | 07 left adaptation | Reviewed / scoped corrections | Web checked; native pending |
+| A33 | Sample reader: first/middle/last reading | `/read/[id]` | 08 left/middle adaptation | Reviewed / scoped corrections | Web checked; native pending |
 | A34 | Quiz: unanswered/selected/checked/final | `/quiz/[id]` | 08 right | Reviewed | Pending |
 | A35 | Quiz result / saved-or-unsaved score | Quiz result state | 07 finish adaptation | Reviewed | Pending |
 | A36 | Answer review / retry | Quiz result variant | 08 feedback adaptation | Reviewed | Pending |

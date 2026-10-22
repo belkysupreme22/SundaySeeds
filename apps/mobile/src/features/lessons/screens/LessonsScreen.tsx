@@ -3,6 +3,7 @@ import { router, useLocalSearchParams } from 'expo-router';
 import { CourseJourneyCard } from '../../courses/components/CourseJourneyCard';
 import { Pressable, StyleSheet, View } from 'react-native';
 import { getLessonTopic } from '../data/lessonTopics';
+import { useLearningProgress } from '../../progress/hooks/useLearningProgress';
 import { LessonCard } from '../components/LessonCard';
 import { LessonsBrowseHero } from '../components/LessonsBrowseHero';
 import { LessonFilters } from '../components/LessonFilters';
@@ -22,6 +23,8 @@ export function LessonsScreen() {
     setFilter(getLessonFilter(params.filter));
   }, [params.filter]);
   const visible = useLessonResults({ topic: topic?.name, filter });
+  const { errorKind } = useLearningProgress();
+  const savedViewUnavailable = errorKind === 'load' && filter !== 'all';
   const narrowed = Boolean(topic || filter !== 'all');
   const clearFilters = () => {
     setFilter('all');
@@ -89,8 +92,9 @@ export function LessonsScreen() {
                       : 'Sample lessons'}
             </Text>
             <Text variant="small" muted>
-              {visible.length} {visible.length === 1 ? 'lesson' : 'lessons'}
-              {narrowed ? ' in this view' : ' to explore'}
+              {savedViewUnavailable
+                ? 'Saved learning unavailable'
+                : `${visible.length} ${visible.length === 1 ? 'lesson' : 'lessons'}${narrowed ? ' in this view' : ' to explore'}`}
             </Text>
           </View>
           {narrowed && (
@@ -112,7 +116,13 @@ export function LessonsScreen() {
         {visible.map((l) => (
           <LessonCard key={l.id} lesson={l} />
         ))}
-        {!visible.length && (
+        {savedViewUnavailable && (
+          <Card tone="peach" shadow={false} style={styles.banner}>
+            <Text variant="title">Saved learning is unavailable</Text>
+            <Text>Use the recovery notice above to load your saved lessons and progress.</Text>
+          </Card>
+        )}
+        {!visible.length && !savedViewUnavailable && (
           <Card shadow={false} style={styles.banner}>
             <Icon name="book-open" />
             <Text variant="title">Nothing here just yet</Text>

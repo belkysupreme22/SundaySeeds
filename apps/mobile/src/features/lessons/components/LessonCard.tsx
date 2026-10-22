@@ -10,7 +10,7 @@ import { LessonArtwork } from './LessonArtwork';
 export function LessonCard({ lesson }: { lesson: Lesson }) {
   const { width, fontScale } = useWindowDimensions();
   const stacked = width < 350 || fontScale >= 1.5;
-  const { progress, bookmarks, toggleBookmark } = useLearningProgress();
+  const { progress, bookmarks, toggleBookmark, errorKind } = useLearningProgress();
   const saved = bookmarks.includes(lesson.id);
   const entry = progress[lesson.id];
   return (
@@ -30,7 +30,13 @@ export function LessonCard({ lesson }: { lesson: Lesson }) {
             {lesson.category} · {lesson.durationMinutes} min
           </Text>
           <Text variant="caption">{lesson.scripture}</Text>
-          <LessonProgressSummary readingCount={lesson.sections.length} progress={entry} />
+          {errorKind === 'load' ? (
+            <Text variant="caption" muted>
+              Progress unavailable
+            </Text>
+          ) : (
+            <LessonProgressSummary readingCount={lesson.sections.length} progress={entry} />
+          )}
         </View>
       </Pressable>
       <View style={styles.save}>

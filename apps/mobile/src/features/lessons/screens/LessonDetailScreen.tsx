@@ -14,7 +14,9 @@ import { Button, IconButton } from '../../../shared/ui/Button';
 import { sampleCourse } from '../../courses/data/sampleCourse';
 export function LessonDetailScreen({ lessonId }: { lessonId: string }) {
   const lesson = getLesson(lessonId);
-  const { bookmarks, toggleBookmark, progress, setSection, error } = useLearningProgress();
+  const { bookmarks, toggleBookmark, progress, setSection, error, errorKind } =
+    useLearningProgress();
+  const progressAvailable = errorKind !== 'load';
   if (!lesson)
     return (
       <Screen>
@@ -30,11 +32,13 @@ export function LessonDetailScreen({ lessonId }: { lessonId: string }) {
       footer={
         <Button
           label={
-            completed
-              ? 'Revisit lesson'
-              : lessonProgress
-                ? 'Continue learning'
-                : 'Start this lesson'
+            !progressAvailable
+              ? 'Read first reading'
+              : completed
+                ? 'Revisit lesson'
+                : lessonProgress
+                  ? 'Continue learning'
+                  : 'Start this lesson'
           }
           onPress={() => {
             if (completed) setSection(lesson.id, 0);
@@ -91,6 +95,7 @@ export function LessonDetailScreen({ lessonId }: { lessonId: string }) {
       <LessonCurriculum
         lesson={lesson}
         progress={lessonProgress}
+        readingEnabled={progressAvailable}
         onRead={(index) => {
           setSection(lesson.id, index);
           router.push(`/read/${lesson.id}`);

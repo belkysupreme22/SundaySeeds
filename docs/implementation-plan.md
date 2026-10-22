@@ -2,17 +2,19 @@
 
 ## Ordered sample-lesson audit A27–A33 — 22 October 2026
 
-Overview responsive correction is complete: ordinary narrow rows, natural stacked
-copy/facts and two large portrait crops, preserving thumbnails and course context.
-All four overviews checked at five widths (280–430px); native acceptance pending.
+Discovery keeps course promotion in the unfiltered list and names filtered views;
+filter web states are explicit. Discovery/overview responsive corrections preserve
+reference composition, assets, thumbnails and contextual navigation. All four
+overviews checked at five widths (280–430px). Unknown progress no longer appears
+empty/unstarted; paused reading controls recover through the existing notice.
+Home card callers checked without changing Home layout or connected reader.
 
-Discovery pass preserves the reference06 structure, keeps the course promotion only
-in the unfiltered list and names filtered views. Web filter checked/expanded state
-is explicit; Cancel/Apply/search/topic return checked at 320px/390px. The discovery
-hero uses measured-width portrait sizing without changing assets/shared defaults.
-Native acceptance pending. Next in this pass: reproduced narrow overview overlap
-and honest unavailable-progress/paused-reading controls, with all feature-card
-callers checked. Home and connected course screens remain outside layout changes.
+Eight browser state cases passed at 320px/390px for discovery, search/filters,
+curriculum, start/resume/revisit, reader navigation/reload and load-failure recovery.
+No external requests or real account/storage mutation. Independent review found no
+blocker. Typecheck retains the existing loader error; lint/build/unit suite not rerun.
+Native text scaling/Back/assistive technology, explicit save-failure runtime and
+bookmark disabled semantics remain pending. Next A34–A37 quiz/results/retry/exit.
 See [ordered evidence](learner-screen-audit.md).
 
 ## Ordered connected-course audit A22–A26 — 22 October 2026
