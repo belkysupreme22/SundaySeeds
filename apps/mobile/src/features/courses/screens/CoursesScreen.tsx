@@ -2,7 +2,6 @@ import { router } from 'expo-router';
 import { StyleSheet } from 'react-native';
 import { ConnectedCourseCard } from '../components/ConnectedCourseCard';
 import { useCourseCatalog } from '../hooks/useCourseCatalog';
-import { sampleCourse } from '../data/sampleCourse';
 import { PageHeader } from '../../../shared/ui/PageHeader';
 import { Screen } from '../../../shared/ui/Screen';
 import { Card } from '../../../shared/ui/Card';
@@ -60,9 +59,9 @@ export function CoursesScreen() {
       )}
       <Card tone="yellow" shadow={false} style={styles.group}>
         <Text variant="caption">SAMPLE COURSE</Text>
-        <Text variant="title">{sampleCourse.title}</Text>
+        <Text variant="title">Explore before joining</Text>
         <Text variant="small">
-          Explore the sample lessons and knowledge checks at your own pace.
+          Try the sample lessons and knowledge checks without an account.
         </Text>
         <Button
           label="Explore sample course"

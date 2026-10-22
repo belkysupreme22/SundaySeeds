@@ -1,5 +1,15 @@
 # SundaySeeds implementation plan
 
+## Ordered connected-course audit A22–A26 — 22 October 2026
+
+A22 library keeps its connected cards and sample path, replacing only the repeated
+sample course title with an account-free exploration callout. Ready/empty/error/
+retry and pending exit checked at 320px/390px with intercepted responses; no service
+or account mutation. Native/unconfigured and real catalog acceptance remain pending.
+Next in this pass: same-edition curriculum duplication and offering versus joined
+edition availability in course details, followed by join/reader boundary checks.
+Home, tabs and shared defaults remain unchanged. See [screen evidence](learner-screen-audit.md).
+
 ## Ordered Home audit A20–A21 — 22 October 2026
 
 After owner feedback, final Home portrait uses measured card width/proportional

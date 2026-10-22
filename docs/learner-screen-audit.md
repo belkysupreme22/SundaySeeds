@@ -285,6 +285,23 @@ contexts contained disposable sample progress only; no owner session/storage/env
 server record changed. Final native/owner visual acceptance is still pending.
 Next A22–A26: course library, detail/join and authorized reading, preserving layouts.
 
+## A22 course library — 22 October 2026
+
+Reference06 comparison preserves the current catalog cards, pastel sample callout,
+header and navigation. The development import and bundled sample previously repeated
+the same course title in adjacent promotions. The sample callout now says “Explore
+before joining” and explains its account-free lessons/checks, keeping its existing
+sample-course destination, yellow card, position and styling. It does not invent a
+second course or remove guest access.
+
+At 320px/390px, isolated browser checks passed ready/empty/error/retry and leaving
+through the sample path while a library request was pending, without late navigation.
+The connected title appears once in the ready list. Both contexts had zero page
+errors; all Supabase responses were intercepted. Evidence: ignored
+`.artifacts/catalog-audit-2026-10-22/library-results.json` and screenshots. Native,
+unconfigured settings and actual catalog-service acceptance remain pending. Shared
+tab selection remains the separate A45 finding; no tab model was changed here.
+
 ## Ordered screen inventory
 
 Work through IDs in this order. Each row includes a screen or a distinct state that can regress independently. “Pending” below means rendered/runtime acceptance, not that its source is necessarily unread.
@@ -312,7 +329,7 @@ Work through IDs in this order. Each row includes a screen or a distinct state t
 | A19 | Preference result / edit / Skip and return | Learning-profile variants | 02/04 adaptation | Reviewed / Settings return fixed | Web result/edit/Skip/slow exit checked; setup hierarchy/real/native pending |
 | A20 | Home: new / returning / guest / verified | `/home` | 05 left | Reviewed / Home-scoped fixes | Guest/state web checked; portrait 280–430px checked; identity/native pending |
 | A21 | Home: Continue learning states | Home continuation | 05 middle adaptation | Reviewed / suggestion deduplication | Web progress/resume states checked; real/native pending |
-| A22 | Course library: available/empty/error | `/courses` | 06 left | Reviewed | Pending |
+| A22 | Course library: available/empty/error | `/courses` | 06 left | Reviewed / sample callout clarified | Web ready/empty/error/retry/pending exit checked; real/native pending |
 | A23 | Course details: guest/unverified/not joined | `/courses/[id]` | 07 left | Reviewed | Pending |
 | A24 | Join: pending/stale/uncertain/retry | Course details enrollment panel | 07 adaptation | Reviewed | Pending |
 | A25 | Joined curriculum: same/older/unavailable edition | Course details enrollment panel | 07 middle | Reviewed | Pending |

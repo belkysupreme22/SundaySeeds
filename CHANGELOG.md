@@ -5,6 +5,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Changed
+- Clarified the course library's sample exploration callout without repeating the connected course title. Preserved guest access, cards and navigation; ready/empty/error/retry/pending-exit browser checks passed at 320px/390px with intercepted responses. Real service/native acceptance pending.
 - Restored Home's greeting/hero/shortcut hierarchy, moved course browsing into the first existing shortcut and kept all Home sections/tabs. Suggestions avoid the featured and visible resume lessons; saved-reader navigation remains intact and unavailable shortcut counts no longer show zero. Ten browser state cases passed at 320px/390px; native/identity variants pending.
 - Refined Home's portrait after narrow-screen feedback using measured card width, proportional sizing and a compact side-by-side layout. Very small cards/larger text have a safe stacked frame; browser breakpoints checked from 280px to 430px. Other screens and image assets are unchanged.
 - Fixed Home's featured portrait overlapping its text/action at narrow widths. Preserved the regular layout, assets and shared styles; browser screenshots checked at 320px/390px. Native text-scale checks pending.
