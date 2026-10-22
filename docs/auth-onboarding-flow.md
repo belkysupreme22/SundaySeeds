@@ -17,6 +17,10 @@ values still produce honest unavailable outcomes.
 
 ## Account-choice and narrow hero audit — 22 October 2026
 
+Invalid confirmation's signup link is now labelled “Back to sign up”; invalid
+recovery names its existing recovery-email request destination. Neither button
+sends an email by itself. Both destination paths were browser checked at 320px/390px.
+
 Reset-link guidance uses a distinct hero copy mode: open the recovery email before
 choosing a password. The actual recovery-proof screen keeps its existing password
 instruction; illustrations/layouts and proof requirements are unchanged. Both copy

@@ -104,7 +104,7 @@ export function EmailActionScreen({
       )}
       {proof.stage === 'invalid' && (
         <Button
-          label="Request a new email"
+          label={kind === 'confirmation' ? 'Back to sign up' : 'Request a recovery email'}
           variant="outline"
           onPress={() => router.replace(kind === 'confirmation' ? '/sign-up' : '/forgot-password')}
         />

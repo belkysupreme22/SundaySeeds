@@ -2,6 +2,11 @@
 
 ## Ordered audit A09–A13: recovery and proof boundaries — 22 October 2026
 
+Invalid-link buttons now name their unchanged destinations: Back to sign up for
+confirmation, Request a recovery email for recovery. Both clicks checked at both
+widths; no resend service invented. Next A14–A19 optional learning-profile screens;
+retain unresolved signed-in/proof-success/native variants in the checklist.
+
 A12 guidance now correctly asks the learner to open the recovery email; a distinct
 hero mode preserves the actual proof/password instruction and existing artwork.
 Both contexts' copy checked at 320px/390px, guidance screenshots inspected. No

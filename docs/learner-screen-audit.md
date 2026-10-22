@@ -155,6 +155,19 @@ guidance. Both routes' copy was checked at 320px/390px; guidance screenshots wer
 inspected. No speculative shared sizing fix was made from source alone. Native
 larger-text/keyboard acceptance remains pending.
 
+## A11/A13 invalid-link action labels — 22 October 2026
+
+Invalid confirmation now labels its existing signup destination “Back to sign up,”
+rather than claiming the button requests an email. Recovery labels its existing
+request form “Request a recovery email.” Routes, button styling and proof logic
+are unchanged. Both invalid/expired presentations and destination clicks were checked
+at 320px/390px alongside the preceding recovery/proof regression; zero page errors,
+all Auth requests intercepted. The signup destination is not a new resend service.
+Pending-account/verified states, actual successful proof/password operations and
+native acceptance remain open; do not mark the whole identity flow accepted.
+Next screen group is A14–A19 optional learning-profile setup, retaining the listed
+identity-state follow-ups rather than treating them as passed.
+
 ## Ordered screen inventory
 
 Work through IDs in this order. Each row includes a screen or a distinct state that can regress independently. “Pending” below means rendered/runtime acceptance, not that its source is necessarily unread.
