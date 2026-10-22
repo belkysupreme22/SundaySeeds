@@ -31,6 +31,8 @@ export function LearningChoiceCards<Value extends string | number>({
             accessibilityLabel={choice.label}
             accessibilityHint={checked ? 'Tap again to clear this answer.' : choice.description}
             accessibilityState={{ checked, disabled: unavailable }}
+            aria-checked={checked}
+            aria-disabled={unavailable}
             disabled={unavailable}
             onPress={() => onSelect(choice.value)}
             style={({ pressed }) => [

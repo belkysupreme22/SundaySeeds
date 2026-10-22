@@ -1,5 +1,15 @@
 # SundaySeeds implementation plan
 
+## Ordered audit A14–A19: optional learning profile — 22 October 2026
+
+Question-control browser checks passed at 320px/390px with synthetic verified identity
+and intercepted preference responses. Preserved optionality, all four pages, card
+appearance, deselection, three-topic cap, draft retention and Cancel. Fixed missing
+web checked/disabled semantics in the feature choice cards and the existing missing
+Back callback dependency argument in the audited screen. Native Back/screen-reader/
+text scaling remain pending. See [per-screen evidence](learner-screen-audit.md).
+Time wording and Settings-result correction remain separate scoped increments.
+
 ## Ordered audit A09–A13: recovery and proof boundaries — 22 October 2026
 
 Invalid-link buttons now name their unchanged destinations: Back to sign up for

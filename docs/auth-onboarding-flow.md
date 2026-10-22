@@ -17,6 +17,12 @@ values still produce honest unavailable outcomes.
 
 ## Account-choice and narrow hero audit — 22 October 2026
 
+Optional-profile question controls were browser checked at 320px/390px with a
+synthetic verified identity and intercepted preference responses. Explicit feature
+card ARIA state fixes web checked/disabled semantics; native state and layouts are
+preserved. The screen's Back callback now has its required dependency argument.
+No real account/preferences changed; native/text-scale acceptance remains pending.
+
 Invalid confirmation's signup link is now labelled “Back to sign up”; invalid
 recovery names its existing recovery-email request destination. Neither button
 sends an email by itself. Both destination paths were browser checked at 320px/390px.

@@ -92,7 +92,7 @@ function LearningProfileForm({ editing }: { editing: boolean }) {
         return true;
       });
       return () => subscription.remove();
-    }),
+    }, [back]),
   );
 
   async function save() {

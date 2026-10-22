@@ -168,6 +168,28 @@ native acceptance remain open; do not mark the whole identity flow accepted.
 Next screen group is A14–A19 optional learning-profile setup, retaining the listed
 identity-state follow-ups rather than treating them as passed.
 
+## A14–A18 question-control audit — 22 October 2026
+
+Isolated Chromium at 320×568 and 390×844 exercised guest gating, a synthetic verified
+identity, all four questions, selection/deselection, the three-topic cap, Back retaining
+answers, optional unanswered familiarity, time/It varies switching, acknowledged save
+and edit Cancel preserving saved values. Requests were intercepted; synthetic account
+and preference rows exist only in the test browser, with no server mutations.
+
+The selected cards rendered correctly but lacked `aria-checked` in the actual web
+DOM. Added explicit checked/disabled ARIA properties to the feature's choice cards,
+retaining native accessibilityState and every style. Web role/state assertions now
+pass on all four pages. Corrected the existing missing callback dependency argument
+in this screen's focused Back listener using `[back]`; it retains the current
+per-render closure instead of inventing a stale empty dependency list. Native
+hardware Back and actual assistive-technology announcements remain pending.
+
+Reference02/04 comparison preserves the approved four optional questions, pastel
+cards, symbols, progress segments and footer. No country, birth date, required
+answers or fabricated catalog matching was added. Evidence: ignored
+`.artifacts/learning-profile-audit-2026-10-22/` screenshots/results. Native larger
+text and broader load/save/conflict/slow-exit cases are recorded separately below.
+
 ## Ordered screen inventory
 
 Work through IDs in this order. Each row includes a screen or a distinct state that can regress independently. “Pending” below means rendered/runtime acceptance, not that its source is necessarily unread.
