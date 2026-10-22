@@ -21,7 +21,11 @@ export function LessonArtwork({
     <View style={[styles.frame, { backgroundColor: colors[tone] }, large && styles.large]}>
       <Image
         source={source}
-        style={styles.portrait}
+        style={[
+          styles.portrait,
+          large && id === 'good-samaritan' && styles.fullPortrait,
+          large && id === 'a-life-of-prayer' && styles.prayerPortrait,
+        ]}
         resizeMode="cover"
         accessibilityIgnoresInvertColors
       />
@@ -42,6 +46,8 @@ const styles = StyleSheet.create({
   },
   large: { width: 118, height: 160 },
   portrait: { width: '180%', height: '100%', position: 'absolute', right: -10 },
+  fullPortrait: { width: '100%', right: 0 },
+  prayerPortrait: { left: -20, right: 'auto' },
   stamp: {
     position: 'absolute',
     left: 5,

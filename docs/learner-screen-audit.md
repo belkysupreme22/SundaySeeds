@@ -363,6 +363,22 @@ ignored `.artifacts/sample-audit-2026-10-22/discovery-results.json` and screensh
 Storage-failure states and overview/reader corrections follow separately; native
 text scaling/Back/assistive technology remain pending.
 
+## A32 responsive overview — 22 October 2026
+
+Reference07 overview structure remains: portrait/title, introduction, facts, course
+context, outcomes, section access and primary footer. Measured card width keeps
+ordinary narrow phones side by side; tiny cards or large fontScale stack naturally.
+Explicit flex sizing fixes collapsed stacked copy/facts. Reading min describes the
+existing duration estimate. The large Good Samaritan and Prayer crops keep faces
+visible; small artwork callers and other assets retain their styling.
+
+All four overviews passed rendered bounds/fact-height checks at 280, 320, 350, 390
+and 430px with zero page errors. Final screenshots inspected, including the corrected
+Prayer crop. The contextual course card is retained as useful curriculum navigation;
+no global deduplication or shared-style replacement. Evidence: ignored
+`.artifacts/sample-audit-2026-10-22/overview-results.json` and A32 screenshots.
+Native text scaling and assistive technology remain pending.
+
 ## Ordered screen inventory
 
 Work through IDs in this order. Each row includes a screen or a distinct state that can regress independently. “Pending” below means rendered/runtime acceptance, not that its source is necessarily unread.

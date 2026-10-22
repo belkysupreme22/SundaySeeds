@@ -2,6 +2,10 @@
 
 ## Ordered sample-lesson audit A27–A33 — 22 October 2026
 
+Overview responsive correction is complete: ordinary narrow rows, natural stacked
+copy/facts and two large portrait crops, preserving thumbnails and course context.
+All four overviews checked at five widths (280–430px); native acceptance pending.
+
 Discovery pass preserves the reference06 structure, keeps the course promotion only
 in the unfiltered list and names filtered views. Web filter checked/expanded state
 is explicit; Cancel/Apply/search/topic return checked at 320px/390px. The discovery
