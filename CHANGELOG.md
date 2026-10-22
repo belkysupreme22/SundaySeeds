@@ -5,6 +5,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Changed
+- Kept filtered sample lesson views focused on their results, restored explicit web filter selection/expanded state and adapted the discovery portrait to card width. Preserved unfiltered composition and filter drafts; browser search/topic/Cancel/Apply checks passed at 320px/390px. Native checks pending.
 - Removed same-edition curriculum duplication on course details and kept available joined editions usable when the current offering is absent. Missing offerings no longer invite registration/joining or promise future enrollment. Preserved pinned links and access controls; browser Join/edition/reader boundary checks passed at 320px/390px using intercepted responses. Real service/native acceptance pending.
 - Clarified the course library's sample exploration callout without repeating the connected course title. Preserved guest access, cards and navigation; ready/empty/error/retry/pending-exit browser checks passed at 320px/390px with intercepted responses. Real service/native acceptance pending.
 - Restored Home's greeting/hero/shortcut hierarchy, moved course browsing into the first existing shortcut and kept all Home sections/tabs. Suggestions avoid the featured and visible resume lessons; saved-reader navigation remains intact and unavailable shortcut counts no longer show zero. Ten browser state cases passed at 320px/390px; native/identity variants pending.

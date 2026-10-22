@@ -1,5 +1,16 @@
 # SundaySeeds implementation plan
 
+## Ordered sample-lesson audit A27–A33 — 22 October 2026
+
+Discovery pass preserves the reference06 structure, keeps the course promotion only
+in the unfiltered list and names filtered views. Web filter checked/expanded state
+is explicit; Cancel/Apply/search/topic return checked at 320px/390px. The discovery
+hero uses measured-width portrait sizing without changing assets/shared defaults.
+Native acceptance pending. Next in this pass: reproduced narrow overview overlap
+and honest unavailable-progress/paused-reading controls, with all feature-card
+callers checked. Home and connected course screens remain outside layout changes.
+See [ordered evidence](learner-screen-audit.md).
+
 ## Ordered connected-course audit A22–A26 — 22 October 2026
 
 A23/A25 now distinguish a missing current offering from an available joined edition,

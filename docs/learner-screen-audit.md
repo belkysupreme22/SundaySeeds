@@ -343,6 +343,26 @@ payload variants and unconfigured service settings remain pending. Courses still
 has no selected tab (A45); manual auth return remains the existing scope. Next:
 A27–A33 sample discovery, curriculum, overview and reader, followed by quizzes.
 
+## A27–A30 sample discovery — 22 October 2026
+
+Reference06 roles are preserved: search and discovery hero, topics, filtered results
+and a separate filter sheet. Filtered list views now omit the full course promotion
+and name Saved/Completed/In progress when no topic overrides the heading. The
+unfiltered list keeps its existing course context. No Home/tab/connected screen
+changed. Discovery artwork now follows measured card width, retains a compact
+side-by-side crop at ordinary phone sizes and uses a 3:2 frame only at very small
+widths or large system text. Assets and shared styles remain unchanged.
+
+Filter choices now expose explicit web checked state/plain labels; the trigger
+exposes expanded state. Opening copies applied values, Cancel/X discards drafts,
+Clear modifies the draft and Apply commits. These are intentionally distinct actions.
+320px/390px isolated browser checks passed selection/deselection on reopening,
+Cancel/Apply, narrowed results without the promotion, search/query clearing and
+topic return. Zero page errors; no external services or owner storage used. Evidence:
+ignored `.artifacts/sample-audit-2026-10-22/discovery-results.json` and screenshots.
+Storage-failure states and overview/reader corrections follow separately; native
+text scaling/Back/assistive technology remain pending.
+
 ## Ordered screen inventory
 
 Work through IDs in this order. Each row includes a screen or a distinct state that can regress independently. “Pending” below means rendered/runtime acceptance, not that its source is necessarily unread.

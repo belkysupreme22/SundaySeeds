@@ -1,4 +1,5 @@
 import { Image, StyleSheet, View, useWindowDimensions } from 'react-native';
+import { useState } from 'react';
 import type { Pastel } from '../../../shared/theme/tokens';
 import { Card } from '../../../shared/ui/Card';
 import { Text } from '../../../shared/ui/Text';
@@ -18,10 +19,17 @@ export function LessonsBrowseHero({
   onPress: () => void;
 }) {
   const { width, fontScale } = useWindowDimensions();
-  const stacked = width < 350 || fontScale >= 1.5;
+  const [cardWidth, setCardWidth] = useState<number | null>(null);
+  const availableWidth = cardWidth ?? width - 40;
+  const stacked = availableWidth < 250 || fontScale >= 1.5;
+  const portraitWidth = Math.min(270, availableWidth * 0.8);
 
   return (
-    <Card tone={tone} style={[styles.hero, stacked && styles.stacked]}>
+    <Card
+      tone={tone}
+      onLayout={({ nativeEvent }) => setCardWidth(nativeEvent.layout.width)}
+      style={[styles.hero, stacked && styles.stacked]}
+    >
       <View style={[styles.copy, stacked && styles.stackedCopy]}>
         <Text variant="title" style={styles.title}>
           {title}
@@ -36,7 +44,15 @@ export function LessonsBrowseHero({
       >
         <Image
           source={require('../../../../assets/legacy/home_banner_user.png')}
-          style={[styles.image, stacked && styles.stackedImage]}
+          style={[
+            styles.image,
+            {
+              width: portraitWidth,
+              height: portraitWidth * (200 / 270),
+              right: -portraitWidth * (28 / 270),
+            },
+            stacked && styles.stackedImage,
+          ]}
           resizeMode="cover"
           accessible={false}
         />
@@ -53,13 +69,14 @@ const styles = StyleSheet.create({
   title: { fontSize: 19, lineHeight: 26 },
   action: {
     alignSelf: 'flex-start',
+    maxWidth: '100%',
     minHeight: 44,
     paddingHorizontal: 10,
     paddingVertical: 8,
     borderRadius: 6,
   },
   art: { width: '35%', overflow: 'hidden', borderTopLeftRadius: 48 },
-  stackedArt: { width: '100%', height: 130, borderTopLeftRadius: 0 },
-  image: { position: 'absolute', bottom: 0, right: -28, width: 270, height: 200 },
-  stackedImage: { width: '100%', height: 220, right: 0 },
+  stackedArt: { width: '100%', aspectRatio: 1.5, borderTopLeftRadius: 0 },
+  image: { position: 'absolute', bottom: 0 },
+  stackedImage: { width: '100%', height: '100%', right: 0 },
 });

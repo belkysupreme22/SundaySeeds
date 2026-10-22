@@ -73,12 +73,20 @@ export function LessonsScreen() {
           onPress={() => (topic ? router.setParams({ topic: '' }) : router.push('/lessons/topics'))}
         />
       </View>
-      <CourseJourneyCard />
+      {!narrowed && <CourseJourneyCard />}
       <ContentGroup>
         <View style={styles.sectionHeader}>
           <View style={styles.headerWords}>
             <Text variant="title" accessibilityRole="header">
-              {topic ? `${topic.name} lessons` : 'Sample lessons'}
+              {topic
+                ? `${topic.name} lessons`
+                : filter === 'saved'
+                  ? 'Saved lessons'
+                  : filter === 'completed'
+                    ? 'Completed lessons'
+                    : filter === 'in-progress'
+                      ? 'In progress'
+                      : 'Sample lessons'}
             </Text>
             <Text variant="small" muted>
               {visible.length} {visible.length === 1 ? 'lesson' : 'lessons'}

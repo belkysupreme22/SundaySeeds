@@ -37,6 +37,7 @@ export function LessonFilters({
         accessibilityRole="button"
         accessibilityLabel={`Filter lessons, ${activeCount} active filters`}
         accessibilityState={{ expanded: open }}
+        aria-expanded={open}
         onPress={() => {
           Keyboard.dismiss();
           setDraft({ topic, filter });
@@ -142,7 +143,9 @@ function FilterChoice({
   return (
     <Pressable
       accessibilityRole="checkbox"
+      accessibilityLabel={label}
       accessibilityState={{ checked: selected }}
+      aria-checked={selected}
       onPress={onPress}
       style={[
         styles.choice,
