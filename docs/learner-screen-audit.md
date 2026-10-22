@@ -45,6 +45,19 @@ The flow cases also cover the optional-name/Skip boundary; no account form was
 submitted, email sent or server record mutated. Six browser case groups completed
 with zero page errors. Browser evidence does not establish native acceptance.
 
+## A05 account-choice correction — 22 October 2026
+
+Replaced only the false “Account services are not available yet” caption with
+“An account is optional. You can explore sample lessons first.” Buttons, portrait,
+note card, Skip and optional-name entry keep their positions and styling. This
+copy does not introduce state-dependent account logic or promise learning sync.
+The visible caption and guest Skip/name boundaries were checked in the browser.
+
+A06 optional-name entry, Back, save, Skip and completion reload also passed the
+basic guest browser cases. Its layout and both existing Skip positions were left
+intact. Native keyboard, text scaling, slow-save/error and account-name variants
+still need acceptance; this does not complete every optional-name state.
+
 ## Ordered screen inventory
 
 Work through IDs in this order. Each row includes a screen or a distinct state that can regress independently. “Pending” below means rendered/runtime acceptance, not that its source is necessarily unread.
@@ -55,8 +68,8 @@ Work through IDs in this order. Each row includes a screen or a distinct state t
 | A02 | Introduction page 1 | Welcome flow | 01 left | Reviewed / scoped fix | Web checked; native pending |
 | A03 | Introduction page 2 | Welcome flow | 01 middle | Reviewed / scoped fix | Web checked; native pending |
 | A04 | Introduction page 3 / Get started | Welcome flow | 01 right | Reviewed / scoped fix | Web checked; native pending |
-| A05 | Create account / Sign in / Skip choice | Welcome flow | 03 adaptation | Reviewed | Pending |
-| A06 | Optional guest name setup | Welcome flow | 02/04 adaptation | Reviewed | Pending |
+| A05 | Create account / Sign in / Skip choice | Welcome flow | 03 adaptation | Reviewed | Basic guest web checked; native/other states pending |
+| A06 | Optional guest name setup | Welcome flow | 02/04 adaptation | Reviewed | Basic guest web checked; native/other states pending |
 | A07 | Create account | `/sign-up` and welcome step | 03 right | Reviewed | Pending |
 | A08 | Sign in | `/sign-in` and welcome step | 03 middle | Reviewed | Pending |
 | A09 | Forgot password / request accepted | `/forgot-password` | 03 adaptation | Reviewed | Pending |
@@ -198,9 +211,11 @@ These are separate rendered/runtime acceptance items; all remain unchecked. Sour
 - Review unknown lesson/route, direct links, account switches, expired sessions, storage recovery and unavailable content. Source guards do not prove these runtime scenarios pass.
 - References09 assignments, 10 badges/certificates/history, 11 community/live/chat and 12 notifications/downloads do not establish implemented features. Do not fabricate those screens or statistics during this regression.
 
-## Actual verification baseline
+## Original verification baseline — 21 October 2026
 
-- [x] Reverted only this turn’s unreviewed source/test changes to committed contents; no layout fixes remain applied from this audit.
+This is the baseline before the bounded 22 October corrections recorded above.
+
+- [x] Reverted only that turn’s unreviewed source/test changes to committed contents; no layout fixes remain applied from this audit.
 - [x] Inspected reference images01–12 and source journeys; screen-group reviews are recorded above.
 - [x] Ran mobile typecheck against restored source: **fails with two errors**, `LearningProfileScreen.tsx` missing useCallback dependency argument and `PageLoadingOverlay.tsx` using StyleSheet.absoluteFillObject absent from installed types.
 - [x] Ran existing regression suite against restored source: **16 passed, 1 failed**. The failing assertion requires “Sample lesson” in every introduction; current approved teaching copy does not contain that phrase. Review the assertion against the policy of clear sample identification without repeated disclaimers.

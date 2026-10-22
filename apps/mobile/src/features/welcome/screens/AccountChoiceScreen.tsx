@@ -65,7 +65,7 @@ export function AccountChoiceScreen({
         <Button label="Create account" onPress={onSignUp} disabled={saving} />
         <Button label="Sign in" variant="outline" onPress={onSignIn} disabled={saving} />
         <Text variant="caption" muted style={styles.center}>
-          Account services are not available yet. You can still start learning.
+          An account is optional. You can explore sample lessons first.
         </Text>
       </View>
       <Pressable

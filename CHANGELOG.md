@@ -5,6 +5,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Changed
+- Corrected account-choice guidance that still claimed accounts were unavailable. Kept the existing portrait, controls and layout; basic guest Skip/name browser flows checked, native/keyboard and other identity states remain pending.
 - Kept the introduction layout intact while adding focused Android Back handling for previous slides and pending saves. Browser introduction/Skip/reload/recovery/replay checks passed at standard and narrow widths; native Back and text-scale acceptance remain pending.
 - Recorded an ordered learner screen audit from onboarding through logout, with reference mappings, per-screen flow/duplication findings, Settings-sheet variants and pending visual/runtime acceptance. Reverted the unreviewed multi-screen rewrite; no app changes in this audit. Restored baseline checks expose two TypeScript errors and one outdated sample-copy assertion (16 other tests pass).
 - Made Home’s Browse courses action a full-width button directly below the greeting, replacing the smaller link farther down beside Your course journey. Reuses existing outline-button styling; owner runtime/visual review pending.
