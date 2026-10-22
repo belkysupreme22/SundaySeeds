@@ -1,5 +1,14 @@
 # SundaySeeds implementation plan
 
+## Ordered Home audit A20–A21 — 22 October 2026
+
+Reference05 and actual 320px Home exposed a collapsed featured-hero copy box, letting
+the portrait cover its action/text. Minimal Home-only responsive sizing now reserves
+text height; 320px/390px screenshots checked, no assets/shared styles changed. Next
+in this same audit: restore header/hero/shortcuts order and distinct discovery/resume
+roles while preserving Home sections, sample curriculum and the existing tab model.
+Native acceptance remains pending; see [evidence](learner-screen-audit.md).
+
 ## Ordered audit A14–A19: optional learning profile — 22 October 2026
 
 Settings edit success now stays focused on saved preferences and returns to Settings;

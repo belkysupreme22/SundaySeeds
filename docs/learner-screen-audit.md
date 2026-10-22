@@ -229,6 +229,22 @@ course/catalog/Home destinations remain a separate finding; this change delibera
 addresses Settings' return purpose only. Next ordered screen is A20 Home, where the
 original overlapping course-entry report must be resolved without redesigning tabs.
 
+## A20 narrow featured-hero correction — 22 October 2026
+
+Actual 320×568 Home screenshot reproduced the portrait covering the featured
+headline, description and Explore lesson button. WeeklyHero's stacked text container
+collapsed through `flex: 0`. Explicit grow/shrink/basis sizing now reserves its natural
+height before the existing clipped artwork. Regular 390×844 composition, typography,
+assets, colors and strokes are preserved. Both final screenshots were inspected and
+the visible artwork container clears the action at 320px. No shared UI or other
+screen changed. Evidence: ignored `.artifacts/home-audit-2026-10-22/` before/hero-after
+screenshots, baseline.json and hero-results.json. Isolated guest contexts had zero
+page errors. Native text scaling/screen readers remain pending.
+
+Home entry-point and recommendation corrections are a separate bounded increment:
+restore greeting → hero → four shortcuts, use the first shortcut for the catalog,
+preserve sample curriculum and remove repeated featured/resume lesson promotions.
+
 ## Ordered screen inventory
 
 Work through IDs in this order. Each row includes a screen or a distinct state that can regress independently. “Pending” below means rendered/runtime acceptance, not that its source is necessarily unread.

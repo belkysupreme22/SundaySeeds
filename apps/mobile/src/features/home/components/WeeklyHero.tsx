@@ -50,8 +50,8 @@ export function WeeklyHero() {
 const styles = StyleSheet.create({
   hero: { minHeight: 210, padding: 0, overflow: 'hidden', flexDirection: 'row' },
   stacked: { flexDirection: 'column' },
-  copy: { flex: 1, gap: 8, paddingLeft: 16, paddingVertical: 14 },
-  stackedCopy: { flex: 0, paddingRight: 16 },
+  copy: { flexGrow: 1, flexShrink: 1, flexBasis: 0, gap: 8, paddingLeft: 16, paddingVertical: 14 },
+  stackedCopy: { flexGrow: 0, flexShrink: 0, flexBasis: 'auto', paddingRight: 16 },
   headline: { fontSize: 24, lineHeight: 31, letterSpacing: -0.6 },
   eyebrow: { fontSize: 11, lineHeight: 18, letterSpacing: 0.5 },
   description: { maxWidth: 165, fontSize: 12, lineHeight: 19 },
