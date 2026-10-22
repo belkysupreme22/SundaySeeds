@@ -1,6 +1,6 @@
 import { useAuth } from '../../auth/hooks/useAuth';
-import { useEffect, useState } from 'react';
-import { router } from 'expo-router';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { router, useFocusEffect } from 'expo-router';
 import { StyleSheet, View } from 'react-native';
 import { DISPLAY_NAME_LIMIT } from '../data/profileStorage';
 import { useLearnerProfile } from '../hooks/useLearnerProfile';
@@ -22,6 +22,18 @@ function ProfileNameForm() {
   const { displayName, hydrated, loadError, retryLoad, saveName, saving, saveError } =
     useLearnerProfile();
   const [name, setName] = useState<string | null>(hydrated && !loadError ? displayName : null);
+  const focused = useRef(false);
+  const saveAttempt = useRef(0);
+  const saveInFlight = useRef(false);
+  useFocusEffect(
+    useCallback(() => {
+      focused.current = true;
+      return () => {
+        focused.current = false;
+        ++saveAttempt.current;
+      };
+    }, []),
+  );
   useEffect(() => {
     if (name === null && hydrated && !loadError) setName(displayName);
   }, [name, displayName, hydrated, loadError]);
@@ -39,7 +51,23 @@ function ProfileNameForm() {
     );
   }
   async function save() {
-    if (name !== null && hydrated && !loadError && (await saveName(name))) closeEditor();
+    if (
+      name === null ||
+      !hydrated ||
+      loadError ||
+      saving ||
+      saveInFlight.current ||
+      !focused.current
+    )
+      return;
+    saveInFlight.current = true;
+    const attempt = ++saveAttempt.current;
+    try {
+      const saved = await saveName(name);
+      if (saved && focused.current && attempt === saveAttempt.current) closeEditor();
+    } finally {
+      saveInFlight.current = false;
+    }
   }
 
   return (

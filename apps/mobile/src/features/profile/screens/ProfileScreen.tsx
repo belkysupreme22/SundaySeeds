@@ -33,7 +33,7 @@ export function ProfileScreen() {
     <Screen tabs>
       <PageHeader
         title="My profile"
-        subtitle="Your space to learn and grow."
+        subtitle="Your profile and sample learning."
         action={
           <IconButton
             name="settings"

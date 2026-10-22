@@ -525,6 +525,30 @@ Remaining A45 items include shared progressbar web numeric ARIA, active-tab logi
 for connected course routes, page-loader type error and native Back/accessibility.
 Next full ordered scope remains A39–A43 Profile/edit/Settings/replay/logout.
 
+## A39–A40 Profile editing and recovery — 22 October 2026
+
+Reference12 Profile layout and the existing edit form remain intact. Header wording
+identifies sample-learning scope. Editor saves now close only while the initiating
+form is still focused; blur/unmount invalidates the navigation attempt. A synchronous
+in-flight guard avoids duplicate submit calls superseding the successful request.
+Submitted writes continue normally. Actor-key remounts, InputField, optional names,
+revision checks and draft retention are unchanged; no profile/storage API changes.
+
+Six isolated browser cases at 320px/390px (guest, verified and unverified synthetic
+users) passed Cancel, normalized Save/reload, blank name, failed-save draft/retry,
+guest name read failure/retry, account-profile load failure/no editable empty name,
+and account revision conflict/reload preserving the typed draft. Slow account Save,
+browser Back and navigation to Settings preserve Settings after the response.
+Final profile/error screenshots inspected. Independent source review found no
+blocker after duplicate-submit guards. Zero page errors/external requests; mock
+Auth/profile/preferences responses only, no owner sessions/env/real records.
+Evidence ignored `.artifacts/profile-settings-audit-2026-10-22/`.
+
+Native keyboard/Back/VoiceOver/TalkBack, initial slow load, real account persistence,
+account switching during a save and Unicode-limit acceptance remain pending. The
+existing typecheck loader error remains; no lint/build/unit suite rerun. Settings
+and replay/logout evidence are recorded separately below.
+
 ## Ordered screen inventory
 
 Work through IDs in this order. Each row includes a screen or a distinct state that can regress independently. “Pending” below means rendered/runtime acceptance, not that its source is necessarily unread.
@@ -569,8 +593,8 @@ Work through IDs in this order. Each row includes a screen or a distinct state t
 | A36 | Answer review / retry | Quiz result variant | 08 feedback adaptation | Reviewed / scoped corrections | Web checked; native pending |
 | A37 | Post-quiz next lesson / all finished | Course quiz next steps | 07 curriculum/finish adaptation | Reviewed / scoped corrections | Web checked; native pending |
 | A38 | Progress: loading/failure/empty/partial/complete | `/progress` | 05 right / 09 right | Reviewed / scoped correction | Web checked; native pending |
-| A39 | Profile: guest/account/profile failure | `/profile` | 12 left | Reviewed | Pending |
-| A40 | Edit profile / save / revision conflict | `/edit-profile` | 12 left adaptation | Reviewed | Pending |
+| A39 | Profile: guest/account/profile failure | `/profile` | 12 left | Reviewed / scoped correction | Web checked; native pending |
+| A40 | Edit profile / save / revision conflict | `/edit-profile` | 12 left adaptation | Reviewed / scoped correction | Web checked; native pending |
 | A41 | Settings and its sheets | `/settings` | 12 right | Reviewed | Pending |
 | A42 | Introduction replay and exit | `/welcome` from Settings | 01 | Reviewed | Pending |
 | A43 | Logout and signed-out return | Settings → Home | 12 right adaptation | Reviewed | Pending |

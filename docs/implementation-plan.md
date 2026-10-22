@@ -1,5 +1,14 @@
 # SundaySeeds implementation plan
 
+## Profile and Settings continuation A39–A43 — 22 October 2026
+
+A39/A40 now fence late editor-save navigation and duplicate submissions while
+preserving drafts, revision recovery and layouts. Six guest/verified/unverified
+browser cases at 320px/390px passed; native/real persistence/account-switch cases
+remain pending. Profile scope explicitly identifies sample learning. Settings copy,
+sample reset and replay completion are separate bounded increments in this pass;
+no backend or shared-layout changes.
+
 ## Progress and responsive continuation — 22 October 2026
 
 A38 Progress now uses natural stacked heights for hero/stats/row copy and identifies

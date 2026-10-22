@@ -5,6 +5,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Changed
+- Kept successful profile saves from navigating after the editor is left, with synchronous duplicate-submit protection. Clarified Profile’s sample-learning scope; guest/account save/cancel/error/conflict/slow-exit browser checks passed at 320px/390px. Native/account-switch acceptance pending.
 - Kept bottom-navigation labels within their tabs and reclaimed horizontal spacing below 320px, preventing larger labels from touching without shrinking text. Preserved four tabs, routes, icons and regular spacing; caller layouts checked at 280px/320px/390px with ordinary and 150% browser text. Native acceptance pending.
 - Fixed narrow Profile header/stat sizing so long names and summary labels retain their height. Preserved avatar, colors, edit action and regular layout; checked 280px/320px/390px and 150% browser text. Full Profile behavior/native audit remains pending.
 - Reserved natural text height in narrow account recovery/verification heroes so artwork follows the copy instead of sharing a collapsed text box. Five caller routes checked at 280px/320px/390px and with 150% browser text; native font scaling pending.
