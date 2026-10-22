@@ -50,7 +50,7 @@ export function CourseSuggestions({
               <Text variant="label">A lesson you may enjoy</Text>
               <Text variant="small">{course.lessonSuggestion.title}</Text>
               <Text variant="small" muted>
-                About {course.lessonSuggestion.durationMinutes} minutes for this lesson
+                About {course.lessonSuggestion.durationMinutes} minutes of reading
               </Text>
               <Text variant="small" muted>
                 Find it in the course curriculum. You can follow the course in order.

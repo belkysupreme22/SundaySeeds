@@ -190,6 +190,20 @@ answers or fabricated catalog matching was added. Evidence: ignored
 `.artifacts/learning-profile-audit-2026-10-22/` screenshots/results. Native larger
 text and broader load/save/conflict/slow-exit cases are recorded separately below.
 
+## A18 session-time wording — 22 October 2026
+
+The time question now suggests pausing between readings rather than implying that
+a whole lesson fits one session. Sample suggestions label their authored estimate
+as “minutes of reading.” Choices, values, ordering/ranking, artwork and layout are
+unchanged. Both copy contexts and the four-question flow were browser checked at
+320px/390px. “It varies” and unanswered time still save the same null value; the
+summary correctly calls that “No fixed time.” No new backend distinction or
+promise about full study/quiz duration was introduced.
+
+After the preceding scoped Back dependency fix, whole-project typecheck now reports
+one remaining baseline error in PageLoadingOverlay; the learning-profile error is
+resolved. No lint/build or existing unit-suite rerun in this pass.
+
 ## Ordered screen inventory
 
 Work through IDs in this order. Each row includes a screen or a distinct state that can regress independently. “Pending” below means rendered/runtime acceptance, not that its source is necessarily unread.

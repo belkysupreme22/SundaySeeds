@@ -2,6 +2,11 @@
 
 ## Ordered audit A14–A19: optional learning profile — 22 October 2026
 
+Session guidance now describes pausing between readings; sample hints explicitly
+say minutes of reading. No ranking, choices, duration values or layout changes.
+Browser copy/flow checked at 320px/390px. Typecheck after the scoped Back correction
+has one remaining baseline error (PageLoadingOverlay); the profile error is fixed.
+
 Question-control browser checks passed at 320px/390px with synthetic verified identity
 and intercepted preference responses. Preserved optionality, all four pages, card
 appearance, deselection, three-topic cap, draft retention and Cancel. Fixed missing

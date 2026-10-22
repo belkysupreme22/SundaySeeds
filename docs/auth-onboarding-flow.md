@@ -17,6 +17,10 @@ values still produce honest unavailable outcomes.
 
 ## Account-choice and narrow hero audit — 22 October 2026
 
+Learning-profile time guidance distinguishes a preferred session from authored
+reading estimates. Sample hints now say “minutes of reading”; no full-lesson time
+promise or different persistence for unanswered versus flexible time is introduced.
+
 Optional-profile question controls were browser checked at 320px/390px with a
 synthetic verified identity and intercepted preference responses. Explicit feature
 card ARIA state fixes web checked/disabled semantics; native state and layouts are

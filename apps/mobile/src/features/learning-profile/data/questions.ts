@@ -126,6 +126,6 @@ export const questionPages = [
     subtitle: 'How much time feels comfortable for one study session?',
     icon: 'clock',
     tone: 'peach',
-    note: 'A session can be one lesson. Take any course at your own pace.',
+    note: 'Pause between readings and continue at your own pace.',
   },
 ] satisfies { title: string; subtitle: string; icon: IconName; tone: Pastel; note: string }[];
