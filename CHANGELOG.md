@@ -5,6 +5,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Changed
+- Fixed email-link tokens remaining in the browser URL on direct entry by clearing parameters after navigation listeners mount. Preserved explicit proof confirmation and isolated sessions; synthetic invalid/expired-link and pending-exit browser checks passed at 320px/390px. Real service/native acceptance remains pending.
 - Disclosed Google/Apple sign-in availability before activation, with descriptive information-action labels. Preserved auth layouts; checked validation, password reveal, simulated sign-in failure and pending/Back navigation at 320px/390px. Real service submissions and native accessibility remain pending.
 - Fixed collapsed auth-hero text overlapping the portrait at narrow widths. Preserved existing assets and regular layout; inspected account choice, Sign in and Sign up at 320px/390px. Native keyboard/text-scale checks remain pending; Home and navigation were not changed.
 - Corrected account-choice guidance that still claimed accounts were unavailable. Kept the existing portrait, controls and layout; basic guest Skip/name browser flows checked, native/keyboard and other identity states remain pending.

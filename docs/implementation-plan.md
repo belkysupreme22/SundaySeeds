@@ -1,5 +1,16 @@
 # SundaySeeds implementation plan
 
+## Ordered audit A09–A13: recovery and proof boundaries — 22 October 2026
+
+Browser recovery validation/simulated responses/pending exit and no-account
+verification guidance checked at 320px/390px. Both email-proof routes now defer
+parameter clearing until linking listeners mount; direct links previously retained
+their token in the URL. Explicit Continue, memory-only candidate and current-account
+isolation are unchanged. Invalid/simulated-expiry, cleared-link reload and late
+response after exit checked; no service mutations or real proofs used. Native,
+actual proof/password success and other identity variants remain pending. Follow
+[screen evidence](learner-screen-audit.md); copy corrections stay separate.
+
 ## Ordered audit A07–A08: account forms — 22 October 2026
 
 Added upfront Google/Apple unavailable guidance and descriptive informational-action

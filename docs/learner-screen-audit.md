@@ -116,6 +116,35 @@ exports. Source review was independent/read-only. No tests/typecheck/lint/build 
 rerun for the copy-only change; the previously recorded baseline failures remain.
 Next ordered pass: A09 recovery request, then verification/proof states A10–A13.
 
+## A09–A13 recovery and proof boundary checks — 22 October 2026
+
+Isolated Chromium checks at 320×568 and 390×844 covered recovery-request validation,
+simulated accepted/error responses and pending exit to sign-in. Without an account
+or pending address, verification Check directs the learner to sign in and Resend
+requests an address without sending a request. Those existing layouts are preserved;
+signed-in/unverified/verified and pending-signup action hierarchy still need review.
+
+A11/A13 direct links exposed a functional defect: clearing route parameters in the
+initial child effect happened before parent linking listeners were mounted, leaving
+the synthetic proof in the browser URL. Schedule parameter clearing for the next
+task, cancel on effect cleanup and skip when unfocused. Captured proof remains in
+memory; no consumption occurs before explicit Continue. Independent source review
+found no blocker. Browser checks cover both routes, removal of token values before
+Continue, simulated expired-proof errors, reload requiring a fresh email link and
+leaving a pending proof request without late navigation. No password form appears
+for invalid or failed proofs. No screen composition changed.
+
+All Supabase requests were intercepted; no real proof, email, account, password or
+server data was used/changed. Two viewport cases completed with zero page errors.
+Evidence: ignored `.artifacts/recovery-audit-2026-10-22/` screenshots/results. Native,
+same-path in-app fresh-link timing, actual successful confirmation/recovery,
+cross-account isolation and revocation uncertainty remain pending. Existing generic
+same-password feedback remains deferred to the owner-requested polish sprint.
+The reset-guidance copy and invalid-confirmation action label are separate scoped
+corrections; this proof cleanup does not change those screens' wording.
+Whole-project typecheck after the hook change still reports only the two recorded
+baseline errors in LearningProfileScreen and PageLoadingOverlay; it is not passing.
+
 ## Ordered screen inventory
 
 Work through IDs in this order. Each row includes a screen or a distinct state that can regress independently. “Pending” below means rendered/runtime acceptance, not that its source is necessarily unread.
@@ -130,11 +159,11 @@ Work through IDs in this order. Each row includes a screen or a distinct state t
 | A06 | Optional guest name setup | Welcome flow | 02/04 adaptation | Reviewed | Basic guest web checked; native/other states pending |
 | A07 | Create account | `/sign-up` and welcome step | 03 right | Reviewed / availability copy fixed | Web validation/navigation checked; real submission/native pending |
 | A08 | Sign in | `/sign-in` and welcome step | 03 middle | Reviewed / availability copy fixed | Web validation/simulated failure/navigation checked; real submission/native pending |
-| A09 | Forgot password / request accepted | `/forgot-password` | 03 adaptation | Reviewed | Pending |
-| A10 | Email verification guidance/resend/check | `/verify-email` | 03 adaptation | Reviewed | Pending |
-| A11 | Confirmation link: initial/pending/success/invalid | `/auth/confirm` | 03 adaptation | Reviewed | Pending |
+| A09 | Forgot password / request accepted | `/forgot-password` | 03 adaptation | Reviewed | Web validation/simulated responses/pending exit checked; real/native pending |
+| A10 | Email verification guidance/resend/check | `/verify-email` | 03 adaptation | Reviewed | No-account web checked; other identities/native pending |
+| A11 | Confirmation link: initial/pending/success/invalid | `/auth/confirm` | 03 adaptation | Reviewed / URL cleanup fixed | Web invalid/simulated expiry/exit checked; success/native pending |
 | A12 | Reset-link guidance | `/reset-password` | 03 adaptation | Reviewed | Pending |
-| A13 | Recovery proof / new password / success/failure | `/auth/recover` | 03 adaptation | Reviewed | Pending |
+| A13 | Recovery proof / new password / success/failure | `/auth/recover` | 03 adaptation | Reviewed / URL cleanup fixed | Web invalid/simulated expiry/exit checked; password/success/native pending |
 | A14 | Learning-profile initial load/error/exit | `/learning-profile` | 02/04 adaptation | Reviewed | Pending |
 | A15 | Intention question | Learning-profile step 1 | 02/04 adaptation | Reviewed | Pending |
 | A16 | Interests question | Learning-profile step 2 | 02/04 adaptation | Reviewed | Pending |

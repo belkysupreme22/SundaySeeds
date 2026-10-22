@@ -17,6 +17,15 @@ values still produce honest unavailable outcomes.
 
 ## Account-choice and narrow hero audit — 22 October 2026
 
+Recovery/proof browser follow-up found initial URL cleanup ran before linking
+listeners mounted. The proof hook now schedules parameter removal after those
+mount effects, cancels obsolete cleanup and skips unfocused callbacks. Explicit
+Continue and isolated proof handling are unchanged. Both routes passed URL removal,
+invalid/simulated-expiry, cleared-link reload and pending-exit checks at 320px/390px.
+Recovery requests and no-account verification guidance also received browser checks.
+All Auth requests were intercepted; successful proof/password and native acceptance
+remain pending. See [actual audit scope](learner-screen-audit.md).
+
 Follow-up A07/A08 audit adds upfront Google/Apple unavailable guidance and accessible
 information-action labels without changing the forms or provider behavior. Browser
 validation, masking, simulated sign-in failure, pending exit and embedded Back paths

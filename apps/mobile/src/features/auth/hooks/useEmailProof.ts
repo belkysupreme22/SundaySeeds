@@ -49,7 +49,12 @@ export function useEmailProof(kind: 'confirmation' | 'recovery', token: unknown,
       setStage('ready');
     }
     // Capture only in memory, then remove parameters without consuming the proof.
-    router.setParams({ token_hash: undefined, type: undefined });
+    // Let the parent navigation/linking listeners mount before changing params
+    // on a directly opened link; otherwise the browser URL can retain the proof.
+    const cleanup = setTimeout(() => {
+      if (active.current) router.setParams({ token_hash: undefined, type: undefined });
+    }, 0);
+    return () => clearTimeout(cleanup);
   }, [kind, token, type]);
   useFocusEffect(
     useCallback(() => {
