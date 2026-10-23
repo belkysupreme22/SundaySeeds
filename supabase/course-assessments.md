@@ -98,7 +98,9 @@ isolated; these summaries do not imply reading-position/bookmark synchronization
 
 `tests/course_quiz_rpc.test.sql` supplies rollback-only permission/behavior fixtures;
 `tests/course_quiz_concurrency.md` lists separate multi-transaction schedules.
-The single-session RPC suite passed 80 assertions; concurrency schedules are not
-executed. Deployment/advisors, concurrent revocation/Finish, actual session timing
-and mobile integration remain pending. See assessment-verification.md.
+The single-session RPC suite passed 80 assertions. The isolated local concurrency
+harness passed 12 groups, including observed revocation/Finish lock boundaries.
+Local Auth shims do not establish real provider/session behavior. Remaining trigger
+edge fixtures, deployment/advisors, actual session timing and mobile integration
+remain pending. See assessment-verification.md.
 No content imported or assessments activated by this RPC migration.

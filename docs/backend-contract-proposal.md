@@ -1,5 +1,20 @@
 # Backend contract proposal
 
+## Assessment concurrency verification — 23 October 2026
+
+Passed 12 isolated local PostgreSQL 17.10 test groups (zero failures), including
+10 observed lock schedules for Start/Check/Finish and revocation/withdrawal in both
+commit orders. Distinct retries preserve highest score and completion counts;
+deleted-session replay is denied. Auth tables/claims were local shims; hosted
+17.11 rollback results remain separate. Temporary server stopped; no hosted schema,
+content activation or app dependency changes. See the
+[verification record](../supabase/assessment-verification.md).
+
+Next finish remaining integrity-trigger edge fixtures, then development deployment
+and installed-schema advisors before the approved four-check import/activation.
+Mobile quiz integration and actual SDK/session/native acceptance remain pending.
+
+
 ## Assessment rollback verification — 23 October 2026
 
 Owner approved rollback-only testing in existing development after branch creation
@@ -8,10 +23,9 @@ assertions passed. Post-run objects/fixture users/course absent; no persistent
 schema/import/activation. Added reproducible SQL assembly helper and detailed
 [verification record](../supabase/assessment-verification.md).
 
-Two-session concurrency remains gated on a separate database/local environment;
-rollback-only fixtures cannot be shared across sessions. No production-ready claim.
-Next obtain that environment for concurrency acceptance before activation; mobile
-source integration can be prepared separately without claiming connected runtime.
+Subsequent isolated local concurrency results are recorded above. Hosted rollback
+fixtures remain invisible to other sessions; this run alone is not concurrency
+acceptance or a production-ready claim.
 
 
 ## Trusted connected quiz RPC source — 23 October 2026

@@ -5,7 +5,8 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Changed
-- Verified assessment foundation (36 assertions) and trusted quiz APIs (80 assertions) in owner-approved rollback-only development transactions. Confirmed no schema or fixtures retained; added reproducible assembly and verification records. Two-session concurrency and activation remain pending.
+- Passed 12 isolated local PostgreSQL concurrency test groups for connected quizzes, including observed Start/Check/Finish and revocation/withdrawal locks. Added a loopback-only disposable database harness; Auth uses local shims. No hosted deployment or activation.
+- Verified assessment foundation (36 assertions) and trusted quiz APIs (80 assertions) in owner-approved rollback-only development transactions. Confirmed no schema or fixtures retained; added reproducible assembly and verification records. Local concurrency was subsequently verified separately; activation remains pending.
 - Prepared trusted connected quiz Start/resume/Check/Finish and own progress RPC source with private feedback, locked selections, server scores and stable receipt reconciliation. Added rollback permission/behavior tests and concurrency schedules. No database application, test execution, quiz activation or mobile integration yet.
 - Prepared private connected-assessment storage, sealed edition snapshots, enrollment-bound attempts and validated outcomes, with permission-test source. No migration application, quiz activation, real history or mobile integration yet; SQL/runtime checks pending.
 - Recorded accepted connected-assessment policies and a bounded server-authoritative quiz/progress contract, including one-time immutable quiz activation in the current development edition. Implementation and deployment remain pending.

@@ -1,10 +1,14 @@
 # Connected quiz concurrency acceptance
 
-Owner-run on an isolated development database after both assessment migrations and
-rollback fixture setup. **Not executed.** Sequential pgTAP is not concurrency proof.
-Use two independent authenticated SQL transactions with real fixture session claims;
-use a separate privileged transaction only for fixture revocation/withdrawal.
-Do not run these schedules against real learner records.
+Executed 23 October 2026 using `course_quiz_concurrency.cjs`: **12 groups passed**
+on isolated local PostgreSQL 17.10, with ten observed lock waits. Auth tables and
+claims were shims; no hosted schema or data changed. See
+[actual verification and reproduction](../assessment-verification.md).
+
+The harness requires an empty disposable loopback database and commits fake fixtures
+for cross-session visibility. It refuses existing Auth/app schemas, never reads
+`.env`, and rolls back/ends connections in cleanup. It does not replace real
+Supabase Auth, network, native or in-flight session-revocation acceptance.
 
 ## Required schedules
 
@@ -34,5 +38,7 @@ Do not run these schedules against real learner records.
 Confirm both commit order and durable row counts, then discard the isolated fixture
 state. Record deadlocks/serialization errors explicitly: do not silently call a new
 Start key to recover an uncertain request. Reconcile using the original attempt/key.
-Also run the permission/behavior pgTAP source and database advisors; source review
-and these written schedules do not establish a passing result.
+The permission/behavior pgTAP suites passed separately in hosted rollback-only
+transactions. Installed-schema advisors and remaining trigger edge fixtures are
+still pending. The Auth deletion group is sequential, not an in-flight revocation
+test; banning/unverifying cases belong to separate authorization coverage.
