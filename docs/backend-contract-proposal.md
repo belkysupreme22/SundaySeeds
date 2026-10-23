@@ -1,5 +1,16 @@
 # Backend contract proposal
 
+## Connected assessment storage foundation — 23 October 2026
+
+Prepared CLI-generated additive migration for sealed private assessment snapshots,
+exact enrollment/edition-bound attempts, immutable checked selections and validated
+outcomes. RLS and privilege revokes keep answer keys and attempts inaccessible to
+clients. Added owner-run permission/validator test source; no tests/SQL/advisors run.
+No content import, activation, RPC or mobile integration in this increment.
+See [foundation scope](../supabase/course-assessments.md). Next trusted Start/Check/
+Finish and own summaries, then separate development import/activation and mobile.
+
+
 ## Connected assessment policy — 23 October 2026
 
 Owner accepted highest score per joined edition, unlimited retries, submission

@@ -1,5 +1,11 @@
 # Learner identity database foundation
 
+## Assessment foundation — 23 October 2026
+
+Source-only private storage migration and permission-test source are prepared.
+Nothing applied, imported or activated. See [assessment scope](course-assessments.md).
+
+
 ## Verified enrollment and reading — 21 October 2026
 
 The next additive migration and four-reading development import are now applied.
