@@ -26,6 +26,7 @@ export function ReaderScreen({ lessonId }: { lessonId: string }) {
     return (
       <Screen>
         <PageHeader title="Lesson not found" back />
+        <Button label="Explore lessons" onPress={() => router.replace('/lessons')} />
       </Screen>
     );
   const index = progress[lesson.id]?.sectionIndex ?? 0;

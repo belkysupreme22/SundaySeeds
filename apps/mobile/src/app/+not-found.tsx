@@ -6,8 +6,8 @@ export default function NotFound() {
   return (
     <Screen>
       <Text variant="heading">This page wandered off.</Text>
-      <Text>Let’s get back to your lessons.</Text>
-      <Button label="Back to Home" onPress={() => router.replace('/')} />
+      <Text>Let’s get back to Home.</Text>
+      <Button label="Back to Home" onPress={() => router.replace('/home')} />
     </Screen>
   );
 }

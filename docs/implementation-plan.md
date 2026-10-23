@@ -1,5 +1,15 @@
 # SundaySeeds implementation plan
 
+## A44 missing-route recovery — 23 October 2026
+
+Missing reader lessons now offer Explore lessons, matching overview/quiz fallbacks.
+Unknown-route copy and destination consistently return to /home. Four browser
+paths (unknown route, missing overview/reader/quiz) recovered at 320px/390px with
+zero page errors and disposable data. Screenshots inspected; no layout/storage/API
+changes. Native Back and assistive technology remain pending. Evidence ignored
+in .artifacts/tail-audit-2026-10-23. Shared A45 corrections follow separately.
+
+
 ## Profile and Settings continuation A39–A43 — 22 October 2026
 
 A39/A40 now fence late editor-save navigation and duplicate submissions while
