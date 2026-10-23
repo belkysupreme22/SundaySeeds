@@ -1,5 +1,25 @@
 # Backend contract proposal
 
+## Connected mobile quizzes — 23 October 2026
+
+Implemented source for joined-reading → connected quiz → server feedback/Finish →
+receipt/best score → joined course progress. Existing lesson links show completion
+and best scores; no duplicate lesson list. Actor/focus/request fencing, durable
+same-key pending-operation recovery and redacted Finish reconciliation protect
+uncertain requests. Explicit acknowledged retry rotates the key. Sample progress
+and quiz routes stay separate; Settings help explains the actual storage scope.
+Final source review fenced a delayed retry before journal replacement, checked
+recovered attempt identity, resets each new question to the top and returns to the
+existing course screen instead of stacking duplicate course pages.
+No backend changes or real attempts/results were made by this mobile increment.
+
+Actual verification: scoped source review and formatting only. Typecheck, tests,
+builds, runtime/service behavior, screenshot regression and native acceptance remain
+owner-run pending. See [acceptance checklist](connected-quiz-acceptance.md) and
+[decision0017](decisions/0017-connected-quiz-mobile-recovery.md). Next owner acceptance
+of this connected journey, resolve findings, then reading/bookmark synchronization.
+
+
 ## Development quizzes activated — 23 October 2026
 
 Deployed both reviewed assessment migrations to sundayseeds-dev, checked installed

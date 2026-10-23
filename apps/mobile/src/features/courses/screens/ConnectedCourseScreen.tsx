@@ -2,6 +2,8 @@ import { router, useLocalSearchParams } from 'expo-router';
 import { StyleSheet, View } from 'react-native';
 import { useCourseOffering } from '../hooks/useCourseOffering';
 import { useCourseEnrollment } from '../hooks/useCourseEnrollment';
+import { useCourseQuizProgress } from '../../quizzes/hooks/useCourseQuizProgress';
+import { ConnectedQuizProgress } from '../../quizzes/components/ConnectedQuizProgress';
 import { CourseEnrollmentPanel } from '../components/CourseEnrollmentPanel';
 import { courseTimeLabel } from '../types/catalog';
 import { colors } from '../../../shared/theme/tokens';
@@ -20,6 +22,16 @@ export function ConnectedCourseScreen() {
   const course = state.status === 'ready' ? state.data : null;
   const enrollment = access.state.status === 'ready' ? access.state.enrollment : null;
   const joinedEditionAvailable = enrollment?.state === 'active' && enrollment.available;
+  const quizProgress = useCourseQuizProgress(courseId, Boolean(joinedEditionAvailable));
+  const progressData =
+    quizProgress.state.status === 'ready' &&
+    quizProgress.state.data?.releaseId === enrollment?.releaseId
+      ? quizProgress.state.data
+      : null;
+  const progressPanel =
+    joinedEditionAvailable && enrollment ? (
+      <ConnectedQuizProgress progress={quizProgress} releaseId={enrollment.releaseId} />
+    ) : null;
   const showOfferedOutline = !joinedEditionAvailable || enrollment?.releaseId !== course?.releaseId;
   const time = course ? courseTimeLabel(course) : null;
   const lessonCount =
@@ -27,6 +39,7 @@ export function ConnectedCourseScreen() {
 
   const accessPanel = (
     <CourseEnrollmentPanel
+      quizProgress={progressData}
       course={course}
       state={access.state}
       onJoin={(revision) => {
@@ -83,6 +96,7 @@ export function ConnectedCourseScreen() {
           </Card>
         )}
       {!course && accessPanel}
+      {!course && progressPanel}
       {course && (
         <>
           <Card tone="lavender" style={styles.group}>
@@ -127,6 +141,7 @@ export function ConnectedCourseScreen() {
               ))}
             </View>
           )}
+          {progressPanel}
           {accessPanel}
           {showOfferedOutline && (
             <>

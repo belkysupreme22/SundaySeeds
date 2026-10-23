@@ -73,7 +73,13 @@ import. No new assessment security warning was reported.
   INFO findings concern newly created assessment/attempt indexes before workload.
   Their lack of usage at deployment is not grounds for deletion.
 
-## Next increment
+## Mobile follow-up
+
+Mobile quiz/progress source has since been implemented. Its typecheck, runtime and
+visual/native acceptance remain pending; see [mobile checklist](../docs/connected-quiz-acceptance.md).
+The deployment results above are not mobile acceptance.
+
+## Original next increment
 
 Connect mobile Start/resume/Check/Finish and acknowledged own progress. Preserve
 actor fencing, original idempotency keys on uncertain responses, server feedback

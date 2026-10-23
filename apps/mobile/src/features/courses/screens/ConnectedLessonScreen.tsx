@@ -90,16 +90,23 @@ export function ConnectedLessonScreen() {
               Take the reflection prompts at your own pace. You do not need to submit a personal
               response.
             </Text>
-            <Text variant="small" muted>
-              Connected knowledge checks and saved learning progress are coming in the next update.
-            </Text>
+            <Button
+              label="Open knowledge check"
+              icon="arrow-right"
+              onPress={() =>
+                router.push({
+                  pathname: '/courses/[id]/quiz/[lessonId]',
+                  params: { id: courseId, lessonId: lesson.id },
+                })
+              }
+            />
           </Card>
         </>
       )}
       <Button
         label="Back to your course"
         variant="outline"
-        onPress={() => router.replace({ pathname: '/courses/[id]', params: { id: courseId } })}
+        onPress={() => router.dismissTo({ pathname: '/courses/[id]', params: { id: courseId } })}
       />
     </Screen>
   );

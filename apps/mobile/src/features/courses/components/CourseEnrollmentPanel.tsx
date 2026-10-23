@@ -1,6 +1,7 @@
 import { router } from 'expo-router';
 import { StyleSheet, View } from 'react-native';
 import type { CourseOffering } from '../types/catalog';
+import type { CourseQuizProgress } from '../../quizzes/types/connectedQuiz';
 import type { EnrollmentState } from '../types/enrollment';
 import { Button } from '../../../shared/ui/Button';
 import { Card } from '../../../shared/ui/Card';
@@ -8,12 +9,14 @@ import { Text } from '../../../shared/ui/Text';
 
 export function CourseEnrollmentPanel({
   course,
+  quizProgress,
   state,
   onJoin,
   onReload,
   onRefreshCourse,
 }: {
   course: CourseOffering | null;
+  quizProgress?: CourseQuizProgress | null;
   state: EnrollmentState;
   onJoin: (revision: number) => void;
   onReload: () => void;
@@ -119,20 +122,34 @@ export function CourseEnrollmentPanel({
       {enrolled.modules.map((module) => (
         <View key={module.id} style={styles.group}>
           <Text variant="label">{module.title}</Text>
-          {module.lessons.map((lesson) => (
-            <Button
-              key={lesson.id}
-              label={lesson.title}
-              variant="outline"
-              icon="book-open"
-              onPress={() =>
-                router.push({
-                  pathname: '/courses/[id]/lessons/[lessonId]',
-                  params: { id: enrolled.courseId, lessonId: lesson.id },
-                })
-              }
-            />
-          ))}
+          {module.lessons.map((lesson) => {
+            const check =
+              quizProgress?.available && quizProgress.assessmentAvailable
+                ? quizProgress.lessons?.find((item) => item.lessonId === lesson.id)
+                : null;
+            return (
+              <View key={lesson.id} style={{ gap: 6 }}>
+                <Button
+                  label={lesson.title}
+                  variant="outline"
+                  icon="book-open"
+                  onPress={() =>
+                    router.push({
+                      pathname: '/courses/[id]/lessons/[lessonId]',
+                      params: { id: enrolled.courseId, lessonId: lesson.id },
+                    })
+                  }
+                />
+                {check && (
+                  <Text variant="caption" muted>
+                    {check.completed
+                      ? `Knowledge check finished · Best ${check.bestScorePercent}%`
+                      : 'Knowledge check not finished'}
+                  </Text>
+                )}
+              </View>
+            );
+          })}
         </View>
       ))}
     </Card>

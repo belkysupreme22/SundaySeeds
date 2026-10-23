@@ -1,5 +1,14 @@
 # Auth onboarding flow
 
+
+## Connected quiz account boundary — 23 October 2026
+
+Mobile quiz source now uses the existing validated actor/session boundary, pinned
+request tokens and focus/sequence fences. Signed-out/unverified deep links show
+account guidance; interrupted writes reconcile their actor-scoped attempt before
+showing completion. No new sign-in/onboarding behavior is added. Runtime/account-
+switch/native acceptance remains pending; see [checklist](connected-quiz-acceptance.md).
+
 Updated 20 October 2026. The owner authorized the first identity/profile source
 slice after contract draft v1, requested preparation for a new development project
 with configurable domain/sender, and explicitly delegated the three dependency
