@@ -1,5 +1,16 @@
 # Backend contract proposal
 
+## Connected assessment policy — 23 October 2026
+
+Owner accepted highest score per joined edition, unlimited retries, submission
+access recheck and first immutable quiz activation in the current development
+edition without changing readings/order. Later quiz changes require a new edition.
+See [decision0016](decisions/0016-connected-assessment-policy.md) for the concrete
+Start/Check/Finish and delivery contract. Next: additive assessment schema and
+permission-test source, then separate explicit development import/activation.
+No schema/service/content changes or verification in this planning increment.
+
+
 ## Verified enrollment and authorized reading — 21 October 2026
 
 Owner requested the next implementation step. Additive migration
