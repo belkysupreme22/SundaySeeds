@@ -5,6 +5,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Changed
+- Prepared trusted connected quiz Start/resume/Check/Finish and own progress RPC source with private feedback, locked selections, server scores and stable receipt reconciliation. Added rollback permission/behavior tests and concurrency schedules. No database application, test execution, quiz activation or mobile integration yet.
 - Prepared private connected-assessment storage, sealed edition snapshots, enrollment-bound attempts and validated outcomes, with permission-test source. No migration application, quiz activation, real history or mobile integration yet; SQL/runtime checks pending.
 - Recorded accepted connected-assessment policies and a bounded server-authoritative quiz/progress contract, including one-time immutable quiz activation in the current development edition. Implementation and deployment remain pending.
 - Added page-wide background blur behind active loaders with SDK-compatible Expo Blur, preserving sharp original-color animations. Corrected connected-course active tabs, web progress/selection semantics and removed loader style API usage. Browser caller checks at320px/390px and typecheck pass; native blur/accessibility pending, older Android uses tint fallback.

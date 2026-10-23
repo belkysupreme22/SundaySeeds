@@ -1,5 +1,23 @@
 # SundaySeeds implementation plan
 
+## Trusted connected quiz RPC source — 23 October 2026
+
+Prepared CLI-generated migration20261023081342 with Start, resume, Check, Finish
+and own progress APIs. Entry points derive live verified actor/session, enforce
+exact enrollment/edition access and lock writes consistently. Initial questions use
+allowlists; checked selections lock, Finish scores server-side, stable receipts
+are separate from current best. Withdrawn access blocks unfinished writes; own
+historical receipt replay contains no teaching content. Unknown/unavailable progress
+uses null state rather than fake zero. Sample history remains separate.
+
+Independent SQL source review found no concrete blocker. Added 80-assertion rollback
+pgTAP source plus separate concurrency schedules; neither executed. No hosted SQL,
+advisors, content activation/import or mobile integration. Owner verification
+preference retained. Next isolated SQL/permission/concurrency verification before
+explicit four-check development import/activation, then mobile adapter/quiz flow.
+See [API/source scope](../supabase/course-assessments.md).
+
+
 ## Connected assessment storage foundation — 23 October 2026
 
 Prepared CLI-generated additive migration for sealed private assessment snapshots,

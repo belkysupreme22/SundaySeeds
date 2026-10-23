@@ -53,3 +53,50 @@ Only after permission/concurrency checks: explicit approved four-check import an
 activation, then mobile integration. No sample progress/history is imported. Reading
 positions/bookmarks synchronize separately with stale-write handling. No staff
 publication, course migration or production content review is implemented here.
+
+## Trusted RPC source increment — 23 October 2026
+
+Migration `20261023081342_trusted_course_quiz_api.sql` follows the foundation;
+**not deployed or SQL-tested**.
+All endpoints derive their own verified actor/session; none accepts a learner ID.
+Public wrappers run as invoker and call narrowly granted private definer entrypoints
+with an empty search path. Internal helpers remain uncallable by client roles.
+Direct answer-key/attempt/outcome table access stays revoked.
+
+| RPC | Request | Acknowledged result |
+| --- | --- | --- |
+| `start_course_quiz` | course ID, lesson ID, actor-scoped UUID start key | Exact pinned attempt and safe questions; same key/scope returns same attempt |
+| `get_course_quiz_attempt` | attempt ID | Own active attempt, safe questions and feedback only for checked answers |
+| `check_course_quiz_answer` | attempt ID, question ID, option ID | First accepted selection with correct option, correctness and explanation |
+| `finish_course_quiz` | attempt ID | `{receipt, best_score_percent}`; no questions or feedback |
+| `get_my_course_quiz_progress` | course ID | Own edition's required/completed checks and per-lesson best scores |
+
+Start/Get project question and option fields explicitly; explanations/keys appear
+only in checked-answer feedback. Changing a checked selection returns a conflict;
+an intentional retry starts a new key/attempt. Finish accepts only fully checked
+attempts, deriving score server-side and storing one immutable outcome. Receipt score/count/time fields are immutable; `best_score_percent` is a separate
+current aggregate and may improve on later attempts. A repeated
+Finish can return an already-committed own redacted receipt after withdrawal;
+it cannot reopen question/feedback access. Best scores include recorded zero and
+never decrease. No course-wide score is introduced. Multiple attempts cannot inflate
+completion of the same required lesson.
+
+New access/check/submission locks the enrollment, then pinned release, then attempt.
+Start additionally serializes actor/start-key reuse. Withdrawn/revoked access blocks
+unfinished submissions; admission closure of the current offering is independent.
+Read the migration and concurrency schedules together before implementing privileged
+revocation operations. Session validation is at request entry; in-flight Auth-session
+revocation timing requires acceptance, not a claim of instantaneous token invalidation.
+
+Failures include denied verification/access, unavailable attempt/assessment, invalid
+request/selection, reused start-key scope conflict, checked-answer conflict and
+incomplete quiz. Mobile adapters must map these to safe messages and preserve the
+original attempt/key on an uncertain response. A missing enrollment or assessment
+is distinct from a failed query or fabricated empty history. Sample learning remains
+isolated; these summaries do not imply reading-position/bookmark synchronization.
+
+`tests/course_quiz_rpc.test.sql` supplies rollback-only permission/behavior fixtures;
+`tests/course_quiz_concurrency.md` lists separate multi-transaction schedules.
+Neither is a passing verification record. Deployment, SQL/pgTAP/advisors, concurrent
+revocation/Finish, actual session timing and mobile integration remain pending.
+No content imported or assessments activated by this RPC migration.

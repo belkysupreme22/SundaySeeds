@@ -1,5 +1,11 @@
 # Learner identity database foundation
 
+## Trusted quiz RPC source — 23 October 2026
+
+Start/resume/Check/Finish/own summary source and rollback tests are prepared, not
+applied or SQL-verified. See [assessment API scope](course-assessments.md).
+
+
 ## Assessment foundation — 23 October 2026
 
 Source-only private storage migration and permission-test source are prepared.
