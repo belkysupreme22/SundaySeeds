@@ -1,5 +1,20 @@
 # Backend contract proposal
 
+## Development quizzes activated — 23 October 2026
+
+Deployed both reviewed assessment migrations to sundayseeds-dev, checked installed
+security/performance advisors, and explicitly imported the approved first sealed
+set into the existing edition: four checks/12 questions. Seven local import/source
+groups passed; final hosted queries confirm valid set, unchanged reading/release/
+offering hashes and zero attempts/outcomes. No learner history or enrollment writes.
+Advisor findings and exact migration-version mapping are documented in the
+[activation record](../supabase/assessment-development-activation.md).
+
+Next mobile connected quiz adapter/flow and acknowledged progress, with actor
+fencing and uncertain-response reconciliation. No mobile code changed this increment;
+real session/network/native and production content review remain pending.
+
+
 ## Assessment integrity verification — 23 October 2026
 
 Passed 38 rollback-only storage-integrity groups on isolated local PostgreSQL17.10:

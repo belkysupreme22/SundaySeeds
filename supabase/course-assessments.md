@@ -1,7 +1,8 @@
 # Connected assessment foundation
 
-23 October 2026. **Rollback SQL verification passed; not persistently deployed or activated.** See
-[verification record](assessment-verification.md).
+23 October 2026. **Deployed and activated in development: four checks/12 questions.**
+See [activation record](assessment-development-activation.md) and
+[verification record](assessment-verification.md). Mobile integration remains pending.
 
 Policy: [decision0016](../docs/decisions/0016-connected-assessment-policy.md).
 Migration: `20261023080205_connected_assessment_foundation.sql`, generated using

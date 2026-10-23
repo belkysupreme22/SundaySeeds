@@ -1,13 +1,13 @@
 # Learner identity database foundation
 
-## Current assessment verification
+## Current development assessment state
 
-The assessment schema and trusted quiz APIs are source-complete but not deployed
-persistently or activated. Hosted rollback-only suites passed 116 assertions;
-the separate local concurrency harness passed 12 groups and storage-integrity
-checks passed 38 groups using Auth shims.
-See [actual verification and remaining gates](assessment-verification.md) before
-deploying or importing content. The dated source checkpoints below preserve history.
+Both reviewed assessment migrations and the explicit first four-check development
+import are now applied to sundayseeds-dev. Installed-schema advisors were reviewed;
+no attempts or learner results were imported. See the
+[activation record](assessment-development-activation.md) for exact scope, migration
+versions, verification and remaining advisory findings. Mobile quiz integration
+is next. Dated source checkpoints below preserve history.
 
 ## Trusted quiz RPC source — 23 October 2026
 

@@ -1,5 +1,10 @@
 # Assessment verification — 23 October 2026
 
+Subsequent development deployment and four-check activation are recorded in
+[development activation](assessment-development-activation.md). The dated test
+runs below retain their original scope and limits.
+
+
 The owner explicitly approved rollback-only tests in **sundayseeds-dev** after
 branch creation was declined. No local Docker/Postgres was available. No test
 branch was created, and neither assessment migration was deployed persistently.

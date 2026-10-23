@@ -5,6 +5,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Changed
+- Deployed verified assessment storage/RPCs and activated the first sealed four-check development set (12 questions). Seven import/source checks passed; hosted readings, course listing and learner history stayed unchanged. Recorded installed-schema advisors and remaining readiness findings; mobile integration is next.
 - Verified 38 local rollback-only assessment integrity groups: sealed content, exact enrollment bindings, forged/partial outcome rejection, fractional scoring and isolated user-deletion cascades. All fixtures rolled back; no hosted deployment or activation.
 - Passed 12 isolated local PostgreSQL concurrency test groups for connected quizzes, including observed Start/Check/Finish and revocation/withdrawal locks. Added a loopback-only disposable database harness; Auth uses local shims. No hosted deployment or activation.
 - Verified assessment foundation (36 assertions) and trusted quiz APIs (80 assertions) in owner-approved rollback-only development transactions. Confirmed no schema or fixtures retained; added reproducible assembly and verification records. Local concurrency was subsequently verified separately; activation remains pending.
