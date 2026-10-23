@@ -1,5 +1,22 @@
 # SundaySeeds implementation plan
 
+## Account reading-state backend — 23 October 2026
+
+Applied an additive private reading-state table and three trusted RPCs to development:
+get own state, save authored section ID and set a lesson bookmark. Records bind to
+current actor/enrollment/joined edition; independent revisions prevent unrelated
+field conflicts, same-value retries reconcile and stale changed values require
+explicit reload. No completion, history, sample merge or learner state was inserted.
+
+Source review fixed a null-section/mobile invariant mismatch. Actual verification:
+MCP DDL success, migration metadata, empty table/grant/function inspection and
+installed advisors only. Database test source is prepared but unexecuted; behavior,
+concurrency and mobile/native acceptance remain pending. See
+[backend scope](../supabase/course-reading-state.md) and
+[decision0018](decisions/0018-connected-reading-state.md). Mobile reader integration
+follows as a separate bounded commit; previous connected quiz acceptance is pending.
+
+
 ## Connected mobile quizzes — 23 October 2026
 
 Implemented source for joined-reading → connected quiz → server feedback/Finish →

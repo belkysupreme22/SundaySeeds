@@ -1,5 +1,13 @@
 # Learner identity database foundation
 
+
+## Account reading state — 23 October 2026
+
+An additive private reading-state table and get/save-section/set-bookmark APIs are
+now applied to development. Position/bookmark revisions are independent; sample
+storage and quiz completion remain separate. Catalog/advisors were inspected;
+behavioral/concurrency tests remain pending. See [scope](course-reading-state.md).
+
 ## Current development assessment state
 
 Both reviewed assessment migrations and the explicit first four-check development
