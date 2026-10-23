@@ -1,9 +1,16 @@
-import { useEffect, useRef } from 'react';
+import { BlurView } from 'expo-blur';
+import { useEffect, useRef, type RefObject } from 'react';
 import { Animated, Easing, Platform, StyleSheet, View } from 'react-native';
 import { LoadingState } from './LoadingState';
 import { useLoaderMotion } from './useLoaderMotion';
 
-export function PageLoadingOverlay({ label }: { label: string }) {
+export function PageLoadingOverlay({
+  label,
+  blurTarget,
+}: {
+  label: string;
+  blurTarget: RefObject<View | null>;
+}) {
   const motion = useLoaderMotion();
   const opacity = useRef(new Animated.Value(1)).current;
   useEffect(() => {
@@ -23,6 +30,14 @@ export function PageLoadingOverlay({ label }: { label: string }) {
   }, [motion, opacity]);
   return (
     <Animated.View pointerEvents="none" style={[styles.overlay, { opacity }]}>
+      <BlurView
+        pointerEvents="none"
+        intensity={35}
+        tint="light"
+        blurTarget={blurTarget}
+        blurMethod="dimezisBlurViewSdk31Plus"
+        style={StyleSheet.absoluteFill}
+      />
       <View style={styles.panel}>
         <LoadingState label={label} />
       </View>
@@ -32,7 +47,11 @@ export function PageLoadingOverlay({ label }: { label: string }) {
 
 const styles = StyleSheet.create({
   overlay: {
-    ...StyleSheet.absoluteFillObject,
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
     zIndex: 20,
     alignItems: 'center',
     justifyContent: 'center',

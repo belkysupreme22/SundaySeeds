@@ -1,5 +1,6 @@
+import { BlurTargetView } from 'expo-blur';
 import type { ReactNode } from 'react';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useFocusEffect } from 'expo-router';
 import {
   Keyboard,
@@ -29,6 +30,7 @@ export function Screen({
   backgroundColor?: string;
   loadingMessage?: string;
 }) {
+  const blurTarget = useRef<View | null>(null);
   const [focused, setFocused] = useState(false);
   useFocusEffect(
     useCallback(() => {
@@ -44,20 +46,24 @@ export function Screen({
       style={[styles.safe, backgroundColor ? { backgroundColor } : undefined]}
       edges={['top', 'left', 'right']}
     >
-      <ScrollView
-        contentContainerStyle={[styles.content, contentStyle]}
-        keyboardShouldPersistTaps="handled"
-        showsVerticalScrollIndicator={false}
-      >
-        {children}
-      </ScrollView>
-      {footer && (
-        <SafeAreaView edges={['bottom']} style={styles.footer}>
-          {footer}
-        </SafeAreaView>
+      <BlurTargetView ref={blurTarget} style={styles.body}>
+        <ScrollView
+          contentContainerStyle={[styles.content, contentStyle]}
+          keyboardShouldPersistTaps="handled"
+          showsVerticalScrollIndicator={false}
+        >
+          {children}
+        </ScrollView>
+        {footer && (
+          <SafeAreaView edges={['bottom']} style={styles.footer}>
+            {footer}
+          </SafeAreaView>
+        )}
+        {tabs && <BottomNav />}
+      </BlurTargetView>
+      {loadingMessage && focused && (
+        <PageLoadingOverlay label={loadingMessage} blurTarget={blurTarget} />
       )}
-      {tabs && <BottomNav />}
-      {loadingMessage && focused && <PageLoadingOverlay label={loadingMessage} />}
     </SafeAreaView>
   );
 }
@@ -65,6 +71,7 @@ export function ContentGroup({ children }: { children: ReactNode }) {
   return <View style={styles.group}>{children}</View>;
 }
 const styles = StyleSheet.create({
+  body: { flex: 1 },
   safe: { flex: 1, backgroundColor: colors.paper },
   content: { paddingHorizontal: 20, paddingTop: 14, paddingBottom: 28, gap: 22 },
   group: { gap: 12 },

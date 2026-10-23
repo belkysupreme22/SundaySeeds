@@ -5,6 +5,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Changed
+- Added page-wide background blur behind active loaders with SDK-compatible Expo Blur, preserving sharp original-color animations. Corrected connected-course active tabs, web progress/selection semantics and removed loader style API usage. Browser caller checks at320px/390px and typecheck pass; native blur/accessibility pending, older Android uses tint fallback.
 - Added Explore lessons to missing-reader recovery and made unknown-route Home guidance target Home explicitly. Four missing-route recovery paths checked at 320px/390px; native acceptance pending.
 - Prevented a delayed introduction-replay save from navigating after the learner leaves, with duplicate-submit protection. Preserved normal Home completion and continue-for-now recovery; slow-exit/success/failure browser checks passed at 320px/390px. Native gestures/Back pending.
 - Updated Settings to show verified account status without a misleading management action, distinguish learning-email preferences from account emails, and explain connected course access in Help. Reset explicitly targets sample learning and keeps names/account data separate; sheet/reset/logout browser checks passed at 320px/390px with synthetic responses. Native/service acceptance pending.

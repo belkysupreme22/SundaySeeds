@@ -23,12 +23,15 @@ export function BottomNav() {
             pathname === tab.href ||
             (tab.href === '/home' && pathname === '/') ||
             (tab.href === '/lessons' && pathname.startsWith('/lessons/')) ||
+            (tab.href === '/lessons' &&
+              (pathname === '/courses' || pathname.startsWith('/courses/'))) ||
             (tab.href === '/profile' && pathname === '/settings');
           return (
             <Pressable
               key={tab.label}
               accessibilityRole="tab"
               accessibilityState={{ selected }}
+              aria-selected={selected}
               accessibilityLabel={tab.label}
               onPress={() => {
                 if (pathname !== tab.href) router.replace(tab.href);

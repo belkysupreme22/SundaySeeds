@@ -1,5 +1,25 @@
 # SundaySeeds implementation plan
 
+## A45 shared controls and loader blur — 23 October 2026
+
+Connected course routes now select Lessons; tab selection and shared progress values
+have explicit web ARIA while retaining native properties. Replaced the removed
+absoluteFillObject helper with explicit overlay insets; typecheck now passes.
+Owner requested a blurred loader background: installed SDK-compatible expo-blur,
+wrapped Screen content/footer/tabs in a stable BlurTargetView and rendered blur
+behind the sharp loader. Colors, transparent loader panel, motion and focus gating
+remain. Android uses SDK31Plus blur with older-device tint fallback.
+
+Browser checks at320/390 passed 11 tab routes, six progress caller routes, four
+missing-route recovery paths and a pending recovery-request loader. Screenshots
+inspected; zero page errors, all external requests intercepted, disposable guest
+storage only. No real emails/accounts/env manually accessed. Native blur/Back/
+assistive tech remain pending; custom course indicators and full native accessibility
+are not covered by the shared ProgressBar check. No lint/build/unit-suite rerun.
+Evidence ignored .artifacts/tail-audit-2026-10-23. Next connected quizzes/synced
+progress planning, retaining the audit's explicitly pending native acceptance.
+
+
 ## A44 missing-route recovery — 23 October 2026
 
 Missing reader lessons now offer Explore lessons, matching overview/quiz fallbacks.
