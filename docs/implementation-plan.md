@@ -1,5 +1,20 @@
 # SundaySeeds implementation plan
 
+## Assessment integrity verification — 23 October 2026
+
+Passed 38 rollback-only storage-integrity groups on isolated local PostgreSQL17.10:
+sealed snapshot coverage/immutability, exact actor/enrollment/edition bindings,
+invalid choices, partial/forged outcomes, zero/full/fractional scoring and Auth-shim
+user deletion cascades preserving other learners/shared content. Rejected mutations
+require matching SQLSTATE/message and unchanged storage; all new fixtures rolled
+back. No schema fixes were needed. Independent source review found no blocker.
+
+Next development deployment and installed-schema advisors, then the approved
+four-check import/activation and mobile quiz integration. Hosted assessment schema
+and content remain unchanged; local Auth shims do not prove provider/session/native
+acceptance. See [verification record](../supabase/assessment-verification.md).
+
+
 ## Assessment concurrency verification — 23 October 2026
 
 Passed 12 isolated local PostgreSQL 17.10 test groups (zero failures), including

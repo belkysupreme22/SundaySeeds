@@ -39,9 +39,8 @@ migrations are not already installed. The helper only writes SQL; it neither
 connects nor deploys. Do not run against production. This verification permission
 was for rollback-only development testing, not persistent fixtures or deployment.
 
-Still pending: full binding/immutability trigger edge fixtures beyond these suites,
-database advisors for a persistently installed assessment schema, actual
-network/session-switch behavior,
+Still pending: database advisors for a persistently installed assessment schema,
+actual network/session-switch behavior,
 content import/activation and mobile integration. The tests do not prove immediate
 in-flight Auth revocation. See tests/course_quiz_concurrency.md for schedules.
 
@@ -86,7 +85,47 @@ never reads environment files. It leaves local fixture state and must only targe
 a disposable database. Stop/discard that cluster after testing.
 
 The concurrency gate for these schedules is satisfied locally. Remaining gates
-include additional integrity-trigger edge fixtures, installed-schema advisors,
+include installed-schema advisors,
 development deployment/import, actual SDK/network/account-switch acceptance and
 mobile integration. Immediate in-flight Auth revocation remains unproven.
 No claim of production readiness follows from these results.
+
+
+## Isolated local integrity run
+
+`tests/assessment_integrity.cjs` passed **38 groups, zero failures** on PostgreSQL
+17.10 with the same local Auth shims. It exercises privileged storage writes so
+trigger behavior is checked independently of client RPC validation. Each rejected
+mutation must raise its expected SQLSTATE and message; all seven relevant storage
+tables are compared before and after rejection.
+
+Coverage includes missing/extra/duplicate released lessons, unknown or mismatched
+release/course, one sealed set per edition, sealed update/delete, crossed actor/
+enrollment/course/release/set/lesson/check attempt bindings, immutable attempt/
+answer/outcome updates, invalid questions/options, duplicate records, incomplete
+or forged outcomes, zero/full scores and 1/3→33%, 2/3→67% rounding. Incorrect 34%/
+66% values are rejected. A completed outcome blocks further checked-answer inserts.
+
+Deleting a fake Auth user after deleting its shim session removes both enrollments,
+all four own attempts and their checked answers/outcomes. Both shared assessment
+sets survive, as do another learner's enrollment, attempt, answers and outcome.
+Standalone privileged answer/outcome deletion remains intentionally permitted;
+this is not a client deletion API or production retention policy.
+
+The harness wraps all new fixtures in BEGIN/ROLLBACK and confirms their absence
+at the end. The final strengthened cascade version was rerun successfully; the
+local server was then stopped. No hosted queries, schema fixes, migration changes,
+content imports, activation, real learner records or mobile changes occurred.
+Independent source review found no blocker; real Supabase Auth cascades beyond the
+local shim schema and live session/network/native behavior remain unverified.
+
+Reproduction: first prepare the disposable database with the concurrency harness,
+then use the same three environment variables shown above and run:
+
+```sh
+node supabase/tests/assessment_integrity.cjs
+```
+
+These checks complete the enumerated storage-integrity gate. Next apply the
+reviewed assessment migrations to development, inspect installed-schema advisors,
+then import the approved four checks separately before mobile integration.

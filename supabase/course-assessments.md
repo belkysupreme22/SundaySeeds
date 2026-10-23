@@ -37,12 +37,14 @@ through attempts. No retention/export/delete policy or client deletion API is ad
 `tests/assessment_foundation.test.sql` is owner-run, rollback-only pgTAP source:
 RLS, role privileges, direct-access denial and malformed snapshot validation.
 Its 36 assertions passed in a rollback-only PostgreSQL run. Persistent deployment,
-advisors and full trigger edge fixtures remain pending. Additional required acceptance cases before enabling
-quizzes: missing/extra outline lessons; sealed updates; cross-enrollment/edition
-binding; invalid/changed choices; partial or forged outcomes; zero/full scores;
-concurrent Check/Finish; actual role/default privilege behavior and Auth cascades.
+advisors remain pending. The separate local integrity suite passed 38 groups for
+missing/extra/duplicate outline lessons, sealed mutations, cross-actor/enrollment/
+edition bindings, invalid choices, partial/forged outcomes, zero/full/fractional
+scores and Auth-shim deletion cascades. Concurrency passed separately; local shims
+do not establish real Auth-provider behavior.
 
-Next implement trusted Start/Check/Finish and own summary RPCs. Require the existing
+The trusted Start/Check/Finish and own summary RPC source is implemented below.
+It requires the existing
 verified live actor/session and current enrollment/release access at acceptance.
 Coordinate a consistent enrollment/release/assessment/attempt lock order with
 revocation; offering closure alone must not revoke a pinned enrollment. Same checked
@@ -100,7 +102,7 @@ isolated; these summaries do not imply reading-position/bookmark synchronization
 `tests/course_quiz_concurrency.md` lists separate multi-transaction schedules.
 The single-session RPC suite passed 80 assertions. The isolated local concurrency
 harness passed 12 groups, including observed revocation/Finish lock boundaries.
-Local Auth shims do not establish real provider/session behavior. Remaining trigger
-edge fixtures, deployment/advisors, actual session timing and mobile integration
+Local Auth shims do not establish real provider/session behavior. The 38-group local storage-integrity suite also passed. Deployment/advisors,
+actual session timing and mobile integration
 remain pending. See assessment-verification.md.
 No content imported or assessments activated by this RPC migration.

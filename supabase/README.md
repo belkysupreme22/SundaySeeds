@@ -1,5 +1,14 @@
 # Learner identity database foundation
 
+## Current assessment verification
+
+The assessment schema and trusted quiz APIs are source-complete but not deployed
+persistently or activated. Hosted rollback-only suites passed 116 assertions;
+the separate local concurrency harness passed 12 groups and storage-integrity
+checks passed 38 groups using Auth shims.
+See [actual verification and remaining gates](assessment-verification.md) before
+deploying or importing content. The dated source checkpoints below preserve history.
+
 ## Trusted quiz RPC source — 23 October 2026
 
 Start/resume/Check/Finish/own summary source and rollback tests are prepared, not
