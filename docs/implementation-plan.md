@@ -1,5 +1,19 @@
 # SundaySeeds implementation plan
 
+## Assessment rollback verification — 23 October 2026
+
+Owner approved rollback-only testing in existing development after branch creation
+was declined. Both migrations executed transactionally: foundation36/36 and RPC80/80
+assertions passed. Post-run objects/fixture users/course absent; no persistent
+schema/import/activation. Added reproducible SQL assembly helper and detailed
+[verification record](../supabase/assessment-verification.md).
+
+Two-session concurrency remains gated on a separate database/local environment;
+rollback-only fixtures cannot be shared across sessions. No production-ready claim.
+Next obtain that environment for concurrency acceptance before activation; mobile
+source integration can be prepared separately without claiming connected runtime.
+
+
 ## Trusted connected quiz RPC source — 23 October 2026
 
 Prepared CLI-generated migration20261023081342 with Start, resume, Check, Finish

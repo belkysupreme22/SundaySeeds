@@ -1,6 +1,7 @@
 # Connected assessment foundation
 
-23 October 2026. **Source prepared; not applied or verified against Postgres.**
+23 October 2026. **Rollback SQL verification passed; not persistently deployed or activated.** See
+[verification record](assessment-verification.md).
 
 Policy: [decision0016](../docs/decisions/0016-connected-assessment-policy.md).
 Migration: `20261023080205_connected_assessment_foundation.sql`, generated using
@@ -35,8 +36,8 @@ through attempts. No retention/export/delete policy or client deletion API is ad
 
 `tests/assessment_foundation.test.sql` is owner-run, rollback-only pgTAP source:
 RLS, role privileges, direct-access denial and malformed snapshot validation.
-It has not run. Migration application, SQL parsing/execution, advisors and full
-trigger fixtures are pending. Additional required acceptance cases before enabling
+Its 36 assertions passed in a rollback-only PostgreSQL run. Persistent deployment,
+advisors and full trigger edge fixtures remain pending. Additional required acceptance cases before enabling
 quizzes: missing/extra outline lessons; sealed updates; cross-enrollment/edition
 binding; invalid/changed choices; partial or forged outcomes; zero/full scores;
 concurrent Check/Finish; actual role/default privilege behavior and Auth cascades.
@@ -57,7 +58,7 @@ publication, course migration or production content review is implemented here.
 ## Trusted RPC source increment — 23 October 2026
 
 Migration `20261023081342_trusted_course_quiz_api.sql` follows the foundation;
-**not deployed or SQL-tested**.
+**not persistently deployed; 80 RPC assertions passed in rollback-only SQL tests**.
 All endpoints derive their own verified actor/session; none accepts a learner ID.
 Public wrappers run as invoker and call narrowly granted private definer entrypoints
 with an empty search path. Internal helpers remain uncallable by client roles.
@@ -97,6 +98,7 @@ isolated; these summaries do not imply reading-position/bookmark synchronization
 
 `tests/course_quiz_rpc.test.sql` supplies rollback-only permission/behavior fixtures;
 `tests/course_quiz_concurrency.md` lists separate multi-transaction schedules.
-Neither is a passing verification record. Deployment, SQL/pgTAP/advisors, concurrent
-revocation/Finish, actual session timing and mobile integration remain pending.
+The single-session RPC suite passed 80 assertions; concurrency schedules are not
+executed. Deployment/advisors, concurrent revocation/Finish, actual session timing
+and mobile integration remain pending. See assessment-verification.md.
 No content imported or assessments activated by this RPC migration.
