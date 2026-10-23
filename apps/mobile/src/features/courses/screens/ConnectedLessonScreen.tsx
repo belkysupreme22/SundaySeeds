@@ -1,6 +1,11 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import { StyleSheet, View } from 'react-native';
 import { useConnectedLesson } from '../hooks/useConnectedLesson';
+import { useCourseReadingState } from '../hooks/useCourseReadingState';
+import {
+  CourseReadingStatePanel,
+  SectionReadingPlace,
+} from '../components/CourseReadingStatePanel';
 import { Screen } from '../../../shared/ui/Screen';
 import { PageHeader } from '../../../shared/ui/PageHeader';
 import { Card } from '../../../shared/ui/Card';
@@ -17,9 +22,20 @@ export function ConnectedLessonScreen() {
     courseId,
     typeof lessonId === 'string' ? lessonId : '',
   );
+  const connectedLesson = state.status === 'ready' ? state.data : null;
+  const readingSync = useCourseReadingState(connectedLesson);
   const lesson = state.status === 'ready' ? state.data.lesson : null;
   return (
-    <Screen tabs loadingMessage={state.status === 'loading' ? 'Opening your lesson…' : undefined}>
+    <Screen
+      tabs
+      loadingMessage={
+        state.status === 'loading'
+          ? 'Opening your lesson…'
+          : readingSync.state.status === 'ready' && readingSync.state.busy
+            ? 'Saving your reading state…'
+            : undefined
+      }
+    >
       <PageHeader title="Your lesson" back />
       {(state.status === 'signed_out' || state.status === 'unverified') && (
         <Card tone="mint" style={styles.group}>
@@ -60,6 +76,9 @@ export function ConnectedLessonScreen() {
             </Text>
             <Text variant="small">{lesson.intro}</Text>
           </Card>
+          {connectedLesson && (
+            <CourseReadingStatePanel sync={readingSync} lesson={connectedLesson} />
+          )}
           <View style={styles.group}>
             <Text variant="title" accessibilityRole="header">
               In this lesson
@@ -77,6 +96,7 @@ export function ConnectedLessonScreen() {
                 {section.title}
               </Text>
               <Text>{section.body}</Text>
+              <SectionReadingPlace sync={readingSync} sectionId={section.id} />
             </View>
           ))}
           <Card tone="yellow" shadow={false} style={styles.group}>

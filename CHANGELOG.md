@@ -5,6 +5,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Changed
+- Added explicit saved-place and lesson-bookmark controls to the full connected reader, with acknowledged account state, same-change retry and conflict reload. Preserved sample learning and quiz completion; typecheck, cross-device behavior and visual/native acceptance remain pending.
 - Applied private account reading-place/bookmark storage and three actor/edition-bound APIs with independent field revisions and explicit conflict handling. Inspected development metadata/advisors; behavioral and concurrency checks remain pending. No learner data imported.
 - Added mobile connected course quizzes with server feedback/scoring, acknowledged receipts, same-attempt recovery and account fencing. Joined course details show recorded completion and best scores; sample learning stays separate. Source review only; owner typecheck/runtime/visual/native acceptance pending.
 - Deployed verified assessment storage/RPCs and activated the first sealed four-check development set (12 questions). Seven import/source checks passed; hosted readings, course listing and learner history stayed unchanged. Recorded installed-schema advisors and remaining readiness findings; mobile integration is next.

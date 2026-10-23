@@ -36,6 +36,7 @@ export function useConnectedLesson(courseId: string, lessonId: string) {
           try {
             const client = getSupabaseClient();
             actor = await authRef.current.getValidatedActor();
+            if (!active) return;
             if (!client || !actor || actor.userId !== owner?.id || !actor.isCurrent())
               throw new CourseEnrollmentError('authentication_required');
             const data = await loadConnectedLesson(client, actor, courseId, lessonId);

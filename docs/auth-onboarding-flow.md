@@ -1,6 +1,15 @@
 # Auth onboarding flow
 
 
+## Connected reading-state account boundary — 23 October 2026
+
+Reading-place and lesson-bookmark source uses validated account actors and pinned
+request tokens, with focus/sequence fencing. Only server acknowledgement displays
+saved state. Account switching hides earlier account state; prior sample data is
+not merged. Runtime/session and native acceptance remain pending; see the
+[reading checklist](connected-reading-acceptance.md).
+
+
 ## Connected quiz account boundary — 23 October 2026
 
 Mobile quiz source now uses the existing validated actor/session boundary, pinned

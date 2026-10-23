@@ -1,5 +1,23 @@
 # SundaySeeds implementation plan
 
+## Connected reading-place controls — 23 October 2026
+
+The full connected reader now has a lesson bookmark, acknowledged saved-section
+summary/marker and explicit Save my place here actions. Feature-owned adapters and
+hooks validate exact actor/enrollment/edition/lesson/section responses, pin request
+tokens and fence account/focus/request changes. Unknown saves retain target/revision
+for explicit retry; conflicts require reload. Previous data is labelled last
+confirmed while pending. A late lesson actor lookup no longer sends after blur.
+
+Full text, outcomes, verse, quiz entry and shared/sample screens remain intact.
+No auto-scroll, offline queue, sample merge or completion changes. Settings help
+reflects actual storage/reset behavior. Database is applied; source review and
+formatting passed. Typecheck, DB behavior/concurrency, real cross-device/session,
+visual and native acceptance remain owner-run pending. See the
+[acceptance checklist](connected-reading-acceptance.md). Previous quiz acceptance
+also remains pending; next validate both connected journeys before staff workflows.
+
+
 ## Account reading-state backend — 23 October 2026
 
 Applied an additive private reading-state table and three trusted RPCs to development:
