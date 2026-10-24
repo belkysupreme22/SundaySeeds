@@ -5,6 +5,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Changed
+- Recorded the owner’s teacher-draft/admin-review-and-publish workflow and a staged staff backend plan: scoped authority, durable drafts, fixed reviews and complete immutable course editions. Staff grants/implementation and learner quiz/reading acceptance remain pending.
 - Added explicit saved-place and lesson-bookmark controls to the full connected reader, with acknowledged account state, same-change retry and conflict reload. Preserved sample learning and quiz completion; typecheck, cross-device behavior and visual/native acceptance remain pending.
 - Applied private account reading-place/bookmark storage and three actor/edition-bound APIs with independent field revisions and explicit conflict handling. Inspected development metadata/advisors; behavioral and concurrency checks remain pending. No learner data imported.
 - Added mobile connected course quizzes with server feedback/scoring, acknowledged receipts, same-attempt recovery and account fencing. Joined course details show recorded completion and best scores; sample learning stays separate. Source review only; owner typecheck/runtime/visual/native acceptance pending.

@@ -1,5 +1,20 @@
 # Backend contract proposal
 
+## Staff workflow direction — 24 October 2026
+
+The owner selected **teachers draft; admins review and publish**. See
+[decision0019](decisions/0019-staff-review-and-publication.md) and the
+[staff workflow plan](staff-workflow-plan.md) for the bounded sequence: course-scoped
+authority proposal, durable drafts, fixed review snapshots, then atomic complete
+course-edition publication. Prototype lesson publication cannot directly become
+the connected publish operation. The learner's joined edition remains unchanged.
+
+B1-04 is now partially resolved on publisher role only; named content/rights
+reviewers and identities remain open. B1-06 bootstrap, scopes/delegation and audit
+access also remain open. No prototype grants/fixtures are migrated. Source and
+document review only; no staff implementation, deployment, SQL, tests or runtime
+checks. Learner quiz/reading acceptance remains pending alongside this planning.
+
 ## Connected reading-place controls — 23 October 2026
 
 The full connected reader now has a lesson bookmark, acknowledged saved-section
@@ -351,7 +366,7 @@ No SQL, RLS policies, provider configuration, credentials, email delivery or net
 | B1-01 | Confirmed by owner | Adult learners; system-wide super admin and evolving sub-admin structure | Product scope established; capabilities remain open |
 | B1-02 | Confirmed by owner, 16 October | Adult learner sign-in: email and password | Provider/verification/recovery configuration still pending |
 | B1-03 | Confirmed by owner | Automatic knowledge checks with answers and explanations; no teacher marking | Feedback operation implementation |
-| B1-04 | Owner decision required | First organization/class, curriculum owner, content/translation rights and permitted publisher/inviter | Real pilot data and content publication |
+| B1-04 | Partially confirmed 24 Oct: teachers draft; admins review/publish | Named curriculum/rights reviewers and publisher identities remain open; class/organization and invitation issuer are separate later inputs. See decision0019 and staff-workflow-plan.md | Actual staff authority, content approval/publication and later class invitations |
 | B1-05a | Confirmed by owner, 16 October | Adult learner self-onboarding: create an account without an invitation using email/password. Class admission and staff grants are separate | Registration UI/contract direction established; no service configured |
 | B1-05b | Remaining owner/contract decisions required; verification/admission direction settled in B1-05c/d | Verification/recovery method and destination, safe errors/retry/password/session policy, class invitation recipient/expiry/redemption lifecycle; staff sign-in and staff-as-learner support | Remaining identity/enrollment workflow and connected implementation |
 | B1-05c | Confirmed by owner, 19 October | Learners must verify their email before starting a connected course. Guest browsing/details remain available; existing sample learning is unchanged | Enforce verified identity at trusted connected course Start/Join/content operations; delivery/callback contract still pending |

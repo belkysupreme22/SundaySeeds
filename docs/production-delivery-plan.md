@@ -2,6 +2,22 @@
 
 Status: delivery plan, not a readiness certification. The owner wants approximately 80% overall completion by next week, across mobile and teacher/admin. Use **28 October** as the checkpoint. The earlier roughly 35% overall estimate was qualitative; there is no weighted, estimated backlog from which to calculate a defensible new percentage. Do not report planning, source implementation or prototype screens as verified production workflows.
 
+## Current checkpoint — 24 October 2026
+
+Development now has connected catalog/Join/readings, trusted knowledge checks,
+acknowledged quiz progress and reading-place/bookmark APIs; the corresponding
+mobile source is committed and pushed. Quiz and reading-sync owner acceptance,
+including cross-device/session and native checks, remains pending. Teacher/admin
+are still session-only prototypes. The original target dates below are historical
+targets, not completed batches or a readiness percentage.
+
+The owner confirmed teachers draft and admins review/publish. Follow the
+[staff workflow plan](staff-workflow-plan.md): scoped authority and durable drafts
+first, fixed admin review next, atomic course-edition publication after that.
+Planning can advance alongside learner acceptance. Actual grants/publication wait
+for the named identities and remaining authority/rights decisions. No staff schema,
+connected UI or grants were implemented by this planning increment.
+
 ## Owner priority change — 21 October 2026
 
 The owner requires a screen-by-screen learner audit beginning at onboarding before
@@ -32,7 +48,7 @@ catalog portion of the 22 October target, not the full enrollment/access batch.
 
 ## Outcome and scope
 
-Prioritize one connected development workflow: an authorized teacher saves and publishes a reviewed course; a verified learner joins, studies and submits a knowledge check; progress survives another device; the teacher sees only the permitted class-level learning results. Admin must be able to provision/revoke the required scoped authority with an audit trail. This is the first meaningful production-oriented milestone, not the whole product.
+Prioritize one connected development workflow: an authorized teacher saves and submits a course; an authorized admin reviews and publishes its fixed edition; a verified learner joins, studies and submits a knowledge check; progress survives another device; the teacher sees only the permitted class-level learning results. Admin must be able to provision/revoke the required scoped authority with an audit trail. This is the first meaningful production-oriented milestone, not the whole product.
 
 The dependency order is content/access rules → publication and enrollment → trusted attempts/progress → scoped classes/reporting. Backend boundaries and owner decisions are shared dependencies, so adding UI lanes alone cannot compress the whole schedule. Dates below are targets conditional on those decisions and verification, not a promise of 80% readiness. If scope or checks slip, report the unfinished workflow rather than changing the denominator.
 

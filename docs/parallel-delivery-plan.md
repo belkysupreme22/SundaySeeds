@@ -1,5 +1,16 @@
 # Parallel delivery plan
 
+## Current checkpoint — 24 October 2026
+
+Connected quizzes/progress and reading-place/bookmark sync now have development
+backend and mobile source; owner acceptance remains pending. Teachers/admins still
+use session-only prototypes. The owner confirmed teachers draft and admins
+review/publish. Follow the [staff workflow plan](staff-workflow-plan.md) for scoped
+authority, durable drafts, fixed review snapshots and atomic course publication;
+named identities and remaining authority/rights rules still gate activation.
+Planning may advance alongside learner acceptance without marking it passed.
+Older next-task notes below retain their dated context.
+
 ## Current owner priority — 21 October 2026
 
 Follow the [ordered learner screen audit](learner-screen-audit.md), starting at

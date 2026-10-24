@@ -1,5 +1,20 @@
 # SundaySeeds implementation plan
 
+## Staff authoring/review plan — 24 October 2026
+
+The owner confirmed **teachers draft; admins review and publish**. The
+[staff workflow plan](staff-workflow-plan.md) maps existing prototypes to scoped
+staff authority, durable revisioned drafts, fixed admin review snapshots and atomic
+course-edition publication. [Decision0019](decisions/0019-staff-review-and-publication.md)
+records only that accepted workflow; identities, bootstrap/delegation, precise
+scopes, rights review and lifecycle permissions remain open.
+
+Next: prepare the S1/S2 authority/durable-draft slice, with authority policy reviewed
+before implementation/activation. Learner quiz/reading acceptance remains pending
+and can proceed alongside planning; resolve findings before combined workflow
+acceptance. No staff code, migration, grant or publication was created. Actual
+verification: source inventory and document review only; no tests/builds/runtime.
+
 ## Connected reading-place controls — 23 October 2026
 
 The full connected reader now has a lesson bookmark, acknowledged saved-section
