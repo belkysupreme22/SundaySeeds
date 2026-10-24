@@ -1,5 +1,23 @@
 # SundaySeeds implementation plan
 
+## Staff draft foundation source — 24 October 2026
+
+Proceeding with the first staff backend slice: explicit assigned-course authoring,
+live verified-session checks, one revisioned working draft per course and exact
+same-request recovery. See [decision0020](decisions/0020-scoped-staff-course-drafts.md)
+and the [backend contract](../supabase/staff-course-drafts.md). Incomplete drafts
+are separate from publication readiness; teachers gain no admin or learner-record
+access. No real assignment or administrator is inferred from this implementation.
+
+This is source preparation with rollback-only permission/behavior test source.
+Independent source review fixed a save/Auth-deletion lock inversion and found no
+remaining blocker; whitespace review passed. Tests, behavioral SQL,
+deployment, staff UI/auth integration and runtime acceptance remain pending. The
+dashboard stays a session-only prototype. Next verify/deploy the reviewed backend
+in development and wire staff sign-in/editor separately; actual assignment requires
+owner-selected identities and trusted provisioning. Existing learner quiz/reading
+acceptance remains open alongside this work.
+
 ## Staff authoring/review plan — 24 October 2026
 
 The owner confirmed **teachers draft; admins review and publish**. The

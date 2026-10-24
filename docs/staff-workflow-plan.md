@@ -5,6 +5,14 @@ teachers draft and admins review/publish. The remaining authority and lifecycle
 rules below are proposals, not active permissions. See
 [decision0019](decisions/0019-staff-review-and-publication.md).
 
+S1/S2 backend source preparation now exists under
+[decision0020](decisions/0020-scoped-staff-course-drafts.md): assigned-course
+authority and draft List/Get/Save with revisions and exact-request recovery.
+See the [backend contract](../supabase/staff-course-drafts.md). The migration and
+permission/behavior checks remain unexecuted; no real assignments or staff UI
+connection are established. The staged plan below still separates this source
+from deployment, owner acceptance, bootstrap and publication.
+
 ## Delivery order
 
 The first connected staff result should be an authorized teacher saving a course

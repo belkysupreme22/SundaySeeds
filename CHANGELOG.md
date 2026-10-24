@@ -5,6 +5,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Changed
+- Prepared the assigned-course staff draft backend: live verified authority checks, revisioned aggregate saves, exact request reconciliation and minimal save events. Includes source permission/behavior checks; deployment, actual grants, staff sign-in/editor integration and runtime verification remain pending.
 - Recorded the owner’s teacher-draft/admin-review-and-publish workflow and a staged staff backend plan: scoped authority, durable drafts, fixed reviews and complete immutable course editions. Staff grants/implementation and learner quiz/reading acceptance remain pending.
 - Added explicit saved-place and lesson-bookmark controls to the full connected reader, with acknowledged account state, same-change retry and conflict reload. Preserved sample learning and quiz completion; typecheck, cross-device behavior and visual/native acceptance remain pending.
 - Applied private account reading-place/bookmark storage and three actor/edition-bound APIs with independent field revisions and explicit conflict handling. Inspected development metadata/advisors; behavioral and concurrency checks remain pending. No learner data imported.

@@ -1,5 +1,13 @@
 # Learner identity database foundation
 
+## Staff course drafts — 24 October 2026
+
+Source-only additive assigned-course authority, aggregate draft read/save and
+same-request reconciliation are prepared in a separate migration. No staff
+identity, grant, administrator bootstrap, draft import, UI connection or hosted
+deployment is created. See the [staff draft contract](staff-course-drafts.md) and
+its pending permission/behavior checks; do not blanket-push migration history.
+
 
 ## Account reading state — 23 October 2026
 
