@@ -110,3 +110,73 @@ export async function saveCourseDraft(
     p_content: content,
   });
 }
+
+export interface CourseReviewItem {
+  review_id: string;
+  course_id: string;
+  title: string;
+  revision: number;
+  status: "pending" | "changes_requested" | "approved" | "published";
+  submitted_by: string;
+  review_notes: string | null;
+  published_edition_number: number | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface CourseReviewDetails extends CourseReviewItem {
+  snapshot: CourseDraftAggregate;
+}
+
+export async function submitCourseForReview(
+  courseId: string,
+  expectedRevision: number,
+  requestKey: string = crypto.randomUUID(),
+): Promise<{ ok: boolean; review_id: string; status: string }> {
+  return await callRpc<{ ok: boolean; review_id: string; status: string }>(
+    "submit_course_draft_for_review",
+    {
+      p_course_id: courseId,
+      p_expected_revision: expectedRevision,
+      p_request_key: requestKey,
+    },
+  );
+}
+
+export async function fetchCourseReviews(): Promise<CourseReviewItem[]> {
+  const result = await callRpc<{ ok: boolean; reviews: CourseReviewItem[] }>(
+    "list_course_reviews",
+  );
+  return result.reviews || [];
+}
+
+export async function fetchCourseReview(reviewId: string): Promise<CourseReviewDetails> {
+  return await callRpc<CourseReviewDetails>("get_course_review", {
+    p_review_id: reviewId,
+  });
+}
+
+export async function returnCourseReview(
+  reviewId: string,
+  notes: string,
+  requestKey: string = crypto.randomUUID(),
+): Promise<{ ok: boolean }> {
+  return await callRpc<{ ok: boolean }>("return_course_review_for_changes", {
+    p_review_id: reviewId,
+    p_notes: notes,
+    p_request_key: requestKey,
+  });
+}
+
+export async function publishCourseReview(
+  reviewId: string,
+  requestKey: string = crypto.randomUUID(),
+): Promise<{ ok: boolean; edition_number: number; release_id: string }> {
+  return await callRpc<{ ok: boolean; edition_number: number; release_id: string }>(
+    "publish_course_review",
+    {
+      p_review_id: reviewId,
+      p_request_key: requestKey,
+    },
+  );
+}

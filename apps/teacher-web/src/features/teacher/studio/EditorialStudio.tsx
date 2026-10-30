@@ -91,6 +91,14 @@ export function EditorialStudio({
       setStatus(`Course draft saved to Supabase (Revision ${durable.revision + 1}).`);
     }
   };
+
+  const handleSubmitReview = async () => {
+    if (!course) return;
+    const result = await durable.submitForReview();
+    if (result.ok) {
+      setStatus(`Course revision ${durable.revision} submitted for admin review.`);
+    }
+  };
   function navigate(action: () => void) {
     if (dirty) setPending(() => action);
     else action();
@@ -385,6 +393,8 @@ export function EditorialStudio({
               onPreviewLesson={(id) => openLesson(id, "preview")}
               onSaveDurableDraft={course?.isAssigned ? handleSaveDurable : undefined}
               savingDraft={durable.saving}
+              onSubmitForReview={course?.isAssigned ? handleSubmitReview : undefined}
+              submittingForReview={durable.submitting}
               durableRevision={durable.revision}
               durableError={durable.error}
               lastSavedAt={durable.lastSavedAt}

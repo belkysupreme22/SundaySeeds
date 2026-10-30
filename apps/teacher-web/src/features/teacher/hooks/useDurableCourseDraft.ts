@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import {
   fetchCourseDraft,
   saveCourseDraft,
+  submitCourseForReview,
   type CourseDraftAggregate,
   type DraftLesson,
 } from "../data/staffDraftApi";
@@ -67,6 +68,7 @@ export function useDurableCourseDraft(courseId: string | null) {
   const [revision, setRevision] = useState(0);
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isConflict, setIsConflict] = useState(false);
   const [lastSavedAt, setLastSavedAt] = useState<string | null>(null);
@@ -150,15 +152,37 @@ export function useDurableCourseDraft(courseId: string | null) {
     }
   };
 
+  const submitForReview = async () => {
+    if (!courseId) {
+      return { ok: false, message: "No course selected for review." };
+    }
+
+    setSubmitting(true);
+    setError(null);
+
+    try {
+      const res = await submitCourseForReview(courseId, revision);
+      return { ok: true, reviewId: res.review_id };
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : "Failed to submit course for review.";
+      setError(msg);
+      return { ok: false, message: msg };
+    } finally {
+      if (mounted.current) setSubmitting(false);
+    }
+  };
+
   return {
     draft,
     revision,
     loading,
     saving,
+    submitting,
     error,
     isConflict,
     lastSavedAt,
     save,
+    submitForReview,
     reload: load,
   };
 }

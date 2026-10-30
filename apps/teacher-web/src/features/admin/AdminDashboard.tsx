@@ -13,6 +13,7 @@ import { useAdminSettings } from "./settings/useAdminSettings";
 import { SystemSettingsPanel } from "./settings/SystemSettingsPanel";
 import { AdminHelpCard } from "./settings/AdminHelpCard";
 import { AuditWorkspace } from "./audit/AuditWorkspace";
+import { CourseReviewsPanel } from "./reviews/CourseReviewsPanel";
 
 function AdministrationStructure() {
   return (
@@ -85,6 +86,9 @@ export default function AdminDashboard() {
           </Tabs.Trigger>
           <Tabs.Trigger className="tab-trigger" value="settings">
             Settings
+          </Tabs.Trigger>
+          <Tabs.Trigger className="tab-trigger" value="reviews">
+            Course reviews
           </Tabs.Trigger>
           <Tabs.Trigger className="tab-trigger" value="audit">
             Audit &amp; operations
@@ -249,6 +253,14 @@ export default function AdminDashboard() {
           className="page-stack admin-tab-content"
         >
           <SystemSettingsPanel model={settings} directory={directory} />
+        </Tabs.Content>
+        <Tabs.Content
+          value="reviews"
+          forceMount
+          hidden={tab !== "reviews"}
+          className="page-stack admin-tab-content"
+        >
+          <CourseReviewsPanel />
         </Tabs.Content>
         <Tabs.Content
           value="audit"

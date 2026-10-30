@@ -1,4 +1,4 @@
-import { BookOpen, CheckCircle2, CircleAlert, FilePenLine, Save } from "lucide-react";
+import { BookOpen, CheckCircle2, CircleAlert, FilePenLine, Save, Send } from "lucide-react";
 import type { CourseOutline } from "../courses/useCourseOutlines";
 import type { LessonDraft } from "../lessons/types";
 import {
@@ -14,6 +14,8 @@ export function CourseReview({
   onPreviewLesson,
   onSaveDurableDraft,
   savingDraft,
+  onSubmitForReview,
+  submittingForReview,
   durableRevision,
   durableError,
   lastSavedAt,
@@ -25,6 +27,8 @@ export function CourseReview({
   onPreviewLesson: (id: string) => void;
   onSaveDurableDraft?: () => void;
   savingDraft?: boolean;
+  onSubmitForReview?: () => void;
+  submittingForReview?: boolean;
   durableRevision?: number;
   durableError?: string | null;
   lastSavedAt?: string | null;
@@ -71,10 +75,26 @@ export function CourseReview({
               type="button"
               className="button button-primary"
               onClick={onSaveDurableDraft}
-              disabled={savingDraft}
+              disabled={savingDraft || submittingForReview}
             >
               <Save size={16} />
               <span>{savingDraft ? "Saving to database…" : "Save draft to database"}</span>
+            </button>
+          )}
+          {onSubmitForReview && (
+            <button
+              type="button"
+              className="button button-outline"
+              onClick={onSubmitForReview}
+              disabled={savingDraft || submittingForReview || (durableRevision ?? 0) === 0}
+              title={
+                (durableRevision ?? 0) === 0
+                  ? "Save draft first before submitting for review"
+                  : "Submit frozen draft snapshot for admin review"
+              }
+            >
+              <Send size={16} />
+              <span>{submittingForReview ? "Submitting…" : "Submit for Admin Review"}</span>
             </button>
           )}
         </div>
