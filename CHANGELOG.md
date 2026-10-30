@@ -5,6 +5,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Changed
+- Connected teacher editorial studio to durable draft RPCs (S2): created `staffDraftApi` and `useDurableCourseDraft` in `apps/teacher-web`. Assigned courses populate automatically from the staff session; teachers can edit course briefs, modules, lessons and quizzes, and save durable revisioned aggregates with revision tracking, timestamps and conflict detection.
 - Implemented role-based staff authentication (RBAC) and workspace gating in `apps/teacher-web`: email/password sign-in screen, `useStaffAuth` session context, zero-dependency Supabase client, and server-verified role gating for Teacher and Administration workspaces with user email, role badges and sign-out controls.
 - Prepared additive migration `20261030090000_staff_roles_and_session.sql`: `staff_roles` table with RLS, `get_my_staff_session` RPC returning verified actor roles and course assignments, development initial admin bootstrap helper, and admin `set_staff_role` API.
 - Polished mobile auth error messages and proof handling: added actionable feedback for same-password rejection, invalid credentials, rate limiting, network failures, server unavailability, and expired or disabled verification links without exposing raw errors. Updated sample lesson unit test assertion to match descriptive lesson intros.
