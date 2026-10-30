@@ -44,6 +44,23 @@ export function createEmailProof(kind: 'confirmation' | 'recovery', tokenHash: s
         tokenHash = '';
         if (disposed || error || !data.session || !data.user?.email) {
           await clear(operationClient);
+          const errCode =
+            error && typeof error === 'object' && 'code' in error && typeof error.code === 'string'
+              ? error.code
+              : '';
+          if (errCode === 'otp_expired') {
+            return {
+              ok: false,
+              message: 'This email link has expired. Request a new email to continue.',
+            };
+          }
+          if (errCode === 'otp_disabled') {
+            return {
+              ok: false,
+              message:
+                'This email link has already been used or is disabled. Request a new email.',
+            };
+          }
           return {
             ok: false,
             message:
@@ -66,12 +83,21 @@ export function createEmailProof(kind: 'confirmation' | 'recovery', tokenHash: s
           message: 'Choose a new password for this account.',
           email: subject.email,
         };
-      } catch {
+      } catch (err) {
         tokenHash = '';
         await clear(operationClient);
+        const isNetwork =
+          err instanceof TypeError ||
+          (err &&
+            typeof err === 'object' &&
+            'message' in err &&
+            typeof (err as { message: unknown }).message === 'string' &&
+            /network|fetch|connect|timeout/i.test((err as { message: string }).message));
         return {
           ok: false,
-          message: 'The link could not be checked. Request a new email and try again.',
+          message: isNetwork
+            ? 'The link could not be checked. Check your connection and try again.'
+            : 'The link could not be checked. Request a new email and try again.',
         };
       } finally {
         inFlight = false;
@@ -91,6 +117,40 @@ export function createEmailProof(kind: 'confirmation' | 'recovery', tokenHash: s
       try {
         const { data, error } = await current.auth.updateUser({ password });
         if (error || data.user?.id !== account.id) {
+          const errCode =
+            error && typeof error === 'object' && 'code' in error && typeof error.code === 'string'
+              ? error.code
+              : '';
+          const errMsg =
+            error && typeof error === 'object' && 'message' in error && typeof error.message === 'string'
+              ? error.message
+              : '';
+          if (errCode === 'same_password' || /same_password|different from the old/i.test(errMsg)) {
+            return {
+              ok: false,
+              message: 'Your new password must be different from your previous password.',
+            };
+          }
+          if (errCode === 'weak_password') {
+            return {
+              ok: false,
+              message: 'Choose a longer passphrase that meets the account password requirements.',
+            };
+          }
+          if (errCode === 'over_request_rate_limit') {
+            return {
+              ok: false,
+              message: 'Too many requests were made. Wait a few minutes before trying again.',
+            };
+          }
+          const isNetwork =
+            /network|fetch|timeout|connection/i.test(errMsg) || error instanceof TypeError;
+          if (isNetwork) {
+            return {
+              ok: false,
+              message: 'The password could not be changed. Check your connection and try again.',
+            };
+          }
           return {
             ok: false,
             message:

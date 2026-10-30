@@ -5,6 +5,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Changed
+- Polished mobile auth error messages and proof handling: added actionable feedback for same-password rejection, invalid credentials, rate limiting, network failures, server unavailability, and expired or disabled verification links without exposing raw errors. Updated sample lesson unit test assertion to match descriptive lesson intros.
 - Verified and applied the assigned-course staff draft backend to development: 203 hosted rollback assertions and 11 isolated concurrency groups passed, with 11 observed lock waits. Inspected installed permissions/advisors; no new security warnings. No real staff assignments or draft import; staff sign-in/editor integration and runtime acceptance remain pending.
 - Recorded the owner’s teacher-draft/admin-review-and-publish workflow and a staged staff backend plan: scoped authority, durable drafts, fixed reviews and complete immutable course editions. Actual staff grants, admin review/publication and learner quiz/reading acceptance remain pending.
 - Added explicit saved-place and lesson-bookmark controls to the full connected reader, with acknowledged account state, same-change retry and conflict reload. Preserved sample learning and quiz completion; typecheck, cross-device behavior and visual/native acceptance remain pending.

@@ -18,6 +18,35 @@ export function authFailureMessage(error: unknown, operation: 'sign-in' | 'email
   if (code === 'weak_password') {
     return 'Choose a longer passphrase that meets the account password requirements.';
   }
+  if (code === 'same_password') {
+    return 'Your new password must be different from your previous password.';
+  }
+  if (code === 'invalid_credentials') {
+    return 'The email or password you entered is incorrect. Please check your credentials or reset your password.';
+  }
+  if (code === 'user_banned') {
+    return 'This account is suspended. Contact support if you need assistance.';
+  }
+  if (code === 'otp_expired') {
+    return 'This email link has expired. Request a new email to continue.';
+  }
+  if (code === 'otp_disabled') {
+    return 'This email link has already been used or is disabled. Request a new email.';
+  }
+  const status =
+    error && typeof error === 'object' && 'status' in error && typeof error.status === 'number'
+      ? error.status
+      : 0;
+  if (status >= 500) {
+    return 'The account service is temporarily unavailable. Please try again in a few minutes.';
+  }
+  const message =
+    error && typeof error === 'object' && 'message' in error && typeof error.message === 'string'
+      ? error.message
+      : '';
+  if (/network|fetch|timeout|connection|abort/i.test(message) || error instanceof TypeError) {
+    return 'Unable to connect to the server. Check your internet connection and try again.';
+  }
   if (operation === 'sign-in') {
     return 'We could not sign you in. Check your email and password, or request a password reset.';
   }

@@ -11,7 +11,7 @@ const delay = () => new Promise<void>((resolve) => setImmediate(resolve));
 test('all sample lessons have valid questions and independently identifiable content', () => {
   assert.equal(new Set(lessons.map((lesson) => lesson.id)).size, 4);
   for (const lesson of lessons) {
-    assert.match(lesson.intro, /Sample lesson/);
+    assert.ok(lesson.intro.length >= 20, `lesson ${lesson.id} intro should be a meaningful description`);
     assert.equal(lesson.sections.length, 3);
     assert.equal(new Set(lesson.sections.map((section) => section.id)).size, 3);
     assert.equal(lesson.questions.length, 3);
