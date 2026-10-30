@@ -1,7 +1,9 @@
 # 0020 — Scoped staff course-draft foundation
 
-24 October 2026. Status: source architecture under the owner's proceed instruction;
-not deployed or behaviorally accepted. Decision0019 establishes teacher drafting
+24 October 2026; deployment update 28 October. Status: applied to development after
+203 hosted assertions and 11 isolated concurrency groups passed. See the
+[verification record](../../supabase/staff-draft-verification.md); staff UI/provider
+acceptance remains pending. Decision0019 establishes teacher drafting
 and admin review/publication. This increment prepares only authoring authority and
 durable draft operations; actual staff identities/bootstrap remain unselected.
 
@@ -28,7 +30,7 @@ durable draft operations; actual staff identities/bootstrap remain unselected.
   navigation summary cannot replace the locked Get/Save authority check. A write
   holding authority may finish before a competing revocation; committed
   revocation denies subsequent requests. No instantaneous session cancellation
-  claim; concurrency verification remains pending.
+  claim; the isolated concurrency schedules passed, with provider behavior pending.
 - Keep the shared course draft if one author is deleted; null its updater
   attribution and cascade that user's assignment/request/event records. This is
   a bounded development behavior, not the final production audit-retention policy.

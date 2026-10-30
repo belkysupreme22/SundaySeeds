@@ -1,10 +1,11 @@
 # Staff course-draft foundation
 
-24 October 2026. **Source preparation only.** No hosted migration, staff identity,
-assignment, administrator bootstrap, draft import or publication is activated by
-this increment. The dashboard remains a session-only prototype; staff sign-in and
-editor integration follow separately. The owner requested proceeding with the
-first staff slice after confirming teacher drafting and admin review/publication.
+28 October 2026. **Applied to development**, following 203 passing hosted rollback
+assertions and 11 passing isolated concurrency groups (11 observed waits).
+Installed grants/functions/advisors were inspected; no new security warning.
+No staff identity, assignment, administrator bootstrap, draft import or publication
+was activated. The dashboard remains a session-only prototype; staff sign-in and
+editor integration follow separately. See the [verification/deployment record](staff-draft-verification.md).
 
 Source migration: `migrations/20261024084826_staff_course_drafts.sql`, generated
 with cached Supabase CLI2.121.0. Do not blanket-push local history: earlier manually
@@ -41,7 +42,7 @@ is not a production audit-retention/deletion policy.
 
 ## Client operations
 
-Three proposed RPCs return JSON objects, not table rows. No operation accepts an
+Three RPCs return JSON objects, not table rows. No operation accepts an
 actor ID or a role assertion.
 
 | RPC | Parameters | Result |
@@ -168,30 +169,23 @@ reconciliation; their retention/storage policy must be resolved before productio
 Audit events contain identifiers/revision/time, never draft text, passwords,
 tokens or learner reflections. There is no client audit-reader API in this slice.
 
-Pending owner checks are provided in `tests/staff_course_drafts.test.sql`: live
+The executed checks in `tests/staff_course_drafts.test.sql` cover live
 session/assignment denial, cross-scope isolation, read-without-creation, CAS and
 same-key reconciliation, malformed content/privileges, revocation and isolated
-Auth-deletion behavior. This file is test source, not a passing result. Separately
-exercise competing first saves, concurrent author updates, duplicate request keys
-and both save/revocation and save/Auth-deletion commit orders in an isolated
-two-session environment. Unexpected transaction failures still require retry of
+Auth-deletion behavior. The separate local concurrency runner covers competing
+first saves, concurrent updates, duplicate keys, both revocation orders and
+Get/Save against both Auth-deletion orders. See the verification record for actual
+counts and limits. Unexpected transaction failures still require retry of
 the whole original request, never a new request key or partial-write assumption.
 
-Before enabling: independently review source, run the appropriate permission and
-behavior/concurrency checks, apply only the reviewed additive migration to the
-intended development project, inspect installed grants/functions/advisors, then
-provision only owner-selected assignments and integrate the staff UI. Do not use
-real learner accounts as fixtures or infer authority from a deadline.
-
-Actual evidence: read-only hosted catalog preflight confirmed the existing course
-tables and no staff tables in the proposed schema, without reading user records.
-Independent source review identified the Auth-deletion lock inversion; the source
-now locks the Auth parent before assignment and rechecks the actor after waiting.
-Final independent source review found no remaining blocker; whitespace review
-passed before commit. Tests,
-typecheck, builds, migration/behavioral SQL and runtime/native acceptance have not
-been performed for this source increment. Existing mobile acceptance remains
-pending separately. No advisor run is claimed for unapplied source.
+Source review, permission/behavior and isolated concurrency checks, development
+application and installed-schema inspection are complete for this foundation.
+Hosted migration version is `20261028081455`; source version remains
+`20261024084826`. Only the reviewed additive migration was applied, without
+replaying historical foundations. Provision only owner-selected assignments via
+a reviewed trusted process and integrate the staff UI separately. Do not use real
+learner accounts as fixtures or infer authority from a deadline. App/provider/
+network/native acceptance and existing mobile acceptance remain pending.
 
 References: [staff workflow plan](../docs/staff-workflow-plan.md),
 [Supabase database function security](https://supabase.com/docs/guides/database/functions),

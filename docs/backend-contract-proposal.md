@@ -1,8 +1,8 @@
 # Backend contract proposal
 
-## Scoped staff draft source — 24 October 2026
+## Scoped staff draft development backend — 28 October 2026
 
-The first staff backend increment prepares course-specific author assignments,
+The first staff backend increment provides course-specific author assignments,
 verified live-session workspace/draft read and revisioned save, with actor-scoped
 request receipts and minimal successful-save events. Private storage and trusted
 operations expose no grant management or publication API. Saving incomplete
@@ -10,11 +10,13 @@ content is allowed; the learner release contract remains unchanged. See
 [decision0020](decisions/0020-scoped-staff-course-drafts.md) and the
 [exact draft API](../supabase/staff-course-drafts.md).
 
-Source only: no hosted application, real staff grants, draft import or connected
-dashboard UI. Tests and runtime/deployment acceptance remain pending. Named
-bootstrap identities, broader delegation/audit policy and production rights gates
-are not settled by this source increment. Learner quiz/reading acceptance is also
-still pending.
+Applied only to development after 203 hosted rollback assertions and 11 isolated
+concurrency groups passed, with installed permissions/advisors inspected. See the
+[verification record](../supabase/staff-draft-verification.md). No real staff grants,
+draft import or connected dashboard UI. Named bootstrap identities, broader
+delegation/audit policy and production rights gates remain open. Staff sign-in/
+editor wiring is next; runtime acceptance and learner quiz/reading acceptance
+remain pending.
 
 ## Staff workflow direction — 24 October 2026
 

@@ -1,17 +1,19 @@
 # Connected staff workflow
 
-Updated 24 October 2026. Status: implementation plan. The owner confirmed that
+Updated 28 October 2026. Status: staged implementation. The owner confirmed that
 teachers draft and admins review/publish. The remaining authority and lifecycle
 rules below are proposals, not active permissions. See
 [decision0019](decisions/0019-staff-review-and-publication.md).
 
-S1/S2 backend source preparation now exists under
+S1/S2 backend foundation now exists under
 [decision0020](decisions/0020-scoped-staff-course-drafts.md): assigned-course
 authority and draft List/Get/Save with revisions and exact-request recovery.
-See the [backend contract](../supabase/staff-course-drafts.md). The migration and
-permission/behavior checks remain unexecuted; no real assignments or staff UI
-connection are established. The staged plan below still separates this source
-from deployment, owner acceptance, bootstrap and publication.
+See the [backend contract](../supabase/staff-course-drafts.md). The migration is
+applied to development after 203 hosted assertions and 11 local concurrency groups
+passed; installed grants/advisors were inspected. See the
+[verification record](../supabase/staff-draft-verification.md). No real assignments
+or staff UI connection are established. Next staff sign-in/editor wiring; owner
+acceptance, trusted bootstrap and admin review/publication remain separate gates.
 
 ## Delivery order
 

@@ -1,5 +1,5 @@
--- SOURCE ONLY: not executed by the authoring increment.
--- Owner-run on an isolated Supabase development database after
+-- Rollback-only suite; execution evidence: ../staff-draft-verification.md.
+-- Run on an isolated Supabase development database after
 -- 20261024084826_staff_course_drafts.sql and its prerequisites.
 -- Fake identities/content only; all fixtures and pgTAP installation roll back.
 -- Single-session coverage does not establish concurrent lock/revocation behavior.
@@ -133,7 +133,7 @@ insert into staff_responses values('list-empty',public.list_my_authoring_courses
 select is((select body->>'actor_id' from staff_responses where name='list-empty'),'a4000000-0000-4000-8000-000000000001','List derives exact current actor');
 select is((select body - array['actor_id','courses'] from staff_responses where name='list-empty'),'{}'::jsonb,'List response has explicit allowlist');
 select is((select jsonb_array_length(body->'courses') from staff_responses where name='list-empty'),2,'List includes only two explicitly assigned courses');
-select ok(not exists(select 1 from staff_responses r,lateral jsonb_array_elements(r.body->'courses') c where r.name='list-empty' and (c->'draft_id'<>'null'::jsonb or c->'revision'<>'0'::jsonb)),'assigned courses without drafts have explicit null ID and revision zero');
+select ok(not exists(select 1 from staff_responses r,lateral jsonb_array_elements(r.body->'courses') c where r.name='list-empty' and (c->'draft_id' is distinct from 'null'::jsonb or c->'revision' is distinct from '0'::jsonb)),'assigned courses without drafts have explicit null ID and revision zero');
 select is(public.get_my_course_draft('c4000000-0000-4000-8000-000000000001')->'draft','null'::jsonb,'authorized missing draft is null');
 select throws_ok($$select public.get_my_course_draft('c4000000-0000-4000-8000-000000000003')$$,'42501','staff_access_required','existing unassigned course denied');
 select throws_ok($$select public.get_my_course_draft('c4000000-0000-4000-8000-000000000099')$$,'42501','staff_access_required','guessed course has same denied outcome');
@@ -198,7 +198,7 @@ select ok((select body->>'actor_id'='a4000000-0000-4000-8000-000000000001' and
  from staff_responses where name='first'),'save acknowledgement binds exact actor/course/request');
 select is((select body->'draft'->'content' from staff_responses where name='first'),pg_temp.staff_content(),'incomplete blank draft round trips without invented content');
 select is((select body - array['actor_id','course_id','request_key','saved_revision','draft'] from staff_responses where name='first'),'{}'::jsonb,'save response has explicit allowlist');
-select is((select body->'draft' - array['draft_id','revision','content','updated_at'] from staff_responses where name='first'),'{}'::jsonb,'draft response has explicit allowlist');
+select is((select (body->'draft') - array['draft_id','revision','content','updated_at'] from staff_responses where name='first'),'{}'::jsonb,'draft response has explicit allowlist');
 select ok((select body->'draft'->>'draft_id' is not null and body->'draft'->>'updated_at' is not null from staff_responses where name='first'),'save returns server draft identity and acknowledgement time');
 select is(public.save_my_course_draft('c4000000-0000-4000-8000-000000000001',0,'e4000000-0000-4000-8000-000000000001',pg_temp.staff_content()),(select body from staff_responses where name='first'),'exact same request returns same acknowledgement before other saves');
 select is(public.get_my_course_draft('c4000000-0000-4000-8000-000000000001')->'draft',(select body->'draft' from staff_responses where name='first'),'Get returns acknowledged saved draft');
@@ -276,8 +276,8 @@ set local role authenticated;
 select is(public.get_my_course_draft('c4000000-0000-4000-8000-000000000001')->'draft'->'revision','4'::jsonb,'remaining authorized author can still read shared draft');
 reset role;
 
--- Pending separate two-session schedules: competing first inserts; stale author
--- updates; same actor/key races; save/revocation in both commit orders; Auth
--- deletion contention; whole-transaction retry after serialization/deadlock.
-select * from finish();
+-- Separate executed two-session schedules: staff_course_draft_concurrency.cjs.
+-- Provider/client recovery after unexpected transaction/transport failures remains
+-- a later integration check; these SQL tests do not prove that behavior.
+select * from finish(true);
 rollback;
