@@ -1,4 +1,4 @@
-import { BookOpen, CheckCircle2, CircleAlert, FilePenLine } from "lucide-react";
+import { BookOpen, CheckCircle2, CircleAlert, FilePenLine, Save } from "lucide-react";
 import type { CourseOutline } from "../courses/useCourseOutlines";
 import type { LessonDraft } from "../lessons/types";
 import {
@@ -12,12 +12,22 @@ export function CourseReview({
   getPublication,
   onOpenLesson,
   onPreviewLesson,
+  onSaveDurableDraft,
+  savingDraft,
+  durableRevision,
+  durableError,
+  lastSavedAt,
 }: {
   course: CourseOutline;
   drafts: LessonDraft[];
   getPublication: (id: string) => LessonPublication;
   onOpenLesson: (id: string) => void;
   onPreviewLesson: (id: string) => void;
+  onSaveDurableDraft?: () => void;
+  savingDraft?: boolean;
+  durableRevision?: number;
+  durableError?: string | null;
+  lastSavedAt?: string | null;
 }) {
   const ids = course.modules.flatMap((module) => module.lessonIds);
   const linked = ids
@@ -49,8 +59,47 @@ export function CourseReview({
           <p>{course.summary || "Add an introduction in the course brief."}</p>
           {course.audience && <p className="muted">For {course.audience}</p>}
         </div>
-        {course.example && <span className="badge">Example course</span>}
+        <div style={{ display: "flex", gap: "8px", alignItems: "center", flexWrap: "wrap" }}>
+          {course.isAssigned && (
+            <span className="badge tone-mint">
+              Assigned draft · Rev {durableRevision ?? course.draftRevision ?? 0}
+            </span>
+          )}
+          {course.example && <span className="badge">Example course</span>}
+          {onSaveDurableDraft && (
+            <button
+              type="button"
+              className="button button-primary"
+              onClick={onSaveDurableDraft}
+              disabled={savingDraft}
+            >
+              <Save size={16} />
+              <span>{savingDraft ? "Saving to database…" : "Save draft to database"}</span>
+            </button>
+          )}
+        </div>
       </header>
+      {durableError && (
+        <div
+          role="alert"
+          style={{
+            background: "#fff0f0",
+            border: "1px solid #d94343",
+            color: "#a81c1c",
+            padding: "10px 14px",
+            borderRadius: 8,
+            fontSize: 13,
+            marginBottom: 16,
+          }}
+        >
+          {durableError}
+        </div>
+      )}
+      {lastSavedAt && (
+        <p className="muted" style={{ fontSize: "12px", marginTop: -8, marginBottom: 16 }}>
+          Last saved to Supabase: {new Date(lastSavedAt).toLocaleTimeString()}
+        </p>
+      )}
       <div className="studio-metrics">
         <div>
           <strong>{course.modules.length}</strong>

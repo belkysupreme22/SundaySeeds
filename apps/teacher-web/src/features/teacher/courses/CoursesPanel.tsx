@@ -135,8 +135,12 @@ export function CoursesPanel({
                 <span className="teacher-icon-tile tone-lavender">
                   <Layers size={25} aria-hidden="true" />
                 </span>
-                <span className="badge">
-                  {item.example ? "Example course" : "Draft course"}
+                <span className={`badge ${item.isAssigned ? "tone-mint" : ""}`}>
+                  {item.example
+                    ? "Example course"
+                    : item.isAssigned
+                      ? `Assigned draft · Rev ${item.draftRevision ?? 0}`
+                      : "Draft course"}
                 </span>
                 <h3>{item.title}</h3>
                 <p className="muted course-summary-copy">

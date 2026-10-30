@@ -1,5 +1,5 @@
 import { ArrowLeft, BookOpen, Copy, LayoutPanelLeft, Plus } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { CourseOutlineModel } from "../courses/useCourseOutlines";
 import type { LessonContent, LessonDraft } from "../lessons/types";
 import { LessonEditor } from "../lessons/LessonEditor";
@@ -11,6 +11,10 @@ import { CourseBrief } from "./CourseBrief";
 import { CourseReview } from "./CourseReview";
 import { StudioOutline } from "./StudioOutline";
 import type { StudioEntry } from "./types";
+import {
+  useDurableCourseDraft,
+  outlineToDraftAggregate,
+} from "../hooks/useDurableCourseDraft";
 import "./studio.css";
 
 interface EditorialStudioProps {
@@ -58,6 +62,35 @@ export function EditorialStudio({
   const course = model.courses.find((item) => item.id === courseId);
   const lesson = drafts.find((item) => item.id === lessonId);
   const module = course?.modules.find((item) => item.id === moduleId);
+
+  const durable = useDurableCourseDraft(course?.isAssigned ? course.id : null);
+
+  useEffect(() => {
+    if (durable.draft && course?.isAssigned) {
+      model.loadDurableDraft(
+        course.id,
+        {
+          course: {
+            title: durable.draft.course.title,
+            summary: durable.draft.course.summary,
+            audience: durable.draft.course.audience,
+            outcomes: durable.draft.course.outcomes,
+          },
+          modules: durable.draft.modules,
+        },
+        durable.revision,
+      );
+    }
+  }, [durable.draft, durable.revision, course?.isAssigned, course?.id]);
+
+  const handleSaveDurable = async () => {
+    if (!course) return;
+    const aggregate = outlineToDraftAggregate(course, drafts);
+    const result = await durable.save(aggregate);
+    if (result.ok) {
+      setStatus(`Course draft saved to Supabase (Revision ${durable.revision + 1}).`);
+    }
+  };
   function navigate(action: () => void) {
     if (dirty) setPending(() => action);
     else action();
@@ -350,6 +383,11 @@ export function EditorialStudio({
               getPublication={publications.get}
               onOpenLesson={openLesson}
               onPreviewLesson={(id) => openLesson(id, "preview")}
+              onSaveDurableDraft={course?.isAssigned ? handleSaveDurable : undefined}
+              savingDraft={durable.saving}
+              durableRevision={durable.revision}
+              durableError={durable.error}
+              lastSavedAt={durable.lastSavedAt}
             />
           ) : courseView ? (
             <div className="studio-welcome">

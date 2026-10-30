@@ -20,6 +20,7 @@ import { CourseLibrary } from "./studio/CourseLibrary";
 import type { StudioEntry } from "./studio/types";
 import { ClassesPanel } from "./classes/ClassesPanel";
 import { ReportsPanel } from "./reporting/ReportsPanel";
+import { useStaffAuth } from "../auth/useStaffAuth";
 import "./teacher.css";
 
 type TeacherTab = "overview" | "courses" | "lessons" | "classes" | "reports";
@@ -33,9 +34,17 @@ export default function TeacherDashboard({
   const [studio, setStudio] = useState<StudioEntry | null>(null);
   const courses = useCourseOutlines();
   const publications = useLessonPublications();
+  const { assignedCourses } = useStaffAuth();
   const nextId = useRef(1);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const active = studio !== null;
+
+  useEffect(() => {
+    if (assignedCourses && assignedCourses.length > 0) {
+      courses.importAssignedCourses(assignedCourses);
+    }
+  }, [assignedCourses]);
+
   useEffect(() => {
     onStudioChange?.(active);
   }, [active, onStudioChange]);

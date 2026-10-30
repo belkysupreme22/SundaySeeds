@@ -10,6 +10,8 @@ export interface CourseModule {
 export interface CourseOutline {
   id: string;
   example?: boolean;
+  isAssigned?: boolean;
+  draftRevision?: number;
   title: string;
   summary: string;
   audience?: string;
@@ -152,6 +154,52 @@ export function useCourseOutlines() {
           : [...current, example],
       );
       selectCourse(example.id);
+    },
+    importAssignedCourses(
+      assignments: { course_id: string; title: string; revision: number }[],
+    ) {
+      setCourses((current) => {
+        const existingMap = new Map(current.map((c) => [c.id, c]));
+        const updated = assignments.map((a) => {
+          const existing = existingMap.get(a.course_id);
+          if (existing) {
+            return {
+              ...existing,
+              title: a.title || existing.title,
+              isAssigned: true,
+              draftRevision: a.revision,
+            };
+          }
+          return {
+            id: a.course_id,
+            title: a.title,
+            summary: "Assigned course draft",
+            modules: [],
+            isAssigned: true,
+            draftRevision: a.revision,
+          };
+        });
+        const unassigned = current.filter(
+          (c) => !assignments.some((a) => a.course_id === c.id),
+        );
+        return [...updated, ...unassigned];
+      });
+    },
+    loadDurableDraft(
+      courseId: string,
+      draftContent: {
+        course: CourseDetails;
+        modules: CourseModule[];
+      },
+      revision: number,
+    ) {
+      updateCourse(courseId, (prev) => ({
+        ...prev,
+        ...draftContent.course,
+        modules: draftContent.modules,
+        isAssigned: true,
+        draftRevision: revision,
+      }));
     },
     removeCourse(id: string) {
       setCourses((current) => current.filter((course) => course.id !== id));
