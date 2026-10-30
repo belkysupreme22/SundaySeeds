@@ -5,6 +5,8 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Changed
+- Implemented role-based staff authentication (RBAC) and workspace gating in `apps/teacher-web`: email/password sign-in screen, `useStaffAuth` session context, zero-dependency Supabase client, and server-verified role gating for Teacher and Administration workspaces with user email, role badges and sign-out controls.
+- Prepared additive migration `20261030090000_staff_roles_and_session.sql`: `staff_roles` table with RLS, `get_my_staff_session` RPC returning verified actor roles and course assignments, development initial admin bootstrap helper, and admin `set_staff_role` API.
 - Polished mobile auth error messages and proof handling: added actionable feedback for same-password rejection, invalid credentials, rate limiting, network failures, server unavailability, and expired or disabled verification links without exposing raw errors. Updated sample lesson unit test assertion to match descriptive lesson intros.
 - Verified and applied the assigned-course staff draft backend to development: 203 hosted rollback assertions and 11 isolated concurrency groups passed, with 11 observed lock waits. Inspected installed permissions/advisors; no new security warnings. No real staff assignments or draft import; staff sign-in/editor integration and runtime acceptance remain pending.
 - Recorded the owner’s teacher-draft/admin-review-and-publish workflow and a staged staff backend plan: scoped authority, durable drafts, fixed reviews and complete immutable course editions. Actual staff grants, admin review/publication and learner quiz/reading acceptance remain pending.
