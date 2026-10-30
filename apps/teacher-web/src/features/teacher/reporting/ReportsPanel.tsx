@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ArrowRight,
   BarChart3,
@@ -11,13 +11,68 @@ import type { CourseOutline } from "../courses/useCourseOutlines";
 import { ReportChartPreview } from "./ReportChartPreview";
 import { ReportTables } from "./ReportTables";
 import { reportClasses, reportCourses, summarize } from "./reportExamples";
+import {
+  fetchMyTeachingClasses,
+  fetchClassLearningSummary,
+  type TeachingClassSummary,
+  type ClassLearningSummary,
+} from "../data/staffDraftApi";
 import "./reporting.css";
 
 export function ReportsPanel({ courses }: { courses: CourseOutline[] }) {
   const [example, setExample] = useState(false);
+  const [liveClasses, setLiveClasses] = useState<TeachingClassSummary[]>([]);
+  const [selectedLiveClassId, setSelectedLiveClassId] = useState<string | null>(null);
+  const [liveSummary, setLiveSummary] = useState<ClassLearningSummary | null>(null);
+  const [loadingSummary, setLoadingSummary] = useState(false);
+
   const [classId, setClassId] = useState(reportClasses[0].id);
   const [courseId, setCourseId] = useState(reportCourses[0].id);
   const [lessonId, setLessonId] = useState("");
+
+  // Load connected classes
+  useEffect(() => {
+    let active = true;
+    async function load() {
+      try {
+        const cls = await fetchMyTeachingClasses();
+        if (active && cls && cls.length > 0) {
+          setLiveClasses(cls);
+          setSelectedLiveClassId(cls[0].id);
+        }
+      } catch {
+        // Fall back gracefully
+      }
+    }
+    void load();
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  // Load live summary when live class selected
+  useEffect(() => {
+    if (!selectedLiveClassId) {
+      setLiveSummary(null);
+      return;
+    }
+    let active = true;
+    setLoadingSummary(true);
+    fetchClassLearningSummary(selectedLiveClassId)
+      .then((summary) => {
+        if (active) setLiveSummary(summary);
+      })
+      .catch(() => {
+        if (active) setLiveSummary(null);
+      })
+      .finally(() => {
+        if (active) setLoadingSummary(false);
+      });
+    return () => {
+      active = false;
+    };
+  }, [selectedLiveClassId]);
+
   const selectedClass =
     reportClasses.find((item) => item.id === classId) ?? reportClasses[0];
   const availableCourses = reportCourses.filter((course) =>
@@ -56,50 +111,175 @@ export function ReportsPanel({ courses }: { courses: CourseOutline[] }) {
       </header>
       {!example ? (
         <>
-          <div
-            className="report-metrics"
-            aria-label="Connected reporting availability"
-          >
-            {[
-              { label: "Learner progress", Icon: Users, tone: "lavender" },
-              { label: "Lesson completion", Icon: CheckCheck, tone: "mint" },
-              { label: "Knowledge checks", Icon: BookOpen, tone: "yellow" },
-              { label: "Data coverage", Icon: Database, tone: "peach" },
-            ].map(({ label, Icon, tone }) => (
-              <article className={`report-metric tone-${tone}`} key={label}>
-                <Icon size={20} aria-hidden="true" />
-                <h3>{label}</h3>
-                <strong className="report-unavailable-value">
-                  Unavailable
-                </strong>
-                <p>No connected learner results</p>
-              </article>
-            ))}
-          </div>
-          <div className="report-surface report-empty">
-            <span className="report-heading-icon tone-lavender">
-              <BookOpen size={27} aria-hidden="true" />
-            </span>
-            <h3>A report needs recorded learning.</h3>
-            <p className="muted">
-              Your {courses.length} course{" "}
-              {courses.length === 1 ? "outline is" : "outlines are"} authoring
-              content. Class and invitation simulations do not create learner
-              activity or reporting records.
-            </p>
-            <p className="muted">
-              Explore a fictional dataset to review filters, completion measures
-              and missing-data states.
-            </p>
-            <button
-              type="button"
-              className="button button-primary"
-              onClick={() => setExample(true)}
-            >
-              Explore example report
-              <ArrowRight size={17} aria-hidden="true" />
-            </button>
-          </div>
+          {liveClasses.length > 0 ? (
+            <div className="page-stack" style={{ gap: "20px" }}>
+              <div
+                className="panel"
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  padding: "16px 20px",
+                  background: "#ffffff",
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                  <label style={{ fontSize: "13px", fontWeight: 600 }}>Teaching Class:</label>
+                  <select
+                    className="input"
+                    value={selectedLiveClassId || ""}
+                    onChange={(e) => setSelectedLiveClassId(e.target.value)}
+                    style={{ minWidth: "220px" }}
+                  >
+                    {liveClasses.map((c) => (
+                      <option key={c.id} value={c.id}>
+                        {c.name} ({c.memberCount} members)
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <button
+                  type="button"
+                  className="button button-outline"
+                  onClick={() => setExample(true)}
+                >
+                  Explore example dataset
+                  <ArrowRight size={15} aria-hidden="true" />
+                </button>
+              </div>
+
+              {loadingSummary ? (
+                <div className="panel" style={{ padding: "32px", textAlign: "center" }}>
+                  <p className="muted">Loading class learning progress...</p>
+                </div>
+              ) : liveSummary ? (
+                <>
+                  <div className="report-metrics" aria-label="Connected reporting metrics">
+                    <article className="report-metric tone-lavender">
+                      <Users size={20} aria-hidden="true" />
+                      <h3>Class learners</h3>
+                      <strong>{liveSummary.member_count}</strong>
+                      <p>Active class members</p>
+                    </article>
+                    <article className="report-metric tone-mint">
+                      <CheckCheck size={20} aria-hidden="true" />
+                      <h3>Lessons completed</h3>
+                      <strong>
+                        {liveSummary.courses.reduce((sum, c) => sum + c.completed_lessons, 0)}
+                      </strong>
+                      <p>Readings completed by class</p>
+                    </article>
+                    <article className="report-metric tone-yellow">
+                      <BookOpen size={20} aria-hidden="true" />
+                      <h3>Average quiz score</h3>
+                      <strong>
+                        {liveSummary.courses.length > 0 &&
+                        liveSummary.courses.some((c) => c.quizzes_taken > 0)
+                          ? `${Math.round(
+                              liveSummary.courses
+                                .filter((c) => c.quizzes_taken > 0)
+                                .reduce((sum, c) => sum + c.average_quiz_score, 0) /
+                                (liveSummary.courses.filter((c) => c.quizzes_taken > 0).length || 1),
+                            )}%`
+                          : "—"}
+                      </strong>
+                      <p>Across finished knowledge checks</p>
+                    </article>
+                    <article className="report-metric tone-peach">
+                      <Database size={20} aria-hidden="true" />
+                      <h3>Quizzes taken</h3>
+                      <strong>
+                        {liveSummary.courses.reduce((sum, c) => sum + c.quizzes_taken, 0)}
+                      </strong>
+                      <p>Total completed assessments</p>
+                    </article>
+                  </div>
+
+                  {liveSummary.courses.length > 0 ? (
+                    <div className="panel" style={{ padding: "20px" }}>
+                      <h3 style={{ fontSize: "16px", margin: "0 0 16px 0" }}>Course Breakdown</h3>
+                      <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "13px" }}>
+                        <thead>
+                          <tr style={{ borderBottom: "1px solid var(--line)", textAlign: "left" }}>
+                            <th style={{ padding: "8px 12px" }}>Course Title</th>
+                            <th style={{ padding: "8px 12px" }}>Active Learners</th>
+                            <th style={{ padding: "8px 12px" }}>Lessons Read</th>
+                            <th style={{ padding: "8px 12px" }}>Avg Quiz Score</th>
+                            <th style={{ padding: "8px 12px" }}>Quizzes Taken</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {liveSummary.courses.map((cs) => (
+                            <tr key={cs.course_id} style={{ borderBottom: "1px solid var(--line)" }}>
+                              <td style={{ padding: "10px 12px", fontWeight: 600 }}>{cs.title}</td>
+                              <td style={{ padding: "10px 12px" }}>{cs.active_learners}</td>
+                              <td style={{ padding: "10px 12px" }}>{cs.completed_lessons}</td>
+                              <td style={{ padding: "10px 12px" }}>
+                                {cs.quizzes_taken > 0 ? `${cs.average_quiz_score}%` : "—"}
+                              </td>
+                              <td style={{ padding: "10px 12px" }}>{cs.quizzes_taken}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  ) : (
+                    <div className="panel" style={{ padding: "24px", textAlign: "center" }}>
+                      <p className="muted">
+                        No courses are currently assigned to this class. Assign courses in the Classes workspace to see progress metrics.
+                      </p>
+                    </div>
+                  )}
+                </>
+              ) : null}
+            </div>
+          ) : (
+            <>
+              <div
+                className="report-metrics"
+                aria-label="Connected reporting availability"
+              >
+                {[
+                  { label: "Learner progress", Icon: Users, tone: "lavender" },
+                  { label: "Lesson completion", Icon: CheckCheck, tone: "mint" },
+                  { label: "Knowledge checks", Icon: BookOpen, tone: "yellow" },
+                  { label: "Data coverage", Icon: Database, tone: "peach" },
+                ].map(({ label, Icon, tone }) => (
+                  <article className={`report-metric tone-${tone}`} key={label}>
+                    <Icon size={20} aria-hidden="true" />
+                    <h3>{label}</h3>
+                    <strong className="report-unavailable-value">
+                      Unavailable
+                    </strong>
+                    <p>No connected learner results</p>
+                  </article>
+                ))}
+              </div>
+              <div className="report-surface report-empty">
+                <span className="report-heading-icon tone-lavender">
+                  <BookOpen size={27} aria-hidden="true" />
+                </span>
+                <h3>A report needs recorded learning.</h3>
+                <p className="muted">
+                  Your {courses.length} course{" "}
+                  {courses.length === 1 ? "outline is" : "outlines are"} authoring
+                  content. Create a class in Classes workspace and invite learners to record real learning results.
+                </p>
+                <p className="muted">
+                  Explore a fictional dataset to review filters, completion measures
+                  and missing-data states.
+                </p>
+                <button
+                  type="button"
+                  className="button button-primary"
+                  onClick={() => setExample(true)}
+                >
+                  Explore example report
+                  <ArrowRight size={17} aria-hidden="true" />
+                </button>
+              </div>
+            </>
+          )}
         </>
       ) : (
         <>

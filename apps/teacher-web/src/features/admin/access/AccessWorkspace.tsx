@@ -6,6 +6,7 @@ import { useAccessProposals } from "./useAccessProposals";
 import { RolesPanel } from "./RolesPanel";
 import { AssignmentsPanel } from "./AssignmentsPanel";
 import { SafeguardWalkthrough } from "./SafeguardWalkthrough";
+import { StaffDirectoryPanel } from "./StaffDirectoryPanel";
 import "./access.css";
 
 export function AccessWorkspace({
@@ -16,7 +17,7 @@ export function AccessWorkspace({
   onOpenDirectory: () => void;
 }) {
   const model = useAccessProposals(directory);
-  const [tab, setTab] = useState("roles");
+  const [tab, setTab] = useState("staff");
   return (
     <section className="access-stack">
       <header className="access-heading">
@@ -40,6 +41,9 @@ export function AccessWorkspace({
       </p>
       <Tabs.Root value={tab} onValueChange={setTab} className="section-tabs">
         <Tabs.List className="tab-list" aria-label="Access planning tools">
+          <Tabs.Trigger className="tab-trigger" value="staff">
+            Staff directory &amp; roles
+          </Tabs.Trigger>
           <Tabs.Trigger className="tab-trigger" value="roles">
             Role proposals
           </Tabs.Trigger>
@@ -50,6 +54,14 @@ export function AccessWorkspace({
             System safeguards
           </Tabs.Trigger>
         </Tabs.List>
+        <Tabs.Content
+          value="staff"
+          forceMount
+          hidden={tab !== "staff"}
+          className="access-tab-content"
+        >
+          <StaffDirectoryPanel />
+        </Tabs.Content>
         <Tabs.Content
           value="roles"
           forceMount
