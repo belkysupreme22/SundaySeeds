@@ -1,0 +1,72 @@
+{
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "close": "Close",
+    "done": "Done",
+    "loading": "Loading…",
+    "signOut": "Sign Out",
+    "tagline": "SundaySeeds · A little faith, every day.",
+    "brandSub": "Grow together.",
+    "verifiedStaff": "Role-verified staff",
+    "sessionVerified": "Connected to SundaySeeds · Session verified via Supabase Auth"
+  },
+  "nav": {
+    "skipToWorkspace": "Skip to workspace",
+    "workspaces": "DESIGN WORKSPACES",
+    "teacher": "Teacher",
+    "admin": "Administration"
+  },
+  "auth": {
+    "verifying": "Verifying staff authorization…",
+    "sidebarQuote": "A little faith.\nA shared purpose.",
+    "sidebarQuoteSub": "Thoughtful tools for teaching and learning together."
+  },
+  "teacher": {
+    "title": "Welcome, teacher.",
+    "subtitle": "Shape SundaySeeds courses, lessons and reading collections.",
+    "openStudio": "Open editorial studio",
+    "tabs": {
+      "overview": "Editorial desk",
+      "courses": "Courses",
+      "lessons": "Lesson library",
+      "classes": "Classes",
+      "reports": "Reports"
+    },
+    "hero": {
+      "eyebrow": "Plan · Write · Refine",
+      "heading": "From a thoughtful idea to a complete course.",
+      "description": "Set the direction, organize your modules and give each lesson the space it deserves.",
+      "startCourse": "Start a course",
+      "exploreExample": "Explore example course",
+      "growTogether": "GROW TOGETHER"
+    },
+    "glance": "On your editorial desk"
+  },
+  "admin": {
+    "title": "A little clarity. Room to grow.",
+    "subtitle": "People, learning and access across the system.",
+    "eyebrow": "SundaySeeds administration",
+    "badge": "Super-admin workspace",
+    "tabs": {
+      "overview": "Overview",
+      "people": "People",
+      "organizations": "Organizations",
+      "invitations": "Invitations",
+      "access": "Access & roles",
+      "settings": "Settings",
+      "reviews": "Course reviews",
+      "audit": "Audit & operations"
+    },
+    "hero": {
+      "eyebrow": "The bigger picture",
+      "heading": "Make room for learning.",
+      "description": "A shared home for supporting SundaySeeds as the adult learning community grows."
+    }
+  },
+  "language": {
+    "switch": "Language",
+    "en": "English",
+    "am": "አማርኛ"
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "common": {
+    "save": "አስቀምጥ",
+    "cancel": "ሰርዝ",
+    "close": "ዝጋ",
+    "done": "ተጠናቀቀ",
+    "loading": "በመጫን ላይ…",
+    "signOut": "ውጣ",
+    "tagline": "SundaySeeds · በየቀኑ ትንሽ እምነት።",
+    "brandSub": "አብረን እናድግ።",
+    "verifiedStaff": "የተረጋገጡ ሰራተኛ",
+    "sessionVerified": "ከ SundaySeeds ጋር ተገናኝቷል · በ Supabase Auth የተረጋገጠ ክፍለ ጊዜ"
+  },
+  "nav": {
+    "skipToWorkspace": "ወደ ስራ ቦታ ዝለል",
+    "workspaces": "የስራ ቦታዎች",
+    "teacher": "አስተማሪ",
+    "admin": "አስተዳደር"
+  },
+  "auth": {
+    "verifying": "የሰራተኛ ፈቃድ በማረጋገጥ ላይ…",
+    "sidebarQuote": "ትንሽ እምነት።\nየጋራ አላማ።",
+    "sidebarQuoteSub": "አብሮ ለማስተማርና ለመማር አጋዥ መሳሪያዎች።"
+  },
+  "teacher": {
+    "title": "እንኳን ደህና መጡ፣ አስተማሪ።",
+    "subtitle": "የ SundaySeeds ኮርሶችን፣ ትምህርቶችን እና የንባብ ስብስቦችን ያዘጋጁ።",
+    "openStudio": "የኤዲቶሪያል ስቱዲዮ ክፈት",
+    "tabs": {
+      "overview": "የኤዲቶሪያል ጠረጴዛ",
+      "courses": "ኮርሶች",
+      "lessons": "የትምህርት ቤተ መፃሕፍት",
+      "classes": "ክፍሎች",
+      "reports": "ሪፖርቶች"
+    },
+    "hero": {
+      "eyebrow": "እቅድ · ጻፍ · አሻሽል",
+      "heading": "ከአስተዋይ ሀሳብ ወደ ሙሉ ኮርስ።",
+      "description": "አቅጣጫ ይወስኑ፣ ሞጁሎችን ያደራጁ እና ለእያንዳንዱ ትምህርት ተገቢውን ቦታ ይስጡ።",
+      "startCourse": "ኮርስ ጀምር",
+      "exploreExample": "የናሙና ኮርስ ያስሱ",
+      "growTogether": "አብረን እናድግ"
+    },
+    "glance": "በኤዲቶሪያል ጠረጴዛዎ ላይ"
+  },
+  "admin": {
+    "title": "ትንሽ ግልጽነት። ለማደግ ቦታ።",
+    "subtitle": "ሰዎች፣ ትምህርት እና የስርዓቱ መዳረሻ።",
+    "eyebrow": "SundaySeeds አስተዳደር",
+    "badge": "የሱፐር-አስተዳዳሪ የስራ ቦታ",
+    "tabs": {
+      "overview": "አጠቃላይ እይታ",
+      "people": "ሰዎች",
+      "organizations": "ድርጅቶች",
+      "invitations": "ግብዣዎች",
+      "access": "መዳረሻ እና ሚናዎች",
+      "settings": "ቅንጅቶች",
+      "reviews": "የኮርስ ግምገማዎች",
+      "audit": "ኦዲት እና ክንውኖች"
+    },
+    "hero": {
+      "eyebrow": "ሰፊው እይታ",
+      "heading": "ለመማር ቦታ ይስጡ።",
+      "description": "የአዋቂዎች የመማሪያ ማህበረሰብ ሲያድግ SundaySeedsን ለመደገፍ የጋራ ማዕከል።"
+    }
+  },
+  "language": {
+    "switch": "ቋንቋ",
+    "en": "English",
+    "am": "አማርኛ"
+  }
+}
