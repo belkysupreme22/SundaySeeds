@@ -19,7 +19,7 @@ export const welcomeSlides: WelcomeSlide[] = [
     title: 'Grow in faith.\nOne little step.',
     description:
       'Discover Bible stories, find a fresh perspective and make a little space for faith.',
-    image: require('../../../../assets/legacy/onboarding_learn.png'),
+    image: require('../../../../assets/orthodox/lesson_faith_seed.jpg'),
     icon: 'book-open',
     accent: 'yellow',
     companionIcon: 'sun',
@@ -31,7 +31,7 @@ export const welcomeSlides: WelcomeSlide[] = [
     title: 'Carry Sunday\ninto your week.',
     description:
       'Read, reflect and practise. Take something meaningful from every lesson into everyday life.',
-    image: require('../../../../assets/legacy/onboarding_experts.png'),
+    image: require('../../../../assets/orthodox/home_weekly_hero.jpg'),
     icon: 'heart',
     accent: 'mint',
     companionIcon: 'book-open',
@@ -43,7 +43,7 @@ export const welcomeSlides: WelcomeSlide[] = [
     title: 'See your little\nseeds grow.',
     description:
       'Save the lessons you love, revisit what you have learned and celebrate each step forward.',
-    image: require('../../../../assets/legacy/home_banner_user.png'),
+    image: require('../../../../assets/orthodox/course_faith_everyday.jpg'),
     icon: 'sun',
     accent: 'pink',
     companionIcon: 'bookmark',

@@ -43,7 +43,7 @@ export function LessonsBrowseHero({
         importantForAccessibility="no-hide-descendants"
       >
         <Image
-          source={require('../../../../assets/legacy/home_banner_user.png')}
+          source={require('../../../../assets/orthodox/lessons_browse_hero.jpg')}
           style={[
             styles.image,
             {

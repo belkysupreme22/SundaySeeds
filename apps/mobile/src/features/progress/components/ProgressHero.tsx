@@ -36,7 +36,7 @@ export function ProgressHero({ completed, total, started, stacked }: ProgressHer
       </View>
       <View style={[styles.art, stacked && styles.stackedArt]} accessible={false}>
         <Image
-          source={require('../../../../assets/legacy/home_banner_user.png')}
+          source={require('../../../../assets/orthodox/progress_hero.jpg')}
           style={styles.portrait}
           resizeMode="cover"
           accessible={false}

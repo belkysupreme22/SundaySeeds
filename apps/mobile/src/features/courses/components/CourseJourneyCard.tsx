@@ -1,5 +1,5 @@
 import { router } from 'expo-router';
-import { StyleSheet, View, useWindowDimensions } from 'react-native';
+import { Image, StyleSheet, View, useWindowDimensions } from 'react-native';
 import { useCourseJourney } from '../hooks/useCourseJourney';
 import { Card } from '../../../shared/ui/Card';
 import { Text } from '../../../shared/ui/Text';
@@ -26,7 +26,11 @@ export function CourseJourneyCard() {
     <Card style={styles.card}>
       <View style={[styles.header, stacked && styles.stacked]}>
         <View style={styles.art} accessible={false}>
-          <Icon name="book-open" size={32} />
+          <Image
+            source={require('../../../../assets/orthodox/course_faith_everyday.jpg')}
+            style={styles.artImage}
+            resizeMode="cover"
+          />
         </View>
         <View style={styles.words}>
           <Text variant="caption">COURSE · {moduleCount} MODULES</Text>
@@ -82,9 +86,9 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     width: 68,
     height: 76,
-    alignItems: 'center',
-    justifyContent: 'center',
+    overflow: 'hidden',
   },
+  artImage: { width: '100%', height: '100%' },
   track: { height: 8, borderRadius: 4, backgroundColor: colors.soft, overflow: 'hidden' },
   fill: { height: '100%', backgroundColor: colors.primary },
 });

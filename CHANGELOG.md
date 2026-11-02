@@ -5,6 +5,13 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Added
+- Integrated authentic Ethiopian Orthodox Tewahedo iconography and artwork across mobile learner screens:
+  - Generated and integrated 8 text-free, high-resolution Ethiopian Orthodox Christian artworks honoring distinct regional traditions (Lalibela rock-hewn filigree cross carvings, Lake Tana monastic frescoes, Gheralta cliffside church paintings, and illuminated Sensul lectionaries).
+  - Wired `WeeklyHero` on Home with a narrative Ethiopian Good Samaritan icon.
+  - Wired `ConnectedCourseCard`, `CourseJourneyCard`, and `ConnectedCourseScreen` hero banner with an illuminated Gospel manuscript and Lalibela stone cross.
+  - Wired all 4 lesson cards in `LessonArtwork` with dedicated icons (Good Samaritan, Saint David the Shepherd, Life of Prayer with Mequteria beads and Netela, and Parable of the Seed).
+  - Wired `LessonsBrowseHero` and `ProgressHero` with scholarly monastic lectionary and commemorative cross artwork.
+  - Updated `welcomeSlides` onboarding carousel to feature authentic iconography, replacing legacy placeholders.
 - Connected mobile course journey and curriculum navigation directly to the live Supabase course (`12de2847-b8a0-4489-b081-fb3e99a3de2e` · "Faith for everyday life"):
   - Replaced hardcoded `sampleCourse` stub references in `CourseJourneyCard`, `useCourseJourney`, `CourseQuizNextSteps`, `LessonDetailScreen`, and `LearningProfileScreen`.
   - Updated all course curriculum navigation buttons to open the live connected course route (`/courses/[id]`) rather than static `/lessons/course`.

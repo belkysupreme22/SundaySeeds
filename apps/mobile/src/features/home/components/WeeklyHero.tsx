@@ -43,7 +43,7 @@ export function WeeklyHero() {
         importantForAccessibility="no-hide-descendants"
       >
         <Image
-          source={require('../../../../assets/legacy/home_banner_user.png')}
+          source={require('../../../../assets/orthodox/home_weekly_hero.jpg')}
           style={[
             styles.image,
             {

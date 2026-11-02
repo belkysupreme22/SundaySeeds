@@ -1,5 +1,5 @@
 import { router, useLocalSearchParams } from 'expo-router';
-import { StyleSheet, View } from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
 import { useCourseOffering } from '../hooks/useCourseOffering';
 import { useCourseEnrollment } from '../hooks/useCourseEnrollment';
 import { useCourseQuizProgress } from '../../quizzes/hooks/useCourseQuizProgress';
@@ -100,6 +100,13 @@ export function ConnectedCourseScreen() {
       {course && (
         <>
           <Card tone="lavender" style={styles.group}>
+            <View style={styles.courseHeroArt}>
+              <Image
+                source={require('../../../../assets/orthodox/course_faith_everyday.jpg')}
+                style={styles.courseHeroImage}
+                resizeMode="cover"
+              />
+            </View>
             {course.isDevelopment && <Text variant="caption">DEVELOPMENT COURSE</Text>}
             <Text variant="heading" accessibilityRole="header">
               {course.title}
@@ -181,6 +188,15 @@ export function ConnectedCourseScreen() {
 
 const styles = StyleSheet.create({
   group: { gap: 12 },
+  courseHeroArt: {
+    width: '100%',
+    height: 140,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: colors.ink,
+    overflow: 'hidden',
+  },
+  courseHeroImage: { width: '100%', height: '100%' },
   outcome: { flexDirection: 'row', alignItems: 'flex-start', gap: 10 },
   words: { flex: 1, gap: 4 },
   module: { padding: 0, overflow: 'hidden' },

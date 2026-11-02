@@ -1,8 +1,7 @@
-import { StyleSheet, View } from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
 import { colors } from '../../../shared/theme/tokens';
 import { Button } from '../../../shared/ui/Button';
 import { Card } from '../../../shared/ui/Card';
-import { Icon } from '../../../shared/ui/Icon';
 import { Text } from '../../../shared/ui/Text';
 import { courseTimeLabel, type CourseOffering } from '../types/catalog';
 
@@ -18,7 +17,11 @@ export function ConnectedCourseCard({
   return (
     <Card style={styles.card}>
       <View style={styles.art} accessible={false}>
-        <Icon name="book-open" size={32} />
+        <Image
+          source={require('../../../../assets/orthodox/course_faith_everyday.jpg')}
+          style={styles.artImage}
+          resizeMode="cover"
+        />
       </View>
       {course.isDevelopment && <Text variant="caption">DEVELOPMENT COURSE</Text>}
       <Text variant="title" accessibilityRole="header">
@@ -42,8 +45,6 @@ export function ConnectedCourseCard({
 const styles = StyleSheet.create({
   card: { gap: 12 },
   art: {
-    alignItems: 'center',
-    justifyContent: 'center',
     alignSelf: 'flex-start',
     width: 64,
     height: 64,
@@ -51,5 +52,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.ink,
     borderRadius: 10,
+    overflow: 'hidden',
   },
+  artImage: { width: '100%', height: '100%' },
 });
