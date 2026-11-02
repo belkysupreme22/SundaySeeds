@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import * as Tabs from "@radix-ui/react-tabs";
 import { ArrowRight, BookOpen, ShieldCheck, Sprout, Users } from "lucide-react";
 import { ChartPreview } from "../../shared/ChartPreview";
@@ -45,6 +46,7 @@ function AdministrationStructure() {
 }
 
 export default function AdminDashboard() {
+  const { t } = useTranslation();
   const [tab, setTab] = useState("overview");
   const directory = useAdminDirectory();
   const settings = useAdminSettings(directory);
@@ -56,42 +58,42 @@ export default function AdminDashboard() {
     >
       <header className="page-heading">
         <div>
-          <p className="eyebrow">SundaySeeds administration</p>
-          <h1>A little clarity. Room to grow.</h1>
+          <p className="eyebrow">{t("admin.eyebrow")}</p>
+          <h1>{t("admin.title")}</h1>
           <p className="muted">
-            People, learning and access across the system.
+            {t("admin.subtitle")}
           </p>
         </div>
         <span className="badge admin-workspace-badge">
           <ShieldCheck size={16} aria-hidden="true" />
-          Super-admin workspace
+          {t("admin.badge")}
         </span>
       </header>
       <Tabs.Root className="section-tabs" value={tab} onValueChange={setTab}>
         <Tabs.List className="tab-list" aria-label="Admin sections">
           <Tabs.Trigger className="tab-trigger" value="overview">
-            Overview
+            {t("admin.tabs.overview")}
           </Tabs.Trigger>
           <Tabs.Trigger className="tab-trigger" value="people">
-            People
+            {t("admin.tabs.people")}
           </Tabs.Trigger>
           <Tabs.Trigger className="tab-trigger" value="organizations">
-            Organizations
+            {t("admin.tabs.organizations")}
           </Tabs.Trigger>
           <Tabs.Trigger className="tab-trigger" value="invitations">
-            Invitations
+            {t("admin.tabs.invitations")}
           </Tabs.Trigger>
           <Tabs.Trigger className="tab-trigger" value="access">
-            Access &amp; roles
+            {t("admin.tabs.access")}
           </Tabs.Trigger>
           <Tabs.Trigger className="tab-trigger" value="settings">
-            Settings
+            {t("admin.tabs.settings")}
           </Tabs.Trigger>
           <Tabs.Trigger className="tab-trigger" value="reviews">
-            Course reviews
+            {t("admin.tabs.reviews")}
           </Tabs.Trigger>
           <Tabs.Trigger className="tab-trigger" value="audit">
-            Audit &amp; operations
+            {t("admin.tabs.audit")}
           </Tabs.Trigger>
         </Tabs.List>
         {["people", "organizations", "invitations"].includes(tab) && (
@@ -113,11 +115,10 @@ export default function AdminDashboard() {
         <Tabs.Content value="overview" className="page-stack admin-tab-content">
           <section className="panel tone-lavender admin-welcome">
             <div>
-              <p className="eyebrow">The bigger picture</p>
-              <h2>Make room for learning.</h2>
+              <p className="eyebrow">{t("admin.hero.eyebrow")}</p>
+              <h2>{t("admin.hero.heading")}</h2>
               <p>
-                A shared home for supporting SundaySeeds as the adult learning
-                community grows.
+                {t("admin.hero.description")}
               </p>
             </div>
             <span className="admin-sprout">

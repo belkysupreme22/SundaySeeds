@@ -1,4 +1,5 @@
 import * as Tabs from "@radix-ui/react-tabs";
+import { useTranslation } from "react-i18next";
 import {
   ArrowRight,
   BarChart3,
@@ -29,6 +30,7 @@ export default function TeacherDashboard({
 }: {
   onStudioChange?: (active: boolean) => void;
 }) {
+  const { t } = useTranslation();
   const [tab, setTab] = useState<TeacherTab>("overview");
   const [drafts, setDrafts] = useState<LessonDraft[]>([]);
   const [studio, setStudio] = useState<StudioEntry | null>(null);
@@ -152,7 +154,7 @@ export default function TeacherDashboard({
             }
           >
             <BookOpen size={19} aria-hidden="true" />
-            Open editorial studio
+            {t("teacher.openStudio")}
           </button>
         </header>
         <Tabs.Root
@@ -163,11 +165,11 @@ export default function TeacherDashboard({
           <Tabs.List className="tab-list" aria-label="Teacher sections">
             {(
               [
-                { id: "overview", label: "Editorial desk", Icon: Home },
-                { id: "courses", label: "Courses", Icon: Layers },
-                { id: "lessons", label: "Lesson library", Icon: BookOpen },
-                { id: "classes", label: "Classes", Icon: Users },
-                { id: "reports", label: "Reports", Icon: BarChart3 },
+                { id: "overview", label: t("teacher.tabs.overview"), Icon: Home },
+                { id: "courses", label: t("teacher.tabs.courses"), Icon: Layers },
+                { id: "lessons", label: t("teacher.tabs.lessons"), Icon: BookOpen },
+                { id: "classes", label: t("teacher.tabs.classes"), Icon: Users },
+                { id: "reports", label: t("teacher.tabs.reports"), Icon: BarChart3 },
               ] as const
             ).map(({ id, label, Icon }) => (
               <Tabs.Trigger className="tab-trigger" value={id} key={id}>
@@ -182,11 +184,10 @@ export default function TeacherDashboard({
           >
             <section className="panel tone-lavender teacher-hero">
               <div>
-                <p className="eyebrow">Plan · Write · Refine</p>
-                <h2>From a thoughtful idea to a complete course.</h2>
+                <p className="eyebrow">{t("teacher.hero.eyebrow")}</p>
+                <h2>{t("teacher.hero.heading")}</h2>
                 <p>
-                  Set the direction, organize your modules and give each lesson
-                  the space it deserves.
+                  {t("teacher.hero.description")}
                 </p>
                 <div className="studio-toolbar">
                   <button
@@ -194,13 +195,13 @@ export default function TeacherDashboard({
                     onClick={createCourse}
                   >
                     <Plus size={18} aria-hidden="true" />
-                    Start a course
+                    {t("teacher.hero.startCourse")}
                   </button>
                   <button
                     className="button button-outline"
                     onClick={openExample}
                   >
-                    Explore example course
+                    {t("teacher.hero.exploreExample")}
                     <ArrowRight size={18} aria-hidden="true" />
                   </button>
                 </div>
@@ -208,12 +209,12 @@ export default function TeacherDashboard({
               <div className="teacher-book-art" aria-hidden="true">
                 <Sprout size={25} />
                 <BookOpen size={62} strokeWidth={1.25} />
-                <span>GROW TOGETHER</span>
+                <span>{t("teacher.hero.growTogether")}</span>
               </div>
             </section>
             <section aria-labelledby="editorial-glance">
               <h2 id="editorial-glance" className="teacher-section-title">
-                On your editorial desk
+                {t("teacher.glance")}
               </h2>
               <div className="three-col">
                 {[
