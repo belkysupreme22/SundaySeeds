@@ -32,11 +32,11 @@ export function getSupabaseConfig(): { url: string; anonKey: string } | null {
   const url =
     env.VITE_SUPABASE_URL ||
     env.EXPO_PUBLIC_SUPABASE_URL ||
-    "";
+    "https://ypykbtwwyebsfqtdvodj.supabase.co";
   const anonKey =
     env.VITE_SUPABASE_ANON_KEY ||
     env.EXPO_PUBLIC_SUPABASE_PUBLISHABLE_KEY ||
-    "";
+    "sb_publishable_bx0vTgbZCNxS4MdCksttwA_R1VOimFk";
 
   if (!url || !anonKey) {
     return null;

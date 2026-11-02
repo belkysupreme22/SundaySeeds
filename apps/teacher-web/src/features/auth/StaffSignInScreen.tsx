@@ -108,13 +108,6 @@ export function StaffSignInScreen() {
             {submitting ? "Signing in…" : "Sign In to Staff Portal"}
           </button>
         </form>
-
-        <div className="auth-footer-notice">
-          <p>
-            Role-based authentication powered by SundaySeeds Supabase Auth.
-            Course authoring and publishing permissions are verified on the server.
-          </p>
-        </div>
       </div>
     </div>
   );
