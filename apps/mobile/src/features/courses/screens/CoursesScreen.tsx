@@ -36,8 +36,7 @@ export function CoursesScreen() {
         <Card tone="mint" shadow={false} style={styles.group}>
           <Text variant="title">More studies are on the way</Text>
           <Text variant="small">
-            There are no published courses in the library yet. You can explore the sample course
-            below.
+            There are no published courses in the library right now. Check back soon for new studies.
           </Text>
           <Button label="Refresh library" variant="outline" onPress={reload} icon="refresh-cw" />
         </Card>
@@ -57,18 +56,6 @@ export function CoursesScreen() {
           <Button label="Try again" variant="outline" onPress={reload} icon="refresh-cw" />
         </Card>
       )}
-      <Card tone="yellow" shadow={false} style={styles.group}>
-        <Text variant="caption">SAMPLE COURSE</Text>
-        <Text variant="title">Explore before joining</Text>
-        <Text variant="small">
-          Try the sample lessons and knowledge checks without an account.
-        </Text>
-        <Button
-          label="Explore sample course"
-          variant="outline"
-          onPress={() => router.push('/lessons/course')}
-        />
-      </Card>
     </Screen>
   );
 }

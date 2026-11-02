@@ -1,22 +1,19 @@
 import { router } from 'expo-router';
-import { sampleCourse } from '../data/sampleCourse';
 import { useCourseJourney } from '../hooks/useCourseJourney';
 import { ContentGroup } from '../../../shared/ui/Screen';
 import { Text } from '../../../shared/ui/Text';
 import { QuizNextAction } from '../../quizzes/components/QuizNextAction';
 
 export function CourseQuizNextSteps({ lessonId }: { lessonId: string }) {
-  const { lessons, progress, available, next, finished, status } = useCourseJourney();
+  const { lessons, progress, available, next, finished, status, courseId, courseTitle } =
+    useCourseJourney();
   if (!lessons.some((lesson) => lesson.id === lessonId)) return null;
   const canContinue =
     available && progress[lessonId]?.completed && !finished && next && next.id !== lessonId;
-  const nextModule = canContinue
-    ? sampleCourse.modules.find((module) => module.lessonIds.includes(next.id))
-    : undefined;
   return (
     <ContentGroup>
-      <Text variant="title">Your sample course journey</Text>
-      <Text variant="label">{sampleCourse.title}</Text>
+      <Text variant="title">Your course journey</Text>
+      <Text variant="label">{courseTitle}</Text>
       <Text variant="small" muted>
         {status}
       </Text>
@@ -29,7 +26,7 @@ export function CourseQuizNextSteps({ lessonId }: { lessonId: string }) {
       {canContinue && (
         <QuizNextAction
           title={`Continue with ${next.title}`}
-          description={`${nextModule?.title ?? 'Course lesson'} · ${next.durationMinutes} minutes of reading. Read, reflect and explore your next step.`}
+          description={`${next.title} · ${next.durationMinutes} minutes of reading. Read, reflect and explore your next step.`}
           icon="arrow-right"
           tone="lavender"
           onPress={() => router.push(`/lessons/${next.id}`)}
@@ -37,10 +34,10 @@ export function CourseQuizNextSteps({ lessonId }: { lessonId: string }) {
       )}
       <QuizNextAction
         title="View course curriculum"
-        description="Explore both modules, revisit a reflection or choose your next lesson."
+        description="Explore modules, revisit a reflection or choose your next lesson."
         icon="list"
         tone="mint"
-        onPress={() => router.push('/lessons/course')}
+        onPress={() => router.push({ pathname: '/courses/[id]', params: { id: courseId } })}
       />
     </ContentGroup>
   );

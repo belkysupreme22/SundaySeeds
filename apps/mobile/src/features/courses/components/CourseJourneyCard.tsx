@@ -1,6 +1,5 @@
 import { router } from 'expo-router';
 import { StyleSheet, View, useWindowDimensions } from 'react-native';
-import { sampleCourse } from '../data/sampleCourse';
 import { useCourseJourney } from '../hooks/useCourseJourney';
 import { Card } from '../../../shared/ui/Card';
 import { Text } from '../../../shared/ui/Text';
@@ -9,7 +8,18 @@ import { Icon } from '../../../shared/ui/Icon';
 import { colors } from '../../../shared/theme/tokens';
 
 export function CourseJourneyCard() {
-  const { available, lessons, completed, started, finished, next, status } = useCourseJourney();
+  const {
+    courseId,
+    courseTitle,
+    moduleCount,
+    available,
+    lessons,
+    completed,
+    started,
+    finished,
+    next,
+    status,
+  } = useCourseJourney();
   const { width, fontScale } = useWindowDimensions();
   const stacked = width < 360 || fontScale > 1.2;
   return (
@@ -19,8 +29,8 @@ export function CourseJourneyCard() {
           <Icon name="book-open" size={32} />
         </View>
         <View style={styles.words}>
-          <Text variant="caption">SAMPLE COURSE · {sampleCourse.modules.length} MODULES</Text>
-          <Text variant="title">{sampleCourse.title}</Text>
+          <Text variant="caption">COURSE · {moduleCount} MODULES</Text>
+          <Text variant="title">{courseTitle}</Text>
           <Text variant="small" muted>
             {lessons.length} Bible studies · Prayer, trust, courage & kindness
           </Text>
@@ -53,7 +63,9 @@ export function CourseJourneyCard() {
       <Button
         label={available && started ? 'View curriculum' : 'Explore course'}
         variant={available && started ? 'outline' : 'primary'}
-        onPress={() => router.push('/lessons/course')}
+        onPress={() =>
+          router.push({ pathname: '/courses/[id]', params: { id: courseId } })
+        }
       />
     </Card>
   );

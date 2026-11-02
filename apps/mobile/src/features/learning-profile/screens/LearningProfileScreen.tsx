@@ -194,7 +194,12 @@ function LearningProfileForm({ editing }: { editing: boolean }) {
         {!editing && (
           <CourseSuggestions
             preferences={profile.preferences ?? draft}
-            onViewCourse={() => router.replace('/lessons/course')}
+            onViewCourse={() =>
+              router.replace({
+                pathname: '/courses/[id]',
+                params: { id: '12de2847-b8a0-4489-b081-fb3e99a3de2e' },
+              })
+            }
             onBrowse={() => router.replace('/courses')}
           />
         )}

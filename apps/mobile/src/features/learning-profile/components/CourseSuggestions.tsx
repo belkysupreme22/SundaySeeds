@@ -32,7 +32,7 @@ export function CourseSuggestions({
           <View style={styles.art} accessible={false}>
             <Icon name="book-open" size={32} />
           </View>
-          <Text variant="caption">SAMPLE COURSE</Text>
+          <Text variant="caption">COURSE</Text>
           <Text variant="title" accessibilityRole="header">
             {course.title}
           </Text>
