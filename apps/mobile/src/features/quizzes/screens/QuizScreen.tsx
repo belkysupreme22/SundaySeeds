@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { router } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
 import { getLesson } from '../../lessons/data/lessons';
 import { useLearningProgress } from '../../progress/hooks/useLearningProgress';
@@ -15,6 +16,7 @@ import { Icon } from '../../../shared/ui/Icon';
 import { ProgressBar } from '../../../shared/ui/ProgressBar';
 
 export function QuizScreen({ lessonId }: { lessonId: string }) {
+  const { t } = useTranslation();
   const lesson = getLesson(lessonId);
   const { completeQuiz, hydrated, errorKind } = useLearningProgress();
   const canRecord = hydrated && errorKind !== 'load';
@@ -27,8 +29,8 @@ export function QuizScreen({ lessonId }: { lessonId: string }) {
   if (!lesson)
     return (
       <Screen>
-        <PageHeader title="Quiz not found" back />
-        <Button label="Explore lessons" onPress={() => router.replace('/lessons')} />
+        <PageHeader title={t('quiz.notFound')} back />
+        <Button label={t('common.exploreMore')} onPress={() => router.replace('/lessons')} />
       </Screen>
     );
   const question = lesson.questions[index];
@@ -68,25 +70,29 @@ export function QuizScreen({ lessonId }: { lessonId: string }) {
       key={index}
       footer={
         <Button
-          label={!checked ? 'Check answer' : last ? 'Finish quiz' : 'Next question'}
+          label={!checked ? t('quiz.checkAnswer') : last ? t('quiz.finishQuiz') : t('quiz.nextQuestion')}
           icon={!checked ? 'check' : 'arrow-right'}
           disabled={selected === null || (checked && last && !canRecord)}
           onPress={() => (checked ? next() : setChecked(true))}
         />
       }
     >
-      <PageHeader title="Quiz time" subtitle={`Sample lesson · ${lesson.title}`} back />
+      <PageHeader
+        title={t('quiz.title')}
+        subtitle={`${t('quiz.subtitlePrefix')}${lesson.title}`}
+        back
+      />
       <View style={styles.progress}>
         <View style={styles.between}>
           <Text variant="label">
-            Question {index + 1} of {lesson.questions.length}
+            {t('quiz.questionCount', { current: index + 1, total: lesson.questions.length })}
           </Text>
-          <Text variant="small">{checkedPercent}% checked</Text>
+          <Text variant="small">{t('quiz.checked', { pct: checkedPercent })}</Text>
         </View>
         <ProgressBar
           value={checkedPercent}
-          label="Answers checked"
-          valueText={`${checkedCount} of ${lesson.questions.length} answers checked`}
+          label={t('quiz.answersCheckedLabel')}
+          valueText={t('quiz.answersChecked', { count: checkedCount, total: lesson.questions.length })}
         />
       </View>
       <Card tone="lavender" style={styles.question}>
@@ -114,7 +120,7 @@ export function QuizScreen({ lessonId }: { lessonId: string }) {
           <View style={styles.feedbackHeading}>
             <Icon name={correct ? 'check-circle' : 'book-open'} size={18} />
             <Text variant="label" style={styles.feedbackTitle}>
-              {correct ? 'That’s right!' : 'A chance to learn'}
+              {correct ? t('quiz.correct') : t('quiz.incorrect')}
             </Text>
           </View>
           <Text variant="small">{question.explanation}</Text>
@@ -123,11 +129,11 @@ export function QuizScreen({ lessonId }: { lessonId: string }) {
       <Text variant="caption" muted accessibilityLiveRegion="polite">
         {checked && last && !canRecord
           ? !hydrated
-            ? 'Your checked answers are ready. Wait for saved learning to finish loading, then finish the quiz.'
-            : 'Your checked answers are ready. Load saved learning using the notice above, then finish the quiz.'
+            ? t('quiz.waitLoading')
+            : t('quiz.loadSaved')
           : checked && last
-            ? 'All answers checked. Tap Finish quiz to record your result.'
-            : 'Take your time. Choose an answer, then check it to learn more.'}
+            ? t('quiz.allChecked')
+            : t('quiz.instructions')}
       </Text>
     </Screen>
   );

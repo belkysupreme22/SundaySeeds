@@ -1,17 +1,21 @@
 import { router, usePathname, type Href } from 'expo-router';
 import { Pressable, StyleSheet, View, useWindowDimensions } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useTranslation } from 'react-i18next';
 import { colors } from '../theme/tokens';
 import { Icon, type IconName } from './Icon';
 import { Text } from './Text';
 
-const tabs: { label: string; href: Href; icon: IconName }[] = [
-  { label: 'Home', href: '/home', icon: 'home' },
-  { label: 'Lessons', href: '/lessons', icon: 'book-open' },
-  { label: 'Progress', href: '/progress', icon: 'bar-chart-2' },
-  { label: 'Profile', href: '/profile', icon: 'user' },
+type TabConfig = { labelKey: string; href: Href; icon: IconName };
+
+const tabs: TabConfig[] = [
+  { labelKey: 'nav.home', href: '/home', icon: 'home' },
+  { labelKey: 'nav.lessons', href: '/lessons', icon: 'book-open' },
+  { labelKey: 'nav.progress', href: '/progress', icon: 'bar-chart-2' },
+  { labelKey: 'nav.profile', href: '/profile', icon: 'user' },
 ];
 export function BottomNav() {
+  const { t } = useTranslation();
   const pathname = usePathname();
   const { width } = useWindowDimensions();
   const compact = width < 320;
@@ -19,6 +23,7 @@ export function BottomNav() {
     <SafeAreaView edges={['bottom']} style={[styles.safe, compact && styles.compactSafe]}>
       <View style={[styles.bar, compact && styles.compactBar]}>
         {tabs.map((tab) => {
+          const label = t(tab.labelKey);
           const selected =
             pathname === tab.href ||
             (tab.href === '/home' && pathname === '/') ||
@@ -28,11 +33,11 @@ export function BottomNav() {
             (tab.href === '/profile' && pathname === '/settings');
           return (
             <Pressable
-              key={tab.label}
+              key={tab.labelKey}
               accessibilityRole="tab"
               accessibilityState={{ selected }}
               aria-selected={selected}
-              accessibilityLabel={tab.label}
+              accessibilityLabel={label}
               onPress={() => {
                 if (pathname !== tab.href) router.replace(tab.href);
               }}
@@ -40,7 +45,7 @@ export function BottomNav() {
             >
               <Icon name={tab.icon} size={21} />
               <Text variant="caption" style={styles.label}>
-                {tab.label}
+                {label}
               </Text>
             </Pressable>
           );

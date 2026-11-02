@@ -2,6 +2,7 @@ import { useAuth } from '../../auth/hooks/useAuth';
 import { Card } from '../../../shared/ui/Card';
 import { useCallback, useRef, useState } from 'react';
 import { router, useFocusEffect } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
 import { LearningDataControls } from '../components/LearningDataControls';
 import { SettingsGroup, SettingsRow } from '../components/SettingsGroup';
@@ -11,9 +12,13 @@ import { PageHeader } from '../../../shared/ui/PageHeader';
 import { Text } from '../../../shared/ui/Text';
 import { Button } from '../../../shared/ui/Button';
 import { colors } from '../../../shared/theme/tokens';
+import { useLanguage } from '../hooks/useLanguage';
 
 export function SettingsScreen() {
+  const { t } = useTranslation();
   const auth = useAuth();
+  const { language, availableLanguages } = useLanguage();
+  const currentLangLabel = availableLanguages.find((l) => l.code === language)?.nativeLabel ?? 'English';
   const [notice, setNotice] = useState<string | null>(null);
   const [loggingOut, setLoggingOut] = useState(false);
   const [detail, setDetail] = useState<SettingsDetailKey | null>(null);
@@ -42,35 +47,35 @@ export function SettingsScreen() {
     else setNotice(result.message);
   }
   return (
-    <Screen tabs loadingMessage={loggingOut && auth.busy ? 'Signing out…' : undefined}>
-      <PageHeader title="Settings" subtitle="Make SundaySeeds your own." back />
-      <SettingsGroup title="Account">
+    <Screen tabs loadingMessage={loggingOut && auth.busy ? t('settings.signingOut') : undefined}>
+      <PageHeader title={t('settings.title')} subtitle={t('settings.subtitle')} back />
+      <SettingsGroup title={t('settings.account')}>
         <SettingsRow
           icon="log-in"
           title={
             !auth.hydrated
-              ? 'Account'
+              ? t('settings.accountLabel')
               : auth.user
                 ? auth.user.email
-                : 'Sign in or create an account'
+                : t('settings.signInOrCreate')
           }
           value={
             !auth.hydrated
-              ? 'Loading…'
+              ? t('settings.loading')
               : auth.user
                 ? auth.user.verified
-                  ? 'Verified'
-                  : 'Verify email'
-                : 'Optional'
+                  ? t('settings.verified')
+                  : t('settings.verifyEmail')
+                : t('common.optional')
           }
           description={
             !auth.hydrated
-              ? 'Loading your account status…'
+              ? t('settings.statusLoading')
               : auth.user
                 ? auth.user.verified
-                  ? 'Signed in on this device.'
-                  : 'Confirm your email to join connected courses.'
-                : 'Sign in, create an account or keep exploring.'
+                  ? t('settings.signedIn')
+                  : t('settings.confirmEmail')
+                : t('settings.keepExploring')
           }
           onPress={
             auth.hydrated && !auth.user?.verified
@@ -81,99 +86,99 @@ export function SettingsScreen() {
         <SettingsRow
           divider
           icon="user"
-          title="Personal information"
-          description="Update your display name."
+          title={t('settings.personalInfo')}
+          description={t('settings.personalInfoDesc')}
           onPress={() => router.push('/edit-profile')}
         />
         <SettingsRow
           divider
           icon="lock"
-          title="Change password"
-          value={auth.configured ? 'Email link' : 'Unavailable'}
-          description="Request an email to choose a new password."
+          title={t('settings.changePassword')}
+          value={auth.configured ? t('settings.emailLink') : t('common.unavailable')}
+          description={t('settings.changePasswordDesc')}
           onPress={() => router.push('/forgot-password')}
         />
         <SettingsRow
           divider
           icon="mail"
-          title="Email preferences"
-          value="Unavailable"
-          description="Learning-email preferences are not available yet."
+          title={t('settings.emailPrefs')}
+          value={t('common.unavailable')}
+          description={t('settings.emailPrefsDesc')}
           onPress={() => setDetail('email')}
         />
       </SettingsGroup>
-      <SettingsGroup title="App Settings">
+      <SettingsGroup title={t('settings.appSettings')}>
         <SettingsRow
           icon="sun"
-          title="Appearance"
-          value="Light mode"
+          title={t('settings.appearance')}
+          value={t('settings.lightMode')}
           onPress={() => setDetail('appearance')}
         />
         <SettingsRow
           divider
           icon="globe"
-          title="Language"
-          value="English"
+          title={t('settings.language')}
+          value={currentLangLabel}
           onPress={() => setDetail('language')}
         />
         <SettingsRow
           divider
           icon="play-circle"
-          title="Video playback"
-          value="Unavailable"
+          title={t('settings.videoPlayback')}
+          value={t('common.unavailable')}
           onPress={() => setDetail('playback')}
         />
         <SettingsRow
           divider
           icon="download"
-          title="Download quality"
-          value="Unavailable"
+          title={t('settings.downloadQuality')}
+          value={t('common.unavailable')}
           onPress={() => setDetail('downloads')}
         />
-        <SettingsRow divider icon="database" title="Data usage" onPress={() => setDetail('data')} />
+        <SettingsRow divider icon="database" title={t('settings.dataUsage')} onPress={() => setDetail('data')} />
       </SettingsGroup>
-      <SettingsGroup title="Learning">
+      <SettingsGroup title={t('settings.learning')}>
         <SettingsRow
           icon="compass"
-          title="Learning profile"
-          description="Choose your interests, starting point and study rhythm."
-          value={auth.user?.verified ? undefined : 'Optional'}
+          title={t('settings.learningProfile')}
+          description={t('settings.learningProfileDesc')}
+          value={auth.user?.verified ? undefined : t('common.optional')}
           onPress={() => router.push('/learning-profile?mode=edit')}
         />
         <SettingsRow
           divider
           icon="play-circle"
-          title="Replay the introduction"
-          description="Revisit account options and optional name setup."
+          title={t('settings.replayIntro')}
+          description={t('settings.replayIntroDesc')}
           onPress={() => router.push('/welcome')}
         />
       </SettingsGroup>
-      <SettingsGroup title="Support & About">
+      <SettingsGroup title={t('settings.support')}>
         <SettingsRow
           icon="help-circle"
-          title="Help Center"
-          description="Get help with learning and saved progress."
+          title={t('settings.helpCenter')}
+          description={t('settings.helpCenterDesc')}
           onPress={() => setDetail('help')}
         />
         <SettingsRow
           divider
           icon="shield"
-          title="Privacy Policy"
-          value="Not published"
+          title={t('settings.privacy')}
+          value={t('settings.notPublished')}
           onPress={() => setDetail('privacy')}
         />
         <SettingsRow
           divider
           icon="file-text"
-          title="Terms of Service"
-          value="Not published"
+          title={t('settings.terms')}
+          value={t('settings.notPublished')}
           onPress={() => setDetail('terms')}
         />
         <SettingsRow
           divider
           icon="info"
-          title="About SundaySeeds"
-          description="Version 0.1.0"
+          title={t('settings.about')}
+          description={t('settings.version')}
           onPress={() => setDetail('about')}
         />
       </SettingsGroup>
@@ -185,7 +190,7 @@ export function SettingsScreen() {
       <LearningDataControls />
       <View style={styles.signOut}>
         <Button
-          label="Log out"
+          label={t('settings.logOut')}
           icon="log-out"
           variant="outline"
           disabled={!auth.user || auth.busy || !auth.hydrated}
@@ -194,11 +199,11 @@ export function SettingsScreen() {
           onPress={() => void logout()}
         />
         <Text variant="caption" muted style={styles.center}>
-          {auth.user ? 'Signs out on this device.' : 'No account is signed in.'}
+          {auth.user ? t('settings.signsOutDevice') : t('settings.noAccountSignedIn')}
         </Text>
       </View>
       <Text variant="caption" muted style={styles.center}>
-        A little faith, every day.
+        {t('common.tagline')}
       </Text>
       <SettingsDetailSheet detail={detail} onClose={() => setDetail(null)} />
     </Screen>

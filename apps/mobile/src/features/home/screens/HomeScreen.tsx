@@ -1,6 +1,7 @@
 import { useAuth } from '../../auth/hooks/useAuth';
 import { useCallback } from 'react';
 import { router, useFocusEffect } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import { useLearningProfile } from '../../learning-profile/hooks/useLearningProfile';
 import { Pressable, StyleSheet, useWindowDimensions, View } from 'react-native';
 import { useLearningProgress } from '../../progress/hooks/useLearningProgress';
@@ -18,6 +19,7 @@ import { CourseJourneyCard } from '../../courses/components/CourseJourneyCard';
 import { useLearnerProfile } from '../../profile/hooks/useLearnerProfile';
 import { getHomeLessons } from '../data/homeLessons';
 export function HomeScreen() {
+  const { t } = useTranslation();
   const { shouldPrompt } = useLearningProfile();
   useFocusEffect(
     useCallback(() => {
@@ -28,7 +30,7 @@ export function HomeScreen() {
   const wrapShortcuts = width < 360 || fontScale > 1.2;
   const { user } = useAuth();
   const { displayName } = useLearnerProfile();
-  const greetingName = user ? displayName || 'learner' : 'learner';
+  const greetingName = user ? displayName || t('profile.learner') : t('profile.learner');
   const { bookmarks, progress, errorKind } = useLearningProgress();
   const { continuing, suggestions } = getHomeLessons(progress);
   const completed = Object.values(progress).filter((p) => p.completed).length;
@@ -41,30 +43,30 @@ export function HomeScreen() {
     action: () => void;
   }[] = [
     {
-      title: 'Courses',
-      subtitle: 'Browse library',
-      label: 'Browse courses',
+      title: t('home.courses'),
+      subtitle: t('home.browseCourses'),
+      label: t('home.browseCourseLabel'),
       tone: 'yellow',
       icon: 'book-open',
       action: () => router.push('/courses'),
     },
     {
-      title: 'Saved',
-      subtitle: errorKind === 'load' ? 'Unavailable' : `${bookmarks.length} saved`,
+      title: t('home.saved'),
+      subtitle: errorKind === 'load' ? t('common.unavailable') : t('home.savedCount', { count: bookmarks.length }),
       tone: 'mint',
       icon: 'bookmark',
       action: () => router.replace('/lessons?filter=saved'),
     },
     {
-      title: 'Practice',
-      subtitle: 'Quick quiz',
+      title: t('home.practice'),
+      subtitle: t('home.quickQuiz'),
       tone: 'lavender',
       icon: 'edit-3',
       action: () => router.push('/quiz/good-samaritan'),
     },
     {
-      title: 'My growth',
-      subtitle: errorKind === 'load' ? 'Unavailable' : `${completed} finished`,
+      title: t('home.myGrowth'),
+      subtitle: errorKind === 'load' ? t('common.unavailable') : t('home.finishedCount', { count: completed }),
       tone: 'peach',
       icon: 'award',
       action: () => router.replace('/progress'),
@@ -78,17 +80,17 @@ export function HomeScreen() {
             <Icon name="sun" size={21} />
           </View>
           <View style={styles.greeting}>
-            <Text variant="title">Hello, {greetingName}! ☀</Text>
+            <Text variant="title">{t('home.greeting', { name: greetingName })}</Text>
             <Text variant="caption" muted>
-              A little learning. A little growing.
+              {t('home.subtitle')}
             </Text>
           </View>
         </View>
-        <IconButton name="user" label="Your profile" onPress={() => router.replace('/profile')} />
+        <IconButton name="user" label={t('home.yourProfile')} onPress={() => router.replace('/profile')} />
       </View>
       <WeeklyHero />
       <ContentGroup>
-        <SectionHeading title="Quick access" />
+        <SectionHeading title={t('home.quickAccess')} />
         <View style={styles.shortcuts}>
           {shortcuts.map((item) => (
             <Pressable
@@ -117,13 +119,13 @@ export function HomeScreen() {
       </ContentGroup>
       <ContinueLearning lessons={continuing} />
       <ContentGroup>
-        <SectionHeading title="Your course journey" />
+        <SectionHeading title={t('home.courseJourney')} />
         <CourseJourneyCard />
       </ContentGroup>
       <ContentGroup>
         <SectionHeading
-          title="Grow a little today"
-          action="View all"
+          title={t('home.growToday')}
+          action={t('common.viewAll')}
           onPress={() => router.replace('/lessons')}
         />
         {suggestions.map((lesson) => (
@@ -131,20 +133,20 @@ export function HomeScreen() {
         ))}
       </ContentGroup>
       <ContentGroup>
-        <SectionHeading title="A verse to carry with you" />
+        <SectionHeading title={t('home.memoryVerse')} />
         <Card tone="mint" shadow={false}>
           <View style={styles.verseTitle}>
             <Icon name="sun" size={20} />
-            <Text variant="caption">THIS WEEK’S MEMORY VERSE · KJV</Text>
+            <Text variant="caption">{t('home.memoryVerseLabel')}</Text>
           </View>
           <Text variant="title" style={styles.verse}>
-            “Thou shalt love thy neighbour as thyself.”
+            {t('home.verseText')}
           </Text>
-          <Text variant="small">Mark 12:31</Text>
+          <Text variant="small">{t('home.verseRef')}</Text>
         </Card>
       </ContentGroup>
       <Text variant="caption" muted style={styles.demo}>
-        A little faith, every day.
+        {t('common.tagline')}
       </Text>
     </Screen>
   );

@@ -1,4 +1,5 @@
 import { router } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import { StyleSheet, View, useWindowDimensions } from 'react-native';
 import { lessons } from '../../lessons/data/lessons';
 import { useLearningProgress } from '../hooks/useLearningProgress';
@@ -15,6 +16,7 @@ import { Icon } from '../../../shared/ui/Icon';
 import { ProgressBar } from '../../../shared/ui/ProgressBar';
 
 export function ProgressScreen() {
+  const { t } = useTranslation();
   const { progress, bookmarks, hydrated, error, errorKind } = useLearningProgress();
   const { width, fontScale } = useWindowDimensions();
   const stacked = width < 350 || fontScale >= 1.5;
@@ -31,7 +33,7 @@ export function ProgressScreen() {
   if (!hydrated || errorKind === 'load') {
     return (
       <Screen tabs>
-        <PageHeader title="Your progress" subtitle="Sample lessons · Every little step matters." />
+        <PageHeader title={t('progress.title')} subtitle={t('progress.subtitle')} />
         <Card
           tone={errorKind === 'load' ? 'peach' : 'lavender'}
           style={styles.state}
@@ -39,12 +41,12 @@ export function ProgressScreen() {
         >
           <Icon name={errorKind === 'load' ? 'alert-circle' : 'book-open'} size={28} />
           <Text variant="title">
-            {errorKind === 'load' ? 'Your progress is on hold' : 'Loading your learning…'}
+            {errorKind === 'load' ? t('progress.onHold') : t('progress.loading')}
           </Text>
           <Text variant="small">
             {errorKind === 'load'
-              ? 'Saved learning is unavailable right now. Use Try loading again in the notice above to restore your dashboard.'
-              : 'Your lesson positions, saved lessons and quiz scores will appear here.'}
+              ? t('progress.onHoldDesc')
+              : t('progress.loadingDesc')}
           </Text>
         </Card>
       </Screen>
@@ -53,7 +55,7 @@ export function ProgressScreen() {
 
   return (
     <Screen tabs>
-      <PageHeader title="Your progress" subtitle="Sample lessons · Every little step matters." />
+      <PageHeader title={t('progress.title')} subtitle={t('progress.subtitle')} />
       <ProgressHero
         completed={completed}
         total={lessons.length}
@@ -61,28 +63,28 @@ export function ProgressScreen() {
         stacked={stacked}
       />
       <ContentGroup>
-        <Text variant="title">Overall progress</Text>
+        <Text variant="title">{t('progress.overall')}</Text>
         <Card stroke="subtle" shadow={false} style={styles.overall}>
           <View style={styles.between}>
             <Text variant="label" style={styles.grow}>
-              {completed} of {lessons.length} lessons completed
+              {t('progress.lessonsCompleted', { completed, total: lessons.length })}
             </Text>
             <View style={styles.percentage}>
-              <Text variant="title">{completion}%</Text>
+              <Text variant="title">{t('progress.completion', { pct: completion })}</Text>
             </View>
           </View>
           <ProgressBar
             value={completion}
-            label="Completed sample lessons"
-            valueText={completed + ' of ' + lessons.length + ' lessons completed'}
+            label={t('progress.completedLabel')}
+            valueText={t('progress.lessonsCompleted', { completed, total: lessons.length })}
           />
           <Text variant="caption" muted>
-            Finishing a quiz completes its lesson. Reading position is shown separately below.
+            {t('progress.progressNote')}
           </Text>
         </Card>
       </ContentGroup>
       <ContentGroup>
-        <Text variant="title">Learning overview</Text>
+        <Text variant="title">{t('progress.overview')}</Text>
         <ProgressStats
           completed={completed}
           inProgress={inProgress}
@@ -95,15 +97,15 @@ export function ProgressScreen() {
       {entries.length === 0 && (
         <Card tone="peach" shadow={false} style={styles.state}>
           <Text variant="title">
-            {saved ? 'Your saved lessons are waiting' : 'Your first seed starts here'}
+            {saved ? t('progress.emptyWithSaved') : t('progress.emptyFirst')}
           </Text>
           <Text variant="small">
             {saved
-              ? 'Saving a lesson keeps it handy. Open one when you’re ready to begin.'
-              : 'Open a sample lesson to begin. Your reading position and best quiz score will appear here.'}
+              ? t('progress.emptyWithSavedDesc')
+              : t('progress.emptyFirstDesc')}
           </Text>
           <Button
-            label="Explore lessons"
+            label={t('progress.exploreLessons')}
             icon="arrow-right"
             onPress={() => router.push('/lessons')}
           />
@@ -112,10 +114,10 @@ export function ProgressScreen() {
       <ContentGroup>
         <View style={styles.between}>
           <Text variant="title" style={styles.grow}>
-            Lesson progress
+            {t('progress.lessonHistory')}
           </Text>
           <Text variant="caption" muted>
-            {lessons.length} sample lessons
+            {lessons.length} {t('lessons.sampleLessons')}
           </Text>
         </View>
         {lessons.map((lesson) => (

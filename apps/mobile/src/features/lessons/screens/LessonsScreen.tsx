@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { router, useLocalSearchParams } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import { CourseJourneyCard } from '../../courses/components/CourseJourneyCard';
 import { Pressable, StyleSheet, View } from 'react-native';
 import { getLessonTopic } from '../data/lessonTopics';
@@ -15,6 +16,7 @@ import { Card } from '../../../shared/ui/Card';
 import { Icon } from '../../../shared/ui/Icon';
 import { Button, IconButton } from '../../../shared/ui/Button';
 export function LessonsScreen() {
+  const { t } = useTranslation();
   const params = useLocalSearchParams<{ filter?: string; topic?: string }>();
   const topic = getLessonTopic(params.topic);
   const [filter, setFilter] = useState<LessonFilter>(() => getLessonFilter(params.filter));
@@ -36,22 +38,22 @@ export function LessonsScreen() {
         <View style={styles.header}>
           <View style={styles.headerWords}>
             <Text variant="title" accessibilityRole="header">
-              Browse lessons
+              {t('lessons.title')}
             </Text>
             <Text variant="small" muted>
-              Discover a story. Grow in faith.
+              {t('lessons.subtitle')}
             </Text>
           </View>
           <IconButton
             name="grid"
-            label="Browse topics"
+            label={t('lessons.browseTopics')}
             onPress={() => router.push('/lessons/topics')}
           />
         </View>
         <Pressable
           accessibilityRole="button"
-          accessibilityLabel="Search lessons"
-          accessibilityHint="Search by title, topic or scripture within this lesson view"
+          accessibilityLabel={t('lessons.searchLabel')}
+          accessibilityHint={t('lessons.searchHint')}
           onPress={() =>
             router.push({
               pathname: '/lessons/search',
@@ -64,15 +66,15 @@ export function LessonsScreen() {
         >
           <Icon name="search" size={18} />
           <Text variant="small" muted style={styles.searchLabel}>
-            Search lessons or scripture
+            {t('lessons.searchPlaceholder')}
           </Text>
           <Icon name="arrow-right" size={18} />
         </Pressable>
         <LessonsBrowseHero
-          title={topic ? `Grow in ${topic.name.toLowerCase()}` : 'Small stories.\nLasting faith.'}
-          description={topic?.description ?? 'Find a Bible story to carry into your week.'}
+          title={topic ? t('lessons.growTopic', { topic: topic.name.toLowerCase() }) : t('lessons.heroDefault')}
+          description={topic?.description ?? t('lessons.heroDefaultDesc')}
           tone={topic?.tone ?? 'lavender'}
-          actionLabel={topic ? 'All topics' : 'Explore topics'}
+          actionLabel={topic ? t('lessons.allTopics') : t('lessons.exploreTopics')}
           onPress={() => (topic ? router.setParams({ topic: '' }) : router.push('/lessons/topics'))}
         />
       </View>
@@ -82,24 +84,24 @@ export function LessonsScreen() {
           <View style={styles.headerWords}>
             <Text variant="title" accessibilityRole="header">
               {topic
-                ? `${topic.name} lessons`
+                ? t('lessons.topicLessons', { topic: topic.name })
                 : filter === 'saved'
-                  ? 'Saved lessons'
+                  ? t('lessons.savedLessons')
                   : filter === 'completed'
-                    ? 'Completed lessons'
+                    ? t('lessons.completedLessons')
                     : filter === 'in-progress'
-                      ? 'In progress'
-                      : 'Sample lessons'}
+                      ? t('lessons.inProgress')
+                      : t('lessons.sampleLessons')}
             </Text>
             <Text variant="small" muted>
               {savedViewUnavailable
-                ? 'Saved learning unavailable'
-                : `${visible.length} ${visible.length === 1 ? 'lesson' : 'lessons'}${narrowed ? ' in this view' : ' to explore'}`}
+                ? t('lessons.savedUnavailable')
+                : `${t(visible.length === 1 ? 'lessons.lessonCount_one' : 'lessons.lessonCount_other', { count: visible.length })} ${narrowed ? t('lessons.inThisView') : t('lessons.toExplore')}`}
             </Text>
           </View>
           {narrowed && (
             <Pressable accessibilityRole="button" onPress={clearFilters} style={styles.clear}>
-              <Text variant="small">Clear all</Text>
+              <Text variant="small">{t('common.clearAll')}</Text>
             </Pressable>
           )}
         </View>
@@ -118,31 +120,31 @@ export function LessonsScreen() {
         ))}
         {savedViewUnavailable && (
           <Card tone="peach" shadow={false} style={styles.banner}>
-            <Text variant="title">Saved learning is unavailable</Text>
-            <Text>Use the recovery notice above to load your saved lessons and progress.</Text>
+            <Text variant="title">{t('lessons.savedUnavailableBanner')}</Text>
+            <Text>{t('lessons.savedUnavailableDesc')}</Text>
           </Card>
         )}
         {!visible.length && !savedViewUnavailable && (
           <Card shadow={false} style={styles.banner}>
             <Icon name="book-open" />
-            <Text variant="title">Nothing here just yet</Text>
+            <Text variant="title">{t('lessons.emptyTitle')}</Text>
             <Text>
               {topic
-                ? `No ${topic.name.toLowerCase()} lessons match this view yet. Try All lessons or another topic.`
+                ? t('lessons.emptyTopic', { topic: topic.name.toLowerCase() })
                 : filter === 'saved'
-                  ? 'Tap a bookmark on a lesson to keep it here.'
+                  ? t('lessons.emptySaved')
                   : filter === 'completed'
-                    ? 'Finish a lesson’s quiz to see it here.'
+                    ? t('lessons.emptyCompleted')
                     : filter === 'in-progress'
-                      ? 'Start a reading to keep your place here. Finished lessons move to Completed.'
-                      : 'Try a different search.'}
+                      ? t('lessons.emptyInProgress')
+                      : t('lessons.emptyNoTopic')}
             </Text>
-            <Button label="Clear filters" variant="outline" icon="x" onPress={clearFilters} />
+            <Button label={t('common.clearFilters')} variant="outline" icon="x" onPress={clearFilters} />
           </Card>
         )}
       </ContentGroup>
       <Text variant="caption" muted>
-        Choose a story to read, reflect and grow.
+        {t('lessons.footer')}
       </Text>
     </Screen>
   );
