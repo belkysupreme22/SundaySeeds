@@ -1,9 +1,11 @@
 import '../i18n/i18n';
+import { useCallback, useState } from 'react';
 import { I18nextProvider } from 'react-i18next';
 import i18n from '../i18n/i18n';
 import { AuthProvider } from '../features/auth/hooks/useAuth';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
+import * as SplashScreen from 'expo-splash-screen';
 import {
   useFonts,
   Poppins_400Regular,
@@ -22,6 +24,10 @@ import { LearnerProfileProvider } from '../features/profile/hooks/useLearnerProf
 import { LoadingState } from '../shared/ui/LoadingState';
 import { LearningStorageNotice } from '../features/progress/components/LearningStorageNotice';
 import { LearningProfileProvider } from '../features/learning-profile/hooks/useLearningProfile';
+import { AnimatedSplash } from '../shared/ui/AnimatedSplash';
+
+// Keep the native splash visible while fonts load.
+SplashScreen.preventAutoHideAsync().catch(() => {});
 
 function AppNavigator() {
   const { hydrated } = useLearningProgress();
@@ -51,12 +57,22 @@ export default function RootLayout() {
     Poppins_600SemiBold,
     Poppins_700Bold,
   });
+  const [splashDone, setSplashDone] = useState(false);
+  const fontsReady = loaded || !!error;
+
+  // Once fonts are ready, hide the native splash and let our animated one play.
+  const onLayoutReady = useCallback(() => {
+    if (fontsReady) SplashScreen.hideAsync().catch(() => {});
+  }, [fontsReady]);
+
+  const handleSplashComplete = useCallback(() => setSplashDone(true), []);
+
   return (
     <SafeAreaProvider>
-      <View style={styles.backdrop}>
+      <View style={styles.backdrop} onLayout={onLayoutReady}>
         <View style={styles.app}>
           <StatusBar style="dark" />
-          {!loaded && !error ? (
+          {!fontsReady ? (
             <View style={styles.loading}>
               <LoadingState label="Preparing SundaySeeds…" bootstrap />
             </View>
@@ -72,6 +88,9 @@ export default function RootLayout() {
                 </AuthProvider>
               </LearningProgressProvider>
             </I18nextProvider>
+          )}
+          {fontsReady && !splashDone && (
+            <AnimatedSplash onComplete={handleSplashComplete} />
           )}
         </View>
       </View>

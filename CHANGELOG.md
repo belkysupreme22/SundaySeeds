@@ -5,6 +5,11 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Added
+- Added cinematic animated splash screen with authentic Ethiopian Orthodox artistry for mobile (`apps/mobile`):
+  - Generated atmospheric watercolor Ethiopian highland dawn landscape (`splash_bg.jpg`) with ancient rock church silhouette and Adey Abeba wildflowers.
+  - Generated geometric gold Ethiopian Meskel cross icon (`splash_cross.jpg`) with traditional openwork lattice and dark ink outlines.
+  - Built multi-phase `AnimatedSplash` component with Ken Burns ambient camera push, floating morning dew light particles, expanding concentric aura halos, rotating celestial seed orbit, spring emblem entrance, and traditional Harag knotwork divider.
+  - Coordinated native cold-start handoff via `expo-splash-screen` (`preventAutoHideAsync` / `hideAsync`) with `#FCFAFF` paper background in `app.json`.
 - Integrated authentic Ethiopian Orthodox Tewahedo iconography and artwork across mobile learner screens:
   - Generated and integrated 8 text-free, high-resolution Ethiopian Orthodox Christian artworks honoring distinct regional traditions (Lalibela rock-hewn filigree cross carvings, Lake Tana monastic frescoes, Gheralta cliffside church paintings, and illuminated Sensul lectionaries).
   - Wired `WeeklyHero` on Home with a narrative Ethiopian Good Samaritan icon.
