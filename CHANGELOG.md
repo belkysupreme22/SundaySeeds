@@ -4,6 +4,19 @@ Notable changes are recorded here. Unreleased entries describe development miles
 
 ## Unreleased
 
+### Added
+- Implemented internationalization (i18n) for `apps/mobile` supporting English (en) and Amharic (am) from day one:
+  - Installed `i18next`, `react-i18next`, and `expo-localization`.
+  - Configured translation resources in `apps/mobile/src/i18n/en.json` and `apps/mobile/src/i18n/am.json`.
+  - Created `useLanguage` hook with AsyncStorage persistence (`sundayseeds_language`) and dynamic locale hydration.
+  - Added language picker sheet to SettingsScreen and wired dynamic language display.
+  - Externalized user-visible strings across BottomNav, HomeScreen, LessonsScreen, ProgressScreen, and QuizScreen.
+- Implemented internationalization (i18n) for `apps/teacher-web` supporting English (en) and Amharic (am):
+  - Installed `i18next`, `react-i18next`, and `i18next-browser-languagedetector`.
+  - Configured translation resources in `apps/teacher-web/src/i18n/en.json` and `apps/teacher-web/src/i18n/am.json`.
+  - Added persistent language switcher toggle in the staff dashboard sidebar.
+  - Externalized strings across App shell, TeacherDashboard, and AdminDashboard navigation and headings.
+
 ### Changed
 - Implemented class community, invitations, staff directory and progress reporting (S5): added backend migration `20261030110000_classes_and_staff_administration.sql` introducing `classes`, `class_courses`, `class_members`, and `class_invitations` in `class_community_private`, along with teacher class management RPCs, learner token-based invitation acceptance, and class learning summary aggregation. Added admin staff directory inspection and authoring assignment RPCs.
 - Connected teacher and admin workspaces in `apps/teacher-web`: added `StaffDirectoryPanel` in Admin Access workspace for live staff role grants and course author assignments; updated `useTeachingClasses` to sync with live backend classes, invitations, and roster actions; and connected `ReportsPanel` to live class progress metrics with course breakdown tables and privacy-preserving metrics.
