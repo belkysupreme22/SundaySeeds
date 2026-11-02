@@ -1,9 +1,11 @@
-import { Modal, ScrollView, StyleSheet, View } from 'react-native';
+import { Modal, Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useTranslation } from 'react-i18next';
 import { lessons } from '../../lessons/data/lessons';
 import { colors } from '../../../shared/theme/tokens';
 import { Button, IconButton } from '../../../shared/ui/Button';
 import { Text } from '../../../shared/ui/Text';
+import { useLanguage, AVAILABLE_LANGUAGES, type AppLanguage } from '../hooks/useLanguage';
 
 export type SettingsDetailKey =
   | 'email'
@@ -37,10 +39,8 @@ const details: Record<SettingsDetailKey, DetailContent> = {
   },
   language: {
     title: 'Language',
-    status: 'English',
-    paragraphs: [
-      'The app and sample lessons are currently available in English. Additional languages are not available yet.',
-    ],
+    status: undefined,
+    paragraphs: [],
   },
   playback: {
     title: 'Video playback',
@@ -112,6 +112,8 @@ export function SettingsDetailSheet({
   detail: SettingsDetailKey | null;
   onClose: () => void;
 }) {
+  const { t } = useTranslation();
+  const { language, changeLanguage } = useLanguage();
   if (!detail) return null;
   const content = details[detail];
 
@@ -126,21 +128,70 @@ export function SettingsDetailSheet({
               </Text>
               <IconButton name="x" label={`Close ${content.title}`} onPress={onClose} />
             </View>
-            {content.status ? (
-              <View style={styles.status}>
-                <Text variant="label">{content.status}</Text>
-              </View>
-            ) : null}
-            {content.paragraphs.map((paragraph) => (
-              <Text key={paragraph} variant="small">
-                {paragraph}
-              </Text>
-            ))}
-            <Button label="Done" icon="check" onPress={onClose} />
+            {detail === 'language' ? (
+              <LanguagePicker
+                current={language}
+                onChange={(lang) => void changeLanguage(lang as AppLanguage)}
+              />
+            ) : (
+              <>
+                {content.status ? (
+                  <View style={styles.status}>
+                    <Text variant="label">{content.status}</Text>
+                  </View>
+                ) : null}
+                {content.paragraphs.map((paragraph) => (
+                  <Text key={paragraph} variant="small">
+                    {paragraph}
+                  </Text>
+                ))}
+              </>
+            )}
+            <Button label={t('common.close')} icon="check" onPress={onClose} />
           </ScrollView>
         </View>
       </SafeAreaView>
     </Modal>
+  );
+}
+
+function LanguagePicker({
+  current,
+  onChange,
+}: {
+  current: AppLanguage;
+  onChange: (lang: string) => void;
+}) {
+  const { t } = useTranslation();
+  return (
+    <View style={styles.languageList} accessibilityRole="radiogroup">
+      <Text variant="small" muted>
+        {t('language.selectLanguage')}
+      </Text>
+      {AVAILABLE_LANGUAGES.map((option) => {
+        const selected = option.code === current;
+        return (
+          <Pressable
+            key={option.code}
+            accessibilityRole="radio"
+            accessibilityState={{ checked: selected }}
+            accessibilityLabel={option.nativeLabel}
+            onPress={() => onChange(option.code)}
+            style={[styles.languageOption, selected && styles.languageOptionSelected]}
+          >
+            <Text variant="label">{option.nativeLabel}</Text>
+            {option.code !== option.nativeLabel && (
+              <Text variant="small" muted>
+                {option.label}
+              </Text>
+            )}
+            {selected && (
+              <View style={styles.selectedDot} />
+            )}
+          </Pressable>
+        );
+      })}
+    </View>
   );
 }
 
@@ -166,4 +217,25 @@ const styles = StyleSheet.create({
   header: { flexDirection: 'row', alignItems: 'center', gap: 8 },
   heading: { flex: 1 },
   status: { padding: 10, backgroundColor: colors.lavender, borderRadius: 6 },
+  languageList: { gap: 8 },
+  languageOption: {
+    padding: 14,
+    borderWidth: 1,
+    borderColor: colors.line,
+    borderRadius: 8,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+  languageOptionSelected: {
+    borderColor: colors.ink,
+    backgroundColor: colors.lavender,
+  },
+  selectedDot: {
+    marginLeft: 'auto',
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    backgroundColor: colors.ink,
+  },
 });

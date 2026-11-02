@@ -1,3 +1,6 @@
+import '../i18n/i18n';
+import { I18nextProvider } from 'react-i18next';
+import i18n from '../i18n/i18n';
 import { AuthProvider } from '../features/auth/hooks/useAuth';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
@@ -58,15 +61,17 @@ export default function RootLayout() {
               <LoadingState label="Preparing SundaySeeds…" bootstrap />
             </View>
           ) : (
-            <LearningProgressProvider>
-              <AuthProvider>
-                <LearnerProfileProvider>
-                  <LearningProfileProvider>
-                    <AppNavigator />
-                  </LearningProfileProvider>
-                </LearnerProfileProvider>
-              </AuthProvider>
-            </LearningProgressProvider>
+            <I18nextProvider i18n={i18n}>
+              <LearningProgressProvider>
+                <AuthProvider>
+                  <LearnerProfileProvider>
+                    <LearningProfileProvider>
+                      <AppNavigator />
+                    </LearningProfileProvider>
+                  </LearnerProfileProvider>
+                </AuthProvider>
+              </LearningProgressProvider>
+            </I18nextProvider>
           )}
         </View>
       </View>
