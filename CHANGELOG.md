@@ -5,6 +5,11 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Added
+- Connected mobile course journey and curriculum navigation directly to the live Supabase course (`12de2847-b8a0-4489-b081-fb3e99a3de2e` · "Faith for everyday life"):
+  - Replaced hardcoded `sampleCourse` stub references in `CourseJourneyCard`, `useCourseJourney`, `CourseQuizNextSteps`, `LessonDetailScreen`, and `LearningProfileScreen`.
+  - Updated all course curriculum navigation buttons to open the live connected course route (`/courses/[id]`) rather than static `/lessons/course`.
+  - Added automatic redirection in `CourseScreen` to forward legacy `/lessons/course` deep-links directly to the live offering.
+  - Removed sample course promo card from `CoursesScreen`, keeping the library focused strictly on real catalog offerings.
 - Implemented internationalization (i18n) for `apps/mobile` supporting English (en) and Amharic (am) from day one:
   - Installed `i18next`, `react-i18next`, and `expo-localization`.
   - Configured translation resources in `apps/mobile/src/i18n/en.json` and `apps/mobile/src/i18n/am.json`.
