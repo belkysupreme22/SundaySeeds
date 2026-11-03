@@ -21,12 +21,14 @@ or backend changed. Photographic learner-image selection remains separate below.
 Current owner priority: replace the existing Orthodox artwork and improve the
 splash. The owner clarified a generated photographic feel, natural colors and
 believable everyday detail; pastel illustrations and generic stock photographs
-were rejected. Three [new visual alternatives](artwork-options/2026-11-03/README.md)
+were rejected. Five [visual alternatives](artwork-options/2026-11-03/README.md)
 are prepared for selection: biblical scenes, contemporary learning/community and
 symbolic detail photography. No direction is selected or wired into screens.
 
-Next select a direction/combination, generate the coordinated replacement set,
-finish the separate splash draft and review each affected screen. Original artwork
+Next select a direction/combination, generate the coordinated replacement set and
+review each affected screen. D (private prayer) and E (quiet courage) add two more
+generated photographic examples. The app icon and matching splash are implemented
+separately above. Original artwork
 stays until a replacement is selected. No tests, builds or runtime checks ran;
 source/asset inspection only. Existing backend/acceptance work is unchanged.
 

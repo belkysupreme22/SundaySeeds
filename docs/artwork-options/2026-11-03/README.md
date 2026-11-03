@@ -16,16 +16,25 @@ Bible-reading sample, the owner requested more alternatives.
   Contemporary people, natural expressions and familiar surroundings.
 - **C — Quiet symbolic photography:** [Seed and Bible](c-seed.png).
   Tactile nature/detail imagery for course covers or a restrained opening screen.
+- **D — Private prayer:** [Morning prayer](d-prayer.png).
+  A candid, contemporary approach to quiet spiritual practice.
+- **E — Quiet courage:** [Young shepherd](e-courage.png).
+  Historically inspired, live-action storytelling for the David lesson.
+
+The owner requested more photographic alternatives after A/B/C. D and E were
+generated with the same built-in tool; their exact prompts are in
+[more-prompts.json](more-prompts.json). No sixth option was generated after the
+owner shifted the immediate focus to a proper app icon.
 
 Next: owner selects a direction or combination, then generate the coordinated set
 and replace current artwork without changing screen flow. The original assets
 remain until that replacement is selected. Rejected stock downloads and wiring
 are archived under ignored `.artifacts/artwork-refresh-2026-11-03`.
 
-A separate uncommitted splash draft replaces the ornate cinematic treatment with
-a hand-authored sprout mark, typography and short transition. Its SVG and native
-PNG are in `apps/mobile/assets/brand`. Source review found a minor web exit issue
-(the underlying app stays hidden during the final fade); resolve it before calling
-the splash finished. Native, accessibility, width/text-scale, runtime, tests and
-build acceptance have not been performed. This concept increment changes no
-learner screen imagery, backend, environment values or dependencies.
+The separate app identity and matching splash are now implemented using a
+hand-authored book-and-seed mark; see the
+[brand record](../../brand-options/2026-11-03/README.md). The earlier web exit issue
+was fixed in source by keeping the underlying content painted and inert during
+the fade. Native, accessibility, width/text-scale, runtime, tests and build
+acceptance remain pending. These photographic concepts change no learner screen
+imagery, backend, environment values or dependencies.
