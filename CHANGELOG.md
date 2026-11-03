@@ -4,6 +4,9 @@ Notable changes are recorded here. Unreleased entries describe development miles
 
 ## Unreleased
 
+### Design proposals
+- Prepared three original photographic-feel artwork alternatives for Bible stories, everyday faith and symbolic growth after owner feedback. Direction selection and screen replacement remain pending; no learner imagery is changed by this proposal.
+
 ### Added
 - Added cinematic animated splash screen with authentic Ethiopian Orthodox artistry for mobile (`apps/mobile`):
   - Generated atmospheric watercolor Ethiopian highland dawn landscape (`splash_bg.jpg`) with ancient rock church silhouette and Adey Abeba wildflowers.

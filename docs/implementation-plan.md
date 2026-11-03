@@ -1,5 +1,19 @@
 # SundaySeeds implementation plan
 
+## Artwork direction review — 3 November 2026
+
+Current owner priority: replace the existing Orthodox artwork and improve the
+splash. The owner clarified a generated photographic feel, natural colors and
+believable everyday detail; pastel illustrations and generic stock photographs
+were rejected. Three [new visual alternatives](artwork-options/2026-11-03/README.md)
+are prepared for selection: biblical scenes, contemporary learning/community and
+symbolic detail photography. No direction is selected or wired into screens.
+
+Next select a direction/combination, generate the coordinated replacement set,
+finish the separate splash draft and review each affected screen. Original artwork
+stays until a replacement is selected. No tests, builds or runtime checks ran;
+source/asset inspection only. Existing backend/acceptance work is unchanged.
+
 ## Staff draft development backend — 28 October 2026
 
 Proceeding with the first staff backend slice: explicit assigned-course authoring,
