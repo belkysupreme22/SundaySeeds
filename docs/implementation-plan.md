@@ -1,5 +1,21 @@
 # SundaySeeds implementation plan
 
+## App icon and matching splash — 3 November 2026
+
+The owner requested one clean, expressive app icon informed by platform design
+principles. Implemented the original book-and-seed vector identity after reviewing
+Apple, Android and Expo SDK57 guidance. The opaque app icon, Android adaptive and
+monochrome layers, favicon and matching native/animated splash now use one mark.
+See the [asset kit](../apps/mobile/assets/brand/README.md) and
+[design record](brand-options/2026-11-03/README.md).
+
+The splash has font/layout-gated native handoff, reduced-motion safeguards and a
+short restrained transition. Web keeps content painted beneath the fade while
+inert prevents keyboard interaction. Actual verification: asset rendering,
+dimensions/safe-area inspection and lead source review. Tests, builds, runtime,
+native launcher/splash and owner visual acceptance remain pending. No app packages
+or backend changed. Photographic learner-image selection remains separate below.
+
 ## Artwork direction review — 3 November 2026
 
 Current owner priority: replace the existing Orthodox artwork and improve the

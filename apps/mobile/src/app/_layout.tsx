@@ -1,5 +1,5 @@
 import '../i18n/i18n';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { I18nextProvider } from 'react-i18next';
 import i18n from '../i18n/i18n';
 import { AuthProvider } from '../features/auth/hooks/useAuth';
@@ -58,39 +58,68 @@ export default function RootLayout() {
     Poppins_700Bold,
   });
   const [splashDone, setSplashDone] = useState(false);
+  const [layoutReady, setLayoutReady] = useState(false);
+  const [splashReady, setSplashReady] = useState(false);
+  const [nativeSplashHidden, setNativeSplashHidden] = useState(false);
   const fontsReady = loaded || !!error;
 
-  // Once fonts are ready, hide the native splash and let our animated one play.
-  const onLayoutReady = useCallback(() => {
-    if (fontsReady) SplashScreen.hideAsync().catch(() => {});
-  }, [fontsReady]);
+  const onLayoutReady = useCallback(() => setLayoutReady(true), []);
+  const handleSplashReady = useCallback(() => setSplashReady(true), []);
+
+  useEffect(() => {
+    if (!fontsReady || !layoutReady || !splashReady) return;
+    // Font readiness can change after the root's only layout event. Gate the
+    // native handoff on state, including the replacement splash's actual layout.
+    try {
+      SplashScreen.hide();
+    } catch {
+      // Web/preview environments may have no native splash to hide.
+    }
+    setNativeSplashHidden(true);
+  }, [fontsReady, layoutReady, splashReady]);
 
   const handleSplashComplete = useCallback(() => setSplashDone(true), []);
+  // RN Web forwards inert to the DOM. Keep the screen painted for the dissolve
+  // while preventing keyboard focus; aria-hidden alone does not prevent focus.
+  const webFocusGuard = Platform.OS === 'web' ? { inert: !splashDone } : {};
 
   return (
     <SafeAreaProvider>
       <View style={styles.backdrop} onLayout={onLayoutReady}>
         <View style={styles.app}>
           <StatusBar style="dark" />
-          {!fontsReady ? (
-            <View style={styles.loading}>
-              <LoadingState label="Preparing SundaySeeds…" bootstrap />
-            </View>
-          ) : (
-            <I18nextProvider i18n={i18n}>
-              <LearningProgressProvider>
-                <AuthProvider>
-                  <LearnerProfileProvider>
-                    <LearningProfileProvider>
-                      <AppNavigator />
-                    </LearningProfileProvider>
-                  </LearnerProfileProvider>
-                </AuthProvider>
-              </LearningProgressProvider>
-            </I18nextProvider>
-          )}
+          <View
+            {...webFocusGuard}
+            style={styles.content}
+            pointerEvents={splashDone ? 'auto' : 'none'}
+            accessibilityElementsHidden={!splashDone}
+            importantForAccessibility={splashDone ? 'auto' : 'no-hide-descendants'}
+            aria-hidden={!splashDone}
+          >
+            {!fontsReady ? (
+              <View style={styles.loading}>
+                <LoadingState label="Preparing SundaySeeds…" bootstrap />
+              </View>
+            ) : (
+              <I18nextProvider i18n={i18n}>
+                <LearningProgressProvider>
+                  <AuthProvider>
+                    <LearnerProfileProvider>
+                      <LearningProfileProvider>
+                        <AppNavigator />
+                      </LearningProfileProvider>
+                    </LearnerProfileProvider>
+                  </AuthProvider>
+                </LearningProgressProvider>
+              </I18nextProvider>
+            )}
+          </View>
           {fontsReady && !splashDone && (
-            <AnimatedSplash onComplete={handleSplashComplete} />
+            <AnimatedSplash
+              ready={nativeSplashHidden}
+              onReady={handleSplashReady}
+              onComplete={handleSplashComplete}
+            />
           )}
         </View>
       </View>
@@ -98,12 +127,13 @@ export default function RootLayout() {
   );
 }
 const styles = StyleSheet.create({
-  backdrop: { flex: 1, backgroundColor: '#EEEBF2', alignItems: 'center' },
+  backdrop: { flex: 1, backgroundColor: colors.paper, alignItems: 'center' },
   app: {
     flex: 1,
     width: '100%',
     maxWidth: Platform.OS === 'web' ? 480 : undefined,
     backgroundColor: colors.paper,
   },
+  content: { flex: 1 },
   loading: { flex: 1, gap: 16, justifyContent: 'center', alignItems: 'center' },
 });

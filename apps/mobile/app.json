@@ -5,11 +5,8 @@
     "scheme": "sundayseeds",
     "version": "0.1.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/brand/app-icon.png",
     "userInterfaceStyle": "light",
-    "splash": {
-      "backgroundColor": "#FCFAFF"
-    },
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.chobor.sundayseeds"
@@ -17,19 +14,29 @@
     "android": {
       "package": "com.chobor.sundayseeds",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/android-icon-foreground.png",
-        "backgroundColor": "#DCD3FA"
+        "foregroundImage": "./assets/brand/adaptive-foreground.png",
+        "monochromeImage": "./assets/brand/adaptive-monochrome.png",
+        "backgroundColor": "#173E32"
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png",
+      "favicon": "./assets/brand/favicon.png",
       "bundler": "metro"
     },
     "plugins": [
       "expo-router",
       "expo-font",
       "expo-secure-store",
-      "expo-localization"
+      "expo-localization",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/brand/logo.png",
+          "imageWidth": 144,
+          "resizeMode": "contain",
+          "backgroundColor": "#FCFAFF"
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true

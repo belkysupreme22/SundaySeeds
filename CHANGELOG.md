@@ -4,6 +4,9 @@ Notable changes are recorded here. Unreleased entries describe development miles
 
 ## Unreleased
 
+### Branding
+- Added an original book-and-seed app icon with opaque primary, Android adaptive/themed layers and favicon, informed by platform icon guidance. Replaced the ornate cinematic splash with matching vector branding, restrained motion and guarded startup handoff. Asset/source review completed; device, runtime and owner visual acceptance remain pending.
+
 ### Design proposals
 - Prepared three original photographic-feel artwork alternatives for Bible stories, everyday faith and symbolic growth after owner feedback. Direction selection and screen replacement remain pending; no learner imagery is changed by this proposal.
 
