@@ -1,5 +1,23 @@
 # SundaySeeds — The unfolding seed
 
+## Implementation continuation
+
+The owner said this drawing was better than the previous directions. The current
+static icon/final logo now use these four paths; the native launch asset uses the
+initial closed seed. A bundled2.3second vector sequence opens the seam, extends
+the stem and unrolls the two leaves into the exact final drawing. The app plays it
+once, with a late wordmark and short fade. Reduced-motion/failure paths use the
+static mark. See the [asset record](../../../../apps/mobile/assets/animations/README.md).
+
+![Asset-only motion study, looping for inspection](motion-study.gif)
+
+The GIF loops; app playback is one-shot. The study and [key poses](motion-poses.png)
+are artwork previews, not app captures. Native exports/adaptive bounds were
+inspected separately. App/runtime/native and owner motion acceptance remain
+pending. The original proposal record below explains the shape-review stage.
+
+## Initial shape review
+
 4 November 2026. The owner selected the unfolding-seed direction after stopping
 the book-to-fruit-tree film. This increment establishes the **finished shape for
 visual review before animation**. Direction selection does not mean the owner has

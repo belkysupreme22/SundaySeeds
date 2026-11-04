@@ -1,19 +1,31 @@
 # SundaySeeds implementation plan
 
-## Unfolding-seed identity proposal — 4 November 2026
+## Unfolding-seed identity and motion — 4 November 2026
 
-The owner stopped the book/tree film, requested a rethink and selected the
-unfolding seed: a small seed opens, two leaves unfurl and settle beside the
-SundaySeeds wordmark. First establish its finished shape, then develop a short
-2–3 second vector motion sequence from that same geometry. See the
-[finished-shape board and editable source](brand-options/2026-11-04/unfolding-seed/README.md).
+The owner responded positively to the finished seed drawing. Implemented its exact
+four paths across the static icon, native initial-seed image, final logos and
+bundled2.3second vector unfolding sequence. The seed opens, a curved stem extends,
+then two leaves unroll and settle. The wordmark arrives late and the app fades in;
+normal startup targets2.64seconds after the native handoff. No new packages,
+external player, account or CDN is used. See the
+[identity/motion study](brand-options/2026-11-04/unfolding-seed/README.md) and
+[decision0022](decisions/0022-unfolding-seed-startup.md).
 
-The proposal is rendered for review, with a static icon and small artwork samples.
-Owner acceptance of this specific drawing, animation and app integration remain
-pending. Current installed app branding stays unchanged during shape review.
-The earlier 3D production route stays stopped; its source and pending drafts are
-preserved. Only selected poses were rendered, not a complete animated take.
-No app tests/builds/typecheck/lint/runtime/native checks ran for this proposal.
+Native and web players preload with a bounded static fallback, start only after
+native hide and respect conservative reduced-motion selection/live changes.
+Backgrounding stops/completes; completion and animation/load timeouts are finite.
+Existing font-failure handling, provider hydration, input/accessibility/webinert
+fences and routing remain. A measured text-height balance centers the mark at the
+native canvas centre on normal layouts; actual inset/short-screen handoff needs
+native review. Adaptive artwork radius299.96px stays inside312.89pxsafe bounds.
+
+Actual verification: static/vector artwork rendering, key-pose inspection,
+independent source review, scoped source formatting and whitespace inspection.
+No tests, typecheck, lint, builds or app/runtime/native checks ran. Owner review:
+reload for one-shot animation; reduced motion; background/return; font/player
+failure; small/short/larger-text layouts; native icon and handoff after rebuilding.
+The earlier book/tree production route stays stopped and its drafts are preserved.
+Other learner-art replacement and backend acceptance work remain separate.
 
 ## Earlier continuous 3D splash direction — superseded 4 November 2026
 

@@ -8,8 +8,9 @@ sticker motion only when loaded, focused, foreground and explicitly allowed by
 the system motion preference. Image failures show the slide icon and never block
 navigation. Next, Back, Skip, Android Back, saving/recovery and all identity/profile
 routing stay unchanged. Source review only; owner small-screen/large-text,
-reduced-motion, app/runtime and native acceptance remain pending. This is separate
-from the requested continuous 3D startup film, which is not yet implemented.
+reduced-motion, app/runtime and native acceptance remain pending. The later unfolding-seed startup identity/motion update is separate from these
+introduction controls; it preserves all identity/profile routes. The earlier
+continuous book/tree film was stopped and superseded.
 
 
 ## Connected reading-state account boundary — 23 October 2026

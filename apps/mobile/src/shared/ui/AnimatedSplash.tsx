@@ -1,7 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import {
   AccessibilityInfo,
   Animated,
+  AppState,
   Easing,
   ScrollView,
   StyleSheet,
@@ -9,114 +10,105 @@ import {
   useWindowDimensions,
   View,
 } from 'react-native';
-import Svg, { Path } from 'react-native-svg';
 import { colors, fonts } from '../theme/tokens';
+import { UnfoldingSeedMark } from './UnfoldingSeedMark';
 
-type Props = {
-  ready: boolean;
-  onReady: () => void;
-  onComplete: () => void;
-};
-
-// Temporary brand transition while the continuous 3D film is in production.
-// Geometry and crop match the static icon; no layered-image growth sequence.
-function BrandMark({ size }: { size: number }) {
-  return (
-    <Svg width={size} height={size} viewBox="112 80 800 800">
-      <Path
-        d="M200 460C310 435 414 453 512 520C610 453 714 435 824 460V754C711 733 609 754 512 824C415 754 313 733 200 754ZM256 505C335 495 411 515 484 561V741C410 697 333 682 256 694ZM540 561C613 515 689 495 768 505V694C691 682 614 697 540 741Z"
-        fill="#173E32"
-        fillRule="evenodd"
-      />
-      <Path
-        d="M489 682C501 588 497 516 481 461C466 412 481 377 512 350C543 377 558 412 543 461C527 516 523 588 535 682Z"
-        fill="#173E32"
-        fillRule="evenodd"
-      />
-      <Path
-        d="M512 124C563 96 625 126 636 174C693 166 739 211 738 264C778 297 770 358 724 386C711 430 657 451 611 435C580 459 542 457 512 440C482 457 444 459 413 435C367 451 313 430 300 386C254 358 246 297 286 264C285 211 331 166 388 174C399 126 461 96 512 124ZM421 296A24 24 0 1 0 373 296A24 24 0 1 0 421 296ZM604 244A24 24 0 1 0 556 244A24 24 0 1 0 604 244ZM634 357A24 24 0 1 0 586 357A24 24 0 1 0 634 357Z"
-        fill="#173E32"
-        fillRule="evenodd"
-      />
-    </Svg>
-  );
-}
+type Props = { ready: boolean; onReady: () => void; onComplete: () => void };
 
 export function AnimatedSplash({ ready, onReady, onComplete }: Props) {
   const { width, height, fontScale } = useWindowDimensions();
   const [laidOut, setLaidOut] = useState(false);
-  const entrance = useRef(new Animated.Value(1)).current;
+  const [wordmarkHeight, setWordmarkHeight] = useState(0);
+  const [motionReady, setMotionReady] = useState(false);
+  const [artworkReady, setArtworkReady] = useState(false);
+  const [playing, setPlaying] = useState(false);
   const opacity = useRef(new Animated.Value(1)).current;
-  // A slow or unavailable preference query must never opt the user into motion.
+  const wordmark = useRef(new Animated.Value(0)).current;
   const reduceMotion = useRef(true);
-  const motionChanged = useRef(false);
-  const stopForReducedMotion = useRef<(() => void) | null>(null);
+  const assetCanAnimate = useRef(false);
+  const backgrounded = useRef(AppState.currentState === 'background');
+  const stopCurrent = useRef<(() => void) | null>(null);
+  const finishMotion = useRef<(() => void) | null>(null);
   const completed = useRef(false);
   const completionCallback = useRef(onComplete);
   completionCallback.current = onComplete;
-
   const markSize = Math.max(
     80,
-    Math.min(144, width - 64, (height * 0.3) / Math.max(1, fontScale * 0.65)),
+    Math.min(160, width - 64, (height * 0.3) / Math.max(1, fontScale * 0.65)),
   );
 
   useEffect(() => {
     let active = true;
-    motionChanged.current = false;
-    const subscription = AccessibilityInfo.addEventListener(
-      'reduceMotionChanged',
-      (enabled) => {
-        motionChanged.current = true;
-        reduceMotion.current = enabled;
-        if (enabled) stopForReducedMotion.current?.();
-      },
-    );
-    void AccessibilityInfo.isReduceMotionEnabled().then(
-      (enabled) => {
-        if (active && !motionChanged.current) {
-          reduceMotion.current = enabled;
-          if (enabled) stopForReducedMotion.current?.();
-        }
-      },
-      () => {
-        // Keep the static presentation when the preference is unavailable.
-      },
-    );
+    let decided = false;
+    const decide = (enabled: boolean) => {
+      if (!active || decided) return;
+      decided = true;
+      reduceMotion.current = enabled;
+      setMotionReady(true);
+    };
+    // A late or failed preference query cannot opt someone into motion.
+    const deadline = setTimeout(() => decide(true), 200);
+    const preference = AccessibilityInfo.addEventListener('reduceMotionChanged', (enabled) => {
+      if (enabled) {
+        reduceMotion.current = true;
+        stopCurrent.current?.();
+      }
+      decide(enabled);
+    });
+    void AccessibilityInfo.isReduceMotionEnabled().then(decide, () => decide(true));
+    const appState = AppState.addEventListener('change', (state) => {
+      if (state === 'background') {
+        backgrounded.current = true;
+        stopCurrent.current?.();
+      }
+    });
     return () => {
       active = false;
-      subscription.remove();
+      clearTimeout(deadline);
+      preference.remove();
+      appState.remove();
     };
   }, []);
 
+  const handleArtworkReady = useCallback((canAnimate: boolean) => {
+    assetCanAnimate.current = canAnimate;
+    setArtworkReady(true);
+  }, []);
+  const handleFinished = useCallback(() => finishMotion.current?.(), []);
+
   useEffect(() => {
-    if (laidOut) onReady();
-  }, [laidOut, onReady]);
+    if (laidOut && wordmarkHeight > 0 && motionReady && (reduceMotion.current || artworkReady))
+      onReady();
+  }, [artworkReady, laidOut, motionReady, onReady, wordmarkHeight]);
 
   useEffect(() => {
     if (!ready) return;
     let active = true;
-    let animation: Animated.CompositeAnimation | undefined;
-    let staticTimeout: ReturnType<typeof setTimeout> | undefined;
+    let exiting = false;
+    let exitAnimation: Animated.CompositeAnimation | undefined;
+    let wordmarkAnimation: Animated.CompositeAnimation | undefined;
+    const timers: ReturnType<typeof setTimeout>[] = [];
     const complete = () => {
       if (!active || completed.current) return;
       completed.current = true;
       completionCallback.current();
     };
-
-    entrance.setValue(1);
-    opacity.setValue(1);
-    if (reduceMotion.current) {
-      staticTimeout = setTimeout(complete, 1380);
-    } else {
-      entrance.setValue(0);
-      animation = Animated.sequence([
-        Animated.timing(entrance, {
-          toValue: 1,
-          duration: 360,
-          easing: Easing.out(Easing.cubic),
-          useNativeDriver: true,
-        }),
-        Animated.delay(800),
+    const stop = () => {
+      wordmarkAnimation?.stop();
+      exitAnimation?.stop();
+      setPlaying(false);
+      wordmark.setValue(1);
+      opacity.setValue(1);
+      complete();
+    };
+    const finish = () => {
+      if (!active || exiting || completed.current) return;
+      exiting = true;
+      setPlaying(false);
+      wordmarkAnimation?.stop();
+      wordmark.setValue(1);
+      exitAnimation = Animated.sequence([
+        Animated.delay(120),
         Animated.timing(opacity, {
           toValue: 0,
           duration: 220,
@@ -124,30 +116,42 @@ export function AnimatedSplash({ ready, onReady, onComplete }: Props) {
           useNativeDriver: true,
         }),
       ]);
-      animation.start(({ finished }) => {
+      exitAnimation.start(({ finished }) => {
         if (finished) complete();
       });
+    };
+    stopCurrent.current = stop;
+    finishMotion.current = finish;
+    if (backgrounded.current) {
+      complete();
+    } else if (reduceMotion.current || !assetCanAnimate.current) {
+      timers.push(setTimeout(complete, 900));
+    } else {
+      wordmark.setValue(0);
+      setPlaying(true);
+      wordmarkAnimation = Animated.sequence([
+        Animated.delay(1300),
+        Animated.timing(wordmark, {
+          toValue: 1,
+          duration: 500,
+          easing: Easing.out(Easing.cubic),
+          useNativeDriver: true,
+        }),
+      ]);
+      wordmarkAnimation.start();
+      // Native/web completion events can be missed; never trap startup behind art.
+      timers.push(setTimeout(finish, 2500));
     }
-
-    if (animation) {
-      const runningAnimation = animation;
-      stopForReducedMotion.current = () => {
-        runningAnimation.stop();
-        entrance.setValue(1);
-        opacity.setValue(1);
-        // A live setting change removes the splash without another transition.
-        complete();
-      };
-    }
-    const failsafe = setTimeout(complete, 2200);
+    timers.push(setTimeout(stop, 3400));
     return () => {
       active = false;
-      stopForReducedMotion.current = null;
-      animation?.stop();
-      clearTimeout(staticTimeout);
-      clearTimeout(failsafe);
+      stopCurrent.current = null;
+      finishMotion.current = null;
+      wordmarkAnimation?.stop();
+      exitAnimation?.stop();
+      timers.forEach(clearTimeout);
     };
-  }, [entrance, opacity, ready]);
+  }, [opacity, ready, wordmark]);
 
   return (
     <Animated.View
@@ -162,40 +166,41 @@ export function AnimatedSplash({ ready, onReady, onComplete }: Props) {
         showsVerticalScrollIndicator={false}
         bounces={false}
       >
-        <Animated.View
-          style={[
-            styles.brand,
-            {
-              opacity: entrance.interpolate({
-                inputRange: [0, 1],
-                outputRange: [0.88, 1],
-              }),
-              transform: [
-                {
-                  translateY: entrance.interpolate({
-                    inputRange: [0, 1],
-                    outputRange: [6, 0],
-                  }),
-                },
-                {
-                  scale: entrance.interpolate({
-                    inputRange: [0, 1],
-                    outputRange: [0.985, 1],
-                  }),
-                },
-              ],
-            },
-          ]}
-        >
+        <View style={styles.brand}>
+          {/* Balance the text below so the mark stays at the native canvas centre. */}
+          <View style={{ height: wordmarkHeight }} accessible={false} />
           <View
             style={{ width: markSize, height: markSize }}
             accessible={false}
             accessibilityElementsHidden
             importantForAccessibility="no-hide-descendants"
           >
-            <BrandMark size={markSize} />
+            <UnfoldingSeedMark
+              size={markSize}
+              animate={motionReady && !reduceMotion.current}
+              playing={playing}
+              onReady={handleArtworkReady}
+              onFinished={handleFinished}
+            />
           </View>
-          <View style={styles.wordmarkBlock}>
+          <Animated.View
+            onLayout={(event) => setWordmarkHeight(event.nativeEvent.layout.height)}
+            style={[
+              styles.wordmarkBlock,
+              {
+                opacity:
+                  motionReady && !reduceMotion.current && assetCanAnimate.current ? wordmark : 1,
+                transform: [
+                  {
+                    translateY:
+                      motionReady && !reduceMotion.current && assetCanAnimate.current
+                        ? wordmark.interpolate({ inputRange: [0, 1], outputRange: [4, 0] })
+                        : 0,
+                  },
+                ],
+              },
+            ]}
+          >
             <Text
               style={styles.wordmark}
               numberOfLines={1}
@@ -206,8 +211,8 @@ export function AnimatedSplash({ ready, onReady, onComplete }: Props) {
               SundaySeeds
             </Text>
             <Text style={styles.tagline}>Grow in faith. One little step.</Text>
-          </View>
-        </Animated.View>
+          </Animated.View>
+        </View>
       </ScrollView>
     </Animated.View>
   );

@@ -7,13 +7,18 @@ const destination = path.resolve(__dirname, '../assets/brand');
 const master = fs.readFileSync(path.join(destination, 'logo.svg'), 'utf8');
 const shape = master.match(/<path\b[^>]*\/>/g)?.join('');
 if (!shape) throw new Error('Missing master mark');
+const seedTag = master.match(/<path\b[^>]*id="seed"[^>]*\/>/)?.[0];
+const seedOutline = seedTag?.match(/\sd="([^"]+)"/)?.[1].match(/^M.*?Z/)?.[0];
+if (!seedOutline) throw new Error('Missing closed seed outline');
 const forest = '#173E32';
 const ivory = '#F7F3E8';
 const recolor = color => shape.replaceAll(forest, color);
 const svg = (body, viewBox = '0 0 1024 1024') =>
   `<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="${viewBox}">${body}</svg>`;
+// Matches the accepted static-icon concept without changing the master paths.
+const placed = color => `<g transform="translate(-28 -20) scale(1.055)">${recolor(color)}</g>`;
 const adaptive = color =>
-  `<g transform="translate(512 512) scale(0.76) translate(-512 -512)">${recolor(color)}</g>`;
+  `<g transform="translate(512 512) scale(0.82) translate(-512 -512)">${placed(color)}</g>`;
 
 async function png(name, source, size, opaque = false) {
   let renderer = sharp(Buffer.from(source)).resize(size, size);
@@ -23,7 +28,7 @@ async function png(name, source, size, opaque = false) {
 }
 
 async function main() {
-  const icon = svg(`<rect width="1024" height="1024" fill="${forest}"/>${recolor(ivory)}`);
+  const icon = svg(`<rect width="1024" height="1024" fill="${forest}"/>${placed(ivory)}`);
   const foreground = svg(adaptive(ivory));
   const monochrome = svg(adaptive('#000000'));
   fs.writeFileSync(path.join(destination, 'app-icon.svg'), icon);
@@ -34,7 +39,11 @@ async function main() {
   await png('adaptive-monochrome.png', monochrome, 1024);
   await png('favicon.png', icon, 64, true);
   // Tight mark exports for the splash/wordmark, with the same actual artwork.
-  await png('logo.png', svg(recolor(forest), '112 80 800 800'), 704);
-  await png('logo-reversed.png', svg(recolor(ivory), '112 80 800 800'), 704);
+  await png('logo.png', svg(recolor(forest), '192 192 640 640'), 704);
+  await png('logo-reversed.png', svg(recolor(ivory), '192 192 640 640'), 704);
+  // Native launch shows the opening pose, at its position in the full mark canvas.
+  const seed = svg(`<path fill="${forest}" d="${seedOutline}"/>`, '192 192 640 640');
+  fs.writeFileSync(path.join(destination, 'splash-seed.svg'), seed);
+  await png('splash-seed.png', seed, 704);
 }
 main().catch(error => { console.error(error); process.exitCode = 1; });
