@@ -1,6 +1,6 @@
 import { useState, type ReactNode } from 'react';
 import { Platform, StyleSheet, TextInput, View, type TextInputProps } from 'react-native';
-import { colors, fonts } from '../theme/tokens';
+import { brandColors, colors, fonts } from '../theme/tokens';
 import { Icon, type IconName } from './Icon';
 import { Text } from './Text';
 
@@ -24,8 +24,8 @@ export function InputField({
   const input = (
     <TextInput
       placeholderTextColor={colors.muted}
-      selectionColor={colors.primary}
-      cursorColor={colors.ink}
+      selectionColor={brandColors.surfaceStrong}
+      cursorColor={brandColors.forest}
       {...props}
       editable={editable}
       underlineColorAndroid="transparent"
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
   // Reference 03 uses a finer charcoal field outline than its dark CTA outline.
   account: { borderColor: '#6B6672' },
   accountLabel: { fontFamily: fonts.semibold },
-  accountFocused: { borderColor: '#75619D', backgroundColor: colors.white },
+  accountFocused: { borderColor: brandColors.forest, backgroundColor: colors.white },
   frame: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -97,7 +97,8 @@ const styles = StyleSheet.create({
   },
   focused: {
     borderWidth: 2,
-    backgroundColor: colors.soft,
+    borderColor: brandColors.forest,
+    backgroundColor: brandColors.surface,
     // Keep the field and its contents stationary when the stroke thickens.
     paddingHorizontal: 12,
     paddingVertical: 0,
@@ -107,9 +108,9 @@ const styles = StyleSheet.create({
     borderWidth: 0,
     paddingHorizontal: 14,
     paddingVertical: 2,
-    backgroundColor: colors.soft,
+    backgroundColor: brandColors.surface,
   },
-  softFocused: { backgroundColor: colors.lavender },
+  softFocused: { backgroundColor: brandColors.surfaceStrong },
   input: {
     flex: 1,
     minWidth: 0,

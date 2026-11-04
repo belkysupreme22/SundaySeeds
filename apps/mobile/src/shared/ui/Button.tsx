@@ -1,5 +1,5 @@
 import { Pressable, StyleSheet, View, type StyleProp, type ViewStyle } from 'react-native';
-import { colors } from '../theme/tokens';
+import { brandColors, colors } from '../theme/tokens';
 import { Text } from './Text';
 import { Icon, type IconName } from './Icon';
 
@@ -34,11 +34,15 @@ export function Button({
         style,
       ]}
     >
-      <Text variant="label" style={[styles.label, variant === 'dark' && { color: colors.white }]}>
+      <Text variant="label" style={[styles.label, variant !== 'outline' && styles.filledLabel]}>
         {label}
       </Text>
       {icon && (
-        <Icon name={icon} size={19} color={variant === 'dark' ? colors.white : colors.ink} />
+        <Icon
+          name={icon}
+          size={19}
+          color={variant !== 'outline' ? brandColors.onForest : colors.ink}
+        />
       )}
     </Pressable>
   );
@@ -63,7 +67,7 @@ export function IconButton({
       hitSlop={4}
       style={({ pressed }) => [styles.iconTarget, pressed && styles.pressed]}
     >
-      <View style={[styles.iconBox, active && { backgroundColor: colors.lavender }]}>
+      <View style={[styles.iconBox, active && { backgroundColor: brandColors.surface }]}>
         <Icon name={name} size={19} />
       </View>
     </Pressable>
@@ -82,10 +86,11 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     gap: 12,
   },
-  primary: { backgroundColor: colors.primary, boxShadow: '2px 3px 0px #26212E' },
-  dark: { backgroundColor: colors.ink },
+  primary: { backgroundColor: brandColors.forest, boxShadow: '2px 3px 0px #26212E' },
+  dark: { backgroundColor: brandColors.forest },
   outline: { backgroundColor: colors.white },
   label: { flexShrink: 1, textAlign: 'center', flexGrow: 1 },
+  filledLabel: { color: brandColors.onForest },
   disabled: { opacity: 0.45, boxShadow: 'none' },
   pressed: { opacity: 0.72, transform: [{ translateY: 1 }] },
   iconTarget: { minWidth: 44, minHeight: 44, alignItems: 'center', justifyContent: 'center' },

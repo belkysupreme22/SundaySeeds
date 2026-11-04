@@ -1,5 +1,5 @@
 import { StyleSheet, View, type ViewProps } from 'react-native';
-import { colors, type Pastel } from '../theme/tokens';
+import { cardColors, colors, type Pastel } from '../theme/tokens';
 
 export function Card({
   tone,
@@ -14,7 +14,7 @@ export function Card({
       style={[
         styles.card,
         stroke !== 'strong' && styles[stroke],
-        tone && { backgroundColor: colors[tone] },
+        tone && { backgroundColor: cardColors[tone] },
         shadow && styles.shadow,
         style,
       ]}

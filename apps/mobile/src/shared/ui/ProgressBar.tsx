@@ -1,9 +1,9 @@
 import { View, StyleSheet } from 'react-native';
-import { colors } from '../theme/tokens';
+import { brandColors, colors } from '../theme/tokens';
 
 export function ProgressBar({
   value,
-  color = colors.primary,
+  color = brandColors.forest,
   label,
   valueText,
 }: {
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     borderWidth: 0.7,
     borderColor: colors.muted,
     borderRadius: 5,
-    backgroundColor: colors.soft,
+    backgroundColor: brandColors.surface,
     overflow: 'hidden',
   },
   fill: { height: '100%', borderRadius: 4 },

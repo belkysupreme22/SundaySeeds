@@ -2,7 +2,7 @@ import { router, usePathname, type Href } from 'expo-router';
 import { Pressable, StyleSheet, View, useWindowDimensions } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTranslation } from 'react-i18next';
-import { colors } from '../theme/tokens';
+import { brandColors, colors } from '../theme/tokens';
 import { Icon, type IconName } from './Icon';
 import { Text } from './Text';
 
@@ -43,8 +43,12 @@ export function BottomNav() {
               }}
               style={[styles.tab, selected && styles.active]}
             >
-              <Icon name={tab.icon} size={21} />
-              <Text variant="caption" style={styles.label}>
+              <Icon
+                name={tab.icon}
+                size={21}
+                color={selected ? brandColors.onForest : colors.ink}
+              />
+              <Text variant="caption" style={[styles.label, selected && styles.activeLabel]}>
                 {label}
               </Text>
             </Pressable>
@@ -83,7 +87,8 @@ const styles = StyleSheet.create({
     borderRadius: 6,
   },
   label: { alignSelf: 'stretch', textAlign: 'center' },
-  active: { backgroundColor: colors.lavender },
+  active: { backgroundColor: brandColors.forest },
+  activeLabel: { color: brandColors.onForest },
   compactSafe: { paddingHorizontal: 4 },
   compactBar: { padding: 2, gap: 0 },
 });
