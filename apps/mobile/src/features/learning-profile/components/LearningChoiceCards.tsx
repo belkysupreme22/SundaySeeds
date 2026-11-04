@@ -1,5 +1,5 @@
 import { Pressable, StyleSheet, View, useWindowDimensions } from 'react-native';
-import { colors } from '../../../shared/theme/tokens';
+import { brandColors, colors } from '../../../shared/theme/tokens';
 import { Icon } from '../../../shared/ui/Icon';
 import { Text } from '../../../shared/ui/Text';
 import type { LearningChoice } from '../data/questions';
@@ -38,7 +38,6 @@ export function LearningChoiceCards<Value extends string | number>({
             style={({ pressed }) => [
               styles.card,
               columns && styles.column,
-              { backgroundColor: colors[choice.tone] },
               checked && styles.selected,
               unavailable && styles.disabled,
               pressed && styles.pressed,
@@ -47,7 +46,7 @@ export function LearningChoiceCards<Value extends string | number>({
             <View style={styles.top}>
               <Icon name={choice.icon} size={25} />
               <View style={[styles.check, checked && styles.checked]}>
-                {checked && <Icon name="check" color={colors.white} size={13} />}
+                {checked && <Icon name="check" color={brandColors.onForest} size={13} />}
               </View>
             </View>
             <Text variant="label">{choice.label}</Text>
@@ -64,6 +63,7 @@ const styles = StyleSheet.create({
   card: {
     width: '100%',
     minHeight: 100,
+    backgroundColor: colors.white,
     borderWidth: 1,
     borderColor: colors.outline,
     borderRadius: 9,
@@ -71,7 +71,11 @@ const styles = StyleSheet.create({
     gap: 7,
   },
   column: { width: '48%', flexGrow: 1, flexBasis: '45%' },
-  selected: { borderColor: colors.ink, boxShadow: '1px 2px 0px #26212E' },
+  selected: {
+    backgroundColor: brandColors.surfaceStrong,
+    borderColor: brandColors.forest,
+    boxShadow: '1px 2px 0px #26212E',
+  },
   top: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 12 },
   check: {
     width: 19,
@@ -83,7 +87,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  checked: { borderColor: colors.ink, backgroundColor: colors.ink },
+  checked: { borderColor: brandColors.forest, backgroundColor: brandColors.forest },
   disabled: { opacity: 0.5 },
   pressed: { opacity: 0.75 },
 });

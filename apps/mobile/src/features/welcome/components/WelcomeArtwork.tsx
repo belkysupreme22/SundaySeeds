@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useFocusEffect } from 'expo-router';
 import { AccessibilityInfo, Animated, AppState, Easing, StyleSheet, View } from 'react-native';
-import { colors } from '../../../shared/theme/tokens';
+import { brandColors, colors } from '../../../shared/theme/tokens';
 import { Icon } from '../../../shared/ui/Icon';
-import type { WelcomeSlide } from '../data/welcomeSlides';
+import { welcomeAccentColors, type WelcomeSlide } from '../data/welcomeSlides';
 
 export function WelcomeArtwork({ slide, height }: { slide: WelcomeSlide; height: number }) {
   const entrance = useRef(new Animated.Value(1)).current;
@@ -15,10 +15,13 @@ export function WelcomeArtwork({ slide, height }: { slide: WelcomeSlide; height:
   useEffect(() => {
     let live = true;
     let preferenceChanged = false;
-    const motionSubscription = AccessibilityInfo.addEventListener('reduceMotionChanged', (value) => {
-      preferenceChanged = true;
-      setReduceMotion(value);
-    });
+    const motionSubscription = AccessibilityInfo.addEventListener(
+      'reduceMotionChanged',
+      (value) => {
+        preferenceChanged = true;
+        setReduceMotion(value);
+      },
+    );
     void AccessibilityInfo.isReduceMotionEnabled().then(
       (value) => {
         if (live && !preferenceChanged) setReduceMotion(value);
@@ -105,14 +108,14 @@ export function WelcomeArtwork({ slide, height }: { slide: WelcomeSlide; height:
         />
       ) : (
         <View style={styles.fallback}>
-          <Icon name={slide.icon} size={64} />
+          <Icon name={slide.icon} size={64} color={brandColors.forest} />
         </View>
       )}
       <Animated.View
         style={[
           styles.sticker,
           {
-            backgroundColor: colors[slide.accent],
+            backgroundColor: welcomeAccentColors[slide.accent],
             transform: [
               { rotate: '-7deg' },
               { translateY: drift.interpolate({ inputRange: [0, 1], outputRange: [0, -4] }) },
@@ -120,13 +123,13 @@ export function WelcomeArtwork({ slide, height }: { slide: WelcomeSlide; height:
           },
         ]}
       >
-        <Icon name={slide.icon} size={29} />
+        <Icon name={slide.icon} size={29} color={brandColors.forest} />
       </Animated.View>
       <Animated.View
         style={[
           styles.companionSticker,
           {
-            backgroundColor: colors[slide.companionAccent],
+            backgroundColor: welcomeAccentColors[slide.companionAccent],
             transform: [
               { rotate: '5deg' },
               { translateY: drift.interpolate({ inputRange: [0, 1], outputRange: [0, 3] }) },
@@ -134,7 +137,7 @@ export function WelcomeArtwork({ slide, height }: { slide: WelcomeSlide; height:
           },
         ]}
       >
-        <Icon name={slide.companionIcon} size={24} />
+        <Icon name={slide.companionIcon} size={24} color={brandColors.forest} />
       </Animated.View>
     </View>
   );
@@ -143,7 +146,7 @@ export function WelcomeArtwork({ slide, height }: { slide: WelcomeSlide; height:
 const styles = StyleSheet.create({
   artwork: {
     position: 'relative',
-    backgroundColor: colors.lavender,
+    backgroundColor: brandColors.surface,
     borderRadius: 10,
     overflow: 'hidden',
     borderWidth: 1,

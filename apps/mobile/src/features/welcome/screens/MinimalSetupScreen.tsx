@@ -2,7 +2,7 @@ import { useState, type ReactNode } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 import { DISPLAY_NAME_LIMIT } from '../../profile/data/profileStorage';
 import { useLearnerProfile } from '../../profile/hooks/useLearnerProfile';
-import { colors } from '../../../shared/theme/tokens';
+import { brandColors, colors } from '../../../shared/theme/tokens';
 import { Button } from '../../../shared/ui/Button';
 import { Card } from '../../../shared/ui/Card';
 import { Icon } from '../../../shared/ui/Icon';
@@ -245,7 +245,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   step: {
-    backgroundColor: colors.lavender,
+    backgroundColor: brandColors.surface,
     borderRadius: 4,
     paddingHorizontal: 9,
     paddingVertical: 5,
@@ -259,7 +259,7 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     overflow: 'hidden',
   },
-  progressFill: { flex: 1, backgroundColor: colors.primary },
+  progressFill: { flex: 1, backgroundColor: brandColors.forest },
   introduction: { gap: 8 },
   portrait: { alignSelf: 'center', paddingHorizontal: 18, paddingVertical: 4 },
   avatar: {
@@ -268,7 +268,7 @@ const styles = StyleSheet.create({
     borderWidth: 1.2,
     borderColor: colors.ink,
     borderRadius: 73,
-    backgroundColor: colors.lavender,
+    backgroundColor: brandColors.surface,
     alignItems: 'center',
     justifyContent: 'center',
   },

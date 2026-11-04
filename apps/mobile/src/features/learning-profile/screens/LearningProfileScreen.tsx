@@ -11,7 +11,7 @@ import { Screen } from '../../../shared/ui/Screen';
 import { Button, IconButton } from '../../../shared/ui/Button';
 import { Card } from '../../../shared/ui/Card';
 import { Text } from '../../../shared/ui/Text';
-import { colors } from '../../../shared/theme/tokens';
+import { brandColors, colors } from '../../../shared/theme/tokens';
 
 export function LearningProfileScreen() {
   const { user } = useAuth();
@@ -334,7 +334,7 @@ function LearningProfileForm({ editing }: { editing: boolean }) {
 const styles = StyleSheet.create({
   top: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 12 },
   badge: {
-    backgroundColor: colors.lavender,
+    backgroundColor: brandColors.surface,
     paddingHorizontal: 10,
     paddingVertical: 5,
     borderRadius: 4,
@@ -348,7 +348,7 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     backgroundColor: colors.soft,
   },
-  filled: { backgroundColor: colors.primary, borderColor: colors.muted },
+  filled: { backgroundColor: brandColors.forest, borderColor: colors.muted },
   footer: { gap: 12 },
   feedback: { gap: 12 },
 });

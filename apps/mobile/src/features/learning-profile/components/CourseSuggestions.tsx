@@ -1,5 +1,5 @@
 import { StyleSheet, View } from 'react-native';
-import { colors } from '../../../shared/theme/tokens';
+import { brandColors, colors } from '../../../shared/theme/tokens';
 import { Button } from '../../../shared/ui/Button';
 import { Card } from '../../../shared/ui/Card';
 import { Icon } from '../../../shared/ui/Icon';
@@ -74,11 +74,11 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     width: 64,
     height: 64,
-    backgroundColor: colors.lavender,
+    backgroundColor: brandColors.surface,
     borderWidth: 1,
     borderColor: colors.ink,
     borderRadius: 10,
   },
-  reason: { backgroundColor: colors.mint, borderRadius: 8, padding: 12 },
+  reason: { backgroundColor: brandColors.surfaceStrong, borderRadius: 8, padding: 12 },
   lesson: { gap: 4, borderTopWidth: 1, borderTopColor: colors.line, paddingTop: 12 },
 });

@@ -1,7 +1,7 @@
 import { StyleSheet, View } from 'react-native';
 import { IconButton } from '../../../shared/ui/Button';
 import { Text } from '../../../shared/ui/Text';
-import { colors } from '../../../shared/theme/tokens';
+import { brandColors } from '../../../shared/theme/tokens';
 
 export function AccountTopBar({ label, onBack }: { label: string; onBack: () => void }) {
   return (
@@ -17,7 +17,7 @@ export function AccountTopBar({ label, onBack }: { label: string; onBack: () => 
 const styles = StyleSheet.create({
   row: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', gap: 12 },
   badge: {
-    backgroundColor: colors.lavender,
+    backgroundColor: brandColors.surface,
     paddingHorizontal: 10,
     paddingVertical: 5,
     borderRadius: 4,

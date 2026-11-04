@@ -1,7 +1,7 @@
 import { StyleSheet, useWindowDimensions, View } from 'react-native';
 import Svg, { Circle, G, Path, Rect } from 'react-native-svg';
 import { Text } from '../../../shared/ui/Text';
-import { colors } from '../../../shared/theme/tokens';
+import { brandColors, cardColors, colors } from '../../../shared/theme/tokens';
 
 type Mode = 'request' | 'verify' | 'reset' | 'reset-guidance';
 const copy = {
@@ -12,7 +12,7 @@ const copy = {
 };
 
 // The references do not include recovery screens. These original vectors extend
-// reference 03's pastel shapes, fine ink lines and right-edge composition.
+// reference 03's contours, fine ink lines and right-edge composition in the brand palette.
 export function AccountRecoveryHero({ mode }: { mode: Mode }) {
   const { width, fontScale } = useWindowDimensions();
   const stacked = width < 360 || fontScale > 1.2;
@@ -34,7 +34,7 @@ export function AccountRecoveryHero({ mode }: { mode: Mode }) {
         <Svg width="100%" height="100%" viewBox="0 0 190 205" aria-hidden>
           <Path
             d="M190 202H91C46 202 25 177 25 143C25 111 44 91 71 77L80 91L82 62L112 55L119 73L139 48L162 63L158 81L190 73Z"
-            fill={reset ? colors.yellow : colors.lavender}
+            fill={reset ? brandColors.surfaceStrong : brandColors.surface}
             stroke={colors.ink}
             strokeWidth="1.2"
           />
@@ -54,12 +54,12 @@ export function AccountRecoveryHero({ mode }: { mode: Mode }) {
                   stroke={colors.white}
                 />
                 <Rect x="72" y="111" width="83" height="68" rx="11" fill={colors.white} />
-                <Circle cx="113" cy="137" r="7" fill={colors.lavender} />
+                <Circle cx="113" cy="137" r="7" fill={brandColors.surfaceStrong} />
                 <Path d="M113 144V155" strokeWidth="3" />
               </G>
             ) : (
               <G transform="rotate(-9 111 132)">
-                <Path d="M57 116L112 72L166 116V174H57Z" fill={colors.yellow} />
+                <Path d="M57 116L112 72L166 116V174H57Z" fill={cardColors.yellow} />
                 <Rect x="76" y="81" width="72" height="77" rx="5" fill={colors.white} />
                 <Path d="M89 99H133M89 109H133M89 119H117" stroke="#AAA6B1" />
                 <Path d="M57 116L112 150L166 116V174H57Z" fill={colors.white} />

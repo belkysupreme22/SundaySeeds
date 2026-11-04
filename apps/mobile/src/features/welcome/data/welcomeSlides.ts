@@ -1,15 +1,21 @@
 import type { ImageSourcePropType } from 'react-native';
-import type { Pastel } from '../../../shared/theme/tokens';
+import { brandColors } from '../../../shared/theme/tokens';
 import type { IconName } from '../../../shared/ui/Icon';
+
+export const welcomeAccentColors = {
+  sage: brandColors.surfaceStrong,
+  wheat: '#F2E6BD',
+} as const;
+type WelcomeAccent = keyof typeof welcomeAccentColors;
 
 export type WelcomeSlide = {
   title: string;
   description: string;
   image: ImageSourcePropType;
   icon: IconName;
-  accent: Pastel;
+  accent: WelcomeAccent;
   companionIcon: IconName;
-  companionAccent: Pastel;
+  companionAccent: WelcomeAccent;
   featureTitle: string;
   featureDescription: string;
 };
@@ -21,9 +27,9 @@ export const welcomeSlides: WelcomeSlide[] = [
       'Discover Bible stories, find a fresh perspective and make a little space for faith.',
     image: require('../../../../assets/onboarding/learn.jpg'),
     icon: 'book-open',
-    accent: 'yellow',
+    accent: 'wheat',
     companionIcon: 'sun',
-    companionAccent: 'mint',
+    companionAccent: 'sage',
     featureTitle: 'A little learning, anytime',
     featureDescription: 'Short lessons that fit into your day, at your own pace.',
   },
@@ -33,9 +39,9 @@ export const welcomeSlides: WelcomeSlide[] = [
       'Read, reflect and practise. Take something meaningful from every lesson into everyday life.',
     image: require('../../../../assets/onboarding/live.jpg'),
     icon: 'heart',
-    accent: 'mint',
+    accent: 'sage',
     companionIcon: 'book-open',
-    companionAccent: 'yellow',
+    companionAccent: 'wheat',
     featureTitle: 'Small lessons. Everyday kindness.',
     featureDescription: 'Memory verses and gentle questions help the message stay with you.',
   },
@@ -45,9 +51,9 @@ export const welcomeSlides: WelcomeSlide[] = [
       'Save the lessons you love, revisit what you have learned and celebrate each step forward.',
     image: require('../../../../assets/onboarding/grow.jpg'),
     icon: 'sun',
-    accent: 'pink',
+    accent: 'sage',
     companionIcon: 'bookmark',
-    companionAccent: 'yellow',
+    companionAccent: 'wheat',
     featureTitle: 'Your own learning journey',
     featureDescription: 'Your reading progress and best quiz scores, all in one place.',
   },

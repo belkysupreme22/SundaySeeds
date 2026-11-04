@@ -9,7 +9,7 @@ import {
   useWindowDimensions,
   View,
 } from 'react-native';
-import { colors } from '../../../shared/theme/tokens';
+import { brandColors, colors } from '../../../shared/theme/tokens';
 import { Button } from '../../../shared/ui/Button';
 import { Card } from '../../../shared/ui/Card';
 import { Icon } from '../../../shared/ui/Icon';
@@ -85,13 +85,15 @@ export function WelcomeScreen({
           <View style={styles.brand}>
             <View style={styles.logo}>
               <Image
-                source={require('../../../../assets/brand/logo.png')}
+                source={require('../../../../assets/brand/logo-reversed.png')}
                 style={styles.logoImage}
                 resizeMode="contain"
                 accessible={false}
               />
             </View>
-            <Text variant="label">SundaySeeds</Text>
+            <Text variant="label" style={styles.brandName}>
+              SundaySeeds
+            </Text>
           </View>
           <Pressable
             accessibilityRole="button"
@@ -108,7 +110,7 @@ export function WelcomeScreen({
         </View>
 
         <View style={styles.intro} accessibilityLiveRegion="polite">
-          <Text variant="hero" accessibilityRole="header">
+          <Text variant="hero" accessibilityRole="header" style={styles.headline}>
             {slide.title}
           </Text>
           <Text style={styles.description}>{slide.description}</Text>
@@ -124,16 +126,16 @@ export function WelcomeScreen({
           onPress={advance}
           style={({ pressed }) => [pressed && styles.pressed]}
         >
-          <Card tone="lavender" shadow={false} style={styles.feature}>
-            <View style={[styles.featureIcon, { backgroundColor: colors[slide.accent] }]}>
-              <Icon name={slide.icon} size={24} />
+          <Card tone="mint" shadow={false} style={styles.feature}>
+            <View style={styles.featureIcon}>
+              <Icon name={slide.icon} size={24} color={brandColors.forest} />
             </View>
             <View style={styles.featureCopy}>
               <Text variant="label">{slide.featureTitle}</Text>
               <Text variant="small">{slide.featureDescription}</Text>
             </View>
             <View style={styles.featureArrow}>
-              <Icon name="arrow-right" size={19} />
+              <Icon name="arrow-right" size={19} color={brandColors.forest} />
             </View>
           </Card>
         </Pressable>
@@ -169,10 +171,11 @@ const styles = StyleSheet.create({
   page: { gap: 16 },
   header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 12 },
   brand: { flexDirection: 'row', alignItems: 'center', gap: 9, flexShrink: 1 },
+  brandName: { color: brandColors.forest },
   logo: {
     width: 34,
     height: 34,
-    backgroundColor: colors.yellow,
+    backgroundColor: brandColors.forest,
     borderWidth: 1,
     borderColor: colors.ink,
     borderRadius: 8,
@@ -182,9 +185,22 @@ const styles = StyleSheet.create({
   logoImage: { width: 32, height: 32 },
   skip: { minWidth: 44, minHeight: 44, alignItems: 'center', justifyContent: 'center' },
   intro: { gap: 8 },
+  headline: { color: brandColors.forest },
   description: { maxWidth: 360, fontSize: 13, lineHeight: 21 },
-  feature: { flexDirection: 'row', alignItems: 'center', gap: 10, padding: 12 },
-  featureIcon: { padding: 8, borderWidth: 1, borderColor: colors.ink, borderRadius: 8 },
+  feature: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
+    padding: 12,
+    backgroundColor: brandColors.surface,
+  },
+  featureIcon: {
+    padding: 8,
+    borderWidth: 1,
+    borderColor: colors.ink,
+    borderRadius: 8,
+    backgroundColor: brandColors.surfaceStrong,
+  },
   featureCopy: { flex: 1, gap: 4 },
   featureArrow: {
     width: 32,
@@ -192,13 +208,13 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.ink,
     borderRadius: 16,
-    backgroundColor: colors.white,
+    backgroundColor: brandColors.canvas,
     alignItems: 'center',
     justifyContent: 'center',
   },
   pagination: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 9 },
   dot: { width: 8, height: 8, borderRadius: 4, backgroundColor: colors.line },
-  activeDot: { backgroundColor: colors.primary },
+  activeDot: { backgroundColor: brandColors.forest },
   actions: { flexDirection: 'row', gap: 12 },
   stackedActions: { flexDirection: 'column' },
   back: { flex: 1 },

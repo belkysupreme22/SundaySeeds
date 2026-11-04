@@ -1,4 +1,5 @@
 import Svg, { G, Path } from 'react-native-svg';
+import { brandColors } from '../../../shared/theme/tokens';
 
 /** Separate contours traced from reference-03's centre and right auth panels. */
 export function AccountBackdrop({ signup }: { signup: boolean }) {
@@ -10,7 +11,7 @@ export function AccountBackdrop({ signup }: { signup: boolean }) {
             ? 'M240 240H119C61 240 20 201 20 145C20 103 44 66 83 47L95 66L89 39L125 25L138 55L158 25L190 36L179 67L216 54L240 87Z'
             : 'M240 240H57C39 237 31 225 33 204C34 188 43 173 51 158L43 151L65 120L75 130L89 105L100 116L118 82L128 99L150 78L163 101L177 82L200 89L195 107L218 99L240 113Z'
         }
-        fill={signup ? '#FFED8D' : '#DCD3FA'}
+        fill={signup ? brandColors.surfaceStrong : brandColors.surface}
         stroke="#26212E"
         strokeWidth="1.2"
         strokeLinejoin="round"

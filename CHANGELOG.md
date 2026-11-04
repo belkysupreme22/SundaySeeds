@@ -5,6 +5,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Branding
+- Aligned introduction, account and learning-profile setup with forest branding, sage surfaces, calm choice cards and forest progress. Preserved motion, geometry, text, Skip/Back and recovery behavior; owner app/native acceptance pending.
 - Established shared forest/ivory action and navigation roles, cream page backgrounds, sage focus/selection and muted card surfaces. Original pastel tokens remain accent colors; control geometry, strokes and shadows are preserved. Source review only; app/native acceptance pending.
 - Gave the unfolding splash a deep forest background, warm ivory artwork/wordmark and soft sage tagline, with matching native/static fallback colors and light launch status-bar icons. Other screen and loader colors are unchanged; app/native visual review remains pending.
 - Installed the selected unfolding-seed identity across app icon/native launch assets and added a one-shot2.3second vector unfolding splash with a late wordmark, reduced-motion/static fallbacks and bounded startup handling. Native and web use existing local players; no new packages. Asset/source review completed; app/runtime/native and owner motion acceptance remain pending.
