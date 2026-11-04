@@ -1,8 +1,23 @@
 # SundaySeeds implementation plan
 
-## Continuous 3D splash direction — 3 November 2026
+## Unfolding-seed identity proposal — 4 November 2026
 
-Current owner priority: one continuous naturalistic 3D animation of a closed book
+The owner stopped the book/tree film, requested a rethink and selected the
+unfolding seed: a small seed opens, two leaves unfurl and settle beside the
+SundaySeeds wordmark. First establish its finished shape, then develop a short
+2–3 second vector motion sequence from that same geometry. See the
+[finished-shape board and editable source](brand-options/2026-11-04/unfolding-seed/README.md).
+
+The proposal is rendered for review, with a static icon and small artwork samples.
+Owner acceptance of this specific drawing, animation and app integration remain
+pending. Current installed app branding stays unchanged during shape review.
+The earlier 3D production route stays stopped; its source and pending drafts are
+preserved. Only selected poses were rendered, not a complete animated take.
+No app tests/builds/typecheck/lint/runtime/native checks ran for this proposal.
+
+## Earlier continuous 3D splash direction — superseded 4 November 2026
+
+The prior direction was one continuous naturalistic 3D animation of a closed book
 opening, flexible pages turning, a seed germinating inside the page crease, branches
 and leaves growing, then attached fruit developing. The layered-PNG attempt was
 rejected and removed from startup. A short logo transition remains temporarily;
@@ -15,9 +30,10 @@ Runway was discovered and suggested, but its authentication calls return
 [Blender scene source](../apps/mobile/scripts/splash-motion/README.md) is prepared
 as a deterministic production alternative. It models a hinged cover, flexible
 page turns, seed shells, growing wood, unfolding leaves and attached fruit. It has
-not been executed or rendered, so quality and compatibility remain unverified. No
-renderer, video playback package or backend change is introduced. Rendering,
-continuous-motion review and mobile/native acceptance remain pending.
+been executed in a project-local Blender4.5.15 renderer and selected still poses
+were inspected. The owner stopped this approach before a complete take or video
+integration. No app playback package or backend change was introduced. Do not
+resume this superseded work as the current splash task.
 
 The static icon now joins the book crease to a fruit-bearing tree. Brand exports
 and illustrative platform previews were rendered; owner acceptance remains pending.
