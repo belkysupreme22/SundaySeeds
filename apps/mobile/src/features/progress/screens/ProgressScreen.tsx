@@ -6,7 +6,7 @@ import { useLearningProgress } from '../hooks/useLearningProgress';
 import { ProgressHero } from '../components/ProgressHero';
 import { ProgressStats } from '../components/ProgressStats';
 import { LessonProgressRow } from '../components/LessonProgressRow';
-import { colors } from '../../../shared/theme/tokens';
+import { brandColors, colors } from '../../../shared/theme/tokens';
 import { Screen, ContentGroup } from '../../../shared/ui/Screen';
 import { PageHeader } from '../../../shared/ui/PageHeader';
 import { Text } from '../../../shared/ui/Text';
@@ -35,7 +35,7 @@ export function ProgressScreen() {
       <Screen tabs>
         <PageHeader title={t('progress.title')} subtitle={t('progress.subtitle')} />
         <Card
-          tone={errorKind === 'load' ? 'peach' : 'lavender'}
+          tone={errorKind === 'load' ? 'peach' : 'mint'}
           style={styles.state}
           accessibilityLiveRegion="polite"
         >
@@ -44,9 +44,7 @@ export function ProgressScreen() {
             {errorKind === 'load' ? t('progress.onHold') : t('progress.loading')}
           </Text>
           <Text variant="small">
-            {errorKind === 'load'
-              ? t('progress.onHoldDesc')
-              : t('progress.loadingDesc')}
+            {errorKind === 'load' ? t('progress.onHoldDesc') : t('progress.loadingDesc')}
           </Text>
         </Card>
       </Screen>
@@ -100,9 +98,7 @@ export function ProgressScreen() {
             {saved ? t('progress.emptyWithSaved') : t('progress.emptyFirst')}
           </Text>
           <Text variant="small">
-            {saved
-              ? t('progress.emptyWithSavedDesc')
-              : t('progress.emptyFirstDesc')}
+            {saved ? t('progress.emptyWithSavedDesc') : t('progress.emptyFirstDesc')}
           </Text>
           <Button
             label={t('progress.exploreLessons')}
@@ -150,7 +146,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.outline,
     borderRadius: 6,
-    backgroundColor: colors.lavender,
+    backgroundColor: brandColors.surface,
   },
   state: { gap: 12 },
 });

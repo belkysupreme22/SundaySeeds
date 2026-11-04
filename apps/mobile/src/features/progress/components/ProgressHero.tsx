@@ -1,5 +1,5 @@
 import { Image, StyleSheet, View } from 'react-native';
-import { colors } from '../../../shared/theme/tokens';
+import { brandColors, colors } from '../../../shared/theme/tokens';
 import { Card } from '../../../shared/ui/Card';
 import { Text } from '../../../shared/ui/Text';
 
@@ -8,12 +8,7 @@ type ProgressHeroProps = { completed: number; total: number; started: boolean; s
 export function ProgressHero({ completed, total, started, stacked }: ProgressHeroProps) {
   const allComplete = total > 0 && completed === total;
   return (
-    <Card
-      tone="lavender"
-      stroke="soft"
-      shadow={false}
-      style={[styles.hero, stacked && styles.stacked]}
-    >
+    <Card tone="mint" stroke="soft" shadow={false} style={[styles.hero, stacked && styles.stacked]}>
       <View style={[styles.copy, stacked && styles.stackedCopy]}>
         <Text variant="caption">YOUR LEARNING JOURNEY</Text>
         <Text variant="heading">
@@ -66,7 +61,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.line,
     borderRadius: 7,
-    backgroundColor: colors.lavender,
+    backgroundColor: brandColors.surface,
   },
   portrait: { position: 'absolute', right: -8, width: '185%', height: '100%' },
   stacked: { flexDirection: 'column', alignItems: 'stretch' },

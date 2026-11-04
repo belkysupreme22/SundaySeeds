@@ -5,6 +5,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Branding
+- Aligned quiz selections and progress surfaces with shared forest/sage roles while retaining correct/incorrect feedback and progress meaning. Source review only; app/runtime/native acceptance pending.
 - Carried the seed identity into Home, with sage feature/shortcut/journey surfaces, forest headings and consistent discovery/filter/curriculum accents. Preserved responsive composition, artwork, content and navigation; owner visual review pending.
 - Aligned introduction, account and learning-profile setup with forest branding, sage surfaces, calm choice cards and forest progress. Preserved motion, geometry, text, Skip/Back and recovery behavior; owner app/native acceptance pending.
 - Established shared forest/ivory action and navigation roles, cream page backgrounds, sage focus/selection and muted card surfaces. Original pastel tokens remain accent colors; control geometry, strokes and shadows are preserved. Source review only; app/native acceptance pending.

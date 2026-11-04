@@ -1,5 +1,5 @@
 import { Pressable, StyleSheet, View } from 'react-native';
-import { colors } from '../../../shared/theme/tokens';
+import { brandColors, colors } from '../../../shared/theme/tokens';
 import { Icon } from '../../../shared/ui/Icon';
 import { Text } from '../../../shared/ui/Text';
 
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 10,
   },
-  selected: { backgroundColor: colors.lavender },
+  selected: { backgroundColor: brandColors.surfaceStrong },
   correct: { backgroundColor: colors.mint },
   incorrect: { backgroundColor: colors.peach },
   pressed: { opacity: 0.8 },
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: colors.white,
   },
-  selectedLetter: { backgroundColor: colors.ink },
-  selectedLetterText: { color: colors.white },
+  selectedLetter: { backgroundColor: brandColors.forest },
+  selectedLetterText: { color: brandColors.onForest },
   copy: { flex: 1, gap: 4 },
 });
