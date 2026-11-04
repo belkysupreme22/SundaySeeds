@@ -3,7 +3,7 @@ import { Pressable, StyleSheet, View } from 'react-native';
 import type { Lesson } from '../../lessons/types';
 import { LessonArtwork } from '../../lessons/components/LessonArtwork';
 import { useLearningProgress } from '../../progress/hooks/useLearningProgress';
-import { colors } from '../../../shared/theme/tokens';
+import { brandColors, colors } from '../../../shared/theme/tokens';
 import { Card } from '../../../shared/ui/Card';
 import { Icon } from '../../../shared/ui/Icon';
 import { LessonProgressSummary } from '../../lessons/components/LessonProgressSummary';
@@ -40,11 +40,14 @@ export function ContinueLearning({ lessons }: { lessons: Lesson[] }) {
               <LessonArtwork id={lesson.id} tone={lesson.color} />
               <View style={styles.copy}>
                 <Text variant="label">{lesson.title}</Text>
-                <LessonProgressSummary readingCount={lesson.sections.length} progress={progress[lesson.id]} />
+                <LessonProgressSummary
+                  readingCount={lesson.sections.length}
+                  progress={progress[lesson.id]}
+                />
                 <Text variant="caption">{lesson.sections[index].title}</Text>
               </View>
               <View style={styles.play}>
-                <Icon name="play" size={18} />
+                <Icon name="play" size={18} color={brandColors.onForest} />
               </View>
             </Card>
           </Pressable>
@@ -55,7 +58,13 @@ export function ContinueLearning({ lessons }: { lessons: Lesson[] }) {
 }
 
 const styles = StyleSheet.create({
-  card: { flexDirection: 'row', alignItems: 'center', padding: 10, gap: 10 },
+  card: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 10,
+    gap: 10,
+    backgroundColor: brandColors.surface,
+  },
   copy: { flex: 1, gap: 7 },
   play: {
     width: 36,
@@ -63,7 +72,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.ink,
     borderRadius: 8,
-    backgroundColor: colors.lavender,
+    backgroundColor: brandColors.forest,
     alignItems: 'center',
     justifyContent: 'center',
   },

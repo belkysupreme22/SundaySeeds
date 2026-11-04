@@ -1,7 +1,7 @@
 import { Pressable, StyleSheet, View } from 'react-native';
 import type { Lesson } from '../types';
 import type { LessonProgress } from '../../progress/data/progressStorage';
-import { colors } from '../../../shared/theme/tokens';
+import { brandColors, colors } from '../../../shared/theme/tokens';
 import { Card } from '../../../shared/ui/Card';
 import { Icon } from '../../../shared/ui/Icon';
 import { Text } from '../../../shared/ui/Text';
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
   },
   words: { flex: 1, gap: 3 },
   number: { padding: 7, borderRadius: 5, backgroundColor: colors.soft },
-  resume: { backgroundColor: colors.lavender },
+  resume: { backgroundColor: brandColors.surfaceStrong },
   quiz: { backgroundColor: colors.mint },
   pressed: { opacity: 0.72 },
   disabled: { opacity: 0.5 },

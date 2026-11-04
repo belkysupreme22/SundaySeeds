@@ -13,7 +13,7 @@ import { lessonTopics } from '../data/lessonTopics';
 import { lessonFilters, useLessonResults, type LessonFilter } from '../hooks/useLessonResults';
 import type { LessonCategory } from '../types';
 import { useLearningProgress } from '../../progress/hooks/useLearningProgress';
-import { colors } from '../../../shared/theme/tokens';
+import { brandColors, colors } from '../../../shared/theme/tokens';
 import { Text } from '../../../shared/ui/Text';
 import { Icon } from '../../../shared/ui/Icon';
 import { Button, IconButton } from '../../../shared/ui/Button';
@@ -180,7 +180,7 @@ const styles = StyleSheet.create({
     borderRadius: 7,
     backgroundColor: colors.white,
   },
-  active: { backgroundColor: colors.lavender },
+  active: { backgroundColor: brandColors.surfaceStrong },
   overlay: {
     flex: 1,
     justifyContent: 'flex-end',
@@ -215,6 +215,6 @@ const styles = StyleSheet.create({
     borderRadius: 7,
     backgroundColor: colors.white,
   },
-  preview: { padding: 12, backgroundColor: colors.mint, borderRadius: 7, gap: 4 },
+  preview: { padding: 12, backgroundColor: brandColors.surface, borderRadius: 7, gap: 4 },
   fullWidth: { flexBasis: '100%' },
 });

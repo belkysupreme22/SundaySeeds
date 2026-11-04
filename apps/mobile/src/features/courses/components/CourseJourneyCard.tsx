@@ -5,7 +5,7 @@ import { Card } from '../../../shared/ui/Card';
 import { Text } from '../../../shared/ui/Text';
 import { Button } from '../../../shared/ui/Button';
 import { Icon } from '../../../shared/ui/Icon';
-import { colors } from '../../../shared/theme/tokens';
+import { brandColors, colors } from '../../../shared/theme/tokens';
 
 export function CourseJourneyCard() {
   const {
@@ -34,7 +34,9 @@ export function CourseJourneyCard() {
         </View>
         <View style={styles.words}>
           <Text variant="caption">COURSE · {moduleCount} MODULES</Text>
-          <Text variant="title">{courseTitle}</Text>
+          <Text variant="title" style={styles.title}>
+            {courseTitle}
+          </Text>
           <Text variant="small" muted>
             {lessons.length} Bible studies · Prayer, trust, courage & kindness
           </Text>
@@ -67,20 +69,19 @@ export function CourseJourneyCard() {
       <Button
         label={available && started ? 'View curriculum' : 'Explore course'}
         variant={available && started ? 'outline' : 'primary'}
-        onPress={() =>
-          router.push({ pathname: '/courses/[id]', params: { id: courseId } })
-        }
+        onPress={() => router.push({ pathname: '/courses/[id]', params: { id: courseId } })}
       />
     </Card>
   );
 }
 const styles = StyleSheet.create({
-  card: { gap: 12 },
+  card: { gap: 12, backgroundColor: brandColors.surface },
+  title: { color: brandColors.forest },
   header: { flexDirection: 'row', alignItems: 'center', gap: 12 },
   stacked: { flexDirection: 'column', alignItems: 'flex-start' },
   words: { flex: 1, gap: 4 },
   art: {
-    backgroundColor: colors.lavender,
+    backgroundColor: brandColors.surfaceStrong,
     borderColor: colors.ink,
     borderWidth: 1,
     borderRadius: 8,
@@ -89,6 +90,11 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   artImage: { width: '100%', height: '100%' },
-  track: { height: 8, borderRadius: 4, backgroundColor: colors.soft, overflow: 'hidden' },
-  fill: { height: '100%', backgroundColor: colors.primary },
+  track: {
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: brandColors.surfaceStrong,
+    overflow: 'hidden',
+  },
+  fill: { height: '100%', backgroundColor: brandColors.forest },
 });

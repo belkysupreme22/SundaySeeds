@@ -7,6 +7,7 @@ import { Text } from '../../../shared/ui/Text';
 import { IconButton } from '../../../shared/ui/Button';
 import { LessonProgressSummary } from './LessonProgressSummary';
 import { LessonArtwork } from './LessonArtwork';
+import { brandColors } from '../../../shared/theme/tokens';
 export function LessonCard({ lesson }: { lesson: Lesson }) {
   const { width, fontScale } = useWindowDimensions();
   const stacked = width < 350 || fontScale >= 1.5;
@@ -55,6 +56,6 @@ const styles = StyleSheet.create({
   main: { flex: 1, flexDirection: 'row', alignItems: 'center', gap: 12 },
   stacked: { flexDirection: 'column', alignItems: 'stretch' },
   words: { flexGrow: 1, flexShrink: 1, flexBasis: 'auto', justifyContent: 'center', gap: 4 },
-  title: { fontSize: 13, lineHeight: 19 },
+  title: { fontSize: 13, lineHeight: 19, color: brandColors.forest },
   save: { width: 44, minHeight: 44 },
 });

@@ -3,7 +3,7 @@ import { useCallback } from 'react';
 import { router, useFocusEffect } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { useLearningProfile } from '../../learning-profile/hooks/useLearningProfile';
-import { Pressable, StyleSheet, useWindowDimensions, View } from 'react-native';
+import { Image, Pressable, StyleSheet, useWindowDimensions, View } from 'react-native';
 import { useLearningProgress } from '../../progress/hooks/useLearningProgress';
 import { LessonCard } from '../../lessons/components/LessonCard';
 import { Screen, ContentGroup } from '../../../shared/ui/Screen';
@@ -12,7 +12,7 @@ import { Icon, type IconName } from '../../../shared/ui/Icon';
 import { IconButton } from '../../../shared/ui/Button';
 import { Card } from '../../../shared/ui/Card';
 import { SectionHeading } from '../../../shared/ui/SectionHeading';
-import { colors, type Pastel } from '../../../shared/theme/tokens';
+import { brandColors, colors } from '../../../shared/theme/tokens';
 import { WeeklyHero } from '../components/WeeklyHero';
 import { ContinueLearning } from '../components/ContinueLearning';
 import { CourseJourneyCard } from '../../courses/components/CourseJourneyCard';
@@ -38,7 +38,6 @@ export function HomeScreen() {
     title: string;
     subtitle: string;
     label?: string;
-    tone: Pastel;
     icon: IconName;
     action: () => void;
   }[] = [
@@ -46,28 +45,30 @@ export function HomeScreen() {
       title: t('home.courses'),
       subtitle: t('home.browseCourses'),
       label: t('home.browseCourseLabel'),
-      tone: 'yellow',
       icon: 'book-open',
       action: () => router.push('/courses'),
     },
     {
       title: t('home.saved'),
-      subtitle: errorKind === 'load' ? t('common.unavailable') : t('home.savedCount', { count: bookmarks.length }),
-      tone: 'mint',
+      subtitle:
+        errorKind === 'load'
+          ? t('common.unavailable')
+          : t('home.savedCount', { count: bookmarks.length }),
       icon: 'bookmark',
       action: () => router.replace('/lessons?filter=saved'),
     },
     {
       title: t('home.practice'),
       subtitle: t('home.quickQuiz'),
-      tone: 'lavender',
       icon: 'edit-3',
       action: () => router.push('/quiz/good-samaritan'),
     },
     {
       title: t('home.myGrowth'),
-      subtitle: errorKind === 'load' ? t('common.unavailable') : t('home.finishedCount', { count: completed }),
-      tone: 'peach',
+      subtitle:
+        errorKind === 'load'
+          ? t('common.unavailable')
+          : t('home.finishedCount', { count: completed }),
       icon: 'award',
       action: () => router.replace('/progress'),
     },
@@ -77,16 +78,27 @@ export function HomeScreen() {
       <View style={styles.header}>
         <View style={styles.brand}>
           <View style={styles.logo}>
-            <Icon name="sun" size={21} />
+            <Image
+              source={require('../../../../assets/brand/logo-reversed.png')}
+              style={styles.logoImage}
+              resizeMode="contain"
+              accessible={false}
+            />
           </View>
           <View style={styles.greeting}>
-            <Text variant="title">{t('home.greeting', { name: greetingName })}</Text>
+            <Text variant="title" style={styles.brandTitle}>
+              {t('home.greeting', { name: greetingName })}
+            </Text>
             <Text variant="caption" muted>
               {t('home.subtitle')}
             </Text>
           </View>
         </View>
-        <IconButton name="user" label={t('home.yourProfile')} onPress={() => router.replace('/profile')} />
+        <IconButton
+          name="user"
+          label={t('home.yourProfile')}
+          onPress={() => router.replace('/profile')}
+        />
       </View>
       <WeeklyHero />
       <ContentGroup>
@@ -104,8 +116,8 @@ export function HomeScreen() {
                 { minWidth: 72 * fontScale },
               ]}
             >
-              <Card tone={item.tone} shadow={false} style={styles.shortcutCard}>
-                <Icon name={item.icon} size={23} />
+              <Card tone="mint" shadow={false} style={styles.shortcutCard}>
+                <Icon name={item.icon} size={23} color={brandColors.forest} />
                 <Text variant="label" style={styles.shortcutTitle}>
                   {item.title}
                 </Text>
@@ -136,7 +148,7 @@ export function HomeScreen() {
         <SectionHeading title={t('home.memoryVerse')} />
         <Card tone="mint" shadow={false}>
           <View style={styles.verseTitle}>
-            <Icon name="sun" size={20} />
+            <Icon name="sun" size={20} color={brandColors.forest} />
             <Text variant="caption">{t('home.memoryVerseLabel')}</Text>
           </View>
           <Text variant="title" style={styles.verse}>
@@ -163,8 +175,10 @@ const styles = StyleSheet.create({
     borderWidth: 1.1,
     borderRadius: 8,
     borderColor: colors.ink,
-    backgroundColor: colors.yellow,
+    backgroundColor: brandColors.forest,
   },
+  logoImage: { width: 29, height: 33 },
+  brandTitle: { color: brandColors.forest },
   shortcuts: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
   shortcut: { flexGrow: 1, flexBasis: '20%' },
   wideShortcut: { flexBasis: '45%' },
