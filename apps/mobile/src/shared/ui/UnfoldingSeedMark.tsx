@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import LottieView from 'lottie-react-native';
 import Svg, { Path } from 'react-native-svg';
-import { seedPaths, seedViewBox } from '../branding/seedMark';
+import { seedInk, seedPaths, seedViewBox } from '../branding/seedMark';
 
 type Props = {
   size: number;
@@ -88,7 +88,7 @@ export function UnfoldingSeedMark({ size, animate, playing, onReady, onFinished 
               <Path
                 key={id}
                 d={waitingForMotion ? `${d.split('ZM')[0]}Z` : d}
-                fill="#173E32"
+                fill={seedInk}
                 fillRule="evenodd"
               />
             ))}

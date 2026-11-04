@@ -2,6 +2,12 @@
 
 ## Unfolding-seed identity and motion — 4 November 2026
 
+Latest owner refinement: replace white with a suitable colored background.
+Applied deep forest `#173E32` with ivory seed/wordmark and soft sage tagline to
+both launch phases and static fallbacks. Status-bar icons use light styling only
+while the splash is active. Shared screen/loader colors are unchanged. Dark
+artwork rendering/source review completed; app/device review remains pending.
+
 The owner responded positively to the finished seed drawing. Implemented its exact
 four paths across the static icon, native initial-seed image, final logos and
 bundled2.3second vector unfolding sequence. The seed opens, a curved stem extends,

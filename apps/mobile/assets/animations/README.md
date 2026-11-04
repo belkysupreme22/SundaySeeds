@@ -5,6 +5,10 @@
 4 November 2026. `unfolding-seed.json` is original project-authored vector motion
 from the accepted four-path identity, independent of the loading-dots asset and
 its license below. It has no images, fonts, audio or external assets.
+The owner subsequently requested a colored background: ivory vector fills
+`#F7F3E8` now render against the splash's deep forest `#173E32`. Generated color
+constants keep native/web static fallbacks and splash text consistent; the
+separate blue/purple loading dots below retain their original colors.
 `scripts/export-seed-motion.cjs` derives Bezier geometry from `brand/logo.svg` and
 generates static TypeScript definitions for the same fallback mark. At60fps,
 frames0–138 take2.3seconds: the seam opens, the stem extends, two narrow buds

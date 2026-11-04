@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import type { AnimationItem } from 'lottie-web';
 import animation from '../../../assets/animations/unfolding-seed.json';
-import { seedPaths, seedViewBox } from '../branding/seedMark';
+import { seedInk, seedPaths, seedViewBox } from '../branding/seedMark';
 
 type Props = {
   size: number;
@@ -115,7 +115,7 @@ export function UnfoldingSeedMark({ size, animate, playing, onReady, onFinished 
               <path
                 key={id}
                 d={waitingForMotion ? `${d.split('ZM')[0]}Z` : d}
-                fill="#173E32"
+                fill={seedInk}
                 fillRule="evenodd"
               />
             ))}

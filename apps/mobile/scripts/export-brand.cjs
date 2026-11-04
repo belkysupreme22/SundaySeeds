@@ -42,7 +42,7 @@ async function main() {
   await png('logo.png', svg(recolor(forest), '192 192 640 640'), 704);
   await png('logo-reversed.png', svg(recolor(ivory), '192 192 640 640'), 704);
   // Native launch shows the opening pose, at its position in the full mark canvas.
-  const seed = svg(`<path fill="${forest}" d="${seedOutline}"/>`, '192 192 640 640');
+  const seed = svg(`<path fill="${ivory}" d="${seedOutline}"/>`, '192 192 640 640');
   fs.writeFileSync(path.join(destination, 'splash-seed.svg'), seed);
   await png('splash-seed.png', seed, 704);
 }

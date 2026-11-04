@@ -1,5 +1,8 @@
 // Generated from assets/brand/logo.svg by scripts/export-seed-motion.cjs.
 export const seedViewBox = '192 192 640 640';
+export const seedInk = '#F7F3E8';
+export const seedBackground = '#173E32';
+export const seedMutedInk = '#C4D1BE';
 export const seedPaths = [
   {
     "id": "stem",

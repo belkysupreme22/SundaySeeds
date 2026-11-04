@@ -9,6 +9,13 @@ launch image shows its initial closed seed rather than displaying the final
 sprout before the unfolding begins. Current native image width is160; all mark
 representations share the square `192 192 640 640` crop.
 
+The owner then requested a colored background. Use deep forest `#173E32` with
+warm ivory `#F7F3E8` artwork/wordmark and soft sage `#C4D1BE` tagline for this splash.
+The native seed asset is ivory on transparency; the local Lottie and static
+fallbacks use the same ink. Status-bar icons are light until splash completion,
+then restore the existing dark styling. Other learner-screen and loader colors
+remain unchanged.
+
 `export-seed-motion.cjs` parses the named master SVG paths, authors compatible
 Bezier morph keyframes and generates both local Lottie JSON and static fallback
 TypeScript paths. The seed seam opens, the stem extends and curled narrow leaf

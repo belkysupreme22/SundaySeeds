@@ -10,7 +10,8 @@ import {
   useWindowDimensions,
   View,
 } from 'react-native';
-import { colors, fonts } from '../theme/tokens';
+import { fonts } from '../theme/tokens';
+import { seedBackground, seedInk, seedMutedInk } from '../branding/seedMark';
 import { UnfoldingSeedMark } from './UnfoldingSeedMark';
 
 type Props = { ready: boolean; onReady: () => void; onComplete: () => void };
@@ -225,7 +226,7 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
     left: 0,
-    backgroundColor: colors.paper,
+    backgroundColor: seedBackground,
     zIndex: 999,
     overflow: 'hidden',
   },
@@ -246,13 +247,13 @@ const styles = StyleSheet.create({
     lineHeight: 43,
     letterSpacing: -1.1,
     textAlign: 'center',
-    color: colors.ink,
+    color: seedInk,
   },
   tagline: {
     fontFamily: fonts.regular,
     fontSize: 13,
     lineHeight: 21,
     textAlign: 'center',
-    color: colors.muted,
+    color: seedMutedInk,
   },
 });

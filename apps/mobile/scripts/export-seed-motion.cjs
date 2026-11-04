@@ -12,6 +12,8 @@ if (!['stem', 'left-leaf', 'right-leaf', 'seed'].every(id => paths.some(p => p.i
   throw new Error('Expected the four approved unfolding-seed paths.');
 }
 const FPS = 60, LAST = 138, CROP = '192 192 640 640';
+const INK = '#F7F3E8', BACKGROUND = '#173E32', MUTED_INK = '#C4D1BE';
+const inkRgb = [1,3,5].map(start => parseInt(INK.slice(start,start+2),16)/255);
 const point = (x, y) => [x, y];
 const subtract = (a, b) => [a[0] - b[0], a[1] - b[1]];
 const add = (a, b) => [a[0] + b[0], a[1] + b[1]];
@@ -117,7 +119,7 @@ function layer(id, index) {
       ? { t: time, s: [frames[at][id][sub]] }
       : { t: time, s: [frames[at][id][sub]], e: [frames[at+1][id][sub]], i: { x: 1, y: 1 }, o: { x: 0, y: 0 } }) },
   }));
-  shapes.push({ty:'fl',nm:'Original forest ink',c:fixed([23/255,62/255,50/255,1]),o:fixed(100),r:2,bm:0});
+  shapes.push({ty:'fl',nm:'Warm ivory ink',c:fixed([...inkRgb,1]),o:fixed(100),r:2,bm:0});
   return {ddd:0,ind:index,ty:4,nm:id,sr:1,ks:{o:fixed(100),r:fixed(0),p:fixed([-192,-192,0]),a:fixed([0,0,0]),s:fixed([100,100,100])},
     ao:0,shapes,ip:0,op:LAST,st:0,bm:0};
 }
@@ -129,7 +131,7 @@ fs.writeFileSync(output, JSON.stringify(animation));
 const definitions = path.join(root,'apps/mobile/src/shared/branding');
 fs.mkdirSync(definitions,{recursive:true});
 fs.writeFileSync(path.join(definitions,'seedMark.ts'),
-  `// Generated from assets/brand/logo.svg by scripts/export-seed-motion.cjs.\nexport const seedViewBox = '${CROP}';\nexport const seedPaths = ${JSON.stringify(paths,null,2)} as const;\n`);
+  `// Generated from assets/brand/logo.svg by scripts/export-seed-motion.cjs.\nexport const seedViewBox = '${CROP}';\nexport const seedInk = '${INK}';\nexport const seedBackground = '${BACKGROUND}';\nexport const seedMutedInk = '${MUTED_INK}';\nexport const seedPaths = ${JSON.stringify(paths,null,2)} as const;\n`);
 
 // Asset-only preview frames use the very same exported Lottie control points.
 function svgPath(shape) {
@@ -144,9 +146,9 @@ if(process.argv.includes('--preview')) {
   const preview = path.join(root,'.artifacts/unfolding-seed-frames');
   fs.mkdirSync(preview,{recursive:true});
   for(let at=0;at<times.length;at++) {
-    const art = paths.map(p => `<path fill="#173E32" fill-rule="evenodd" d="${frames[at][p.id].map(svgPath).join('')}"/>`).join('');
+    const art = paths.map(p => `<path fill="${INK}" fill-rule="evenodd" d="${frames[at][p.id].map(svgPath).join('')}"/>`).join('');
     fs.writeFileSync(path.join(preview,`${String(times[at]).padStart(3,'0')}.svg`),
-      `<svg xmlns="http://www.w3.org/2000/svg" width="320" height="320" viewBox="${CROP}"><rect x="192" y="192" width="640" height="640" fill="#FCFAFF"/>${art}</svg>`);
+      `<svg xmlns="http://www.w3.org/2000/svg" width="320" height="320" viewBox="${CROP}"><rect x="192" y="192" width="640" height="640" fill="${BACKGROUND}"/>${art}</svg>`);
   }
 }
 console.log(`Exported ${LAST/FPS}s vector motion (${fs.statSync(output).size} bytes), static paths and optional authoring frames.`);

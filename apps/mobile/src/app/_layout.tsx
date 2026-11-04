@@ -87,7 +87,7 @@ export default function RootLayout() {
     <SafeAreaProvider>
       <View style={styles.backdrop} onLayout={onLayoutReady}>
         <View style={styles.app}>
-          <StatusBar style="dark" />
+          <StatusBar style={splashDone ? 'dark' : 'light'} />
           <View
             {...webFocusGuard}
             style={styles.content}

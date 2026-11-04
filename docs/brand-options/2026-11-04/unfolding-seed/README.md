@@ -2,6 +2,12 @@
 
 ## Implementation continuation
 
+The owner requested a colored splash background. The current motion study uses
+deep forest `#173E32` with warm ivory `#F7F3E8` graphics/wordmark and a soft sage
+`#C4D1BE` tagline. Native launch, animation and static fallback share this palette;
+status-bar icons remain light until the splash completes. The original light
+proposal board below remains a historical shape study.
+
 The owner said this drawing was better than the previous directions. The current
 static icon/final logo now use these four paths; the native launch asset uses the
 initial closed seed. A bundled2.3second vector sequence opens the seam, extends

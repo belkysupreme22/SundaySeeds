@@ -7,6 +7,12 @@ Deep forest (`#173E32`) and warm ivory (`#F7F3E8`) preserve a clear silhouette.
 The app's interface palette stays unchanged. The static launcher uses the final
 sprout; the native launch asset uses its initial closed-seed pose.
 
+The owner requested a colored launch background. The splash now uses deep forest
+`#173E32`, warm ivory `#F7F3E8` seed/wordmark and soft sage `#C4D1BE` tagline.
+Native closed-seed artwork is ivory on transparency for that forest background.
+The light-surface `logo.png` and the rest of the interface palette stay unchanged.
+Status-bar icons are light during the splash and return to dark on completion.
+
 The exact geometry comes from the
 [accepted study](../../../../docs/brand-options/2026-11-04/unfolding-seed/README.md).
 No generated bitmap imagery or new app dependency is used in the identity.
