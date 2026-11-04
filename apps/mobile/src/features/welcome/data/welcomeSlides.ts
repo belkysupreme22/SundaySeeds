@@ -2,7 +2,7 @@ import type { ImageSourcePropType } from 'react-native';
 import type { Pastel } from '../../../shared/theme/tokens';
 import type { IconName } from '../../../shared/ui/Icon';
 
-type WelcomeSlide = {
+export type WelcomeSlide = {
   title: string;
   description: string;
   image: ImageSourcePropType;
@@ -19,7 +19,7 @@ export const welcomeSlides: WelcomeSlide[] = [
     title: 'Grow in faith.\nOne little step.',
     description:
       'Discover Bible stories, find a fresh perspective and make a little space for faith.',
-    image: require('../../../../assets/orthodox/lesson_faith_seed.jpg'),
+    image: require('../../../../assets/onboarding/learn.jpg'),
     icon: 'book-open',
     accent: 'yellow',
     companionIcon: 'sun',
@@ -31,7 +31,7 @@ export const welcomeSlides: WelcomeSlide[] = [
     title: 'Carry Sunday\ninto your week.',
     description:
       'Read, reflect and practise. Take something meaningful from every lesson into everyday life.',
-    image: require('../../../../assets/orthodox/home_weekly_hero.jpg'),
+    image: require('../../../../assets/onboarding/live.jpg'),
     icon: 'heart',
     accent: 'mint',
     companionIcon: 'book-open',
@@ -43,7 +43,7 @@ export const welcomeSlides: WelcomeSlide[] = [
     title: 'See your little\nseeds grow.',
     description:
       'Save the lessons you love, revisit what you have learned and celebrate each step forward.',
-    image: require('../../../../assets/orthodox/course_faith_everyday.jpg'),
+    image: require('../../../../assets/onboarding/grow.jpg'),
     icon: 'sun',
     accent: 'pink',
     companionIcon: 'bookmark',

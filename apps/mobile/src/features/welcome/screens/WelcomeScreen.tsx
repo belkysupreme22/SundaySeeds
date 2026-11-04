@@ -16,6 +16,7 @@ import { Icon } from '../../../shared/ui/Icon';
 import { Screen } from '../../../shared/ui/Screen';
 import { Text } from '../../../shared/ui/Text';
 import { welcomeSlides } from '../data/welcomeSlides';
+import { WelcomeArtwork } from '../components/WelcomeArtwork';
 
 type Props = {
   saving: boolean;
@@ -83,7 +84,12 @@ export function WelcomeScreen({
         <View style={styles.header}>
           <View style={styles.brand}>
             <View style={styles.logo}>
-              <Icon name="sun" size={20} />
+              <Image
+                source={require('../../../../assets/brand/logo.png')}
+                style={styles.logoImage}
+                resizeMode="contain"
+                accessible={false}
+              />
             </View>
             <Text variant="label">SundaySeeds</Text>
           </View>
@@ -108,17 +114,7 @@ export function WelcomeScreen({
           <Text style={styles.description}>{slide.description}</Text>
         </View>
 
-        <View style={[styles.artwork, { height: Math.max(220, Math.min(380, height * 0.38)) }]}>
-          <Image source={slide.image} style={styles.image} resizeMode="cover" accessible={false} />
-          <View style={[styles.sticker, { backgroundColor: colors[slide.accent] }]}>
-            <Icon name={slide.icon} size={29} />
-          </View>
-          <View
-            style={[styles.companionSticker, { backgroundColor: colors[slide.companionAccent] }]}
-          >
-            <Icon name={slide.companionIcon} size={24} />
-          </View>
-        </View>
+        <WelcomeArtwork slide={slide} height={Math.max(220, Math.min(380, height * 0.38))} />
 
         <Pressable
           accessibilityRole="button"
@@ -183,40 +179,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  logoImage: { width: 32, height: 32 },
   skip: { minWidth: 44, minHeight: 44, alignItems: 'center', justifyContent: 'center' },
   intro: { gap: 8 },
   description: { maxWidth: 360, fontSize: 13, lineHeight: 21 },
-  artwork: {
-    position: 'relative',
-    backgroundColor: colors.lavender,
-    borderRadius: 10,
-    overflow: 'hidden',
-    borderWidth: 1,
-    borderColor: colors.ink,
-  },
-  image: { width: '100%', height: '100%' },
-  sticker: {
-    position: 'absolute',
-    left: 14,
-    top: 24,
-    borderWidth: 1.2,
-    borderColor: colors.ink,
-    borderRadius: 10,
-    padding: 12,
-    boxShadow: '2px 3px 0px #26212E',
-    transform: [{ rotate: '-7deg' }],
-  },
-  companionSticker: {
-    position: 'absolute',
-    right: 16,
-    bottom: 24,
-    padding: 10,
-    borderWidth: 1.2,
-    borderColor: colors.ink,
-    borderRadius: 9,
-    boxShadow: '2px 3px 0px #26212E',
-    transform: [{ rotate: '5deg' }],
-  },
   feature: { flexDirection: 'row', alignItems: 'center', gap: 10, padding: 12 },
   featureIcon: { padding: 8, borderWidth: 1, borderColor: colors.ink, borderRadius: 8 },
   featureCopy: { flex: 1, gap: 4 },

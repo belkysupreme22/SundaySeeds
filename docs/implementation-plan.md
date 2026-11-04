@@ -20,6 +20,17 @@ The static icon now joins the book crease to a fruit-bearing tree. Brand exports
 and illustrative platform previews were rendered; owner acceptance remains pending.
 The prior book-and-seed entry below is historical.
 
+## Introduction artwork refresh — 3 November 2026
+
+Replaced the three introduction images with natural-color generated photographic
+reading/community/seedling scenes. Added feature-owned gentle image and sticker
+motion with reduced-motion, foreground and focus cleanup; fallback icons never
+block navigation. Preserved introduction text, Next/Back/Skip, layout sizing and
+saving/recovery. Independent source review found no blocker. No tests, typecheck,
+lint, builds or runtime/native checks ran. Owner visual acceptance is pending.
+Home/course/lesson/progress artwork is still separate replacement work; this does
+not complete the original project-wide Orthodox-art replacement request.
+
 ## App icon and matching splash — 3 November 2026
 
 The owner requested one clean, expressive app icon informed by platform design
@@ -42,13 +53,14 @@ Current owner priority: replace the existing Orthodox artwork and improve the
 splash. The owner clarified a generated photographic feel, natural colors and
 believable everyday detail; pastel illustrations and generic stock photographs
 were rejected. Five [visual alternatives](artwork-options/2026-11-03/README.md)
-are prepared for selection: biblical scenes, contemporary learning/community and
-symbolic detail photography. No direction is selected or wired into screens.
+are prepared: biblical scenes, contemporary learning/community and symbolic detail
+photography. The introduction now uses reading/community/seedling imagery as
+recorded above; the remaining learner screens still await replacement selection.
 
 Next select a direction/combination, generate the coordinated replacement set and
 review each affected screen. D (private prayer) and E (quiet courage) add two more
 generated photographic examples. The app icon and matching splash are implemented
-separately above. Original artwork
+separately above. Original artwork on the other learner screens
 stays until a replacement is selected. No tests, builds or runtime checks ran;
 source/asset inspection only. Existing backend/acceptance work is unchanged.
 

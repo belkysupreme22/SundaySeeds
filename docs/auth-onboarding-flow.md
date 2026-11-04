@@ -1,5 +1,16 @@
 # Auth onboarding flow
 
+## Introduction artwork and motion — 3 November 2026
+
+The three introduction pages now use generated photography-style reading,
+community and seedling images. Feature-owned artwork adds a slow image drift and
+sticker motion only when loaded, focused, foreground and explicitly allowed by
+the system motion preference. Image failures show the slide icon and never block
+navigation. Next, Back, Skip, Android Back, saving/recovery and all identity/profile
+routing stay unchanged. Source review only; owner small-screen/large-text,
+reduced-motion, app/runtime and native acceptance remain pending. This is separate
+from the requested continuous 3D startup film, which is not yet implemented.
+
 
 ## Connected reading-state account boundary — 23 October 2026
 
