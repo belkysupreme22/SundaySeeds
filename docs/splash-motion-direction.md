@@ -52,8 +52,9 @@ availability and generation remain unconfirmed. No generation was submitted and
 no credit use is claimed. Do not describe a visible tool definition as a working
 connection. Recheck authentication before selecting an available model.
 
-The deterministic alternative is an editable procedural Blender scene in
-`apps/mobile/scripts/splash-motion/`. A modeled scene permits exact cover hinges,
+The deterministic alternative is the unrendered procedural Blender scene source
+in [the authoring directory](../apps/mobile/scripts/splash-motion/README.md).
+A modeled scene permits exact cover hinges,
 paper bending and growing branches instead of relying on a video model to invent
 all these events correctly. Script authoring does not establish render quality:
 Blender execution, actual renders, motion review and material refinement remain

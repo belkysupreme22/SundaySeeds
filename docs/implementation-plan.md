@@ -12,7 +12,10 @@ export requirements and integration acceptance.
 
 Runway was discovered and suggested, but its authentication calls return
 `Unknown tool`; usable connection and generation remain unconfirmed. An editable
-Blender scene is being prepared as a deterministic production alternative. No
+[Blender scene source](../apps/mobile/scripts/splash-motion/README.md) is prepared
+as a deterministic production alternative. It models a hinged cover, flexible
+page turns, seed shells, growing wood, unfolding leaves and attached fruit. It has
+not been executed or rendered, so quality and compatibility remain unverified. No
 renderer, video playback package or backend change is introduced. Rendering,
 continuous-motion review and mobile/native acceptance remain pending.
 

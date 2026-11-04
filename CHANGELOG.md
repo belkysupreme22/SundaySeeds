@@ -9,6 +9,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 - Added an original book-and-seed app icon with opaque primary, Android adaptive/themed layers and favicon, informed by platform icon guidance. Replaced the ornate cinematic splash with matching vector branding, restrained motion and guarded startup handoff. Asset/source review completed; device, runtime and owner visual acceptance remain pending.
 
 ### Design proposals
+- Prepared an unrendered, editable Blender scene source for a single continuous closed-book, bending-page and seed-to-fruit-tree animation. It replaces the rejected photo-layer production approach; rendering, motion/material review and video integration remain pending. Runway discovery succeeded, but its connection check returned an unknown-tool error; no video generation was submitted.
 - Prepared five original photographic-feel artwork alternatives for Bible stories, everyday faith, symbolic growth, prayer and courage after owner feedback. Direction selection and screen replacement remain pending; no learner imagery is changed by these proposals.
 
 ### Added
