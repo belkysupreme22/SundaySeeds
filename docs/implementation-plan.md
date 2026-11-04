@@ -1,5 +1,25 @@
 # SundaySeeds implementation plan
 
+## Continuous 3D splash direction — 3 November 2026
+
+Current owner priority: one continuous naturalistic 3D animation of a closed book
+opening, flexible pages turning, a seed germinating inside the page crease, branches
+and leaves growing, then attached fruit developing. The layered-PNG attempt was
+rejected and removed from startup. A short logo transition remains temporarily;
+the requested film is **not implemented or approved**. See the
+[motion production brief](splash-motion-direction.md) for timing, visual continuity,
+export requirements and integration acceptance.
+
+Runway was discovered and suggested, but its authentication calls return
+`Unknown tool`; usable connection and generation remain unconfirmed. An editable
+Blender scene is being prepared as a deterministic production alternative. No
+renderer, video playback package or backend change is introduced. Rendering,
+continuous-motion review and mobile/native acceptance remain pending.
+
+The static icon now joins the book crease to a fruit-bearing tree. Brand exports
+and illustrative platform previews were rendered; owner acceptance remains pending.
+The prior book-and-seed entry below is historical.
+
 ## App icon and matching splash — 3 November 2026
 
 The owner requested one clean, expressive app icon informed by platform design

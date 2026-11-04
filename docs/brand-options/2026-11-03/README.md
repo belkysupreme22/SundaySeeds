@@ -2,7 +2,10 @@
 
 Three original hand-authored vector concepts explored the owner's request for a
 clean, expressive app logo. After the owner requested one focused icon based on
-platform design principles, **A — The living word** became the implemented mark.
+platform design principles, the book-and-growth direction became the implemented
+mark. The current revision connects the book crease to a mature tree trunk and
+a broad canopy with three fruit openings. The earlier A seed/flame below is
+historical; `final-preview` and the app asset master show the current revision.
 This is the implementation choice, not a claim of owner visual approval.
 
 ![Implemented icon and illustrative platform previews](final-preview.png)
@@ -10,8 +13,9 @@ This is the implementation choice, not a claim of owner visual approval.
 The [editable master and export kit](../../../apps/mobile/assets/brand/README.md)
 contain the actual app assets. Configuration now uses the opaque square app icon,
 safe-area Android foreground, monochrome layer and favicon. The matching splash
-uses the same mark. Asset rendering and lead source review only; actual device/
-native and owner visual acceptance remain pending. The exploration below records
+temporarily uses the same static mark. The continuous 3D film requested later is
+[pending production](../../splash-motion-direction.md). Asset rendering and source
+review only; actual device/native and owner visual acceptance remain pending. The exploration below records
 the earlier alternatives; B and C are not installed.
 
 ![Comparison board](comparison-board.png)
@@ -55,5 +59,5 @@ The comparison-board PNG was inspected as artwork, including light/dark samples;
 an initial fill-rendering problem was corrected and the board rendered again.
 This is asset inspection only. No tests, builds, app runtime, native launcher,
 splash, accessibility or device visual checks have been performed. Final icon
-selection, typography and owner review remain pending. No existing app asset or
-uncommitted splash draft was changed.
+and owner visual review remain pending. Current app assets use the revised
+fruit-bearing tree; the initial A/B/C board remains an exploration record.

@@ -13,7 +13,7 @@ const recolor = color => shape.replaceAll(forest, color);
 const svg = (body, viewBox = '0 0 1024 1024') =>
   `<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="${viewBox}">${body}</svg>`;
 const adaptive = color =>
-  `<g transform="translate(512 512) scale(0.78) translate(-512 -512)">${recolor(color)}</g>`;
+  `<g transform="translate(512 512) scale(0.76) translate(-512 -512)">${recolor(color)}</g>`;
 
 async function png(name, source, size, opaque = false) {
   let renderer = sharp(Buffer.from(source)).resize(size, size);
@@ -34,7 +34,7 @@ async function main() {
   await png('adaptive-monochrome.png', monochrome, 1024);
   await png('favicon.png', icon, 64, true);
   // Tight mark exports for the splash/wordmark, with the same actual artwork.
-  await png('logo.png', svg(recolor(forest), '160 160 704 704'), 704);
-  await png('logo-reversed.png', svg(recolor(ivory), '160 160 704 704'), 704);
+  await png('logo.png', svg(recolor(forest), '112 80 800 800'), 704);
+  await png('logo-reversed.png', svg(recolor(ivory), '112 80 800 800'), 704);
 }
 main().catch(error => { console.error(error); process.exitCode = 1; });

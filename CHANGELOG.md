@@ -5,6 +5,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Branding
+- Refined the static app icon into a fruit-bearing tree whose trunk connects to the book crease, with updated adaptive/themed exports and platform previews. Removed the rejected layered-photo growth sequence from startup; the short logo transition remains while a continuous 3D book-opening/page-turning/growth film is prepared. Film generation, app/native checks and owner visual acceptance remain pending.
 - Added an original book-and-seed app icon with opaque primary, Android adaptive/themed layers and favicon, informed by platform icon guidance. Replaced the ornate cinematic splash with matching vector branding, restrained motion and guarded startup handoff. Asset/source review completed; device, runtime and owner visual acceptance remain pending.
 
 ### Design proposals
