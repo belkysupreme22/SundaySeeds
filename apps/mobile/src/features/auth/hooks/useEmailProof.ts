@@ -1,7 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { router, useFocusEffect } from 'expo-router';
+import { authMessage, type AuthMessage } from '../data/authMessages';
 import { createEmailProof } from '../data/emailProof';
 import { useAuth } from './useAuth';
+
+type ProofNotice = AuthMessage & { deviceMessageKey?: AuthMessage['messageKey'] };
 
 function validProof(
   kind: 'confirmation' | 'recovery',
@@ -24,8 +27,8 @@ export function useEmailProof(kind: 'confirmation' | 'recovery', token: unknown,
   const [stage, setStage] = useState<'ready' | 'password' | 'done' | 'invalid'>(
     initial ? 'ready' : 'invalid',
   );
-  const [message, setMessage] = useState<string | null>(
-    initial ? null : 'Open the latest confirmation or recovery link from your email.',
+  const [notice, setNotice] = useState<ProofNotice | null>(
+    initial ? null : authMessage('openLatestEmailLink'),
   );
   const [email, setEmail] = useState('');
   const [busy, setBusy] = useState(false);
@@ -45,7 +48,7 @@ export function useEmailProof(kind: 'confirmation' | 'recovery', token: unknown,
       consumed.current = false;
       setBusy(false);
       setEmail('');
-      setMessage(null);
+      setNotice(null);
       setStage('ready');
     }
     // Capture only in memory, then remove parameters without consuming the proof.
@@ -63,7 +66,7 @@ export function useEmailProof(kind: 'confirmation' | 'recovery', token: unknown,
         inFlight.current = false;
         setBusy(false);
         setStage('invalid');
-        setMessage('Open a new email link to continue.');
+        setNotice(authMessage('openNewLink'));
       }
       return () => {
         active.current = false;
@@ -85,23 +88,26 @@ export function useEmailProof(kind: 'confirmation' | 'recovery', token: unknown,
     const proof = controller.current;
     if (!proof) {
       setStage('invalid');
-      setMessage('Open a new email link to continue.');
+      setNotice(authMessage('openNewLink'));
       return false;
     }
     const version = ++request.current;
     inFlight.current = true;
     setBusy(true);
     const result = password === undefined ? await proof.begin() : await proof.reset(password);
-    let deviceMessage = '';
+    let deviceMessageKey: AuthMessage['messageKey'] | undefined;
     if (password !== undefined && result.ok && result.userId) {
       const signedOut = await auth.signOut(result.userId);
       if (!signedOut.ok && auth.user?.id === result.userId) {
-        deviceMessage =
-          ' Sign out from Settings before signing in again; device sign-out could not be confirmed.';
+        deviceMessageKey = authMessage('deviceSignOutUnconfirmed').messageKey;
       }
     }
     if (active.current && request.current === version) {
-      setMessage(result.message + deviceMessage);
+      setNotice({
+        message: result.message,
+        messageKey: result.messageKey,
+        deviceMessageKey,
+      });
       if (result.email) setEmail(result.email);
       setStage(
         result.ok
@@ -119,7 +125,9 @@ export function useEmailProof(kind: 'confirmation' | 'recovery', token: unknown,
   }
   return {
     stage,
-    message,
+    message: notice?.message ?? null,
+    messageKey: notice?.messageKey ?? null,
+    deviceMessageKey: notice?.deviceMessageKey ?? null,
     email,
     busy,
     begin: () => perform(),

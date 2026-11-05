@@ -1,57 +1,69 @@
-export const accountUnavailable =
-  'Account services are not configured yet. You can continue exploring the sample lessons.';
+import englishMessages from '../../../i18n/authResults.en.json';
 
-export const emailRequestAccepted =
-  'Request accepted. If this address is eligible, an email will follow. Check your inbox and spam folder; delivery may take a few minutes.';
+type AuthMessageId = keyof typeof englishMessages;
+type AuthMessageKey = `authResults.${AuthMessageId}`;
 
-export function authFailureMessage(error: unknown, operation: 'sign-in' | 'email' | 'account') {
+export type AuthMessage = { message: string; messageKey: AuthMessageKey };
+
+export function authMessage(key: AuthMessageId): AuthMessage {
+  return { message: englishMessages[key], messageKey: `authResults.${key}` };
+}
+
+export function authResult(ok: boolean, key: AuthMessageId) {
+  return { ok, ...authMessage(key) };
+}
+
+export function authFailureKey(
+  error: unknown,
+  operation: 'sign-in' | 'email' | 'account',
+): AuthMessageId {
   const code =
     error && typeof error === 'object' && 'code' in error && typeof error.code === 'string'
       ? error.code
       : '';
   if (code === 'over_email_send_rate_limit' || code === 'over_request_rate_limit') {
-    return 'Too many requests were made. Wait a few minutes before trying again.';
+    return 'rateLimited';
   }
   if (code === 'email_not_confirmed') {
-    return 'Open the confirmation email first, then sign in again.';
+    return 'emailNotConfirmed';
   }
   if (code === 'weak_password') {
-    return 'Choose a longer passphrase that meets the account password requirements.';
+    return 'weakPassword';
   }
   if (code === 'same_password') {
-    return 'Your new password must be different from your previous password.';
+    return 'samePassword';
   }
   if (code === 'invalid_credentials') {
-    return 'The email or password you entered is incorrect. Please check your credentials or reset your password.';
+    return 'invalidCredentials';
   }
   if (code === 'user_banned') {
-    return 'This account is suspended. Contact support if you need assistance.';
+    return 'accountSuspended';
   }
   if (code === 'otp_expired') {
-    return 'This email link has expired. Request a new email to continue.';
+    return 'expiredLink';
   }
   if (code === 'otp_disabled') {
-    return 'This email link has already been used or is disabled. Request a new email.';
+    return 'disabledLink';
   }
   const status =
     error && typeof error === 'object' && 'status' in error && typeof error.status === 'number'
       ? error.status
       : 0;
   if (status >= 500) {
-    return 'The account service is temporarily unavailable. Please try again in a few minutes.';
+    return 'serviceUnavailable';
   }
   const message =
     error && typeof error === 'object' && 'message' in error && typeof error.message === 'string'
       ? error.message
       : '';
   if (/network|fetch|timeout|connection|abort/i.test(message) || error instanceof TypeError) {
-    return 'Unable to connect to the server. Check your internet connection and try again.';
+    return 'connectionFailed';
   }
   if (operation === 'sign-in') {
-    return 'We could not sign you in. Check your email and password, or request a password reset.';
+    return 'signInFailed';
   }
   if (operation === 'email') {
-    return 'We could not confirm the email request. Check your connection and try again later.';
+    return 'emailRequestFailed';
   }
-  return 'The account request could not be completed. Check your connection and try again.';
+  return 'accountRequestFailed';
 }

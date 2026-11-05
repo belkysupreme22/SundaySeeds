@@ -2,6 +2,7 @@ import { useCallback, useRef, useState } from 'react';
 import { useFocusEffect } from 'expo-router';
 import { useAuth } from '../hooks/useAuth';
 import { Keyboard, Pressable, StyleSheet } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { PasswordField } from '../components/PasswordField';
 import { AccountHero } from '../components/AccountHero';
 import { AccountProviders } from '../components/AccountProviders';
@@ -12,20 +13,22 @@ import { InputField } from '../../../shared/ui/InputField';
 import { Text } from '../../../shared/ui/Text';
 import { Card } from '../../../shared/ui/Card';
 import { Button } from '../../../shared/ui/Button';
-import { colors } from '../../../shared/theme/tokens';
+import { brandColors, colors } from '../../../shared/theme/tokens';
 import { createAccountNavigation, type AccountNavigation } from '../navigation';
+import type { LocalizedAuthResult } from '../types';
 
 type Mode = 'sign-in' | 'sign-up' | 'recovery';
 type Errors = { email?: string; password?: string; confirmation?: string };
 export function AccountScreen({
   mode,
   navigation,
-  continueLabel = 'Return to learning',
+  continueLabel,
 }: {
   mode: Mode;
   navigation?: AccountNavigation;
   continueLabel?: string;
 }) {
+  const { t } = useTranslation();
   const navigate = navigation ?? createAccountNavigation('/settings');
   const auth = useAuth();
   const mounted = useRef(true);
@@ -47,16 +50,15 @@ export function AccountScreen({
   const [confirmation, setConfirmation] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const [notice, setNotice] = useState<string | null>(null);
+  const [notice, setNotice] = useState<LocalizedAuthResult | null>(null);
   const [policy, setPolicy] = useState(false);
   const errors: Errors = {};
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim()))
-    errors.email = 'Enter a valid email address.';
-  if (!recovery && !password) errors.password = 'Enter your password.';
-  if (signup && password.length < 15)
-    errors.password = 'Use at least 15 characters. Spaces are welcome.';
+    errors.email = t('authScreens.invalidEmail');
+  if (!recovery && !password) errors.password = t('authScreens.requiredPassword');
+  if (signup && password.length < 15) errors.password = t('authScreens.passwordLength');
   if (signup && (!confirmation || confirmation !== password))
-    errors.confirmation = 'Both passwords must match.';
+    errors.confirmation = t('authScreens.passwordsMustMatch');
   async function submit() {
     setSubmitted(true);
     setNotice(null);
@@ -71,7 +73,7 @@ export function AccountScreen({
         : await auth.signIn(email.trim(), password);
     setSubmitting(false);
     if (!mounted.current || request.current !== version) return;
-    setNotice(result.message);
+    setNotice(result);
     if (result.ok) {
       setPassword('');
       setConfirmation('');
@@ -85,19 +87,25 @@ export function AccountScreen({
   return (
     <Screen
       contentStyle={styles.screenContent}
-      backgroundColor="#F8F5FC"
+      backgroundColor={brandColors.canvas}
       loadingMessage={
         submitting && auth.busy
           ? recovery
-            ? 'Sending your recovery request…'
+            ? t('authScreens.pending.recovery')
             : signup
-              ? 'Creating your account…'
-              : 'Signing you in…'
+              ? t('authScreens.pending.signUp')
+              : t('authScreens.pending.signIn')
           : undefined
       }
     >
       <AccountTopBar
-        label={recovery ? 'Account recovery' : signup ? 'Create account' : 'Welcome back'}
+        label={t(
+          recovery
+            ? 'authScreens.accountRecovery'
+            : signup
+              ? 'authScreens.createAccount'
+              : 'authScreens.welcomeBack',
+        )}
         onBack={navigate.back}
       />
       {recovery ? <AccountRecoveryHero mode="request" /> : <AccountHero mode={mode} />}
@@ -106,10 +114,10 @@ export function AccountScreen({
           <ContentGroup>
             <InputField
               appearance="account"
-              label="Display name (optional)"
+              label={t('authScreens.displayName')}
               icon="user"
-              accessibilityLabel="Display name, optional"
-              placeholder="What should we call you?"
+              accessibilityLabel={t('authScreens.displayName')}
+              placeholder={t('authScreens.displayNamePlaceholder')}
               value={name}
               onChangeText={(value) => {
                 setName(value);
@@ -123,9 +131,9 @@ export function AccountScreen({
         <ContentGroup>
           <InputField
             appearance="account"
-            label="Email address"
+            label={t('authScreens.emailAddress')}
             icon="mail"
-            accessibilityLabel="Email address"
+            accessibilityLabel={t('authScreens.emailAddress')}
             placeholder="you@example.com"
             value={email}
             onChangeText={(value) => {
@@ -146,7 +154,7 @@ export function AccountScreen({
         {!recovery && (
           <ContentGroup>
             <PasswordField
-              label="Password"
+              label={t('authScreens.password')}
               value={password}
               newPassword={signup}
               onChangeText={(value) => {
@@ -164,7 +172,7 @@ export function AccountScreen({
         {signup && (
           <ContentGroup>
             <PasswordField
-              label="Confirm password"
+              label={t('authScreens.confirmPassword')}
               value={confirmation}
               newPassword
               onChangeText={(value) => {
@@ -183,14 +191,11 @@ export function AccountScreen({
               style={styles.link}
               onPress={() => setPolicy(!policy)}
             >
-              <Text variant="small">Terms & privacy information</Text>
+              <Text variant="small">{t('authScreens.termsAndPrivacy')}</Text>
             </Pressable>
             {policy && (
               <Card shadow={false} stroke="soft">
-                <Text variant="small">
-                  The Terms of Service and Privacy Policy are not published yet. They must be
-                  approved before a public launch.
-                </Text>
+                <Text variant="small">{t('authScreens.policyNotice')}</Text>
               </Card>
             )}
           </ContentGroup>
@@ -202,19 +207,25 @@ export function AccountScreen({
             onPress={navigate.recover}
           >
             <Text variant="small" style={styles.accent}>
-              Forgot password?
+              {t('authScreens.forgotPassword')}
             </Text>
           </Pressable>
         )}
         <Button
-          label={recovery ? 'Request password reset' : signup ? 'Create account' : 'Sign in'}
+          label={t(
+            recovery
+              ? 'authScreens.requestPasswordReset'
+              : signup
+                ? 'authScreens.createAccount'
+                : 'authScreens.signIn',
+          )}
           loading={auth.busy}
           disabled={auth.busy || !auth.hydrated}
           onPress={() => void submit()}
         />
         {submitted && Object.keys(errors).length > 0 && (
           <Text variant="small" accessibilityLiveRegion="polite" style={styles.error}>
-            Check the fields above to continue.
+            {t('authScreens.checkFields')}
           </Text>
         )}
         {notice && (
@@ -225,10 +236,10 @@ export function AccountScreen({
             style={styles.group}
             accessibilityLiveRegion="polite"
           >
-            <Text variant="small">{notice}</Text>
+            <Text variant="small">{t(notice.messageKey, { defaultValue: notice.message })}</Text>
             {auth.pendingEmail && !recovery && (
               <Button
-                label="Email verification options"
+                label={t('authScreens.verificationOptions')}
                 variant="outline"
                 onPress={navigate.verify}
               />
@@ -243,16 +254,20 @@ export function AccountScreen({
         onPress={signup || recovery ? navigate.signIn : navigate.signUp}
       >
         <Text variant="small" style={styles.center}>
-          {signup ? 'Already have an account? ' : recovery ? '' : 'Don’t have an account? '}
+          {!recovery && `${t(signup ? 'authScreens.existingAccount' : 'authScreens.newAccount')} `}
           <Text variant="small" style={styles.accent}>
-            {signup ? 'Sign in' : recovery ? 'Back to sign in' : 'Sign up'}
+            {t(
+              signup
+                ? 'authScreens.signIn'
+                : recovery
+                  ? 'authScreens.backToSignIn'
+                  : 'authScreens.signUp',
+            )}
           </Text>
         </Text>
       </Pressable>
       <Text variant="caption" muted style={styles.center}>
-        {auth.configured
-          ? 'An account is optional. You can keep exploring the sample lessons.'
-          : 'Account setup is not configured yet. You can still explore the lessons.'}
+        {t(auth.configured ? 'authScreens.accountOptional' : 'authScreens.accountUnavailable')}
       </Text>
       <Pressable
         accessibilityRole="link"
@@ -260,7 +275,7 @@ export function AccountScreen({
         onPress={navigate.continueLearning}
       >
         <Text variant="small" muted>
-          {continueLabel}
+          {continueLabel ?? t('authScreens.returnToLearning')}
         </Text>
       </Pressable>
     </Screen>
@@ -269,7 +284,7 @@ export function AccountScreen({
 const styles = StyleSheet.create({
   screenContent: { gap: 14 },
   forgot: { alignSelf: 'flex-end' },
-  accent: { color: '#75619D' },
+  accent: { color: brandColors.forest },
   switchLink: { minHeight: 44, justifyContent: 'center', alignItems: 'center', paddingVertical: 8 },
   center: { textAlign: 'center' },
   group: { gap: 10 },

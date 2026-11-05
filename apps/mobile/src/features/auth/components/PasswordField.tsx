@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Pressable, StyleSheet } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { InputField } from '../../../shared/ui/InputField';
 import { Icon } from '../../../shared/ui/Icon';
 
@@ -14,6 +15,7 @@ export function PasswordField({
   onChangeText: (value: string) => void;
   newPassword?: boolean;
 }) {
+  const { t } = useTranslation();
   const [visible, setVisible] = useState(false);
   return (
     <InputField
@@ -31,7 +33,9 @@ export function PasswordField({
       trailing={
         <Pressable
           accessibilityRole="button"
-          accessibilityLabel={`${visible ? 'Hide' : 'Show'} ${label.toLowerCase()}`}
+          accessibilityLabel={t(visible ? 'authScreens.hidePassword' : 'authScreens.showPassword', {
+            label: label.toLowerCase(),
+          })}
           onPress={() => setVisible(!visible)}
           style={({ pressed }) => [styles.reveal, pressed && styles.pressed]}
         >

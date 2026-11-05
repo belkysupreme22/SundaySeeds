@@ -3,6 +3,7 @@ import { cloneElement, isValidElement, type ReactNode } from 'react';
 import { isLoaded } from 'expo-font';
 import { colors, fonts } from '../theme/tokens';
 import {
+  authHeadingFonts,
   emphasizedRoles,
   ethiopicFonts,
   readingFonts,
@@ -24,19 +25,22 @@ export function Text({
   ...props
 }: TextProps & { variant?: TypographyRole; muted?: boolean }) {
   const ethiopic = containsEthiopic(props.children);
+  const editorial = variant === 'reading' || variant === 'authHeading';
   const ethiopicFamily =
-    variant === 'reading'
-      ? readingFonts.ethiopic
-      : emphasizedRoles.includes(variant)
-        ? ethiopicFonts.emphasis
-        : ethiopicFonts.regular;
+    variant === 'authHeading' && isLoaded(authHeadingFonts.ethiopic)
+      ? authHeadingFonts.ethiopic
+      : editorial
+        ? readingFonts.ethiopic
+        : emphasizedRoles.includes(variant)
+          ? ethiopicFonts.emphasis
+          : ethiopicFonts.regular;
   const scriptStyle = ethiopic
     ? {
         fontFamily: isLoaded(ethiopicFamily) ? ethiopicFamily : undefined,
         letterSpacing: 0,
         lineHeight: Math.max(
           typeScale[variant].lineHeight,
-          Math.ceil(typeScale[variant].fontSize * (variant === 'reading' ? 1.7 : 1.6)),
+          Math.ceil(typeScale[variant].fontSize * (editorial ? 1.7 : 1.6)),
         ),
       }
     : undefined;
@@ -67,7 +71,7 @@ export function Text({
       style={[
         styles.base,
         typeScale[variant],
-        variant === 'reading' && !isLoaded(readingFonts.latin)
+        editorial && !isLoaded(typeScale[variant].fontFamily)
           ? { fontFamily: isLoaded(fonts.regular) ? fonts.regular : undefined }
           : undefined,
         ethiopic && scriptStyle ? { lineHeight: scriptStyle.lineHeight } : undefined,

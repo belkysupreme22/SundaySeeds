@@ -1,0 +1,36 @@
+{
+  "skipForNow": "Skip for now",
+  "continueForNow": "Continue for now",
+  "welcomePreferenceError": "We couldn’t load or save your welcome preference. Try again, or continue for now.",
+  "choice": {
+    "openingLessons": "Opening your lessons…",
+    "journey": "Your learning journey",
+    "title": "Grow at your pace.",
+    "description": "Choose how to begin. Make a little room for faith today.",
+    "noteTitle": "Read. Reflect. Put faith into practice.",
+    "noteBody": "A thoughtful lesson is a good place to start.",
+    "createAccount": "Create account",
+    "signIn": "Sign in",
+    "accountOptional": "An account is optional. You can explore sample lessons first.",
+    "addName": "Add a name for your profile"
+  },
+  "setup": {
+    "openingName": "Opening your saved name…",
+    "nameLoadError": "We couldn’t load your saved name. Try again before editing it.",
+    "preparing": "Preparing your learning space…",
+    "wait": "One moment…",
+    "startLearning": "Start learning",
+    "displayName": "Display name (optional)",
+    "namePlaceholder": "Your name or nickname",
+    "nameHint": "Up to {{limit}} characters. A first name or nickname is perfect.",
+    "noteTitle": "A familiar hello",
+    "noteBody": "Your name appears on Profile. You can change it there whenever you like.",
+    "nameSaveError": "We couldn’t confirm that your name was saved. Your changes are still here. Try again.",
+    "backToAccount": "Back to account options",
+    "stepLabel": "One optional step",
+    "skipName": "Skip name setup",
+    "stepAccessibility": "Optional profile setup, step 1 of 1",
+    "title": "Make it yours",
+    "description": "What should we call you? Add a name for your profile, or jump straight into your lessons."
+  }
+}

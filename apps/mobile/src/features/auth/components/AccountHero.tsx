@@ -1,4 +1,5 @@
 import { Image, StyleSheet, useWindowDimensions, View } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { Text } from '../../../shared/ui/Text';
 import { AccountBackdrop } from './AccountBackdrop';
 
@@ -11,18 +12,18 @@ export function AccountHero({
   title?: string;
   description?: string;
 }) {
+  const { t } = useTranslation();
   const signup = mode === 'sign-up';
   const { width, fontScale } = useWindowDimensions();
   const stacked = width < 360 || fontScale > 1.2;
   return (
     <View style={[styles.hero, stacked && styles.stacked]}>
       <View style={[styles.copy, stacked && styles.stackedCopy]}>
-        <Text variant="heading">{title ?? (signup ? 'Sign up' : 'Sign in')}</Text>
+        <Text variant="authHeading" accessibilityRole="header">
+          {title ?? t(signup ? 'authScreens.signUp' : 'authScreens.signIn')}
+        </Text>
         <Text variant="small">
-          {description ??
-            (signup
-              ? 'Create your account and start growing today.'
-              : 'Welcome back! Make room for a little learning today.')}
+          {description ?? t(signup ? 'authScreens.signUpBody' : 'authScreens.signInBody')}
         </Text>
       </View>
       <View
@@ -72,7 +73,9 @@ const styles = StyleSheet.create({
     flexGrow: 0,
     flexShrink: 0,
     flexBasis: 'auto',
+    alignSelf: 'stretch',
     paddingTop: 4,
+    paddingRight: 20,
     paddingBottom: 8,
   },
   art: { width: '55%', height: 225, alignSelf: 'flex-end' },

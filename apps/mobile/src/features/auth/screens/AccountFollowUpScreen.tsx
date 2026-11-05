@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Pressable, StyleSheet } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../hooks/useAuth';
 import { AccountTopBar } from '../components/AccountTopBar';
 import { AccountRecoveryHero } from '../components/AccountRecoveryHero';
@@ -7,75 +8,79 @@ import { Screen, ContentGroup } from '../../../shared/ui/Screen';
 import { Button } from '../../../shared/ui/Button';
 import { Card } from '../../../shared/ui/Card';
 import { Text } from '../../../shared/ui/Text';
-import { colors } from '../../../shared/theme/tokens';
+import { brandColors, colors } from '../../../shared/theme/tokens';
 import { createAccountNavigation, type AccountNavigation } from '../navigation';
+import type { LocalizedAuthResult } from '../types';
 
 export function AccountFollowUpScreen({
   mode,
   navigation,
-  continueLabel = 'Return to learning',
+  continueLabel,
 }: {
   mode: 'verify' | 'reset';
   navigation?: AccountNavigation;
   continueLabel?: string;
 }) {
+  const { t } = useTranslation();
   const verification = mode === 'verify';
   const navigate =
     navigation ??
     createAccountNavigation(verification ? '/sign-up' : '/forgot-password', 'replace');
   const auth = useAuth();
-  const [notice, setNotice] = useState<string | null>(null);
+  const [notice, setNotice] = useState<LocalizedAuthResult | null>(null);
   const [checking, setChecking] = useState<'verification' | 'resend' | null>(null);
   async function check(resend = false) {
     if (checking || auth.busy || !auth.hydrated) return;
     setChecking(resend ? 'resend' : 'verification');
     try {
       const result = resend ? await auth.resendVerification() : await auth.checkVerification();
-      setNotice(result.message);
+      setNotice(result);
     } finally {
       setChecking(null);
     }
   }
   return (
     <Screen
-      backgroundColor="#F8F5FC"
+      backgroundColor={brandColors.canvas}
       contentStyle={styles.screen}
       loadingMessage={
         auth.busy && checking
           ? checking === 'resend'
-            ? 'Sending your verification email…'
-            : 'Checking your verification…'
+            ? t('authScreens.pending.verificationEmail')
+            : t('authScreens.pending.verification')
           : undefined
       }
     >
       <AccountTopBar
-        label={verification ? 'Email verification' : 'Password reset'}
+        label={t(verification ? 'authScreens.emailVerification' : 'authScreens.passwordReset')}
         onBack={navigate.back}
       />
       <AccountRecoveryHero mode={verification ? 'verify' : 'reset-guidance'} />
       <ContentGroup>
         <Card shadow={false} stroke="soft" style={styles.card}>
           <Text variant="title">
-            {verification ? 'Confirm your email' : 'Open your recovery email'}
+            {t(verification ? 'authScreens.confirmEmail' : 'authScreens.openRecoveryEmail')}
           </Text>
           <Text variant="small">
-            {!auth.configured
-              ? 'Account setup is not configured yet. You can keep exploring the lessons.'
-              : verification
-                ? 'Open the confirmation link in your email, confirm it, then sign in here. An accepted request does not guarantee delivery; check spam or request another email.'
-                : 'Use the latest password recovery link to choose a new password. After changing it, return here and sign in.'}
+            {t(
+              !auth.configured
+                ? 'authScreens.accountUnavailable'
+                : verification
+                  ? 'authScreens.verificationGuidance'
+                  : 'authScreens.resetGuidance',
+            )}
           </Text>
         </Card>
         {verification && (
           <>
             <Button
-              label="Check verification"
+              label={t('authScreens.checkVerification')}
               loading={auth.busy && checking === 'verification'}
               disabled={auth.busy || !auth.hydrated}
               onPress={() => void check()}
             />
             <Button
-              label="Resend verification email"
+              label={t('authScreens.resendVerification')}
               variant="outline"
               loading={auth.busy && checking === 'resend'}
               disabled={auth.busy || !auth.hydrated}
@@ -86,24 +91,24 @@ export function AccountFollowUpScreen({
         {notice && (
           <Card tone="lavender" shadow={false} stroke="soft">
             <Text variant="small" accessibilityLiveRegion="polite">
-              {notice}
+              {t(notice.messageKey, { defaultValue: notice.message })}
             </Text>
           </Card>
         )}
       </ContentGroup>
-      <Button label="Sign in" onPress={navigate.signIn} />
+      <Button label={t('authScreens.signIn')} onPress={navigate.signIn} />
       <Pressable
         accessibilityRole="link"
         style={styles.link}
         onPress={verification ? navigate.signUp : navigate.recover}
       >
         <Text variant="small" style={styles.accent}>
-          {verification ? 'Back to sign up' : 'Request a recovery email'}
+          {t(verification ? 'authScreens.backToSignUp' : 'authScreens.requestRecoveryEmail')}
         </Text>
       </Pressable>
       <Pressable accessibilityRole="link" style={styles.link} onPress={navigate.continueLearning}>
         <Text variant="small" muted>
-          {continueLabel}
+          {continueLabel ?? t('authScreens.returnToLearning')}
         </Text>
       </Pressable>
     </Screen>
@@ -122,9 +127,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 10,
-    backgroundColor: colors.lavender,
+    backgroundColor: brandColors.surface,
   },
   link: { minHeight: 44, alignItems: 'center', justifyContent: 'center', paddingVertical: 8 },
-  accent: { color: '#75619D', textAlign: 'center' },
+  accent: { color: brandColors.forest, textAlign: 'center' },
   error: { color: colors.danger },
 });

@@ -14,7 +14,7 @@ import {
   getAuthRedirectUrl,
   getSupabaseClient,
 } from '@/shared/data/supabase';
-import { accountUnavailable, authFailureMessage, emailRequestAccepted } from '../data/authMessages';
+import { authFailureKey, authResult } from '../data/authMessages';
 import {
   ensureOwnProfile,
   normalizeAccountName,
@@ -22,11 +22,10 @@ import {
   updateOwnProfile,
   type ProfileActor,
 } from '../data/profileApi';
-import type { AccountIdentity, AccountProfile, AuthContextValue, AuthResult } from '../types';
+import type { AccountIdentity, AccountProfile, AuthContextValue, LocalizedAuthResult } from '../types';
 
 const AuthContext = createContext<AuthContextValue | null>(null);
-const sessionChanged = { ok: false, message: 'The account changed. Please try again.' };
-const invalidEmail = 'Enter a valid email address.';
+const sessionChanged = authResult(false, 'sessionChanged');
 
 function identity(user: User): AccountIdentity {
   return { id: user.id, email: user.email ?? '', verified: Boolean(user.email_confirmed_at) };
@@ -70,7 +69,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
   );
 
   const loadProfile = useCallback(
-    async (actor: ProfileActor, version: number): Promise<AuthResult> => {
+    async (actor: ProfileActor, version: number): Promise<LocalizedAuthResult> => {
       if (!client || !isCurrent(actor.userId, version)) return sessionChanged;
       const request = ++profileRequest.current;
       setProfileError(null);
@@ -82,15 +81,14 @@ export function AuthProvider({ children }: PropsWithChildren) {
         profileRef.current = result;
         profileConflict.current = false;
         setProfile(result);
-        return { ok: true, message: 'Account profile loaded.' };
+        return authResult(true, 'profileLoaded');
       } catch {
         if (!isCurrent(actor.userId, version) || request !== profileRequest.current) {
           return sessionChanged;
         }
-        const message =
-          'Your account is signed in, but its profile could not be loaded. Try again.';
-        setProfileError(message);
-        return { ok: false, message };
+        const result = authResult(false, 'profileLoadFailed');
+        setProfileError(result.message);
+        return result;
       }
     },
     [client, isCurrent],
@@ -241,13 +239,12 @@ export function AuthProvider({ children }: PropsWithChildren) {
   }, [client]);
 
   async function run(
-    operation: () => Promise<AuthResult>,
+    operation: () => Promise<LocalizedAuthResult>,
     kind: 'sign-in' | 'email' | 'account' = 'account',
-  ): Promise<AuthResult> {
-    if (!client) return { ok: false, message: accountUnavailable };
-    if (!hydrated) return { ok: false, message: 'Your account session is still loading.' };
-    if (operationInFlight.current)
-      return { ok: false, message: 'Please wait for the current request.' };
+  ): Promise<LocalizedAuthResult> {
+    if (!client) return authResult(false, 'accountUnavailable');
+    if (!hydrated) return authResult(false, 'sessionLoading');
+    if (operationInFlight.current) return authResult(false, 'requestInProgress');
     operationInFlight.current = true;
     setBusy(true);
     setError(null);
@@ -258,9 +255,9 @@ export function AuthProvider({ children }: PropsWithChildren) {
         setError(result.message);
       return result;
     } catch (failure) {
-      const message = authFailureMessage(failure, kind);
-      if (mounted.current && initialActor === actorId.current) setError(message);
-      return { ok: false, message };
+      const result = authResult(false, authFailureKey(failure, kind));
+      if (mounted.current && initialActor === actorId.current) setError(result.message);
+      return result;
     } finally {
       operationInFlight.current = false;
       if (mounted.current) setBusy(false);
@@ -302,18 +299,11 @@ export function AuthProvider({ children }: PropsWithChildren) {
   function signIn(emailValue: string, password: string) {
     return run(async () => {
       if (!(await clearInvalidSession()))
-        return {
-          ok: false,
-          message: 'Your expired session could not be cleared. Check device storage and try again.',
-        };
-      if (actorId.current)
-        return {
-          ok: false,
-          message: 'Sign out of the current account before signing in to another.',
-        };
+        return authResult(false, 'expiredSessionClearFailed');
+      if (actorId.current) return authResult(false, 'signOutBeforeSignIn');
       const email = emailValue.trim();
-      if (!validEmail(email)) return { ok: false, message: invalidEmail };
-      if (!password) return { ok: false, message: 'Enter your password.' };
+      if (!validEmail(email)) return authResult(false, 'invalidEmail');
+      if (!password) return authResult(false, 'passwordRequired');
       const { data, error: signInError } = await client!.auth.signInWithPassword({
         email,
         password,
@@ -322,41 +312,25 @@ export function AuthProvider({ children }: PropsWithChildren) {
         if (signInError.code === 'email_not_confirmed' && !actorId.current) setPendingEmail(email);
         throw signInError;
       }
-      if (!data.session || !data.user)
-        return { ok: false, message: 'Sign-in did not create a session. Please try again.' };
-      return {
-        ok: true,
-        message: data.user.email_confirmed_at
-          ? 'You are signed in.'
-          : 'Confirm your email before starting a course.',
-      };
+      if (!data.session || !data.user) return authResult(false, 'sessionNotCreated');
+      return authResult(true, data.user.email_confirmed_at ? 'signedIn' : 'verifyBeforeCourse');
     }, 'sign-in');
   }
 
   function signUp(emailValue: string, password: string, displayName: string) {
     return run(async () => {
       if (!(await clearInvalidSession()))
-        return {
-          ok: false,
-          message: 'Your expired session could not be cleared. Check device storage and try again.',
-        };
-      if (actorId.current)
-        return { ok: false, message: 'Sign out of the current account before creating another.' };
+        return authResult(false, 'expiredSessionClearFailed');
+      if (actorId.current) return authResult(false, 'signOutBeforeSignUp');
       const email = emailValue.trim();
       const name = normalizeAccountName(displayName);
-      if (!validEmail(email)) return { ok: false, message: invalidEmail };
-      if (password.length < 15)
-        return { ok: false, message: 'Use a passphrase with at least 15 characters.' };
-      if (name && [...name].length > 40)
-        return { ok: false, message: 'Use a name with 40 characters or fewer.' };
+      if (!validEmail(email)) return authResult(false, 'invalidEmail');
+      if (password.length < 15) return authResult(false, 'passwordLength');
+      if (name && [...name].length > 40) return authResult(false, 'displayNameLength');
       const redirect = getAuthRedirectUrl('confirmation');
-      if (!redirect)
-        return {
-          ok: false,
-          message: 'Email confirmation is not configured yet. Please try again later.',
-        };
+      if (!redirect) return authResult(false, 'confirmationUnavailable');
       const candidate = createIsolatedAuthClient();
-      if (!candidate) return { ok: false, message: accountUnavailable };
+      if (!candidate) return authResult(false, 'accountUnavailable');
       try {
         const { data, error: signupError } = await candidate.auth.signUp({
           email,
@@ -366,66 +340,50 @@ export function AuthProvider({ children }: PropsWithChildren) {
         if (signupError && signupError.code !== 'user_already_exists') throw signupError;
         if (data.session) {
           await candidate.auth.signOut({ scope: 'local' });
-          return {
-            ok: false,
-            message:
-              'Email confirmation must be enabled for this environment before creating accounts.',
-          };
+          return authResult(false, 'confirmationRequired');
         }
       } finally {
         await candidate.auth.dispose();
       }
       if (mounted.current && !actorId.current) setPendingEmail(email);
-      return { ok: true, message: emailRequestAccepted };
+      return authResult(true, 'emailRequestAccepted');
     }, 'email');
   }
 
   function requestRecovery(emailValue: string) {
     return run(async () => {
       const email = emailValue.trim();
-      if (!validEmail(email)) return { ok: false, message: invalidEmail };
+      if (!validEmail(email)) return authResult(false, 'invalidEmail');
       const redirect = getAuthRedirectUrl('recovery');
-      if (!redirect)
-        return {
-          ok: false,
-          message: 'Password recovery is not configured yet. Please try again later.',
-        };
+      if (!redirect) return authResult(false, 'recoveryUnavailable');
       const { error: requestError } = await client!.auth.resetPasswordForEmail(email, {
         redirectTo: redirect,
       });
       if (requestError) throw requestError;
-      return { ok: true, message: emailRequestAccepted };
+      return authResult(true, 'emailRequestAccepted');
     }, 'email');
   }
 
   function resendVerification() {
     return run(async () => {
       const email = user?.email || pendingEmail;
-      if (!email) return { ok: false, message: 'Enter your email on the sign-in screen first.' };
+      if (!email) return authResult(false, 'enterEmailFirst');
       const redirect = getAuthRedirectUrl('confirmation');
-      if (!redirect)
-        return {
-          ok: false,
-          message: 'Email confirmation is not configured yet. Please try again later.',
-        };
+      if (!redirect) return authResult(false, 'confirmationUnavailable');
       const { error: resendError } = await client!.auth.resend({
         type: 'signup',
         email,
         options: { emailRedirectTo: redirect },
       });
       if (resendError) throw resendError;
-      return { ok: true, message: emailRequestAccepted };
+      return authResult(true, 'emailRequestAccepted');
     }, 'email');
   }
 
   function checkVerification() {
     return run(async () => {
       const context = await currentActor(false);
-      if (!context)
-        return {
-          ok: false,
-          message: 'After opening the confirmation email, sign in to check your account.',
-        };
+      if (!context) return authResult(false, 'signInToCheck');
       validatedActor.current = null;
       profileRef.current = null;
       setProfile(null);
@@ -435,10 +393,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
         response = await client!.auth.getUser(context.actor.accessToken);
       } catch {
         await rejectValidation(context.actor.userId, context.version, false);
-        return {
-          ok: false,
-          message: 'Your account session could not be checked. Please try again.',
-        };
+        return authResult(false, 'sessionCheckFailed');
       }
       const { data, error: checkError } = response;
       if (!isCurrent(context.actor.userId, context.version)) return sessionChanged;
@@ -448,23 +403,17 @@ export function AuthProvider({ children }: PropsWithChildren) {
           context.version,
           invalidAuthResponse(checkError) || !checkError,
         );
-        return {
-          ok: false,
-          message: invalidAuthResponse(checkError)
-            ? 'Your account session has expired. Please sign in again.'
-            : 'Your account session could not be checked. Please try again.',
-        };
+        return authResult(
+          false,
+          invalidAuthResponse(checkError) ? 'expiredSession' : 'sessionCheckFailed',
+        );
       }
       validatedActor.current = { id: data.user.id, version: context.version };
       setUser(identity(data.user));
       await loadProfile(context.actor, context.version);
       if (!isCurrent(context.actor.userId, context.version)) return sessionChanged;
-      return {
-        ok: Boolean(data.user.email_confirmed_at),
-        message: data.user.email_confirmed_at
-          ? 'Your email is confirmed.'
-          : 'Your email is still awaiting confirmation. Open the latest confirmation email and try again.',
-      };
+      const confirmed = Boolean(data.user.email_confirmed_at);
+      return authResult(confirmed, confirmed ? 'emailConfirmed' : 'confirmationPending');
     });
   }
 
@@ -474,29 +423,18 @@ export function AuthProvider({ children }: PropsWithChildren) {
       const { error: signOutError } = await client!.auth.signOut({ scope: 'local' });
       if (signOutError && actorId.current === null) {
         setPendingEmail(null);
-        return {
-          ok: true,
-          message:
-            'Signed out on this device. Server session revocation could not be confirmed; reconnect and sign in again if needed.',
-        };
+        return authResult(true, 'signedOutRevocationUnconfirmed');
       }
-      if (signOutError)
-        return {
-          ok: false,
-          message: 'Sign-out could not be confirmed. Check your connection and try again.',
-        };
+      if (signOutError) return authResult(false, 'signOutUnconfirmed');
       setPendingEmail(null);
-      return {
-        ok: true,
-        message: 'You are signed out on this device. Your sample learning is still here.',
-      };
+      return authResult(true, 'signedOut');
     });
   }
 
   function retryProfile() {
     return run(async () => {
       const context = await currentActor();
-      if (!context) return { ok: false, message: 'Sign in before loading your account profile.' };
+      if (!context) return authResult(false, 'signInForProfile');
       return loadProfile(context.actor, context.version);
     });
   }
@@ -516,17 +454,13 @@ export function AuthProvider({ children }: PropsWithChildren) {
   function saveProfileName(value: string) {
     return run(async () => {
       const name = normalizeAccountName(value);
-      if (name && [...name].length > 40)
-        return { ok: false, message: 'Use a name with 40 characters or fewer.' };
+      if (name && [...name].length > 40) return authResult(false, 'displayNameLength');
       const context = await currentActor();
       const previous = profileRef.current;
       if (profileConflict.current)
-        return {
-          ok: false,
-          message: 'Reload your account profile before saving again; your draft is still here.',
-        };
+        return authResult(false, 'reloadProfileBeforeSaving');
       if (!context || !previous || previous.userId !== context.actor.userId) {
-        return { ok: false, message: 'Load your account profile before editing it.' };
+        return authResult(false, 'loadProfileBeforeEditing');
       }
       const request = ++profileRequest.current;
       try {
@@ -536,18 +470,15 @@ export function AuthProvider({ children }: PropsWithChildren) {
         profileRef.current = result;
         setProfile(result);
         setProfileError(null);
-        return { ok: true, message: 'Your account name is saved.' };
+        return authResult(true, 'nameSaved');
       } catch (failure) {
         if (!isCurrent(context.actor.userId, context.version) || request !== profileRequest.current)
           return sessionChanged;
-        const message =
-          failure instanceof ProfileRequestError && failure.code === '40001'
-            ? 'Your profile changed elsewhere. Reload it before saving again; your draft is still here.'
-            : 'Your account name could not be saved. Your draft is still here; please try again.';
-        if (failure instanceof ProfileRequestError && failure.code === '40001')
-          profileConflict.current = true;
-        setProfileError(message);
-        return { ok: false, message };
+        const conflict = failure instanceof ProfileRequestError && failure.code === '40001';
+        if (conflict) profileConflict.current = true;
+        const result = authResult(false, conflict ? 'profileConflict' : 'profileSaveFailed');
+        setProfileError(result.message);
+        return result;
       }
     });
   }

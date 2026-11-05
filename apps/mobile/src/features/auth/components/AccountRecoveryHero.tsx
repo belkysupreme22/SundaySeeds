@@ -1,29 +1,25 @@
 import { StyleSheet, useWindowDimensions, View } from 'react-native';
 import Svg, { Circle, G, Path, Rect } from 'react-native-svg';
+import { useTranslation } from 'react-i18next';
 import { Text } from '../../../shared/ui/Text';
-import { brandColors, cardColors, colors } from '../../../shared/theme/tokens';
+import { accentColors, brandColors, cardColors, colors } from '../../../shared/theme/tokens';
 
 type Mode = 'request' | 'verify' | 'reset' | 'reset-guidance';
-const copy = {
-  request: { title: 'Forgot password?', body: 'A little help getting back to your learning.' },
-  verify: { title: 'Verify your email', body: 'One small step toward your learning journey.' },
-  reset: { title: 'A fresh start', body: 'Choose a new password for your account.' },
-  'reset-guidance': { title: 'A fresh start', body: 'Open your recovery email to continue.' },
-};
 
 // The references do not include recovery screens. These original vectors extend
 // reference 03's contours, fine ink lines and right-edge composition in the brand palette.
 export function AccountRecoveryHero({ mode }: { mode: Mode }) {
+  const { t } = useTranslation();
   const { width, fontScale } = useWindowDimensions();
   const stacked = width < 360 || fontScale > 1.2;
   const reset = mode === 'reset' || mode === 'reset-guidance';
   return (
     <View style={[styles.hero, stacked && styles.stacked]}>
       <View style={[styles.copy, stacked && styles.stackedCopy]}>
-        <Text variant="heading" accessibilityRole="header">
-          {copy[mode].title}
+        <Text variant="authHeading" accessibilityRole="header">
+          {t(`authScreens.recoveryHero.${mode}.title`)}
         </Text>
-        <Text variant="small">{copy[mode].body}</Text>
+        <Text variant="small">{t(`authScreens.recoveryHero.${mode}.body`)}</Text>
       </View>
       <View
         style={styles.art}
@@ -70,7 +66,7 @@ export function AccountRecoveryHero({ mode }: { mode: Mode }) {
           </G>
           <Path
             d="M28 29L37 38M37 29L28 38"
-            stroke="#BDA9EA"
+            stroke={accentColors.lavenderLine}
             strokeWidth="4"
             strokeLinecap="round"
           />

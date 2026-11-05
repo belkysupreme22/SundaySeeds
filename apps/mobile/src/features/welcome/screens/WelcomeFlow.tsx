@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react';
 import { BackHandler } from 'react-native';
 import { useFocusEffect } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import { AccountScreen } from '../../auth/screens/AccountScreen';
 import { AccountFollowUpScreen } from '../../auth/screens/AccountFollowUpScreen';
 import type { AccountNavigation } from '../../auth/navigation';
@@ -45,6 +46,7 @@ export function WelcomeFlow({
   onFinish: () => Promise<boolean>;
   onContinueForNow: () => void;
 }) {
+  const { t } = useTranslation();
   const [step, setStep] = useState<Step>('introduction');
   const [introductionPage, setIntroductionPage] = useState(0);
   const { saving: savingName } = useLearnerProfile();
@@ -83,7 +85,12 @@ export function WelcomeFlow({
 
   if (step === 'sign-in' || step === 'sign-up' || step === 'recovery') {
     return (
-      <AccountScreen key={step} mode={step} navigation={navigation} continueLabel="Skip for now" />
+      <AccountScreen
+        key={step}
+        mode={step}
+        navigation={navigation}
+        continueLabel={t('authScreens.skipForNow')}
+      />
     );
   }
   if (step === 'verify-from-sign-in' || step === 'verify-from-sign-up' || step === 'reset') {
@@ -92,7 +99,7 @@ export function WelcomeFlow({
         key={step}
         mode={step === 'reset' ? 'reset' : 'verify'}
         navigation={navigation}
-        continueLabel="Skip for now"
+        continueLabel={t('authScreens.skipForNow')}
       />
     );
   }

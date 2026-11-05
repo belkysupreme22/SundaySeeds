@@ -10,6 +10,11 @@ export const ethiopicFonts = {
   emphasis: 'NotoSansEthiopic_600SemiBold',
 } as const;
 
+export const authHeadingFonts = {
+  latin: readingFonts.latin,
+  ethiopic: 'AbyssinicaSIL_400Regular',
+} as const;
+
 // Existing dense UI roles remain stable until each screen's larger-text review.
 // New prose uses bodyLarge; long-form lessons use reading. See the system guide.
 export const typeScale = {
@@ -23,6 +28,7 @@ export const typeScale = {
   title: { fontSize: 17, lineHeight: 25, fontFamily: fonts.semibold, letterSpacing: -0.4 },
   heading: { fontSize: 25, lineHeight: 34, fontFamily: fonts.bold, letterSpacing: -0.7 },
   hero: { fontSize: 27, lineHeight: 35, fontFamily: fonts.bold, letterSpacing: -0.7 },
+  authHeading: { fontSize: 26, lineHeight: 37, fontFamily: authHeadingFonts.latin },
   reading: { fontSize: 20, lineHeight: 32, fontFamily: readingFonts.latin },
 } as const;
 

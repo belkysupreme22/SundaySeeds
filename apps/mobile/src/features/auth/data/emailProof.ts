@@ -1,7 +1,9 @@
 import type { SupabaseClient } from '@supabase/supabase-js';
 import { createIsolatedAuthClient } from '../../../shared/data/supabase';
+import type { LocalizedAuthResult } from '../types';
+import { authResult } from './authMessages';
 
-export type ProofResult = { ok: boolean; message: string; email?: string; userId?: string };
+export type ProofResult = LocalizedAuthResult & { email?: string; userId?: string };
 
 // Proofs and candidate sessions exist only in this object, never primary storage.
 export function createEmailProof(kind: 'confirmation' | 'recovery', tokenHash: string) {
@@ -30,10 +32,9 @@ export function createEmailProof(kind: 'confirmation' | 'recovery', tokenHash: s
   }
   return {
     async begin(): Promise<ProofResult> {
-      if (disposed || candidate)
-        return { ok: false, message: 'Request a new email link to continue.' };
+      if (disposed || candidate) return authResult(false, 'requestNewLink');
       candidate = createIsolatedAuthClient();
-      if (!candidate) return { ok: false, message: 'Account setup is not configured yet.' };
+      if (!candidate) return authResult(false, 'proofUnavailable');
       const operationClient = candidate;
       inFlight = true;
       try {
@@ -49,38 +50,24 @@ export function createEmailProof(kind: 'confirmation' | 'recovery', tokenHash: s
               ? error.code
               : '';
           if (errCode === 'otp_expired') {
-            return {
-              ok: false,
-              message: 'This email link has expired. Request a new email to continue.',
-            };
+            return authResult(false, 'expiredLink');
           }
           if (errCode === 'otp_disabled') {
-            return {
-              ok: false,
-              message:
-                'This email link has already been used or is disabled. Request a new email.',
-            };
+            return authResult(false, 'disabledLink');
           }
-          return {
-            ok: false,
-            message:
-              'This link could not be verified. It may have expired or already been used. Request a new email.',
-          };
+          return authResult(false, 'unverifiedLink');
         }
         if (kind === 'confirmation') {
           const confirmed = !!data.user.email_confirmed_at;
           await clear();
-          return {
-            ok: confirmed,
-            message: confirmed
-              ? 'Email verified. Return to SundaySeeds and sign in to continue.'
-              : 'Verification is incomplete. Request a new email.',
-          };
+          return authResult(
+            confirmed,
+            confirmed ? 'emailVerifiedReturn' : 'verificationIncomplete',
+          );
         }
         subject = { id: data.user.id, email: data.user.email };
         return {
-          ok: true,
-          message: 'Choose a new password for this account.',
+          ...authResult(true, 'chooseNewPassword'),
           email: subject.email,
         };
       } catch (err) {
@@ -93,12 +80,7 @@ export function createEmailProof(kind: 'confirmation' | 'recovery', tokenHash: s
             'message' in err &&
             typeof (err as { message: unknown }).message === 'string' &&
             /network|fetch|connect|timeout/i.test((err as { message: string }).message));
-        return {
-          ok: false,
-          message: isNetwork
-            ? 'The link could not be checked. Check your connection and try again.'
-            : 'The link could not be checked. Request a new email and try again.',
-        };
+        return authResult(false, isNetwork ? 'linkConnectionFailed' : 'linkCheckFailed');
       } finally {
         inFlight = false;
         if (disposed) await clear(operationClient);
@@ -108,10 +90,7 @@ export function createEmailProof(kind: 'confirmation' | 'recovery', tokenHash: s
       const current = candidate;
       const account = subject;
       if (disposed || !current || !account || password.length < 15) {
-        return {
-          ok: false,
-          message: 'Use a valid recovery link and a password of at least 15 characters.',
-        };
+        return authResult(false, 'recoveryLinkAndPassword');
       }
       inFlight = true;
       try {
@@ -126,36 +105,20 @@ export function createEmailProof(kind: 'confirmation' | 'recovery', tokenHash: s
               ? error.message
               : '';
           if (errCode === 'same_password' || /same_password|different from the old/i.test(errMsg)) {
-            return {
-              ok: false,
-              message: 'Your new password must be different from your previous password.',
-            };
+            return authResult(false, 'samePassword');
           }
           if (errCode === 'weak_password') {
-            return {
-              ok: false,
-              message: 'Choose a longer passphrase that meets the account password requirements.',
-            };
+            return authResult(false, 'weakPassword');
           }
           if (errCode === 'over_request_rate_limit') {
-            return {
-              ok: false,
-              message: 'Too many requests were made. Wait a few minutes before trying again.',
-            };
+            return authResult(false, 'rateLimited');
           }
           const isNetwork =
             /network|fetch|timeout|connection/i.test(errMsg) || error instanceof TypeError;
           if (isNetwork) {
-            return {
-              ok: false,
-              message: 'The password could not be changed. Check your connection and try again.',
-            };
+            return authResult(false, 'passwordChangeConnectionFailed');
           }
-          return {
-            ok: false,
-            message:
-              'The password could not be changed. Try again or request a new recovery email.',
-          };
+          return authResult(false, 'passwordChangeFailed');
         }
         // Report password success separately from provider session revocation.
         let revoked = false;
@@ -166,17 +129,11 @@ export function createEmailProof(kind: 'confirmation' | 'recovery', tokenHash: s
         }
         await clear(current);
         return {
-          ok: true,
+          ...authResult(true, revoked ? 'passwordChanged' : 'passwordChangedRevocationUnconfirmed'),
           userId: account.id,
-          message: revoked
-            ? 'Password changed. Sign in again with your new password. Existing access tokens may remain valid until they expire.'
-            : 'Password changed. Sign in again with your new password. Other sessions could not be confirmed signed out.',
         };
       } catch {
-        return {
-          ok: false,
-          message: 'The password could not be changed. Check your connection and try again.',
-        };
+        return authResult(false, 'passwordChangeConnectionFailed');
       } finally {
         inFlight = false;
         if (disposed) await clear(current);

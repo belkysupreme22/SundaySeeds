@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { router } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import { AccountTopBar } from '../components/AccountTopBar';
 import { AccountRecoveryHero } from '../components/AccountRecoveryHero';
 import { PasswordField } from '../components/PasswordField';
@@ -8,6 +9,7 @@ import { Screen, ContentGroup } from '../../../shared/ui/Screen';
 import { Text } from '../../../shared/ui/Text';
 import { Button } from '../../../shared/ui/Button';
 import { Card } from '../../../shared/ui/Card';
+import { brandColors } from '../../../shared/theme/tokens';
 
 export function EmailActionScreen({
   kind,
@@ -18,6 +20,7 @@ export function EmailActionScreen({
   tokenHash: unknown;
   type: unknown;
 }) {
+  const { t } = useTranslation();
   const proof = useEmailProof(kind, tokenHash, type);
   const [password, setPassword] = useState('');
   const [confirmation, setConfirmation] = useState('');
@@ -40,28 +43,35 @@ export function EmailActionScreen({
   }
   return (
     <Screen
-      backgroundColor="#F8F5FC"
+      backgroundColor={brandColors.canvas}
       loadingMessage={
         proof.busy
           ? proof.stage === 'password'
-            ? 'Changing your password…'
-            : 'Checking your email link…'
+            ? t('authScreens.pending.passwordChange')
+            : t('authScreens.pending.emailLink')
           : undefined
       }
     >
       <AccountTopBar
-        label={kind === 'confirmation' ? 'Confirm email' : 'Recover account'}
+        label={t(
+          kind === 'confirmation' ? 'authScreens.confirmEmailBadge' : 'authScreens.recoverAccount',
+        )}
         onBack={() => router.replace('/sign-in')}
       />
       <AccountRecoveryHero mode={kind === 'confirmation' ? 'verify' : 'reset'} />
       {proof.stage === 'ready' && (
         <ContentGroup>
           <Text>
-            Continue to {kind === 'confirmation' ? 'verify your email' : 'open password recovery'}.
-            Your current signed-in account will be kept.
+            {t(
+              kind === 'confirmation'
+                ? 'authScreens.continueConfirmation'
+                : 'authScreens.continueRecovery',
+            )}
           </Text>
           <Button
-            label={proof.busy ? 'Checking link…' : 'Continue with email link'}
+            label={t(
+              proof.busy ? 'authScreens.pending.emailLink' : 'authScreens.continueEmailLink',
+            )}
             loading={proof.busy}
             disabled={proof.busy}
             onPress={() => void proof.begin()}
@@ -70,27 +80,27 @@ export function EmailActionScreen({
       )}
       {proof.stage === 'password' && (
         <ContentGroup>
-          <Text variant="label">Reset password for {proof.email}</Text>
+          <Text variant="label">{t('authScreens.resetPasswordFor', { email: proof.email })}</Text>
           <PasswordField
-            label="New password"
+            label={t('authScreens.newPassword')}
             value={password}
             newPassword
             onChangeText={setPassword}
           />
           <PasswordField
-            label="Confirm new password"
+            label={t('authScreens.confirmNewPassword')}
             value={confirmation}
             newPassword
             onChangeText={setConfirmation}
           />
-          <Text variant="small">Use at least 15 characters. Spaces are welcome.</Text>
+          <Text variant="small">{t('authScreens.passwordLength')}</Text>
           {submitted && !validPassword && (
-            <Text accessibilityRole="alert">
-              Use at least 15 characters and match both passwords.
-            </Text>
+            <Text accessibilityRole="alert">{t('authScreens.passwordRequirements')}</Text>
           )}
           <Button
-            label={proof.busy ? 'Changing password…' : 'Reset password'}
+            label={t(
+              proof.busy ? 'authScreens.pending.passwordChange' : 'authScreens.resetPassword',
+            )}
             loading={proof.busy}
             disabled={proof.busy}
             onPress={() => void reset()}
@@ -99,18 +109,27 @@ export function EmailActionScreen({
       )}
       {proof.message && (
         <Card tone="lavender" shadow={false} stroke="soft">
-          <Text accessibilityLiveRegion="polite">{proof.message}</Text>
+          <Text accessibilityLiveRegion="polite">
+            {proof.messageKey
+              ? t(proof.messageKey, { defaultValue: proof.message })
+              : proof.message}
+            {proof.messageKey && proof.deviceMessageKey ? ` ${t(proof.deviceMessageKey)}` : null}
+          </Text>
         </Card>
       )}
       {proof.stage === 'invalid' && (
         <Button
-          label={kind === 'confirmation' ? 'Back to sign up' : 'Request a recovery email'}
+          label={t(
+            kind === 'confirmation'
+              ? 'authScreens.backToSignUp'
+              : 'authScreens.requestRecoveryEmail',
+          )}
           variant="outline"
           onPress={() => router.replace(kind === 'confirmation' ? '/sign-up' : '/forgot-password')}
         />
       )}
       <Button
-        label="Return to sign in"
+        label={t('authScreens.returnToSignIn')}
         variant="outline"
         onPress={() => router.replace('/sign-in')}
       />

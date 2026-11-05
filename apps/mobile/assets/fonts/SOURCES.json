@@ -34,5 +34,20 @@
     "url": "https://raw.githubusercontent.com/notofonts/noto-fonts/main/LICENSE",
     "bytes": 4377,
     "sha256": "0dab92d0544f7b233403f14b84a663bdbfa746982eda629e7f4f9ffe1b036feb"
+  },
+  {
+    "file": "AbyssinicaSIL-Regular.ttf",
+    "url": "https://software.sil.org/downloads/r/abyssinica/AbyssinicaSIL-2.300.zip",
+    "archiveMember": "AbyssinicaSIL-2.300/AbyssinicaSIL-Regular.ttf",
+    "bytes": 268264,
+    "sha256": "f0e4fb92ee26967a3e6462342494956a3798b952345f917e1388913bb191cf2b"
+  },
+  {
+    "file": "OFL-AbyssinicaSIL.txt",
+    "url": "https://software.sil.org/downloads/r/abyssinica/AbyssinicaSIL-2.300.zip",
+    "archiveMember": "AbyssinicaSIL-2.300/OFL.txt",
+    "lineEndings": "LF",
+    "bytes": 4512,
+    "sha256": "6e93913412b853d745b143daaf86724986716bb30077eb15cbd33c50d3fd5ccc"
   }
 ]

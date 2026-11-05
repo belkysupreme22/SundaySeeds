@@ -1,7 +1,8 @@
 import { Pressable, StyleSheet, View } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { AccountHero } from '../../auth/components/AccountHero';
 import { AccountTopBar } from '../../auth/components/AccountTopBar';
-import { colors } from '../../../shared/theme/tokens';
+import { brandColors, colors } from '../../../shared/theme/tokens';
 import { Button } from '../../../shared/ui/Button';
 import { Card } from '../../../shared/ui/Card';
 import { Icon } from '../../../shared/ui/Icon';
@@ -29,11 +30,12 @@ export function AccountChoiceScreen({
   onSetupName,
   onContinueForNow,
 }: Props) {
+  const { t } = useTranslation();
   return (
     <Screen
-      backgroundColor="#F8F5FC"
+      backgroundColor={brandColors.canvas}
       contentStyle={styles.content}
-      loadingMessage={saving ? 'Opening your lessons…' : undefined}
+      loadingMessage={saving ? t('accountEntry.choice.openingLessons') : undefined}
     >
       <View
         pointerEvents={saving ? 'none' : 'auto'}
@@ -41,7 +43,7 @@ export function AccountChoiceScreen({
         style={saving ? styles.disabled : undefined}
       >
         <AccountTopBar
-          label="Your learning journey"
+          label={t('accountEntry.choice.journey')}
           onBack={() => {
             if (!saving) onBack();
           }}
@@ -49,23 +51,32 @@ export function AccountChoiceScreen({
       </View>
       <AccountHero
         mode="sign-up"
-        title="Grow at your pace."
-        description="Choose how to begin. Make a little room for faith today."
+        title={t('accountEntry.choice.title')}
+        description={t('accountEntry.choice.description')}
       />
       <Card tone="mint" shadow={false} style={styles.note}>
         <View style={styles.noteIcon}>
           <Icon name="book-open" size={21} />
         </View>
         <View style={styles.noteCopy}>
-          <Text variant="label">Read. Reflect. Put faith into practice.</Text>
-          <Text variant="small">A thoughtful lesson is a good place to start.</Text>
+          <Text variant="label">{t('accountEntry.choice.noteTitle')}</Text>
+          <Text variant="small">{t('accountEntry.choice.noteBody')}</Text>
         </View>
       </Card>
       <View style={styles.actions}>
-        <Button label="Create account" onPress={onSignUp} disabled={saving} />
-        <Button label="Sign in" variant="outline" onPress={onSignIn} disabled={saving} />
+        <Button
+          label={t('accountEntry.choice.createAccount')}
+          onPress={onSignUp}
+          disabled={saving}
+        />
+        <Button
+          label={t('accountEntry.choice.signIn')}
+          variant="outline"
+          onPress={onSignIn}
+          disabled={saving}
+        />
         <Text variant="caption" muted style={styles.center}>
-          An account is optional. You can explore sample lessons first.
+          {t('accountEntry.choice.accountOptional')}
         </Text>
       </View>
       <Pressable
@@ -76,24 +87,24 @@ export function AccountChoiceScreen({
         style={({ pressed }) => [styles.skip, saving && styles.disabled, pressed && styles.pressed]}
       >
         <Text variant="label" style={styles.skipLabel}>
-          {saving ? 'Opening your lessons…' : 'Skip for now'}
+          {t(saving ? 'accountEntry.choice.openingLessons' : 'accountEntry.skipForNow')}
         </Text>
         <Icon name="arrow-right" size={18} />
       </Pressable>
       {error && (
         <Card tone="peach" shadow={false} stroke="soft" style={styles.actions}>
           <Text variant="small" accessibilityRole="alert">
-            {error}
+            {t('accountEntry.welcomePreferenceError')}
           </Text>
           <Button
-            label="Try again"
+            label={t('common.retry')}
             icon="refresh-cw"
             variant="outline"
             onPress={onSkip}
             disabled={saving}
           />
           <Button
-            label="Continue for now"
+            label={t('accountEntry.continueForNow')}
             variant="outline"
             onPress={onContinueForNow}
             disabled={saving}
@@ -113,7 +124,7 @@ export function AccountChoiceScreen({
           ]}
         >
           <Text variant="small" style={styles.nameCopy}>
-            Add a name for your profile
+            {t('accountEntry.choice.addName')}
           </Text>
         </Pressable>
       </View>
@@ -160,7 +171,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 10,
   },
-  nameCopy: { color: '#75619D', textAlign: 'center' },
+  nameCopy: { color: brandColors.forest, textAlign: 'center' },
   disabled: { opacity: 0.45 },
   pressed: { opacity: 0.72 },
 });

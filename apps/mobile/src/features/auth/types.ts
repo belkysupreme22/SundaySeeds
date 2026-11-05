@@ -1,3 +1,5 @@
+import type { AuthMessage } from './data/authMessages';
+
 export type AccountIdentity = {
   id: string;
   email: string;
@@ -12,6 +14,7 @@ export type AccountProfile = {
 };
 
 export type AuthResult = { ok: boolean; message: string };
+export type LocalizedAuthResult = AuthResult & AuthMessage;
 
 // Feature hooks use a pinned, validated actor; screens never receive credentials.
 export type ValidatedAccountActor = {
@@ -29,13 +32,13 @@ export type AuthContextValue = {
   busy: boolean;
   error: string | null;
   profileError: string | null;
-  signIn: (email: string, password: string) => Promise<AuthResult>;
-  signUp: (email: string, password: string, displayName: string) => Promise<AuthResult>;
-  requestRecovery: (email: string) => Promise<AuthResult>;
-  resendVerification: () => Promise<AuthResult>;
-  checkVerification: () => Promise<AuthResult>;
-  signOut: (expectedUserId?: string) => Promise<AuthResult>;
-  retryProfile: () => Promise<AuthResult>;
-  saveProfileName: (name: string) => Promise<AuthResult>;
+  signIn: (email: string, password: string) => Promise<LocalizedAuthResult>;
+  signUp: (email: string, password: string, displayName: string) => Promise<LocalizedAuthResult>;
+  requestRecovery: (email: string) => Promise<LocalizedAuthResult>;
+  resendVerification: () => Promise<LocalizedAuthResult>;
+  checkVerification: () => Promise<LocalizedAuthResult>;
+  signOut: (expectedUserId?: string) => Promise<LocalizedAuthResult>;
+  retryProfile: () => Promise<LocalizedAuthResult>;
+  saveProfileName: (name: string) => Promise<LocalizedAuthResult>;
   getValidatedActor: () => Promise<ValidatedAccountActor | null>;
 };

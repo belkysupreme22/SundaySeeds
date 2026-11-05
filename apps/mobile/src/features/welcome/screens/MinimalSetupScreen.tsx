@@ -1,5 +1,7 @@
 import { useState, type ReactNode } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
+import { useTranslation } from 'react-i18next';
+import { AccountLanguagePicker } from '../../auth/components/AccountLanguagePicker';
 import { DISPLAY_NAME_LIMIT } from '../../profile/data/profileStorage';
 import { useLearnerProfile } from '../../profile/hooks/useLearnerProfile';
 import { brandColors, colors } from '../../../shared/theme/tokens';
@@ -19,17 +21,18 @@ type Props = {
 };
 
 export function MinimalSetupScreen(props: Props) {
+  const { t } = useTranslation();
   const profile = useLearnerProfile();
   if (!profile.hydrated || profile.loadError) {
     return (
       <SetupFrame
         busy={props.finishing}
-        loadingMessage={profile.loadError ? undefined : 'Opening your saved name…'}
+        loadingMessage={profile.loadError ? undefined : t('accountEntry.setup.openingName')}
         onBack={props.onBack}
         onSkip={() => void props.onFinish()}
         footer={
           <Button
-            label="Skip for now"
+            label={t('accountEntry.skipForNow')}
             onPress={() => void props.onFinish()}
             disabled={props.finishing}
           />
@@ -37,12 +40,12 @@ export function MinimalSetupScreen(props: Props) {
       >
         {profile.loadError && (
           <Card tone="peach" shadow={false}>
-            <Text accessibilityLiveRegion="polite">{profile.loadError}</Text>
+            <Text accessibilityLiveRegion="polite">{t('accountEntry.setup.nameLoadError')}</Text>
           </Card>
         )}
         {profile.loadError && (
           <Button
-            label="Try again"
+            label={t('common.retry')}
             icon="refresh-cw"
             variant="outline"
             onPress={profile.retryLoad}
@@ -61,6 +64,7 @@ export function MinimalSetupScreen(props: Props) {
 }
 
 function SetupNameForm({ initialName, ...props }: Props & { initialName: string }) {
+  const { t } = useTranslation();
   const [name, setName] = useState(initialName);
   const { saveName, saving, saveError } = useLearnerProfile();
   const busy = saving || props.finishing;
@@ -73,19 +77,19 @@ function SetupNameForm({ initialName, ...props }: Props & { initialName: string 
   return (
     <SetupFrame
       busy={busy}
-      loadingMessage={busy ? 'Preparing your learning space…' : undefined}
+      loadingMessage={busy ? t('accountEntry.setup.preparing') : undefined}
       onBack={props.onBack}
       onSkip={() => void props.onFinish()}
       footer={
         <View style={styles.actions}>
           <Button
-            label={busy ? 'One moment…' : 'Start learning'}
+            label={t(busy ? 'accountEntry.setup.wait' : 'accountEntry.setup.startLearning')}
             disabled={busy}
             loading={busy}
             onPress={() => void finish()}
           />
           <Button
-            label="Skip for now"
+            label={t('accountEntry.skipForNow')}
             variant="outline"
             icon={false}
             disabled={busy}
@@ -103,11 +107,11 @@ function SetupNameForm({ initialName, ...props }: Props & { initialName: string 
         </View>
       </View>
       <View style={styles.field}>
-        <Text variant="label">Display name (optional)</Text>
+        <Text variant="label">{t('accountEntry.setup.displayName')}</Text>
         <InputField
           icon="user"
-          accessibilityLabel="Display name, optional"
-          placeholder="Your name or nickname"
+          accessibilityLabel={t('accountEntry.setup.displayName')}
+          placeholder={t('accountEntry.setup.namePlaceholder')}
           placeholderTextColor={colors.muted}
           value={name}
           onChangeText={setName}
@@ -119,21 +123,19 @@ function SetupNameForm({ initialName, ...props }: Props & { initialName: string 
           onSubmitEditing={() => void finish()}
         />
         <Text variant="caption" muted>
-          Up to {DISPLAY_NAME_LIMIT} characters. A first name or nickname is perfect.
+          {t('accountEntry.setup.nameHint', { limit: DISPLAY_NAME_LIMIT })}
         </Text>
       </View>
       <Card tone="mint" shadow={false} style={styles.note}>
         <Icon name="smile" size={22} />
         <View style={styles.noteCopy}>
-          <Text variant="label">A familiar hello</Text>
-          <Text variant="small">
-            Your name appears on Profile. You can change it there whenever you like.
-          </Text>
+          <Text variant="label">{t('accountEntry.setup.noteTitle')}</Text>
+          <Text variant="small">{t('accountEntry.setup.noteBody')}</Text>
         </View>
       </Card>
       {saveError && (
         <Card tone="peach" shadow={false}>
-          <Text accessibilityRole="alert">{saveError}</Text>
+          <Text accessibilityRole="alert">{t('accountEntry.setup.nameSaveError')}</Text>
         </Card>
       )}
       <CompletionRecovery
@@ -160,12 +162,13 @@ function SetupFrame({
   children: ReactNode;
   loadingMessage?: string;
 }) {
+  const { t } = useTranslation();
   return (
     <Screen footer={footer} loadingMessage={loadingMessage}>
       <View style={styles.header}>
         <Pressable
           accessibilityRole="button"
-          accessibilityLabel="Back to account options"
+          accessibilityLabel={t('accountEntry.setup.backToAccount')}
           accessibilityState={{ disabled: busy }}
           disabled={busy}
           onPress={onBack}
@@ -174,35 +177,34 @@ function SetupFrame({
           <Icon name="arrow-left" size={20} />
         </Pressable>
         <View style={styles.step}>
-          <Text variant="caption">One optional step</Text>
+          <Text variant="caption">{t('accountEntry.setup.stepLabel')}</Text>
         </View>
         <Pressable
           accessibilityRole="button"
-          accessibilityLabel="Skip name setup"
+          accessibilityLabel={t('accountEntry.setup.skipName')}
           accessibilityState={{ disabled: busy }}
           disabled={busy}
           onPress={onSkip}
           style={({ pressed }) => [styles.skip, pressed && styles.pressed]}
         >
-          <Text variant="small" muted>
-            Skip
+          <Text variant="small" muted style={styles.skipLabel}>
+            {t('common.skip')}
           </Text>
         </Pressable>
       </View>
+      <AccountLanguagePicker />
       <View
         style={styles.progress}
         accessible
-        accessibilityLabel="Optional profile setup, step 1 of 1"
+        accessibilityLabel={t('accountEntry.setup.stepAccessibility')}
       >
         <View style={styles.progressFill} />
       </View>
       <View style={styles.introduction}>
-        <Text variant="heading" accessibilityRole="header">
-          Make it yours
+        <Text variant="authHeading" accessibilityRole="header">
+          {t('accountEntry.setup.title')}
         </Text>
-        <Text variant="small">
-          What should we call you? Add a name for your profile, or jump straight into your lessons.
-        </Text>
+        <Text variant="small">{t('accountEntry.setup.description')}</Text>
       </View>
       {children}
     </Screen>
@@ -218,12 +220,13 @@ function CompletionRecovery({
   busy: boolean;
   onContinueForNow: () => void;
 }) {
+  const { t } = useTranslation();
   if (!error) return null;
   return (
     <Card tone="peach" shadow={false} style={styles.actions}>
-      <Text accessibilityRole="alert">{error}</Text>
+      <Text accessibilityRole="alert">{t('accountEntry.welcomePreferenceError')}</Text>
       <Button
-        label="Continue for now"
+        label={t('accountEntry.continueForNow')}
         variant="outline"
         disabled={busy}
         onPress={onContinueForNow}
@@ -251,7 +254,14 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     flexShrink: 1,
   },
-  skip: { minWidth: 44, minHeight: 44, alignItems: 'center', justifyContent: 'center' },
+  skip: {
+    minWidth: 44,
+    minHeight: 44,
+    flexShrink: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  skipLabel: { textAlign: 'center' },
   progress: {
     height: 6,
     borderWidth: 1,

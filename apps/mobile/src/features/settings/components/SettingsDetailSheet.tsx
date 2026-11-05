@@ -2,10 +2,10 @@ import { Modal, Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTranslation } from 'react-i18next';
 import { lessons } from '../../lessons/data/lessons';
-import { colors } from '../../../shared/theme/tokens';
+import { brandColors, colors } from '../../../shared/theme/tokens';
 import { Button, IconButton } from '../../../shared/ui/Button';
 import { Text } from '../../../shared/ui/Text';
-import { useLanguage, AVAILABLE_LANGUAGES, type AppLanguage } from '../hooks/useLanguage';
+import { useLanguage, AVAILABLE_LANGUAGES, type AppLanguage } from '../../../i18n/useLanguage';
 
 export type SettingsDetailKey =
   | 'email'
@@ -113,9 +113,10 @@ export function SettingsDetailSheet({
   onClose: () => void;
 }) {
   const { t } = useTranslation();
-  const { language, changeLanguage } = useLanguage();
+  const { language, changeLanguage, loading } = useLanguage();
   if (!detail) return null;
   const content = details[detail];
+  const title = detail === 'language' ? t('settings.language') : content.title;
 
   return (
     <Modal visible transparent animationType="fade" onRequestClose={onClose}>
@@ -124,14 +125,15 @@ export function SettingsDetailSheet({
           <ScrollView key={detail} contentContainerStyle={styles.content}>
             <View style={styles.header}>
               <Text variant="title" accessibilityRole="header" style={styles.heading}>
-                {content.title}
+                {title}
               </Text>
-              <IconButton name="x" label={`Close ${content.title}`} onPress={onClose} />
+              <IconButton name="x" label={t('common.close')} onPress={onClose} />
             </View>
             {detail === 'language' ? (
               <LanguagePicker
                 current={language}
-                onChange={(lang) => void changeLanguage(lang as AppLanguage)}
+                loading={loading}
+                onChange={(lang) => void changeLanguage(lang)}
               />
             ) : (
               <>
@@ -157,10 +159,12 @@ export function SettingsDetailSheet({
 
 function LanguagePicker({
   current,
+  loading,
   onChange,
 }: {
   current: AppLanguage;
-  onChange: (lang: string) => void;
+  loading: boolean;
+  onChange: (lang: AppLanguage) => void;
 }) {
   const { t } = useTranslation();
   return (
@@ -174,8 +178,9 @@ function LanguagePicker({
           <Pressable
             key={option.code}
             accessibilityRole="radio"
-            accessibilityState={{ checked: selected }}
+            accessibilityState={{ checked: selected, disabled: loading }}
             accessibilityLabel={option.nativeLabel}
+            disabled={loading}
             onPress={() => onChange(option.code)}
             style={[styles.languageOption, selected && styles.languageOptionSelected]}
           >
@@ -185,9 +190,7 @@ function LanguagePicker({
                 {option.label}
               </Text>
             )}
-            {selected && (
-              <View style={styles.selectedDot} />
-            )}
+            {selected && <View style={styles.selectedDot} />}
           </Pressable>
         );
       })}
@@ -216,7 +219,7 @@ const styles = StyleSheet.create({
   content: { padding: 16, gap: 12 },
   header: { flexDirection: 'row', alignItems: 'center', gap: 8 },
   heading: { flex: 1 },
-  status: { padding: 10, backgroundColor: colors.lavender, borderRadius: 6 },
+  status: { padding: 10, backgroundColor: brandColors.surface, borderRadius: 6 },
   languageList: { gap: 8 },
   languageOption: {
     padding: 14,
@@ -228,14 +231,14 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   languageOptionSelected: {
-    borderColor: colors.ink,
-    backgroundColor: colors.lavender,
+    borderColor: brandColors.forest,
+    backgroundColor: brandColors.surfaceStrong,
   },
   selectedDot: {
     marginLeft: 'auto',
     width: 10,
     height: 10,
     borderRadius: 5,
-    backgroundColor: colors.ink,
+    backgroundColor: brandColors.forest,
   },
 });

@@ -1,4 +1,5 @@
 import { useAuth } from '../../auth/hooks/useAuth';
+import type { LocalizedAuthResult } from '../../auth/types';
 import { Card } from '../../../shared/ui/Card';
 import { useCallback, useRef, useState } from 'react';
 import { router, useFocusEffect } from 'expo-router';
@@ -12,14 +13,15 @@ import { PageHeader } from '../../../shared/ui/PageHeader';
 import { Text } from '../../../shared/ui/Text';
 import { Button } from '../../../shared/ui/Button';
 import { colors } from '../../../shared/theme/tokens';
-import { useLanguage } from '../hooks/useLanguage';
+import { useLanguage } from '../../../i18n/useLanguage';
 
 export function SettingsScreen() {
   const { t } = useTranslation();
   const auth = useAuth();
   const { language, availableLanguages } = useLanguage();
-  const currentLangLabel = availableLanguages.find((l) => l.code === language)?.nativeLabel ?? 'English';
-  const [notice, setNotice] = useState<string | null>(null);
+  const currentLangLabel =
+    availableLanguages.find((l) => l.code === language)?.nativeLabel ?? 'English';
+  const [notice, setNotice] = useState<LocalizedAuthResult | null>(null);
   const [loggingOut, setLoggingOut] = useState(false);
   const [detail, setDetail] = useState<SettingsDetailKey | null>(null);
   const focused = useRef(false);
@@ -44,7 +46,7 @@ export function SettingsScreen() {
     setLoggingOut(false);
     if (!focused.current || logoutAttempt.current !== attempt) return;
     if (result.ok) router.replace('/home');
-    else setNotice(result.message);
+    else setNotice(result);
   }
   return (
     <Screen tabs loadingMessage={loggingOut && auth.busy ? t('settings.signingOut') : undefined}>
@@ -135,7 +137,12 @@ export function SettingsScreen() {
           value={t('common.unavailable')}
           onPress={() => setDetail('downloads')}
         />
-        <SettingsRow divider icon="database" title={t('settings.dataUsage')} onPress={() => setDetail('data')} />
+        <SettingsRow
+          divider
+          icon="database"
+          title={t('settings.dataUsage')}
+          onPress={() => setDetail('data')}
+        />
       </SettingsGroup>
       <SettingsGroup title={t('settings.learning')}>
         <SettingsRow
@@ -184,7 +191,9 @@ export function SettingsScreen() {
       </SettingsGroup>
       {(notice || auth.error) && (
         <Card tone="lavender" shadow={false} stroke="soft">
-          <Text accessibilityLiveRegion="polite">{notice || auth.error}</Text>
+          <Text accessibilityLiveRegion="polite">
+            {notice ? t(notice.messageKey, { defaultValue: notice.message }) : auth.error}
+          </Text>
         </Card>
       )}
       <LearningDataControls />

@@ -61,8 +61,8 @@ export function InputField({
       {label ? (
         <View style={styles.inputColumn}>
           <Text
-            variant="caption"
-            style={[styles.insideLabel, appearance === 'account' && styles.accountLabel]}
+            variant={appearance === 'account' ? 'label' : 'caption'}
+            style={appearance === 'account' ? styles.accountLabel : styles.insideLabel}
           >
             {label}
           </Text>
@@ -81,8 +81,8 @@ const styles = StyleSheet.create({
   insideLabel: { fontSize: 10, lineHeight: 14, paddingTop: 6 },
   labeledInput: { flex: 0, minHeight: 28, paddingTop: 0, paddingBottom: 6, fontSize: 12 },
   // Reference 03 uses a finer charcoal field outline than its dark CTA outline.
-  account: { borderColor: '#6B6672' },
-  accountLabel: { fontFamily: fonts.semibold },
+  account: { minHeight: 44, borderColor: '#6B6672' },
+  accountLabel: { paddingTop: 6 },
   accountFocused: { borderColor: brandColors.forest, backgroundColor: colors.white },
   frame: {
     flexDirection: 'row',

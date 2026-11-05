@@ -8,6 +8,7 @@ Selected 4 November 2026 for the comprehensive design system.
 | Latin lesson reading | Source Serif 4 | 400 |
 | Amharic interface | Noto Sans Ethiopic | 400 / 600 |
 | Amharic lesson reading | Noto Serif Ethiopic | 400 |
+| Account display headings | Source Serif 4 (English), Abyssinica SIL (Amharic) | 400 |
 
 The serif is an editorial reading face; controls and navigation remain geometric
 sans. Noto gives Amharic an explicitly selected family instead of relying on
@@ -20,15 +21,16 @@ downloaded or copied. Hallow's official Bible-tab help documents user text-size
 and theme controls; it does not establish Hallow's font family.
 
 `scripts/fetch-design-fonts.py` fetches original static TTF files and full SIL Open
-Font License texts from the official Adobe/Noto repositories. `SOURCES.json`
-records exact source URLs, sizes and SHA-256 hashes. Noto files are stable static
+Font License texts from Adobe, Noto and SIL. `SOURCES.json` records source URLs,
+archive members where relevant, sizes and SHA-256 hashes. Noto files are stable static
 builds from its official legacy distribution; no latest-release claim is made.
 Poppins remains supplied by the existing Expo Google Fonts package and its license.
 
 These are font assets, not a package install. Download/registration and actual
 English/Amharic rendering are separate from typography research; see the current
-design-system status before claiming app/native verification. Preserve both
-license files in distributions. Files are unmodified originals.
+design-system status before claiming app/native verification. Preserve all
+license files in distributions. The original font binaries are unmodified. The
+Abyssinica license uses LF line endings and trims trailing spaces in this repository.
 
 Sources: [YouVersion reader](https://developers.youversion.com/guides/display-bible-html),
 [Hallow Bible controls](https://help.hallow.com/en/articles/7885495-hallow-bible-tab),

@@ -4,4 +4,5 @@ export const designFontAssets = {
   NotoSansEthiopic_400Regular: require('../../../assets/fonts/NotoSansEthiopic-Regular.ttf'),
   NotoSansEthiopic_600SemiBold: require('../../../assets/fonts/NotoSansEthiopic-SemiBold.ttf'),
   NotoSerifEthiopic_400Regular: require('../../../assets/fonts/NotoSerifEthiopic-Regular.ttf'),
+  AbyssinicaSIL_400Regular: require('../../../assets/fonts/AbyssinicaSIL-Regular.ttf'),
 } as const;

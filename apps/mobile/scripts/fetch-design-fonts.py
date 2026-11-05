@@ -1,13 +1,20 @@
 """Fetch original, open-license static font assets; no packages or app execution."""
 import hashlib
+from io import BytesIO
 import json
 from pathlib import Path
 from urllib.request import Request, urlopen
+from zipfile import ZipFile
 
 ROOT = Path(__file__).resolve().parents[3]
 DESTINATION = ROOT / 'apps/mobile/assets/fonts'
 ADOBE = 'https://raw.githubusercontent.com/adobe-fonts/source-serif/release/'
 NOTO = 'https://raw.githubusercontent.com/notofonts/noto-fonts/main/'
+ABYSSINICA = 'https://software.sil.org/downloads/r/abyssinica/AbyssinicaSIL-2.300.zip'
+ABYSSINICA_FILES = {
+    'AbyssinicaSIL-Regular.ttf': 'AbyssinicaSIL-2.300/AbyssinicaSIL-Regular.ttf',
+    'OFL-AbyssinicaSIL.txt': 'AbyssinicaSIL-2.300/OFL.txt',
+}
 FILES = {
     'SourceSerif4-Regular.ttf': ADOBE + 'TTF/SourceSerif4-Regular.ttf',
     'NotoSansEthiopic-Regular.ttf': NOTO + 'hinted/ttf/NotoSansEthiopic/NotoSansEthiopic-Regular.ttf',
@@ -17,23 +24,33 @@ FILES = {
     'OFL-Noto.txt': NOTO + 'LICENSE',
 }
 
+def fetch(url):
+    request = Request(url, headers={'User-Agent': 'SundaySeeds-font-asset-authoring'})
+    with urlopen(request, timeout=45) as response:
+        return response.read()
+
+
 def main():
     DESTINATION.mkdir(parents=True, exist_ok=True)
     records = []
     # Fetch/validate everything before writing the asset set.
-    downloaded = {}
-    for name, url in FILES.items():
-        request = Request(url, headers={'User-Agent': 'SundaySeeds-font-asset-authoring'})
-        with urlopen(request, timeout=45) as response:
-            data = response.read()
+    downloaded = {name: (fetch(url), {'url': url}) for name, url in FILES.items()}
+    with ZipFile(BytesIO(fetch(ABYSSINICA))) as archive:
+        for name, member in ABYSSINICA_FILES.items():
+            data = archive.read(member)
+            source = {'url': ABYSSINICA, 'archiveMember': member}
+            if name.endswith('.txt'):
+                data = b'\n'.join(line.rstrip(b' \t') for line in data.splitlines()) + b'\n'
+                source['lineEndings'] = 'LF'
+            downloaded[name] = (data, source)
+    for name, (data, source) in downloaded.items():
         if name.endswith('.ttf') and data[:4] not in (b'\x00\x01\x00\x00', b'OTTO'):
             raise RuntimeError(f'{name} is not a supported original static font.')
         if name.endswith('.txt') and b'SIL OPEN FONT LICENSE' not in data.upper():
             raise RuntimeError(f'{name} does not contain the expected license.')
-        downloaded[name] = data
-        records.append({'file': name, 'url': url, 'bytes': len(data),
+        records.append({'file': name, **source, 'bytes': len(data),
                         'sha256': hashlib.sha256(data).hexdigest()})
-    for name, data in downloaded.items():
+    for name, (data, _) in downloaded.items():
         (DESTINATION / name).write_bytes(data)
     (DESTINATION / 'SOURCES.json').write_text(json.dumps(records, indent=2) + '\n')
     print(f'Saved {len(records)} original font/license assets with SHA-256 provenance.')

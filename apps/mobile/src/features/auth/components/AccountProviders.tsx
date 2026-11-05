@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { Image, Pressable, StyleSheet, useWindowDimensions, View } from 'react-native';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { useTranslation } from 'react-i18next';
 import { Text } from '../../../shared/ui/Text';
 import { colors, fonts } from '../../../shared/theme/tokens';
 
 export function AccountProviders() {
+  const { t } = useTranslation();
   const [provider, setProvider] = useState<string | null>(null);
   const { width, fontScale } = useWindowDimensions();
   const stacked = width < 350 || fontScale >= 1.5;
@@ -12,20 +14,20 @@ export function AccountProviders() {
     <View style={styles.group}>
       <View style={styles.divider}>
         <View style={styles.rule} />
-        <Text variant="caption" muted>
-          Other sign-in options
+        <Text variant="caption" muted style={styles.dividerLabel}>
+          {t('authScreens.otherSignInOptions')}
         </Text>
         <View style={styles.rule} />
       </View>
       <Text variant="caption" muted>
-        Google and Apple sign-in are not available yet.
+        {t('authScreens.providersUnavailable')}
       </Text>
       <View style={[styles.row, stacked && styles.stacked]}>
         {(['Google', 'Apple'] as const).map((name) => (
           <Pressable
             key={name}
             accessibilityRole="button"
-            accessibilityLabel={`${name} sign-in information, currently unavailable`}
+            accessibilityLabel={t('authScreens.providerAccessibility', { provider: name })}
             onPress={() => setProvider(name)}
             style={({ pressed }) => [
               styles.button,
@@ -58,7 +60,7 @@ export function AccountProviders() {
       </View>
       {provider && (
         <Text variant="small" accessibilityLiveRegion="polite">
-          {provider} sign-in is not connected yet. No account has been accessed.
+          {t('authScreens.providerUnavailableNotice', { provider })}
         </Text>
       )}
     </View>
@@ -76,6 +78,7 @@ const styles = StyleSheet.create({
   label: { fontFamily: fonts.medium, flexShrink: 1, textAlign: 'center' },
   group: { gap: 14 },
   divider: { flexDirection: 'row', alignItems: 'center', gap: 12 },
+  dividerLabel: { flexShrink: 1, textAlign: 'center' },
   rule: { flex: 1, height: 1, backgroundColor: colors.line },
   row: { flexDirection: 'row', gap: 12 },
   stacked: { flexDirection: 'column' },
