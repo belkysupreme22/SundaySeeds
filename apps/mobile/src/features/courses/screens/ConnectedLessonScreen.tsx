@@ -95,7 +95,7 @@ export function ConnectedLessonScreen() {
               <Text variant="title" accessibilityRole="header">
                 {section.title}
               </Text>
-              <Text>{section.body}</Text>
+              <Text variant="reading">{section.body}</Text>
               <SectionReadingPlace sync={readingSync} sectionId={section.id} />
             </View>
           ))}

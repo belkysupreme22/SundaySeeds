@@ -25,6 +25,7 @@ import { LoadingState } from '../shared/ui/LoadingState';
 import { LearningStorageNotice } from '../features/progress/components/LearningStorageNotice';
 import { LearningProfileProvider } from '../features/learning-profile/hooks/useLearningProfile';
 import { AnimatedSplash } from '../shared/ui/AnimatedSplash';
+import { designFontAssets } from '../shared/theme/fontAssets';
 
 // Keep the native splash visible while fonts load.
 SplashScreen.preventAutoHideAsync().catch(() => {});
@@ -56,6 +57,7 @@ export default function RootLayout() {
     Poppins_500Medium,
     Poppins_600SemiBold,
     Poppins_700Bold,
+    ...designFontAssets,
   });
   const [splashDone, setSplashDone] = useState(false);
   const [layoutReady, setLayoutReady] = useState(false);

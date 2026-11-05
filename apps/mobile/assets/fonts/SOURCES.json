@@ -1,0 +1,38 @@
+[
+  {
+    "file": "SourceSerif4-Regular.ttf",
+    "url": "https://raw.githubusercontent.com/adobe-fonts/source-serif/release/TTF/SourceSerif4-Regular.ttf",
+    "bytes": 261868,
+    "sha256": "e5a4ee6a3d87bb9024796be390c6771e2a0eb1883dae25effaf57ca01668e24b"
+  },
+  {
+    "file": "NotoSansEthiopic-Regular.ttf",
+    "url": "https://raw.githubusercontent.com/notofonts/noto-fonts/main/hinted/ttf/NotoSansEthiopic/NotoSansEthiopic-Regular.ttf",
+    "bytes": 344328,
+    "sha256": "e3a81ca66eb6d6b1a50a287c1dba18195541f69e0986f8b49a42658aa592ff0d"
+  },
+  {
+    "file": "NotoSansEthiopic-SemiBold.ttf",
+    "url": "https://raw.githubusercontent.com/notofonts/noto-fonts/main/hinted/ttf/NotoSansEthiopic/NotoSansEthiopic-SemiBold.ttf",
+    "bytes": 338264,
+    "sha256": "91e7c07758a60c91db32468c64c1d965f86ed1175c1f5aa8c3a902b49406d0a9"
+  },
+  {
+    "file": "NotoSerifEthiopic-Regular.ttf",
+    "url": "https://raw.githubusercontent.com/notofonts/noto-fonts/main/hinted/ttf/NotoSerifEthiopic/NotoSerifEthiopic-Regular.ttf",
+    "bytes": 289588,
+    "sha256": "25983a0af987cef4f615e4dbebd25d66ffd4692a40241272b462d74915f519fe"
+  },
+  {
+    "file": "OFL-SourceSerif4.txt",
+    "url": "https://raw.githubusercontent.com/adobe-fonts/source-serif/release/LICENSE.md",
+    "bytes": 4491,
+    "sha256": "c21d7293d87b6d7ab1d0229a2f55b77f33a7613a6a4e66f6693d68d7d8d09464"
+  },
+  {
+    "file": "OFL-Noto.txt",
+    "url": "https://raw.githubusercontent.com/notofonts/noto-fonts/main/LICENSE",
+    "bytes": 4377,
+    "sha256": "0dab92d0544f7b233403f14b84a663bdbfa746982eda629e7f4f9ffe1b036feb"
+  }
+]

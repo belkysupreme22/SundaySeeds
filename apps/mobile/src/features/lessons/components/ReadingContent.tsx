@@ -20,12 +20,12 @@ export function ReadingContent({ body }: { body: string }) {
                     {reflection[1]}
                   </Text>
                 </View>
-                <Text style={styles.body}>{reflection[2]}</Text>
+                <Text variant="reading">{reflection[2]}</Text>
               </Card>
             );
           }
           return (
-            <Text key={index} style={styles.body}>
+            <Text key={index} variant="reading">
               {paragraph}
             </Text>
           );
@@ -36,7 +36,6 @@ export function ReadingContent({ body }: { body: string }) {
 
 const styles = StyleSheet.create({
   content: { gap: 18 },
-  body: { fontSize: 16, lineHeight: 29 },
   reflection: { gap: 10, borderRadius: 8 },
   heading: { flexDirection: 'row', alignItems: 'center', gap: 10 },
   headingText: { flex: 1 },
