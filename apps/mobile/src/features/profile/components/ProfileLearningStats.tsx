@@ -1,4 +1,5 @@
 import { StyleSheet, View } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { accentColors, brandColors } from '../../../shared/theme/tokens';
 import { Card } from '../../../shared/ui/Card';
 import { Icon, type IconName } from '../../../shared/ui/Icon';
@@ -12,10 +13,21 @@ type Props = {
 };
 
 export function ProfileLearningStats({ completed, inProgress, saved, stacked }: Props) {
+  const { t } = useTranslation();
   const stats = [
-    { label: 'Completed', value: completed, icon: 'check-circle', fill: accentColors.mint },
-    { label: 'In progress', value: inProgress, icon: 'book-open', fill: accentColors.wheat },
-    { label: 'Saved', value: saved, icon: 'bookmark', fill: accentColors.rose },
+    {
+      label: t('profile.completed'),
+      value: completed,
+      icon: 'check-circle',
+      fill: accentColors.mint,
+    },
+    {
+      label: t('lessons.inProgress'),
+      value: inProgress,
+      icon: 'book-open',
+      fill: accentColors.wheat,
+    },
+    { label: t('home.saved'), value: saved, icon: 'bookmark', fill: accentColors.rose },
   ] satisfies readonly { label: string; value: number; icon: IconName; fill: string }[];
   return (
     <View style={[styles.row, stacked && styles.stacked]}>

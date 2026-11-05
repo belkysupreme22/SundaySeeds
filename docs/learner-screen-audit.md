@@ -1,5 +1,14 @@
 # Learner screen audit checklist
 
+## Profile identity and editing — 5 November 2026
+
+Profile gives editing a labelled action under the learner’s identity. Its
+sample activity and routes are grouped together, with one Settings entry.
+Verify guest and signed-in names, blank names, save and retry. Start editing
+from Profile and Settings. Check that Save, Cancel and Back return to the
+screen that opened the form and that a direct entry falls back to Profile.
+Check keyboard, narrow width and larger English/Amharic text.
+
 ## Growth and interaction details — 5 November 2026
 
 - **Quiz results:** finish a new sample and connected attempt. Verify the short

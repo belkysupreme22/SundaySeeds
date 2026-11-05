@@ -234,7 +234,25 @@
   "profile": {
     "title": "Profile",
     "greeting": "Hello, {{name}}",
-    "learner": "learner"
+    "learner": "learner",
+    "identityLabel": "Your learning profile",
+    "loadingName": "Opening your profile…",
+    "nameUnavailable": "Name unavailable",
+    "editName": "Edit display name",
+    "addName": "Add a display name",
+    "completed": "Completed",
+    "progressDescription": "Reading positions and best quiz scores",
+    "savedDescription": "Lessons you bookmarked for later",
+    "learningSaveWarning": "Some changes may still need saving. Use the storage notice above to try again.",
+    "edit": {
+      "title": "Edit profile",
+      "introTitle": "What should we call you?",
+      "introBody": "A first name or nickname is perfect.",
+      "nameHint": "Up to {{limit}} characters. Leave blank to use “learner”.",
+      "saving": "Saving your profile…",
+      "save": "Save profile",
+      "reload": "Reload saved profile"
+    }
   },
   "language": {
     "english": "English",

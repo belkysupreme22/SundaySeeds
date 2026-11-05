@@ -5,6 +5,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Design system
+- Refined Profile and Edit profile into one bilingual identity flow with a clear edit action, scoped activity counts, and consistent return navigation.
 - Added a seed-and-leaf quiz celebration, clearer press and focus states, and a Profile seed seal with recorded learning counts.
 - Replaced the overall progress bar with a milestone board and a next-lesson action that can resume an unfinished reading.
 - Adopted Lexend and Noto Sans Ethiopic as the mobile interface pairing, including semibold account headings. The editorial lesson and Amharic accent roles continue as separate roles.

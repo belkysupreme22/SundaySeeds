@@ -232,9 +232,27 @@
     "continueForNow": "አሁን ቀጥሉ"
   },
   "profile": {
-    "title": "መዝገብ",
+    "title": "መገለጫ",
     "greeting": "ሰላም፣ {{name}}",
-    "learner": "ተማሪ"
+    "learner": "ተማሪ",
+    "identityLabel": "የትምህርት መገለጫዎ",
+    "loadingName": "መገለጫዎ በመክፈት ላይ…",
+    "nameUnavailable": "ስሙን ማግኘት አልተቻለም",
+    "editName": "የማሳያ ስም ያስተካክሉ",
+    "addName": "የማሳያ ስም ያክሉ",
+    "completed": "የተጠናቀቁ",
+    "progressDescription": "የንባብ ቦታዎች እና ምርጥ የፈተና ውጤቶች",
+    "savedDescription": "ለኋላ ያስቀመጧቸው ትምህርቶች",
+    "learningSaveWarning": "አንዳንድ ለውጦች ላይቀመጡ ይችላሉ። እንደገና ለመሞከር ከላይ ያለውን ማሳወቂያ ይጠቀሙ።",
+    "edit": {
+      "title": "መገለጫ ያስተካክሉ",
+      "introTitle": "በምን ስም እንጥራዎ?",
+      "introBody": "የመጀመሪያ ስምዎን ወይም ቅጽል ስምዎን ይጠቀሙ።",
+      "nameHint": "እስከ {{limit}} ቁምፊዎች። «ተማሪ» እንዲታይ ባዶ ይተዉት።",
+      "saving": "መገለጫዎ በመቀመጥ ላይ…",
+      "save": "መገለጫውን ያስቀምጡ",
+      "reload": "የተቀመጠውን መገለጫ ዳግም ይጫኑ"
+    }
   },
   "language": {
     "english": "English",

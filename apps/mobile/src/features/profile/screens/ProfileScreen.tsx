@@ -1,5 +1,6 @@
 import { router } from 'expo-router';
 import { StyleSheet, useWindowDimensions } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { useLearningProgress } from '../../progress/hooks/useLearningProgress';
 import { useLearnerProfile } from '../hooks/useLearnerProfile';
 import { ProfileHeader } from '../components/ProfileHeader';
@@ -12,6 +13,7 @@ import { Card } from '../../../shared/ui/Card';
 import { Button, IconButton } from '../../../shared/ui/Button';
 
 export function ProfileScreen() {
+  const { t } = useTranslation();
   const { displayName, hydrated: profileHydrated, loadError, retryLoad } = useLearnerProfile();
   const {
     progress,
@@ -30,12 +32,11 @@ export function ProfileScreen() {
   return (
     <Screen tabs>
       <PageHeader
-        title="My profile"
-        subtitle="Your profile and sample learning."
+        title={t('profile.title')}
         action={
           <IconButton
             name="settings"
-            label="Open settings"
+            label={t('settings.title')}
             onPress={() => router.push('/settings')}
           />
         }
@@ -53,15 +54,18 @@ export function ProfileScreen() {
             <Text accessibilityRole="alert" variant="small">
               {loadError}
             </Text>
-            <Button label="Try loading my name again" icon="refresh-cw" onPress={retryLoad} />
+            <Button label={t('common.retry')} icon="refresh-cw" onPress={retryLoad} />
           </Card>
         )}
+      </ContentGroup>
+      <ContentGroup>
+        <Text variant="title" accessibilityRole="header">
+          {t('lessons.sampleLessons')}
+        </Text>
         {!learningHydrated || errorKind === 'load' ? (
-          <Card tone={errorKind === 'load' ? 'peach' : undefined} shadow={false}>
+          <Card tone={errorKind === 'load' ? 'peach' : undefined} stroke="soft" shadow={false}>
             <Text variant="small" accessibilityLiveRegion="polite">
-              {errorKind === 'load'
-                ? 'Your learning summary is unavailable. Use Try loading again in the storage notice above.'
-                : 'Loading your learning summary…'}
+              {errorKind === 'load' ? t('progress.onHoldDesc') : t('progress.loading')}
             </Text>
           </Card>
         ) : (
@@ -74,29 +78,25 @@ export function ProfileScreen() {
             />
             {error && (
               <Text variant="caption" muted>
-                These counts include session changes that may not be saved. Use the storage notice
-                above to try again.
+                {t('profile.learningSaveWarning')}
               </Text>
             )}
           </>
         )}
-      </ContentGroup>
-      <ContentGroup>
-        <Text variant="title">My learning</Text>
         <ProfileNavigationGroup
           items={[
             {
               id: 'progress',
-              title: 'My learning progress',
-              description: 'Reading positions and best quiz scores',
+              title: t('progress.title'),
+              description: t('profile.progressDescription'),
               icon: 'bar-chart-2',
               tone: 'mint',
               onPress: () => router.replace('/progress'),
             },
             {
               id: 'saved',
-              title: 'My saved lessons',
-              description: 'Lessons you bookmarked for later',
+              title: t('lessons.savedLessons'),
+              description: t('profile.savedDescription'),
               icon: 'bookmark',
               tone: 'yellow',
               onPress: () => router.replace('/lessons?filter=saved'),
@@ -105,36 +105,26 @@ export function ProfileScreen() {
         />
       </ContentGroup>
       <ContentGroup>
-        <Text variant="title">Make yourself at home</Text>
+        <Text variant="title" accessibilityRole="header">
+          {t('settings.about')}
+        </Text>
         <ProfileNavigationGroup
           items={[
             {
               id: 'welcome',
-              title: 'View introduction',
-              description: 'A quick welcome to SundaySeeds',
+              title: t('settings.replayIntro'),
+              description: t('settings.replayIntroDesc'),
               icon: 'sun',
               tone: 'yellow',
               onPress: () => router.push('/welcome'),
             },
-            {
-              id: 'settings',
-              title: 'Settings',
-              description: 'Your name, learning data and app information',
-              icon: 'settings',
-              tone: 'peach',
-              onPress: () => router.push('/settings'),
-            },
           ]}
         />
       </ContentGroup>
-      <Text variant="caption" muted style={styles.center}>
-        SundaySeeds · A little faith, every day
-      </Text>
     </Screen>
   );
 }
 
 const styles = StyleSheet.create({
   note: { gap: 10 },
-  center: { textAlign: 'center' },
 });
