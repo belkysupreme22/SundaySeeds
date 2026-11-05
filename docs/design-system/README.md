@@ -46,17 +46,15 @@ text, icons, focus, disabled and pending states.
 
 | Family | Accent fill | Softer card fill | Purpose |
 | --- | --- | --- | --- |
-| Lavender | `#E8E3EE` | `#EFEAF4` | Occasional topic/editorial detail |
 | Mint | `#E0ECE2` | `#E6EDDF` | Supporting growth/learning detail |
 | Wheat | `#F2E8C9` | `#F7F0D7` | Reflection, warmth and limited highlights |
 | Peach | `#F1E2D4` | `#F5EBDF` | Gentle attention and recovery support |
-| Rose | `#EBDDE4` | `#F4EAF0` | Optional compact content detail |
+| Rose | `#EEDDDC` | `#F5E8E5` | Warm detail for stories and other content |
 
 The families share low saturation and a light, cream-related base. Use
-`accentColors` for compact accents and `cardColors` for larger toned cards. Avoid
-putting five differently colored full-size cards beside each other. A content
-category may keep a stable accent, but it must not change primary button or
-navigation colors. `colors.primary` is a compatibility alias, not the CTA token.
+`accentColors` for compact accents and `cardColors` for larger toned cards. Use
+white or sage for routine notices, and wheat for practice questions. Use
+`brandColors.forest` for primary buttons and active navigation.
 
 Correct/incorrect, warning and error have semantic meaning. Keep their text,
 icons and labels; do not communicate state through a green or peach fill alone.
@@ -99,6 +97,10 @@ The account heading role draws on the distinction between headings and running
 text in Ethiopian Orthodox manuscripts. The forms pair a short display title
 with Noto Sans Ethiopic or Poppins for controls and feedback.
 [Manuscript research and font choice](../decisions/0024-ethiopic-auth-typography.md)
+
+The [guide](guide.html#auth-type-options) compares six Amharic heading faces
+and an English Lexend account specimen alongside the current typography.
+See the [comparison sources and licensing](specimen-fonts/README.md).
 
 | Semantic role | Size / line height | Usage |
 | --- | --- | --- |

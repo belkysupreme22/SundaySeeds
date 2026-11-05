@@ -10,7 +10,7 @@ const sharp = require(process.env.SUNDAYSEEDS_SHARP_MODULE || 'sharp');
 const data = JSON.parse(fs.readFileSync(path.join(__dirname, 'tokens.json'), 'utf8'));
 const c = data.brandColors, a = data.accentColors;
 const paths = fs.readFileSync(path.join(root, 'apps/mobile/assets/brand/logo.svg'), 'utf8').match(/<path\b[^>]*\/>/g).join('').replaceAll('#173E32', c.onForest);
-const swatches = [['Forest',c.forest],['Cream',c.canvas],['Sage',c.surface],['Lavender',a.lavender],['Wheat',a.wheat],['Peach',a.peach]].map(([name,color],i)=>`<rect x="${48+i*183}" y="250" width="159" height="76" rx="9" fill="${color}" stroke="${data.colors.line}"/><text x="${48+i*183}" y="352" font-size="14" font-weight="600">${name}</text><text x="${48+i*183}" y="374" font-size="12" fill="${c.muted}">${color}</text>`).join('');
+const swatches = [['Forest',c.forest],['Cream',c.canvas],['Sage',c.surface],['Wheat',a.wheat],['Peach',a.peach],['Rose',a.rose]].map(([name,color],i)=>`<rect x="${48+i*183}" y="250" width="159" height="76" rx="9" fill="${color}" stroke="${data.colors.line}"/><text x="${48+i*183}" y="352" font-size="14" font-weight="600">${name}</text><text x="${48+i*183}" y="374" font-size="12" fill="${c.muted}">${color}</text>`).join('');
 const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1040" viewBox="0 0 1200 1040">
 <rect width="1200" height="1040" fill="${c.canvas}"/>
 <g font-family="Poppins, sans-serif" fill="${c.forest}">

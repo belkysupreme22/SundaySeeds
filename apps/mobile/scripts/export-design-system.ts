@@ -34,6 +34,8 @@ const pairs = [
   ['Secondary text on cream', brandColors.muted, brandColors.canvas],
   ['Body text on cream', colors.ink, brandColors.canvas],
   ['Danger text on cream', colors.danger, brandColors.canvas],
+  ['Question text on wheat', colors.ink, cardColors.yellow],
+  ['Body text on rose', colors.ink, cardColors.pink],
   ['Control boundary on white', brandColors.controlBorder, colors.white],
 ] as const;
 const contrast = pairs.map(([name, foreground, background]) => {
@@ -72,7 +74,7 @@ const system = {
   ) as unknown,
 };
 writeFileSync(resolve(destination, 'tokens.json'), JSON.stringify(system, null, 2) + '\n');
-const fontFace = (family: string, url: string, weight: number) =>
+const fontFace = (family: string, url: string, weight: number | string) =>
   `@font-face{font-family:'${family}';src:url('${url}') format('truetype');font-weight:${weight};font-display:swap;}`;
 const css = [
   fontFace(
@@ -92,6 +94,10 @@ const css = [
   ),
   fontFace('Source Serif 4', '../../apps/mobile/assets/fonts/SourceSerif4-Regular.ttf', 400),
   fontFace('Abyssinica SIL', '../../apps/mobile/assets/fonts/AbyssinicaSIL-Regular.ttf', 400),
+  fontFace('Lexend', 'specimen-fonts/Lexend-Variable.ttf', '100 900'),
+  fontFace('Waldba Fantuwua', 'specimen-fonts/WaldbaFantuwua-COLR-UVS.ttf', 400),
+  fontFace('Waldba Zelan', 'specimen-fonts/WaldbaZelan-COLR-UVS.ttf', 400),
+  fontFace('Waldba Tint', 'specimen-fonts/WaldbaTint-COLR-UVS.ttf', 400),
   fontFace(
     'Noto Sans Ethiopic',
     '../../apps/mobile/assets/fonts/NotoSansEthiopic-Regular.ttf',
@@ -107,7 +113,7 @@ const css = [
     '../../apps/mobile/assets/fonts/NotoSerifEthiopic-Regular.ttf',
     400,
   ),
-  `:root{--forest:${brandColors.forest};--cream:${brandColors.canvas};--sage:${brandColors.surface};--selected:${brandColors.surfaceStrong};--muted:${brandColors.muted};--ink:${colors.ink};--line:${colors.line};--control-border:${brandColors.controlBorder};--lavender:${colors.lavender};--wheat:${colors.yellow};--peach:${colors.peach};--danger:${colors.danger};--success:${colors.success};}`,
+  `:root{--forest:${brandColors.forest};--cream:${brandColors.canvas};--sage:${brandColors.surface};--selected:${brandColors.surfaceStrong};--muted:${brandColors.muted};--ink:${colors.ink};--line:${colors.line};--control-border:${brandColors.controlBorder};--wheat:${colors.yellow};--peach:${colors.peach};--rose:${colors.pink};--danger:${colors.danger};--success:${colors.success};}`,
 ].join('\n');
 writeFileSync(resolve(destination, 'theme.css'), css + '\n');
 const template = readFileSync(resolve(destination, 'guide.template.html'), 'utf8');

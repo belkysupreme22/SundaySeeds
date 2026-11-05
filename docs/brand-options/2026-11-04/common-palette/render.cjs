@@ -13,6 +13,8 @@ const tokens = fs.readFileSync(path.join(root, 'apps/mobile/src/shared/theme/tok
 const color = name => tokens.match(new RegExp(`${name}: '(#[A-Fa-f0-9]{6})'`))[1];
 const forest = color('forest'), ivory = color('onForest'), canvas = color('canvas');
 const surface = color('surface'), strong = color('surfaceStrong');
+const cards = tokens.slice(tokens.indexOf('export const cardColors'), tokens.indexOf('export const fonts'));
+const cardColor = name => cards.match(new RegExp(`${name}: '(#[A-Fa-f0-9]{6})'`))[1];
 const master = fs.readFileSync(path.join(root, 'apps/mobile/assets/brand/logo.svg'), 'utf8');
 const mark = master.match(/<path\b[^>]*\/>/g).join('').replaceAll('#173E32', ivory);
 const roles = [
@@ -39,9 +41,9 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1088" height="736" v
 <text x="376" y="224" font-size="14" fill="#647261">The same seed, controls and color roles across the journey.</text>
 ${swatches}
 <path d="M48 574H1040" stroke="#D0D8C8"/>
-<rect x="48" y="603" width="52" height="28" rx="6" fill="#EFEAF4" stroke="#D0D8C8"/>
-<rect x="110" y="603" width="52" height="28" rx="6" fill="#F7F0D7" stroke="#D0D8C8"/>
-<rect x="172" y="603" width="52" height="28" rx="6" fill="#F5EBDF" stroke="#D0D8C8"/>
+<rect x="48" y="603" width="52" height="28" rx="6" fill="${cardColor('yellow')}" stroke="#D0D8C8"/>
+<rect x="110" y="603" width="52" height="28" rx="6" fill="${cardColor('peach')}" stroke="#D0D8C8"/>
+<rect x="172" y="603" width="52" height="28" rx="6" fill="${cardColor('pink')}" stroke="#D0D8C8"/>
 <text x="48" y="661" font-size="14">Pastels: small topic and achievement highlights.</text>
 <rect x="760" y="601" width="280" height="54" rx="9" fill="${forest}"/>
 <text x="900" y="635" text-anchor="middle" fill="${ivory}" font-size="17" font-weight="600">Continue →</text>

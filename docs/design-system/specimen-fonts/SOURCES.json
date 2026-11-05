@@ -1,0 +1,40 @@
+[
+  {
+    "file": "Lexend-Variable.ttf",
+    "url": "https://raw.githubusercontent.com/google/fonts/e2332cf862ac3145c0ee5f24f04f4c1819b2410b/ofl/lexend/Lexend%5Bwght%5D.ttf",
+    "bytes": 175756,
+    "sha256": "3add53e641fbc81da64da4bb254285e2831b52b029527bc0714e2b9610832ee6"
+  },
+  {
+    "file": "OFL-Lexend.txt",
+    "url": "https://raw.githubusercontent.com/google/fonts/e2332cf862ac3145c0ee5f24f04f4c1819b2410b/ofl/lexend/OFL.txt",
+    "normalizedWhitespace": true,
+    "bytes": 4435,
+    "sha256": "da67588af7e0987521d7dffc60ca92e8abee37f30535d94b503ec7bc52d73023"
+  },
+  {
+    "file": "WaldbaFantuwua-COLR-UVS.ttf",
+    "url": "https://raw.githubusercontent.com/raeytype/waldba-font-collection/bcbcbd64e2d8b9cbc0e2e2a4c4b3b69e9c736eeb/snapshot/WaldbaFantuwua-COLR-UVS.ttf",
+    "bytes": 223624,
+    "sha256": "9b341b677ee4081d0cae3430f5d402441473e6855c9074a52bc39cc340e0b198"
+  },
+  {
+    "file": "WaldbaZelan-COLR-UVS.ttf",
+    "url": "https://raw.githubusercontent.com/raeytype/waldba-font-collection/bcbcbd64e2d8b9cbc0e2e2a4c4b3b69e9c736eeb/snapshot/WaldbaZelan-COLR-UVS.ttf",
+    "bytes": 216528,
+    "sha256": "daf863e16901badc769f01e9ab774a6843fe42e58e7b927fb1181639a98723c4"
+  },
+  {
+    "file": "WaldbaTint-COLR-UVS.ttf",
+    "url": "https://raw.githubusercontent.com/raeytype/waldba-font-collection/bcbcbd64e2d8b9cbc0e2e2a4c4b3b69e9c736eeb/snapshot/WaldbaTint-COLR-UVS.ttf",
+    "bytes": 240940,
+    "sha256": "1017ca4a3de14505d2bbc2cc009a2fc0c42213c99fcadd36139141f48a777c6c"
+  },
+  {
+    "file": "OFL-Waldba.txt",
+    "url": "https://raw.githubusercontent.com/raeytype/waldba-font-collection/bcbcbd64e2d8b9cbc0e2e2a4c4b3b69e9c736eeb/OFL.txt",
+    "normalizedWhitespace": true,
+    "bytes": 6387,
+    "sha256": "b412a4601d8a0f30841aa8f86273ee3519b563286436d6268866664b20ad0bfa"
+  }
+]

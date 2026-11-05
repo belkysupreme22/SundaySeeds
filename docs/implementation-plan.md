@@ -1,5 +1,14 @@
 # SundaySeeds implementation plan
 
+## Account font options and palette refinement — 5 November 2026
+
+The [guide](design-system/guide.html#auth-type-options) now compares six
+Amharic heading faces and Lexend against the current English account typography.
+Lexend and the additional Waldba faces are guide specimens pending selection.
+Mobile color adoption removes lavender and uses sage, wheat, peach, warm rose
+or white according to the existing content and state roles. Device acceptance
+for the new palette and first-run flows remains open.
+
 ## Bilingual account entry — 5 November 2026
 
 Mobile account choice, optional setup, sign-in, sign-up, verification and recovery
