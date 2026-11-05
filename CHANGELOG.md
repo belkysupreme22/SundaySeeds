@@ -4,6 +4,9 @@ Notable changes are recorded here. Unreleased entries describe development miles
 
 ## Unreleased
 
+### Design system
+- Added a canonical design system and interactive local reference covering blended color philosophy, church-app-informed bilingual typography, component/state rules, micro-interactions, accessibility and screen-by-screen coverage including auth, onboarding, navigation and Settings. Generated tokens and seven core contrast-pair targets pass; app/native and guide interaction acceptance remain pending.
+
 ### Branding
 - Aligned quiz selections and progress surfaces with shared forest/sage roles while retaining correct/incorrect feedback and progress meaning. Source review only; app/runtime/native acceptance pending.
 - Carried the seed identity into Home, with sage feature/shortcut/journey surfaces, forest headings and consistent discovery/filter/curriculum accents. Preserved responsive composition, artwork, content and navigation; owner visual review pending.

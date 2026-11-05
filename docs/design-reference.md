@@ -1,5 +1,18 @@
 # Design reference and acceptance
 
+## Current owner-approved design system — 4 November 2026
+
+Use [the comprehensive system](design-system/README.md) for visual and interaction
+roles. The owner explicitly selected forest/cream/sage with related, low-saturation
+pastel accents, rather than separate screen palettes. This supersedes color-only
+instructions in older checkpoints and the color labels in the mapping below.
+Reference composition, portrait proportions, spacing and different stroke/shadow
+weights remain authoritative. Auth, Settings and bottom navigation are included;
+active navigation always uses the shared forest/ivory role. New editorial reading
+and Amharic fonts are deliberate typography adaptations; legacy UI density is
+retained until each screen's review. Native/rendered acceptance remains pending.
+
+
 **19 October owner visual approval:** The owner approved optional account onboarding (`752de75`) and learner sample-content polish (`f0b0792`). This supersedes pending visual approval for these increments below. No platform, viewport/text scaling, native accessibility, keyboard/Back, persistence-failure or automated/build results were supplied; those checks remain separate. Teacher/admin and other learner acceptance is not inferred.
 
 **19 October — optional account choice and learner content:** Welcome/replay now leads to an optional account choice adapted from references 01/03, using the existing right-edge portrait/backdrop, account-only lilac page, mint learning note, outlined Sign in and primary Create account, plus a visible Skip for now. All actions scroll at narrow/larger-text sizes. Add a name for your welcome retains reference-02 optional name setup; existing sign-in/signup and recovery art stays. Per-screen strokes/shared defaults are unchanged. See [auth flow](auth-onboarding-flow.md) and [decision 0009](decisions/0009-optional-account-onboarding.md). Source formatting/review only; owner rendered/native/keyboard/Back review pending.

@@ -1,5 +1,32 @@
 # Auth onboarding flow
 
+## English and Amharic account flow — 5 November 2026
+
+Account choice, optional name setup, sign-in, sign-up, verification, recovery
+and email-link screens share a language picker with the device preference used
+by Settings. Changing language preserves the current step and entered form
+state. Validation and in-app account messages render in the active language.
+Short account headings use Source Serif 4 or Abyssinica SIL, with Poppins and
+Noto Sans Ethiopic for supporting copy. See [the font decision](decisions/0024-ethiopic-auth-typography.md).
+
+Owner acceptance is pending for translation nuance, native font rendering,
+keyboard, large text, persisted language and development email-link flows.
+
+## Design-system adoption — 4 November 2026
+
+Account choice, sign-in/sign-up, verification/email-action, recovery/reset and
+minimal setup share cream backgrounds, sage hero/choice surfaces, forest actions
+and the same visible input focus. Old page-specific lilac overrides and purple
+link colors now use semantic roles. Welcome retains its three photographs and
+motion with blended sage/wheat details. Bottom navigation and Settings use the
+same selected-state language. Shared Text has local reading/Ethiopic font roles.
+
+This is visual/type adoption: Back, Skip, password visibility, auth proof rules,
+provider availability, loading, submission and recovery data flows remain. New
+font registration retains the root loaded-or-failed gate. Source/asset review only;
+owner runtime, keyboard, large-text, mixed-script and native acceptance pending.
+See the [complete system and screen inventory](design-system/README.md).
+
 ## Introduction artwork and motion — 3 November 2026
 
 The three introduction pages now use generated photography-style reading,

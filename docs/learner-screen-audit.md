@@ -1,5 +1,25 @@
 # Learner screen audit checklist
 
+## Design-system pass — 4 November 2026
+
+Source color/type pass completed against the owner-selected blended forest system.
+The [component/screen inventory](design-system/component-inventory.md) is the current
+full matrix. No runtime or native acceptance is implied by the source pass.
+
+| Owner review area | Required cases | Current status |
+| --- | --- | --- |
+| Splash / Welcome / setup | one-shot/static, Next/Back/Skip, failure, large text | Source/asset reviewed; owner app/native pending |
+| Account / email / recovery | focus, keyboard, visibility, pending/error, invalid/expired links | Shared palette/type in source; owner app/native pending |
+| Learning profile | selected/unselected/disabled, limits, Skip, save/conflict | Colors only; existing data behavior preserved; owner pending |
+| Home / courses / filters | current/saved/empty/unavailable, nested routes | Source palette pass; owner visual pending |
+| Reading / quiz / progress | serif/mixed scripts, real values, correct/incorrect, retry | Source/type assets reviewed; native font/flow pending |
+| Bottom navigation | selected/inactive, course→Lessons, Settings→Profile | Shared forest selected state; owner route/render review pending |
+| Profile / Settings / data | fine strokes, language selection, unavailable/destructive/recovery | Source palette pass; owner app/native pending |
+
+Review320/390px,150%/200% text, keyboard/safe areas, English/Amharic/mixed text,
+reduced motion and background/return. Legacy compact text and custom motion remain
+explicit migration work. Original remaining learner imagery is a separate task.
+
 ## A45 shared controls and loader blur — 23 October 2026
 
 Connected course routes now select Lessons; tab selection and shared progress values

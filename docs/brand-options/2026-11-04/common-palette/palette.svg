@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1088" height="736" viewBox="0 0 1088 736">
+<rect width="1088" height="736" fill="#F7F3E8"/>
+<g font-family="Poppins, Arial, sans-serif" fill="#173E32">
+<text x="48" y="50" font-size="12" letter-spacing="2.6">SUNDAYSEEDS / SHARED COLOR ROLES</text>
+<rect x="48" y="84" width="280" height="188" rx="14" fill="#173E32"/>
+<svg x="133" y="112" width="110" height="138" viewBox="192 192 640 640"><path id="stem" fill="#F7F3E8" d="M502 663C506 613 500 574 490 532C478 466 494 409 544 366C552 359 562 363 556 375C520 425 511 478 519 540C524 578 527 623 523 673Z"/><path id="left-leaf" fill="#F7F3E8" d="M493 526C386 542 299 480 284 381C279 349 280 321 295 313C309 306 336 316 361 328C446 368 493 435 493 526Z"/><path id="right-leaf" fill="#F7F3E8" d="M520 445C515 343 584 257 685 240C711 236 737 234 744 249C750 262 739 288 726 313C686 395 617 444 520 445Z"/><path id="seed" fill="#F7F3E8" fill-rule="evenodd" d="M506 811C427 781 392 710 414 647C424 619 445 597 469 588C492 612 521 640 543 675C580 733 565 781 506 811ZM469 619C455 663 469 711 497 741C512 758 520 775 520 791C537 761 521 730 501 703C481 677 471 648 469 619Z"/></svg>
+<text x="376" y="139" font-size="38" font-weight="600">Forest-led.</text>
+<text x="376" y="181" font-size="21">Warm pages. Quiet learning surfaces.</text>
+<text x="376" y="224" font-size="14" fill="#647261">The same seed, controls and color roles across the journey.</text>
+<rect x="48" y="320" width="224" height="132" rx="12" fill="#173E32" stroke="#D0D8C8"/>
+  <text x="48" y="486" font-size="20" font-weight="600">Forest</text>
+  <text x="48" y="512" font-size="13">Actions &amp; navigation</text>
+  <text x="48" y="538" font-size="12" fill="#647261">#173E32</text><rect x="296" y="320" width="224" height="132" rx="12" fill="#F7F3E8" stroke="#D0D8C8"/>
+  <text x="296" y="486" font-size="20" font-weight="600">Cream</text>
+  <text x="296" y="512" font-size="13">Page backgrounds</text>
+  <text x="296" y="538" font-size="12" fill="#647261">#F7F3E8</text><rect x="544" y="320" width="224" height="132" rx="12" fill="#E6EDDF" stroke="#D0D8C8"/>
+  <text x="544" y="486" font-size="20" font-weight="600">Sage</text>
+  <text x="544" y="512" font-size="13">Learning surfaces</text>
+  <text x="544" y="538" font-size="12" fill="#647261">#E6EDDF</text><rect x="792" y="320" width="224" height="132" rx="12" fill="#D9E5D2" stroke="#D0D8C8"/>
+  <text x="792" y="486" font-size="20" font-weight="600">Deep sage</text>
+  <text x="792" y="512" font-size="13">Selected states</text>
+  <text x="792" y="538" font-size="12" fill="#647261">#D9E5D2</text>
+<path d="M48 574H1040" stroke="#D0D8C8"/>
+<rect x="48" y="603" width="52" height="28" rx="6" fill="#EFEAF4" stroke="#D0D8C8"/>
+<rect x="110" y="603" width="52" height="28" rx="6" fill="#F7F0D7" stroke="#D0D8C8"/>
+<rect x="172" y="603" width="52" height="28" rx="6" fill="#F5EBDF" stroke="#D0D8C8"/>
+<text x="48" y="661" font-size="14">Pastels: small topic and achievement highlights.</text>
+<rect x="760" y="601" width="280" height="54" rx="9" fill="#173E32"/>
+<text x="900" y="635" text-anchor="middle" fill="#F7F3E8" font-size="17" font-weight="600">Continue →</text>
+<text x="48" y="707" font-size="11" fill="#647261">Color-role study from implemented tokens · not an app capture</text>
+</g></svg>

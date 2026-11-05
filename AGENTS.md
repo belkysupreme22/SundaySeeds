@@ -1,6 +1,7 @@
 # SundaySeeds working agreement
 
 ## Product and visual quality
+- Use `docs/design-system/README.md` as the current visual/interaction standard, with its component inventory and research records. The owner-approved forest/cream/sage system blends related pastel accents; it supersedes the earlier purple-led color assignment while preserving reference composition and screen-specific stroke hierarchy. Reuse shared color, typography and motion roles instead of inventing per-screen palettes.
 - Build the agreed React Native + Expo + TypeScript app in apps/mobile.
 - Teacher/admin screen prototypes use React + TypeScript in apps/teacher-web, with Radix primitives, Lucide icons and lazy-loaded Recharts examples. Follow that workspace's AGENTS.md; keep backend planning separate from connected implementation.
 - Use docs/references screenshots as the visual source of truth: pale lavender, mint, yellow and peach; dark fine outlines; modest radii; crisp offset shadows; geometric type.

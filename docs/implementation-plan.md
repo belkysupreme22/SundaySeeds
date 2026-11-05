@@ -1,5 +1,43 @@
 # SundaySeeds implementation plan
 
+## Bilingual account entry — 5 November 2026
+
+Mobile account choice, optional setup, sign-in, sign-up, verification and recovery
+now offer English and Amharic with one persisted preference shared with Settings.
+The account UI uses a short serif heading role, with Abyssinica SIL as the current
+Amharic choice pending visual review. The [guide](design-system/guide.html#auth-type-options)
+compares it with Noto Serif Ethiopic and Noto Sans Ethiopic at the same size.
+Source checks covered matching locale keys, interpolation variables and font
+provenance. Owner acceptance covers Amharic wording, native layout, keyboard,
+device preference persistence and real development email links. Then continue
+with the Home → Lessons → reading → quiz/progress screen audit.
+
+## Comprehensive design system — 4 November 2026
+
+The owner selected a forest-led app with pastels blended into the base palette,
+then explicitly requested standards for church-app typography, micro-interactions,
+auth, onboarding, navigation states and Settings. The [canonical system](design-system/README.md)
+and [interactive reference](design-system/guide.html) now define color philosophy,
+bilingual type, component/state coverage, spacing/strokes, motion, accessibility
+and screen-by-screen acceptance. See [decision0023](decisions/0023-comprehensive-design-system.md).
+
+Implemented mobile color adoption across shared controls, first-run/account,
+Home/discovery and quiz/progress in separate bounded commits. Follow-up source
+removes old account-page lilac literals, harmonizes pastel accents and Settings
+selection, registers local open-license reading/Ethiopic fonts, preserves mixed
+script families and applies editorial type to long lesson bodies. Shared Button
+uses named motion values. Original layout/data/routing and screen-specific strokes
+remain; old book/tree work stays stopped and its pending drafts are preserved.
+
+The guide is generated from actual tokens and has local specimens for controls,
+type size/language, selected navigation, validation and reduced-motion previews.
+Seven core contrast pairs meet their specified targets; this is not full screen
+or native certification. Source/asset inspection and formatting/whitespace only;
+no app tests/typecheck/lint/build/runtime/native or guide-browser interaction checks.
+Next owner review the guide, then app flows at small/large text in English/Amharic.
+Legacy compact text/custom motion, reader preferences, staff adoption and remaining
+image replacement are explicitly pending; no unreviewed global density resize.
+
 ## Unfolding-seed identity and motion — 4 November 2026
 
 Latest owner refinement: replace white with a suitable colored background.
