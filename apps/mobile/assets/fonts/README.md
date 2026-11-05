@@ -4,11 +4,11 @@ Selected 4 November 2026 for the comprehensive design system.
 
 | Role | Family | Weight |
 | --- | --- | --- |
-| Latin interface | Existing installed Poppins | 400 / 500 / 600 / 700 |
+| Latin interface | Lexend | 400 / 500 / 600 / 700 |
 | Latin lesson reading | Source Serif 4 | 400 |
 | Amharic interface | Noto Sans Ethiopic | 400 / 600 |
 | Amharic lesson reading | Noto Serif Ethiopic | 400 |
-| Account display headings | Source Serif 4 (English), Abyssinica SIL (Amharic) | 400 |
+| Account display headings | Lexend (English), Noto Sans Ethiopic (Amharic) | 600 |
 | Selected Amharic metadata labels | Geez Gofa Mono C | 400 |
 
 The serif is an editorial reading face; controls and navigation remain geometric
@@ -22,16 +22,16 @@ downloaded or copied. Hallow's official Bible-tab help documents user text-size
 and theme controls; it does not establish Hallow's font family.
 
 `scripts/fetch-design-fonts.py` fetches original static TTF files and full SIL Open
-Font License texts from Adobe, Noto, SIL and Debessay’s Gofa project. `SOURCES.json` records source URLs,
-archive members where relevant, sizes and SHA-256 hashes. Noto files are stable static
-builds from its official legacy distribution; no latest-release claim is made.
-Poppins remains supplied by the existing Expo Google Fonts package and its license.
+Font License texts from Adobe, Noto, the Lexend project and Debessay’s Gofa
+project. `SOURCES.json` records source URLs, sizes and SHA-256 hashes. The four
+static Lexend cuts use a pinned upstream revision. The Noto files are static
+builds from its official legacy distribution.
 
 These are font assets, not a package install. Download/registration and actual
 English/Amharic rendering are separate from typography research; see the current
 design-system status before claiming app/native verification. Preserve all
 license files in distributions. The original font binaries are unmodified. The
-Abyssinica and Gofa licenses use LF line endings and trim trailing spaces in this repository.
+Lexend and Gofa licenses use LF line endings and trim trailing spaces in this repository.
 
 Sources: [YouVersion reader](https://developers.youversion.com/guides/display-bible-html),
 [Hallow Bible controls](https://help.hallow.com/en/articles/7885495-hallow-bible-tab),

@@ -1,5 +1,13 @@
 # SundaySeeds implementation plan
 
+## Selected mobile interface typography — 5 November 2026
+
+The owner selected Lexend for English and Noto for Amharic. Mobile uses Lexend
+and Noto Sans Ethiopic for interface roles and account headings. The lesson
+reader uses the editorial serif roles, and selected Amharic labels use the Gofa
+accent. See [decision 0025](decisions/0025-lexend-noto-interface.md). Device review
+of the new interface font metrics is pending alongside the learner screen audit.
+
 ## Learner journey source review — 5 November 2026
 
 Home now previews a listed course with catalog data, and Lessons uses a compact

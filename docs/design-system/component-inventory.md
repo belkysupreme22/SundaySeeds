@@ -8,7 +8,7 @@ authorize route, content, storage, session or backend behavior changes.
 
 | Owner | Component | Required variants/states | Current adoption |
 | --- | --- | --- | --- |
-| `shared/ui/Text.tsx` | Text | UI hierarchy, editorial reading, mixed-script runs, muted text, system scaling | Poppins + local Noto/Source Serif registration; compatibility small roles remain |
+| `shared/ui/Text.tsx` | Text | UI hierarchy, editorial reading, mixed-script runs, muted text, system scaling | Lexend and Noto interface fonts with separate editorial and accent roles; compatibility small roles remain |
 | `shared/ui/Button.tsx` | Button/IconButton | Primary, dark, outline; focus/press/disabled/busy; accessible name | Forest/ivory, shared press tokens; target geometry preserved |
 | `shared/ui/InputField.tsx` | Editable fields | Idle, focused, disabled, error; visible label, selection/cursor | Sage/forest; stationary focus stroke; account variant retained |
 | `shared/ui/Card.tsx` | Card | Neutral/toned; strong, soft, subtle stroke; optional crisp shadow | Muted card palette; reference stroke differences preserved |

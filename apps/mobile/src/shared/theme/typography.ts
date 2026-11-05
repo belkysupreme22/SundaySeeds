@@ -12,8 +12,8 @@ export const ethiopicFonts = {
 } as const;
 
 export const authHeadingFonts = {
-  latin: readingFonts.latin,
-  ethiopic: 'AbyssinicaSIL_400Regular',
+  latin: fonts.semibold,
+  ethiopic: ethiopicFonts.emphasis,
 } as const;
 
 // Existing dense UI roles remain stable until each screen's larger-text review.

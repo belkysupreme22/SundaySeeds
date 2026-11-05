@@ -8,7 +8,8 @@ binaries. The license text uses LF line endings with trailing whitespace trimmed
 
 | Candidate | What to compare |
 | --- | --- |
-| Lexend | English heading, supporting copy and button at 400 and 600 |
+| Lexend | Selected English interface face. The original variable comparison file is archived here |
+| Abyssinica SIL | The earlier calligraphic account heading specimen |
 | Waldba Fantuwua | Flat stroke ends and single-wing serifs for a print-like heading |
 | Waldba Zelan | Rounded ends for a softer Amharic sans face alongside Lexend |
 | Waldba Tint | Ornate blackletter for short titles |
@@ -21,7 +22,7 @@ The Waldba snapshots are Raey Type's Unicode preservation work derived from the
 Senamirmir WashRa collection. The guide uses plain modern Amharic. Any app
 adoption needs wider text coverage and a native layout review. The Gofa specimen
 uses the [mobile font asset and license](../../../apps/mobile/assets/fonts/README.md).
-Other candidate files are loaded by the local guide for comparison.
+The guide uses the app’s static Lexend cuts and loads the other candidates for comparison.
 [Raey Type collection](https://github.com/raeytype/waldba-font-collection)
 [Brana project](https://github.com/raeytype/brana)
 [X.Org release archive](https://xorg.freedesktop.org/archive/individual/font/)

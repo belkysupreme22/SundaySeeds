@@ -49,18 +49,34 @@
     "sha256": "46a890d04f605eabcea8f9d61dd0cfa8fb86401c1e8aac2f5e53141bcd89e774"
   },
   {
-    "file": "AbyssinicaSIL-Regular.ttf",
-    "url": "https://software.sil.org/downloads/r/abyssinica/AbyssinicaSIL-2.300.zip",
-    "archiveMember": "AbyssinicaSIL-2.300/AbyssinicaSIL-Regular.ttf",
-    "bytes": 268264,
-    "sha256": "f0e4fb92ee26967a3e6462342494956a3798b952345f917e1388913bb191cf2b"
+    "file": "Lexend-Regular.ttf",
+    "url": "https://raw.githubusercontent.com/googlefonts/lexend/7894f02b2e7eabc48595f1d4eff3b17b48c6e651/fonts/lexend/ttf/Lexend-Regular.ttf",
+    "bytes": 100264,
+    "sha256": "e2082c28389e9871d5d77ae9163d5c0c1c259fe39bdac91f73d56a600b61f60f"
   },
   {
-    "file": "OFL-AbyssinicaSIL.txt",
-    "url": "https://software.sil.org/downloads/r/abyssinica/AbyssinicaSIL-2.300.zip",
-    "archiveMember": "AbyssinicaSIL-2.300/OFL.txt",
-    "lineEndings": "LF",
-    "bytes": 4512,
-    "sha256": "6e93913412b853d745b143daaf86724986716bb30077eb15cbd33c50d3fd5ccc"
+    "file": "Lexend-Medium.ttf",
+    "url": "https://raw.githubusercontent.com/googlefonts/lexend/7894f02b2e7eabc48595f1d4eff3b17b48c6e651/fonts/lexend/ttf/Lexend-Medium.ttf",
+    "bytes": 101904,
+    "sha256": "ac109d3848ff23f1dda6cdb2f5e5bdb335811967fc4fb60b5f7b9df5a301c5ba"
+  },
+  {
+    "file": "Lexend-SemiBold.ttf",
+    "url": "https://raw.githubusercontent.com/googlefonts/lexend/7894f02b2e7eabc48595f1d4eff3b17b48c6e651/fonts/lexend/ttf/Lexend-SemiBold.ttf",
+    "bytes": 102264,
+    "sha256": "204875848cc7981290a75f8be0e64b335b6d8f6ec6cc3ea05d907a37adab8b7b"
+  },
+  {
+    "file": "Lexend-Bold.ttf",
+    "url": "https://raw.githubusercontent.com/googlefonts/lexend/7894f02b2e7eabc48595f1d4eff3b17b48c6e651/fonts/lexend/ttf/Lexend-Bold.ttf",
+    "bytes": 105564,
+    "sha256": "4509838acc21f2c066e9874c9c5eb52b9b8cdac1771a9c1fe9e7e2cda41ce082"
+  },
+  {
+    "file": "OFL-Lexend.txt",
+    "url": "https://raw.githubusercontent.com/googlefonts/lexend/7894f02b2e7eabc48595f1d4eff3b17b48c6e651/OFL.txt",
+    "normalizedWhitespace": true,
+    "bytes": 4435,
+    "sha256": "da67588af7e0987521d7dffc60ca92e8abee37f30535d94b503ec7bc52d73023"
   }
 ]

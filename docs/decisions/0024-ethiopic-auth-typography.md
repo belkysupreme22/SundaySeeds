@@ -2,6 +2,9 @@
 
 Date 5 November 2026.
 
+The [selected interface pairing](0025-lexend-noto-interface.md) supersedes the
+account heading families recorded in this exploration.
+
 Wäldä Maryam's nineteenth-century prayer book uses black for running text and
 red selectively for headings, names and punctuation. The sixteenth-century
 Gunda Gunde Gospel book pairs Geʿez text with distinct headpieces. The Walters

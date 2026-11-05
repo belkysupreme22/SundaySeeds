@@ -4,7 +4,7 @@ const fs = require('node:fs'), path = require('node:path');
 const root = path.resolve(__dirname, '../..'), cache = path.join(root, '.artifacts/system-font-cache');
 fs.mkdirSync(cache, { recursive: true });
 const config = path.join(cache, 'fonts.conf');
-fs.writeFileSync(config, `<fontconfig><dir>${path.join(root, 'apps/mobile/node_modules/@expo-google-fonts/poppins')}</dir><dir>${path.join(root, 'apps/mobile/assets/fonts')}</dir><cachedir>${cache}</cachedir></fontconfig>`);
+fs.writeFileSync(config, `<fontconfig><dir>${path.join(root, 'apps/mobile/assets/fonts')}</dir><cachedir>${cache}</cachedir></fontconfig>`);
 process.env.FONTCONFIG_FILE = config;
 const sharp = require(process.env.SUNDAYSEEDS_SHARP_MODULE || 'sharp');
 const data = JSON.parse(fs.readFileSync(path.join(__dirname, 'tokens.json'), 'utf8'));
@@ -13,7 +13,7 @@ const paths = fs.readFileSync(path.join(root, 'apps/mobile/assets/brand/logo.svg
 const swatches = [['Forest',c.forest],['Cream',c.canvas],['Sage',c.surface],['Wheat',a.wheat],['Peach',a.peach],['Rose',a.rose]].map(([name,color],i)=>`<rect x="${48+i*183}" y="250" width="159" height="76" rx="9" fill="${color}" stroke="${data.colors.line}"/><text x="${48+i*183}" y="352" font-size="14" font-weight="600">${name}</text><text x="${48+i*183}" y="374" font-size="12" fill="${c.muted}">${color}</text>`).join('');
 const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1040" viewBox="0 0 1200 1040">
 <rect width="1200" height="1040" fill="${c.canvas}"/>
-<g font-family="Poppins, sans-serif" fill="${c.forest}">
+<g font-family="Lexend, sans-serif" fill="${c.forest}">
 <rect width="1200" height="202" fill="${c.forest}"/>
 <svg x="46" y="36" width="105" height="136" viewBox="192 192 640 640">${paths}</svg>
 <text x="182" y="67" font-size="12" letter-spacing="2.5" fill="${c.surfaceStrong}">SUNDAYSEEDS / DESIGN SYSTEM 1.0</text>
@@ -22,7 +22,7 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1040" 
 ${swatches}
 <path d="M48 405H1152" stroke="${data.colors.line}"/>
 <text x="48" y="445" font-size="20" font-weight="600">Interface role</text>
-<text x="48" y="489" font-size="25" font-weight="600">Poppins · English UI</text>
+<text x="48" y="489" font-size="25" font-weight="600">Lexend · English UI</text>
 <text x="48" y="525" font-size="18">Noto Sans Ethiopic · Amharic UI</text>
 <text x="650" y="445" font-size="20" font-weight="600">Editorial reading role</text>
 <text x="650" y="490" font-size="23" font-weight="600">Source Serif 4 · English</text>
@@ -52,9 +52,9 @@ async function main() {
   // Register explicit local faces before SVG rasterization rather than trusting
   // a machine's installed-font fallback when creating the typography specimen.
   for (const [font, file, text] of [
-    ['Poppins 15', 'node_modules/@expo-google-fonts/poppins/400Regular/Poppins_400Regular.ttf', 'Ag'],
-    ['Poppins SemiBold 15', 'node_modules/@expo-google-fonts/poppins/600SemiBold/Poppins_600SemiBold.ttf', 'Ag'],
-    ['Poppins Bold 15', 'node_modules/@expo-google-fonts/poppins/700Bold/Poppins_700Bold.ttf', 'Ag'],
+    ['Lexend 15', 'assets/fonts/Lexend-Regular.ttf', 'Ag'],
+    ['Lexend SemiBold 15', 'assets/fonts/Lexend-SemiBold.ttf', 'Ag'],
+    ['Lexend Bold 15', 'assets/fonts/Lexend-Bold.ttf', 'Ag'],
     ['Source Serif 4 25', 'assets/fonts/SourceSerif4-Regular.ttf', 'Ag'],
     ['Noto Serif Ethiopic 25', 'assets/fonts/NotoSerifEthiopic-Regular.ttf', 'እምነት'],
   ]) await sharp({text:{font,fontfile:path.join(root,'apps/mobile',file),text,rgba:true}}).png().toBuffer();

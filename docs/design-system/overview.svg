@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1040" viewBox="0 0 1200 1040">
 <rect width="1200" height="1040" fill="#F7F3E8"/>
-<g font-family="Poppins, sans-serif" fill="#173E32">
+<g font-family="Lexend, sans-serif" fill="#173E32">
 <rect width="1200" height="202" fill="#173E32"/>
 <svg x="46" y="36" width="105" height="136" viewBox="192 192 640 640"><path id="stem" fill="#F7F3E8" d="M502 663C506 613 500 574 490 532C478 466 494 409 544 366C552 359 562 363 556 375C520 425 511 478 519 540C524 578 527 623 523 673Z"/><path id="left-leaf" fill="#F7F3E8" d="M493 526C386 542 299 480 284 381C279 349 280 321 295 313C309 306 336 316 361 328C446 368 493 435 493 526Z"/><path id="right-leaf" fill="#F7F3E8" d="M520 445C515 343 584 257 685 240C711 236 737 234 744 249C750 262 739 288 726 313C686 395 617 444 520 445Z"/><path id="seed" fill="#F7F3E8" fill-rule="evenodd" d="M506 811C427 781 392 710 414 647C424 619 445 597 469 588C492 612 521 640 543 675C580 733 565 781 506 811ZM469 619C455 663 469 711 497 741C512 758 520 775 520 791C537 761 521 730 501 703C481 677 471 648 469 619Z"/></svg>
 <text x="182" y="67" font-size="12" letter-spacing="2.5" fill="#D9E5D2">SUNDAYSEEDS / DESIGN SYSTEM 1.0</text>
@@ -9,7 +9,7 @@
 <rect x="48" y="250" width="159" height="76" rx="9" fill="#173E32" stroke="#D7DCCF"/><text x="48" y="352" font-size="14" font-weight="600">Forest</text><text x="48" y="374" font-size="12" fill="#647261">#173E32</text><rect x="231" y="250" width="159" height="76" rx="9" fill="#F7F3E8" stroke="#D7DCCF"/><text x="231" y="352" font-size="14" font-weight="600">Cream</text><text x="231" y="374" font-size="12" fill="#647261">#F7F3E8</text><rect x="414" y="250" width="159" height="76" rx="9" fill="#E6EDDF" stroke="#D7DCCF"/><text x="414" y="352" font-size="14" font-weight="600">Sage</text><text x="414" y="374" font-size="12" fill="#647261">#E6EDDF</text><rect x="597" y="250" width="159" height="76" rx="9" fill="#F2E8C9" stroke="#D7DCCF"/><text x="597" y="352" font-size="14" font-weight="600">Wheat</text><text x="597" y="374" font-size="12" fill="#647261">#F2E8C9</text><rect x="780" y="250" width="159" height="76" rx="9" fill="#F1E2D4" stroke="#D7DCCF"/><text x="780" y="352" font-size="14" font-weight="600">Peach</text><text x="780" y="374" font-size="12" fill="#647261">#F1E2D4</text><rect x="963" y="250" width="159" height="76" rx="9" fill="#EEDDDC" stroke="#D7DCCF"/><text x="963" y="352" font-size="14" font-weight="600">Rose</text><text x="963" y="374" font-size="12" fill="#647261">#EEDDDC</text>
 <path d="M48 405H1152" stroke="#D7DCCF"/>
 <text x="48" y="445" font-size="20" font-weight="600">Interface role</text>
-<text x="48" y="489" font-size="25" font-weight="600">Poppins · English UI</text>
+<text x="48" y="489" font-size="25" font-weight="600">Lexend · English UI</text>
 <text x="48" y="525" font-size="18">Noto Sans Ethiopic · Amharic UI</text>
 <text x="650" y="445" font-size="20" font-weight="600">Editorial reading role</text>
 <text x="650" y="490" font-size="23" font-weight="600">Source Serif 4 · English</text>

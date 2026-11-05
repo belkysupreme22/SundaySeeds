@@ -6,8 +6,8 @@ Account choice, optional name setup, sign-in, sign-up, verification, recovery
 and email-link screens share a language picker with the device preference used
 by Settings. Changing language preserves the current step and entered form
 state. Validation and in-app account messages render in the active language.
-Short account headings use Source Serif 4 or Abyssinica SIL, with Poppins and
-Noto Sans Ethiopic for supporting copy. See [the font decision](decisions/0024-ethiopic-auth-typography.md).
+Account headings use Lexend or Noto Sans Ethiopic semibold, with the same
+families in supporting roles. See [the font decision](decisions/0025-lexend-noto-interface.md).
 
 Owner acceptance is pending for translation nuance, native font rendering,
 keyboard, large text, persisted language and development email-link flows.

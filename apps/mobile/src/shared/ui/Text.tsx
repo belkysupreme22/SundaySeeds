@@ -25,28 +25,30 @@ export function Text({
   ...props
 }: TextProps & { variant?: TypographyRole; muted?: boolean }) {
   const ethiopic = containsEthiopic(props.children);
-  const editorial = variant === 'reading' || variant === 'authHeading';
-  const displayFamily =
+  const spaciousLeading = variant === 'reading' || variant === 'authHeading';
+  const scale = typeScale[variant];
+  const latinFamily = 'fontFamily' in scale ? scale.fontFamily : fonts.regular;
+  const ethiopicFamily =
     variant === 'authHeading'
       ? authHeadingFonts.ethiopic
       : variant === 'accentMeta'
         ? ethiopicFonts.accent
-        : undefined;
-  const ethiopicFamily =
-    displayFamily && isLoaded(displayFamily)
-      ? displayFamily
-      : editorial
-        ? readingFonts.ethiopic
-        : emphasizedRoles.includes(variant)
-          ? ethiopicFonts.emphasis
-          : ethiopicFonts.regular;
+        : variant === 'reading'
+          ? readingFonts.ethiopic
+          : emphasizedRoles.includes(variant)
+            ? ethiopicFonts.emphasis
+            : ethiopicFonts.regular;
   const scriptStyle = ethiopic
     ? {
-        fontFamily: isLoaded(ethiopicFamily) ? ethiopicFamily : undefined,
+        fontFamily: isLoaded(ethiopicFamily)
+          ? ethiopicFamily
+          : isLoaded(ethiopicFonts.regular)
+            ? ethiopicFonts.regular
+            : undefined,
         letterSpacing: 0,
         lineHeight: Math.max(
-          typeScale[variant].lineHeight,
-          Math.ceil(typeScale[variant].fontSize * (editorial ? 1.7 : 1.6)),
+          scale.lineHeight,
+          Math.ceil(scale.fontSize * (spaciousLeading ? 1.7 : 1.6)),
         ),
       }
     : undefined;
@@ -76,8 +78,8 @@ export function Text({
       {...props}
       style={[
         styles.base,
-        typeScale[variant],
-        editorial && !isLoaded(typeScale[variant].fontFamily)
+        scale,
+        !isLoaded(latinFamily)
           ? { fontFamily: isLoaded(fonts.regular) ? fonts.regular : undefined }
           : undefined,
         ethiopic && scriptStyle ? { lineHeight: scriptStyle.lineHeight } : undefined,

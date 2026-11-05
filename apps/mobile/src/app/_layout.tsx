@@ -6,13 +6,7 @@ import { AuthProvider } from '../features/auth/hooks/useAuth';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import * as SplashScreen from 'expo-splash-screen';
-import {
-  useFonts,
-  Poppins_400Regular,
-  Poppins_500Medium,
-  Poppins_600SemiBold,
-  Poppins_700Bold,
-} from '@expo-google-fonts/poppins';
+import { useFonts } from 'expo-font';
 import { Platform, StyleSheet, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import {
@@ -52,13 +46,7 @@ function AppNavigator() {
   );
 }
 export default function RootLayout() {
-  const [loaded, error] = useFonts({
-    Poppins_400Regular,
-    Poppins_500Medium,
-    Poppins_600SemiBold,
-    Poppins_700Bold,
-    ...designFontAssets,
-  });
+  const [loaded, error] = useFonts(designFontAssets);
   const [splashDone, setSplashDone] = useState(false);
   const [layoutReady, setLayoutReady] = useState(false);
   const [splashReady, setSplashReady] = useState(false);

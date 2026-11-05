@@ -39,9 +39,9 @@ export const cardColors: Record<Pastel, string> = {
   pink: '#F5E8E5',
 };
 export const fonts = {
-  regular: 'Poppins_400Regular',
-  medium: 'Poppins_500Medium',
-  semibold: 'Poppins_600SemiBold',
-  bold: 'Poppins_700Bold',
+  regular: 'Lexend_400Regular',
+  medium: 'Lexend_500Medium',
+  semibold: 'Lexend_600SemiBold',
+  bold: 'Lexend_700Bold',
 };
 export const spacing = { xs: 4, sm: 8, md: 12, lg: 16, xl: 20, xxl: 24, section: 28 };

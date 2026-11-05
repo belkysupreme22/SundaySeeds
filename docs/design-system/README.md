@@ -75,38 +75,36 @@ disabled treatment and actual placement still need review.
 
 | Role / script | Family | Weight |
 | --- | --- | --- |
-| Latin interface | Poppins | 400 body; 500 supporting; 600 controls/titles; 700 headings |
+| Latin interface | Lexend | 400 body; 500 supporting; 600 controls/titles; 700 headings |
 | Latin long reading | Source Serif 4 | 400 |
 | Amharic interface | Noto Sans Ethiopic | 400 normal; 600 emphasis |
 | Amharic long reading | Noto Serif Ethiopic | 400 |
-| Short account headings | Source Serif 4 (English), Abyssinica SIL (Amharic) | 400 |
+| Short account headings | Lexend (English), Noto Sans Ethiopic (Amharic) | 600 |
 | Selected Amharic metadata labels | Geez Gofa Mono C | 400 |
 
-Poppins retains the established geometric interface. A serif reading role creates
-a quieter editorial rhythm for long lessons without applying decorative church
-lettering to controls. Noto is an explicit Amharic choice. Asset inspection found
-that these Ethiopic files do not include Latin letters; Shared Text therefore
-keeps mixed-script runs in their corresponding families. Do not apply Latin
-negative tracking to Ethiopic text or simulate missing font weights.
+Lexend and Noto Sans Ethiopic give the interface a consistent sans-serif hierarchy.
+Source Serif 4 and Noto Serif Ethiopic give longer lessons their own reading
+rhythm. Shared Text keeps mixed-script runs in their corresponding families.
+Use zero tracking on Ethiopic and select a bundled weight for emphasis.
 
 This choice is informed by verified faith-app patterns, not copied proprietary
 branding. YouVersion's public reader guide specifies a serif stack and reader
 tokens; Hallow documents reader-size controls. Their exact app fonts must not be
 guessed. See the [research and licensing record](research/church-typography.md).
 
-The account heading role draws on the distinction between headings and running
-text in Ethiopian Orthodox manuscripts. The forms pair a short display title
-with Noto Sans Ethiopic or Poppins for controls and feedback.
-[Manuscript research and font choice](../decisions/0024-ethiopic-auth-typography.md)
+The account heading role keeps the strong distinction between headings and running
+text researched in Ethiopian Orthodox manuscripts. The selected faces for those
+titles are Lexend and Noto Sans Ethiopic semibold.
+[Selected interface typography](../decisions/0025-lexend-noto-interface.md)
 
 The [guide](guide.html#auth-type-options) compares ten Amharic heading faces
-and an English Lexend account specimen alongside the current typography.
+and shows the selected Lexend account specimen alongside the earlier English type.
 See the [comparison sources and licensing](specimen-fonts/README.md).
 
 Geez Gofa Mono C adds a fixed-width accent to account context badges, the
 optional setup step and Home’s memory-verse label. Use `accentMeta` for those
 labels. Amharic runs fall back to Noto Sans Ethiopic when needed, and mixed Latin
-text such as `KJV` uses Poppins. Account titles and Scripture use their own roles.
+text such as `KJV` uses Lexend. Account titles and Scripture use their own roles.
 
 | Semantic role | Size / line height | Usage |
 | --- | --- | --- |
