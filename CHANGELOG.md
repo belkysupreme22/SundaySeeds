@@ -5,6 +5,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Design system
+- Expanded the Amharic heading comparison to ten options with Brana, Goha Tibeb Zemen, Waldba Jiret and Geez Gofa Mono C.
 - Removed lavender from the mobile palette and refreshed the shared color references. Sage, wheat, peach, warm rose and white cover the former lavender roles. Device review is pending.
 - Added Lexend and three Amharic faces from the Waldba collection to the account typography comparison, with local font assets and license provenance.
 - Added a canonical design system and interactive local reference covering blended color philosophy, church-app-informed bilingual typography, component/state rules, micro-interactions, accessibility and screen-by-screen coverage including auth, onboarding, navigation and Settings. Generated tokens and seven core contrast-pair targets pass; app/native and guide interaction acceptance remain pending.

@@ -98,7 +98,7 @@ text in Ethiopian Orthodox manuscripts. The forms pair a short display title
 with Noto Sans Ethiopic or Poppins for controls and feedback.
 [Manuscript research and font choice](../decisions/0024-ethiopic-auth-typography.md)
 
-The [guide](guide.html#auth-type-options) compares six Amharic heading faces
+The [guide](guide.html#auth-type-options) compares ten Amharic heading faces
 and an English Lexend account specimen alongside the current typography.
 See the [comparison sources and licensing](specimen-fonts/README.md).
 

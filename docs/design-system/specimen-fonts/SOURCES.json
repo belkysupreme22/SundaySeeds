@@ -36,5 +36,54 @@
     "normalizedWhitespace": true,
     "bytes": 6387,
     "sha256": "b412a4601d8a0f30841aa8f86273ee3519b563286436d6268866664b20ad0bfa"
+  },
+  {
+    "file": "Brana-Regular.ttf",
+    "url": "https://raw.githubusercontent.com/raeytype/brana/1637967f3e4739cd38f0c1960eb1609b092119ad/snapshot/Brana-Regular-COLR-UVS.ttf",
+    "bytes": 306528,
+    "sha256": "5ea53d4b0d95d3eeff19181077798d0d1686108a4c6218ff37824544123550c3"
+  },
+  {
+    "file": "OFL-Brana.txt",
+    "url": "https://raw.githubusercontent.com/raeytype/brana/1637967f3e4739cd38f0c1960eb1609b092119ad/OFL.txt",
+    "normalizedWhitespace": true,
+    "bytes": 4614,
+    "sha256": "90b7c632a46761e52e33be0391a287345f7d88f202ba5047b3da1647a1e86981"
+  },
+  {
+    "file": "GeezGofaMonoC-Regular.ttf",
+    "url": "https://raw.githubusercontent.com/debessay/Geez_monospace_font/9ff60b3c999e6a027b217ea25cfcacf2565b533e/font/Geez_Gofa_mono_C_200_regular_normal_plain.ttf",
+    "bytes": 298412,
+    "sha256": "b32a06ad6188a974e709bbe5e95e721919a9b6dcca46fd7c411432dddf23ee73"
+  },
+  {
+    "file": "OFL-GeezGofaMonoC.txt",
+    "url": "https://raw.githubusercontent.com/debessay/Geez_monospace_font/9ff60b3c999e6a027b217ea25cfcacf2565b533e/OFL.md",
+    "normalizedWhitespace": true,
+    "bytes": 4388,
+    "sha256": "46a890d04f605eabcea8f9d61dd0cfa8fb86401c1e8aac2f5e53141bcd89e774"
+  },
+  {
+    "file": "WaldbaJiret-COLR-UVS.ttf",
+    "url": "https://raw.githubusercontent.com/raeytype/waldba-font-collection/bcbcbd64e2d8b9cbc0e2e2a4c4b3b69e9c736eeb/snapshot/WaldbaJiret-COLR-UVS.ttf",
+    "bytes": 270324,
+    "sha256": "dd1297e498985b47afdfc12f227b72c72878dc65636daadac52c6d96427aa08f"
+  },
+  {
+    "file": "GohaTibebZemen.ttf",
+    "url": "https://xorg.freedesktop.org/archive/individual/font/font-misc-ethiopic-1.0.5.tar.xz",
+    "archiveMember": "font-misc-ethiopic-1.0.5/GohaTibebZemen.ttf",
+    "bytes": 95352,
+    "sha256": "d7e088c8c0a28a86d474a628d9fdd7fee610fffcd82be5f21ae87fc9e4e8e080",
+    "upstreamSha256": "c006f41daaae65ab9ea57a26814a1e8cf5c939f93621eb3a896376ae303ebaec",
+    "normalization": "Removed the empty cvt table directory entry and recalculated sfnt checksumAdjustment for web font sanitizers. Glyphs and metrics are unchanged."
+  },
+  {
+    "file": "LICENSE-GohaTibebZemen.txt",
+    "url": "https://xorg.freedesktop.org/archive/individual/font/font-misc-ethiopic-1.0.5.tar.xz",
+    "archiveMember": "font-misc-ethiopic-1.0.5/COPYING",
+    "normalizedWhitespace": true,
+    "bytes": 1478,
+    "sha256": "4c51cf8271fac11a1673290fc320b6727f0a4774cece401d139b13aa5bf70d4f"
   }
 ]

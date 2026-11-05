@@ -11,6 +11,10 @@
 .auth-title.fantuwua-option[lang=am]{font-family:'Waldba Fantuwua','Noto Serif Ethiopic',serif}
 .auth-title.zelan-option[lang=am]{font-family:'Waldba Zelan','Noto Sans Ethiopic',sans-serif}
 .auth-title.tint-option[lang=am]{font-family:'Waldba Tint','Noto Serif Ethiopic',serif}
+.auth-title.brana-option[lang=am]{font-family:'Brana','Noto Serif Ethiopic',serif}
+.auth-title.zemen-option[lang=am]{font-family:'Goha Tibeb Zemen','Noto Serif Ethiopic',serif}
+.auth-title.jiret-option[lang=am]{font-family:'Waldba Jiret','Noto Serif Ethiopic',serif}
+.auth-title.gofa-option[lang=am]{font-family:'Geez Gofa Mono C','Noto Sans Ethiopic',sans-serif}
 .english-specimen{margin-top:20px}.english-sample{background:var(--sage);border:1px solid var(--line);border-radius:8px;padding:16px}.english-sample h4{font-size:26px;line-height:37px;margin:0 0 8px;color:var(--forest);font-weight:600}.english-sample p{font-size:14px;line-height:23px}.english-sample .btn{font-size:14px}.current-sample h4{font-family:'Source Serif 4',serif;font-weight:400}.current-sample p,.current-sample .btn{font-family:'Poppins',sans-serif}.lexend-sample{font-family:'Lexend',sans-serif}
 </style>
 </head>
@@ -30,8 +34,12 @@
 <article class="card"><h3>4. Waldba Fantuwua</h3><p class="auth-title fantuwua-option" lang="am">እንኳን ደህና መጡ</p><p class="auth-title fantuwua-option" lang="am">መለያ ይፍጠሩ</p><p>Flat-ended strokes and compact serifs give it a printed-book feel.</p></article>
 <article class="card"><h3>5. Waldba Zelan</h3><p class="auth-title zelan-option" lang="am">እንኳን ደህና መጡ</p><p class="auth-title zelan-option" lang="am">መለያ ይፍጠሩ</p><p>Rounded stroke ends echo the softer shapes of Lexend.</p></article>
 <article class="card"><h3>6. Waldba Tint</h3><p class="auth-title tint-option" lang="am">እንኳን ደህና መጡ</p><p class="auth-title tint-option" lang="am">መለያ ይፍጠሩ</p><p>Ornate blackletter forms suit a short ceremonial heading.</p></article>
+<article class="card"><h3>7. Brana</h3><p class="auth-title brana-option" lang="am">እንኳን ደህና መጡ</p><p class="auth-title brana-option" lang="am">መለያ ይፍጠሩ</p><p>Amha Asfaw’s Ethiopic face from 1995, named for the writing material used in Ethiopian manuscripts.</p></article>
+<article class="card"><h3>8. Goha Tibeb Zemen</h3><p class="auth-title zemen-option" lang="am">እንኳን ደህና መጡ</p><p class="auth-title zemen-option" lang="am">መለያ ይፍጠሩ</p><p>A classic Zemen face from the Ge’ez Frontiers Foundation.</p></article>
+<article class="card"><h3>9. Waldba Jiret</h3><p class="auth-title jiret-option" lang="am">እንኳን ደህና መጡ</p><p class="auth-title jiret-option" lang="am">መለያ ይፍጠሩ</p><p>A screen-oriented take on a classic Ethiopic serif.</p></article>
+<article class="card"><h3>10. Geez Gofa Mono C</h3><p class="auth-title gofa-option" lang="am">እንኳን ደህና መጡ</p><p class="auth-title gofa-option" lang="am">መለያ ይፍጠሩ</p><p>Fixed-width letters give it a measured, even rhythm.</p></article>
 </div>
-<p class="small muted">Additional specimens are from the <a href="https://github.com/raeytype/waldba-font-collection">Raey Type Waldba collection</a>. The comparison uses plain modern Amharic text.</p>
+<p class="small muted">The comparison uses plain modern Amharic text. <a href="specimen-fonts/README.md">Sources and licensing</a></p>
 <h3 class="english-specimen">English account type with Lexend</h3>
 <div class="grid">
 <article class="card"><h3>Current account type</h3><p class="small muted">Source Serif 4 for the heading · Poppins for copy and actions</p><div class="english-sample current-sample" lang="en"><h4>Welcome back</h4><p>Make room for a little learning today.</p><span class="btn">Sign in</span></div></article>
@@ -60,7 +68,7 @@
  const tabs=[...document.querySelectorAll('.bottom-nav button')];tabs.forEach((tab,index)=>{const select=()=>tabs.forEach(item=>item.setAttribute('aria-pressed',String(item===tab)));tab.addEventListener('click',select);tab.addEventListener('keydown',event=>{if(event.key!=='ArrowLeft'&&event.key!=='ArrowRight')return;event.preventDefault();const next=tabs[(index+(event.key==='ArrowRight'?1:tabs.length-1))%tabs.length];next.click();next.focus()})});
  const choices=[...document.querySelectorAll('.choice')];choices.forEach(choice=>choice.addEventListener('click',()=>choices.forEach(item=>item.setAttribute('aria-pressed',String(item===choice)))));
  const reduce=document.getElementById('reduce-motion'),motion=document.getElementById('motion-specimen');reduce.addEventListener('change',()=>root.classList.toggle('reduce',reduce.checked));document.getElementById('replay-motion').addEventListener('click',()=>{motion.classList.remove('replay');requestAnimationFrame(()=>requestAnimationFrame(()=>motion.classList.add('replay')))});
- const fontSamples=[['16px Poppins','Welcome'],['20px "Source Serif 4"','Welcome'],['600 26px Lexend','Welcome'],['600 26px "Noto Sans Ethiopic"','እንኳን'],['26px "Noto Serif Ethiopic"','እንኳን'],['26px "Abyssinica SIL"','እንኳን'],['26px "Waldba Fantuwua"','እንኳን'],['26px "Waldba Zelan"','እንኳን'],['26px "Waldba Tint"','እንኳን']];
+ const fontSamples=[['16px Poppins','Welcome'],['20px "Source Serif 4"','Welcome'],['600 26px Lexend','Welcome'],['600 26px "Noto Sans Ethiopic"','እንኳን'],['26px "Noto Serif Ethiopic"','እንኳን'],['26px "Abyssinica SIL"','እንኳን'],['26px "Waldba Fantuwua"','እንኳን'],['26px "Waldba Zelan"','እንኳን'],['26px "Waldba Tint"','እንኳን'],['26px Brana','እንኳን'],['26px "Goha Tibeb Zemen"','እንኳን'],['26px "Waldba Jiret"','እንኳን'],['26px "Geez Gofa Mono C"','እንኳን']];
  Promise.allSettled(fontSamples.map(([font,sample])=>document.fonts.load(font,sample))).then(results=>{const missing=fontSamples.filter((_,index)=>results[index].status==='rejected'||!results[index].value.length).map(([font])=>font.replace(/^(600 )?\d+px /,'').replaceAll('"',''));document.getElementById('font-status').textContent=missing.length?'Some local fonts are unavailable: '+missing.join(', ')+'. Fallbacks may be visible. Serve the repository root to load local assets.':'Local font families loaded for this guide. App/native rendering still needs review.'});
 })();
 </script>

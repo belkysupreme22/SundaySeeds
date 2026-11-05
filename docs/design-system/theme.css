@@ -7,6 +7,10 @@
 @font-face{font-family:'Waldba Fantuwua';src:url('specimen-fonts/WaldbaFantuwua-COLR-UVS.ttf') format('truetype');font-weight:400;font-display:swap;}
 @font-face{font-family:'Waldba Zelan';src:url('specimen-fonts/WaldbaZelan-COLR-UVS.ttf') format('truetype');font-weight:400;font-display:swap;}
 @font-face{font-family:'Waldba Tint';src:url('specimen-fonts/WaldbaTint-COLR-UVS.ttf') format('truetype');font-weight:400;font-display:swap;}
+@font-face{font-family:'Brana';src:url('specimen-fonts/Brana-Regular.ttf') format('truetype');font-weight:400;font-display:swap;}
+@font-face{font-family:'Goha Tibeb Zemen';src:url('specimen-fonts/GohaTibebZemen.ttf') format('truetype');font-weight:400;font-display:swap;}
+@font-face{font-family:'Waldba Jiret';src:url('specimen-fonts/WaldbaJiret-COLR-UVS.ttf') format('truetype');font-weight:400;font-display:swap;}
+@font-face{font-family:'Geez Gofa Mono C';src:url('specimen-fonts/GeezGofaMonoC-Regular.ttf') format('truetype');font-weight:400;font-display:swap;}
 @font-face{font-family:'Noto Sans Ethiopic';src:url('../../apps/mobile/assets/fonts/NotoSansEthiopic-Regular.ttf') format('truetype');font-weight:400;font-display:swap;}
 @font-face{font-family:'Noto Sans Ethiopic';src:url('../../apps/mobile/assets/fonts/NotoSansEthiopic-SemiBold.ttf') format('truetype');font-weight:600;font-display:swap;}
 @font-face{font-family:'Noto Serif Ethiopic';src:url('../../apps/mobile/assets/fonts/NotoSerifEthiopic-Regular.ttf') format('truetype');font-weight:400;font-display:swap;}

@@ -98,6 +98,10 @@ const css = [
   fontFace('Waldba Fantuwua', 'specimen-fonts/WaldbaFantuwua-COLR-UVS.ttf', 400),
   fontFace('Waldba Zelan', 'specimen-fonts/WaldbaZelan-COLR-UVS.ttf', 400),
   fontFace('Waldba Tint', 'specimen-fonts/WaldbaTint-COLR-UVS.ttf', 400),
+  fontFace('Brana', 'specimen-fonts/Brana-Regular.ttf', 400),
+  fontFace('Goha Tibeb Zemen', 'specimen-fonts/GohaTibebZemen.ttf', 400),
+  fontFace('Waldba Jiret', 'specimen-fonts/WaldbaJiret-COLR-UVS.ttf', 400),
+  fontFace('Geez Gofa Mono C', 'specimen-fonts/GeezGofaMonoC-Regular.ttf', 400),
   fontFace(
     'Noto Sans Ethiopic',
     '../../apps/mobile/assets/fonts/NotoSansEthiopic-Regular.ttf',
