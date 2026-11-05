@@ -7,13 +7,14 @@ import { useLearningProgress } from '../../progress/hooks/useLearningProgress';
 import type { QuizScore } from '../data/scoreQuiz';
 import { AnswerReviewCard } from '../components/AnswerReviewCard';
 import { QuizNextAction } from '../components/QuizNextAction';
+import { QuizCompletion } from '../components/QuizCompletion';
+import { QuizScoreRibbon } from '../components/QuizScoreRibbon';
 import { SampleQuizNextLesson } from '../components/SampleQuizNextLesson';
 import { Screen, ContentGroup } from '../../../shared/ui/Screen';
 import { PageHeader } from '../../../shared/ui/PageHeader';
 import { Text } from '../../../shared/ui/Text';
 import { Card } from '../../../shared/ui/Card';
 import { Button } from '../../../shared/ui/Button';
-import { Icon } from '../../../shared/ui/Icon';
 import { colors } from '../../../shared/theme/tokens';
 
 type QuizResultScreenProps = {
@@ -41,17 +42,7 @@ export function QuizResultScreen({ lesson, result, answers, onRetry }: QuizResul
       }
     >
       <PageHeader title="Quiz results" back />
-      <View style={styles.celebration}>
-        <View style={styles.medal}>
-          <Icon name="check" size={54} />
-        </View>
-        <Text variant="heading" style={styles.center}>
-          You did it!
-        </Text>
-        <Text muted style={styles.center}>
-          Quiz complete. Every little lesson helps you grow.
-        </Text>
-      </View>
+      <QuizCompletion celebrate />
       <Card shadow={false} style={[styles.lesson, stacked && styles.stacked]}>
         <LessonArtwork id={lesson.id} tone={lesson.color} />
         <View style={styles.lessonCopy}>
@@ -69,6 +60,7 @@ export function QuizResultScreen({ lesson, result, answers, onRetry }: QuizResul
         <View style={styles.score}>
           <Text variant="label">This attempt</Text>
           <Text variant="hero">{result.percentage}%</Text>
+          <QuizScoreRibbon correct={result.correct} total={result.total} />
           <Text variant="small">
             {result.correct} of {result.total} correct
           </Text>
@@ -135,18 +127,6 @@ export function QuizResultScreen({ lesson, result, answers, onRetry }: QuizResul
 }
 
 const styles = StyleSheet.create({
-  celebration: { alignItems: 'center', gap: 10, paddingVertical: 8 },
-  medal: {
-    width: 108,
-    height: 108,
-    borderRadius: 54,
-    backgroundColor: colors.mint,
-    borderWidth: 1,
-    borderColor: colors.outline,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  center: { textAlign: 'center' },
   lesson: { flexDirection: 'row', alignItems: 'center', gap: 14 },
   lessonCopy: { flex: 1, gap: 5 },
   result: { flexDirection: 'row', gap: 16 },

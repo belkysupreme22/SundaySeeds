@@ -95,7 +95,9 @@
     "allChecked": "All answers checked. Tap Finish quiz to record your result.",
     "instructions": "Take your time. Choose an answer, then check it to learn more.",
     "answersChecked": "{{count}} of {{total}} answers checked",
-    "answersCheckedLabel": "Answers checked"
+    "answersCheckedLabel": "Answers checked",
+    "celebrationTitle": "A seed planted",
+    "celebrationSubtitle": "You finished the quiz."
   },
   "progress": {
     "title": "Your progress",

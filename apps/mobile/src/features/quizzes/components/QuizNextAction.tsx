@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
-import { colors, type Pastel } from '../../../shared/theme/tokens';
+import { motion } from '../../../shared/theme/motion';
+import { brandColors, colors, type Pastel } from '../../../shared/theme/tokens';
 import { Icon, type IconName } from '../../../shared/ui/Icon';
 import { Text } from '../../../shared/ui/Text';
 
@@ -20,6 +22,7 @@ export function QuizNextAction({
   expanded,
   onPress,
 }: QuizNextActionProps) {
+  const [focused, setFocused] = useState(false);
   return (
     <Pressable
       accessibilityRole="button"
@@ -27,7 +30,9 @@ export function QuizNextAction({
       accessibilityState={expanded === undefined ? undefined : { expanded }}
       aria-expanded={expanded}
       onPress={onPress}
-      style={({ pressed }) => [styles.row, pressed && styles.pressed]}
+      onFocus={() => setFocused(true)}
+      onBlur={() => setFocused(false)}
+      style={({ pressed }) => [styles.row, focused && styles.focused, pressed && styles.pressed]}
     >
       <View style={[styles.icon, { backgroundColor: colors[tone] }]}>
         <Icon name={icon} size={20} />
@@ -38,7 +43,10 @@ export function QuizNextAction({
           {description}
         </Text>
       </View>
-      <Icon name={expanded ? 'chevron-up' : 'arrow-right'} size={18} />
+      <Icon
+        name={expanded === undefined ? 'arrow-right' : expanded ? 'chevron-up' : 'chevron-down'}
+        size={18}
+      />
     </Pressable>
   );
 }
@@ -55,7 +63,8 @@ const styles = StyleSheet.create({
     borderRadius: 9,
     backgroundColor: colors.white,
   },
-  pressed: { backgroundColor: colors.soft },
+  focused: { borderColor: brandColors.forest },
+  pressed: { backgroundColor: colors.soft, transform: [{ translateY: motion.distance.press }] },
   icon: { padding: 8, borderWidth: 1, borderColor: colors.ink, borderRadius: 5 },
   copy: { flex: 1, gap: 2 },
 });

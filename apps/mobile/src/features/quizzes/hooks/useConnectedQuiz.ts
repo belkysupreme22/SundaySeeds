@@ -34,6 +34,7 @@ type Finished = {
   status: 'finished';
   attempt: ConnectedQuizAttempt | null;
   result: QuizFinish;
+  celebrate: boolean;
   busy: boolean;
   message: string | null;
 };
@@ -154,6 +155,7 @@ export function useConnectedQuiz(courseId: string, lessonId: string) {
                   status: 'finished',
                   attempt: null,
                   result: finish,
+                  celebrate: false,
                   busy: false,
                   message: null,
                 },
@@ -186,7 +188,14 @@ export function useConnectedQuiz(courseId: string, lessonId: string) {
                 owner,
                 scope,
                 actor,
-                state: { status: 'finished', attempt, result: finish, busy: false, message: null },
+                state: {
+                  status: 'finished',
+                  attempt,
+                  result: finish,
+                  celebrate: false,
+                  busy: false,
+                  message: null,
+                },
               });
               return;
             }
@@ -358,6 +367,7 @@ export function useConnectedQuiz(courseId: string, lessonId: string) {
             status: 'finished',
             attempt: s.attempt,
             result: finish,
+            celebrate: true,
             busy: false,
             message: null,
           },

@@ -30,6 +30,7 @@ export function ConnectedQuizScreen({
       <ConnectedQuizResult
         attempt={state.attempt}
         result={state.result}
+        celebrate={state.celebrate}
         onRetry={retry}
         onCourse={() =>
           router.dismissTo({

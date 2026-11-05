@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
+import { motion } from '../../../shared/theme/motion';
 import { brandColors, colors } from '../../../shared/theme/tokens';
 import { Icon } from '../../../shared/ui/Icon';
 import { Text } from '../../../shared/ui/Text';
@@ -20,6 +22,7 @@ export function QuizChoice({
   correct,
   onSelect,
 }: QuizChoiceProps) {
+  const [focused, setFocused] = useState(false);
   const revealedCorrect = checked && correct;
   const revealedIncorrect = checked && selected && !correct;
   const status = revealedCorrect
@@ -39,11 +42,14 @@ export function QuizChoice({
       aria-disabled={checked}
       disabled={checked}
       onPress={onSelect}
+      onFocus={() => setFocused(true)}
+      onBlur={() => setFocused(false)}
       style={({ pressed }) => [
         styles.option,
         selected && styles.selected,
         revealedCorrect && styles.correct,
         revealedIncorrect && styles.incorrect,
+        focused && !checked && styles.focused,
         pressed && styles.pressed,
       ]}
     >
@@ -82,7 +88,8 @@ const styles = StyleSheet.create({
   selected: { backgroundColor: brandColors.surfaceStrong },
   correct: { backgroundColor: colors.mint },
   incorrect: { backgroundColor: colors.peach },
-  pressed: { opacity: 0.8 },
+  focused: { borderColor: brandColors.forest },
+  pressed: { opacity: motion.pressedOpacity, transform: [{ translateY: motion.distance.press }] },
   letter: {
     minWidth: 30,
     minHeight: 30,

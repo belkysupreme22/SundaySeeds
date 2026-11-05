@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { StyleSheet, View, useWindowDimensions } from 'react-native';
 import type { ConnectedQuizAttempt, QuizFinish } from '../types/connectedQuiz';
 import { QuizNextAction } from '../components/QuizNextAction';
+import { QuizCompletion } from '../components/QuizCompletion';
+import { QuizScoreRibbon } from '../components/QuizScoreRibbon';
 import { Screen, ContentGroup } from '../../../shared/ui/Screen';
 import { PageHeader } from '../../../shared/ui/PageHeader';
 import { Text } from '../../../shared/ui/Text';
@@ -13,6 +15,7 @@ import { colors } from '../../../shared/theme/tokens';
 type ConnectedQuizResultProps = {
   attempt: ConnectedQuizAttempt | null;
   result: QuizFinish;
+  celebrate: boolean;
   onRetry: () => void;
   onCourse: () => void;
   busy: boolean;
@@ -22,6 +25,7 @@ type ConnectedQuizResultProps = {
 export function ConnectedQuizResult({
   attempt,
   result,
+  celebrate,
   onRetry,
   onCourse,
   busy,
@@ -42,21 +46,15 @@ export function ConnectedQuizResult({
       }
     >
       <PageHeader title="Quiz results" back />
-      <View style={styles.celebration}>
-        <View style={styles.medal}>
-          <Icon name="award" size={54} />
-        </View>
-        <Text variant="heading" style={styles.center}>
-          You did it!
-        </Text>
-        <Text muted style={styles.center}>
-          Quiz complete. Every little lesson helps you grow.
-        </Text>
-      </View>
+      <QuizCompletion key={result.receipt.attemptId} celebrate={celebrate && !busy} />
       <Card tone="mint" style={[styles.result, stacked && styles.stacked]}>
         <View style={styles.score}>
           <Text variant="label">This attempt</Text>
           <Text variant="hero">{result.receipt.scorePercent}%</Text>
+          <QuizScoreRibbon
+            correct={result.receipt.correctCount}
+            total={result.receipt.questionCount}
+          />
           <Text variant="small">
             {result.receipt.correctCount} of {result.receipt.questionCount} correct
           </Text>
@@ -163,18 +161,6 @@ export function ConnectedQuizResult({
 }
 
 const styles = StyleSheet.create({
-  celebration: { alignItems: 'center', gap: 10, paddingVertical: 8 },
-  medal: {
-    width: 108,
-    height: 108,
-    borderRadius: 54,
-    backgroundColor: colors.mint,
-    borderWidth: 1,
-    borderColor: colors.outline,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  center: { textAlign: 'center' },
   result: { flexDirection: 'row', gap: 16 },
   score: { flex: 1, minWidth: 0, gap: 4 },
   best: {

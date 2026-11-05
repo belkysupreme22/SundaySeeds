@@ -95,7 +95,9 @@
     "allChecked": "ሁሉም መልሶች ተረጋግጠዋል። ፈተናን ጨርስ ላይ ይጫኑ።",
     "instructions": "ጊዜ ይውሰዱ። መልስ ምረጡ፣ ከዚያ ለማወቅ ይፈትሹ።",
     "answersChecked": "{{count}} ከ {{total}} መልሶች ተረጋግጠዋል",
-    "answersCheckedLabel": "የተረጋገጡ መልሶች"
+    "answersCheckedLabel": "የተረጋገጡ መልሶች",
+    "celebrationTitle": "አንድ ዘር ተዘራ",
+    "celebrationSubtitle": "ፈተናውን አጠናቀቁ።"
   },
   "progress": {
     "title": "እድገቶ",

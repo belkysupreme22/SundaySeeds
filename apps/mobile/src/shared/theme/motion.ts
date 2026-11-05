@@ -8,6 +8,7 @@ export const motion = {
     exit: 140,
     page: 240,
     sheet: 260,
+    celebration: 1050,
     splash: 2300,
   },
   easing: { standard: [0.2, 0, 0, 1], enter: [0.16, 1, 0.3, 1], exit: [0.4, 0, 1, 1] },
