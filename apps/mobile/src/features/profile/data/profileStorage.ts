@@ -1,7 +1,21 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { avatarIds, type AvatarId } from '../types/avatar';
 
 const PROFILE_KEY = 'sundayseeds.profile.v1';
 export const DISPLAY_NAME_LIMIT = 40;
+const AVATAR_KEY = 'sundayseeds.profile.avatar.v1';
+
+export const avatarStorage = {
+  async read(scope: string): Promise<AvatarId | null> {
+    const stored = await AsyncStorage.getItem(`${AVATAR_KEY}.${scope}`);
+    return avatarIds.find((id) => id === stored) ?? null;
+  },
+  async write(scope: string, avatarId: AvatarId | null) {
+    const key = `${AVATAR_KEY}.${scope}`;
+    if (avatarId) await AsyncStorage.setItem(key, avatarId);
+    else await AsyncStorage.removeItem(key);
+  },
+};
 
 export function normalizeDisplayName(value: string): string {
   const name = value.replace(/\s+/g, ' ').trim();

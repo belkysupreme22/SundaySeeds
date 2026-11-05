@@ -6,7 +6,10 @@ import { useTranslation } from 'react-i18next';
 import authMessages from '../../../i18n/authResults.en.json';
 import { DISPLAY_NAME_LIMIT } from '../data/profileStorage';
 import { useLearnerProfile } from '../hooks/useLearnerProfile';
-import { ProfileSeal } from '../components/ProfileSeal';
+import { useProfileAvatar } from '../hooks/useProfileAvatar';
+import { ProfileAvatar } from '../components/ProfileAvatar';
+import { ProfileAvatarPicker } from '../components/ProfileAvatarPicker';
+import type { AvatarId } from '../types/avatar';
 import { Screen, ContentGroup } from '../../../shared/ui/Screen';
 import { Text } from '../../../shared/ui/Text';
 import { Button, IconButton } from '../../../shared/ui/Button';
@@ -22,9 +25,12 @@ function ProfileNameForm({ signedIn }: { signedIn: boolean }) {
   const { t } = useTranslation();
   const { displayName, hydrated, loadError, retryLoad, saveName, saving, saveError } =
     useLearnerProfile();
+  const { avatarId, status: avatarStatus, reload: reloadAvatar, saveAvatar } = useProfileAvatar();
   const { width, fontScale } = useWindowDimensions();
   const stackedActions = width < 350 || fontScale >= 1.5;
   const [name, setName] = useState<string | null>(hydrated && !loadError ? displayName : null);
+  const [draftAvatar, setDraftAvatar] = useState<AvatarId | null | undefined>(undefined);
+  const [avatarSaveError, setAvatarSaveError] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const focused = useRef(false);
   const saveAttempt = useRef(0);
@@ -73,10 +79,20 @@ function ProfileNameForm({ signedIn }: { signedIn: boolean }) {
       return;
     saveInFlight.current = true;
     setSubmitting(true);
+    setAvatarSaveError(false);
     const attempt = ++saveAttempt.current;
     try {
-      const saved = await saveName(name);
-      if (saved && focused.current && attempt === saveAttempt.current) closeEditor();
+      if (name !== displayName && !(await saveName(name))) return;
+      if (!focused.current || attempt !== saveAttempt.current) return;
+      if (
+        draftAvatar !== undefined &&
+        draftAvatar !== avatarId &&
+        !(await saveAvatar(draftAvatar))
+      ) {
+        setAvatarSaveError(true);
+        return;
+      }
+      if (focused.current && attempt === saveAttempt.current) closeEditor();
     } finally {
       saveInFlight.current = false;
       setSubmitting(false);
@@ -86,6 +102,7 @@ function ProfileNameForm({ signedIn }: { signedIn: boolean }) {
   const loading = submitting || saving || !hydrated || (name === null && !loadError);
   const displayNameLabel = t('accountEntry.setup.displayName');
   const issue = name === null ? loadError : saveError || loadError;
+  const selectedAvatar = draftAvatar === undefined ? avatarId : draftAvatar;
 
   return (
     <Screen
@@ -128,14 +145,19 @@ function ProfileNameForm({ signedIn }: { signedIn: boolean }) {
       </View>
       {name !== null && (
         <>
-          <Card tone="mint" stroke="soft" shadow={false} style={styles.introduction}>
-            <ProfileSeal />
-            <Text variant="heading" style={styles.center}>
-              {t('profile.edit.introTitle')}
-            </Text>
-            <Text variant="small" muted style={styles.center}>
-              {t('profile.edit.introBody')}
-            </Text>
+          <Card
+            tone="mint"
+            stroke="soft"
+            shadow={false}
+            style={[styles.introduction, stackedActions && styles.stackedIntroduction]}
+          >
+            <ProfileAvatar avatarId={selectedAvatar} />
+            <View style={[styles.introCopy, stackedActions && styles.stackedCopy]}>
+              <Text variant="heading">{t('profile.edit.introTitle')}</Text>
+              <Text variant="small" muted>
+                {t('profile.edit.introBody')}
+              </Text>
+            </View>
           </Card>
           <ContentGroup>
             <Text variant="label">{displayNameLabel}</Text>
@@ -157,6 +179,39 @@ function ProfileNameForm({ signedIn }: { signedIn: boolean }) {
               {t('profile.edit.nameHint', { limit: DISPLAY_NAME_LIMIT })}
             </Text>
           </ContentGroup>
+          {avatarStatus === 'ready' ? (
+            <ContentGroup>
+              <ProfileAvatarPicker
+                selectedId={selectedAvatar}
+                disabled={loading}
+                onSelect={(choice) => {
+                  setDraftAvatar(choice);
+                  setAvatarSaveError(false);
+                }}
+              />
+              {avatarSaveError && (
+                <Text variant="small" accessibilityRole="alert">
+                  {t('profile.avatar.saveError')}
+                </Text>
+              )}
+            </ContentGroup>
+          ) : avatarStatus === 'error' ? (
+            <ContentGroup>
+              <Text variant="small" accessibilityRole="alert">
+                {t('profile.avatar.loadError')}
+              </Text>
+              <Button
+                label={t('common.retry')}
+                variant="outline"
+                icon="refresh-cw"
+                onPress={reloadAvatar}
+              />
+            </ContentGroup>
+          ) : (
+            <Text variant="small" accessibilityLiveRegion="polite">
+              {t('profile.avatar.loading')}
+            </Text>
+          )}
         </>
       )}
       {issue && (
@@ -180,8 +235,16 @@ function ProfileNameForm({ signedIn }: { signedIn: boolean }) {
 const styles = StyleSheet.create({
   header: { flexDirection: 'row', alignItems: 'center', gap: 8 },
   headerTitle: { flex: 1 },
-  introduction: { alignItems: 'center', gap: 8, padding: 14, borderRadius: 9 },
-  center: { textAlign: 'center' },
+  introduction: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 14,
+    padding: 14,
+    borderRadius: 9,
+  },
+  introCopy: { flex: 1, minWidth: 0, gap: 4 },
+  stackedIntroduction: { flexDirection: 'column', alignItems: 'flex-start' },
+  stackedCopy: { flexGrow: 0, flexShrink: 0, flexBasis: 'auto', alignSelf: 'stretch' },
   note: { gap: 10 },
   actions: { flexDirection: 'row', gap: 8 },
   stackedActions: { flexDirection: 'column' },

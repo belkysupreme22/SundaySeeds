@@ -15,6 +15,7 @@ import {
 } from '../features/progress/hooks/useLearningProgress';
 import { colors } from '../shared/theme/tokens';
 import { LearnerProfileProvider } from '../features/profile/hooks/useLearnerProfile';
+import { ProfileAvatarProvider } from '../features/profile/hooks/useProfileAvatar';
 import { LoadingState } from '../shared/ui/LoadingState';
 import { LearningStorageNotice } from '../features/progress/components/LearningStorageNotice';
 import { LearningProfileProvider } from '../features/learning-profile/hooks/useLearningProfile';
@@ -95,9 +96,11 @@ export default function RootLayout() {
                 <LearningProgressProvider>
                   <AuthProvider>
                     <LearnerProfileProvider>
-                      <LearningProfileProvider>
-                        <AppNavigator />
-                      </LearningProfileProvider>
+                      <ProfileAvatarProvider>
+                        <LearningProfileProvider>
+                          <AppNavigator />
+                        </LearningProfileProvider>
+                      </ProfileAvatarProvider>
                     </LearnerProfileProvider>
                   </AuthProvider>
                 </LearningProgressProvider>

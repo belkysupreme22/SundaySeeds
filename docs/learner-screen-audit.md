@@ -2,12 +2,15 @@
 
 ## Profile identity and editing — 5 November 2026
 
-Profile aligns the name and edit action beside a seed bookplate. The activity
+Profile aligns the name and edit action beside the learner’s portrait. The activity
 ledger aligns labels and counts in three rows, with one Settings entry above.
 Verify guest and signed-in names, blank names, save and retry. Start editing
 from Profile and Settings. Check that Save, Cancel and Back return to the
 screen that opened the form and that a direct entry falls back to Profile.
 Check keyboard, narrow width and larger English/Amharic text.
+Choose each portrait and check the selected mark and preview. Save and reopen
+the app to confirm the choice persists. Check that Cancel keeps the prior
+portrait and that signed-in and guest choices stay separate.
 
 ## Growth and interaction details — 5 November 2026
 

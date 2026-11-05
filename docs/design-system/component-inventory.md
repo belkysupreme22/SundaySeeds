@@ -20,6 +20,7 @@ authorize route, content, storage, session or backend behavior changes.
 | `shared/ui/PageLoadingOverlay.tsx` | Pending work | Focused pending, reduced motion, blur/tint fallback, failure | Centered green dots use the shared palette |
 | `shared/ui/AnimatedSplash.tsx` | Brand startup | Loaded/fallback, motion/static, finite completion, background | One-shot vector mark; font/layout handoff and input fences retained |
 | `features/learning-profile/components/LearningChoiceCards.tsx` | Profile choices | Unselected, selected, disabled, selection limit, text/marker | Neutral/sage, forest check; underlying selection rules unchanged |
+| `features/profile/components/ProfileAvatarPicker.tsx` | Profile images | Preview, selected marker, keyboard focus, press, save recovery | Cartoon portraits with consistent crop and ring, aligned grid and local choice |
 | `features/quizzes/components/QuizChoice.tsx` | Quiz choice | Selected, checked/locked, correct, incorrect | Sage selection; correctness still has explicit text/icons |
 | `features/settings/components/SettingsDetailSheet.tsx` | Settings detail | Available/unavailable, language selected, dismiss/scroll | Cream/sage, forest selected marker; no new preference capability |
 
@@ -38,7 +39,7 @@ authorize route, content, storage, session or backend behavior changes.
 | Lesson reading | Editorial20/32; Latin/Ethiopic runs; existing UI headings | Content/section IDs, saved place, bookmarks, reflection privacy and scrolling |
 | Quiz/results | Sage selected, labelled correctness, real recorded progress | Server/sample boundaries, retry/draft/completion/access rules |
 | Progress | Sage leading surface, forest progress, meaningful status | Loading/error vs zero, real completion/history, no fabricated analytics |
-| Profile | Fine strokes, cream/sage, real learning stats | Name editing, account/guest differences, larger text, logout Home return |
+| Profile | Fine strokes, cream/sage, selected portrait, real learning stats | Name and portrait editing, account/guest differences, larger text, logout Home return |
 | Settings/detail/data | Fine neutral rows, sage selection, forest current-section marker | Actual availability, verified status, language save, destructive intent and recovery |
 | Unknown/empty/failure | Shared roles, useful message and real next action | Back/Home/retry reachability; no stranded navigation |
 

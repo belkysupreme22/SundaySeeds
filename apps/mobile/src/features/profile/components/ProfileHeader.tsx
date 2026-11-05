@@ -4,10 +4,12 @@ import { brandColors } from '../../../shared/theme/tokens';
 import { Card } from '../../../shared/ui/Card';
 import { Button } from '../../../shared/ui/Button';
 import { Text } from '../../../shared/ui/Text';
-import { ProfileSeal } from './ProfileSeal';
+import { ProfileAvatar } from './ProfileAvatar';
+import type { AvatarId } from '../types/avatar';
 
 type ProfileHeaderProps = {
   displayName: string;
+  avatarId: AvatarId | null;
   loading: boolean;
   unavailable: boolean;
   stacked: boolean;
@@ -16,6 +18,7 @@ type ProfileHeaderProps = {
 
 export function ProfileHeader({
   displayName,
+  avatarId,
   loading,
   unavailable,
   stacked,
@@ -25,7 +28,7 @@ export function ProfileHeader({
   return (
     <Card tone="mint" stroke="subtle" shadow={false} style={styles.card}>
       <View style={[styles.identity, stacked && styles.stacked]}>
-        <ProfileSeal />
+        <ProfileAvatar avatarId={avatarId} />
         <View style={[styles.copy, stacked && styles.stackedCopy]}>
           <View accessibilityLiveRegion="polite" style={styles.nameBlock}>
             <Text variant="meta" muted>
@@ -41,7 +44,7 @@ export function ProfileHeader({
           </View>
           {!loading && !unavailable && (
             <Button
-              label={t(displayName ? 'profile.editName' : 'profile.addName')}
+              label={t('profile.edit.title')}
               icon="edit-2"
               variant="outline"
               onPress={onEdit}

@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { lessons } from '../../lessons/data/lessons';
 import { useLearningProgress } from '../../progress/hooks/useLearningProgress';
 import { useLearnerProfile } from '../hooks/useLearnerProfile';
+import { useProfileAvatar } from '../hooks/useProfileAvatar';
 import { ProfileHeader } from '../components/ProfileHeader';
 import { ProfileLearningStats } from '../components/ProfileLearningStats';
 import { ProfileNavigationGroup } from '../components/ProfileNavigationGroup';
@@ -16,6 +17,7 @@ import { Button, IconButton } from '../../../shared/ui/Button';
 export function ProfileScreen() {
   const { t } = useTranslation();
   const { displayName, hydrated: profileHydrated, loadError, retryLoad } = useLearnerProfile();
+  const { avatarId } = useProfileAvatar();
   const {
     progress,
     bookmarks,
@@ -46,6 +48,7 @@ export function ProfileScreen() {
       <ContentGroup>
         <ProfileHeader
           displayName={displayName}
+          avatarId={avatarId}
           loading={!profileHydrated}
           unavailable={!!loadError}
           stacked={stacked}
