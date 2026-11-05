@@ -1,5 +1,13 @@
 # SundaySeeds implementation plan
 
+## Learner journey source review — 5 November 2026
+
+Home now previews a listed course with catalog data, and Lessons uses a compact
+library entry. Sample quiz results choose a next sample lesson from local progress.
+The related connected course link and legacy redirect still open the intended
+course. The [screen audit](learner-screen-audit.md) records guest and verified
+device review cases. Step 3 covers Profile, Settings and sign-out.
+
 ## Account font options and palette refinement — 5 November 2026
 
 The [guide](design-system/guide.html#auth-type-options) now compares six

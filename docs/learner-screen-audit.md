@@ -1,5 +1,20 @@
 # Learner screen audit checklist
 
+## Step 2 learner journey source review — 5 November 2026
+
+| Screen | Source outcome | Owner check |
+| --- | --- | --- |
+| Home | Preserved section order and course card. Its title and summary come from the catalog, with loading, empty and unavailable copy. | Courses shortcut opens the library. The catalog preview opens the named course. Sample quiz completions do not appear on that card. |
+| Lessons | The unfiltered screen links to the course library once, with sample lessons in their own list. | Open Browse courses, return to Lessons, then check that saved/topic filters focus the sample list. |
+| Sample overview and reader | The existing course handoff is now labelled as a related connected course. | Start a sample lesson, resume reading, then open its quiz. The connected link opens the intended course. |
+| Sample results and Progress | The next sample lesson uses bundled lesson order and local progress. Completed sample checks remain on Progress. | Finish a sample quiz, follow the next sample lesson, then check Progress. |
+| Connected reading and checks | Reviewed the joined-edition routes and progress return in source. Course library, overview and joined reader select Lessons. Focused quiz screens use their action footer. | Check one joined reading and knowledge check using a verified development account. Confirm the result appears on the joined course. |
+
+Source inspection and whitespace checks only. Run the owner screen checks at
+320/390 widths with larger text in English and Amharic. See the separate
+[reading](connected-reading-acceptance.md) and [quiz](connected-quiz-acceptance.md)
+acceptance checklists for connected state, retry and device cases.
+
 ## Design-system pass — 4 November 2026
 
 Source color/type pass completed against the owner-selected blended forest system.

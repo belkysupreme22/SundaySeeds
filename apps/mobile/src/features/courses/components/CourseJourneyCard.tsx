@@ -1,27 +1,33 @@
 import { router } from 'expo-router';
 import { Image, StyleSheet, View, useWindowDimensions } from 'react-native';
-import { useCourseJourney } from '../hooks/useCourseJourney';
+import { useTranslation } from 'react-i18next';
+import { useCourseCatalog } from '../hooks/useCourseCatalog';
 import { Card } from '../../../shared/ui/Card';
 import { Text } from '../../../shared/ui/Text';
 import { Button } from '../../../shared/ui/Button';
-import { Icon } from '../../../shared/ui/Icon';
 import { brandColors, colors } from '../../../shared/theme/tokens';
 
 export function CourseJourneyCard() {
-  const {
-    courseId,
-    courseTitle,
-    moduleCount,
-    available,
-    lessons,
-    completed,
-    started,
-    finished,
-    next,
-    status,
-  } = useCourseJourney();
+  const { state } = useCourseCatalog();
+  const { t } = useTranslation();
   const { width, fontScale } = useWindowDimensions();
   const stacked = width < 360 || fontScale > 1.2;
+  const course = state.status === 'ready' ? state.data[0] : undefined;
+
+  if (!course) {
+    return (
+      <Card style={styles.card}>
+        <Text variant="small" accessibilityLiveRegion="polite">
+          {state.status === 'loading'
+            ? t('common.loading')
+            : state.status === 'ready'
+              ? t('home.courseLibraryEmpty')
+              : t('home.courseLibraryUnavailable')}
+        </Text>
+      </Card>
+    );
+  }
+
   return (
     <Card style={styles.card}>
       <View style={[styles.header, stacked && styles.stacked]}>
@@ -30,50 +36,27 @@ export function CourseJourneyCard() {
             source={require('../../../../assets/orthodox/course_faith_everyday.jpg')}
             style={styles.artImage}
             resizeMode="cover"
+            accessible={false}
           />
         </View>
         <View style={styles.words}>
-          <Text variant="caption">COURSE · {moduleCount} MODULES</Text>
+          {course.isDevelopment && <Text variant="caption">{t('home.developmentCourse')}</Text>}
           <Text variant="title" style={styles.title}>
-            {courseTitle}
+            {course.title}
           </Text>
           <Text variant="small" muted>
-            {lessons.length} Bible studies · Prayer, trust, courage & kindness
+            {course.summary}
           </Text>
         </View>
       </View>
-      <Text variant="small">{status}</Text>
-      {available && lessons.length > 0 && (
-        <View
-          accessibilityRole="progressbar"
-          accessibilityLabel="Lesson quizzes finished"
-          accessibilityValue={{ min: 0, max: lessons.length, now: completed }}
-          style={styles.track}
-        >
-          <View style={[styles.fill, { width: `${(completed / lessons.length) * 100}%` }]} />
-        </View>
-      )}
-      {available && started && next && (
-        <Text variant="small" muted>
-          {finished
-            ? 'You’ve completed every knowledge check. Return to a lesson for a fresh reflection.'
-            : `Up next: ${next.title}`}
-        </Text>
-      )}
-      {available && started && next && (
-        <Button
-          label={finished ? 'Revisit first lesson' : 'Continue course'}
-          onPress={() => router.push(`/lessons/${next.id}`)}
-        />
-      )}
       <Button
-        label={available && started ? 'View curriculum' : 'Explore course'}
-        variant={available && started ? 'outline' : 'primary'}
-        onPress={() => router.push({ pathname: '/courses/[id]', params: { id: courseId } })}
+        label={t('home.viewCourse')}
+        onPress={() => router.push({ pathname: '/courses/[id]', params: { id: course.courseId } })}
       />
     </Card>
   );
 }
+
 const styles = StyleSheet.create({
   card: { gap: 12, backgroundColor: brandColors.surface },
   title: { color: brandColors.forest },
@@ -90,11 +73,4 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   artImage: { width: '100%', height: '100%' },
-  track: {
-    height: 8,
-    borderRadius: 4,
-    backgroundColor: brandColors.surfaceStrong,
-    overflow: 'hidden',
-  },
-  fill: { height: '100%', backgroundColor: brandColors.forest },
 });

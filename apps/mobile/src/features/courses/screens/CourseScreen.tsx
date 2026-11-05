@@ -1,21 +1,6 @@
-import { router } from 'expo-router';
-import { useEffect } from 'react';
-import { useCourseJourney } from '../hooks/useCourseJourney';
-import { Screen } from '../../../shared/ui/Screen';
-import { LoadingState } from '../../../shared/ui/LoadingState';
+import { Redirect } from 'expo-router';
+import { sampleCourse } from '../data/sampleCourse';
 
 export function CourseScreen() {
-  const { courseId } = useCourseJourney();
-
-  useEffect(() => {
-    if (courseId) {
-      router.replace({ pathname: '/courses/[id]', params: { id: courseId } });
-    }
-  }, [courseId]);
-
-  return (
-    <Screen tabs>
-      <LoadingState label="Loading course…" />
-    </Screen>
-  );
+  return <Redirect href={{ pathname: '/courses/[id]', params: { id: sampleCourse.id } }} />;
 }

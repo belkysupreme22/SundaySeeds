@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useTranslation } from 'react-i18next';
-import { CourseJourneyCard } from '../../courses/components/CourseJourneyCard';
 import { Pressable, StyleSheet, View } from 'react-native';
 import { getLessonTopic } from '../data/lessonTopics';
 import { useLearningProgress } from '../../progress/hooks/useLearningProgress';
@@ -78,7 +77,14 @@ export function LessonsScreen() {
           onPress={() => (topic ? router.setParams({ topic: '' }) : router.push('/lessons/topics'))}
         />
       </View>
-      {!narrowed && <CourseJourneyCard />}
+      {!narrowed && (
+        <Button
+          label={t('home.browseCourseLabel')}
+          variant="outline"
+          icon="book-open"
+          onPress={() => router.push('/courses')}
+        />
+      )}
       <ContentGroup>
         <View style={styles.sectionHeader}>
           <View style={styles.headerWords}>

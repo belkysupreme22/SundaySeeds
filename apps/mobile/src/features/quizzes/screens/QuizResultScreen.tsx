@@ -7,7 +7,7 @@ import { useLearningProgress } from '../../progress/hooks/useLearningProgress';
 import type { QuizScore } from '../data/scoreQuiz';
 import { AnswerReviewCard } from '../components/AnswerReviewCard';
 import { QuizNextAction } from '../components/QuizNextAction';
-import { CourseQuizNextSteps } from '../../courses/components/CourseQuizNextSteps';
+import { SampleQuizNextLesson } from '../components/SampleQuizNextLesson';
 import { Screen, ContentGroup } from '../../../shared/ui/Screen';
 import { PageHeader } from '../../../shared/ui/PageHeader';
 import { Text } from '../../../shared/ui/Text';
@@ -83,9 +83,9 @@ export function QuizResultScreen({ lesson, result, answers, onRetry }: QuizResul
           )}
         </View>
       </Card>
-      <CourseQuizNextSteps lessonId={lesson.id} />
       <ContentGroup>
         <Text variant="title">What’s next?</Text>
+        <SampleQuizNextLesson lessonId={lesson.id} />
         <QuizNextAction
           title={showReview ? 'Hide answer review' : 'Review your answers'}
           description="Look back at your choices and explanations."
