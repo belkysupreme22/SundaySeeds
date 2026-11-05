@@ -58,10 +58,10 @@ export function HomeScreen() {
       action: () => router.replace('/lessons?filter=saved'),
     },
     {
-      title: t('home.practice'),
-      subtitle: t('home.quickQuiz'),
-      icon: 'edit-3',
-      action: () => router.push('/quiz/good-samaritan'),
+      title: t('home.findLesson'),
+      subtitle: t('home.findLessonHint'),
+      icon: 'search',
+      action: () => router.push('/lessons/search'),
     },
     {
       title: t('home.myGrowth'),

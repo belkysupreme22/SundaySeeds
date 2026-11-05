@@ -1,4 +1,5 @@
 import { router, useLocalSearchParams } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import { Pressable, StyleSheet, View } from 'react-native';
 import { getLessonTopic } from '../data/lessonTopics';
 import { useLearningProgress } from '../../progress/hooks/useLearningProgress';
@@ -14,6 +15,7 @@ import { Button, IconButton } from '../../../shared/ui/Button';
 import { Card } from '../../../shared/ui/Card';
 
 export function LessonSearchScreen() {
+  const { t } = useTranslation();
   const params = useLocalSearchParams<{ query?: string; topic?: string; filter?: string }>();
   const query = params.query ?? '';
   const topic = getLessonTopic(params.topic);
@@ -31,7 +33,7 @@ export function LessonSearchScreen() {
         <View style={styles.header}>
           <IconButton
             name="arrow-left"
-            label="Back to lessons"
+            label={t('common.back')}
             onPress={() => (router.canGoBack() ? router.back() : router.replace('/lessons'))}
           />
           <View style={styles.words}>

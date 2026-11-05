@@ -57,6 +57,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
   - Externalized strings across App shell, TeacherDashboard, and AdminDashboard navigation and headings.
 
 ### Changed
+- Replaced Home’s fixed quick-quiz shortcut with Find a lesson, which opens the existing lesson search.
 - Separated the Home course preview and Lessons catalog shortcut from sample progress. Sample quiz results recommend the next sample lesson, and the sample lesson overview labels its related connected course explicitly.
 - Localized mobile account entry, forms, verification and recovery in English and Amharic. Added a shared saved language choice and calligraphy-informed Amharic account headings. Device and translation acceptance are pending.
 - Fixed onboarding verification Back navigation so it returns to the sign-in or sign-up form that opened it. Source review only. Device verification is pending.

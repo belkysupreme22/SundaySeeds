@@ -1,5 +1,13 @@
 # Learner screen audit checklist
 
+## Home quick access — 5 November 2026
+
+Find a lesson replaces the fixed Good Samaritan quiz shortcut. It opens lesson
+search with the full sample collection in scope. From Home, the search Back
+action follows the existing route history. Quizzes remain available from their
+lessons. Owner review: check the four Home tiles at 320/390 widths, search by
+title or topic, confirm Lessons is selected, then use Back to return to Home.
+
 ## Step 2 learner journey source review — 5 November 2026
 
 | Screen | Source outcome | Owner check |
