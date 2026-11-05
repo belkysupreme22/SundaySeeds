@@ -14,12 +14,10 @@ export const colors = {
   white: '#FFFFFF',
   ink: '#19171D',
   muted: brandColors.muted,
-  lavender: '#E8E3EE',
-  primary: '#E8E3EE',
   mint: '#E0ECE2',
   yellow: '#F2E8C9',
   peach: '#F1E2D4',
-  pink: '#EBDDE4',
+  pink: '#EEDDDC',
   line: '#D7DCCF',
   outline: brandColors.controlBorder,
   soft: '#EEF0E6',
@@ -27,21 +25,18 @@ export const colors = {
   danger: '#A52F3F',
 } as const;
 export const accentColors = {
-  lavender: colors.lavender,
   mint: colors.mint,
   wheat: colors.yellow,
   peach: colors.peach,
   rose: colors.pink,
-  lavenderLine: '#A69AB8',
 } as const;
-export type Pastel = 'lavender' | 'mint' | 'yellow' | 'peach' | 'pink';
+export type Pastel = 'mint' | 'yellow' | 'peach' | 'pink';
 // Card-sized tone areas are quieter than the compact accent badges.
 export const cardColors: Record<Pastel, string> = {
-  lavender: '#EFEAF4',
   mint: brandColors.surface,
   yellow: '#F7F0D7',
   peach: '#F5EBDF',
-  pink: '#F4EAF0',
+  pink: '#F5E8E5',
 };
 export const fonts = {
   regular: 'Poppins_400Regular',

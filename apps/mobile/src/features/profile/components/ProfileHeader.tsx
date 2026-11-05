@@ -21,7 +21,7 @@ export function ProfileHeader({
   onEdit,
 }: ProfileHeaderProps) {
   return (
-    <Card tone="lavender" stroke="soft" shadow={false} style={styles.card}>
+    <Card tone="mint" stroke="soft" shadow={false} style={styles.card}>
       <View style={[styles.identity, stacked && styles.stacked]}>
         <View style={styles.avatar} accessible={false}>
           <Icon name="user" size={38} />

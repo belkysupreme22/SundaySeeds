@@ -17,7 +17,7 @@ export function ConnectedQuizProgress({
   const data = state.status === 'ready' ? state.data : null;
   const available = data?.available && data.assessmentAvailable && data.releaseId === releaseId;
   return (
-    <Card tone="lavender" shadow={false} style={styles.group}>
+    <Card tone="mint" shadow={false} style={styles.group}>
       <Text variant="title">Your course progress</Text>
       {state.status === 'loading' ? (
         <Text variant="small">Loading your knowledge checks…</Text>

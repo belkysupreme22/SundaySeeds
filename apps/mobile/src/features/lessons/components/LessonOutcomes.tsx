@@ -9,7 +9,7 @@ import { Text } from '../../../shared/ui/Text';
 const accents: { tone: Pastel; icon: IconName }[] = [
   { tone: 'mint', icon: 'heart' },
   { tone: 'yellow', icon: 'sun' },
-  { tone: 'lavender', icon: 'book-open' },
+  { tone: 'pink', icon: 'book-open' },
   { tone: 'peach', icon: 'compass' },
 ];
 

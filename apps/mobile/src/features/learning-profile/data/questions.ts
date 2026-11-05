@@ -16,7 +16,7 @@ export type LearningChoice<Value extends string | number = string | number> = {
 };
 
 export const intentions: LearningChoice<LearningIntention>[] = [
-  { value: 'explore_faith', label: 'Explore Christian faith', icon: 'compass', tone: 'lavender' },
+  { value: 'explore_faith', label: 'Explore Christian faith', icon: 'compass', tone: 'pink' },
   { value: 'understand_bible', label: 'Understand the Bible', icon: 'book-open', tone: 'mint' },
   { value: 'prayer_habit', label: 'Build a prayer habit', icon: 'sun', tone: 'yellow' },
   {
@@ -26,7 +26,7 @@ export const intentions: LearningChoice<LearningIntention>[] = [
     tone: 'peach',
   },
   { value: 'deeper_study', label: 'Deepen my Bible study', icon: 'search', tone: 'pink' },
-  { value: 'browsing', label: 'Just browsing', icon: 'grid', tone: 'lavender' },
+  { value: 'browsing', label: 'Just browsing', icon: 'grid', tone: 'mint' },
 ];
 
 export const interests: LearningChoice<LearningInterest>[] = [
@@ -35,7 +35,7 @@ export const interests: LearningChoice<LearningInterest>[] = [
     label: 'Faith',
     description: 'Trust and growth',
     icon: 'feather',
-    tone: 'lavender',
+    tone: 'pink',
   },
   { value: 'Prayer', label: 'Prayer', description: 'Make room for God', icon: 'sun', tone: 'mint' },
   {
@@ -67,7 +67,7 @@ export const familiarities: LearningChoice<BibleFamiliarity>[] = [
     label: 'I know some stories and ideas',
     description: 'Build on familiar foundations',
     icon: 'book-open',
-    tone: 'lavender',
+    tone: 'pink',
   },
   {
     value: 'regular',
@@ -87,7 +87,7 @@ export const familiarities: LearningChoice<BibleFamiliarity>[] = [
 
 export const sessionTimes: LearningChoice<SessionMinutes | 'flexible'>[] = [
   { value: 5, label: 'About 5 minutes', icon: 'clock', tone: 'mint' },
-  { value: 10, label: 'About 10 minutes', icon: 'clock', tone: 'lavender' },
+  { value: 10, label: 'About 10 minutes', icon: 'clock', tone: 'pink' },
   { value: 15, label: 'About 15 minutes', icon: 'clock', tone: 'yellow' },
   { value: 20, label: 'About 20 minutes', icon: 'clock', tone: 'peach' },
   {
@@ -104,7 +104,7 @@ export const questionPages = [
     title: 'What would you like help with first?',
     subtitle: 'Start with what matters to you. Choose one, or keep exploring.',
     icon: 'compass',
-    tone: 'lavender',
+    tone: 'pink',
     note: 'You can revisit your learning intention in Settings.',
   },
   {

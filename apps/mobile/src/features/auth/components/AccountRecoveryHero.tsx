@@ -2,7 +2,7 @@ import { StyleSheet, useWindowDimensions, View } from 'react-native';
 import Svg, { Circle, G, Path, Rect } from 'react-native-svg';
 import { useTranslation } from 'react-i18next';
 import { Text } from '../../../shared/ui/Text';
-import { accentColors, brandColors, cardColors, colors } from '../../../shared/theme/tokens';
+import { brandColors, cardColors, colors } from '../../../shared/theme/tokens';
 
 type Mode = 'request' | 'verify' | 'reset' | 'reset-guidance';
 
@@ -66,7 +66,7 @@ export function AccountRecoveryHero({ mode }: { mode: Mode }) {
           </G>
           <Path
             d="M28 29L37 38M37 29L28 38"
-            stroke={accentColors.lavenderLine}
+            stroke={brandColors.controlBorder}
             strokeWidth="4"
             strokeLinecap="round"
           />

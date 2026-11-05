@@ -89,7 +89,7 @@ export function AccountFollowUpScreen({
           </>
         )}
         {notice && (
-          <Card tone="lavender" shadow={false} stroke="soft">
+          <Card shadow={false} stroke="soft">
             <Text variant="small" accessibilityLiveRegion="polite">
               {t(notice.messageKey, { defaultValue: notice.message })}
             </Text>

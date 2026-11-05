@@ -58,7 +58,7 @@ export function ProgressStats({
         scoredLessons === 0
           ? 'No quizzes yet'
           : `Across ${scoredLessons} ${scoredLessons === 1 ? 'quiz' : 'quizzes'}`,
-      tone: 'lavender',
+      tone: 'pink',
       icon: 'bar-chart-2',
     },
   ];

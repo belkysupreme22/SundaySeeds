@@ -10,7 +10,7 @@ import { Text } from '../../../shared/ui/Text';
 import { Icon } from '../../../shared/ui/Icon';
 import { Button } from '../../../shared/ui/Button';
 import { Card } from '../../../shared/ui/Card';
-import { colors } from '../../../shared/theme/tokens';
+import { brandColors, colors } from '../../../shared/theme/tokens';
 import { InputField } from '../../../shared/ui/InputField';
 
 export function EditProfileScreen() {
@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
     borderRadius: 59,
     borderWidth: 1.2,
     borderColor: colors.ink,
-    backgroundColor: colors.lavender,
+    backgroundColor: brandColors.surface,
     alignItems: 'center',
     justifyContent: 'center',
   },

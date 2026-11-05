@@ -1,5 +1,12 @@
 # Design reference and acceptance
 
+## Palette refinement — 5 November 2026
+
+The owner removed lavender from the mobile palette. Use forest and cream for
+brand and page roles, sage for learning surfaces and selected states, and mint,
+wheat, peach and warm rose for accents. Match the reference composition and
+stroke hierarchy using these current colors. See the [design system](design-system/README.md).
+
 ## Current owner-approved design system — 4 November 2026
 
 Use [the comprehensive system](design-system/README.md) for visual and interaction

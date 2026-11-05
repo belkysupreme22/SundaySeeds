@@ -61,7 +61,7 @@ export function LessonDetailScreen({ lessonId }: { lessonId: string }) {
       />
       <LessonOverviewHeader lesson={lesson} />
       {sampleCourse.modules.some((module) => module.lessonIds.includes(lesson.id)) && (
-        <Card tone="lavender" shadow={false} style={styles.progress}>
+        <Card tone="mint" shadow={false} style={styles.progress}>
           <Text variant="small">PART OF A COURSE</Text>
           <Text variant="label">{sampleCourse.title}</Text>
           <Button

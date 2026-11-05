@@ -28,7 +28,7 @@ export function CourseQuizNextSteps({ lessonId }: { lessonId: string }) {
           title={`Continue with ${next.title}`}
           description={`${next.title} · ${next.durationMinutes} minutes of reading. Read, reflect and explore your next step.`}
           icon="arrow-right"
-          tone="lavender"
+          tone="mint"
           onPress={() => router.push(`/lessons/${next.id}`)}
         />
       )}

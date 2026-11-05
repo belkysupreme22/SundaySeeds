@@ -190,7 +190,7 @@ export function SettingsScreen() {
         />
       </SettingsGroup>
       {(notice || auth.error) && (
-        <Card tone="lavender" shadow={false} stroke="soft">
+        <Card tone="peach" shadow={false} stroke="soft">
           <Text accessibilityLiveRegion="polite">
             {notice ? t(notice.messageKey, { defaultValue: notice.message }) : auth.error}
           </Text>

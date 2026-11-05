@@ -1,5 +1,5 @@
 import Svg, { G, Path } from 'react-native-svg';
-import { accentColors, brandColors } from '../../../shared/theme/tokens';
+import { brandColors } from '../../../shared/theme/tokens';
 
 /** Separate contours traced from reference-03's centre and right auth panels. */
 export function AccountBackdrop({ signup }: { signup: boolean }) {
@@ -26,7 +26,7 @@ export function AccountBackdrop({ signup }: { signup: boolean }) {
       <Path
         d="M28 27L36 35M36 27L28 35"
         fill="none"
-        stroke={accentColors.lavenderLine}
+        stroke={brandColors.controlBorder}
         strokeWidth="4"
         strokeLinecap="round"
       />

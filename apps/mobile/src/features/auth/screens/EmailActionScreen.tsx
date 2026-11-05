@@ -108,7 +108,7 @@ export function EmailActionScreen({
         </ContentGroup>
       )}
       {proof.message && (
-        <Card tone="lavender" shadow={false} stroke="soft">
+        <Card shadow={false} stroke="soft">
           <Text accessibilityLiveRegion="polite">
             {proof.messageKey
               ? t(proof.messageKey, { defaultValue: proof.message })

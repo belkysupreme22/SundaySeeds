@@ -115,7 +115,7 @@ export function ProfileScreen() {
               title: 'View introduction',
               description: 'A quick welcome to SundaySeeds',
               icon: 'sun',
-              tone: 'lavender',
+              tone: 'yellow',
               onPress: () => router.push('/welcome'),
             },
             {

@@ -99,7 +99,7 @@ export function ConnectedCourseScreen() {
       {!course && progressPanel}
       {course && (
         <>
-          <Card tone="lavender" style={styles.group}>
+          <Card tone="mint" style={styles.group}>
             <View style={styles.courseHeroArt}>
               <Image
                 source={require('../../../../assets/orthodox/course_faith_everyday.jpg')}

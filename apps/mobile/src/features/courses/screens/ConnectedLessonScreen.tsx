@@ -66,7 +66,7 @@ export function ConnectedLessonScreen() {
       )}
       {lesson && (
         <>
-          <Card tone="lavender" style={styles.group}>
+          <Card tone="mint" style={styles.group}>
             <Text variant="heading" accessibilityRole="header">
               {lesson.title}
             </Text>

@@ -95,7 +95,7 @@ export function QuizScreen({ lessonId }: { lessonId: string }) {
           valueText={t('quiz.answersChecked', { count: checkedCount, total: lesson.questions.length })}
         />
       </View>
-      <Card tone="lavender" style={styles.question}>
+      <Card tone="yellow" style={styles.question}>
         <Text variant="title">{question.prompt}</Text>
       </Card>
       <ContentGroup>

@@ -12,7 +12,7 @@ export const lessons: Lesson[] = [
     category: 'Kindness',
     scripture: 'Luke 10:25–37',
     durationMinutes: 8,
-    color: 'lavender',
+    color: 'pink',
     intro:
       'What does it mean to be a neighbour? Explore the Good Samaritan and consider how compassion shapes the way we respond to people around us.',
     outcomes: [

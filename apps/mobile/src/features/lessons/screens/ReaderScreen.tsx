@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     backgroundColor: colors.white,
   },
-  nextIcon: { padding: 12, borderRadius: 6, backgroundColor: colors.lavender },
+  nextIcon: { padding: 12, borderRadius: 6, backgroundColor: colors.mint },
   quizIcon: { backgroundColor: colors.yellow },
   pressed: { opacity: 0.72 },
   disabled: { opacity: 0.5 },

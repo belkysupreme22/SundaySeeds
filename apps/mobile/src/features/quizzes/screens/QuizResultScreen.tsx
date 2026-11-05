@@ -65,7 +65,7 @@ export function QuizResultScreen({ lesson, result, answers, onRetry }: QuizResul
           <Text variant="caption">{lesson.questions.length} questions</Text>
         </View>
       </Card>
-      <Card tone="lavender" style={[styles.result, stacked && styles.stacked]}>
+      <Card tone="mint" style={[styles.result, stacked && styles.stacked]}>
         <View style={styles.score}>
           <Text variant="label">This attempt</Text>
           <Text variant="hero">{result.percentage}%</Text>
@@ -114,7 +114,7 @@ export function QuizResultScreen({ lesson, result, answers, onRetry }: QuizResul
           title="Try the quiz again"
           description="Start fresh. Your best score stays."
           icon="refresh-cw"
-          tone="lavender"
+          tone="peach"
           onPress={onRetry}
         />
       </ContentGroup>

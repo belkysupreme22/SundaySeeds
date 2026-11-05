@@ -53,7 +53,7 @@ export function ConnectedQuizResult({
           Quiz complete. Every little lesson helps you grow.
         </Text>
       </View>
-      <Card tone="lavender" style={[styles.result, stacked && styles.stacked]}>
+      <Card tone="mint" style={[styles.result, stacked && styles.stacked]}>
         <View style={styles.score}>
           <Text variant="label">This attempt</Text>
           <Text variant="hero">{result.receipt.scorePercent}%</Text>

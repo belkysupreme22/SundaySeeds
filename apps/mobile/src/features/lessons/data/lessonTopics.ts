@@ -13,7 +13,7 @@ export const lessonTopics: readonly LessonTopic[] = [
   {
     name: 'Faith',
     icon: 'sun',
-    tone: 'lavender',
+    tone: 'pink',
     description: 'Small steps in trusting God and growing in faith.',
   },
   {

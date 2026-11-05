@@ -10,7 +10,7 @@ export function ProfileLearningStats({ completed, inProgress, saved, stacked }: 
   const stats: { label: string; value: number; icon: IconName; tone: Pastel }[] = [
     { label: 'Completed', value: completed, icon: 'check-circle', tone: 'mint' },
     { label: 'In progress', value: inProgress, icon: 'book-open', tone: 'yellow' },
-    { label: 'Saved', value: saved, icon: 'bookmark', tone: 'lavender' },
+    { label: 'Saved', value: saved, icon: 'bookmark', tone: 'pink' },
   ];
   return (
     <View style={[styles.row, stacked && styles.stacked]}>

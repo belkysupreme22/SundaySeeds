@@ -230,7 +230,6 @@ export function AccountScreen({
         )}
         {notice && (
           <Card
-            tone="lavender"
             shadow={false}
             stroke="soft"
             style={styles.group}

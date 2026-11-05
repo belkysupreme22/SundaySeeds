@@ -73,7 +73,7 @@ export function LessonsScreen() {
         <LessonsBrowseHero
           title={topic ? t('lessons.growTopic', { topic: topic.name.toLowerCase() }) : t('lessons.heroDefault')}
           description={topic?.description ?? t('lessons.heroDefaultDesc')}
-          tone={topic?.tone ?? 'lavender'}
+          tone={topic?.tone}
           actionLabel={topic ? t('lessons.allTopics') : t('lessons.exploreTopics')}
           onPress={() => (topic ? router.setParams({ topic: '' }) : router.push('/lessons/topics'))}
         />

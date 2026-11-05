@@ -1,5 +1,6 @@
+import type { Pastel } from '../../shared/theme/tokens';
+
 export type LessonCategory = 'Faith' | 'Kindness' | 'Courage' | 'Prayer';
-export type LessonColor = 'lavender' | 'mint' | 'peach' | 'yellow';
 
 export type QuizQuestion = {
   id: string;
@@ -16,7 +17,7 @@ export type Lesson = {
   category: LessonCategory;
   scripture: string;
   durationMinutes: number;
-  color: LessonColor;
+  color: Pastel;
   intro: string;
   outcomes: { title: string; description: string }[];
   memoryVerse: { text: string; reference: string };

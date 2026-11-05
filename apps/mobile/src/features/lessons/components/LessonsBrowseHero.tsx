@@ -8,7 +8,7 @@ import { Button } from '../../../shared/ui/Button';
 export function LessonsBrowseHero({
   title,
   description,
-  tone = 'lavender',
+  tone = 'mint',
   actionLabel,
   onPress,
 }: {

@@ -58,7 +58,7 @@ export function TopicsScreen() {
           }
           style={({ pressed }) => [styles.topic, styles.fullWidth, pressed && styles.pressed]}
         >
-          <Card tone="lavender" style={styles.card}>
+          <Card tone="mint" style={styles.card}>
             <View style={styles.icon}>
               <Icon name="book-open" size={25} />
             </View>

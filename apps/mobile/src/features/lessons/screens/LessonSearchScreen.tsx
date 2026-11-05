@@ -104,7 +104,7 @@ export function LessonSearchScreen() {
           </Card>
         )}
         {!visible.length && !savedViewUnavailable && (
-          <Card tone="lavender" shadow={false} style={styles.empty}>
+          <Card shadow={false} style={styles.empty}>
             <Icon name="search" size={26} />
             <Text variant="title">No matching lessons</Text>
             <Text>
