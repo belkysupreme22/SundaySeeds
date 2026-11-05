@@ -1,5 +1,6 @@
 import { Pressable, StyleSheet, View, type StyleProp, type ViewStyle } from 'react-native';
 import { brandColors, colors } from '../theme/tokens';
+import { motion, targets } from '../theme/motion';
 import { Text } from './Text';
 import { Icon, type IconName } from './Icon';
 
@@ -75,7 +76,7 @@ export function IconButton({
 }
 const styles = StyleSheet.create({
   button: {
-    minHeight: 52,
+    minHeight: targets.primaryHeight,
     borderWidth: 1.2,
     borderColor: colors.ink,
     borderRadius: 9,
@@ -91,9 +92,14 @@ const styles = StyleSheet.create({
   outline: { backgroundColor: colors.white },
   label: { flexShrink: 1, textAlign: 'center', flexGrow: 1 },
   filledLabel: { color: brandColors.onForest },
-  disabled: { opacity: 0.45, boxShadow: 'none' },
-  pressed: { opacity: 0.72, transform: [{ translateY: 1 }] },
-  iconTarget: { minWidth: 44, minHeight: 44, alignItems: 'center', justifyContent: 'center' },
+  disabled: { opacity: motion.disabledOpacity, boxShadow: 'none' },
+  pressed: { opacity: motion.pressedOpacity, transform: [{ translateY: motion.distance.press }] },
+  iconTarget: {
+    minWidth: targets.minimum,
+    minHeight: targets.minimum,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   iconBox: {
     width: 35,
     height: 35,

@@ -6,24 +6,33 @@ export const brandColors = {
   surface: '#E6EDDF',
   surfaceStrong: '#D9E5D2',
   muted: '#647261',
+  controlBorder: '#788672',
 } as const;
 
 export const colors = {
   paper: brandColors.canvas,
   white: '#FFFFFF',
   ink: '#19171D',
-  muted: '#6D6777',
-  lavender: '#DCD3FA',
-  primary: '#CBBBF4',
-  mint: '#B9EBDD',
-  yellow: '#FFED8D',
-  peach: '#FFD0B0',
-  pink: '#F3C9EC',
-  line: '#DED9E5',
-  outline: '#AAA6B1',
-  soft: '#F1EDF7',
+  muted: brandColors.muted,
+  lavender: '#E8E3EE',
+  primary: '#E8E3EE',
+  mint: '#E0ECE2',
+  yellow: '#F2E8C9',
+  peach: '#F1E2D4',
+  pink: '#EBDDE4',
+  line: '#D7DCCF',
+  outline: brandColors.controlBorder,
+  soft: '#EEF0E6',
   success: '#225F4B',
   danger: '#A52F3F',
+} as const;
+export const accentColors = {
+  lavender: colors.lavender,
+  mint: colors.mint,
+  wheat: colors.yellow,
+  peach: colors.peach,
+  rose: colors.pink,
+  lavenderLine: '#A69AB8',
 } as const;
 export type Pastel = 'lavender' | 'mint' | 'yellow' | 'peach' | 'pink';
 // Card-sized tone areas are quieter than the compact accent badges.
