@@ -7,7 +7,7 @@ import { ProgressHero } from '../components/ProgressHero';
 import { ProgressStats } from '../components/ProgressStats';
 import { LessonProgressRow } from '../components/LessonProgressRow';
 import { LearningMilestones } from '../components/LearningMilestones';
-import { brandColors, colors } from '../../../shared/theme/tokens';
+import { colors } from '../../../shared/theme/tokens';
 import { Screen, ContentGroup } from '../../../shared/ui/Screen';
 import { PageHeader } from '../../../shared/ui/PageHeader';
 import { Text } from '../../../shared/ui/Text';
@@ -33,6 +33,9 @@ export function ProgressScreen() {
     lessons.find((lesson) => !progress[lesson.id] && bookmarks.includes(lesson.id)) ??
     lessons.find((lesson) => !progress[lesson.id]);
   const nextProgress = nextLesson ? progress[nextLesson.id] : undefined;
+  const nextReading =
+    nextLesson && nextProgress ? nextLesson.sections[nextProgress.sectionIndex] : undefined;
+  const collectionComplete = lessons.length > 0 && completed === lessons.length;
 
   if (!hydrated || errorKind === 'load') {
     return (
@@ -69,7 +72,7 @@ export function ProgressScreen() {
           {t('progress.milestoneBoard')}
         </Text>
         <Card stroke="subtle" shadow={false} style={styles.overall}>
-          <View style={styles.between}>
+          <View style={styles.summary} accessibilityLiveRegion="polite">
             <Text variant="label">
               {t('progress.lessonsCompleted', { completed, total: lessons.length })}
             </Text>
@@ -80,16 +83,19 @@ export function ProgressScreen() {
           {nextLesson && (
             <View style={styles.nextStep}>
               <Text variant="meta" muted>
-                {t('progress.milestoneNextLesson')}
+                {t(nextReading ? 'progress.milestoneActiveLesson' : 'progress.milestoneNextLesson')}
               </Text>
               <Text variant="title">{nextLesson.title}</Text>
-              {nextProgress && (
-                <Text variant="small">
-                  {t('progress.milestoneReadingPlace', {
-                    position: nextProgress.sectionIndex + 1,
-                    total: nextLesson.sections.length,
-                  })}
-                </Text>
+              {nextProgress && nextReading && (
+                <View style={styles.readingPlace}>
+                  <Text variant="label">{nextReading.title}</Text>
+                  <Text variant="meta" muted>
+                    {t('progress.milestoneReadingPlace', {
+                      position: nextProgress.sectionIndex + 1,
+                      total: nextLesson.sections.length,
+                    })}
+                  </Text>
+                </View>
               )}
               <Button
                 label={t(nextProgress ? 'progress.milestoneResume' : 'progress.milestoneOpen')}
@@ -105,6 +111,18 @@ export function ProgressScreen() {
             completed={completed}
             total={lessons.length}
           />
+          {collectionComplete ? (
+            <Button
+              label={t('progress.milestoneRevisit')}
+              variant="outline"
+              icon="book-open"
+              onPress={() => router.push('/lessons')}
+            />
+          ) : (
+            <Text variant="meta" muted>
+              {t('progress.progressNote')}
+            </Text>
+          )}
         </Card>
       </ContentGroup>
       <ContentGroup>
@@ -117,14 +135,9 @@ export function ProgressScreen() {
         />
       </ContentGroup>
       <ContentGroup>
-        <View style={styles.between}>
-          <Text variant="title" style={styles.grow}>
-            {t('progress.lessonHistory')}
-          </Text>
-          <Text variant="caption" muted>
-            {lessons.length} {t('lessons.sampleLessons')}
-          </Text>
-        </View>
+        <Text variant="title" accessibilityRole="header">
+          {t('progress.lessonHistory')}
+        </Text>
         {lessons.map((lesson) => (
           <LessonProgressRow
             key={lesson.id}
@@ -146,16 +159,15 @@ export function ProgressScreen() {
 }
 
 const styles = StyleSheet.create({
-  overall: { gap: 12 },
-  between: { flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', gap: 10 },
-  grow: { flexGrow: 1, flexShrink: 1 },
+  overall: { gap: 14 },
+  summary: { gap: 2 },
   nextStep: {
     gap: 8,
-    padding: 12,
-    borderWidth: 1,
+    paddingVertical: 12,
+    borderTopWidth: 1,
+    borderBottomWidth: 1,
     borderColor: colors.line,
-    borderRadius: 8,
-    backgroundColor: brandColors.surface,
   },
+  readingPlace: { gap: 2 },
   state: { gap: 12 },
 });

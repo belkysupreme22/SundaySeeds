@@ -40,7 +40,7 @@ export function CourseJourneyCard() {
           />
         </View>
         <View style={styles.words}>
-          {course.isDevelopment && <Text variant="caption">{t('home.developmentCourse')}</Text>}
+          {course.isDevelopment && <Text variant="caption">{t('home.pilotCourse')}</Text>}
           <Text variant="title" style={styles.title}>
             {course.title}
           </Text>

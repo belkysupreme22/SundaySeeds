@@ -110,7 +110,7 @@ export function LessonFilters({
                 <Text variant="small">
                   {savedMatchesUnavailable
                     ? 'Close filters and use the recovery notice to load your saved learning.'
-                    : `${query.trim() ? 'Your search text stays applied.' : 'From the sample collection.'}${matches.length === 0 ? ' Try another combination or clear the filters.' : ''}`}
+                    : `${query.trim() ? 'Your search text stays applied.' : 'From the lesson collection.'}${matches.length === 0 ? ' Try another combination or clear the filters.' : ''}`}
                 </Text>
               </View>
               <Button

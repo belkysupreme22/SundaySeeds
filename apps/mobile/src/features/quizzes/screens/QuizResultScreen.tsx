@@ -47,7 +47,7 @@ export function QuizResultScreen({ lesson, result, answers, onRetry }: QuizResul
         <LessonArtwork id={lesson.id} tone={lesson.color} />
         <View style={styles.lessonCopy}>
           <Text variant="caption" muted>
-            Sample lesson · {lesson.category}
+            {lesson.category}
           </Text>
           <Text variant="title">{lesson.title}</Text>
           <Text variant="small" muted>

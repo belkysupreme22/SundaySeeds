@@ -1,5 +1,6 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import { Image, StyleSheet, View } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { useCourseOffering } from '../hooks/useCourseOffering';
 import { useCourseEnrollment } from '../hooks/useCourseEnrollment';
 import { useCourseQuizProgress } from '../../quizzes/hooks/useCourseQuizProgress';
@@ -15,6 +16,7 @@ import { Screen } from '../../../shared/ui/Screen';
 import { Text } from '../../../shared/ui/Text';
 
 export function ConnectedCourseScreen() {
+  const { t } = useTranslation();
   const { id } = useLocalSearchParams<{ id?: string | string[] }>();
   const courseId = typeof id === 'string' ? id : '';
   const { state, reload } = useCourseOffering(courseId);
@@ -107,7 +109,7 @@ export function ConnectedCourseScreen() {
                 resizeMode="cover"
               />
             </View>
-            {course.isDevelopment && <Text variant="caption">DEVELOPMENT COURSE</Text>}
+            {course.isDevelopment && <Text variant="caption">{t('home.pilotCourse')}</Text>}
             <Text variant="heading" accessibilityRole="header">
               {course.title}
             </Text>

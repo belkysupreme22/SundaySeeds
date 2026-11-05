@@ -1,5 +1,5 @@
 {
-  "accountUnavailable": "Account services are not configured yet. You can continue exploring the sample lessons.",
+  "accountUnavailable": "Account services are not configured yet. You can continue exploring lessons.",
   "emailRequestAccepted": "Request accepted. If this address is eligible, an email will follow. Check your inbox and spam folder. Delivery may take a few minutes.",
   "rateLimited": "Too many requests were made. Wait a few minutes before trying again.",
   "emailNotConfirmed": "Open the confirmation email first, then sign in again.",
@@ -40,7 +40,7 @@
   "confirmationPending": "Your email is still awaiting confirmation. Open the latest confirmation email and try again.",
   "signedOutRevocationUnconfirmed": "Signed out on this device. Server session revocation could not be confirmed. Reconnect and sign in again if needed.",
   "signOutUnconfirmed": "Sign-out could not be confirmed. Check your connection and try again.",
-  "signedOut": "You are signed out on this device. Your sample learning is still here.",
+  "signedOut": "You are signed out on this device. Your lesson activity is still here.",
   "signInForProfile": "Sign in before loading your account profile.",
   "reloadProfileBeforeSaving": "Reload your account profile before saving again. Your draft is still here.",
   "loadProfileBeforeEditing": "Load your account profile before editing it.",

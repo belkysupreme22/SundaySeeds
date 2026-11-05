@@ -1,4 +1,5 @@
 import { Image, StyleSheet, View } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { brandColors, colors } from '../../../shared/theme/tokens';
 import { Button } from '../../../shared/ui/Button';
 import { Card } from '../../../shared/ui/Card';
@@ -12,6 +13,7 @@ export function ConnectedCourseCard({
   course: CourseOffering;
   onView: () => void;
 }) {
+  const { t } = useTranslation();
   const lessonCount = course.modules.reduce((total, module) => total + module.lessons.length, 0);
   const time = courseTimeLabel(course);
   return (
@@ -23,7 +25,7 @@ export function ConnectedCourseCard({
           resizeMode="cover"
         />
       </View>
-      {course.isDevelopment && <Text variant="caption">DEVELOPMENT COURSE</Text>}
+      {course.isDevelopment && <Text variant="caption">{t('home.pilotCourse')}</Text>}
       <Text variant="title" accessibilityRole="header">
         {course.title}
       </Text>

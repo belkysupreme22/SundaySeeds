@@ -23,41 +23,52 @@ export function ProfileHeader({
 }: ProfileHeaderProps) {
   const { t } = useTranslation();
   return (
-    <Card tone="mint" stroke="soft" shadow={false} style={styles.card}>
+    <Card tone="mint" stroke="subtle" shadow={false} style={styles.card}>
       <View style={[styles.identity, stacked && styles.stacked]}>
         <ProfileSeal />
-        <View style={[styles.copy, stacked && styles.stackedCopy]} accessibilityLiveRegion="polite">
-          <Text variant="meta" muted>
-            {t('profile.identityLabel')}
-          </Text>
-          <Text variant="heading" accessibilityRole="header" style={styles.name}>
-            {loading
-              ? t('profile.loadingName')
-              : unavailable
-                ? t('profile.nameUnavailable')
-                : displayName || t('profile.greeting', { name: t('profile.learner') })}
-          </Text>
+        <View style={[styles.copy, stacked && styles.stackedCopy]}>
+          <View accessibilityLiveRegion="polite" style={styles.nameBlock}>
+            <Text variant="meta" muted>
+              {t('profile.identityLabel')}
+            </Text>
+            <Text variant="heading" accessibilityRole="header" style={styles.name}>
+              {loading
+                ? t('profile.loadingName')
+                : unavailable
+                  ? t('profile.nameUnavailable')
+                  : displayName || t('profile.greeting', { name: t('profile.learner') })}
+            </Text>
+          </View>
+          {!loading && !unavailable && (
+            <Button
+              label={t(displayName ? 'profile.editName' : 'profile.addName')}
+              icon="edit-2"
+              variant="outline"
+              onPress={onEdit}
+              style={styles.edit}
+            />
+          )}
         </View>
       </View>
-      {!loading && !unavailable && (
-        <Button
-          label={t(displayName ? 'profile.editName' : 'profile.addName')}
-          icon="edit-2"
-          variant="outline"
-          onPress={onEdit}
-          style={styles.edit}
-        />
-      )}
     </Card>
   );
 }
 
 const styles = StyleSheet.create({
-  card: { padding: 14, borderRadius: 9, gap: 12 },
+  card: { padding: 14, borderRadius: 12 },
+  nameBlock: { gap: 4 },
   name: { color: brandColors.forest },
-  edit: { borderColor: brandColors.controlBorder, minHeight: 44, paddingVertical: 8 },
-  identity: { flexDirection: 'row', alignItems: 'center', gap: 12 },
-  copy: { flex: 1, minWidth: 0, gap: 4 },
+  edit: {
+    alignSelf: 'flex-start',
+    borderColor: brandColors.controlBorder,
+    backgroundColor: brandColors.canvas,
+    minHeight: 44,
+    maxWidth: '100%',
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+  },
+  identity: { flexDirection: 'row', alignItems: 'center', gap: 14 },
+  copy: { flex: 1, minWidth: 0, gap: 9 },
   stacked: { flexDirection: 'column', alignItems: 'flex-start' },
   stackedCopy: { flexGrow: 0, flexShrink: 0, flexBasis: 'auto', alignSelf: 'stretch' },
 });

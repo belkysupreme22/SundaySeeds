@@ -16,26 +16,39 @@ export function LearningMilestones({ started, completed, total }: LearningMilest
 
   const halfway = Math.ceil(total / 2);
   const checkpoints = [
-    { id: 'start', label: t('progress.milestoneStarted'), done: started || completed > 0 },
-    { id: 'first', label: t('progress.milestoneFirstQuiz'), done: completed >= 1 },
+    {
+      id: 'start',
+      label: t('progress.milestoneStarted'),
+      done: started || completed > 0,
+      threshold: 0,
+    },
+    { id: 'first', label: t('progress.milestoneFirstQuiz'), done: completed >= 1, threshold: 1 },
     ...(total > 2
       ? [
           {
             id: 'halfway',
             label: t('progress.milestoneHalfway', { count: halfway }),
             done: completed >= halfway,
+            threshold: halfway,
           },
         ]
       : []),
     ...(total > 1
-      ? [{ id: 'all', label: t('progress.milestoneAll'), done: completed >= total }]
+      ? [
+          {
+            id: 'all',
+            label: t('progress.milestoneAll'),
+            done: completed >= total,
+            threshold: total,
+          },
+        ]
       : []),
   ];
   const nextIndex = checkpoints.findIndex((checkpoint) => !checkpoint.done);
 
   return (
     <View>
-      {checkpoints.map(({ id, label, done }, index) => {
+      {checkpoints.map(({ id, label, done, threshold }, index) => {
         const next = index === nextIndex;
         const last = index === checkpoints.length - 1;
         const status = done
@@ -65,6 +78,11 @@ export function LearningMilestones({ started, completed, total }: LearningMilest
               <Text variant="meta" muted={!next} style={next && styles.nextLabel}>
                 {t(status)}
               </Text>
+              {next && threshold > 1 && (
+                <Text variant="meta" muted>
+                  {t('progress.milestoneRemaining', { count: threshold - completed })}
+                </Text>
+              )}
             </View>
           </View>
         );

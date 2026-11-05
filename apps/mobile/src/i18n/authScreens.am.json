@@ -33,7 +33,7 @@
   "backToSignIn": "ወደ መግቢያ ይመለሱ",
   "returnToSignIn": "ወደ መግቢያ ይመለሱ",
   "backToSignUp": "ወደ ምዝገባ ይመለሱ",
-  "accountOptional": "መለያ መክፈት ግዴታ አይደለም። የናሙና ትምህርቶችን መመልከት ይችላሉ።",
+  "accountOptional": "መለያ መክፈት ግዴታ አይደለም። ትምህርቶችን መመልከት ይችላሉ።",
   "accountUnavailable": "መለያ ማዘጋጀት ለጊዜው አይቻልም። ትምህርቶቹን መመልከት ይችላሉ።",
   "otherSignInOptions": "ሌሎች የመግቢያ አማራጮች",
   "providersUnavailable": "በGoogle ወይም በApple መለያ መግባት ገና አይቻልም።",

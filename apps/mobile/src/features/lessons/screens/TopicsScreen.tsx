@@ -11,7 +11,7 @@ import { Icon } from '../../../shared/ui/Icon';
 export function TopicsScreen() {
   const { width, fontScale } = useWindowDimensions();
   const singleColumn = width < 350 || fontScale >= 1.5;
-  const collectionLabel = `${lessons.length} sample ${lessons.length === 1 ? 'lesson' : 'lessons'}`;
+  const collectionLabel = `${lessons.length} ${lessons.length === 1 ? 'lesson' : 'lessons'}`;
 
   return (
     <Screen tabs>
@@ -52,7 +52,7 @@ export function TopicsScreen() {
         <Pressable
           accessibilityRole="button"
           accessibilityLabel={`All lessons, ${collectionLabel}`}
-          accessibilityHint="Browse the complete sample collection"
+          accessibilityHint="Browse the complete lesson collection"
           onPress={() =>
             router.replace({ pathname: '/lessons', params: { topic: '', filter: 'all' } })
           }
@@ -73,7 +73,7 @@ export function TopicsScreen() {
         </Pressable>
       </View>
       <Text variant="caption" muted>
-        Sample topics · Choose a story to read, reflect and grow.
+        Choose a story to read, reflect and grow.
       </Text>
     </Screen>
   );

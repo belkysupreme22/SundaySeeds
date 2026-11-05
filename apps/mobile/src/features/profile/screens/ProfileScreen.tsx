@@ -1,6 +1,7 @@
 import { router } from 'expo-router';
 import { StyleSheet, useWindowDimensions } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import { lessons } from '../../lessons/data/lessons';
 import { useLearningProgress } from '../../progress/hooks/useLearningProgress';
 import { useLearnerProfile } from '../hooks/useLearnerProfile';
 import { ProfileHeader } from '../components/ProfileHeader';
@@ -24,10 +25,11 @@ export function ProfileScreen() {
   } = useLearningProgress();
   const { width, fontScale } = useWindowDimensions();
   const stacked = width < 350 || fontScale >= 1.5;
-  const entries = Object.values(progress);
+  const entries = lessons.flatMap((lesson) => (progress[lesson.id] ? [progress[lesson.id]] : []));
   const completed = entries.filter((entry) => entry.completed).length;
   const inProgress = entries.length - completed;
-  const saved = bookmarks.length;
+  const saved = lessons.filter((lesson) => bookmarks.includes(lesson.id)).length;
+  const learningReady = learningHydrated && errorKind !== 'load';
 
   return (
     <Screen tabs>
@@ -60,9 +62,9 @@ export function ProfileScreen() {
       </ContentGroup>
       <ContentGroup>
         <Text variant="title" accessibilityRole="header">
-          {t('lessons.sampleLessons')}
+          {t('profile.lessonActivity')}
         </Text>
-        {!learningHydrated || errorKind === 'load' ? (
+        {!learningReady ? (
           <Card tone={errorKind === 'load' ? 'peach' : undefined} stroke="soft" shadow={false}>
             <Text variant="small" accessibilityLiveRegion="polite">
               {errorKind === 'load' ? t('progress.onHoldDesc') : t('progress.loading')}
@@ -74,7 +76,7 @@ export function ProfileScreen() {
               completed={completed}
               inProgress={inProgress}
               saved={saved}
-              stacked={stacked}
+              onOpen={(filter) => router.replace({ pathname: '/lessons', params: { filter } })}
             />
             {error && (
               <Text variant="caption" muted>
@@ -93,14 +95,18 @@ export function ProfileScreen() {
               tone: 'mint',
               onPress: () => router.replace('/progress'),
             },
-            {
-              id: 'saved',
-              title: t('lessons.savedLessons'),
-              description: t('profile.savedDescription'),
-              icon: 'bookmark',
-              tone: 'yellow',
-              onPress: () => router.replace('/lessons?filter=saved'),
-            },
+            ...(!learningReady
+              ? [
+                  {
+                    id: 'saved',
+                    title: t('lessons.savedLessons'),
+                    description: t('profile.savedDescription'),
+                    icon: 'bookmark' as const,
+                    tone: 'yellow' as const,
+                    onPress: () => router.replace('/lessons?filter=saved'),
+                  },
+                ]
+              : []),
           ]}
         />
       </ContentGroup>

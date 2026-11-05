@@ -97,7 +97,7 @@ export function LessonsScreen() {
                     ? t('lessons.completedLessons')
                     : filter === 'in-progress'
                       ? t('lessons.inProgress')
-                      : t('lessons.sampleLessons')}
+                      : t('lessons.collectionLabel')}
             </Text>
             <Text variant="small" muted>
               {savedViewUnavailable

@@ -20,14 +20,11 @@ export function ProgressHero({ completed, total, started, stacked }: ProgressHer
         </Text>
         <Text variant="small">
           {allComplete
-            ? 'You’ve finished every sample quiz. Revisit a lesson and carry it into your week.'
+            ? 'You’ve finished every quiz in this collection. Revisit a lesson and carry it into your week.'
             : started
               ? 'Pick up a lesson, reflect on its message and take one small step forward.'
               : 'A story, a reflection, a small act of faith. Your first lesson is waiting.'}
         </Text>
-        <View style={styles.label}>
-          <Text variant="caption">{total} lessons to explore</Text>
-        </View>
       </View>
       <View style={[styles.art, stacked && styles.stackedArt]} accessible={false}>
         <Image
@@ -45,15 +42,6 @@ export function ProgressHero({ completed, total, started, stacked }: ProgressHer
 const styles = StyleSheet.create({
   hero: { flexDirection: 'row', alignItems: 'center', gap: 12 },
   copy: { flex: 1, gap: 8 },
-  label: {
-    alignSelf: 'flex-start',
-    backgroundColor: colors.white,
-    paddingHorizontal: 8,
-    paddingVertical: 5,
-    borderWidth: 1,
-    borderColor: colors.line,
-    borderRadius: 5,
-  },
   art: {
     width: 100,
     height: 150,
@@ -66,5 +54,5 @@ const styles = StyleSheet.create({
   portrait: { position: 'absolute', right: -8, width: '185%', height: '100%' },
   stacked: { flexDirection: 'column', alignItems: 'stretch' },
   stackedCopy: { flexGrow: 0, flexShrink: 0, flexBasis: 'auto' },
-  stackedArt: { width: 118, height: 145, alignSelf: 'center' },
+  stackedArt: { width: 118, height: 145, alignSelf: 'flex-start' },
 });

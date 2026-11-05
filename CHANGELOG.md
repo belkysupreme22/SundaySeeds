@@ -5,6 +5,8 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Design system
+- Aligned Profile around a seed bookplate and an activity ledger with shortcuts to completed, in-progress and saved lessons. Progress shows the current reading section, remaining milestones and a revisit action.
+- Replaced development-style lesson labels with learner-facing copy and kept the explanation of device-only activity in Settings.
 - Refined Profile and Edit profile into one bilingual identity flow with a clear edit action, scoped activity counts, and consistent return navigation.
 - Added a seed-and-leaf quiz celebration, clearer press and focus states, and a Profile seed seal with recorded learning counts.
 - Replaced the overall progress bar with a milestone board and a next-lesson action that can resume an unfinished reading.

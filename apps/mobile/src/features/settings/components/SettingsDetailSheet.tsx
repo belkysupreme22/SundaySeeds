@@ -59,23 +59,23 @@ const details: Record<SettingsDetailKey, DetailContent> = {
   data: {
     title: 'Data usage',
     paragraphs: [
-      'Sample reading positions, quiz scores, bookmarks and your guest name stay on this device. Signing in does not upload or merge them. Your account display name is stored separately with your account.',
+      'Reading positions, quiz scores and bookmarks from the Lessons tab stay on this device, along with your guest name. Signing in does not upload or merge them. Your account display name is stored separately with your account.',
       'Account learning preferences, enrollments, course reading places, lesson bookmarks and completed knowledge checks are stored with your account. A small recovery record on this device keeps an interrupted quiz request on the same attempt; it is not a saved result.',
-      'Reset sample learning removes sample quiz scores, reading positions and bookmarks. Names, account learning preferences, course enrollments, connected reading places and bookmarks, quiz results and your introduction preference are kept.',
+      'Reset lesson activity clears the quiz scores, reading positions and bookmarks stored on this device. Names, account learning preferences, course enrollments, connected reading places and bookmarks, quiz results and your introduction preference are kept.',
       'Wi-Fi-only and mobile-data preferences are not available yet.',
     ],
   },
   help: {
     title: 'Help Center',
     paragraphs: [
-      'Find a lesson: open Lessons to browse the sample collection, search by title or scripture, or use the filter icon. You can leave all filters off.',
-      'Start a sample lesson: open its overview and choose Start or Continue. Read each section, then move to the quiz.',
-      'Take a sample quiz: choose an answer, tap Check answer, read the explanation and continue. Finish all questions to record completion.',
-      'See sample progress: open Progress for completed lessons and best quiz scores. Use the bookmark icon on a lesson to save it for later.',
+      'Find a lesson: open Lessons to browse the lesson collection, search by title or scripture, or use the filter icon. You can leave all filters off.',
+      'Start a lesson: open its overview and choose Start or Continue. Read each section, then move to the quiz.',
+      'Take a lesson quiz: choose an answer, tap Check answer, read the explanation and continue. Finish all questions to record completion.',
+      'See lesson progress: open Progress for completed lessons and best quiz scores. Use the bookmark icon on a lesson to save it for later.',
       'Browse connected courses: choose Courses on Home to open the Course library. An available course shows its outline; joining requires a verified account and an explicit Join action. Open joined readings from your saved-edition curriculum.',
-      'Take a course knowledge check: open a joined reading and choose Open knowledge check. Check each answer, then Finish quiz to record the result. Return to the course for completed checks and best scores; the Progress tab shows sample learning. If a request is interrupted, choose Check again to recover the same attempt.',
+      'Take a course knowledge check: open a joined reading and choose Open knowledge check. Check each answer, then Finish quiz to record the result. Return to the course for completed checks and best scores. If a request is interrupted, choose Check again to recover the same attempt.',
       'Keep a course reading place: choose Save my place here beside a section and Bookmark this lesson to keep it bookmarked. Your verified account can load these choices on another device. If saving is not confirmed, retry the same change or reload saved state; a conflict requires reloading before another choice.',
-      'Start fresh: use Reset sample learning in Settings. You can cancel before confirming; account enrollments are kept.',
+      'Start fresh: use Reset lesson activity in Settings. You can cancel before confirming; account enrollments are kept.',
       'If saved learning cannot load, changes pause to protect it. Use Try loading again in the notice. If changes cannot save, keep the app open and use Try saving again.',
     ],
   },
@@ -83,7 +83,7 @@ const details: Record<SettingsDetailKey, DetailContent> = {
     title: 'Privacy Policy',
     status: 'Official policy not published yet',
     paragraphs: [
-      'An official privacy policy has not been published for this preview. This panel is a status notice, not a privacy policy.',
+      'An official privacy policy has not been published yet.',
       'For the current storage behavior, open Data usage in Settings.',
     ],
   },
@@ -91,7 +91,7 @@ const details: Record<SettingsDetailKey, DetailContent> = {
     title: 'Terms of Service',
     status: 'Official terms not published yet',
     paragraphs: [
-      'Official terms of service have not been published for this preview. There are no terms to review or accept in this panel.',
+      'Official terms of service have not been published yet.',
     ],
   },
   about: {
@@ -99,7 +99,7 @@ const details: Record<SettingsDetailKey, DetailContent> = {
     status: 'Version 0.1.0',
     paragraphs: [
       'A little faith, every day.',
-      `Explore ${lessons.length} sample lessons with scripture, reflection and short quizzes.`,
+      `Explore ${lessons.length} lessons with scripture, reflection and short quizzes.`,
       'Loading animation: “Loading dots” by Kyle McGahey on LottieFiles, adapted for SundaySeeds under the Lottie Simple License.',
     ],
   },

@@ -1,7 +1,7 @@
 import { StyleSheet, View } from 'react-native';
-import Svg, { Path } from 'react-native-svg';
+import Svg, { Path, Rect, Svg as Inset } from 'react-native-svg';
 import { seedPaths, seedViewBox } from '../../../shared/branding/seedMark';
-import { accentColors, brandColors, colors } from '../../../shared/theme/tokens';
+import { accentColors, brandColors } from '../../../shared/theme/tokens';
 
 export function ProfileSeal() {
   return (
@@ -12,35 +12,33 @@ export function ProfileSeal() {
       importantForAccessibility="no-hide-descendants"
       aria-hidden
     >
-      <View style={styles.field}>
-        <Svg width={50} height={50} viewBox={seedViewBox}>
+      <Svg width={80} height={90} viewBox="0 0 80 90">
+        <Rect x={9} y={7} width={64} height={75} rx={7} fill={accentColors.wheat} />
+        <Rect x={5} y={3} width={64} height={75} rx={7} fill={brandColors.forest} />
+        <Rect x={13} y={10} width={49} height={60} rx={3} fill={brandColors.canvas} />
+        <Path
+          d="M18 17h9m-9 0v9m39-9h-9m9 0v9m-39 37h9m-9 0v-9m39 9h-9m9 0v-9"
+          fill="none"
+          stroke={brandColors.controlBorder}
+          strokeWidth={1}
+        />
+        <Inset x={18} y={19} width={40} height={40} viewBox={seedViewBox}>
           {seedPaths.map(({ id, d }) => (
             <Path key={id} d={d} fill={brandColors.forest} fillRule="evenodd" />
           ))}
-        </Svg>
-      </View>
+        </Inset>
+        <Path
+          d="M43 73h12v14l-6-4-6 4z"
+          fill={accentColors.wheat}
+          stroke={brandColors.forest}
+          strokeWidth={1}
+          strokeLinejoin="round"
+        />
+      </Svg>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  seal: {
-    width: 72,
-    height: 72,
-    flexShrink: 0,
-    borderRadius: 36,
-    borderWidth: 1,
-    borderColor: colors.line,
-    backgroundColor: brandColors.canvas,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  field: {
-    width: 58,
-    height: 58,
-    borderRadius: 29,
-    backgroundColor: accentColors.wheat,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+  seal: { width: 80, height: 90, flexShrink: 0 },
 });

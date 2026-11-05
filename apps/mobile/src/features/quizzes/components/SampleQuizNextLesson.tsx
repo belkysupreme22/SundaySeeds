@@ -26,7 +26,7 @@ export function SampleQuizNextLesson({ lessonId }: { lessonId: string }) {
   return (
     <QuizNextAction
       title={`Continue with ${next.title}`}
-      description={`Sample lesson · ${next.durationMinutes} minutes of reading`}
+      description={`${next.durationMinutes} minutes of reading`}
       icon="arrow-right"
       tone="mint"
       onPress={() => router.push(`/lessons/${next.id}`)}

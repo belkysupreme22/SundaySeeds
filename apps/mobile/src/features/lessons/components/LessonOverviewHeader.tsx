@@ -19,7 +19,7 @@ export function LessonOverviewHeader({ lesson }: { lesson: Lesson }) {
         style={[styles.hero, stacked && styles.stacked]}
       >
         <View style={[styles.copy, stacked && styles.stackedCopy]}>
-          <Text variant="caption">{lesson.category.toUpperCase()} · SAMPLE LESSON</Text>
+          <Text variant="caption">{lesson.category.toUpperCase()}</Text>
           <Text variant="heading" style={styles.title}>
             {lesson.title}
           </Text>

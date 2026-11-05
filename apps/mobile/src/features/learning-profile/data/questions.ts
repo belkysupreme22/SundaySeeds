@@ -112,7 +112,7 @@ export const questionPages = [
     subtitle: 'Choose up to three topics that spark your curiosity.',
     icon: 'book-open',
     tone: 'mint',
-    note: 'These topics are represented in the current sample course.',
+    note: 'You can explore these topics in the lessons.',
   },
   {
     title: 'Where would you like to begin?',

@@ -118,7 +118,7 @@ export function LessonSearchScreen() {
                     ? 'Finish a lesson’s quiz to see it in Completed, or clear your filters.'
                     : filter === 'in-progress'
                       ? 'Start a reading to keep your place, or clear your filters to explore.'
-                      : 'Clear your filters to explore the sample collection.'}
+                      : 'Clear your filters to browse all lessons.'}
             </Text>
             {query.length > 0 && (
               <Button label="Clear search" variant="outline" icon="x" onPress={clearQuery} />

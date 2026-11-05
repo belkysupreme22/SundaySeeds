@@ -24,7 +24,7 @@ export function ContinueLearning({ lessons }: { lessons: Lesson[] }) {
         onPress={() => router.replace('/lessons?filter=in-progress')}
       />
       <Text variant="small" muted>
-        Pick up your sample lessons where you left off.
+        Pick up where you left off.
       </Text>
       {lessons.map((lesson) => {
         const index = progress[lesson.id].sectionIndex;

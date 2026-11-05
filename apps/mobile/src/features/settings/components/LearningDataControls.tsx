@@ -23,9 +23,9 @@ export function LearningDataControls() {
     try {
       await resetProgress();
       setConfirm(false);
-      setMessage('Your sample reading positions, quiz scores and bookmarks have been reset.');
+      setMessage('Your reading positions, quiz scores and bookmarks have been reset.');
     } catch {
-      setMessage('We could not save the sample learning reset. Keep the app open and try again.');
+      setMessage('We could not reset your lesson activity. Keep the app open and try again.');
     } finally {
       resetting.current = false;
       setBusy(false);
@@ -42,13 +42,14 @@ export function LearningDataControls() {
       {confirm ? (
         <Card tone="peach" shadow={false} style={styles.confirmation}>
           <View style={styles.confirmationContent}>
-            <Text variant="label">Reset sample learning?</Text>
+            <Text variant="label">Reset lesson activity?</Text>
             <Text variant="small">
-              This removes sample quiz scores, reading positions and bookmarks. Names, account
-              learning preferences, course enrollments and your introduction preference are kept.
+              This removes quiz scores, reading positions and bookmarks stored on this device.
+              Names, account learning preferences, course enrollments and your introduction
+              preference are kept.
             </Text>
             <Button
-              label={busy ? 'Resetting…' : 'Yes, reset sample learning'}
+              label={busy ? 'Resetting…' : 'Yes, reset lesson activity'}
               icon="refresh-cw"
               variant="outline"
               style={styles.confirmButton}
@@ -56,7 +57,7 @@ export function LearningDataControls() {
               onPress={() => void reset()}
             />
             <Button
-              label="Keep sample learning"
+              label="Keep lesson activity"
               icon={false}
               variant="outline"
               style={styles.confirmButton}
@@ -71,8 +72,8 @@ export function LearningDataControls() {
       ) : (
         <Pressable
           accessibilityRole="button"
-          accessibilityLabel="Reset sample learning"
-          accessibilityHint="Opens a confirmation before removing sample scores, reading positions and bookmarks."
+          accessibilityLabel="Reset lesson activity"
+          accessibilityHint="Opens a confirmation before removing local quiz scores, reading positions and bookmarks."
           style={({ pressed }) => [styles.resetRow, pressed && styles.pressed]}
           onPress={() => {
             setMessage('');
@@ -81,7 +82,7 @@ export function LearningDataControls() {
         >
           <Icon name="refresh-cw" size={16} color={colors.danger} />
           <Text variant="label" style={styles.resetLabel}>
-            Reset sample learning
+            Reset lesson activity
           </Text>
         </Pressable>
       )}

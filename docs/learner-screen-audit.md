@@ -2,8 +2,8 @@
 
 ## Profile identity and editing — 5 November 2026
 
-Profile gives editing a labelled action under the learner’s identity. Its
-sample activity and routes are grouped together, with one Settings entry.
+Profile aligns the name and edit action beside a seed bookplate. The activity
+ledger aligns labels and counts in three rows, with one Settings entry above.
 Verify guest and signed-in names, blank names, save and retry. Start editing
 from Profile and Settings. Check that Save, Cancel and Back return to the
 screen that opened the form and that a direct entry falls back to Profile.
@@ -15,12 +15,14 @@ Check keyboard, narrow width and larger English/Amharic text.
   seed burst, usable actions during animation and unchanged score values. Reopen
   a recorded connected result and try reduced motion, backgrounding, and Back.
 - **Progress:** check the milestone board before starting, after opening a
-  reading, after the first quiz, at halfway, and after completing the collection.
-  Verify Resume reading opens the saved section. Check that Open lesson leads to
-  the named lesson overview and that completion hides the next-lesson action.
+  reading, after advancing a section, after the first quiz, at halfway, and
+  after completing the collection. Verify the section name and position move
+  with reading and the completion count moves with a finished quiz. Check
+  Resume reading opens the saved section and Revisit lessons appears at the end.
   Check focus and press feedback on lesson history rows.
 - **Profile:** check completed, in-progress and saved counts after changes.
-  Each tile uses one icon. Check storage-unavailable copy and Profile navigation.
+  Each row opens its Lessons filter. Check keyboard focus, alignment with large
+  text, and the Saved fallback during a storage load failure.
 - **Controls:** check focus, press, answer selection and review expansion in
   English and Amharic at narrow widths and larger text. Source review only.
 
