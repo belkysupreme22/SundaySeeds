@@ -50,6 +50,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
   - Externalized strings across App shell, TeacherDashboard, and AdminDashboard navigation and headings.
 
 ### Changed
+- Fixed onboarding verification Back navigation so it returns to the sign-in or sign-up form that opened it. Source review only. Device verification is pending.
 - Refreshed the three introduction pages with natural-color, generated photography-style reading, community and seedling imagery, plus gentle image/sticker motion that respects reduced motion, focus and background state. Kept Next, Back, Skip, saving and recovery behavior; owner app/native and visual review remain pending.
 - Implemented class community, invitations, staff directory and progress reporting (S5): added backend migration `20261030110000_classes_and_staff_administration.sql` introducing `classes`, `class_courses`, `class_members`, and `class_invitations` in `class_community_private`, along with teacher class management RPCs, learner token-based invitation acceptance, and class learning summary aggregation. Added admin staff directory inspection and authoring assignment RPCs.
 - Connected teacher and admin workspaces in `apps/teacher-web`: added `StaffDirectoryPanel` in Admin Access workspace for live staff role grants and course author assignments; updated `useTeachingClasses` to sync with live backend classes, invitations, and roster actions; and connected `ReportsPanel` to live class progress metrics with course breakdown tables and privacy-preserving metrics.

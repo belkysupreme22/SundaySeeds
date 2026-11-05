@@ -11,14 +11,23 @@ import { MinimalSetupScreen } from './MinimalSetupScreen';
 import { WelcomeScreen } from './WelcomeScreen';
 
 type Step =
-  'introduction' | 'account' | 'sign-in' | 'sign-up' | 'recovery' | 'verify' | 'reset' | 'setup';
+  | 'introduction'
+  | 'account'
+  | 'sign-in'
+  | 'sign-up'
+  | 'recovery'
+  | 'verify-from-sign-in'
+  | 'verify-from-sign-up'
+  | 'reset'
+  | 'setup';
 
 const previousStep: Record<Exclude<Step, 'introduction'>, Step> = {
   account: 'introduction',
   'sign-in': 'account',
   'sign-up': 'account',
   recovery: 'sign-in',
-  verify: 'sign-up',
+  'verify-from-sign-in': 'sign-in',
+  'verify-from-sign-up': 'sign-up',
   reset: 'recovery',
   setup: 'account',
 };
@@ -67,7 +76,7 @@ export function WelcomeFlow({
     signIn: () => setStep('sign-in'),
     signUp: () => setStep('sign-up'),
     recover: () => setStep('recovery'),
-    verify: () => setStep('verify'),
+    verify: () => setStep(step === 'sign-in' ? 'verify-from-sign-in' : 'verify-from-sign-up'),
     reset: () => setStep('reset'),
     continueLearning: skipAccount,
   };
@@ -77,11 +86,11 @@ export function WelcomeFlow({
       <AccountScreen key={step} mode={step} navigation={navigation} continueLabel="Skip for now" />
     );
   }
-  if (step === 'verify' || step === 'reset') {
+  if (step === 'verify-from-sign-in' || step === 'verify-from-sign-up' || step === 'reset') {
     return (
       <AccountFollowUpScreen
         key={step}
-        mode={step}
+        mode={step === 'reset' ? 'reset' : 'verify'}
         navigation={navigation}
         continueLabel="Skip for now"
       />
