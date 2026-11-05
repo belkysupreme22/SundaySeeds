@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parents[3]
 DESTINATION = ROOT / 'apps/mobile/assets/fonts'
 ADOBE = 'https://raw.githubusercontent.com/adobe-fonts/source-serif/release/'
 NOTO = 'https://raw.githubusercontent.com/notofonts/noto-fonts/main/'
+GOFA = 'https://raw.githubusercontent.com/debessay/Geez_monospace_font/9ff60b3c999e6a027b217ea25cfcacf2565b533e/'
 ABYSSINICA = 'https://software.sil.org/downloads/r/abyssinica/AbyssinicaSIL-2.300.zip'
 ABYSSINICA_FILES = {
     'AbyssinicaSIL-Regular.ttf': 'AbyssinicaSIL-2.300/AbyssinicaSIL-Regular.ttf',
@@ -22,6 +23,8 @@ FILES = {
     'NotoSerifEthiopic-Regular.ttf': NOTO + 'hinted/ttf/NotoSerifEthiopic/NotoSerifEthiopic-Regular.ttf',
     'OFL-SourceSerif4.txt': ADOBE + 'LICENSE.md',
     'OFL-Noto.txt': NOTO + 'LICENSE',
+    'GeezGofaMonoC-Regular.ttf': GOFA + 'font/Geez_Gofa_mono_C_200_regular_normal_plain.ttf',
+    'OFL-GeezGofaMonoC.txt': GOFA + 'OFL.md',
 }
 
 def fetch(url):
@@ -35,6 +38,11 @@ def main():
     records = []
     # Fetch/validate everything before writing the asset set.
     downloaded = {name: (fetch(url), {'url': url}) for name, url in FILES.items()}
+    gofa_license, gofa_source = downloaded['OFL-GeezGofaMonoC.txt']
+    downloaded['OFL-GeezGofaMonoC.txt'] = (
+        b'\n'.join(line.rstrip(b' \t') for line in gofa_license.splitlines()) + b'\n',
+        {**gofa_source, 'normalizedWhitespace': True},
+    )
     with ZipFile(BytesIO(fetch(ABYSSINICA))) as archive:
         for name, member in ABYSSINICA_FILES.items():
             data = archive.read(member)

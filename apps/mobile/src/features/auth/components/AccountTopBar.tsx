@@ -12,7 +12,7 @@ export function AccountTopBar({ label, onBack }: { label: string; onBack: () => 
       <View style={styles.row}>
         <IconButton name="arrow-left" label={t('common.back')} onPress={onBack} />
         <View style={styles.badge}>
-          <Text variant="meta">{label}</Text>
+          <Text variant="accentMeta">{label}</Text>
         </View>
       </View>
       <AccountLanguagePicker />

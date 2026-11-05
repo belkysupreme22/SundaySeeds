@@ -80,6 +80,7 @@ disabled treatment and actual placement still need review.
 | Amharic interface | Noto Sans Ethiopic | 400 normal; 600 emphasis |
 | Amharic long reading | Noto Serif Ethiopic | 400 |
 | Short account headings | Source Serif 4 (English), Abyssinica SIL (Amharic) | 400 |
+| Selected Amharic metadata labels | Geez Gofa Mono C | 400 |
 
 Poppins retains the established geometric interface. A serif reading role creates
 a quieter editorial rhythm for long lessons without applying decorative church
@@ -102,6 +103,11 @@ The [guide](guide.html#auth-type-options) compares ten Amharic heading faces
 and an English Lexend account specimen alongside the current typography.
 See the [comparison sources and licensing](specimen-fonts/README.md).
 
+Geez Gofa Mono C adds a fixed-width accent to account context badges, the
+optional setup step and Home’s memory-verse label. Use `accentMeta` for those
+labels. Amharic runs fall back to Noto Sans Ethiopic when needed, and mixed Latin
+text such as `KJV` uses Poppins. Account titles and Scripture use their own roles.
+
 | Semantic role | Size / line height | Usage |
 | --- | --- | --- |
 | Hero | 27 / 35 | Short first-run or featured heading |
@@ -111,6 +117,7 @@ See the [comparison sources and licensing](specimen-fonts/README.md).
 | New prose `bodyLarge` | 16 / 26 | New interface explanatory content |
 | New action `control` | 14 / 20 | New control labels |
 | New metadata `meta` | 12 / 18 | Secondary facts that remain readable |
+| Accent metadata `accentMeta` | 12 / 18 | Selected short labels. Ethiopic uses 12 / 20 |
 | Editorial `reading` | 20 / 32 | Long lesson body and reflection text; Amharic uses20/34 |
 
 Existing compact `body 14/23`, `small 12/19`, `label 12/19` and `caption 10/16` are

@@ -149,7 +149,9 @@ export function HomeScreen() {
         <Card tone="mint" shadow={false}>
           <View style={styles.verseTitle}>
             <Icon name="sun" size={20} color={brandColors.forest} />
-            <Text variant="caption">{t('home.memoryVerseLabel')}</Text>
+            <Text variant="accentMeta" style={styles.verseLabel}>
+              {t('home.memoryVerseLabel')}
+            </Text>
           </View>
           <Text variant="title" style={styles.verse}>
             {t('home.verseText')}
@@ -194,6 +196,7 @@ const styles = StyleSheet.create({
   shortcutTitle: { fontSize: 12, lineHeight: 19, textAlign: 'center' },
   shortcutSubtitle: { fontSize: 11, lineHeight: 18, textAlign: 'center' },
   verseTitle: { flexDirection: 'row', alignItems: 'center', gap: 8, flexWrap: 'wrap' },
+  verseLabel: { flexShrink: 1 },
   verse: { marginTop: 10, marginBottom: 8 },
   demo: { textAlign: 'center', paddingHorizontal: 10 },
 });

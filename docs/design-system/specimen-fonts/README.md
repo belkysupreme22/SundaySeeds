@@ -15,12 +15,13 @@ binaries. The license text uses LF line endings with trailing whitespace trimmed
 | Brana | Amha Asfaw’s 1995 Ethiopic face, named for Ethiopian manuscript parchment |
 | Goha Tibeb Zemen | The Ge’ez Frontiers Foundation’s classic Zemen face |
 | Waldba Jiret | A screen-oriented take on the classic Ethiopic serif |
-| Geez Gofa Mono C | A fixed-width Amharic option for comparison |
+| Geez Gofa Mono C | A fixed-width Amharic face also used for selected labels in the app |
 
 The Waldba snapshots are Raey Type's Unicode preservation work derived from the
 Senamirmir WashRa collection. The guide uses plain modern Amharic. Any app
-adoption needs wider text coverage and a native layout review. These files are
-loaded by the local guide as candidates; the app uses its existing font roles.
+adoption needs wider text coverage and a native layout review. The Gofa specimen
+uses the [mobile font asset and license](../../../apps/mobile/assets/fonts/README.md).
+Other candidate files are loaded by the local guide for comparison.
 [Raey Type collection](https://github.com/raeytype/waldba-font-collection)
 [Brana project](https://github.com/raeytype/brana)
 [X.Org release archive](https://xorg.freedesktop.org/archive/individual/font/)

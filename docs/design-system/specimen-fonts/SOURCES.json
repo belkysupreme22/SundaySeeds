@@ -51,19 +51,6 @@
     "sha256": "90b7c632a46761e52e33be0391a287345f7d88f202ba5047b3da1647a1e86981"
   },
   {
-    "file": "GeezGofaMonoC-Regular.ttf",
-    "url": "https://raw.githubusercontent.com/debessay/Geez_monospace_font/9ff60b3c999e6a027b217ea25cfcacf2565b533e/font/Geez_Gofa_mono_C_200_regular_normal_plain.ttf",
-    "bytes": 298412,
-    "sha256": "b32a06ad6188a974e709bbe5e95e721919a9b6dcca46fd7c411432dddf23ee73"
-  },
-  {
-    "file": "OFL-GeezGofaMonoC.txt",
-    "url": "https://raw.githubusercontent.com/debessay/Geez_monospace_font/9ff60b3c999e6a027b217ea25cfcacf2565b533e/OFL.md",
-    "normalizedWhitespace": true,
-    "bytes": 4388,
-    "sha256": "46a890d04f605eabcea8f9d61dd0cfa8fb86401c1e8aac2f5e53141bcd89e774"
-  },
-  {
     "file": "WaldbaJiret-COLR-UVS.ttf",
     "url": "https://raw.githubusercontent.com/raeytype/waldba-font-collection/bcbcbd64e2d8b9cbc0e2e2a4c4b3b69e9c736eeb/snapshot/WaldbaJiret-COLR-UVS.ttf",
     "bytes": 270324,

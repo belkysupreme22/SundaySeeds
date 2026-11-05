@@ -101,7 +101,7 @@ const css = [
   fontFace('Brana', 'specimen-fonts/Brana-Regular.ttf', 400),
   fontFace('Goha Tibeb Zemen', 'specimen-fonts/GohaTibebZemen.ttf', 400),
   fontFace('Waldba Jiret', 'specimen-fonts/WaldbaJiret-COLR-UVS.ttf', 400),
-  fontFace('Geez Gofa Mono C', 'specimen-fonts/GeezGofaMonoC-Regular.ttf', 400),
+  fontFace('Geez Gofa Mono C', '../../apps/mobile/assets/fonts/GeezGofaMonoC-Regular.ttf', 400),
   fontFace(
     'Noto Sans Ethiopic',
     '../../apps/mobile/assets/fonts/NotoSansEthiopic-Regular.ttf',

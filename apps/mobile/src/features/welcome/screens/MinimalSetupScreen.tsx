@@ -177,7 +177,7 @@ function SetupFrame({
           <Icon name="arrow-left" size={20} />
         </Pressable>
         <View style={styles.step}>
-          <Text variant="caption">{t('accountEntry.setup.stepLabel')}</Text>
+          <Text variant="accentMeta">{t('accountEntry.setup.stepLabel')}</Text>
         </View>
         <Pressable
           accessibilityRole="button"

@@ -36,6 +36,19 @@
     "sha256": "0dab92d0544f7b233403f14b84a663bdbfa746982eda629e7f4f9ffe1b036feb"
   },
   {
+    "file": "GeezGofaMonoC-Regular.ttf",
+    "url": "https://raw.githubusercontent.com/debessay/Geez_monospace_font/9ff60b3c999e6a027b217ea25cfcacf2565b533e/font/Geez_Gofa_mono_C_200_regular_normal_plain.ttf",
+    "bytes": 298412,
+    "sha256": "b32a06ad6188a974e709bbe5e95e721919a9b6dcca46fd7c411432dddf23ee73"
+  },
+  {
+    "file": "OFL-GeezGofaMonoC.txt",
+    "url": "https://raw.githubusercontent.com/debessay/Geez_monospace_font/9ff60b3c999e6a027b217ea25cfcacf2565b533e/OFL.md",
+    "normalizedWhitespace": true,
+    "bytes": 4388,
+    "sha256": "46a890d04f605eabcea8f9d61dd0cfa8fb86401c1e8aac2f5e53141bcd89e774"
+  },
+  {
     "file": "AbyssinicaSIL-Regular.ttf",
     "url": "https://software.sil.org/downloads/r/abyssinica/AbyssinicaSIL-2.300.zip",
     "archiveMember": "AbyssinicaSIL-2.300/AbyssinicaSIL-Regular.ttf",

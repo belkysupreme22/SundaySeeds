@@ -26,9 +26,15 @@ export function Text({
 }: TextProps & { variant?: TypographyRole; muted?: boolean }) {
   const ethiopic = containsEthiopic(props.children);
   const editorial = variant === 'reading' || variant === 'authHeading';
-  const ethiopicFamily =
-    variant === 'authHeading' && isLoaded(authHeadingFonts.ethiopic)
+  const displayFamily =
+    variant === 'authHeading'
       ? authHeadingFonts.ethiopic
+      : variant === 'accentMeta'
+        ? ethiopicFonts.accent
+        : undefined;
+  const ethiopicFamily =
+    displayFamily && isLoaded(displayFamily)
+      ? displayFamily
       : editorial
         ? readingFonts.ethiopic
         : emphasizedRoles.includes(variant)

@@ -5,4 +5,5 @@ export const designFontAssets = {
   NotoSansEthiopic_600SemiBold: require('../../../assets/fonts/NotoSansEthiopic-SemiBold.ttf'),
   NotoSerifEthiopic_400Regular: require('../../../assets/fonts/NotoSerifEthiopic-Regular.ttf'),
   AbyssinicaSIL_400Regular: require('../../../assets/fonts/AbyssinicaSIL-Regular.ttf'),
+  GeezGofaMonoC_400Regular: require('../../../assets/fonts/GeezGofaMonoC-Regular.ttf'),
 } as const;

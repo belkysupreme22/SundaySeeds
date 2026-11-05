@@ -8,6 +8,7 @@ export const readingFonts = {
 export const ethiopicFonts = {
   regular: 'NotoSansEthiopic_400Regular',
   emphasis: 'NotoSansEthiopic_600SemiBold',
+  accent: 'GeezGofaMonoC_400Regular',
 } as const;
 
 export const authHeadingFonts = {
@@ -23,6 +24,7 @@ export const typeScale = {
   small: { fontSize: 12, lineHeight: 19 },
   caption: { fontSize: 10, lineHeight: 16 },
   meta: { fontSize: 12, lineHeight: 18 },
+  accentMeta: { fontSize: 12, lineHeight: 18 },
   label: { fontSize: 12, lineHeight: 19, fontFamily: fonts.semibold },
   control: { fontSize: 14, lineHeight: 20, fontFamily: fonts.semibold },
   title: { fontSize: 17, lineHeight: 25, fontFamily: fonts.semibold, letterSpacing: -0.4 },
