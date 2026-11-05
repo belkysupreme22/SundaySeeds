@@ -1,9 +1,13 @@
 import { StyleSheet, View } from 'react-native';
+import { brandColors, colors } from '../theme/tokens';
+
+// Left to right, matching the fills in the bundled Loading Dots animation.
+const dotColors = [brandColors.forest, colors.success, brandColors.muted, brandColors.controlBorder];
 
 export function StaticLoadingDots({ small = false }: { small?: boolean }) {
   return (
     <View style={[styles.row, small && styles.smallRow]}>
-      {['#515FF0', '#5B57E8', '#654FE2', '#6E48DC'].map((color) => (
+      {dotColors.map((color) => (
         <View
           key={color}
           style={[styles.dot, small && styles.smallDot, { backgroundColor: color }]}

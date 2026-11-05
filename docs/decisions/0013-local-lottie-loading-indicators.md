@@ -2,7 +2,12 @@
 
 20 October 2026. Implemented in source; owner runtime/native/visual acceptance pending.
 
-Latest owner correction: preserve the selected file's original blue-to-purple
+5 November 2026. The owner selected the app palette for the centered loader.
+The bundled animation and static fallback use forest, success green, muted sage
+and the sage control stroke. Transparency, timing and the existing backdrop
+blur carry forward.
+
+October owner correction: preserve the selected file's original blue-to-purple
 colors and remove the loader background. The source asset is restored from the
 original download with only the canvas crop and license metadata retained. Original
 fill/opacity/shape keyframes are unchanged; static fallback matches original fills.

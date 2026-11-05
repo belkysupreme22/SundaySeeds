@@ -58,8 +58,8 @@ white or sage for routine notices, and wheat for practice questions. Use
 
 Correct/incorrect, warning and error have semantic meaning. Keep their text,
 icons and labels; do not communicate state through a green or peach fill alone.
-Original illustration colors and the selected blue/purple loading animation are
-authored media exceptions, not new UI palette tokens.
+Original illustration colors are authored media exceptions. The loading dots
+use forest, success green, muted sage and the sage control stroke.
 
 ### Contrast
 
@@ -202,7 +202,7 @@ result of selection, saving, completion or recovery before moving on.
 | Quiz check | Locked response, labelled explanation, optional160ms reveal | Immediate explanation; no reward delay |
 | Quiz completion | Seed and leaf burst, 1050ms once after an intentional finish | Static seed emblem for reduced motion and recovered results |
 | Progress | Actual recorded amount only | Immediate true value; no synthetic count-up |
-| Loader | Actual pending work, centered original-color animation and existing blur | Static dots plus useful status |
+| Loader | Actual pending work, centered palette-matched animation and blur | Static dots in the same palette plus useful status |
 | Brand splash | Existing2300ms mark, short hold/fade, one-shot | Final still; finite startup guard |
 
 `motion.ts` supplies named durations, cubic-bezier families, distances and state

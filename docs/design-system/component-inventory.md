@@ -17,7 +17,7 @@ authorize route, content, storage, session or backend behavior changes.
 | `shared/ui/Screen.tsx` | Screen shell | Scroll, footer, tabs, safe areas, pending overlay | Cream via shared canvas; keyboard/loading behavior retained |
 | `shared/ui/PageHeader.tsx` | Header | Title/subtitle/back; long title and larger text | Existing responsive composition; density review pending |
 | `shared/ui/SectionHeading.tsx` | Section header | Heading, optional real action | Existing hierarchy; shared token typography adoption continues |
-| `shared/ui/PageLoadingOverlay.tsx` | Pending work | Focused pending, reduced motion, blur/tint fallback, failure | Selected original-color dots remain; no artificial operation delay |
+| `shared/ui/PageLoadingOverlay.tsx` | Pending work | Focused pending, reduced motion, blur/tint fallback, failure | Centered green dots use the shared palette |
 | `shared/ui/AnimatedSplash.tsx` | Brand startup | Loaded/fallback, motion/static, finite completion, background | One-shot vector mark; font/layout handoff and input fences retained |
 | `features/learning-profile/components/LearningChoiceCards.tsx` | Profile choices | Unselected, selected, disabled, selection limit, text/marker | Neutral/sage, forest check; underlying selection rules unchanged |
 | `features/quizzes/components/QuizChoice.tsx` | Quiz choice | Selected, checked/locked, correct, incorrect | Sage selection; correctness still has explicit text/icons |

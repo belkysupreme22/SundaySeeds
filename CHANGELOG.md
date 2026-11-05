@@ -5,6 +5,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Design system
+- Matched the centered loader and reduced-motion fallback to the shared green palette.
 - Aligned Profile around a seed bookplate and an activity ledger with shortcuts to completed, in-progress and saved lessons. Progress shows the current reading section, remaining milestones and a revisit action.
 - Replaced development-style lesson labels with learner-facing copy and kept the explanation of device-only activity in Settings.
 - Refined Profile and Edit profile into one bilingual identity flow with a clear edit action, scoped activity counts, and consistent return navigation.

@@ -7,8 +7,8 @@ from the accepted four-path identity, independent of the loading-dots asset and
 its license below. It has no images, fonts, audio or external assets.
 The owner subsequently requested a colored background: ivory vector fills
 `#F7F3E8` now render against the splash's deep forest `#173E32`. Generated color
-constants keep native/web static fallbacks and splash text consistent; the
-separate blue/purple loading dots below retain their original colors.
+constants keep native/web static fallbacks and splash text consistent. The
+separate loading dots below also use the shared brand palette.
 `scripts/export-seed-motion.cjs` derives Bezier geometry from `brand/logo.svg` and
 generates static TypeScript definitions for the same fallback mark. At60fps,
 frames0–138 take2.3seconds: the seam opens, the stem extends, two narrow buds
@@ -45,9 +45,10 @@ License (FL 9.13.21), https://lottiefiles.com/page/license. See LICENSE.txt in t
 folder. The derivative animation remains under that license. The JSON metadata
 also embeds the license so bundled app distributions retain its terms.
 
-Changes: cropped unused canvas margins only; original blue-to-purple fills,
-opacity, shapes and bounce/scale keyframes are preserved. The page overlay is
-transparent, with no background panel, border, shadow or page wash. JSON contains no external images/fonts/assets. It is bundled
+Changes: cropped unused canvas margins and applied the forest, success green
+and muted sage tokens to the dot fills. The original opacity, shapes and
+bounce/scale keyframes are preserved. The page overlay blurs the content behind
+the transparent animation. JSON contains no external images/fonts/assets. It is bundled
 with the app; neither a LottieFiles account nor a runtime asset/CDN request is used.
 Native rendering uses Expo's compatible lottie-react-native. Browser rendering uses
 lottie-web SVG with the same bundled JSON, avoiding remote WASM dependencies.
