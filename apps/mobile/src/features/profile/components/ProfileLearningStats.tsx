@@ -1,38 +1,52 @@
 import { StyleSheet, View } from 'react-native';
-import { colors, type Pastel } from '../../../shared/theme/tokens';
+import { accentColors, brandColors } from '../../../shared/theme/tokens';
 import { Card } from '../../../shared/ui/Card';
 import { Icon, type IconName } from '../../../shared/ui/Icon';
 import { Text } from '../../../shared/ui/Text';
 
-type Props = { completed: number; inProgress: number; saved: number; stacked: boolean };
+type Props = {
+  completed: number;
+  inProgress: number;
+  saved: number;
+  stacked: boolean;
+};
 
 export function ProfileLearningStats({ completed, inProgress, saved, stacked }: Props) {
-  const stats: { label: string; value: number; icon: IconName; tone: Pastel }[] = [
-    { label: 'Completed', value: completed, icon: 'check-circle', tone: 'mint' },
-    { label: 'In progress', value: inProgress, icon: 'book-open', tone: 'yellow' },
-    { label: 'Saved', value: saved, icon: 'bookmark', tone: 'pink' },
-  ];
+  const stats = [
+    { label: 'Completed', value: completed, icon: 'check-circle', fill: accentColors.mint },
+    { label: 'In progress', value: inProgress, icon: 'book-open', fill: accentColors.wheat },
+    { label: 'Saved', value: saved, icon: 'bookmark', fill: accentColors.rose },
+  ] satisfies readonly { label: string; value: number; icon: IconName; fill: string }[];
   return (
     <View style={[styles.row, stacked && styles.stacked]}>
-      {stats.map((stat) => (
+      {stats.map(({ label, value, icon, fill }) => (
         <Card
-          key={stat.label}
+          key={label}
           shadow={false}
           stroke="subtle"
           style={[styles.tile, stacked && styles.stackedTile]}
           accessible
-          accessibilityLabel={`${stat.value} lessons ${stat.label.toLowerCase()}`}
+          accessibilityLabel={`${label}: ${value}`}
         >
           <View style={styles.valueRow}>
-            <View style={[styles.icon, { backgroundColor: colors[stat.tone] }]}>
-              <Icon name={stat.icon} size={16} />
+            <View
+              style={[styles.mark, value > 0 && { backgroundColor: fill }]}
+              accessibilityElementsHidden
+              importantForAccessibility="no-hide-descendants"
+              aria-hidden
+            >
+              <Icon
+                name={icon}
+                size={18}
+                color={value > 0 ? brandColors.forest : brandColors.muted}
+              />
             </View>
-            <Text variant="label" style={styles.value}>
-              {stat.value}
+            <Text variant="title" style={styles.value}>
+              {value}
             </Text>
           </View>
           <Text variant="caption" style={styles.label}>
-            {stat.label}
+            {label}
           </Text>
         </Card>
       ))}
@@ -48,14 +62,20 @@ const styles = StyleSheet.create({
     minWidth: 0,
     paddingHorizontal: 6,
     paddingVertical: 10,
-    gap: 6,
+    gap: 3,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 6,
   },
   stackedTile: { flexGrow: 0, flexShrink: 0, flexBasis: 'auto' },
-  valueRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 6 },
-  icon: { padding: 3, borderRadius: 5 },
-  value: { flexShrink: 1 },
-  label: { textAlign: 'center' },
+  valueRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    gap: 4,
+  },
+  mark: { padding: 4, borderRadius: 5, flexShrink: 0 },
+  value: { color: brandColors.forest, flexShrink: 1, textAlign: 'center' },
+  label: { alignSelf: 'stretch', textAlign: 'center' },
 });

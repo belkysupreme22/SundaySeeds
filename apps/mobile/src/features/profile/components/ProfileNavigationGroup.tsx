@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
-import { colors, type Pastel } from '../../../shared/theme/tokens';
+import { motion } from '../../../shared/theme/motion';
+import { brandColors, colors, type Pastel } from '../../../shared/theme/tokens';
 import { Icon, type IconName } from '../../../shared/ui/Icon';
 import { Text } from '../../../shared/ui/Text';
 
@@ -13,6 +15,7 @@ type ProfileNavigationItem = {
 };
 
 export function ProfileNavigationGroup({ items }: { items: readonly ProfileNavigationItem[] }) {
+  const [focusedItem, setFocusedItem] = useState<string | null>(null);
   return (
     <View style={styles.group}>
       {items.map((item, index) => (
@@ -21,12 +24,18 @@ export function ProfileNavigationGroup({ items }: { items: readonly ProfileNavig
           accessibilityRole="button"
           accessibilityLabel={`${item.title}. ${item.description}`}
           onPress={item.onPress}
+          onFocus={() => setFocusedItem(item.id)}
+          onBlur={() => setFocusedItem((current) => (current === item.id ? null : current))}
           style={({ pressed }) => [
             styles.row,
             index > 0 && styles.divider,
+            focusedItem === item.id && styles.focused,
             pressed && styles.pressed,
           ]}
         >
+          {focusedItem === item.id && (
+            <View style={styles.focusMark} pointerEvents="none" aria-hidden />
+          )}
           <View style={[styles.icon, { backgroundColor: colors[item.tone] }]}>
             <Icon name={item.icon} size={18} />
           </View>
@@ -36,7 +45,11 @@ export function ProfileNavigationGroup({ items }: { items: readonly ProfileNavig
               {item.description}
             </Text>
           </View>
-          <Icon name="chevron-right" size={18} />
+          <Icon
+            name="chevron-right"
+            size={18}
+            color={focusedItem === item.id ? brandColors.forest : colors.ink}
+          />
         </Pressable>
       ))}
     </View>
@@ -60,7 +73,17 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
   },
   divider: { borderTopWidth: 1, borderTopColor: colors.line },
-  pressed: { backgroundColor: colors.soft },
+  focused: { backgroundColor: brandColors.surface },
+  focusMark: {
+    position: 'absolute',
+    left: 1,
+    top: 8,
+    bottom: 8,
+    width: 3,
+    borderRadius: 2,
+    backgroundColor: brandColors.forest,
+  },
+  pressed: { opacity: motion.pressedOpacity, backgroundColor: colors.soft },
   icon: {
     width: 34,
     height: 34,

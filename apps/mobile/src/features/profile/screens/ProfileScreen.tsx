@@ -1,6 +1,5 @@
 import { router } from 'expo-router';
 import { StyleSheet, useWindowDimensions } from 'react-native';
-import { lessons } from '../../lessons/data/lessons';
 import { useLearningProgress } from '../../progress/hooks/useLearningProgress';
 import { useLearnerProfile } from '../hooks/useLearnerProfile';
 import { ProfileHeader } from '../components/ProfileHeader';
@@ -23,11 +22,10 @@ export function ProfileScreen() {
   } = useLearningProgress();
   const { width, fontScale } = useWindowDimensions();
   const stacked = width < 350 || fontScale >= 1.5;
-  const completed = lessons.filter((lesson) => progress[lesson.id]?.completed).length;
-  const inProgress = lessons.filter(
-    (lesson) => progress[lesson.id] && !progress[lesson.id].completed,
-  ).length;
-  const saved = lessons.filter((lesson) => bookmarks.includes(lesson.id)).length;
+  const entries = Object.values(progress);
+  const completed = entries.filter((entry) => entry.completed).length;
+  const inProgress = entries.length - completed;
+  const saved = bookmarks.length;
 
   return (
     <Screen tabs>

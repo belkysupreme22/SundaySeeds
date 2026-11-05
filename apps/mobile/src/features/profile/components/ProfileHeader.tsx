@@ -1,7 +1,8 @@
 import { StyleSheet, View } from 'react-native';
-import { colors } from '../../../shared/theme/tokens';
+import Svg, { Path } from 'react-native-svg';
+import { seedPaths, seedViewBox } from '../../../shared/branding/seedMark';
+import { accentColors, brandColors, colors } from '../../../shared/theme/tokens';
 import { Card } from '../../../shared/ui/Card';
-import { Icon } from '../../../shared/ui/Icon';
 import { IconButton } from '../../../shared/ui/Button';
 import { Text } from '../../../shared/ui/Text';
 
@@ -23,8 +24,20 @@ export function ProfileHeader({
   return (
     <Card tone="mint" stroke="soft" shadow={false} style={styles.card}>
       <View style={[styles.identity, stacked && styles.stacked]}>
-        <View style={styles.avatar} accessible={false}>
-          <Icon name="user" size={38} />
+        <View
+          style={styles.seal}
+          accessible={false}
+          accessibilityElementsHidden
+          importantForAccessibility="no-hide-descendants"
+          aria-hidden
+        >
+          <View style={styles.sealField}>
+            <Svg width={50} height={50} viewBox={seedViewBox}>
+              {seedPaths.map(({ id, d }) => (
+                <Path key={id} d={d} fill={brandColors.forest} fillRule="evenodd" />
+              ))}
+            </Svg>
+          </View>
         </View>
         <View style={[styles.copy, stacked && styles.stackedCopy]} accessibilityLiveRegion="polite">
           <View style={styles.nameRow}>
@@ -59,14 +72,22 @@ const styles = StyleSheet.create({
   nameRow: { flexDirection: 'row', alignItems: 'center', gap: 4 },
   name: { flex: 1 },
   identity: { flexDirection: 'row', alignItems: 'center', gap: 12 },
-  avatar: {
+  seal: {
     width: 72,
     height: 72,
     flexShrink: 0,
     borderRadius: 36,
     borderWidth: 1,
     borderColor: colors.line,
-    backgroundColor: colors.white,
+    backgroundColor: brandColors.canvas,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  sealField: {
+    width: 58,
+    height: 58,
+    borderRadius: 29,
+    backgroundColor: accentColors.wheat,
     alignItems: 'center',
     justifyContent: 'center',
   },
