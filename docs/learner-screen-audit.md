@@ -1,5 +1,20 @@
 # Learner screen audit checklist
 
+## Growth and interaction details — 5 November 2026
+
+- **Quiz results:** finish a new sample and connected attempt. Verify the short
+  seed burst, usable actions during animation and unchanged score values. Reopen
+  a recorded connected result and try reduced motion, backgrounding, and Back.
+- **Progress:** check the milestone board before starting, after opening a
+  reading, after the first quiz, at halfway, and after completing the collection.
+  Verify Resume reading opens the saved section. Check that Open lesson leads to
+  the named lesson overview and that completion hides the next-lesson action.
+  Check focus and press feedback on lesson history rows.
+- **Profile:** check completed, in-progress and saved counts after changes.
+  Each tile uses one icon. Check storage-unavailable copy and Profile navigation.
+- **Controls:** check focus, press, answer selection and review expansion in
+  English and Amharic at narrow widths and larger text. Source review only.
+
 ## Home quick access — 5 November 2026
 
 Find a lesson replaces the fixed Good Samaritan quiz shortcut. It opens lesson

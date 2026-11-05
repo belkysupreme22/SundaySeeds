@@ -187,6 +187,10 @@ actions keep clear labels, intent and existing confirmation/recovery behavior.
 
 ## 6. Micro-interactions
 
+Review micro-interactions alongside the first screen layout. A learner should
+see which control has focus, feel a press immediately, and understand the
+result of selection, saving, completion or recovery before moving on.
+
 | Interaction | Standard | Reduced motion / cancellation |
 | --- | --- | --- |
 | Press | Immediate state,1dp depression,opacity.88 | Keep immediate feedback; no animated bounce |
@@ -196,6 +200,7 @@ actions keep clear labels, intent and existing confirmation/recovery behavior.
 | Page / sheet | 240 / 260ms target, clear direction | Native reduced-motion alternative; focus stays correct |
 | Save/bookmark | Acknowledge confirmed state; quiet160ms feedback | Immediate truthful state; retain retry/conflict guidance |
 | Quiz check | Locked response, labelled explanation, optional160ms reveal | Immediate explanation; no reward delay |
+| Quiz completion | Seed and leaf burst, 1050ms once after an intentional finish | Static seed emblem for reduced motion and recovered results |
 | Progress | Actual recorded amount only | Immediate true value; no synthetic count-up |
 | Loader | Actual pending work, centered original-color animation and existing blur | Static dots plus useful status |
 | Brand splash | Existing2300ms mark, short hold/fade, one-shot | Final still; finite startup guard |
@@ -208,6 +213,15 @@ loop decorative reveals, celebrate every tap, add unsolicited sounds or make
 haptics mandatory. Haptics require a separate deliberate implementation; no new
 dependency was added here. Unknown motion preference starts conservatively.
 Backgrounding, unmount, cancellation and failure stop owned animation resources.
+
+### Learning visuals
+
+Use a labelled numeric equivalent for any charted amount. The Progress
+milestone board pairs a next-lesson action with completed and upcoming
+checkpoints. Thresholds use the size of the available lesson collection. Skip
+halfway when it would duplicate another milestone. Profile uses one functional
+icon with each recorded count. The quiz score ribbon uses the actual
+correct-answer share beside its score.
 
 ## 7. Icons, imagery and content
 

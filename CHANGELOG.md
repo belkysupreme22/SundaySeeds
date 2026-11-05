@@ -5,6 +5,8 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Design system
+- Added a seed-and-leaf quiz celebration, clearer press and focus states, and a Profile seed seal with recorded learning counts.
+- Replaced the overall progress bar with a milestone board and a next-lesson action that can resume an unfinished reading.
 - Adopted Lexend and Noto Sans Ethiopic as the mobile interface pairing, including semibold account headings. The editorial lesson and Amharic accent roles continue as separate roles.
 - Adopted Geez Gofa Mono C for Amharic account badges, the optional setup step and the memory-verse label on Home. Native layout review is pending.
 - Expanded the Amharic heading comparison to ten options with Brana, Goha Tibeb Zemen, Waldba Jiret and Geez Gofa Mono C.

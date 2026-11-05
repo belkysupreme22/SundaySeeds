@@ -2,6 +2,7 @@
 
 ## Product and visual quality
 - Use `docs/design-system/README.md` as the current visual/interaction standard, with its component inventory and research records. The owner-approved forest/cream/sage system blends related pastel accents; it supersedes the earlier purple-led color assignment while preserving reference composition and screen-specific stroke hierarchy. Reuse shared color, typography and motion roles instead of inventing per-screen palettes.
+- Prioritize micro-interactions when designing or reviewing a screen. Check immediate press, visible focus, selection, pending, confirmation and recovery. Tie motion to an action or state and provide a clear reduced-motion equivalent.
 - Build the agreed React Native + Expo + TypeScript app in apps/mobile.
 - Teacher/admin screen prototypes use React + TypeScript in apps/teacher-web, with Radix primitives, Lucide icons and lazy-loaded Recharts examples. Follow that workspace's AGENTS.md; keep backend planning separate from connected implementation.
 - Use docs/references screenshots for composition, fine outlines, modest radii, crisp offset shadows and type hierarchy. Use the current design-system tokens for color, with mint, wheat, peach and warm rose as accents.

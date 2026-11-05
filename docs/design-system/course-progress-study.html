@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SundaySeeds · Study shelf concept</title>
+  <link rel="stylesheet" href="theme.css">
+  <style>
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--cream);color:var(--ink);font:400 15px/1.5 Lexend,sans-serif}
+    header{background:var(--forest);color:var(--cream);padding:36px max(22px,calc((100vw - 1040px)/2))}
+    header p{margin:0;max-width:56ch;color:var(--selected)}
+    h1{font-size:clamp(27px,6vw,42px);margin:6px 0 12px;line-height:1.15}
+    main{max-width:1040px;margin:auto;padding:24px 20px 54px}
+    h2,h3,p{margin:0}h2{font-size:20px}h3{font-size:16px}
+    .eyebrow{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+    .scenarios,.checks,.course-top{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+    .scenarios{margin:14px 0 26px}
+    button,.action{font:600 14px Lexend,sans-serif;border-radius:8px;padding:10px 14px;min-height:44px}
+    button{border:1px solid var(--control-border);color:var(--forest);background:white;cursor:pointer}
+    button[aria-pressed=true],.action.primary{border-color:var(--forest);background:var(--forest);color:var(--cream)}
+    button:focus-visible{outline:2px solid var(--forest);outline-offset:3px}
+    button:active{transform:translateY(1px)}
+    .columns{display:grid;grid-template-columns:1.25fr 1fr;gap:20px}
+    .section{display:grid;align-content:start;gap:12px;min-width:0}
+    .folio{border:1px solid var(--line);border-left:5px solid var(--control-border);border-radius:10px;background:white;padding:16px;display:grid;gap:11px}
+    .resume{background:var(--sage);border-left-color:var(--forest)}
+    .finish{border-left-color:var(--forest)}
+    .course-top{justify-content:space-between;align-items:flex-start}
+    .status{background:var(--cream);color:var(--forest);border-radius:5px;padding:4px 7px;font-size:11px;font-weight:600}
+    .status.done{background:var(--sage)}
+    .checks{gap:5px}
+    .checks i{display:grid;place-items:center;width:24px;height:22px;border:1px dashed var(--control-border);border-radius:4px;font:600 12px Lexend;color:var(--cream)}
+    .checks i.done{background:var(--forest);border-color:var(--forest);border-style:solid}
+    .checks span,.note{font-size:12px;color:var(--muted)}
+    .next{border-top:1px solid var(--line);padding-top:9px;display:grid;gap:2px}
+    .action{display:inline-flex;align-items:center;justify-self:start;border:1px solid var(--control-border);color:var(--forest);background:white}
+    .intro,.empty{display:grid;gap:10px}
+    .empty{background:var(--sage);padding:18px;border:1px solid var(--line);border-radius:10px}
+    [hidden]{display:none!important}
+    @media(max-width:690px){.columns{grid-template-columns:1fr}}
+    @media(prefers-reduced-motion:reduce){button:active{transform:none}}
+  </style>
+</head>
+<body>
+<header>
+  <p class="eyebrow">SundaySeeds · Progress concept</p>
+  <h1>Your study shelf</h1>
+  <p>Pick up the course you’re ready for. Keep completed studies within reach.</p>
+</header>
+<main>
+  <p class="note">Illustrative data for design review. Course actions are shown as specimens.</p>
+  <div class="scenarios" aria-label="Preview scenario">
+    <button type="button" data-scenario="several" aria-pressed="true">Several courses underway</button>
+    <button type="button" data-scenario="all-done" aria-pressed="false">All joined courses finished</button>
+  </div>
+  <div class="columns" id="several">
+    <section class="section">
+      <h2>Continue learning</h2>
+      <article class="folio resume">
+        <div class="course-top"><h3>Faith for everyday life</h3><span class="status">Saved reading</span></div>
+        <div class="checks"><i class="done" aria-hidden="true">✓</i><i class="done" aria-hidden="true">✓</i><i aria-hidden="true"></i><i aria-hidden="true"></i><span>2 of 4 checks finished</span></div>
+        <div class="next"><p class="eyebrow">Pick up here</p><p>Love your neighbour · Reading 2</p></div>
+        <span class="action primary">Resume reading</span>
+      </article>
+      <article class="folio">
+        <div class="course-top"><h3>Learning to pray</h3><span class="status">Ready to start</span></div>
+        <div class="checks"><i aria-hidden="true"></i><i aria-hidden="true"></i><i aria-hidden="true"></i><span>0 of 3 checks finished</span></div>
+        <span class="action">Open first lesson</span>
+      </article>
+    </section>
+    <section class="section">
+      <h2>Completed</h2>
+      <article class="folio finish">
+        <div class="course-top"><h3>Walking in wisdom</h3><span class="status done">Finished</span></div>
+        <p>3 of 3 checks finished</p>
+        <span class="action">Revisit course</span>
+      </article>
+    </section>
+  </div>
+  <div class="columns" id="all-done" hidden>
+    <section class="section">
+      <div class="empty">
+        <h2>You finished your joined courses</h2>
+        <p>Reopen a study you want to reflect on, or choose something new when you’re ready.</p>
+        <span class="action primary">Browse courses</span>
+      </div>
+    </section>
+    <section class="section">
+      <h2>Completed</h2>
+      <article class="folio finish"><div class="course-top"><h3>Faith for everyday life</h3><span class="status done">Finished</span></div><p>4 of 4 checks finished</p><span class="action">Revisit course</span></article>
+      <article class="folio finish"><div class="course-top"><h3>Learning to pray</h3><span class="status done">Finished</span></div><p>3 of 3 checks finished</p><span class="action">Revisit course</span></article>
+      <article class="folio finish"><div class="course-top"><h3>Walking in wisdom</h3><span class="status done">Finished</span></div><p>3 of 3 checks finished</p><span class="action">Revisit course</span></article>
+    </section>
+  </div>
+</main>
+<script>
+  const scenarios = document.querySelectorAll('[data-scenario]');
+  scenarios.forEach((button) => button.addEventListener('click', () => {
+    scenarios.forEach((option) => {
+      const selected = option === button;
+      option.setAttribute('aria-pressed', String(selected));
+      document.getElementById(option.dataset.scenario).hidden = !selected;
+    });
+  }));
+</script>
+</body>
+</html>

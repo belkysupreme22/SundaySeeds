@@ -1,5 +1,38 @@
 # SundaySeeds implementation plan
 
+## Connected Study Shelf concept — 5 November 2026
+
+The learner requested meaningful progress with multiple joined courses and after
+finishing all of them. The [interactive study](design-system/course-progress-study.html)
+compares separate in-progress and completed groups with the all-finished state.
+These are illustrative scenarios for review. The mobile milestone board applies
+to the sample collection.
+
+Each joined edition has its own finished check count and next action. A saved
+reading can support Resume. A first available unfinished lesson supports Start
+or Continue. Course milestones represent meaningful boundaries such as completing
+a module or every required check. Finished studies stay in Completed, where
+learners can revisit an available edition and optionally discover another course.
+Opening a new course leaves earned milestones in the finished edition intact.
+
+The current APIs require a known course ID, and the reading API also needs a
+lesson ID. The public library lists current offers. The connected shelf needs a
+trusted verified-actor read model over their own pinned enrollments, required
+checks, outcomes and known saved reading places. Scope unavailable editions
+without protected details or invented zero counts. Reading revisions do not
+establish a global recency order. Use curriculum order or a learner’s explicit
+selection until an actual activity signal exists. Review these rules before
+implementing the read model and connecting the screen.
+
+## Mobile learning visuals and micro-interactions — 5 November 2026
+
+Quiz results use a brief seed-and-leaf celebration on an intentional finish and
+a static emblem on recovered results. Profile uses current activity counts
+with one icon per metric. The owner selected a milestone board for Progress.
+It distinguishes completed and upcoming checkpoints and offers one next-lesson
+action based on recorded activity. The working agreement prioritizes press,
+focus, feedback and recovery in screen reviews. See the [owner checklist](learner-screen-audit.md).
+
 ## Selected mobile interface typography — 5 November 2026
 
 The owner selected Lexend for English and Noto for Amharic. Mobile uses Lexend

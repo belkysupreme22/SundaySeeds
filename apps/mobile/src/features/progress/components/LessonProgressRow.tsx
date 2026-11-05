@@ -1,9 +1,11 @@
+import { useState } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 import type { Lesson } from '../../lessons/types';
 import type { LessonProgress } from '../data/progressStorage';
 import { LessonArtwork } from '../../lessons/components/LessonArtwork';
 import { LessonProgressSummary } from '../../lessons/components/LessonProgressSummary';
-import { colors } from '../../../shared/theme/tokens';
+import { motion } from '../../../shared/theme/motion';
+import { brandColors, colors } from '../../../shared/theme/tokens';
 import { Icon } from '../../../shared/ui/Icon';
 import { Text } from '../../../shared/ui/Text';
 
@@ -22,6 +24,7 @@ export function LessonProgressRow({
   stacked,
   onPress,
 }: LessonProgressRowProps) {
+  const [focused, setFocused] = useState(false);
   const status = progress?.completed ? 'Completed' : progress ? 'In progress' : 'Not started';
   const score = progress?.bestScore;
   const position =
@@ -34,7 +37,14 @@ export function LessonProgressRow({
       accessibilityLabel={`${lesson.title}. ${status}.${position}${saved ? ' Saved lesson.' : ''}${score != null ? ` Best quiz score ${score}%.` : ''}`}
       accessibilityHint="Opens the lesson overview."
       onPress={onPress}
-      style={({ pressed }) => [styles.row, stacked && styles.stacked, pressed && styles.pressed]}
+      onFocus={() => setFocused(true)}
+      onBlur={() => setFocused(false)}
+      style={({ pressed }) => [
+        styles.row,
+        stacked && styles.stacked,
+        focused && styles.focused,
+        pressed && styles.pressed,
+      ]}
     >
       <LessonArtwork id={lesson.id} tone={lesson.color} />
       <View style={[styles.copy, stacked && styles.stackedCopy]}>
@@ -73,7 +83,8 @@ const styles = StyleSheet.create({
     borderRadius: 9,
     backgroundColor: colors.white,
   },
-  pressed: { backgroundColor: colors.soft },
+  focused: { borderColor: brandColors.forest },
+  pressed: { backgroundColor: colors.soft, transform: [{ translateY: motion.distance.press }] },
   copy: { flex: 1, gap: 7 },
   meta: { flexDirection: 'row', alignItems: 'center', gap: 8 },
   category: { flex: 1 },

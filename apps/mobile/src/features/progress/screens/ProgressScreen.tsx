@@ -6,6 +6,7 @@ import { useLearningProgress } from '../hooks/useLearningProgress';
 import { ProgressHero } from '../components/ProgressHero';
 import { ProgressStats } from '../components/ProgressStats';
 import { LessonProgressRow } from '../components/LessonProgressRow';
+import { LearningMilestones } from '../components/LearningMilestones';
 import { brandColors, colors } from '../../../shared/theme/tokens';
 import { Screen, ContentGroup } from '../../../shared/ui/Screen';
 import { PageHeader } from '../../../shared/ui/PageHeader';
@@ -13,7 +14,6 @@ import { Text } from '../../../shared/ui/Text';
 import { Card } from '../../../shared/ui/Card';
 import { Button } from '../../../shared/ui/Button';
 import { Icon } from '../../../shared/ui/Icon';
-import { ProgressBar } from '../../../shared/ui/ProgressBar';
 
 export function ProgressScreen() {
   const { t } = useTranslation();
@@ -28,7 +28,11 @@ export function ProgressScreen() {
   const averageBestScore = scores.length
     ? Math.round(scores.reduce((sum, score) => sum + score, 0) / scores.length)
     : null;
-  const completion = lessons.length ? Math.round((completed / lessons.length) * 100) : 0;
+  const nextLesson =
+    lessons.find((lesson) => progress[lesson.id] && !progress[lesson.id].completed) ??
+    lessons.find((lesson) => !progress[lesson.id] && bookmarks.includes(lesson.id)) ??
+    lessons.find((lesson) => !progress[lesson.id]);
+  const nextProgress = nextLesson ? progress[nextLesson.id] : undefined;
 
   if (!hydrated || errorKind === 'load') {
     return (
@@ -61,52 +65,57 @@ export function ProgressScreen() {
         stacked={stacked}
       />
       <ContentGroup>
-        <Text variant="title">{t('progress.overall')}</Text>
+        <Text variant="title" accessibilityRole="header">
+          {t('progress.milestoneBoard')}
+        </Text>
         <Card stroke="subtle" shadow={false} style={styles.overall}>
           <View style={styles.between}>
-            <Text variant="label" style={styles.grow}>
+            <Text variant="label">
               {t('progress.lessonsCompleted', { completed, total: lessons.length })}
             </Text>
-            <View style={styles.percentage}>
-              <Text variant="title">{t('progress.completion', { pct: completion })}</Text>
-            </View>
+            <Text variant="meta" muted>
+              {t('progress.milestoneInProgress', { count: inProgress })}
+            </Text>
           </View>
-          <ProgressBar
-            value={completion}
-            label={t('progress.completedLabel')}
-            valueText={t('progress.lessonsCompleted', { completed, total: lessons.length })}
+          {nextLesson && (
+            <View style={styles.nextStep}>
+              <Text variant="meta" muted>
+                {t('progress.milestoneNextLesson')}
+              </Text>
+              <Text variant="title">{nextLesson.title}</Text>
+              {nextProgress && (
+                <Text variant="small">
+                  {t('progress.milestoneReadingPlace', {
+                    position: nextProgress.sectionIndex + 1,
+                    total: nextLesson.sections.length,
+                  })}
+                </Text>
+              )}
+              <Button
+                label={t(nextProgress ? 'progress.milestoneResume' : 'progress.milestoneOpen')}
+                icon="arrow-right"
+                onPress={() =>
+                  router.push(nextProgress ? `/read/${nextLesson.id}` : `/lessons/${nextLesson.id}`)
+                }
+              />
+            </View>
+          )}
+          <LearningMilestones
+            started={entries.length > 0}
+            completed={completed}
+            total={lessons.length}
           />
-          <Text variant="caption" muted>
-            {t('progress.progressNote')}
-          </Text>
         </Card>
       </ContentGroup>
       <ContentGroup>
         <Text variant="title">{t('progress.overview')}</Text>
         <ProgressStats
-          completed={completed}
-          inProgress={inProgress}
           saved={saved}
           averageBestScore={averageBestScore}
           scoredLessons={scores.length}
           stacked={stacked}
         />
       </ContentGroup>
-      {entries.length === 0 && (
-        <Card tone="peach" shadow={false} style={styles.state}>
-          <Text variant="title">
-            {saved ? t('progress.emptyWithSaved') : t('progress.emptyFirst')}
-          </Text>
-          <Text variant="small">
-            {saved ? t('progress.emptyWithSavedDesc') : t('progress.emptyFirstDesc')}
-          </Text>
-          <Button
-            label={t('progress.exploreLessons')}
-            icon="arrow-right"
-            onPress={() => router.push('/lessons')}
-          />
-        </Card>
-      )}
       <ContentGroup>
         <View style={styles.between}>
           <Text variant="title" style={styles.grow}>
@@ -140,12 +149,12 @@ const styles = StyleSheet.create({
   overall: { gap: 12 },
   between: { flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', gap: 10 },
   grow: { flexGrow: 1, flexShrink: 1 },
-  percentage: {
-    paddingHorizontal: 10,
-    paddingVertical: 5,
+  nextStep: {
+    gap: 8,
+    padding: 12,
     borderWidth: 1,
-    borderColor: colors.outline,
-    borderRadius: 6,
+    borderColor: colors.line,
+    borderRadius: 8,
     backgroundColor: brandColors.surface,
   },
   state: { gap: 12 },

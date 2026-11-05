@@ -5,8 +5,6 @@ import { Text } from '../../../shared/ui/Text';
 import type { Pastel } from '../../../shared/theme/tokens';
 
 type ProgressStatsProps = {
-  completed: number;
-  inProgress: number;
   saved: number;
   averageBestScore: number | null;
   scoredLessons: number;
@@ -22,28 +20,12 @@ type Stat = {
 };
 
 export function ProgressStats({
-  completed,
-  inProgress,
   saved,
   averageBestScore,
   scoredLessons,
   stacked,
 }: ProgressStatsProps) {
   const stats: Stat[] = [
-    {
-      label: 'Completed',
-      value: String(completed),
-      detail: 'Lessons finished',
-      tone: 'mint',
-      icon: 'check-circle',
-    },
-    {
-      label: 'In progress',
-      value: String(inProgress),
-      detail: 'Lessons to continue',
-      tone: 'yellow',
-      icon: 'book-open',
-    },
     {
       label: 'Saved lessons',
       value: String(saved),
@@ -64,36 +46,31 @@ export function ProgressStats({
   ];
 
   return (
-    <View style={styles.grid}>
-      {[stats.slice(0, 2), stats.slice(2)].map((row, index) => (
-        <View key={index} style={[styles.row, stacked && styles.stacked]}>
-          {row.map((stat) => (
-            <Card
-              key={stat.label}
-              tone={stat.tone}
-              shadow={false}
-              accessible
-              accessibilityLabel={`${stat.label}: ${stat.value}. ${stat.detail}.`}
-              style={[styles.tile, stacked && styles.stackedTile]}
-            >
-              <Text variant="label">{stat.label}</Text>
-              <View style={styles.valueRow}>
-                <Text variant="heading" style={styles.value}>
-                  {stat.value}
-                </Text>
-                <Icon name={stat.icon} size={22} />
-              </View>
-              <Text variant="caption">{stat.detail}</Text>
-            </Card>
-          ))}
-        </View>
+    <View style={[styles.row, stacked && styles.stacked]}>
+      {stats.map((stat) => (
+        <Card
+          key={stat.label}
+          tone={stat.tone}
+          shadow={false}
+          accessible
+          accessibilityLabel={`${stat.label}: ${stat.value}. ${stat.detail}.`}
+          style={[styles.tile, stacked && styles.stackedTile]}
+        >
+          <Text variant="label">{stat.label}</Text>
+          <View style={styles.valueRow}>
+            <Text variant="heading" style={styles.value}>
+              {stat.value}
+            </Text>
+            <Icon name={stat.icon} size={22} />
+          </View>
+          <Text variant="caption">{stat.detail}</Text>
+        </Card>
       ))}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  grid: { gap: 12 },
   row: { flexDirection: 'row', gap: 12, alignItems: 'stretch' },
   stacked: { flexDirection: 'column' },
   tile: { flex: 1, minWidth: 0, padding: 14, gap: 5, borderRadius: 9 },
