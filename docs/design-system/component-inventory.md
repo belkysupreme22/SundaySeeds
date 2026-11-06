@@ -20,7 +20,7 @@ authorize route, content, storage, session or backend behavior changes.
 | `shared/ui/PageLoadingOverlay.tsx` | Pending work | Focused pending, reduced motion, blur/tint fallback, failure | Centered green dots use the shared palette |
 | `shared/ui/AnimatedSplash.tsx` | Brand startup | Loaded/fallback, motion/static, finite completion, background | One-shot vector mark; font/layout handoff and input fences retained |
 | `features/learning-profile/components/LearningChoiceCards.tsx` | Profile choices | Unselected, selected, disabled, selection limit, text/marker | Neutral/sage, forest check; underlying selection rules unchanged |
-| `features/profile/components/ProfileAvatarPicker.tsx` | Profile images | Selected marker, keyboard focus, press, neutral option | Cartoon portraits and the neutral silhouette share a cream grid with a fine outline and sage selection. The gallery keeps preview and save in its footer. |
+| `features/profile/components/ProfileAvatarPicker.tsx` | Profile images | Selected marker, keyboard focus, press, neutral option | Cartoon portraits and the neutral silhouette share a cream grid with a fine outline and sage selection. The gallery keeps Save in its footer. |
 | `features/quizzes/components/QuizChoice.tsx` | Quiz choice | Selected, checked/locked, correct, incorrect | Sage selection; correctness still has explicit text/icons |
 | `features/settings/components/SettingsDetailSheet.tsx` | Settings detail | Available/unavailable, language selected, dismiss/scroll | Cream/sage, forest selected marker; no new preference capability |
 

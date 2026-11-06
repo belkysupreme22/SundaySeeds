@@ -7,7 +7,6 @@ import { Button, IconButton } from '../../../shared/ui/Button';
 import { Card } from '../../../shared/ui/Card';
 import { Screen } from '../../../shared/ui/Screen';
 import { Text } from '../../../shared/ui/Text';
-import { ProfileAvatar } from '../components/ProfileAvatar';
 import { ProfileAvatarPicker } from '../components/ProfileAvatarPicker';
 import { useProfileAvatar } from '../hooks/useProfileAvatar';
 import type { AvatarId } from '../types/avatar';
@@ -66,17 +65,6 @@ function PortraitGallery() {
       footer={
         status === 'ready' ? (
           <View style={styles.footer}>
-            <View style={styles.preview}>
-              <ProfileAvatar avatarId={selected} size={84} />
-              <View style={styles.words} accessibilityLiveRegion="polite">
-                <Text variant="meta" muted>
-                  {t(changed ? 'profile.avatar.preview' : 'profile.avatar.current')}
-                </Text>
-                {selected !== null && (
-                  <Text variant="label">{t(`profile.avatar.${selected}`)}</Text>
-                )}
-              </View>
-            </View>
             {saveError && (
               <Text variant="small" accessibilityRole="alert">
                 {t('profile.avatar.saveError')}
@@ -129,7 +117,6 @@ const styles = StyleSheet.create({
   content: { gap: 14, width: '100%', maxWidth: 460, alignSelf: 'center' },
   header: { flexDirection: 'row', alignItems: 'center', gap: 8 },
   footer: { gap: 10, width: '100%', maxWidth: 424, alignSelf: 'center', paddingHorizontal: 2 },
-  preview: { flexDirection: 'row', alignItems: 'center', gap: 14 },
   words: { flex: 1, minWidth: 0 },
   recovery: { gap: 10 },
 });

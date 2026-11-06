@@ -10,8 +10,8 @@ screen that opened the form and that a direct entry falls back to Profile.
 Check keyboard, narrow width and larger English/Amharic text.
 In Edit Profile, start editing a name, open Change portrait and check the
 gallery alignment at 320 and 390 widths and with larger text. Scroll to the
-silhouette and verify it behaves like any other tile. The preview and Save
-portrait should stay visible. Check Back discards a preview and Save portrait
+silhouette and verify it behaves like any other tile. Check the selected tile
+and confirm Save portrait stays visible. Back should discard an unsaved choice. Save portrait
 updates Edit Profile without losing its name draft. Return to Profile and Home
 to check the saved portrait. On Home, verify the portrait opens Profile and
 stays aligned beside long greetings. Reopen the app to verify persistence and

@@ -251,8 +251,6 @@
       "title": "Choose a portrait",
       "label": "Profile portrait",
       "change": "Change portrait",
-      "current": "Current portrait",
-      "preview": "Portrait preview",
       "save": "Save portrait",
       "saving": "Saving portrait…",
       "default": "Profile silhouette",
