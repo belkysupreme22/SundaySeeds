@@ -1,5 +1,10 @@
 import { getLesson } from '../../lessons/data/lessons';
-import { emptyStudyActivity, type StudyActivity } from './studyActivity';
+import {
+  emptyStudyActivity,
+  recentQuizLimit,
+  type RecentStudyQuiz,
+  type StudyActivity,
+} from './studyActivity';
 
 export const PROGRESS_STORAGE_KEY = 'sundayseeds.learning.v1';
 
@@ -36,6 +41,21 @@ function isId(value: unknown): value is string {
   return typeof value === 'string' && value.length > 0;
 }
 
+function isRecentStudyQuiz(value: unknown): value is RecentStudyQuiz {
+  return (
+    isRecord(value) &&
+    isId(value.lessonId) &&
+    isDay(value.day) &&
+    typeof value.finishedAt === 'number' &&
+    Number.isInteger(value.finishedAt) &&
+    Math.abs(value.finishedAt) <= 8_640_000_000_000_000 &&
+    isScore(value.score) &&
+    typeof value.retake === 'boolean' &&
+    typeof value.improved === 'boolean' &&
+    (!value.improved || value.retake)
+  );
+}
+
 function parseStudyActivity(value: unknown): StudyActivity {
   // Earlier snapshots have no record of which days quizzes were completed.
   if (value === undefined) return emptyStudyActivity();
@@ -65,6 +85,14 @@ function parseStudyActivity(value: unknown): StudyActivity {
     throw new Error('Saved personal best could not be read.');
   }
 
+  const recentQuizzes = value.recentQuizzes;
+  if (
+    recentQuizzes !== undefined &&
+    (!Array.isArray(recentQuizzes) || !recentQuizzes.every(isRecentStudyQuiz))
+  ) {
+    throw new Error('Saved recent study activity could not be read.');
+  }
+
   return {
     days: [...new Set(value.days)],
     firstDayByLesson: value.firstDayByLesson as Record<string, number>,
@@ -74,6 +102,7 @@ function parseStudyActivity(value: unknown): StudyActivity {
       best === null
         ? null
         : { lessonId: best.lessonId, previousScore: best.previousScore, score: best.score },
+    recentQuizzes: recentQuizzes?.slice(0, recentQuizLimit) ?? [],
   };
 }
 

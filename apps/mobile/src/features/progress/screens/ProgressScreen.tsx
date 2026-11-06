@@ -5,7 +5,7 @@ import { lessons } from '../../lessons/data/lessons';
 import { useLearningProgress, useStudyBadgeProgress } from '../hooks/useLearningProgress';
 import { ProgressHero } from '../components/ProgressHero';
 import { ProgressStats } from '../components/ProgressStats';
-import { LessonProgressRow } from '../components/LessonProgressRow';
+import { RecentStudyActivity } from '../components/RecentStudyActivity';
 import { LearningMilestones } from '../components/LearningMilestones';
 import { StudyRhythmCard } from '../components/StudyRhythmCard';
 import { colors } from '../../../shared/theme/tokens';
@@ -124,6 +124,7 @@ export function ProgressScreen() {
         />
         <StudyRhythmCard
           badges={badges}
+          stacked={width < 320 || fontScale >= 1.5}
           onReview={
             completed > 0
               ? () => router.push({ pathname: '/lessons', params: { filter: 'completed' } })
@@ -131,6 +132,10 @@ export function ProgressScreen() {
           }
         />
       </ContentGroup>
+      <RecentStudyActivity
+        quizzes={activity.recentQuizzes}
+        onOpenLesson={(id) => router.push(`/lessons/${id}`)}
+      />
       <ContentGroup>
         <Text variant="title" accessibilityRole="header">
           {t('progress.milestoneBoard')}
@@ -151,21 +156,6 @@ export function ProgressScreen() {
           scoredLessons={scores.length}
           stacked={stacked}
         />
-      </ContentGroup>
-      <ContentGroup>
-        <Text variant="title" accessibilityRole="header">
-          {t('progress.lessonHistory')}
-        </Text>
-        {lessons.map((lesson) => (
-          <LessonProgressRow
-            key={lesson.id}
-            lesson={lesson}
-            progress={progress[lesson.id]}
-            saved={bookmarks.includes(lesson.id)}
-            stacked={stacked}
-            onPress={() => router.push(`/lessons/${lesson.id}`)}
-          />
-        ))}
       </ContentGroup>
       {error && (
         <Text variant="small" muted>

@@ -2,6 +2,14 @@
 
 ## Study badges — 5 November 2026
 
+- Confirm the Weekly Rhythm card explains the two-day goal and shows a
+  separate status for zero study days, one study day, and a met goal.
+- Finish and retake a quiz. Confirm Recent activity shows the date and score
+  for each finish, newest first, and each row opens the corresponding lesson.
+  Confirm repeated taps on Finish produce one entry and the timeline keeps
+  the latest six.
+- Check that badge cards line up in pairs at normal text sizes and reflow at
+  larger text sizes, including longer Amharic labels.
 - Open Progress with existing lesson scores. Check that dated activity starts
   empty. Finish a quiz, retry on the same day, and confirm one study day.
 - Finish on a second day in the same week to meet Weekly Rhythm. Cross a
@@ -42,7 +50,7 @@ check that signed-in and guest choices stay separate.
   after completing the collection. Verify the section name and position move
   with reading and the completion count moves with a finished quiz. Check
   Resume reading opens the saved section and Revisit lessons appears at the end.
-  Check focus and press feedback on lesson history rows.
+  Check focus and press feedback on Recent activity rows.
 - **Profile:** check completed, in-progress and saved counts after changes.
   Each row opens its Lessons filter. Check keyboard focus, alignment with large
   text, and the Saved fallback during a storage load failure.

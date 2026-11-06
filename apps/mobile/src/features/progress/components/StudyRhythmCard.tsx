@@ -14,9 +14,11 @@ import { StudyMedal } from './StudyMedal';
 
 export function StudyRhythmCard({
   badges,
+  stacked,
   onReview,
 }: {
   badges: ReturnType<typeof getStudyBadgeProgress>;
+  stacked: boolean;
   onReview?: () => void;
 }) {
   const { t } = useTranslation();
@@ -28,14 +30,16 @@ export function StudyRhythmCard({
 
   return (
     <Card tone="mint" stroke="soft" shadow={false} style={styles.card}>
-      <View style={styles.lead}>
+      <View style={[styles.lead, stacked && styles.stackedLead]}>
         <StudyMedal badge="weekly" earned={level > 0} level={level} size={76} />
-        <View style={styles.copy}>
+        <View style={[styles.copy, !stacked && styles.leadCopy]}>
           <Text variant="title">{t('progress.badges.weekly')}</Text>
+          <Text variant="small" muted>
+            {t('progress.badges.weekGoal', { goal: weeklyStudyGoal })}
+          </Text>
           <Text variant={goalMet ? 'label' : 'small'} style={goalMet && styles.positive}>
             {t(goalMet ? 'progress.badges.weekMet' : 'progress.badges.weekCount', {
               count: daysThisWeek,
-              goal: weeklyStudyGoal,
             })}
           </Text>
         </View>
@@ -79,6 +83,8 @@ export function StudyRhythmCard({
 const styles = StyleSheet.create({
   card: { gap: 12 },
   lead: { flexDirection: 'row', alignItems: 'center', gap: 12 },
+  stackedLead: { flexDirection: 'column', alignItems: 'flex-start' },
+  leadCopy: { flex: 1 },
   copy: { flexShrink: 1, minWidth: 0, gap: 3 },
   positive: { color: brandColors.forest },
   steps: { flexDirection: 'row', gap: 5 },

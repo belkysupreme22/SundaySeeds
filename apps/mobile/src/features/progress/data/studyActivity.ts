@@ -2,6 +2,7 @@ const millisecondsPerDay = 86_400_000;
 const daysPerWeek = 7;
 
 export const weeklyStudyGoal = 2;
+export const recentQuizLimit = 6;
 
 export const studyBadgeThresholds = {
   weekly: [1, 3, 6],
@@ -16,12 +17,22 @@ export type PersonalBest = {
   score: number;
 };
 
+export type RecentStudyQuiz = {
+  lessonId: string;
+  day: number;
+  finishedAt: number;
+  score: number;
+  retake: boolean;
+  improved: boolean;
+};
+
 export type StudyActivity = {
   days: number[];
   firstDayByLesson: Record<string, number>;
   reviewedLessonIds: string[];
   improvedLessonIds: string[];
   personalBest: PersonalBest | null;
+  recentQuizzes: RecentStudyQuiz[];
 };
 
 export function emptyStudyActivity(): StudyActivity {
@@ -31,6 +42,7 @@ export function emptyStudyActivity(): StudyActivity {
     reviewedLessonIds: [],
     improvedLessonIds: [],
     personalBest: null,
+    recentQuizzes: [],
   };
 }
 
@@ -38,6 +50,10 @@ function localDay(date: Date): number {
   // Map the local calendar date to an integer. Consecutive dates stay one apart
   // even when the actual time between local midnights is 23 or 25 hours.
   return Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) / millisecondsPerDay;
+}
+
+export function studyDayDate(day: number): Date {
+  return new Date(day * millisecondsPerDay);
 }
 
 function monday(day: number): number {
@@ -73,6 +89,10 @@ export function recordStudyCompletion(
         ? [...activity.improvedLessonIds, lessonId]
         : activity.improvedLessonIds,
     personalBest: improved ? { lessonId, previousScore, score } : activity.personalBest,
+    recentQuizzes: [
+      { lessonId, day, finishedAt: now.getTime(), score, retake: previousScore !== null, improved },
+      ...activity.recentQuizzes,
+    ].slice(0, recentQuizLimit),
   };
 }
 

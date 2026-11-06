@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, View, useWindowDimensions } from 'react-native';
 import { brandColors, spacing } from '../../../shared/theme/tokens';
+import { typeScale } from '../../../shared/theme/typography';
 import { Card } from '../../../shared/ui/Card';
 import { Icon } from '../../../shared/ui/Icon';
 import { PageHeader } from '../../../shared/ui/PageHeader';
@@ -15,13 +16,22 @@ import { useLearningProgress, useStudyBadgeProgress } from '../hooks/useLearning
 type TieredBadgeId = Exclude<StudyBadgeId, 'record'>;
 type BadgeUnit = 'weeks' | 'daysUnit' | 'lessonsUnit';
 const levelMarks = ['I', 'II', 'III', 'IV'];
+const medalSize = 72;
+const labelLineHeight = Math.max(
+  typeScale.label.lineHeight,
+  Math.ceil(typeScale.label.fontSize * 1.6),
+);
+const metaLineHeight = Math.max(
+  typeScale.meta.lineHeight,
+  Math.ceil(typeScale.meta.fontSize * 1.6),
+);
 
 export function StudyBadgeCollectionScreen() {
   const { t } = useTranslation();
   const { activity, hydrated, errorKind } = useLearningProgress();
   const progress = useStudyBadgeProgress(activity);
   const { width, fontScale } = useWindowDimensions();
-  const stacked = width < 320 || fontScale >= 1.35;
+  const stacked = width < 320 * Math.max(1, fontScale) || fontScale >= 1.35;
   const ready = hydrated && errorKind !== 'load';
   const title = t('progress.badges.collectionTitle');
   const subtitle = t('progress.badges.collectionSubtitle');
@@ -73,6 +83,9 @@ export function StudyBadgeCollectionScreen() {
   });
   const earnedCount =
     tiered.filter(({ level }) => level > 0).length + Number(Boolean(progress.personalBest));
+  const rows = stacked ? tiered.map((badge) => [badge]) : [tiered.slice(0, 2), tiered.slice(2)];
+  const titleSlot = { minHeight: Math.ceil(labelLineHeight * fontScale * 2) };
+  const targetSlot = { minHeight: Math.ceil(metaLineHeight * fontScale * 3) };
 
   return (
     <Screen>
@@ -93,55 +106,67 @@ export function StudyBadgeCollectionScreen() {
         </Text>
       </Card>
       <View style={styles.grid}>
-        {tiered.map(({ id, current, unit, level, next, complete }) => {
-          const name = t(`progress.badges.${id}`);
-          const levelLabel = level
-            ? t('progress.badges.level', { level: levelMarks[level - 1] })
-            : t('progress.badges.locked');
-          const targetLabel =
-            next === undefined
-              ? t(complete ? 'progress.badges.allLevels' : 'progress.badges.earned')
-              : t('progress.badges.nextTarget', {
-                  current,
-                  target: next,
-                  unit: t(`progress.badges.${unit}`, { count: next }),
-                });
+        {rows.map((row) => (
+          <View key={row[0].id} style={styles.row}>
+            {row.map(({ id, current, unit, level, next, complete }) => {
+              const name = t(`progress.badges.${id}`);
+              const levelLabel = level
+                ? t('progress.badges.level', { level: levelMarks[level - 1] })
+                : t('progress.badges.locked');
+              const targetLabel =
+                next === undefined
+                  ? t(complete ? 'progress.badges.allLevels' : 'progress.badges.earned')
+                  : t('progress.badges.nextTarget', {
+                      current,
+                      target: next,
+                      unit: t(`progress.badges.${unit}`, { count: next }),
+                    });
 
-          return (
-            <Card
-              key={id}
-              stroke="subtle"
-              shadow={false}
-              style={stacked ? styles.fullTile : styles.tile}
-            >
-              <View style={styles.medal}>
-                <StudyMedal badge={id} earned={level > 0} level={level} size={68} />
-              </View>
-              <Text variant="label" style={styles.centered}>
-                {name}
-              </Text>
-              <Text variant="meta" muted={level === 0} style={styles.centered}>
-                {levelLabel}
-              </Text>
-              <View style={styles.detail}>
-                {next !== undefined && (
-                  <ProgressBar
-                    value={(current / next) * 100}
-                    label={name}
-                    valueText={targetLabel}
-                  />
-                )}
-                <Text variant="meta" muted style={styles.centered}>
-                  {targetLabel}
-                </Text>
-              </View>
-            </Card>
-          );
-        })}
+              return (
+                <Card
+                  key={id}
+                  stroke="subtle"
+                  shadow={false}
+                  style={[styles.tile, stacked && styles.wide]}
+                >
+                  <View style={styles.medal}>
+                    <StudyMedal badge={id} earned={level > 0} level={level} size={medalSize} />
+                  </View>
+                  <View style={[styles.badgeCopy, stacked && styles.wideCopy]}>
+                    <View style={!stacked && titleSlot}>
+                      <Text variant="label" style={!stacked && styles.centered}>
+                        {name}
+                      </Text>
+                    </View>
+                    <Text variant="meta" muted={level === 0} style={!stacked && styles.centered}>
+                      {levelLabel}
+                    </Text>
+                    <View style={styles.detail}>
+                      <View style={!stacked && styles.meterSlot}>
+                        {next !== undefined && (
+                          <ProgressBar
+                            value={(current / next) * 100}
+                            label={name}
+                            valueText={targetLabel}
+                          />
+                        )}
+                      </View>
+                      <Text variant="meta" muted style={!stacked && [styles.centered, targetSlot]}>
+                        {targetLabel}
+                      </Text>
+                    </View>
+                  </View>
+                </Card>
+              );
+            })}
+          </View>
+        ))}
       </View>
-      <Card stroke="subtle" shadow={false} style={[styles.record, stacked && styles.stackedRecord]}>
-        <StudyMedal badge="record" earned={Boolean(progress.personalBest)} size={68} />
-        <View style={[styles.recordCopy, stacked && styles.stackedRecordCopy]}>
+      <Card stroke="subtle" shadow={false} style={[styles.tile, styles.wide, styles.record]}>
+        <View style={styles.medal}>
+          <StudyMedal badge="record" earned={Boolean(progress.personalBest)} size={medalSize} />
+        </View>
+        <View style={[styles.badgeCopy, styles.wideCopy]}>
           <Text variant="label">{t('progress.badges.record')}</Text>
           <Text variant="meta" muted={!progress.personalBest}>
             {t(progress.personalBest ? 'progress.badges.earned' : 'progress.badges.locked')}
@@ -164,14 +189,15 @@ const styles = StyleSheet.create({
   intro: { gap: spacing.sm },
   summary: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm },
   summaryLabel: { color: brandColors.forest, flexShrink: 1 },
-  grid: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.md },
-  tile: { flexBasis: '46%', flexGrow: 1, minWidth: 0, gap: spacing.xs, padding: spacing.md },
-  fullTile: { width: '100%', gap: spacing.xs, padding: spacing.md },
-  medal: { alignItems: 'center', marginBottom: spacing.xs },
+  grid: { gap: spacing.md },
+  row: { flexDirection: 'row', gap: spacing.md },
+  tile: { flex: 1, minWidth: 0, gap: spacing.sm, padding: spacing.md },
+  wide: { flexDirection: 'row', alignItems: 'flex-start', gap: spacing.md },
+  record: { flexGrow: 0, flexBasis: 'auto' },
+  medal: { alignItems: 'center', justifyContent: 'center', minHeight: medalSize + spacing.xs },
+  badgeCopy: { flexGrow: 1, minWidth: 0, gap: spacing.xs },
+  wideCopy: { flex: 1 },
   centered: { textAlign: 'center' },
   detail: { gap: spacing.xs, marginTop: 'auto', paddingTop: spacing.xs },
-  record: { flexDirection: 'row', alignItems: 'center', gap: spacing.md },
-  stackedRecord: { flexDirection: 'column', alignItems: 'flex-start' },
-  recordCopy: { flex: 1, minWidth: 0, gap: spacing.xs },
-  stackedRecordCopy: { flexGrow: 0, flexShrink: 0, flexBasis: 'auto', alignSelf: 'stretch' },
+  meterSlot: { minHeight: 7 },
 });

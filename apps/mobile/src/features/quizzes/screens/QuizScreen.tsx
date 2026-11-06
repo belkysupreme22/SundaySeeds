@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { router } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
@@ -25,6 +25,7 @@ export function QuizScreen({ lessonId }: { lessonId: string }) {
     () => lesson?.questions.map(() => null) ?? [],
   );
   const [checked, setChecked] = useState(false);
+  const finishing = useRef(false);
   const [result, setResult] = useState<{ score: QuizScore; previousBest: number | null } | null>(
     null,
   );
@@ -44,7 +45,8 @@ export function QuizScreen({ lessonId }: { lessonId: string }) {
   function next() {
     if (!lesson) return;
     if (last) {
-      if (!canRecord) return;
+      if (!canRecord || finishing.current) return;
+      finishing.current = true;
       const score = scoreQuiz(lesson.questions, answers);
       const previous = progress[lesson.id];
       const previousBest = previous?.completed ? previous.bestScore : null;
@@ -63,6 +65,7 @@ export function QuizScreen({ lessonId }: { lessonId: string }) {
         previousBest={result.previousBest}
         answers={answers}
         onRetry={() => {
+          finishing.current = false;
           setIndex(0);
           setChecked(false);
           setAnswers(lesson.questions.map(() => null));

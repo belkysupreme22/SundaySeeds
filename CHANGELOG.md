@@ -5,6 +5,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Design system
+- Replaced the lesson list on Progress with a dated Recent activity timeline, clarified the two-day Weekly Rhythm goal, and aligned the Study Badges collection.
 - Added the illustrated Study Badges collection, Weekly Rhythm on Progress, and a personal-best medal on improved quiz results. Badges use recorded lesson activity.
 - Kept the neutral portrait as the automatic fallback and simplified the gallery to a borderless grid with a sage selection highlight and checkmark.
 - Blended the portrait gallery into the cream canvas and kept the sage selection highlight.

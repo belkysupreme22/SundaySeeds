@@ -23,5 +23,10 @@ progress and resets with it. Older scores provide a comparison baseline. Past
 dates are unknown. Connected course medals require confirmed course and study
 history across the learner's account and are outside this increment.
 
+Recent activity on Progress shows the latest six recorded local quiz finishes,
+including retakes and personal bests. It uses the recorded study date and
+attempt score, and older snapshots start with an empty timeline. The weekly
+goal and the learner's actual number of study days are labelled separately.
+
 Source, locale and art export checks were performed. Device review and app
 verification are pending. See the [learner audit](../learner-screen-audit.md).

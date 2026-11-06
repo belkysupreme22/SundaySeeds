@@ -21,7 +21,8 @@ authorize route, content, storage, session or backend behavior changes.
 | `shared/ui/AnimatedSplash.tsx` | Brand startup | Loaded/fallback, motion/static, finite completion, background | One-shot vector mark; font/layout handoff and input fences retained |
 | `features/learning-profile/components/LearningChoiceCards.tsx` | Profile choices | Unselected, selected, disabled, selection limit, text/marker | Neutral/sage, forest check; underlying selection rules unchanged |
 | `features/profile/components/ProfileAvatarPicker.tsx` | Profile images | Selected marker, keyboard focus, press | Cartoon portraits sit on the cream page with sage fill and a checkmark for selection. The neutral silhouette is the fallback for unset avatars. |
-| `features/progress/components/StudyMedal.tsx` | Study badges | Locked, earned, earned tier | Reference 10-inspired medal artwork, muted lock treatment and countable diamond marks with visible text in the badge card |
+| `features/progress/components/StudyMedal.tsx` | Study badges | Locked, earned, earned tier | Reference 10-inspired medal artwork, muted locks and countable diamond marks in aligned card pairs with a large-text fallback |
+| `features/progress/components/RecentStudyActivity.tsx` | Recent quiz activity | Empty, quiz completed, retaken, personal best, focus, press | Reference 10-inspired timeline with recorded dates, attempt scores and lesson links |
 | `features/quizzes/components/QuizChoice.tsx` | Quiz choice | Selected, checked/locked, correct, incorrect | Sage selection; correctness still has explicit text/icons |
 | `features/settings/components/SettingsDetailSheet.tsx` | Settings detail | Available/unavailable, language selected, dismiss/scroll | Cream/sage, forest selected marker; no new preference capability |
 
