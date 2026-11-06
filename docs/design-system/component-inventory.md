@@ -35,12 +35,12 @@ authorize route, content, storage, session or backend behavior changes.
 | Sign in/sign up | Cream page, sage hero, consistent fields and actions | Password visibility, errors, pending, provider availability, keyboard/Back |
 | Verification/recovery/reset | Same account surfaces and text hierarchy | Invalid/expired/used proofs, resend/request outcomes, retry and account boundaries |
 | Learning profile | Neutral choice cards, sage selected, forest check/progress | Optional answers, selection limits, Skip, save/conflict/reload; no new data rules |
-| Home | Forest seed header with the saved Profile portrait, sage course preview and memory verse | Profile shortcut, nonblocking course placeholder, name wrapping and content artwork stacking |
+| Home | Forest seed header, sage course feature, raised paper verse and wheat reflection | Guest account entry or saved portrait, nonblocking placeholder, text reflow and study preference shortcut |
 | Course discovery | Shared forest CTA and muted cards | Catalog availability, guest browse, verified joining and empty state |
 | Lesson reading | Editorial20/32; Latin/Ethiopic runs; existing UI headings | Content/section IDs, saved place, bookmarks, reflection privacy and scrolling |
 | Quiz/results | Sage selected, labelled correctness, real recorded progress | Joined-edition retries, drafts, completion and access rules |
 | Progress | Raised paper guidance card and forest action | Guest, unverified and verified paths to progress in joined courses |
-| Profile | Fine warm edges, raised paper navigation, sage portrait card | Name and portrait editing, account/guest differences, larger text, logout Home return |
+| Profile | Account entry for guests, fine warm edges and sage portrait card for members | Session loading, language picker, sign-in return, profile editing, larger text and logout Home return |
 | Settings/detail/data | Raised paper groups, warm edges, sage selection, forest current-section marker | Actual availability, verified status, language save, destructive intent and recovery |
 | Unknown/empty/failure | Shared roles, useful message and real next action | Back/Home/retry reachability; no stranded navigation |
 

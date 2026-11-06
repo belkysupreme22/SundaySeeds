@@ -14,7 +14,7 @@ import { Text } from '../../../shared/ui/Text';
 import { Card } from '../../../shared/ui/Card';
 import { Button } from '../../../shared/ui/Button';
 import { brandColors, colors } from '../../../shared/theme/tokens';
-import { createAccountNavigation, type AccountNavigation } from '../navigation';
+import { useAccountRouteNavigation, type AccountNavigation } from '../navigation';
 import type { LocalizedAuthResult } from '../types';
 
 type Mode = 'sign-in' | 'sign-up' | 'recovery';
@@ -29,7 +29,8 @@ export function AccountScreen({
   continueLabel?: string;
 }) {
   const { t } = useTranslation();
-  const navigate = navigation ?? createAccountNavigation('/settings');
+  const standaloneNavigation = useAccountRouteNavigation('/home');
+  const navigate = navigation ?? standaloneNavigation;
   const auth = useAuth();
   const mounted = useRef(true);
   const request = useRef(0);
@@ -78,7 +79,7 @@ export function AccountScreen({
       setPassword('');
       setConfirmation('');
       if (signup) navigate.verify();
-      else if (!recovery) navigate.continueLearning();
+      else if (!recovery) (navigate.afterSignIn ?? navigate.continueLearning)();
     }
   }
   function edit() {
@@ -229,12 +230,7 @@ export function AccountScreen({
           </Text>
         )}
         {notice && (
-          <Card
-            shadow={false}
-            stroke="soft"
-            style={styles.group}
-            accessibilityLiveRegion="polite"
-          >
+          <Card shadow={false} stroke="soft" style={styles.group} accessibilityLiveRegion="polite">
             <Text variant="small">{t(notice.messageKey, { defaultValue: notice.message })}</Text>
             {auth.pendingEmail && !recovery && (
               <Button

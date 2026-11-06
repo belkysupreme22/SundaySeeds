@@ -1,5 +1,16 @@
 # SundaySeeds implementation plan
 
+## Home and account access — 6 November 2026
+
+Home features a live course, the memory verse and a reflection prompt. Saved
+study preferences can personalize the featured course when a listed offering
+matches. Verified learners can edit those preferences from Home.
+
+Guests keep access to course discovery and open a sign-in entry from Profile.
+The personal screens and Settings require a session. The in-app course
+sign-in path returns to the course while keeping joining an explicit action.
+Device review remains pending for both learner paths.
+
 ## Single mobile course library — 6 November 2026
 
 Courses is the learner's only library. Guests can browse the published

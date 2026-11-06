@@ -1,5 +1,6 @@
 import { router } from 'expo-router';
 import { StyleSheet, View } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import type { CourseOffering } from '../types/catalog';
 import type { CourseQuizProgress } from '../../quizzes/types/connectedQuiz';
 import type { EnrollmentState } from '../types/enrollment';
@@ -22,30 +23,39 @@ export function CourseEnrollmentPanel({
   onReload: () => void;
   onRefreshCourse: () => void;
 }) {
+  const { t } = useTranslation();
   if (state.status === 'loading' || state.status === 'joining') return null;
   if (state.status === 'signed_out' || state.status === 'unverified') {
     if (!course) return null;
+    const signedOut = state.status === 'signed_out';
+    const params = { returnTo: `/courses/${course.courseId}` };
     return (
       <Card tone="mint" shadow={false} style={styles.group}>
         <Text variant="title">
-          {state.status === 'signed_out'
-            ? 'Make room for your next study'
-            : 'Verify your email to continue'}
+          {t(signedOut ? 'courseAccess.signInTitle' : 'courseAccess.verifyTitle')}
         </Text>
         <Text variant="small">
-          {state.status === 'signed_out'
-            ? 'Sign in or create an account with a verified email to join. After signing in, return here through Browse courses and choose Join.'
-            : 'Confirm your email, then return to this course to join. Verification does not enroll you automatically.'}
+          {t(
+            course.joinsOpen
+              ? signedOut
+                ? 'courseAccess.openSignIn'
+                : 'courseAccess.openVerify'
+              : signedOut
+                ? 'courseAccess.closedSignIn'
+                : 'courseAccess.closedVerify',
+          )}
         </Text>
         <Button
-          label={state.status === 'signed_out' ? 'Sign in' : 'Check verification'}
-          onPress={() => router.push(state.status === 'signed_out' ? '/sign-in' : '/verify-email')}
+          label={t(signedOut ? 'authScreens.signIn' : 'settings.verifyEmail')}
+          onPress={() =>
+            router.push({ pathname: signedOut ? '/sign-in' : '/verify-email', params })
+          }
         />
-        {state.status === 'signed_out' && (
+        {signedOut && course.joinsOpen && (
           <Button
-            label="Create account"
+            label={t('authScreens.signUp')}
             variant="outline"
-            onPress={() => router.push('/sign-up')}
+            onPress={() => router.push({ pathname: '/sign-up', params })}
           />
         )}
       </Card>

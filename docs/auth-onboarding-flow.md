@@ -1,5 +1,19 @@
 # Auth onboarding flow
 
+## Guest and account access — 6 November 2026
+
+Guests can skip onboarding, browse Home and Courses, and open the Progress
+entry for guidance. The Profile tab and Home portrait open a sign-in and
+account-creation entry with the language picker. Profile editing, portrait
+selection and Settings require a signed-in session. Guest onboarding no longer
+asks for a profile name.
+
+Sign-in can return to Profile, Progress or the originating course. In-app
+verification preserves the same context, and learners still choose Join
+explicitly. Course lessons, knowledge checks and learning preferences require
+verification. Signing out through Settings returns to Home. See the
+[screen audit](learner-screen-audit.md) for device checks.
+
 ## Guest browsing and course suggestions — 6 November 2026
 
 Skipping account setup opens Home, where guests can browse the Course library.

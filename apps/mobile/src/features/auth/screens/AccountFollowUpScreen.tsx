@@ -9,7 +9,7 @@ import { Button } from '../../../shared/ui/Button';
 import { Card } from '../../../shared/ui/Card';
 import { Text } from '../../../shared/ui/Text';
 import { brandColors, colors } from '../../../shared/theme/tokens';
-import { createAccountNavigation, type AccountNavigation } from '../navigation';
+import { useAccountRouteNavigation, type AccountNavigation } from '../navigation';
 import type { LocalizedAuthResult } from '../types';
 
 export function AccountFollowUpScreen({
@@ -23,10 +23,13 @@ export function AccountFollowUpScreen({
 }) {
   const { t } = useTranslation();
   const verification = mode === 'verify';
-  const navigate =
-    navigation ??
-    createAccountNavigation(verification ? '/sign-up' : '/forgot-password', 'replace');
+  const standaloneNavigation = useAccountRouteNavigation(
+    verification ? '/sign-up' : '/forgot-password',
+    'replace',
+  );
+  const navigate = navigation ?? standaloneNavigation;
   const auth = useAuth();
+  const confirmed = verification && !!auth.user?.verified;
   const [notice, setNotice] = useState<LocalizedAuthResult | null>(null);
   const [checking, setChecking] = useState<'verification' | 'resend' | null>(null);
   async function check(resend = false) {
@@ -55,23 +58,31 @@ export function AccountFollowUpScreen({
         label={t(verification ? 'authScreens.emailVerification' : 'authScreens.passwordReset')}
         onBack={navigate.back}
       />
-      <AccountRecoveryHero mode={verification ? 'verify' : 'reset-guidance'} />
+      {!confirmed && <AccountRecoveryHero mode={verification ? 'verify' : 'reset-guidance'} />}
       <ContentGroup>
         <Card shadow={false} stroke="soft" style={styles.card}>
           <Text variant="title">
-            {t(verification ? 'authScreens.confirmEmail' : 'authScreens.openRecoveryEmail')}
-          </Text>
-          <Text variant="small">
             {t(
-              !auth.configured
-                ? 'authScreens.accountUnavailable'
+              confirmed
+                ? 'authResults.emailConfirmed'
                 : verification
-                  ? 'authScreens.verificationGuidance'
-                  : 'authScreens.resetGuidance',
+                  ? 'authScreens.confirmEmail'
+                  : 'authScreens.openRecoveryEmail',
             )}
           </Text>
+          {!confirmed && (
+            <Text variant="small">
+              {t(
+                !auth.configured
+                  ? 'authScreens.accountUnavailable'
+                  : verification
+                    ? 'authScreens.verificationGuidance'
+                    : 'authScreens.resetGuidance',
+              )}
+            </Text>
+          )}
         </Card>
-        {verification && (
+        {verification && !confirmed && (
           <>
             <Button
               label={t('authScreens.checkVerification')}
@@ -88,7 +99,7 @@ export function AccountFollowUpScreen({
             />
           </>
         )}
-        {notice && (
+        {notice && !confirmed && (
           <Card shadow={false} stroke="soft">
             <Text variant="small" accessibilityLiveRegion="polite">
               {t(notice.messageKey, { defaultValue: notice.message })}
@@ -96,21 +107,33 @@ export function AccountFollowUpScreen({
           </Card>
         )}
       </ContentGroup>
-      <Button label={t('authScreens.signIn')} onPress={navigate.signIn} />
-      <Pressable
-        accessibilityRole="link"
-        style={styles.link}
-        onPress={verification ? navigate.signUp : navigate.recover}
-      >
-        <Text variant="small" style={styles.accent}>
-          {t(verification ? 'authScreens.backToSignUp' : 'authScreens.requestRecoveryEmail')}
-        </Text>
-      </Pressable>
-      <Pressable accessibilityRole="link" style={styles.link} onPress={navigate.continueLearning}>
-        <Text variant="small" muted>
-          {continueLabel ?? t('authScreens.returnToLearning')}
-        </Text>
-      </Pressable>
+      {confirmed && (
+        <Button
+          label={t('authScreens.returnToLearning')}
+          onPress={navigate.afterSignIn ?? navigate.continueLearning}
+        />
+      )}
+      {(!verification || !auth.user) && (
+        <Button label={t('authScreens.signIn')} onPress={navigate.signIn} />
+      )}
+      {(!verification || !auth.user) && (
+        <Pressable
+          accessibilityRole="link"
+          style={styles.link}
+          onPress={verification ? navigate.signUp : navigate.recover}
+        >
+          <Text variant="small" style={styles.accent}>
+            {t(verification ? 'authScreens.backToSignUp' : 'authScreens.requestRecoveryEmail')}
+          </Text>
+        </Pressable>
+      )}
+      {!confirmed && (
+        <Pressable accessibilityRole="link" style={styles.link} onPress={navigate.continueLearning}>
+          <Text variant="small" muted>
+            {continueLabel ?? t('authScreens.returnToLearning')}
+          </Text>
+        </Pressable>
+      )}
     </Screen>
   );
 }

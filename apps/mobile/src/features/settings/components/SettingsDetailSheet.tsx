@@ -57,7 +57,7 @@ const details: Record<SettingsDetailKey, DetailContent> = {
     title: 'Data usage',
     paragraphs: [
       'Your account stores your display name, learning preferences, course enrollments, saved reading places, bookmarks and completed knowledge checks. The app keeps a recovery record on this device while it confirms an interrupted quiz submission.',
-      'Your guest name and your chosen profile portrait stay on this device. The app keeps separate portrait choices for guests and signed-in accounts.',
+      'Your chosen profile portrait stays on this device, separately for each account.',
       'If you used the previous Lessons tab, its reading places, quiz scores, bookmarks and badges stay on this device. Course progress comes from activity in the courses you join.',
       'Wi-Fi-only and mobile-data preferences are not available yet.',
     ],

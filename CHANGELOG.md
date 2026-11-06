@@ -79,6 +79,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
   - Externalized strings across App shell, TeacherDashboard, and AdminDashboard navigation and headings.
 
 ### Changed
+- Expanded the Home course feature and added a reflection prompt and a study-preferences shortcut for verified learners. Profile opens account entry for guests, and course sign-in returns learners to the originating course.
 - Made Courses the single mobile library. Guests can browse, and learners see saved progress inside joined courses. Home shows a nonblocking course placeholder while the catalog loads.
 - Replaced Home’s fixed quick-quiz shortcut with Find a lesson, which opens the existing lesson search.
 - Separated the Home course preview and Lessons catalog shortcut from sample progress. Sample quiz results recommend the next sample lesson, and the sample lesson overview labels its related connected course explicitly.

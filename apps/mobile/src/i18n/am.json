@@ -34,11 +34,25 @@
     "errorTitle": "የኮርስ ቤተ መጻሕፍቱን መጫን አልቻልንም",
     "errorDescription": "የኢንተርኔት ግንኙነትዎን ያረጋግጡና እንደገና ይሞክሩ።"
   },
+  "courseAccess": {
+    "signInTitle": "በመለያዎ ይቀጥሉ",
+    "verifyTitle": "ለመቀጠል ኢሜይልዎን ያረጋግጡ",
+    "openSignIn": "ይህን ኮርስ ለመቀላቀል ይግቡ ወይም መለያ ይፍጠሩ። ኢሜይልዎን ማረጋገጥ ያስፈልጋል።",
+    "openVerify": "ኢሜይልዎን ያረጋግጡ፤ ሲመለሱ ኮርሱን መቀላቀል ይችላሉ።",
+    "closedSignIn": "ምዝገባ ተዘግቷል። ኮርሱን አስቀድመው ከተቀላቀሉ ወደ መለያዎ ይግቡ።",
+    "closedVerify": "ምዝገባ ተዘግቷል። ኮርሱን አስቀድመው ከተቀላቀሉ ለመክፈት ኢሜይልዎን ያረጋግጡ።"
+  },
+  "profileAccess": {
+    "title": "መገለጫዎን ያዘጋጁ",
+    "description": "መገለጫዎንና የጥናት ምርጫዎችዎን ለማስተዳደር ይግቡ።",
+    "guest": "ያለ መለያ ኮርሶችን ማሰስዎን መቀጠል ይችላሉ።"
+  },
   "home": {
     "greeting": "ሰላም፣ {{name}}! ☀",
     "subtitle": "ትንሽ ትምህርት። ትንሽ እድገት።",
     "quickAccess": "ፈጣን ድረስ",
     "yourProfile": "የእርስዎ መለያ",
+    "accountEntry": "የመግቢያ አማራጮችን ይክፈቱ",
     "courses": "ኮርሶች",
     "browseCourses": "ቤተ መፃሕፍቱን ያስሱ",
     "browseCourseLabel": "ኮርሶችን ያስሱ",
@@ -53,9 +67,16 @@
     "courseLibraryUnavailable": "የኮርስ ቤተ መጻሕፍቱ ለጊዜው አይገኝም።",
     "pilotCourse": "የቅድመ ልምምድ ኮርስ",
     "viewCourse": "ኮርሱን ይመልከቱ",
+    "courseLessonCount_one": "{{count}} ትምህርት",
+    "courseLessonCount_other": "{{count}} ትምህርቶች",
+    "coursePreferenceMatch": "ከጥናት ምርጫዎችዎ ጋር ይስማማል",
+    "reflectionTitle": "ለማሰላሰል ጥቂት ጊዜ",
+    "reflectionPrompt": "ዛሬ ለማን ደግነት ማሳየት ይችላሉ? ለእነርሱስ ምን ትንሽ ነገር ማድረግ ይችላሉ?",
+    "studyPreferencesHint": "ምን ማጥናት እንደሚፈልጉና ለጥናት ምን ያህል ጊዜ እንደሚሰጡ ይምረጡ።",
+    "verifyStudyHint": "ኮርሶችን ለመቀላቀልና እድገትዎን ለማስቀመጥ ኢሜይልዎን ያረጋግጡ።",
     "growToday": "ዛሬ ትንሽ አድጉ",
     "memoryVerse": "ከእርስዎ ጋር ሊይዙት የሚችሉ ጥቅስ",
-    "memoryVerseLabel": "የዚህ ሳምንት የሚያስታወሱ ጥቅስ · KJV",
+    "memoryVerseLabel": "የማስታወሻ ጥቅስ · KJV",
     "verseText": "\u201cጎረቤትህን እንደ ራስህ ውደድ።\u201d",
     "verseRef": "ማርቆስ 12፡31"
   },

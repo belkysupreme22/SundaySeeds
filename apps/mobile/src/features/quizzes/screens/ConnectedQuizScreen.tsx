@@ -63,7 +63,10 @@ export function ConnectedQuizScreen({
             <Button
               label={state.status === 'signed_out' ? 'Sign in' : 'Check verification'}
               onPress={() =>
-                router.push(state.status === 'signed_out' ? '/sign-in' : '/verify-email')
+                router.push({
+                  pathname: state.status === 'signed_out' ? '/sign-in' : '/verify-email',
+                  params: { returnTo: `/courses/${courseId}` },
+                })
               }
             />
           </Card>

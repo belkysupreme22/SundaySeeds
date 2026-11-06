@@ -44,7 +44,12 @@ export function ProgressScreen() {
             label={t(user ? 'settings.verifyEmail' : 'auth.signIn')}
             icon={user ? 'mail' : 'log-in'}
             variant="outline"
-            onPress={() => router.push(user ? '/verify-email' : '/sign-in')}
+            onPress={() =>
+              router.push({
+                pathname: user ? '/verify-email' : '/sign-in',
+                params: { returnTo: '/progress' },
+              })
+            }
           />
         )}
       </Card>

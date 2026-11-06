@@ -19,3 +19,9 @@ The public catalog describes current offerings. A connected Study Shelf and
 account-wide badges need an authorized read of the learner's own enrollments
 and confirmed study events, including any pinned editions no longer listed.
 The [Study Shelf plan](../implementation-plan.md) records those requirements.
+
+The guest journey includes Home, public course discovery and a Progress entry
+with sign-in guidance. Profile opens the account entry for guests. Profile
+editing, portrait selection and Settings require a signed-in session. Learning
+preferences and joined course activity retain their verification requirement.
+The account flow accepts only local, recognized return destinations.

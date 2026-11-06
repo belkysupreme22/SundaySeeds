@@ -5,10 +5,9 @@ import { useTranslation } from 'react-i18next';
 import { AccountScreen } from '../../auth/screens/AccountScreen';
 import { AccountFollowUpScreen } from '../../auth/screens/AccountFollowUpScreen';
 import type { AccountNavigation } from '../../auth/navigation';
-import { useLearnerProfile } from '../../profile/hooks/useLearnerProfile';
+import { useAuth } from '../../auth/hooks/useAuth';
 import { welcomeSlides } from '../data/welcomeSlides';
 import { AccountChoiceScreen } from './AccountChoiceScreen';
-import { MinimalSetupScreen } from './MinimalSetupScreen';
 import { WelcomeScreen } from './WelcomeScreen';
 
 type Step =
@@ -19,8 +18,7 @@ type Step =
   | 'recovery'
   | 'verify-from-sign-in'
   | 'verify-from-sign-up'
-  | 'reset'
-  | 'setup';
+  | 'reset';
 
 const previousStep: Record<Exclude<Step, 'introduction'>, Step> = {
   account: 'introduction',
@@ -30,7 +28,6 @@ const previousStep: Record<Exclude<Step, 'introduction'>, Step> = {
   'verify-from-sign-in': 'sign-in',
   'verify-from-sign-up': 'sign-up',
   reset: 'recovery',
-  setup: 'account',
 };
 
 // First launch and Settings replay share the same optional steps.
@@ -47,14 +44,14 @@ export function WelcomeFlow({
   onContinueForNow: () => void;
 }) {
   const { t } = useTranslation();
+  const { user } = useAuth();
   const [step, setStep] = useState<Step>('introduction');
   const [introductionPage, setIntroductionPage] = useState(0);
-  const { saving: savingName } = useLearnerProfile();
   const back = useCallback(() => {
-    if (saving || savingName || step === 'introduction') return;
+    if (saving || step === 'introduction') return;
     if (step === 'account') setIntroductionPage(welcomeSlides.length - 1);
     setStep(previousStep[step]);
-  }, [saving, savingName, step]);
+  }, [saving, step]);
 
   useFocusEffect(
     useCallback(() => {
@@ -103,17 +100,6 @@ export function WelcomeFlow({
       />
     );
   }
-  if (step === 'setup') {
-    return (
-      <MinimalSetupScreen
-        finishing={saving}
-        finishError={error}
-        onFinish={onFinish}
-        onContinueForNow={onContinueForNow}
-        onBack={back}
-      />
-    );
-  }
   if (step === 'account') {
     return (
       <AccountChoiceScreen
@@ -123,7 +109,6 @@ export function WelcomeFlow({
         onSignUp={navigation.signUp}
         onSignIn={navigation.signIn}
         onSkip={skipAccount}
-        onSetupName={() => setStep('setup')}
         onContinueForNow={onContinueForNow}
       />
     );
@@ -133,7 +118,10 @@ export function WelcomeFlow({
       saving={saving}
       error={error}
       initialIndex={introductionPage}
-      onFinish={() => setStep('account')}
+      onFinish={() => {
+        if (user) void onFinish();
+        else setStep('account');
+      }}
       onSkip={() => void onFinish()}
       onContinueForNow={onContinueForNow}
     />

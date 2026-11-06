@@ -2,7 +2,7 @@ import { useAuth } from '../../auth/hooks/useAuth';
 import type { LocalizedAuthResult } from '../../auth/types';
 import { Card } from '../../../shared/ui/Card';
 import { useCallback, useRef, useState } from 'react';
-import { router, useFocusEffect } from 'expo-router';
+import { Redirect, router, useFocusEffect } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
 import { SettingsGroup, SettingsRow } from '../components/SettingsGroup';
@@ -47,41 +47,29 @@ export function SettingsScreen() {
     if (result.ok) router.replace('/home');
     else setNotice(result);
   }
+  if (!auth.hydrated || (!auth.user && loggingOut)) {
+    return (
+      <Screen loadingMessage={t(loggingOut ? 'settings.signingOut' : 'settings.statusLoading')}>
+        {null}
+      </Screen>
+    );
+  }
+  if (!auth.user) return <Redirect href="/profile" />;
+  const { email, verified } = auth.user;
+
   return (
     <Screen tabs loadingMessage={loggingOut && auth.busy ? t('settings.signingOut') : undefined}>
       <PageHeader title={t('settings.title')} subtitle={t('settings.subtitle')} back />
       <SettingsGroup title={t('settings.account')}>
         <SettingsRow
           icon="log-in"
-          title={
-            !auth.hydrated
-              ? t('settings.accountLabel')
-              : auth.user
-                ? auth.user.email
-                : t('settings.signInOrCreate')
-          }
-          value={
-            !auth.hydrated
-              ? t('settings.loading')
-              : auth.user
-                ? auth.user.verified
-                  ? t('settings.verified')
-                  : t('settings.verifyEmail')
-                : t('common.optional')
-          }
-          description={
-            !auth.hydrated
-              ? t('settings.statusLoading')
-              : auth.user
-                ? auth.user.verified
-                  ? t('settings.signedIn')
-                  : t('settings.confirmEmail')
-                : t('settings.keepExploring')
-          }
+          title={email}
+          value={t(verified ? 'settings.verified' : 'settings.verifyEmail')}
+          description={t(verified ? 'settings.signedIn' : 'settings.confirmEmail')}
           onPress={
-            auth.hydrated && !auth.user?.verified
-              ? () => router.push(auth.user ? '/verify-email' : '/sign-in')
-              : undefined
+            verified
+              ? undefined
+              : () => router.push({ pathname: '/verify-email', params: { returnTo: '/settings' } })
           }
         />
         <SettingsRow
@@ -148,7 +136,7 @@ export function SettingsScreen() {
           icon="compass"
           title={t('settings.learningProfile')}
           description={t('settings.learningProfileDesc')}
-          value={auth.user?.verified ? undefined : t('common.optional')}
+          value={verified ? undefined : t('settings.verifyEmail')}
           onPress={() => router.push('/learning-profile?mode=edit')}
         />
         <SettingsRow
@@ -200,13 +188,13 @@ export function SettingsScreen() {
           label={t('settings.logOut')}
           icon="log-out"
           variant="outline"
-          disabled={!auth.user || auth.busy || !auth.hydrated}
+          disabled={auth.busy}
           loading={loggingOut && auth.busy}
           style={styles.signOutButton}
           onPress={() => void logout()}
         />
         <Text variant="caption" muted style={styles.center}>
-          {auth.user ? t('settings.signsOutDevice') : t('settings.noAccountSignedIn')}
+          {t('settings.signsOutDevice')}
         </Text>
       </View>
       <Text variant="caption" muted style={styles.center}>

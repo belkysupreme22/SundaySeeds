@@ -15,9 +15,11 @@ import { CourseJourneyCard } from '../../courses/components/CourseJourneyCard';
 import { useLearnerProfile } from '../../profile/hooks/useLearnerProfile';
 import { useProfileAvatar } from '../../profile/hooks/useProfileAvatar';
 import { ProfileAvatar } from '../../profile/components/ProfileAvatar';
+import { HomeStudyAction } from '../components/HomeStudyAction';
+
 export function HomeScreen() {
   const { t } = useTranslation();
-  const { shouldPrompt } = useLearningProfile();
+  const { shouldPrompt, preferences } = useLearningProfile();
   useFocusEffect(
     useCallback(() => {
       if (shouldPrompt) router.replace('/learning-profile');
@@ -51,7 +53,7 @@ export function HomeScreen() {
         </View>
         <Pressable
           accessibilityRole="button"
-          accessibilityLabel={t('home.yourProfile')}
+          accessibilityLabel={t(user ? 'home.yourProfile' : 'home.accountEntry')}
           onPress={() => router.replace('/profile')}
           onFocus={() => setProfileFocused(true)}
           onBlur={() => setProfileFocused(false)}
@@ -61,30 +63,42 @@ export function HomeScreen() {
             pressed && styles.profilePressed,
           ]}
         >
-          <ProfileAvatar avatarId={avatarId} size={targets.minimum} />
+          <ProfileAvatar avatarId={user ? avatarId : null} size={targets.minimum} />
         </Pressable>
       </View>
       <ContentGroup>
-        <SectionHeading
-          title={t('home.courseJourney')}
-          action={t('common.viewAll')}
-          onPress={() => router.replace('/courses')}
-        />
-        <CourseJourneyCard />
+        <SectionHeading title={t('home.courseJourney')} />
+        <CourseJourneyCard preferences={preferences} />
       </ContentGroup>
+      {user && <HomeStudyAction verified={user.verified} />}
       <ContentGroup>
         <SectionHeading title={t('home.memoryVerse')} />
-        <Card tone="mint" shadow={false}>
+        <Card shadow={false} style={styles.verseCard}>
           <View style={styles.verseTitle}>
-            <Icon name="sun" size={20} color={brandColors.forest} />
+            <View style={styles.verseIcon} aria-hidden>
+              <Icon name="book-open" size={19} color={brandColors.forest} />
+            </View>
             <Text variant="accentMeta" style={styles.verseLabel}>
               {t('home.memoryVerseLabel')}
             </Text>
           </View>
-          <Text variant="title" style={styles.verse}>
+          <Text variant="reading" style={styles.verse}>
             {t('home.verseText')}
           </Text>
-          <Text variant="small">{t('home.verseRef')}</Text>
+          <Text variant="label" style={styles.verse}>
+            {t('home.verseRef')}
+          </Text>
+        </Card>
+        <Card tone="yellow" shadow={false} style={styles.reflection}>
+          <View style={styles.verseTitle}>
+            <View aria-hidden>
+              <Icon name="sun" size={20} color={brandColors.forest} />
+            </View>
+            <Text variant="control" accessibilityRole="header" style={styles.verseLabel}>
+              {t('home.reflectionTitle')}
+            </Text>
+          </View>
+          <Text variant="body">{t('home.reflectionPrompt')}</Text>
         </Card>
       </ContentGroup>
       <Text variant="caption" muted style={styles.tagline}>
@@ -125,8 +139,18 @@ const styles = StyleSheet.create({
   },
   logoImage: { width: 29, height: 33 },
   brandTitle: { color: brandColors.forest },
-  verseTitle: { flexDirection: 'row', alignItems: 'center', gap: 8, flexWrap: 'wrap' },
-  verseLabel: { flexShrink: 1 },
-  verse: { marginTop: 10, marginBottom: 8 },
+  verseCard: { gap: 10, backgroundColor: brandColors.surfaceRaised },
+  verseTitle: { flexDirection: 'row', alignItems: 'center', gap: 8 },
+  verseIcon: {
+    width: 36,
+    height: 36,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: shape.radius.field,
+    backgroundColor: brandColors.surfaceStrong,
+  },
+  verseLabel: { flexShrink: 1, color: brandColors.forest },
+  verse: { color: brandColors.forest },
+  reflection: { gap: 8 },
   tagline: { textAlign: 'center', paddingHorizontal: 10 },
 });

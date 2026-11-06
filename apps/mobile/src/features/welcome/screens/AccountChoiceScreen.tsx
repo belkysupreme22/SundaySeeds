@@ -16,7 +16,6 @@ type Props = {
   onSignUp: () => void;
   onSignIn: () => void;
   onSkip: () => void;
-  onSetupName: () => void;
   onContinueForNow: () => void;
 };
 
@@ -27,7 +26,6 @@ export function AccountChoiceScreen({
   onSignUp,
   onSignIn,
   onSkip,
-  onSetupName,
   onContinueForNow,
 }: Props) {
   const { t } = useTranslation();
@@ -111,23 +109,6 @@ export function AccountChoiceScreen({
           />
         </Card>
       )}
-      <View style={styles.personalize}>
-        <Pressable
-          accessibilityRole="button"
-          accessibilityState={{ disabled: saving }}
-          disabled={saving}
-          onPress={onSetupName}
-          style={({ pressed }) => [
-            styles.nameLink,
-            saving && styles.disabled,
-            pressed && styles.pressed,
-          ]}
-        >
-          <Text variant="small" style={styles.nameCopy}>
-            {t('accountEntry.choice.addName')}
-          </Text>
-        </Pressable>
-      </View>
     </Screen>
   );
 }
@@ -164,14 +145,6 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   skipLabel: { flexShrink: 1, textAlign: 'center' },
-  personalize: { borderTopWidth: 1, borderColor: colors.line, paddingTop: 6 },
-  nameLink: {
-    minHeight: 44,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingVertical: 10,
-  },
-  nameCopy: { color: brandColors.forest, textAlign: 'center' },
   disabled: { opacity: 0.45 },
   pressed: { opacity: 0.72 },
 });

@@ -34,11 +34,25 @@
     "errorTitle": "We couldn’t load the library",
     "errorDescription": "Please check your connection and try again."
   },
+  "courseAccess": {
+    "signInTitle": "Continue with your account",
+    "verifyTitle": "Verify your email to continue",
+    "openSignIn": "Sign in or create an account to join this course. You’ll need a verified email.",
+    "openVerify": "Verify your email, then choose Join course when you return.",
+    "closedSignIn": "Enrollment is closed. Sign in if you’ve already joined this course.",
+    "closedVerify": "Enrollment is closed. Verify your email to open this course if you’ve already joined."
+  },
+  "profileAccess": {
+    "title": "Make it yours",
+    "description": "Sign in to manage your profile and learning preferences.",
+    "guest": "You can keep browsing courses as a guest."
+  },
   "home": {
     "greeting": "Hello, {{name}}! ☀",
     "subtitle": "A little learning. A little growing.",
     "quickAccess": "Quick access",
     "yourProfile": "Your profile",
+    "accountEntry": "Open sign-in options",
     "courses": "Courses",
     "browseCourses": "Browse library",
     "browseCourseLabel": "Browse courses",
@@ -53,9 +67,16 @@
     "courseLibraryUnavailable": "The course library is unavailable right now.",
     "pilotCourse": "Pilot course",
     "viewCourse": "View course",
+    "courseLessonCount_one": "{{count}} lesson",
+    "courseLessonCount_other": "{{count}} lessons",
+    "coursePreferenceMatch": "Matches your learning preferences",
+    "reflectionTitle": "A moment to reflect",
+    "reflectionPrompt": "Who could you show kindness to today, and what’s one small thing you could do for them?",
+    "studyPreferencesHint": "Choose what to study and how much time to set aside.",
+    "verifyStudyHint": "Confirm your email to join courses and save your progress.",
     "growToday": "Grow a little today",
     "memoryVerse": "A verse to carry with you",
-    "memoryVerseLabel": "THIS WEEK'S MEMORY VERSE · KJV",
+    "memoryVerseLabel": "MEMORY VERSE · KJV",
     "verseText": "\u201cThou shalt love thy neighbour as thyself.\u201d",
     "verseRef": "Mark 12:31"
   },

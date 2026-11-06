@@ -15,16 +15,25 @@ import { brandColors, colors } from '../../../shared/theme/tokens';
 
 export function LearningProfileScreen() {
   const { user } = useAuth();
-  const { mode } = useLocalSearchParams<{ mode?: string }>();
+  const { mode, from } = useLocalSearchParams<{ mode?: string; from?: string }>();
+  const editing = mode === 'edit';
+  const returnToSettings = editing && from !== 'home';
   return (
     <LearningProfileForm
-      key={`${user?.id ?? 'guest'}:${mode ?? 'setup'}`}
-      editing={mode === 'edit'}
+      key={`${user?.id ?? 'guest'}:${mode ?? 'setup'}:${returnToSettings}`}
+      editing={editing}
+      returnToSettings={returnToSettings}
     />
   );
 }
 
-function LearningProfileForm({ editing }: { editing: boolean }) {
+function LearningProfileForm({
+  editing,
+  returnToSettings,
+}: {
+  editing: boolean;
+  returnToSettings: boolean;
+}) {
   const { user, hydrated } = useAuth();
   const profile = useLearningProfile();
   const [draft, setDraft] = useState<LearningPreferencesDraft | null>(null);
@@ -66,7 +75,7 @@ function LearningProfileForm({ editing }: { editing: boolean }) {
     // Invalidate in-flight screen actions before navigation, including rapid exit/re-entry.
     focus.current.generation += 1;
     profile.continueForNow();
-    router.replace(editing ? '/settings' : '/home');
+    router.dismissTo(returnToSettings ? '/settings' : '/home');
   }
 
   function skip() {
@@ -166,7 +175,7 @@ function LearningProfileForm({ editing }: { editing: boolean }) {
           />
         )}
         <Button
-          label={editing ? 'Back to Settings' : 'Continue without setup'}
+          label={returnToSettings ? 'Back to Settings' : 'Continue without setup'}
           variant="outline"
           onPress={exit}
         />
@@ -179,7 +188,7 @@ function LearningProfileForm({ editing }: { editing: boolean }) {
       <Screen
         footer={
           <Button
-            label={editing ? 'Back to Settings' : 'Go to Home'}
+            label={returnToSettings ? 'Back to Settings' : 'Go to Home'}
             onPress={editing ? exit : () => router.replace('/home')}
           />
         }
@@ -246,7 +255,7 @@ function LearningProfileForm({ editing }: { editing: boolean }) {
           <Button
             label={
               profile.busy
-                ? editing
+                ? returnToSettings
                   ? 'Return to Settings'
                   : 'Continue to Home'
                 : editing
@@ -273,7 +282,9 @@ function LearningProfileForm({ editing }: { editing: boolean }) {
               ? 'Previous question'
               : editing
                 ? profile.busy
-                  ? 'Back to Settings'
+                  ? returnToSettings
+                    ? 'Back to Settings'
+                    : 'Back to Home'
                   : 'Cancel editing'
                 : 'Skip setup'
           }

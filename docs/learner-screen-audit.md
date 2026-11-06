@@ -1,5 +1,18 @@
 # Learner screen audit checklist
 
+## Guest and signed-in flows — 6 November 2026
+
+| Screen | Guest check | Signed-in check |
+| --- | --- | --- |
+| Welcome | Skip to Home or open sign-in/sign-up. Confirm there is no guest name step. | Replay from Settings and finish without an account prompt. |
+| Home | Confirm the default account icon, live feature, memory verse and reflection. Slow the catalog and keep navigation usable. | Check the saved portrait. Match a featured course to saved study preferences. Open the preference shortcut and return to Home. Check the verification prompt with an unverified session. |
+| Profile and Settings | Open Profile from both Home and the tab. Check sign-in, account creation, language and Courses access. Try direct links to Edit profile, Profile portrait, Settings and Learning profile. | Check session restoration, profile editing, Settings, and logout to Home. Go back after logout and confirm only the account entry can appear. |
+| Courses and course details | Browse outlines. Sign in from an open course and confirm the same course opens. Check closed enrollment copy. | Verify email if required. Confirm joining still requires an explicit tap. Check existing access when enrollment has closed. |
+| Reading and quizzes | Open direct course lesson and quiz links. Confirm the access prompt, and return to the course through sign-in. | Open a joined lesson, save a reading place and finish a knowledge check. Check that unavailable enrollment blocks access. |
+| Progress | Confirm the sign-in action and browsing link. | Confirm the verified course progress guidance and the verification action if email is unverified. |
+
+Review both languages, narrow screens, larger text and reduced motion.
+
 ## Single mobile course library — 6 November 2026
 
 - Skip account setup. Open the same Course library from Home and from the
