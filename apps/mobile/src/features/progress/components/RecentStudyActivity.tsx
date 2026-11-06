@@ -37,7 +37,7 @@ export function RecentStudyActivity({
         {t('progress.activity.title')}
       </Text>
       {entries.length === 0 ? (
-        <Card stroke="subtle" shadow={false}>
+        <Card stroke="subtle" shadow={false} style={styles.surface}>
           <Text variant="small" muted>
             {t('progress.activity.empty')}
           </Text>
@@ -46,6 +46,7 @@ export function RecentStudyActivity({
         <View style={styles.timeline}>
           {entries.map(({ quiz, lesson }, index) => {
             const key = `${quiz.lessonId}:${quiz.finishedAt}`;
+            const focused = focusedKey === key;
             const kind = quiz.improved ? 'personalBest' : quiz.retake ? 'retake' : 'completed';
             const icon = quiz.improved ? 'award' : quiz.retake ? 'refresh-cw' : 'check';
             const tint = quiz.improved
@@ -71,7 +72,8 @@ export function RecentStudyActivity({
                   onBlur={() => setFocusedKey((current) => (current === key ? null : current))}
                   style={({ pressed }) => [
                     styles.row,
-                    focusedKey === key && styles.focused,
+                    styles.surface,
+                    focused && styles.focused,
                     pressed && styles.pressed,
                   ]}
                 >
@@ -79,12 +81,12 @@ export function RecentStudyActivity({
                     <Icon name={icon} size={17} color={brandColors.forest} />
                   </View>
                   <View style={styles.copy}>
-                    <Text variant="meta" muted>
+                    <Text variant="meta" muted={!focused}>
                       {action}
                     </Text>
                     <Text variant="label">{lesson.title}</Text>
                     <View style={styles.metadata}>
-                      <Text variant="small" muted>
+                      <Text variant="small" muted={!focused}>
                         {date}
                       </Text>
                       <Text variant="small" style={styles.score}>
@@ -107,6 +109,7 @@ export function RecentStudyActivity({
 
 const styles = StyleSheet.create({
   timeline: { gap: 8 },
+  surface: { backgroundColor: brandColors.canvas },
   track: { width: 11, alignSelf: 'stretch' },
   rail: {
     position: 'absolute',
@@ -137,7 +140,6 @@ const styles = StyleSheet.create({
     borderRadius: shape.radius.button,
     borderWidth: 1,
     borderColor: colors.line,
-    backgroundColor: colors.white,
   },
   focused: { borderColor: brandColors.forest, backgroundColor: brandColors.surface },
   pressed: { opacity: motion.pressedOpacity, transform: [{ translateY: motion.distance.press }] },

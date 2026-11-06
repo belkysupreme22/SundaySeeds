@@ -1,7 +1,9 @@
 import { router, usePathname, type Href } from 'expo-router';
+import { useState } from 'react';
 import { Pressable, StyleSheet, View, useWindowDimensions } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTranslation } from 'react-i18next';
+import { motion, shape } from '../theme/motion';
 import { brandColors, colors } from '../theme/tokens';
 import { Icon, type IconName } from './Icon';
 import { Text } from './Text';
@@ -18,6 +20,7 @@ export function BottomNav() {
   const { t } = useTranslation();
   const pathname = usePathname();
   const { width } = useWindowDimensions();
+  const [focusedKey, setFocusedKey] = useState<string | null>(null);
   const compact = width < 320;
   return (
     <SafeAreaView edges={['bottom']} style={[styles.safe, compact && styles.compactSafe]}>
@@ -41,7 +44,13 @@ export function BottomNav() {
               onPress={() => {
                 if (pathname !== tab.href) router.replace(tab.href);
               }}
-              style={[styles.tab, selected && styles.active]}
+              onFocus={() => setFocusedKey(tab.labelKey)}
+              onBlur={() => setFocusedKey((current) => (current === tab.labelKey ? null : current))}
+              style={({ pressed }) => [
+                styles.tab,
+                selected && styles.active,
+                pressed && styles.pressed,
+              ]}
             >
               <Icon
                 name={tab.icon}
@@ -51,6 +60,13 @@ export function BottomNav() {
               <Text variant="caption" style={[styles.label, selected && styles.activeLabel]}>
                 {label}
               </Text>
+              {focusedKey === tab.labelKey && (
+                <View
+                  aria-hidden
+                  pointerEvents="none"
+                  style={[styles.focusRing, selected && styles.activeFocusRing]}
+                />
+              )}
             </Pressable>
           );
         })}
@@ -60,7 +76,7 @@ export function BottomNav() {
 }
 const styles = StyleSheet.create({
   safe: {
-    backgroundColor: colors.paper,
+    backgroundColor: brandColors.canvas,
     paddingHorizontal: 12,
     paddingTop: 8,
     paddingBottom: 8,
@@ -74,7 +90,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.line,
     borderRadius: 10,
-    backgroundColor: colors.white,
+    backgroundColor: brandColors.surface,
   },
   tab: {
     flex: 1,
@@ -89,6 +105,18 @@ const styles = StyleSheet.create({
   label: { alignSelf: 'stretch', textAlign: 'center' },
   active: { backgroundColor: brandColors.forest },
   activeLabel: { color: brandColors.onForest },
+  pressed: { opacity: motion.pressedOpacity },
+  focusRing: {
+    position: 'absolute',
+    top: 2,
+    right: 2,
+    bottom: 2,
+    left: 2,
+    borderRadius: 4,
+    borderWidth: shape.stroke.focus,
+    borderColor: brandColors.forest,
+  },
+  activeFocusRing: { borderColor: brandColors.onForest },
   compactSafe: { paddingHorizontal: 4 },
   compactBar: { padding: 2, gap: 0 },
 });

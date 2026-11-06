@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 import { useLearningProgress } from '../../progress/hooks/useLearningProgress';
-import { colors } from '../../../shared/theme/tokens';
+import { brandColors, colors } from '../../../shared/theme/tokens';
 import { ContentGroup } from '../../../shared/ui/Screen';
 import { Card } from '../../../shared/ui/Card';
 import { Text } from '../../../shared/ui/Text';
@@ -54,7 +54,7 @@ export function LearningDataControls() {
               label={busy ? 'Resetting…' : 'Yes, reset lesson activity'}
               icon="refresh-cw"
               variant="outline"
-              style={styles.confirmButton}
+              style={[styles.confirmButton, styles.dangerButton]}
               disabled={busy}
               onPress={() => void reset()}
             />
@@ -110,5 +110,11 @@ const styles = StyleSheet.create({
   pressed: { opacity: 0.72 },
   confirmation: { padding: 12, borderRadius: 8, borderColor: colors.line, borderWidth: 1 },
   confirmationContent: { gap: 10 },
-  confirmButton: { minHeight: 44, paddingVertical: 10, borderRadius: 6 },
+  confirmButton: {
+    minHeight: 44,
+    paddingVertical: 10,
+    borderRadius: 6,
+    backgroundColor: brandColors.canvas,
+  },
+  dangerButton: { borderColor: colors.danger },
 });

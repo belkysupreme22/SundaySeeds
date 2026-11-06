@@ -7,7 +7,7 @@ import { ProgressHero } from '../components/ProgressHero';
 import { ProgressStats } from '../components/ProgressStats';
 import { RecentStudyActivity } from '../components/RecentStudyActivity';
 import { StudyRhythmCard } from '../components/StudyRhythmCard';
-import { colors } from '../../../shared/theme/tokens';
+import { brandColors, colors } from '../../../shared/theme/tokens';
 import { Screen, ContentGroup } from '../../../shared/ui/Screen';
 import { PageHeader } from '../../../shared/ui/PageHeader';
 import { Text } from '../../../shared/ui/Text';
@@ -154,7 +154,7 @@ export function ProgressScreen() {
 }
 
 const styles = StyleSheet.create({
-  overall: { gap: 14 },
+  overall: { gap: 14, backgroundColor: brandColors.canvas },
   summary: { gap: 2 },
   nextStep: {
     gap: 8,

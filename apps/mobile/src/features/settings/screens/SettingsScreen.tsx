@@ -12,7 +12,7 @@ import { Screen } from '../../../shared/ui/Screen';
 import { PageHeader } from '../../../shared/ui/PageHeader';
 import { Text } from '../../../shared/ui/Text';
 import { Button } from '../../../shared/ui/Button';
-import { colors } from '../../../shared/theme/tokens';
+import { cardColors, colors } from '../../../shared/theme/tokens';
 import { useLanguage } from '../../../i18n/useLanguage';
 
 export function SettingsScreen() {
@@ -221,6 +221,11 @@ export function SettingsScreen() {
 
 const styles = StyleSheet.create({
   signOut: { gap: 6 },
-  signOutButton: { borderColor: colors.danger, borderRadius: 6, minHeight: 44 },
+  signOutButton: {
+    borderColor: colors.danger,
+    borderRadius: 6,
+    minHeight: 44,
+    backgroundColor: cardColors.pink,
+  },
   center: { textAlign: 'center' },
 });

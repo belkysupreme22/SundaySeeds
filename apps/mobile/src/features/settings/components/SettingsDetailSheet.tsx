@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import { Modal, Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTranslation } from 'react-i18next';
 import { lessons } from '../../lessons/data/lessons';
+import { motion, targets } from '../../../shared/theme/motion';
 import { brandColors, colors } from '../../../shared/theme/tokens';
 import { Button, IconButton } from '../../../shared/ui/Button';
 import { Text } from '../../../shared/ui/Text';
@@ -90,9 +92,7 @@ const details: Record<SettingsDetailKey, DetailContent> = {
   terms: {
     title: 'Terms of Service',
     status: 'Official terms not published yet',
-    paragraphs: [
-      'Official terms of service have not been published yet.',
-    ],
+    paragraphs: ['Official terms of service have not been published yet.'],
   },
   about: {
     title: 'About SundaySeeds',
@@ -167,6 +167,7 @@ function LanguagePicker({
   onChange: (lang: AppLanguage) => void;
 }) {
   const { t } = useTranslation();
+  const [focusedLanguage, setFocusedLanguage] = useState<AppLanguage | null>(null);
   return (
     <View style={styles.languageList} accessibilityRole="radiogroup">
       <Text variant="small" muted>
@@ -182,15 +183,28 @@ function LanguagePicker({
             accessibilityLabel={option.nativeLabel}
             disabled={loading}
             onPress={() => onChange(option.code)}
-            style={[styles.languageOption, selected && styles.languageOptionSelected]}
+            onFocus={() => setFocusedLanguage(option.code)}
+            onBlur={() =>
+              setFocusedLanguage((current) => (current === option.code ? null : current))
+            }
+            style={({ pressed }) => [
+              styles.languageOption,
+              selected && styles.languageOptionSelected,
+              pressed && styles.languagePressed,
+            ]}
           >
-            <Text variant="label">{option.nativeLabel}</Text>
-            {option.code !== option.nativeLabel && (
-              <Text variant="small" muted>
-                {option.label}
-              </Text>
-            )}
+            <View style={styles.languageWords}>
+              <Text variant="label">{option.nativeLabel}</Text>
+              {option.code !== option.nativeLabel && (
+                <Text variant="small" muted={!selected}>
+                  {option.label}
+                </Text>
+              )}
+            </View>
             {selected && <View style={styles.selectedDot} />}
+            {focusedLanguage === option.code && (
+              <View style={styles.languageFocus} pointerEvents="none" aria-hidden />
+            )}
           </Pressable>
         );
       })}
@@ -210,7 +224,7 @@ const styles = StyleSheet.create({
     width: '100%',
     maxWidth: 480,
     maxHeight: '90%',
-    backgroundColor: colors.paper,
+    backgroundColor: brandColors.canvas,
     borderWidth: 1,
     borderColor: colors.line,
     borderRadius: 10,
@@ -222,6 +236,7 @@ const styles = StyleSheet.create({
   status: { padding: 10, backgroundColor: brandColors.surface, borderRadius: 6 },
   languageList: { gap: 8 },
   languageOption: {
+    minHeight: targets.minimum,
     padding: 14,
     borderWidth: 1,
     borderColor: colors.line,
@@ -229,13 +244,21 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
+    backgroundColor: brandColors.canvas,
+  },
+  languageWords: { flex: 1, minWidth: 0 },
+  languagePressed: { opacity: motion.pressedOpacity },
+  languageFocus: {
+    ...StyleSheet.absoluteFill,
+    borderWidth: 2,
+    borderColor: brandColors.forest,
+    borderRadius: 8,
   },
   languageOptionSelected: {
     borderColor: brandColors.forest,
     backgroundColor: brandColors.surfaceStrong,
   },
   selectedDot: {
-    marginLeft: 'auto',
     width: 10,
     height: 10,
     borderRadius: 5,

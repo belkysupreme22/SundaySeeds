@@ -43,3 +43,13 @@ static reference artwork inspection. No app tests/typecheck/lint/build/runtime/
 native or guide-browser interaction checks ran. The owner retains those checks;
 legacy small text, all custom motion and remaining image replacement are documented
 follow-ups rather than claims of complete app compliance.
+
+## Navigation and Settings palette follow-up
+
+6 November 2026. The owner requested a closer blend between the bottom
+navigation, Settings and the cream page. The bottom safe area uses the page
+color with a sage tray, and forest and ivory identify the active
+tab. Settings, Profile and Progress use local cream row and card surfaces
+with fine strokes and sage focus or selection where appropriate. The shared
+white control and card roles still serve fields and other feature surfaces.
+Source and contrast checks were performed. Device review is pending.

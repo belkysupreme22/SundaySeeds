@@ -1,5 +1,16 @@
 # Learner screen audit checklist
 
+## Navigation and Settings palette — 6 November 2026
+
+- On Home, Lessons, Progress, Profile and Settings, compare the tray and
+  bottom safe area. Check that the forest selected tab stays distinct when
+  pressing or focusing it and that Settings selects Profile.
+- In Settings, review the account groups and language sheet with both
+  languages and larger text. Check selected, focused and pressed rows and
+  destructive confirmation styling.
+- On Profile and Progress, review the cream activity, badge and navigation
+  rows against the page, then check keyboard focus and press feedback.
+
 ## Study badges — 5 November 2026
 
 - Confirm the Weekly Rhythm card explains the two-day goal and shows a

@@ -41,7 +41,7 @@ export function ProfileNavigationGroup({ items }: { items: readonly ProfileNavig
           </View>
           <View style={styles.words}>
             <Text variant="label">{item.title}</Text>
-            <Text variant="small" muted>
+            <Text variant="small" muted={focusedItem !== item.id}>
               {item.description}
             </Text>
           </View>
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.line,
     borderRadius: 9,
-    backgroundColor: colors.white,
+    backgroundColor: brandColors.canvas,
     overflow: 'hidden',
   },
   row: {

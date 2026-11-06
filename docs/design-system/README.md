@@ -162,9 +162,9 @@ enabled-looking setting or social-provider button.
 
 ### Navigation backgrounds
 
-The bottom area uses cream; the navigation bar is neutral white with a light
+The bottom safe area uses cream. A soft sage navigation tray has a fine
 stroke. Exactly one selected section uses forest with ivory icon and label.
-Inactive items use dark ink on the neutral bar. Do not assign each section its
+Inactive items use dark ink. Do not assign each section its
 own active hue. Selection follows route ownership: course routes belong to
 Lessons and Settings belongs to Profile. Deeper action-only pages may omit tabs.
 
@@ -180,8 +180,10 @@ Onboarding uses the seed identity, the same type/CTA roles, sage feature areas
 and restrained wheat details. Optional profile questions use neutral cards with
 one consistent sage selected treatment and a labelled/check-mark state.
 
-Settings/Profile use fine strokes, quiet rows and sage selected language/status
-surfaces. A status label is informational unless an actual action exists.
+Settings and Profile use quiet cream rows, fine strokes, and sage selection.
+Progress uses the same cream for its timeline and badge cards. Sage groups
+the prominent study and identity content. A status label is informational
+unless an actual action exists.
 Unsupported preferences stay honestly unavailable. Destructive learning-data
 actions keep clear labels, intent and existing confirmation/recovery behavior.
 

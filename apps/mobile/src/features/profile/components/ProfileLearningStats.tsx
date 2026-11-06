@@ -90,7 +90,7 @@ export function ProfileLearningStats({ completed, inProgress, saved, onOpen }: P
 }
 
 const styles = StyleSheet.create({
-  ledger: { padding: 0, overflow: 'hidden', borderRadius: 9 },
+  ledger: { padding: 0, overflow: 'hidden', borderRadius: 9, backgroundColor: brandColors.canvas },
   entry: {
     flexDirection: 'row',
     alignItems: 'center',

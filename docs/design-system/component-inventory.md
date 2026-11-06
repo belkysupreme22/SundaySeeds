@@ -12,7 +12,7 @@ authorize route, content, storage, session or backend behavior changes.
 | `shared/ui/Button.tsx` | Button/IconButton | Primary, dark, outline; focus/press/disabled/busy; accessible name | Forest/ivory, shared press tokens; target geometry preserved |
 | `shared/ui/InputField.tsx` | Editable fields | Idle, focused, disabled, error; visible label, selection/cursor | Sage/forest; stationary focus stroke; account variant retained |
 | `shared/ui/Card.tsx` | Card | Neutral/toned; strong, soft, subtle stroke; optional crisp shadow | Muted card palette; reference stroke differences preserved |
-| `shared/ui/BottomNav.tsx` | Bottom navigation | Exactly one selected section, inactive, semantic label, current route ownership | Forest/ivory selected; neutral bar/cream surround |
+| `shared/ui/BottomNav.tsx` | Bottom navigation | Exactly one selected section, inactive, focus, press, semantic label, current route ownership | Forest/ivory selected, sage tray and cream safe area |
 | `shared/ui/ProgressBar.tsx` | Progress | Actual amount; unavailable handled by caller; accessible value | Forest fill/sage track; no fabricated completion |
 | `shared/ui/Screen.tsx` | Screen shell | Scroll, footer, tabs, safe areas, pending overlay | Cream via shared canvas; keyboard/loading behavior retained |
 | `shared/ui/PageHeader.tsx` | Header | Title/subtitle/back; long title and larger text | Existing responsive composition; density review pending |
@@ -40,9 +40,9 @@ authorize route, content, storage, session or backend behavior changes.
 | Course/lesson discovery | Shared forest CTA, muted cards and filters | Catalog availability, counts, exact joined-edition navigation and empty state |
 | Lesson reading | Editorial20/32; Latin/Ethiopic runs; existing UI headings | Content/section IDs, saved place, bookmarks, reflection privacy and scrolling |
 | Quiz/results | Sage selected, labelled correctness, real recorded progress | Server/sample boundaries, retry/draft/completion/access rules |
-| Progress | Sage leading surface, forest progress, meaningful status | Loading/error vs zero, real completion/history, no fabricated analytics |
-| Profile | Fine strokes, cream/sage, selected portrait, real learning stats | Name and portrait editing, account/guest differences, larger text, logout Home return |
-| Settings/detail/data | Fine neutral rows, sage selection, forest current-section marker | Actual availability, verified status, language save, destructive intent and recovery |
+| Progress | Sage leading surface, cream timeline and badge cards, forest progress | Loading/error vs zero, real completion/history, no fabricated analytics |
+| Profile | Fine strokes, cream navigation and activity rows, sage portrait card | Name and portrait editing, account/guest differences, larger text, logout Home return |
+| Settings/detail/data | Fine cream rows, sage selection, forest current-section marker | Actual availability, verified status, language save, destructive intent and recovery |
 | Unknown/empty/failure | Shared roles, useful message and real next action | Back/Home/retry reachability; no stranded navigation |
 
 The bottom-nav route classifier makes course routes part of Lessons and Settings

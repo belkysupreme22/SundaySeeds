@@ -1,6 +1,7 @@
-import type { ReactNode } from 'react';
+import { useState, type ReactNode } from 'react';
 import { Pressable, StyleSheet, View, useWindowDimensions } from 'react-native';
-import { colors } from '../../../shared/theme/tokens';
+import { motion } from '../../../shared/theme/motion';
+import { brandColors, colors } from '../../../shared/theme/tokens';
 import { Icon, type IconName } from '../../../shared/ui/Icon';
 import { Text } from '../../../shared/ui/Text';
 
@@ -32,6 +33,7 @@ export function SettingsRow({
 }) {
   const { width, fontScale } = useWindowDimensions();
   const stackValue = width < 350 || fontScale >= 1.5;
+  const [focused, setFocused] = useState(false);
   const content = (
     <>
       <View style={styles.icon}>
@@ -43,13 +45,20 @@ export function SettingsRow({
             {title}
           </Text>
           {value ? (
-            <Text variant="caption" style={[styles.value, stackValue && styles.stackedValue]}>
+            <Text
+              variant="caption"
+              style={[
+                styles.value,
+                stackValue && styles.stackedValue,
+                focused && styles.focusValue,
+              ]}
+            >
               {value}
             </Text>
           ) : null}
         </View>
         {description ? (
-          <Text variant="small" muted>
+          <Text variant="small" muted={!focused}>
             {description}
           </Text>
         ) : null}
@@ -63,9 +72,17 @@ export function SettingsRow({
       accessibilityRole="button"
       accessibilityLabel={[title, value, description].filter(Boolean).join('. ')}
       onPress={onPress}
-      style={({ pressed }) => [styles.row, divider && styles.divider, pressed && styles.pressed]}
+      onFocus={() => setFocused(true)}
+      onBlur={() => setFocused(false)}
+      style={({ pressed }) => [
+        styles.row,
+        divider && styles.divider,
+        focused && styles.focused,
+        pressed && styles.pressed,
+      ]}
     >
       {content}
+      {focused && <View style={styles.focusMark} pointerEvents="none" aria-hidden />}
     </Pressable>
   ) : (
     <View style={[styles.row, divider && styles.divider]}>{content}</View>
@@ -79,7 +96,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.line,
     borderRadius: 8,
-    backgroundColor: colors.white,
+    backgroundColor: brandColors.canvas,
     overflow: 'hidden',
   },
   row: {
@@ -91,12 +108,23 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   divider: { borderTopWidth: 1, borderTopColor: colors.line },
-  pressed: { backgroundColor: colors.soft },
+  focused: { backgroundColor: brandColors.surface },
+  focusMark: {
+    position: 'absolute',
+    left: 1,
+    top: 8,
+    bottom: 8,
+    width: 3,
+    borderRadius: 2,
+    backgroundColor: brandColors.forest,
+  },
+  pressed: { opacity: motion.pressedOpacity },
   icon: { width: 23, alignItems: 'center', flexShrink: 0 },
   words: { flex: 1, minWidth: 0, gap: 2 },
   titleRow: { flexDirection: 'row', alignItems: 'center', gap: 8 },
   title: { flex: 1 },
   value: { color: colors.muted, flexShrink: 1, maxWidth: '48%', textAlign: 'right' },
+  focusValue: { color: brandColors.forest },
   stacked: { flexDirection: 'column', alignItems: 'stretch', gap: 2 },
   stackedValue: { maxWidth: '100%', textAlign: 'left' },
 });
