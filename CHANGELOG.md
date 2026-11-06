@@ -5,6 +5,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Design system
+- Aligned the Welcome artwork’s wheat accent with the shared palette.
 - Reworked Profile’s lesson activity into a visual summary with filtered shortcuts and removed the About section from Profile.
 - Added raised paper, inset flax, and a warm edge to the shared palette. Settings and progress cards have more depth, and the bottom nav uses flax.
 - Blended the bottom navigation, Settings, and adjacent Profile and Progress surfaces into the cream and sage palette.

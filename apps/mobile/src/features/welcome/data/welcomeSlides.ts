@@ -1,10 +1,10 @@
 import type { ImageSourcePropType } from 'react-native';
-import { brandColors } from '../../../shared/theme/tokens';
+import { accentColors, brandColors } from '../../../shared/theme/tokens';
 import type { IconName } from '../../../shared/ui/Icon';
 
 export const welcomeAccentColors = {
   sage: brandColors.surfaceStrong,
-  wheat: '#F2E6BD',
+  wheat: accentColors.wheat,
 } as const;
 type WelcomeAccent = keyof typeof welcomeAccentColors;
 
