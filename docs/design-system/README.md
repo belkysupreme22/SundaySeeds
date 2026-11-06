@@ -208,7 +208,7 @@ result of selection, saving, completion or recovery before moving on.
 | Quiz completion | Seed and leaf burst, 1050ms once after an intentional finish | Static seed emblem for reduced motion and recovered results |
 | Progress | Actual recorded amount only | Immediate true value; no synthetic count-up |
 | Loader | Actual pending work, centered palette-matched animation and blur | Static dots in the same palette plus useful status |
-| Home course placeholder | Soft sage blocks follow the loaded card layout while the rest of Home stays usable | Static blocks with a loading label |
+| Home and Courses placeholders | Soft sage blocks follow the loaded card layouts while navigation stays usable | Static blocks with a loading label |
 | Brand splash | Existing2300ms mark, short hold/fade, one-shot | Final still; finite startup guard |
 
 `motion.ts` supplies named durations, cubic-bezier families, distances and state

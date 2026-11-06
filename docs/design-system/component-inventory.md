@@ -19,6 +19,7 @@ authorize route, content, storage, session or backend behavior changes.
 | `shared/ui/SectionHeading.tsx` | Section header | Heading, optional real action | Existing hierarchy; shared token typography adoption continues |
 | `shared/ui/PageLoadingOverlay.tsx` | Pending work | Focused pending, reduced motion, blur/tint fallback, failure | Centered green dots use the shared palette |
 | `features/courses/components/CourseJourneyCard.tsx` | Home course preview | Loading, loaded, empty, unavailable, retry | Sage placeholder follows the card layout and stays still with reduced motion. |
+| `features/courses/components/ConnectedCourseCard.tsx` | Course library card | Loading, loaded, focus, press | Course-shaped placeholders share Home's pulse and reduced-motion behavior. |
 | `shared/ui/AnimatedSplash.tsx` | Brand startup | Loaded/fallback, motion/static, finite completion, background | One-shot vector mark; font/layout handoff and input fences retained |
 | `features/learning-profile/components/LearningChoiceCards.tsx` | Profile choices | Unselected, selected, disabled, selection limit, text/marker | Neutral/sage, forest check; underlying selection rules unchanged |
 | `features/profile/components/ProfileAvatarPicker.tsx` | Profile images | Selected marker, keyboard focus, press | Cartoon portraits sit on the cream page with sage fill and a checkmark for selection. The neutral silhouette is the fallback for unset avatars. |

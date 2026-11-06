@@ -9,6 +9,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 - Removed the bundled course fixture from mobile. Course recommendations now use the published catalog, and the legacy course shortcut opens the library.
 
 ### Design system
+- Added course-card skeletons to the Courses tab, with a static reduced-motion state and usable navigation while the catalog loads.
 - Aligned the Welcome artwork’s wheat accent with the shared palette.
 - Reworked Profile’s lesson activity into a visual summary with filtered shortcuts and removed the About section from Profile.
 - Added raised paper, inset flax, and a warm edge to the shared palette. Settings and progress cards have more depth, and the bottom nav uses flax.

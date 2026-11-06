@@ -1,7 +1,10 @@
 import { router } from 'expo-router';
 import { StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { ConnectedCourseCard } from '../components/ConnectedCourseCard';
+import {
+  ConnectedCourseCard,
+  ConnectedCourseCardSkeletons,
+} from '../components/ConnectedCourseCard';
 import { useCourseCatalog } from '../hooks/useCourseCatalog';
 import { PageHeader } from '../../../shared/ui/PageHeader';
 import { Screen } from '../../../shared/ui/Screen';
@@ -19,13 +22,7 @@ export function CoursesScreen() {
         {t('courseLibrary.heading')}
       </Text>
       <Text muted>{t('courseLibrary.description')}</Text>
-      {state.status === 'loading' && (
-        <Card shadow={false} accessibilityState={{ busy: true }}>
-          <Text variant="small" accessibilityLiveRegion="polite">
-            {t('courseLibrary.loading')}
-          </Text>
-        </Card>
-      )}
+      {state.status === 'loading' && <ConnectedCourseCardSkeletons />}
       {state.status === 'ready' &&
         state.data.map((course) => (
           <ConnectedCourseCard

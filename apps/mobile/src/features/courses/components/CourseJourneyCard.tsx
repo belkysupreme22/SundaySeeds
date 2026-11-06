@@ -1,6 +1,5 @@
-import { useCallback, useState } from 'react';
-import { router, useFocusEffect } from 'expo-router';
-import { Animated, Image, Platform, StyleSheet, View, useWindowDimensions } from 'react-native';
+import { router } from 'expo-router';
+import { Image, StyleSheet, View, useWindowDimensions } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { getCourseSuggestion } from '../../learning-profile/data/courseSuggestions';
 import type { LearningPreferencesDraft } from '../../learning-profile/types';
@@ -9,9 +8,9 @@ import { Card } from '../../../shared/ui/Card';
 import { Text } from '../../../shared/ui/Text';
 import { Button } from '../../../shared/ui/Button';
 import { Icon } from '../../../shared/ui/Icon';
-import { useLoaderMotion } from '../../../shared/ui/useLoaderMotion';
 import { shape, targets } from '../../../shared/theme/motion';
 import { brandColors, colors } from '../../../shared/theme/tokens';
+import { CourseLoadingSkeleton } from './CourseLoadingSkeleton';
 
 export function CourseJourneyCard({
   preferences,
@@ -93,48 +92,9 @@ export function CourseJourneyCard({
 }
 
 function CourseJourneySkeleton({ stacked, label }: { stacked: boolean; label: string }) {
-  const animate = useLoaderMotion();
-  const [opacity] = useState(() => new Animated.Value(1));
-
-  useFocusEffect(
-    useCallback(() => {
-      if (!animate) return;
-
-      const useNativeDriver = Platform.OS !== 'web';
-      const pulse = Animated.loop(
-        Animated.sequence([
-          Animated.timing(opacity, {
-            toValue: 0.58,
-            duration: 760,
-            isInteraction: false,
-            useNativeDriver,
-          }),
-          Animated.timing(opacity, {
-            toValue: 1,
-            duration: 760,
-            isInteraction: false,
-            useNativeDriver,
-          }),
-        ]),
-      );
-      pulse.start();
-      return () => {
-        pulse.stop();
-        opacity.setValue(1);
-      };
-    }, [animate, opacity]),
-  );
-
   return (
-    <Card
-      accessible
-      accessibilityRole="progressbar"
-      accessibilityLabel={label}
-      accessibilityLiveRegion="polite"
-      accessibilityState={{ busy: true }}
-      style={styles.card}
-    >
-      <Animated.View aria-hidden style={[styles.placeholders, { opacity }]}>
+    <Card style={styles.card}>
+      <CourseLoadingSkeleton label={label} style={styles.placeholders}>
         <View style={[styles.header, stacked && styles.stacked]}>
           <View style={[styles.words, stacked && styles.stackedWords]}>
             <View style={[styles.placeholder, styles.placeholderTitle]} />
@@ -145,7 +105,7 @@ function CourseJourneySkeleton({ stacked, label }: { stacked: boolean; label: st
         <View style={[styles.placeholder, styles.placeholderLine]} />
         <View style={[styles.placeholder, styles.placeholderLine, styles.placeholderShort]} />
         <View style={[styles.placeholder, styles.placeholderButton]} />
-      </Animated.View>
+      </CourseLoadingSkeleton>
     </Card>
   );
 }

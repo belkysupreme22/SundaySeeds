@@ -22,7 +22,9 @@ Review both languages, narrow screens, larger text and reduced motion.
 - Slow the catalog request on Home. Check that the sage course placeholder
   appears while Profile, tabs and the verse remain usable. Enable reduced
   motion and confirm the placeholder stays still. Check empty, unavailable and
-  failed requests, including retry after reconnecting.
+  failed requests, including retry after reconnecting. Repeat in Courses and
+  check that the card skeletons leave the tabs usable and disappear when
+  results, empty guidance or an error appears.
 - Finish initial learning preferences. Check a matching catalog entry opens
   the suggested course. In a joined course, reopen a saved reading place and
   confirm finished knowledge checks and best scores after a retry.
