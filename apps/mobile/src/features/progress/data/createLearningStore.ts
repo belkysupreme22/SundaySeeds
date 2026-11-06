@@ -6,6 +6,7 @@ import {
   type LessonProgress,
   type SavedLearning,
 } from './progressStorage';
+import { recordStudyCompletion, type StudyActivity } from './studyActivity';
 
 export type LearningSnapshot = {
   hydrated: boolean;
@@ -14,6 +15,7 @@ export type LearningSnapshot = {
   recovering: boolean;
   progress: Record<string, LessonProgress>;
   bookmarks: string[];
+  activity: StudyActivity;
 };
 
 type Storage = {
@@ -37,6 +39,7 @@ export function createLearningStore(storage: Storage) {
     recovering: false,
     progress: {},
     bookmarks: [],
+    activity: saved.activity,
   };
   let writable = false;
   let hydration: Promise<void> | undefined;
@@ -55,6 +58,7 @@ export function createLearningStore(storage: Storage) {
       errorKind,
       progress: saved.progress,
       bookmarks: saved.bookmarks,
+      activity: saved.activity,
     };
     listeners.forEach((listener) => listener());
   }
@@ -159,6 +163,12 @@ export function createLearningStore(storage: Storage) {
       const previous = saved.progress[id] ?? defaultProgress();
       update({
         ...saved,
+        activity: recordStudyCompletion(
+          saved.activity,
+          id,
+          previous.completed ? previous.bestScore : null,
+          score,
+        ),
         progress: {
           ...saved.progress,
           [id]: {

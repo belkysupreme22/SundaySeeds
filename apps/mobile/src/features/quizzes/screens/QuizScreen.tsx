@@ -18,14 +18,16 @@ import { ProgressBar } from '../../../shared/ui/ProgressBar';
 export function QuizScreen({ lessonId }: { lessonId: string }) {
   const { t } = useTranslation();
   const lesson = getLesson(lessonId);
-  const { completeQuiz, hydrated, errorKind } = useLearningProgress();
+  const { completeQuiz, progress, hydrated, errorKind } = useLearningProgress();
   const canRecord = hydrated && errorKind !== 'load';
   const [index, setIndex] = useState(0);
   const [answers, setAnswers] = useState<(number | null)[]>(
     () => lesson?.questions.map(() => null) ?? [],
   );
   const [checked, setChecked] = useState(false);
-  const [result, setResult] = useState<QuizScore | null>(null);
+  const [result, setResult] = useState<{ score: QuizScore; previousBest: number | null } | null>(
+    null,
+  );
   if (!lesson)
     return (
       <Screen>
@@ -44,8 +46,10 @@ export function QuizScreen({ lessonId }: { lessonId: string }) {
     if (last) {
       if (!canRecord) return;
       const score = scoreQuiz(lesson.questions, answers);
+      const previous = progress[lesson.id];
+      const previousBest = previous?.completed ? previous.bestScore : null;
       completeQuiz(lesson.id, score.percentage);
-      setResult(score);
+      setResult({ score, previousBest });
     } else {
       setIndex(index + 1);
       setChecked(false);
@@ -55,7 +59,8 @@ export function QuizScreen({ lessonId }: { lessonId: string }) {
     return (
       <QuizResultScreen
         lesson={lesson}
-        result={result}
+        result={result.score}
+        previousBest={result.previousBest}
         answers={answers}
         onRetry={() => {
           setIndex(0);

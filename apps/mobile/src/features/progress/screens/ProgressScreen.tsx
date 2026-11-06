@@ -2,11 +2,12 @@ import { router } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, View, useWindowDimensions } from 'react-native';
 import { lessons } from '../../lessons/data/lessons';
-import { useLearningProgress } from '../hooks/useLearningProgress';
+import { useLearningProgress, useStudyBadgeProgress } from '../hooks/useLearningProgress';
 import { ProgressHero } from '../components/ProgressHero';
 import { ProgressStats } from '../components/ProgressStats';
 import { LessonProgressRow } from '../components/LessonProgressRow';
 import { LearningMilestones } from '../components/LearningMilestones';
+import { StudyRhythmCard } from '../components/StudyRhythmCard';
 import { colors } from '../../../shared/theme/tokens';
 import { Screen, ContentGroup } from '../../../shared/ui/Screen';
 import { PageHeader } from '../../../shared/ui/PageHeader';
@@ -14,10 +15,12 @@ import { Text } from '../../../shared/ui/Text';
 import { Card } from '../../../shared/ui/Card';
 import { Button } from '../../../shared/ui/Button';
 import { Icon } from '../../../shared/ui/Icon';
+import { SectionHeading } from '../../../shared/ui/SectionHeading';
 
 export function ProgressScreen() {
   const { t } = useTranslation();
-  const { progress, bookmarks, hydrated, error, errorKind } = useLearningProgress();
+  const { progress, bookmarks, activity, hydrated, error, errorKind } = useLearningProgress();
+  const badges = useStudyBadgeProgress(activity);
   const { width, fontScale } = useWindowDimensions();
   const stacked = width < 350 || fontScale >= 1.5;
   const entries = lessons.flatMap((lesson) => (progress[lesson.id] ? [progress[lesson.id]] : []));
@@ -69,7 +72,7 @@ export function ProgressScreen() {
       />
       <ContentGroup>
         <Text variant="title" accessibilityRole="header">
-          {t('progress.milestoneBoard')}
+          {t('progress.badges.lessonProgress')}
         </Text>
         <Card stroke="subtle" shadow={false} style={styles.overall}>
           <View style={styles.summary} accessibilityLiveRegion="polite">
@@ -106,23 +109,38 @@ export function ProgressScreen() {
               />
             </View>
           )}
+          {!collectionComplete && (
+            <Text variant="meta" muted>
+              {t('progress.progressNote')}
+            </Text>
+          )}
+        </Card>
+      </ContentGroup>
+      <ContentGroup>
+        <SectionHeading
+          title={t('progress.badges.collectionTitle')}
+          action={t('progress.badges.viewAll')}
+          onPress={() => router.push('/study-badges')}
+        />
+        <StudyRhythmCard
+          badges={badges}
+          onReview={
+            completed > 0
+              ? () => router.push({ pathname: '/lessons', params: { filter: 'completed' } })
+              : undefined
+          }
+        />
+      </ContentGroup>
+      <ContentGroup>
+        <Text variant="title" accessibilityRole="header">
+          {t('progress.milestoneBoard')}
+        </Text>
+        <Card stroke="subtle" shadow={false}>
           <LearningMilestones
             started={entries.length > 0}
             completed={completed}
             total={lessons.length}
           />
-          {collectionComplete ? (
-            <Button
-              label={t('progress.milestoneRevisit')}
-              variant="outline"
-              icon="book-open"
-              onPress={() => router.push('/lessons')}
-            />
-          ) : (
-            <Text variant="meta" muted>
-              {t('progress.progressNote')}
-            </Text>
-          )}
         </Card>
       </ContentGroup>
       <ContentGroup>

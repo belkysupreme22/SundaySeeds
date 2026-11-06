@@ -23,7 +23,9 @@ export function LearningDataControls() {
     try {
       await resetProgress();
       setConfirm(false);
-      setMessage('Your reading positions, quiz scores and bookmarks have been reset.');
+      setMessage(
+        'Your reading positions, quiz scores, bookmarks and study badges have been reset.',
+      );
     } catch {
       setMessage('We could not reset your lesson activity. Keep the app open and try again.');
     } finally {
@@ -44,8 +46,8 @@ export function LearningDataControls() {
           <View style={styles.confirmationContent}>
             <Text variant="label">Reset lesson activity?</Text>
             <Text variant="small">
-              This removes quiz scores, reading positions and bookmarks stored on this device.
-              Names, account learning preferences, course enrollments and your introduction
+              This removes quiz scores, reading positions, bookmarks and study badges stored on this
+              device. Names, account learning preferences, course enrollments and your introduction
               preference are kept.
             </Text>
             <Button
@@ -73,7 +75,7 @@ export function LearningDataControls() {
         <Pressable
           accessibilityRole="button"
           accessibilityLabel="Reset lesson activity"
-          accessibilityHint="Opens a confirmation before removing local quiz scores, reading positions and bookmarks."
+          accessibilityHint="Opens a confirmation before removing local quiz scores, reading positions, bookmarks and study badges."
           style={({ pressed }) => [styles.resetRow, pressed && styles.pressed]}
           onPress={() => {
             setMessage('');

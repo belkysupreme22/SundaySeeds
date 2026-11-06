@@ -1,4 +1,5 @@
 import { getLesson } from '../../lessons/data/lessons';
+import { emptyStudyActivity, type StudyActivity } from './studyActivity';
 
 export const PROGRESS_STORAGE_KEY = 'sundayseeds.learning.v1';
 
@@ -12,14 +13,68 @@ export type SavedLearning = {
   version: 1;
   progress: Record<string, LessonProgress>;
   bookmarks: string[];
+  activity: StudyActivity;
 };
 
 export function emptyLearning(): SavedLearning {
-  return { version: 1, progress: {}, bookmarks: [] };
+  return { version: 1, progress: {}, bookmarks: [], activity: emptyStudyActivity() };
 }
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
+}
+
+function isDay(value: unknown): value is number {
+  return typeof value === 'number' && Number.isInteger(value) && Math.abs(value) <= 100_000_000;
+}
+
+function isScore(value: unknown): value is number {
+  return typeof value === 'number' && Number.isInteger(value) && value >= 0 && value <= 100;
+}
+
+function isId(value: unknown): value is string {
+  return typeof value === 'string' && value.length > 0;
+}
+
+function parseStudyActivity(value: unknown): StudyActivity {
+  // Earlier snapshots have no record of which days quizzes were completed.
+  if (value === undefined) return emptyStudyActivity();
+  if (
+    !isRecord(value) ||
+    !Array.isArray(value.days) ||
+    !value.days.every(isDay) ||
+    !isRecord(value.firstDayByLesson) ||
+    !Object.values(value.firstDayByLesson).every(isDay) ||
+    !Array.isArray(value.reviewedLessonIds) ||
+    !value.reviewedLessonIds.every(isId) ||
+    !Array.isArray(value.improvedLessonIds) ||
+    !value.improvedLessonIds.every(isId)
+  ) {
+    throw new Error('Saved study activity could not be read.');
+  }
+
+  const best = value.personalBest;
+  if (
+    best !== null &&
+    (!isRecord(best) ||
+      !isId(best.lessonId) ||
+      !isScore(best.previousScore) ||
+      !isScore(best.score) ||
+      best.score <= best.previousScore)
+  ) {
+    throw new Error('Saved personal best could not be read.');
+  }
+
+  return {
+    days: [...new Set(value.days)],
+    firstDayByLesson: value.firstDayByLesson as Record<string, number>,
+    reviewedLessonIds: [...new Set(value.reviewedLessonIds)],
+    improvedLessonIds: [...new Set(value.improvedLessonIds)],
+    personalBest:
+      best === null
+        ? null
+        : { lessonId: best.lessonId, previousScore: best.previousScore, score: best.score },
+  };
 }
 
 export function parseSavedLearning(raw: string | null): SavedLearning {
@@ -46,11 +101,7 @@ export function parseSavedLearning(raw: string | null): SavedLearning {
       entry.sectionIndex < 0 ||
       entry.sectionIndex >= lesson.sections.length ||
       typeof entry.completed !== 'boolean' ||
-      (entry.bestScore !== null &&
-        (typeof entry.bestScore !== 'number' ||
-          !Number.isInteger(entry.bestScore) ||
-          entry.bestScore < 0 ||
-          entry.bestScore > 100))
+      (entry.bestScore !== null && !isScore(entry.bestScore))
     ) {
       throw new Error('Saved lesson progress could not be read.');
     }
@@ -65,5 +116,5 @@ export function parseSavedLearning(raw: string | null): SavedLearning {
     throw new Error('Saved bookmarks could not be read.');
   }
   const bookmarks = [...new Set(value.bookmarks as string[])].filter((id) => getLesson(id));
-  return { version: 1, progress, bookmarks };
+  return { version: 1, progress, bookmarks, activity: parseStudyActivity(value.activity) };
 }

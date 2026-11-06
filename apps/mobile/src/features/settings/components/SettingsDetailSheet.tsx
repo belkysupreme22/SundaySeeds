@@ -59,9 +59,9 @@ const details: Record<SettingsDetailKey, DetailContent> = {
   data: {
     title: 'Data usage',
     paragraphs: [
-      'Reading positions, quiz scores and bookmarks from the Lessons tab stay on this device, along with your guest name and profile image choice. Signing in does not upload or merge them. Your account display name is stored separately with your account.',
+      'Reading positions, quiz scores, bookmarks and study badges from the Lessons tab stay on this device, along with your guest name and profile image choice. Signing in does not upload or merge them. Your account display name is stored separately with your account.',
       'Account learning preferences, enrollments, course reading places, lesson bookmarks and completed knowledge checks are stored with your account. A small recovery record on this device keeps an interrupted quiz request on the same attempt; it is not a saved result.',
-      'Reset lesson activity clears the quiz scores, reading positions and bookmarks stored on this device. Names, account learning preferences, course enrollments, connected reading places and bookmarks, quiz results and your introduction preference are kept.',
+      'Reset lesson activity clears the quiz scores, reading positions, bookmarks and study badges stored on this device. Names, account learning preferences, course enrollments, connected reading places and bookmarks, quiz results and your introduction preference are kept.',
       'Wi-Fi-only and mobile-data preferences are not available yet.',
     ],
   },

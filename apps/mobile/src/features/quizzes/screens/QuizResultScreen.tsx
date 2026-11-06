@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { router } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import { StyleSheet, View, useWindowDimensions } from 'react-native';
 import type { Lesson } from '../../lessons/types';
 import { LessonArtwork } from '../../lessons/components/LessonArtwork';
 import { useLearningProgress } from '../../progress/hooks/useLearningProgress';
+import { StudyMedal } from '../../progress/components/StudyMedal';
 import type { QuizScore } from '../data/scoreQuiz';
 import { AnswerReviewCard } from '../components/AnswerReviewCard';
 import { QuizNextAction } from '../components/QuizNextAction';
@@ -20,16 +22,25 @@ import { colors } from '../../../shared/theme/tokens';
 type QuizResultScreenProps = {
   lesson: Lesson;
   result: QuizScore;
+  previousBest: number | null;
   answers: readonly (number | null)[];
   onRetry: () => void;
 };
 
-export function QuizResultScreen({ lesson, result, answers, onRetry }: QuizResultScreenProps) {
+export function QuizResultScreen({
+  lesson,
+  result,
+  previousBest,
+  answers,
+  onRetry,
+}: QuizResultScreenProps) {
+  const { t } = useTranslation();
   const [showReview, setShowReview] = useState(false);
   const { progress, error, hydrated } = useLearningProgress();
   const { width, fontScale } = useWindowDimensions();
   const stacked = width < 350 || fontScale >= 1.5;
   const bestScore = progress[lesson.id]?.bestScore;
+  const improved = previousBest !== null && result.percentage > previousBest;
 
   return (
     <Screen
@@ -75,6 +86,20 @@ export function QuizResultScreen({ lesson, result, answers, onRetry }: QuizResul
           )}
         </View>
       </Card>
+      {improved && (
+        <Card tone="pink" stroke="soft" shadow={false} style={styles.record}>
+          <StudyMedal badge="record" earned size={50} />
+          <View style={styles.lessonCopy}>
+            <Text variant="label">{t('progress.badges.newRecord')}</Text>
+            <Text variant="small">
+              {t('progress.badges.recordDelta', {
+                previous: previousBest,
+                score: result.percentage,
+              })}
+            </Text>
+          </View>
+        </Card>
+      )}
       <ContentGroup>
         <Text variant="title">What’s next?</Text>
         <SampleQuizNextLesson lessonId={lesson.id} />
@@ -130,6 +155,7 @@ const styles = StyleSheet.create({
   lesson: { flexDirection: 'row', alignItems: 'center', gap: 14 },
   lessonCopy: { flex: 1, gap: 5 },
   result: { flexDirection: 'row', gap: 16 },
+  record: { flexDirection: 'row', alignItems: 'center', gap: 10, paddingVertical: 9 },
   score: { flex: 1, gap: 4 },
   best: { flex: 1, gap: 4, borderLeftWidth: 1, borderColor: colors.line, paddingLeft: 16 },
   stacked: { flexDirection: 'column', alignItems: 'stretch' },

@@ -1,5 +1,18 @@
 # Learner screen audit checklist
 
+## Study badges — 5 November 2026
+
+- Open Progress with existing lesson scores. Check that dated activity starts
+  empty. Finish a quiz, retry on the same day, and confirm one study day.
+- Finish on a second day in the same week to meet Weekly Rhythm. Cross a
+  Monday and confirm the weekly count rolls over while earned levels remain.
+- Follow Review a past lesson, retry an already completed quiz on a later
+  day, and check Worth Revisiting. Beat a previous best and verify the result
+  medal and score comparison. Equal scores should leave the record unchanged.
+- Review medal readability, text wrapping and the Progress action at narrow
+  widths and larger text in both languages. Restart to check persistence.
+  Check storage recovery and confirm Reset lesson activity clears the badges.
+
 ## Profile identity and editing — 5 November 2026
 
 Profile aligns the portrait and name, with a compact edit pencil in the upper
