@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     rowGap: spacing.sm,
     padding: spacing.sm,
-    backgroundColor: colors.white,
+    backgroundColor: brandColors.canvas,
     borderColor: colors.line,
     borderWidth: shape.stroke.subtle,
     borderRadius: shape.radius.card,
