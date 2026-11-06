@@ -32,7 +32,10 @@ const pairs = [
   ['Forest on cream', brandColors.forest, brandColors.canvas],
   ['Forest on sage', brandColors.forest, brandColors.surface],
   ['Secondary text on cream', brandColors.muted, brandColors.canvas],
+  ['Secondary text on raised paper', brandColors.muted, brandColors.surfaceRaised],
   ['Body text on cream', colors.ink, brandColors.canvas],
+  ['Inactive navigation on flax', colors.ink, brandColors.surfaceInset],
+  ['Navigation focus on flax', brandColors.forest, brandColors.surfaceInset],
   ['Danger text on cream', colors.danger, brandColors.canvas],
   ['Question text on wheat', colors.ink, cardColors.yellow],
   ['Body text on rose', colors.ink, cardColors.pink],
@@ -54,7 +57,7 @@ const contrast = pairs.map(([name, foreground, background]) => {
 });
 const system = {
   version: '1.0',
-  updated: '2026-11-05',
+  updated: '2026-11-06',
   brandColors,
   accentColors,
   cardColors,
@@ -120,7 +123,7 @@ const css = [
     '../../apps/mobile/assets/fonts/NotoSerifEthiopic-Regular.ttf',
     400,
   ),
-  `:root{--forest:${brandColors.forest};--cream:${brandColors.canvas};--sage:${brandColors.surface};--selected:${brandColors.surfaceStrong};--muted:${brandColors.muted};--ink:${colors.ink};--line:${colors.line};--control-border:${brandColors.controlBorder};--wheat:${colors.yellow};--peach:${colors.peach};--rose:${colors.pink};--danger:${colors.danger};--success:${colors.success};}`,
+  `:root{--forest:${brandColors.forest};--cream:${brandColors.canvas};--raised:${brandColors.surfaceRaised};--inset:${brandColors.surfaceInset};--surface-edge:${brandColors.surfaceEdge};--sage:${brandColors.surface};--selected:${brandColors.surfaceStrong};--muted:${brandColors.muted};--ink:${colors.ink};--line:${colors.line};--control-border:${brandColors.controlBorder};--wheat:${colors.yellow};--peach:${colors.peach};--rose:${colors.pink};--danger:${colors.danger};--success:${colors.success};}`,
 ].join('\n');
 writeFileSync(resolve(destination, 'theme.css'), css + '\n');
 const template = readFileSync(resolve(destination, 'guide.template.html'), 'utf8');

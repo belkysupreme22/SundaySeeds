@@ -109,7 +109,7 @@ export function RecentStudyActivity({
 
 const styles = StyleSheet.create({
   timeline: { gap: 8 },
-  surface: { backgroundColor: brandColors.canvas },
+  surface: { backgroundColor: brandColors.surfaceRaised, borderColor: brandColors.surfaceEdge },
   track: { width: 11, alignSelf: 'stretch' },
   rail: {
     position: 'absolute',
@@ -139,7 +139,6 @@ const styles = StyleSheet.create({
     padding: 11,
     borderRadius: shape.radius.button,
     borderWidth: 1,
-    borderColor: colors.line,
   },
   focused: { borderColor: brandColors.forest, backgroundColor: brandColors.surface },
   pressed: { opacity: motion.pressedOpacity, transform: [{ translateY: motion.distance.press }] },

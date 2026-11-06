@@ -59,9 +59,9 @@ export function ProfileNavigationGroup({ items }: { items: readonly ProfileNavig
 const styles = StyleSheet.create({
   group: {
     borderWidth: 1,
-    borderColor: colors.line,
+    borderColor: brandColors.surfaceEdge,
     borderRadius: 9,
-    backgroundColor: brandColors.canvas,
+    backgroundColor: brandColors.surfaceRaised,
     overflow: 'hidden',
   },
   row: {

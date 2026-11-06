@@ -30,17 +30,20 @@ not claims about universal color psychology or theological meanings.
 | Brand / action | `brandColors.forest` | `#173E32` | Filled actions, active navigation, identity, important headings |
 | On brand | `brandColors.onForest` | `#F7F3E8` | Text and icons on forest |
 | Page | `brandColors.canvas` / `colors.paper` | `#F7F3E8` | Shared page and footer canvas, including auth |
+| Raised paper | `brandColors.surfaceRaised` | `#FFFCF4` | Grouped Settings and Profile rows, Progress cards and sheets |
+| Inset flax | `brandColors.surfaceInset` | `#EFE8DA` | Recessed neutral areas such as the bottom navigation tray |
+| Warm edge | `brandColors.surfaceEdge` | `#D5CDBD` | Fine decorative boundary for raised paper and inset flax |
 | Supporting surface | `brandColors.surface` | `#E6EDDF` | Leading lesson surfaces, information, quiet learning areas |
 | Selected surface | `brandColors.surfaceStrong` | `#D9E5D2` | Selected answers, choices, language rows and focused soft inputs |
 | Secondary text | `brandColors.muted` | `#647261` | Legible supporting information |
 | Control boundary | `brandColors.controlBorder` | `#788672` | Relevant input/choice boundaries; preserve reference stroke width |
 | Body text | `colors.ink` | `#19171D` | Normal reading and structural fine outlines |
-| Card / field | `colors.white` | `#FFFFFF` | Quiet raised content and input surfaces on cream |
+| Card / field | `colors.white` | `#FFFFFF` | Clear input surfaces and existing content cards |
 
-Cream/white occupy the largest areas, sage groups content, and forest identifies
-actions and the current section. Do not create a new large background color for
-each page. Keep text on forest ivory; changing a fill also requires reviewing its
-text, icons, focus, disabled and pending states.
+Cream is the base. Raised paper lifts content from it, and flax gives inset
+areas a warmer depth. Sage groups related information and shows selection.
+Forest identifies actions and the current section. Keep text on forest ivory
+and check foreground contrast for each surface, including focus and selection.
 
 ### Related pastels
 
@@ -162,8 +165,8 @@ enabled-looking setting or social-provider button.
 
 ### Navigation backgrounds
 
-The bottom safe area uses cream. A soft sage navigation tray has a fine
-stroke. Exactly one selected section uses forest with ivory icon and label.
+The bottom safe area uses cream. An inset flax tray has a fine warm edge.
+Exactly one selected section uses forest with ivory icon and label.
 Inactive items use dark ink. Do not assign each section its
 own active hue. Selection follows route ownership: course routes belong to
 Lessons and Settings belongs to Profile. Deeper action-only pages may omit tabs.
@@ -180,8 +183,8 @@ Onboarding uses the seed identity, the same type/CTA roles, sage feature areas
 and restrained wheat details. Optional profile questions use neutral cards with
 one consistent sage selected treatment and a labelled/check-mark state.
 
-Settings and Profile use quiet cream rows, fine strokes, and sage selection.
-Progress uses the same cream for its timeline and badge cards. Sage groups
+Settings and Profile use raised paper groups, fine warm edges, and sage
+selection. Progress uses raised paper for its timeline and badge cards. Sage groups
 the prominent study and identity content. A status label is informational
 unless an actual action exists.
 Unsupported preferences stay honestly unavailable. Destructive learning-data

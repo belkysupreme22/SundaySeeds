@@ -154,7 +154,11 @@ export function ProgressScreen() {
 }
 
 const styles = StyleSheet.create({
-  overall: { gap: 14, backgroundColor: brandColors.canvas },
+  overall: {
+    gap: 14,
+    backgroundColor: brandColors.surfaceRaised,
+    borderColor: brandColors.surfaceEdge,
+  },
   summary: { gap: 2 },
   nextStep: {
     gap: 8,

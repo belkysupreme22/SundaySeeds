@@ -108,13 +108,18 @@ const styles = StyleSheet.create({
   },
   resetLabel: { color: colors.danger, flexShrink: 1, textAlign: 'center' },
   pressed: { opacity: 0.72 },
-  confirmation: { padding: 12, borderRadius: 8, borderColor: colors.line, borderWidth: 1 },
+  confirmation: {
+    padding: 12,
+    borderRadius: 8,
+    borderColor: brandColors.surfaceEdge,
+    borderWidth: 1,
+  },
   confirmationContent: { gap: 10 },
   confirmButton: {
     minHeight: 44,
     paddingVertical: 10,
     borderRadius: 6,
-    backgroundColor: brandColors.canvas,
+    backgroundColor: brandColors.surfaceRaised,
   },
   dangerButton: { borderColor: colors.danger },
 });

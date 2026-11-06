@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingTop: 8,
     paddingBottom: 8,
-    borderTopColor: colors.line,
+    borderTopColor: brandColors.surfaceEdge,
     borderTopWidth: 1,
   },
   bar: {
@@ -88,9 +88,9 @@ const styles = StyleSheet.create({
     gap: 4,
     padding: 5,
     borderWidth: 1,
-    borderColor: colors.line,
+    borderColor: brandColors.surfaceEdge,
     borderRadius: 10,
-    backgroundColor: brandColors.surface,
+    backgroundColor: brandColors.surfaceInset,
   },
   tab: {
     flex: 1,

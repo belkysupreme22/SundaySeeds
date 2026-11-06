@@ -91,12 +91,13 @@ export function SettingsRow({
 
 const styles = StyleSheet.create({
   section: { gap: 9 },
-  heading: { fontSize: 13, lineHeight: 20 },
+  heading: { fontSize: 13, lineHeight: 20, color: brandColors.forest },
   group: {
     borderWidth: 1,
-    borderColor: colors.line,
+    borderColor: brandColors.surfaceEdge,
     borderRadius: 8,
-    backgroundColor: brandColors.canvas,
+    backgroundColor: brandColors.surfaceRaised,
+    boxShadow: `0px 1px 0px ${brandColors.surfaceEdge}`,
     overflow: 'hidden',
   },
   row: {

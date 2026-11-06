@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTranslation } from 'react-i18next';
 import { lessons } from '../../lessons/data/lessons';
 import { motion, targets } from '../../../shared/theme/motion';
-import { brandColors, colors } from '../../../shared/theme/tokens';
+import { brandColors } from '../../../shared/theme/tokens';
 import { Button, IconButton } from '../../../shared/ui/Button';
 import { Text } from '../../../shared/ui/Text';
 import { useLanguage, AVAILABLE_LANGUAGES, type AppLanguage } from '../../../i18n/useLanguage';
@@ -224,9 +224,9 @@ const styles = StyleSheet.create({
     width: '100%',
     maxWidth: 480,
     maxHeight: '90%',
-    backgroundColor: brandColors.canvas,
+    backgroundColor: brandColors.surfaceRaised,
     borderWidth: 1,
-    borderColor: colors.line,
+    borderColor: brandColors.surfaceEdge,
     borderRadius: 10,
     overflow: 'hidden',
   },
@@ -239,7 +239,7 @@ const styles = StyleSheet.create({
     minHeight: targets.minimum,
     padding: 14,
     borderWidth: 1,
-    borderColor: colors.line,
+    borderColor: brandColors.surfaceEdge,
     borderRadius: 8,
     flexDirection: 'row',
     alignItems: 'center',

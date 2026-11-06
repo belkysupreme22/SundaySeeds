@@ -53,3 +53,12 @@ tab. Settings, Profile and Progress use local cream row and card surfaces
 with fine strokes and sage focus or selection where appropriate. The shared
 white control and card roles still serve fields and other feature surfaces.
 Source and contrast checks were performed. Device review is pending.
+
+## Warm neutral surface levels
+
+6 November 2026. The cream-on-cream treatment flattened Settings, and the
+sage tray gave navigation too much color. The shared palette now uses raised
+paper for grouped content, inset flax for the navigation tray, and a warm
+edge for both. Cream remains the page. Sage denotes related content, focus,
+and selection. Forest and ivory mark the active tab. These roles apply to
+Settings, Profile, and Progress where their surfaces need separation.
