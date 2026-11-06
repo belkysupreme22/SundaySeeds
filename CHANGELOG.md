@@ -5,6 +5,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Design system
+- Aligned the Profile portrait and edit action, moved portrait selection to a dedicated gallery with a persistent preview, and showed the saved portrait in Home’s top-right corner.
 - Added twelve cartoon profile portraits with a preview and selection in Edit profile. The selected image stays on this device for each account or guest.
 - Matched the centered loader and reduced-motion fallback to the shared green palette.
 - Aligned Profile around the learner’s image and an activity ledger with shortcuts to completed, in-progress and saved lessons. Progress shows the current reading section, the work left for the next milestone and a revisit action.

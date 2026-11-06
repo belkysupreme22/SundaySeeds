@@ -2,15 +2,20 @@
 
 ## Profile identity and editing — 5 November 2026
 
-Profile aligns the name and edit action beside the learner’s portrait. The activity
-ledger aligns labels and counts in three rows, with one Settings entry above.
+Profile aligns the portrait and name, with a compact edit pencil in the upper
+corner. The activity ledger aligns labels and counts in three rows.
 Verify guest and signed-in names, blank names, save and retry. Start editing
 from Profile and Settings. Check that Save, Cancel and Back return to the
 screen that opened the form and that a direct entry falls back to Profile.
 Check keyboard, narrow width and larger English/Amharic text.
-Choose each portrait and check the selected mark and preview. Save and reopen
-the app to confirm the choice persists. Check that Cancel keeps the prior
-portrait and that signed-in and guest choices stay separate.
+In Edit Profile, start editing a name, open Change portrait and check the
+gallery alignment at 320 and 390 widths and with larger text. Scroll to the
+silhouette and verify it behaves like any other tile. The preview and Save
+portrait should stay visible. Check Back discards a preview and Save portrait
+updates Edit Profile without losing its name draft. Return to Profile and Home
+to check the saved portrait. On Home, verify the portrait opens Profile and
+stays aligned beside long greetings. Reopen the app to verify persistence and
+check that signed-in and guest choices stay separate.
 
 ## Growth and interaction details — 5 November 2026
 

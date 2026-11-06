@@ -20,7 +20,7 @@ authorize route, content, storage, session or backend behavior changes.
 | `shared/ui/PageLoadingOverlay.tsx` | Pending work | Focused pending, reduced motion, blur/tint fallback, failure | Centered green dots use the shared palette |
 | `shared/ui/AnimatedSplash.tsx` | Brand startup | Loaded/fallback, motion/static, finite completion, background | One-shot vector mark; font/layout handoff and input fences retained |
 | `features/learning-profile/components/LearningChoiceCards.tsx` | Profile choices | Unselected, selected, disabled, selection limit, text/marker | Neutral/sage, forest check; underlying selection rules unchanged |
-| `features/profile/components/ProfileAvatarPicker.tsx` | Profile images | Preview, selected marker, keyboard focus, press, save recovery | Cartoon portraits with consistent crop and ring, aligned grid and local choice |
+| `features/profile/components/ProfileAvatarPicker.tsx` | Profile images | Selected marker, keyboard focus, press, neutral option | Cartoon portraits and neutral silhouette share a framed grid. The gallery screen keeps the preview and save action in its footer. |
 | `features/quizzes/components/QuizChoice.tsx` | Quiz choice | Selected, checked/locked, correct, incorrect | Sage selection; correctness still has explicit text/icons |
 | `features/settings/components/SettingsDetailSheet.tsx` | Settings detail | Available/unavailable, language selected, dismiss/scroll | Cream/sage, forest selected marker; no new preference capability |
 
@@ -34,7 +34,7 @@ authorize route, content, storage, session or backend behavior changes.
 | Sign in/sign up | Cream page, sage hero, consistent fields and actions | Password visibility, errors, pending, provider availability, keyboard/Back |
 | Verification/recovery/reset | Same account surfaces and text hierarchy | Invalid/expired/used proofs, resend/request outcomes, retry and account boundaries |
 | Learning profile | Neutral choice cards, sage selected, forest check/progress | Optional answers, selection limits, Skip, save/conflict/reload; no new data rules |
-| Home | Forest seed header, sage leading/journey areas, calm shortcuts | Existing section order/data, routes, wrapping, portrait stacking |
+| Home | Forest seed header with the saved Profile portrait, sage leading/journey areas, calm shortcuts | Existing section order/data, Profile shortcut, name wrapping and content artwork stacking |
 | Course/lesson discovery | Shared forest CTA, muted cards and filters | Catalog availability, counts, exact joined-edition navigation and empty state |
 | Lesson reading | Editorial20/32; Latin/Ethiopic runs; existing UI headings | Content/section IDs, saved place, bookmarks, reflection privacy and scrolling |
 | Quiz/results | Sage selected, labelled correctness, real recorded progress | Server/sample boundaries, retry/draft/completion/access rules |

@@ -1,5 +1,5 @@
 import { useAuth } from '../../auth/hooks/useAuth';
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { router, useFocusEffect } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { useLearningProfile } from '../../learning-profile/hooks/useLearningProfile';
@@ -9,14 +9,16 @@ import { LessonCard } from '../../lessons/components/LessonCard';
 import { Screen, ContentGroup } from '../../../shared/ui/Screen';
 import { Text } from '../../../shared/ui/Text';
 import { Icon, type IconName } from '../../../shared/ui/Icon';
-import { IconButton } from '../../../shared/ui/Button';
 import { Card } from '../../../shared/ui/Card';
 import { SectionHeading } from '../../../shared/ui/SectionHeading';
+import { motion, shape, targets } from '../../../shared/theme/motion';
 import { brandColors, colors } from '../../../shared/theme/tokens';
 import { WeeklyHero } from '../components/WeeklyHero';
 import { ContinueLearning } from '../components/ContinueLearning';
 import { CourseJourneyCard } from '../../courses/components/CourseJourneyCard';
 import { useLearnerProfile } from '../../profile/hooks/useLearnerProfile';
+import { useProfileAvatar } from '../../profile/hooks/useProfileAvatar';
+import { ProfileAvatar } from '../../profile/components/ProfileAvatar';
 import { getHomeLessons } from '../data/homeLessons';
 export function HomeScreen() {
   const { t } = useTranslation();
@@ -30,6 +32,8 @@ export function HomeScreen() {
   const wrapShortcuts = width < 360 || fontScale > 1.2;
   const { user } = useAuth();
   const { displayName } = useLearnerProfile();
+  const { avatarId } = useProfileAvatar();
+  const [profileFocused, setProfileFocused] = useState(false);
   const greetingName = user ? displayName || t('profile.learner') : t('profile.learner');
   const { bookmarks, progress, errorKind } = useLearningProgress();
   const { continuing, suggestions } = getHomeLessons(progress);
@@ -94,11 +98,20 @@ export function HomeScreen() {
             </Text>
           </View>
         </View>
-        <IconButton
-          name="user"
-          label={t('home.yourProfile')}
+        <Pressable
+          accessibilityRole="button"
+          accessibilityLabel={t('home.yourProfile')}
           onPress={() => router.replace('/profile')}
-        />
+          onFocus={() => setProfileFocused(true)}
+          onBlur={() => setProfileFocused(false)}
+          style={({ pressed }) => [
+            styles.profileTarget,
+            profileFocused && styles.profileFocused,
+            pressed && styles.profilePressed,
+          ]}
+        >
+          <ProfileAvatar avatarId={avatarId} size={targets.minimum} />
+        </Pressable>
       </View>
       <WeeklyHero />
       <ContentGroup>
@@ -166,9 +179,25 @@ export function HomeScreen() {
   );
 }
 const styles = StyleSheet.create({
-  header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
-  brand: { flexDirection: 'row', gap: 9, alignItems: 'center', flex: 1 },
-  greeting: { flex: 1 },
+  header: { flexDirection: 'row', alignItems: 'center', gap: 8 },
+  brand: { flexDirection: 'row', gap: 9, alignItems: 'center', flex: 1, minWidth: 0 },
+  greeting: { flex: 1, minWidth: 0 },
+  profileTarget: {
+    width: targets.preferred,
+    height: targets.preferred,
+    flexShrink: 0,
+    alignSelf: 'flex-start',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: shape.radius.round,
+    borderWidth: shape.stroke.focus,
+    borderColor: 'transparent',
+  },
+  profileFocused: { borderColor: brandColors.forest },
+  profilePressed: {
+    opacity: motion.pressedOpacity,
+    transform: [{ translateY: motion.distance.press }],
+  },
   logo: {
     width: 35,
     height: 39,

@@ -248,8 +248,14 @@
     "savedDescription": "Lessons you bookmarked for later",
     "learningSaveWarning": "Some changes may still need saving. Use the storage notice above to try again.",
     "avatar": {
-      "title": "Choose a profile image",
-      "default": "Default portrait",
+      "title": "Choose a portrait",
+      "label": "Profile portrait",
+      "change": "Change portrait",
+      "current": "Current portrait",
+      "preview": "Portrait preview",
+      "save": "Save portrait",
+      "saving": "Saving portrait…",
+      "default": "Profile silhouette",
       "curls": "Curls and woven collar",
       "glasses": "Round glasses",
       "headwrap": "Cream netela",
@@ -272,7 +278,7 @@
       "introBody": "A first name or nickname is perfect.",
       "nameHint": "Up to {{limit}} characters. Leave blank to use “learner”.",
       "saving": "Saving your profile…",
-      "save": "Save profile",
+      "save": "Save name",
       "reload": "Reload saved profile"
     }
   },
