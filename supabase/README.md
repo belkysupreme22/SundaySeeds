@@ -1,5 +1,18 @@
 # Learner identity database foundation
 
+## Development catalog expansion — 6 November 2026
+
+The [catalog expansion import](seeds/development_catalog_expansion.sql) was
+applied to `sundayseeds-dev` for multi-course app review. It added **Mercy in
+practice** and **Read Scripture with attention**, each with two readings and a
+knowledge check per lesson, plus the closed outline preview **A rhythm of
+gratitude**. The existing pilot remains listed.
+
+Read-back verified four listed offerings under both `anon` and
+`authenticated`, the new admission flags, and the reading and assessment
+counts. The import created no enrollments. Device review and production
+teaching review are pending. This content import is separate from migrations.
+
 ## Staff course drafts — 28 October 2026
 
 Assigned-course authority, aggregate draft read/save and same-request recovery are

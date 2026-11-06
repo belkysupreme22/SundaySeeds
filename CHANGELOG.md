@@ -50,6 +50,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 - Prepared five original photographic-feel artwork alternatives for Bible stories, everyday faith, symbolic growth, prayer and courage after owner feedback. Direction selection and screen replacement remain pending; no learner imagery is changed by these proposals.
 
 ### Added
+- Added three development offerings to the Supabase catalog for guest and signed-in review, including two joinable courses with readings and knowledge checks.
 - Added cinematic animated splash screen with authentic Ethiopian Orthodox artistry for mobile (`apps/mobile`):
   - Generated atmospheric watercolor Ethiopian highland dawn landscape (`splash_bg.jpg`) with ancient rock church silhouette and Adey Abeba wildflowers.
   - Generated geometric gold Ethiopian Meskel cross icon (`splash_cross.jpg`) with traditional openwork lattice and dark ink outlines.

@@ -1,5 +1,13 @@
 # Learner screen audit checklist
 
+## Multiple development courses — 6 November 2026
+
+- Open Courses as a guest and again after signing in. Both should list four
+  offerings. Compare card wrapping and scroll at narrow widths and large text.
+- Open A rhythm of gratitude to check the closed outline. Open Mercy in
+  practice or Read Scripture with attention for the verified Join flow and
+  their two lessons with knowledge checks.
+
 ## Guest and signed-in flows — 6 November 2026
 
 | Screen | Guest check | Signed-in check |
