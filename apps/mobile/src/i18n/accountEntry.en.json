@@ -3,15 +3,15 @@
   "continueForNow": "Continue for now",
   "welcomePreferenceError": "We couldn’t load or save your welcome preference. Try again, or continue for now.",
   "choice": {
-    "openingLessons": "Opening your lessons…",
+    "openingHome": "Opening Home…",
     "journey": "Your learning journey",
     "title": "Grow at your pace.",
     "description": "Choose how to begin. Make a little room for faith today.",
     "noteTitle": "Read. Reflect. Put faith into practice.",
-    "noteBody": "A thoughtful lesson is a good place to start.",
+    "noteBody": "Find a course you’d like to spend time with.",
     "createAccount": "Create account",
     "signIn": "Sign in",
-    "accountOptional": "An account is optional. You can explore lessons first.",
+    "accountOptional": "You can browse courses as a guest.",
     "addName": "Add a name for your profile"
   },
   "setup": {
@@ -31,6 +31,6 @@
     "skipName": "Skip name setup",
     "stepAccessibility": "Optional profile setup, step 1 of 1",
     "title": "Make it yours",
-    "description": "What should we call you? Add a name for your profile, or jump straight into your lessons."
+    "description": "What should we call you? Add a name for your profile, or go straight to Home."
   }
 }

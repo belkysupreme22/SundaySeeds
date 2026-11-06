@@ -18,9 +18,21 @@
   },
   "nav": {
     "home": "Home",
-    "lessons": "Lessons",
+    "courses": "Courses",
     "progress": "Progress",
     "profile": "Profile"
+  },
+  "courseLibrary": {
+    "title": "Course library",
+    "heading": "Find your next study",
+    "description": "Explore course outlines and find a subject you’d like to spend time with.",
+    "loading": "Loading the course library…",
+    "emptyTitle": "More studies are on the way",
+    "emptyDescription": "There are no published courses in the library right now. Check back soon for new studies.",
+    "refresh": "Refresh library",
+    "unavailableTitle": "Course library unavailable",
+    "errorTitle": "We couldn’t load the library",
+    "errorDescription": "Please check your connection and try again."
   },
   "home": {
     "greeting": "Hello, {{name}}! ☀",
@@ -102,6 +114,13 @@
   "progress": {
     "title": "Your progress",
     "subtitle": "Every little step matters.",
+    "connected": {
+      "title": "Progress in your courses",
+      "description": "Open a course you’ve joined to see your completed knowledge checks and best scores. Open a lesson to find your saved reading place.",
+      "guest": "Browse courses now. Sign in or create an account to join a course and keep your progress.",
+      "unverified": "Verify your email to join courses and track your progress.",
+      "profileDescription": "Find progress for your joined courses."
+    },
     "badges": {
       "lessonProgress": "Lesson progress",
       "collectionTitle": "Study badges",

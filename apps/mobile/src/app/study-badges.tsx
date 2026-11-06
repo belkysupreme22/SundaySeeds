@@ -1,1 +1,5 @@
-export { StudyBadgeCollectionScreen as default } from '../features/progress/screens/StudyBadgeCollectionScreen';
+import { Redirect } from 'expo-router';
+
+export default function LegacyStudyBadgesRoute() {
+  return <Redirect href="/progress" />;
+}

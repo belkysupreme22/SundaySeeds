@@ -35,7 +35,7 @@ export function AccountChoiceScreen({
     <Screen
       backgroundColor={brandColors.canvas}
       contentStyle={styles.content}
-      loadingMessage={saving ? t('accountEntry.choice.openingLessons') : undefined}
+      loadingMessage={saving ? t('accountEntry.choice.openingHome') : undefined}
     >
       <View
         pointerEvents={saving ? 'none' : 'auto'}
@@ -87,7 +87,7 @@ export function AccountChoiceScreen({
         style={({ pressed }) => [styles.skip, saving && styles.disabled, pressed && styles.pressed]}
       >
         <Text variant="label" style={styles.skipLabel}>
-          {t(saving ? 'accountEntry.choice.openingLessons' : 'accountEntry.skipForNow')}
+          {t(saving ? 'accountEntry.choice.openingHome' : 'accountEntry.skipForNow')}
         </Text>
         <Icon name="arrow-right" size={18} />
       </Pressable>

@@ -1,22 +1,26 @@
 # SundaySeeds implementation plan
 
-## Mobile course catalog source — 6 November 2026
+## Single mobile course library — 6 November 2026
 
-Mobile course listings, details and first-time learning-profile suggestions
-use the connected catalog. The bundled course fixture and fixed course links
-were removed. The legacy lesson-course shortcut opens the Course library.
-The standalone Lessons collection continues to support guest reading, quizzes
-and local progress. Onboarding suggestions rank actual listed courses by
-matching topics and available lesson estimates. Owner runtime review is pending
-for empty or unavailable catalog states and the standalone lesson journey.
+Courses is the learner's only library. Guests can browse the published
+catalog, then sign in and verify their email to join. Home shows a nonblocking
+course placeholder during loading, and first-time learning suggestions use
+actual listed courses. Standalone lesson, reader and quiz links open Courses.
+
+Progress directs learners to their joined courses for saved reading places,
+completed knowledge checks and best scores. Device-only lesson records and
+badges remain stored separately. Account-wide progress and badges depend on
+the connected Study Shelf read described below. See the
+[course library decision](decisions/0027-single-mobile-course-library.md) and
+[device review checklist](learner-screen-audit.md).
 
 ## Connected Study Shelf concept — 5 November 2026
 
 The learner requested meaningful progress with multiple joined courses and after
 finishing all of them. The [interactive study](design-system/course-progress-study.html)
 compares separate in-progress and completed groups with the all-finished state.
-These are illustrative scenarios for review. The mobile milestone board applies
-to the sample collection.
+These are illustrative scenarios for review. The earlier mobile milestone
+board belonged to the retired standalone collection.
 
 Each joined edition has its own finished check count and next action. A saved
 reading can support Resume. A first available unfinished lesson supports Start

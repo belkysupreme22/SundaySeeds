@@ -2,6 +2,9 @@
 
 Accepted for the first mobile increment on 5 November 2026.
 
+The [single course library decision](0027-single-mobile-course-library.md)
+retired this device-only badge experience from learner navigation on 6 November.
+
 Progress places Weekly Rhythm below the lesson resume card. A badge collection
 shows weekly and daily streak levels, cumulative study days, distinct lesson
 revisits and the latest personal best. The approved reference 10 direction uses

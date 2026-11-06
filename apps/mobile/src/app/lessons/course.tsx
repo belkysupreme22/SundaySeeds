@@ -1,5 +1,1 @@
-import { Redirect } from 'expo-router';
-
-export default function LegacyCourseRoute() {
-  return <Redirect href="/courses" />;
-}
+export { LegacyCourseLibraryRedirect as default } from '../../features/courses/screens/LegacyCourseLibraryRedirect';

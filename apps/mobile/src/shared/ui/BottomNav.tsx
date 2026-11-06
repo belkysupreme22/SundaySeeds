@@ -12,7 +12,7 @@ type TabConfig = { labelKey: string; href: Href; icon: IconName };
 
 const tabs: TabConfig[] = [
   { labelKey: 'nav.home', href: '/home', icon: 'home' },
-  { labelKey: 'nav.lessons', href: '/lessons', icon: 'book-open' },
+  { labelKey: 'nav.courses', href: '/courses', icon: 'book-open' },
   { labelKey: 'nav.progress', href: '/progress', icon: 'bar-chart-2' },
   { labelKey: 'nav.profile', href: '/profile', icon: 'user' },
 ];
@@ -30,9 +30,7 @@ export function BottomNav() {
           const selected =
             pathname === tab.href ||
             (tab.href === '/home' && pathname === '/') ||
-            (tab.href === '/lessons' && pathname.startsWith('/lessons/')) ||
-            (tab.href === '/lessons' &&
-              (pathname === '/courses' || pathname.startsWith('/courses/'))) ||
+            (tab.href === '/courses' && pathname.startsWith('/courses/')) ||
             (tab.href === '/profile' && pathname === '/settings');
           return (
             <Pressable

@@ -9,15 +9,10 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useFonts } from 'expo-font';
 import { Platform, StyleSheet, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import {
-  LearningProgressProvider,
-  useLearningProgress,
-} from '../features/progress/hooks/useLearningProgress';
 import { colors } from '../shared/theme/tokens';
 import { LearnerProfileProvider } from '../features/profile/hooks/useLearnerProfile';
 import { ProfileAvatarProvider } from '../features/profile/hooks/useProfileAvatar';
 import { LoadingState } from '../shared/ui/LoadingState';
-import { LearningStorageNotice } from '../features/progress/components/LearningStorageNotice';
 import { LearningProfileProvider } from '../features/learning-profile/hooks/useLearningProfile';
 import { AnimatedSplash } from '../shared/ui/AnimatedSplash';
 import { designFontAssets } from '../shared/theme/fontAssets';
@@ -25,27 +20,6 @@ import { designFontAssets } from '../shared/theme/fontAssets';
 // Keep the native splash visible while fonts load.
 SplashScreen.preventAutoHideAsync().catch(() => {});
 
-function AppNavigator() {
-  const { hydrated } = useLearningProgress();
-  if (!hydrated)
-    return (
-      <View style={styles.loading}>
-        <LoadingState label="Opening your learning space…" />
-      </View>
-    );
-  return (
-    <>
-      <LearningStorageNotice />
-      <Stack
-        screenOptions={{
-          headerShown: false,
-          contentStyle: { backgroundColor: colors.paper },
-          animation: 'slide_from_right',
-        }}
-      />
-    </>
-  );
-}
 export default function RootLayout() {
   const [loaded, error] = useFonts(designFontAssets);
   const [splashDone, setSplashDone] = useState(false);
@@ -93,17 +67,21 @@ export default function RootLayout() {
               </View>
             ) : (
               <I18nextProvider i18n={i18n}>
-                <LearningProgressProvider>
-                  <AuthProvider>
-                    <LearnerProfileProvider>
-                      <ProfileAvatarProvider>
-                        <LearningProfileProvider>
-                          <AppNavigator />
-                        </LearningProfileProvider>
-                      </ProfileAvatarProvider>
-                    </LearnerProfileProvider>
-                  </AuthProvider>
-                </LearningProgressProvider>
+                <AuthProvider>
+                  <LearnerProfileProvider>
+                    <ProfileAvatarProvider>
+                      <LearningProfileProvider>
+                        <Stack
+                          screenOptions={{
+                            headerShown: false,
+                            contentStyle: { backgroundColor: colors.paper },
+                            animation: 'slide_from_right',
+                          }}
+                        />
+                      </LearningProfileProvider>
+                    </ProfileAvatarProvider>
+                  </LearnerProfileProvider>
+                </AuthProvider>
               </I18nextProvider>
             )}
           </View>

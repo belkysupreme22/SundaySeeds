@@ -40,7 +40,7 @@
   "confirmationPending": "Your email is still awaiting confirmation. Open the latest confirmation email and try again.",
   "signedOutRevocationUnconfirmed": "Signed out on this device. Server session revocation could not be confirmed. Reconnect and sign in again if needed.",
   "signOutUnconfirmed": "Sign-out could not be confirmed. Check your connection and try again.",
-  "signedOut": "You are signed out on this device. Your lesson activity is still here.",
+  "signedOut": "You are signed out on this device.",
   "signInForProfile": "Sign in before loading your account profile.",
   "reloadProfileBeforeSaving": "Reload your account profile before saving again. Your draft is still here.",
   "loadProfileBeforeEditing": "Load your account profile before editing it.",

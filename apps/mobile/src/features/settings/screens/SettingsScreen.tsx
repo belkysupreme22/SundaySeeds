@@ -5,7 +5,6 @@ import { useCallback, useRef, useState } from 'react';
 import { router, useFocusEffect } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
-import { LearningDataControls } from '../components/LearningDataControls';
 import { SettingsGroup, SettingsRow } from '../components/SettingsGroup';
 import { SettingsDetailSheet, type SettingsDetailKey } from '../components/SettingsDetailSheet';
 import { Screen } from '../../../shared/ui/Screen';
@@ -196,7 +195,6 @@ export function SettingsScreen() {
           </Text>
         </Card>
       )}
-      <LearningDataControls />
       <View style={styles.signOut}>
         <Button
           label={t('settings.logOut')}

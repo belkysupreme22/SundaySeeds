@@ -1,5 +1,6 @@
 import { router } from 'expo-router';
 import { StyleSheet } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { ConnectedCourseCard } from '../components/ConnectedCourseCard';
 import { useCourseCatalog } from '../hooks/useCourseCatalog';
 import { PageHeader } from '../../../shared/ui/PageHeader';
@@ -9,19 +10,22 @@ import { Text } from '../../../shared/ui/Text';
 import { Button } from '../../../shared/ui/Button';
 
 export function CoursesScreen() {
+  const { t } = useTranslation();
   const { state, reload } = useCourseCatalog();
   return (
-    <Screen
-      tabs
-      loadingMessage={state.status === 'loading' ? 'Loading the course library…' : undefined}
-    >
-      <PageHeader title="Course library" back />
+    <Screen tabs>
+      <PageHeader title={t('courseLibrary.title')} />
       <Text variant="heading" accessibilityRole="header">
-        Find your next study
+        {t('courseLibrary.heading')}
       </Text>
-      <Text muted>
-        Explore the course outlines and find a subject you would like to spend time with.
-      </Text>
+      <Text muted>{t('courseLibrary.description')}</Text>
+      {state.status === 'loading' && (
+        <Card shadow={false} accessibilityState={{ busy: true }}>
+          <Text variant="small" accessibilityLiveRegion="polite">
+            {t('courseLibrary.loading')}
+          </Text>
+        </Card>
+      )}
       {state.status === 'ready' &&
         state.data.map((course) => (
           <ConnectedCourseCard
@@ -34,26 +38,29 @@ export function CoursesScreen() {
         ))}
       {state.status === 'ready' && state.data.length === 0 && (
         <Card tone="mint" shadow={false} style={styles.group}>
-          <Text variant="title">More studies are on the way</Text>
-          <Text variant="small">
-            There are no published courses in the library right now. Check back soon for new studies.
-          </Text>
-          <Button label="Refresh library" variant="outline" onPress={reload} icon="refresh-cw" />
+          <Text variant="title">{t('courseLibrary.emptyTitle')}</Text>
+          <Text variant="small">{t('courseLibrary.emptyDescription')}</Text>
+          <Button
+            label={t('courseLibrary.refresh')}
+            variant="outline"
+            onPress={reload}
+            icon="refresh-cw"
+          />
         </Card>
       )}
       {(state.status === 'error' || state.status === 'unconfigured') && (
         <Card shadow={false} style={styles.group}>
           <Text variant="title">
             {state.status === 'unconfigured'
-              ? 'Course library unavailable'
-              : 'We couldn’t load the library'}
+              ? t('courseLibrary.unavailableTitle')
+              : t('courseLibrary.errorTitle')}
           </Text>
           <Text variant="small">
             {state.status === 'unconfigured'
-              ? 'The course library is unavailable right now. Please try again later.'
-              : 'Please check your connection and try again.'}
+              ? t('home.courseLibraryUnavailable')
+              : t('courseLibrary.errorDescription')}
           </Text>
-          <Button label="Try again" variant="outline" onPress={reload} icon="refresh-cw" />
+          <Button label={t('common.retry')} variant="outline" onPress={reload} icon="refresh-cw" />
         </Card>
       )}
     </Screen>

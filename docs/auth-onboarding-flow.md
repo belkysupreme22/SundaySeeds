@@ -1,8 +1,10 @@
 # Auth onboarding flow
 
-## Course suggestions after setup — 6 November 2026
+## Guest browsing and course suggestions — 6 November 2026
 
-The initial learning-preferences result now gets its suggestion from the
+Skipping account setup opens Home, where guests can browse the Course library.
+Joining requires sign-in and a verified email.
+The initial learning-preferences result gets its suggestion from the
 connected Course library. Topic matches and study-time hints come from the
 offering itself. A missing catalog shows its loading, empty, or unavailable
 state. Settings edits return to Settings. Device review is pending.

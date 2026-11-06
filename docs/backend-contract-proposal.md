@@ -1,5 +1,14 @@
 # Backend contract proposal
 
+## Current mobile catalog boundary — 6 November 2026
+
+The learner app uses one connected Course library for guests and signed-in
+learners. The existing catalog, verified join, reading and assessment
+contracts apply. Earlier references to bundled guest lessons describe the
+previous mobile flow. Device-only activity is preserved separately. The
+[course library decision](decisions/0027-single-mobile-course-library.md)
+records what the app shows while the account-wide study read is pending.
+
 ## Scoped staff draft development backend — 28 October 2026
 
 The first staff backend increment provides course-specific author assignments,

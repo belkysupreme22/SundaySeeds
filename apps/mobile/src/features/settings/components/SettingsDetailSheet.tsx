@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Modal, Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTranslation } from 'react-i18next';
-import { lessons } from '../../lessons/data/lessons';
 import { motion, targets } from '../../../shared/theme/motion';
 import { brandColors } from '../../../shared/theme/tokens';
 import { Button, IconButton } from '../../../shared/ui/Button';
@@ -47,38 +46,28 @@ const details: Record<SettingsDetailKey, DetailContent> = {
   playback: {
     title: 'Video playback',
     status: 'Video lessons are not available yet',
-    paragraphs: [
-      'The current lessons use reading, reflection and quizzes. There is no video player or playback preference to configure.',
-    ],
+    paragraphs: ['Course lessons use reading, reflection and knowledge checks.'],
   },
   downloads: {
     title: 'Download quality',
     status: 'Downloads are not available yet',
-    paragraphs: [
-      'There is no lesson download manager in this version, so download quality cannot be changed.',
-    ],
+    paragraphs: ['Open course lessons online from the Course library.'],
   },
   data: {
     title: 'Data usage',
     paragraphs: [
-      'Reading positions, quiz scores, bookmarks and study badges from the Lessons tab stay on this device, along with your guest name and profile image choice. Signing in does not upload or merge them. Your account display name is stored separately with your account.',
-      'Account learning preferences, enrollments, course reading places, lesson bookmarks and completed knowledge checks are stored with your account. A small recovery record on this device keeps an interrupted quiz request on the same attempt; it is not a saved result.',
-      'Reset lesson activity clears the quiz scores, reading positions, bookmarks and study badges stored on this device. Names, account learning preferences, course enrollments, connected reading places and bookmarks, quiz results and your introduction preference are kept.',
+      'Your account stores your display name, learning preferences, course enrollments, saved reading places, bookmarks and completed knowledge checks. The app keeps a recovery record on this device while it confirms an interrupted quiz submission.',
+      'Your guest name and your chosen profile portrait stay on this device. The app keeps separate portrait choices for guests and signed-in accounts.',
+      'If you used the previous Lessons tab, its reading places, quiz scores, bookmarks and badges stay on this device. Course progress comes from activity in the courses you join.',
       'Wi-Fi-only and mobile-data preferences are not available yet.',
     ],
   },
   help: {
     title: 'Help Center',
     paragraphs: [
-      'Find a lesson: open Lessons to browse the lesson collection, search by title or scripture, or use the filter icon. You can leave all filters off.',
-      'Start a lesson: open its overview and choose Start or Continue. Read each section, then move to the quiz.',
-      'Take a lesson quiz: choose an answer, tap Check answer, read the explanation and continue. Finish all questions to record completion.',
-      'See lesson progress: open Progress for completed lessons and best quiz scores. Use the bookmark icon on a lesson to save it for later.',
-      'Browse connected courses: choose Courses on Home to open the Course library. An available course shows its outline; joining requires a verified account and an explicit Join action. Open joined readings from your saved-edition curriculum.',
-      'Take a course knowledge check: open a joined reading and choose Open knowledge check. Check each answer, then Finish quiz to record the result. Return to the course for completed checks and best scores. If a request is interrupted, choose Check again to recover the same attempt.',
-      'Keep a course reading place: choose Save my place here beside a section and Bookmark this lesson to keep it bookmarked. Your verified account can load these choices on another device. If saving is not confirmed, retry the same change or reload saved state; a conflict requires reloading before another choice.',
-      'Start fresh: use Reset lesson activity in Settings. You can cancel before confirming; account enrollments are kept.',
-      'If saved learning cannot load, changes pause to protect it. Use Try loading again in the notice. If changes cannot save, keep the app open and use Try saving again.',
+      'Open Courses to browse the Course library and view course outlines. To join, sign in, verify your email and choose Join course. Open lessons from the outline for the edition you joined.',
+      'In a course lesson, choose Open knowledge check. Check each answer, then choose Finish quiz to record the result. Return to the course for completed checks and best scores. If a submission is interrupted, choose Check again to recover the same attempt.',
+      'Choose Save my place here beside a section to return to that spot, or Bookmark this lesson to save the lesson for later. Sign in with the same account to access these choices on another device. If the app cannot confirm a save, retry the change or choose Reload saved state.',
     ],
   },
   privacy: {
@@ -99,7 +88,7 @@ const details: Record<SettingsDetailKey, DetailContent> = {
     status: 'Version 0.1.0',
     paragraphs: [
       'A little faith, every day.',
-      `Explore ${lessons.length} lessons with scripture, reflection and short quizzes.`,
+      'Explore Scripture, reflection and short knowledge checks in the Course library.',
       'Loading animation: “Loading dots” by Kyle McGahey on LottieFiles, adapted for SundaySeeds under the Lottie Simple License.',
     ],
   },

@@ -1,1 +1,1 @@
-export { LessonsScreen as default } from '../../features/lessons/screens/LessonsScreen';
+export { LegacyCourseLibraryRedirect as default } from '../../features/courses/screens/LegacyCourseLibraryRedirect';

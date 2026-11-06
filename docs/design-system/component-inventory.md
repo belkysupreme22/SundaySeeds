@@ -18,12 +18,10 @@ authorize route, content, storage, session or backend behavior changes.
 | `shared/ui/PageHeader.tsx` | Header | Title/subtitle/back; long title and larger text | Existing responsive composition; density review pending |
 | `shared/ui/SectionHeading.tsx` | Section header | Heading, optional real action | Existing hierarchy; shared token typography adoption continues |
 | `shared/ui/PageLoadingOverlay.tsx` | Pending work | Focused pending, reduced motion, blur/tint fallback, failure | Centered green dots use the shared palette |
+| `features/courses/components/CourseJourneyCard.tsx` | Home course preview | Loading, loaded, empty, unavailable, retry | Sage placeholder follows the card layout and stays still with reduced motion. |
 | `shared/ui/AnimatedSplash.tsx` | Brand startup | Loaded/fallback, motion/static, finite completion, background | One-shot vector mark; font/layout handoff and input fences retained |
 | `features/learning-profile/components/LearningChoiceCards.tsx` | Profile choices | Unselected, selected, disabled, selection limit, text/marker | Neutral/sage, forest check; underlying selection rules unchanged |
 | `features/profile/components/ProfileAvatarPicker.tsx` | Profile images | Selected marker, keyboard focus, press | Cartoon portraits sit on the cream page with sage fill and a checkmark for selection. The neutral silhouette is the fallback for unset avatars. |
-| `features/profile/components/ProfileLearningStats.tsx` | Lesson activity | Completed, in progress, unstarted, saved, focus, press | One proportional track with labeled counts. Status shortcuts pair where space allows and Saved uses a separate row. |
-| `features/progress/components/StudyMedal.tsx` | Study badges | Locked, earned, earned tier | Reference 10-inspired medal artwork, muted locks and countable diamond marks in aligned card pairs with a large-text fallback |
-| `features/progress/components/RecentStudyActivity.tsx` | Recent quiz activity | Empty, quiz completed, retaken, personal best, focus, press | Reference 10-inspired timeline with recorded dates, attempt scores and lesson links |
 | `features/quizzes/components/QuizChoice.tsx` | Quiz choice | Selected, checked/locked, correct, incorrect | Sage selection; correctness still has explicit text/icons |
 | `features/settings/components/SettingsDetailSheet.tsx` | Settings detail | Available/unavailable, language selected, dismiss/scroll | Cream/sage, forest selected marker; no new preference capability |
 
@@ -37,16 +35,16 @@ authorize route, content, storage, session or backend behavior changes.
 | Sign in/sign up | Cream page, sage hero, consistent fields and actions | Password visibility, errors, pending, provider availability, keyboard/Back |
 | Verification/recovery/reset | Same account surfaces and text hierarchy | Invalid/expired/used proofs, resend/request outcomes, retry and account boundaries |
 | Learning profile | Neutral choice cards, sage selected, forest check/progress | Optional answers, selection limits, Skip, save/conflict/reload; no new data rules |
-| Home | Forest seed header with the saved Profile portrait, sage leading/journey areas, calm shortcuts | Existing section order/data, Profile shortcut, name wrapping and content artwork stacking |
-| Course/lesson discovery | Shared forest CTA, muted cards and filters | Catalog availability, counts, exact joined-edition navigation and empty state |
+| Home | Forest seed header with the saved Profile portrait, sage course preview and memory verse | Profile shortcut, nonblocking course placeholder, name wrapping and content artwork stacking |
+| Course discovery | Shared forest CTA and muted cards | Catalog availability, guest browse, verified joining and empty state |
 | Lesson reading | Editorial20/32; Latin/Ethiopic runs; existing UI headings | Content/section IDs, saved place, bookmarks, reflection privacy and scrolling |
-| Quiz/results | Sage selected, labelled correctness, real recorded progress | Server/sample boundaries, retry/draft/completion/access rules |
-| Progress | Sage leading surface, raised paper timeline and badge cards, forest progress | Loading/error vs zero, real completion/history, no fabricated analytics |
-| Profile | Fine warm edges, raised paper activity overview, sage portrait card | Name and portrait editing, filtered lesson shortcuts, account/guest differences, larger text, logout Home return |
+| Quiz/results | Sage selected, labelled correctness, real recorded progress | Joined-edition retries, drafts, completion and access rules |
+| Progress | Raised paper guidance card and forest action | Guest, unverified and verified paths to progress in joined courses |
+| Profile | Fine warm edges, raised paper navigation, sage portrait card | Name and portrait editing, account/guest differences, larger text, logout Home return |
 | Settings/detail/data | Raised paper groups, warm edges, sage selection, forest current-section marker | Actual availability, verified status, language save, destructive intent and recovery |
 | Unknown/empty/failure | Shared roles, useful message and real next action | Back/Home/retry reachability; no stranded navigation |
 
-The bottom-nav route classifier makes course routes part of Lessons and Settings
+The bottom-nav route classifier makes course routes part of Courses and Settings
 part of Profile. All selected sections share the same forest background; section
 identity never changes the primary palette. Review direct and nested routes.
 

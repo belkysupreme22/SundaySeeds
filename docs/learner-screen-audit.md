@@ -1,25 +1,37 @@
 # Learner screen audit checklist
 
-## Mobile course catalog source — 6 November 2026
+## Single mobile course library — 6 November 2026
 
-- Open the Course library from Home and from the legacy `/lessons/course`
-  route. Verify course metadata and links come from listed offerings.
+- Skip account setup. Open the same Course library from Home and from the
+  Courses tab. Check course titles and links against listed offerings. Confirm
+  course detail selects Courses and signing in with a verified account lets
+  you join an open course.
+- Slow the catalog request on Home. Check that the sage course placeholder
+  appears while Profile, tabs and the verse remain usable. Enable reduced
+  motion and confirm the placeholder stays still. Check empty, unavailable and
+  failed requests, including retry after reconnecting.
 - Finish initial learning preferences. Check a matching catalog entry opens
-  the returned course. Review loading, empty, and unavailable states.
-- Open a standalone lesson and finish its quiz. Check the next lesson uses
-  the standalone collection and Profile and Progress still reflect that work.
+  the suggested course. In a joined course, reopen a saved reading place and
+  confirm finished knowledge checks and best scores after a retry.
+- Open old `/lessons`, `/read/<id>`, and `/quiz/<id>` links and confirm they
+  lead to Courses. Check Progress and the old `/study-badges` link for
+  account-appropriate guidance. Check Profile portrait editing and the
+  explanation of old device data in Settings.
+- Check English and Amharic, narrow layouts and larger text on Home, Courses,
+  Profile and Progress. The badge checks below describe the previous device
+  collection.
 
 ## Navigation and Settings palette — 6 November 2026
 
-- On Home, Lessons, Progress, Profile and Settings, compare the tray and
+- On Home, Courses, Progress, Profile and Settings, compare the tray and
   bottom safe area. Confirm the flax tray reads separately from the cream
   page. Check that the forest selected tab stays distinct when
   pressing or focusing it and that Settings selects Profile.
 - In Settings, review the raised paper account groups and language sheet with both
   languages and larger text. Check selected, focused and pressed rows and
   destructive confirmation styling.
-- On Profile and Progress, review the raised paper activity, badge and navigation
-  rows against the page, then check keyboard focus and press feedback.
+- On Profile and Progress, review the raised paper navigation and guidance
+  cards against the page, then check keyboard focus and press feedback.
 
 ## Study badges — 5 November 2026
 

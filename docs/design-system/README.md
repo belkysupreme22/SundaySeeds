@@ -168,8 +168,8 @@ enabled-looking setting or social-provider button.
 The bottom safe area uses cream. An inset flax tray has a fine warm edge.
 Exactly one selected section uses forest with ivory icon and label.
 Inactive items use dark ink. Do not assign each section its
-own active hue. Selection follows route ownership: course routes belong to
-Lessons and Settings belongs to Profile. Deeper action-only pages may omit tabs.
+own active hue. Course routes belong to Courses. Settings belongs to Profile.
+Deeper action-only pages may omit tabs.
 
 ### Auth, onboarding and Settings are first-class
 
@@ -208,6 +208,7 @@ result of selection, saving, completion or recovery before moving on.
 | Quiz completion | Seed and leaf burst, 1050ms once after an intentional finish | Static seed emblem for reduced motion and recovered results |
 | Progress | Actual recorded amount only | Immediate true value; no synthetic count-up |
 | Loader | Actual pending work, centered palette-matched animation and blur | Static dots in the same palette plus useful status |
+| Home course placeholder | Soft sage blocks follow the loaded card layout while the rest of Home stays usable | Static blocks with a loading label |
 | Brand splash | Existing2300ms mark, short hold/fade, one-shot | Final still; finite startup guard |
 
 `motion.ts` supplies named durations, cubic-bezier families, distances and state
@@ -221,14 +222,11 @@ Backgrounding, unmount, cancellation and failure stop owned animation resources.
 
 ### Learning visuals
 
-Use a labelled numeric equivalent for any charted amount. Progress leads with
-lesson totals and the next-lesson action, followed by Weekly Rhythm and Recent
-activity. The Study Badges collection uses compact aligned pairs and full-width
-rows when text needs more room. Profile shows the proportions of completed,
-in-progress and unstarted lessons with labeled counts and filtered shortcuts.
-Saved lessons have a separate row because their status can overlap the
-breakdown. The quiz score ribbon uses the actual correct-answer share beside
-its score.
+Use a labelled numeric equivalent for any charted amount. Joined courses show
+completed knowledge checks and best scores for the learner's edition. The
+Progress tab points to that information, and the quiz score ribbon shows the
+actual correct-answer share beside its score. Preserve compact aligned pairs
+with a full-width large-text layout when designing future connected badge cards.
 
 ## 7. Icons, imagery and content
 
