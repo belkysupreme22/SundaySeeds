@@ -1,66 +1,91 @@
 import { StyleSheet, View } from 'react-native';
+import { useTranslation } from 'react-i18next';
+import { useCourseCatalog } from '../../courses/hooks/useCourseCatalog';
 import { brandColors, colors } from '../../../shared/theme/tokens';
 import { Button } from '../../../shared/ui/Button';
 import { Card } from '../../../shared/ui/Card';
 import { Icon } from '../../../shared/ui/Icon';
 import { Text } from '../../../shared/ui/Text';
-import { getCourseSuggestions } from '../data/courseSuggestions';
-import { emptyLearningPreferences } from '../types';
+import { getCourseSuggestion } from '../data/courseSuggestions';
 import type { LearningPreferencesDraft } from '../types';
 
 export function CourseSuggestions({
   preferences,
   onViewCourse,
   onBrowse,
-  catalog = false,
 }: {
   preferences: LearningPreferencesDraft;
-  onViewCourse: () => void;
+  onViewCourse: (courseId: string) => void;
   onBrowse: () => void;
-  catalog?: boolean;
 }) {
-  const suggestions = getCourseSuggestions(catalog ? emptyLearningPreferences : preferences);
+  const { t } = useTranslation();
+  const { state, reload } = useCourseCatalog();
+  const suggestion =
+    state.status === 'ready' ? getCourseSuggestion(state.data, preferences) : undefined;
 
   return (
     <View style={styles.section}>
       <Text variant="heading" accessibilityRole="header">
-        {catalog ? 'Explore courses' : 'A few places to start'}
+        Explore courses
       </Text>
-      <Text muted>Explore the available course and choose what feels right for you.</Text>
-      {suggestions.map((course) => (
-        <Card key={course.id} style={styles.card}>
+      {suggestion ? (
+        <Card style={styles.card}>
           <View style={styles.art} accessible={false}>
             <Icon name="book-open" size={32} />
           </View>
-          <Text variant="caption">COURSE</Text>
+          <Text variant="caption">
+            {suggestion.course.isDevelopment ? t('home.pilotCourse') : 'Course'}
+          </Text>
           <Text variant="title" accessibilityRole="header">
-            {course.title}
+            {suggestion.course.title}
           </Text>
           <Text variant="small" muted>
-            {course.moduleCount} modules · {course.lessonCount} lessons
+            {suggestion.course.modules.length} modules ·{' '}
+            {suggestion.course.modules.reduce((total, module) => total + module.lessons.length, 0)}{' '}
+            lessons
           </Text>
-          <Text variant="small">{course.description}</Text>
-          {!catalog && (
+          <Text variant="small">{suggestion.course.summary}</Text>
+          {suggestion.matchingTopics.length > 0 && (
             <View style={styles.reason}>
-              <Text variant="small">{course.reason}</Text>
+              <Text variant="small">
+                Includes studies on {suggestion.matchingTopics.join(', ')}.
+              </Text>
             </View>
           )}
-          {!catalog && course.lessonSuggestion && (
+          {suggestion.lessonSuggestion && (
             <View style={styles.lesson}>
               <Text variant="label">A lesson you may enjoy</Text>
-              <Text variant="small">{course.lessonSuggestion.title}</Text>
+              <Text variant="small">{suggestion.lessonSuggestion.title}</Text>
               <Text variant="small" muted>
-                About {course.lessonSuggestion.durationMinutes} minutes of reading
+                About {suggestion.lessonSuggestion.estimatedMinutes} minutes
               </Text>
               <Text variant="small" muted>
                 Find it in the course curriculum. You can follow the course in order.
               </Text>
             </View>
           )}
-          <Button label="View course" onPress={onViewCourse} />
+          <Button label="View course" onPress={() => onViewCourse(suggestion.course.courseId)} />
         </Card>
-      ))}
-      {!catalog && <Button label="View all courses" variant="outline" onPress={onBrowse} />}
+      ) : (
+        <Card stroke="soft" shadow={false} style={styles.card}>
+          <Text variant="small" accessibilityLiveRegion="polite">
+            {state.status === 'loading'
+              ? t('common.loading')
+              : state.status === 'ready'
+                ? t('home.courseLibraryEmpty')
+                : t('home.courseLibraryUnavailable')}
+          </Text>
+          {state.status === 'error' && (
+            <Button
+              label={t('common.retry')}
+              variant="outline"
+              icon="refresh-cw"
+              onPress={reload}
+            />
+          )}
+        </Card>
+      )}
+      <Button label="View all courses" variant="outline" onPress={onBrowse} />
     </View>
   );
 }

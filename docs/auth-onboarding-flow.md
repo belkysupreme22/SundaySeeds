@@ -1,5 +1,12 @@
 # Auth onboarding flow
 
+## Course suggestions after setup — 6 November 2026
+
+The initial learning-preferences result now gets its suggestion from the
+connected Course library. Topic matches and study-time hints come from the
+offering itself. A missing catalog shows its loading, empty, or unavailable
+state. Settings edits return to Settings. Device review is pending.
+
 ## English and Amharic account flow — 5 November 2026
 
 Account choice, optional name setup, sign-in, sign-up, verification, recovery

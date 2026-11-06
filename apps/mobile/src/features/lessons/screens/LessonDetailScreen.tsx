@@ -11,7 +11,6 @@ import { PageHeader } from '../../../shared/ui/PageHeader';
 import { Text } from '../../../shared/ui/Text';
 import { Card } from '../../../shared/ui/Card';
 import { Button, IconButton } from '../../../shared/ui/Button';
-import { sampleCourse } from '../../courses/data/sampleCourse';
 export function LessonDetailScreen({ lessonId }: { lessonId: string }) {
   const lesson = getLesson(lessonId);
   const { bookmarks, toggleBookmark, progress, setSection, error, errorKind } =
@@ -60,19 +59,6 @@ export function LessonDetailScreen({ lessonId }: { lessonId: string }) {
         }
       />
       <LessonOverviewHeader lesson={lesson} />
-      {sampleCourse.modules.some((module) => module.lessonIds.includes(lesson.id)) && (
-        <Card tone="mint" shadow={false} style={styles.progress}>
-          <Text variant="small">RELATED CONNECTED COURSE</Text>
-          <Text variant="label">{sampleCourse.title}</Text>
-          <Button
-            label="View connected course"
-            variant="outline"
-            onPress={() =>
-              router.push({ pathname: '/courses/[id]', params: { id: sampleCourse.id } })
-            }
-          />
-        </Card>
-      )}
       <LessonOutcomes outcomes={lesson.outcomes} />
       {lessonProgress && (
         <Card tone={completed ? 'mint' : undefined} shadow={false} style={styles.progress}>

@@ -11,7 +11,7 @@ import { AnswerReviewCard } from '../components/AnswerReviewCard';
 import { QuizNextAction } from '../components/QuizNextAction';
 import { QuizCompletion } from '../components/QuizCompletion';
 import { QuizScoreRibbon } from '../components/QuizScoreRibbon';
-import { SampleQuizNextLesson } from '../components/SampleQuizNextLesson';
+import { NextStandaloneLesson } from '../components/NextStandaloneLesson';
 import { Screen, ContentGroup } from '../../../shared/ui/Screen';
 import { PageHeader } from '../../../shared/ui/PageHeader';
 import { Text } from '../../../shared/ui/Text';
@@ -102,7 +102,7 @@ export function QuizResultScreen({
       )}
       <ContentGroup>
         <Text variant="title">What’s next?</Text>
-        <SampleQuizNextLesson lessonId={lesson.id} />
+        <NextStandaloneLesson lessonId={lesson.id} />
         <QuizNextAction
           title={showReview ? 'Hide answer review' : 'Review your answers'}
           description="Look back at your choices and explanations."

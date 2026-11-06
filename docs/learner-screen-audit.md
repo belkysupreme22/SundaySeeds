@@ -1,5 +1,14 @@
 # Learner screen audit checklist
 
+## Mobile course catalog source — 6 November 2026
+
+- Open the Course library from Home and from the legacy `/lessons/course`
+  route. Verify course metadata and links come from listed offerings.
+- Finish initial learning preferences. Check a matching catalog entry opens
+  the returned course. Review loading, empty, and unavailable states.
+- Open a standalone lesson and finish its quiz. Check the next lesson uses
+  the standalone collection and Profile and Progress still reflect that work.
+
 ## Navigation and Settings palette — 6 November 2026
 
 - On Home, Lessons, Progress, Profile and Settings, compare the tray and

@@ -4,6 +4,9 @@ Notable changes are recorded here. Unreleased entries describe development miles
 
 ## Unreleased
 
+### Removed
+- Removed the bundled course fixture from mobile. Course recommendations now use the published catalog, and the legacy course shortcut opens the library.
+
 ### Design system
 - Aligned the Welcome artwork’s wheat accent with the shared palette.
 - Reworked Profile’s lesson activity into a visual summary with filtered shortcuts and removed the About section from Profile.

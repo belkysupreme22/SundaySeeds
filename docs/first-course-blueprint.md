@@ -118,7 +118,7 @@ Minor corrections and urgent rights/safety withdrawals need an explicit correcti
 
 ## Source of this candidate
 
-- Existing curriculum and module order: `apps/mobile/src/features/courses/data/sampleCourse.ts`.
+- Development curriculum and module order: [development course outline seed](../supabase/seeds/development_course_outline.sql).
 - Existing teaching, prompts, quiz answers, verse labels and estimates: `apps/mobile/src/features/lessons/data/lessons.ts`.
 - Research rationale and unresolved model choices: `docs/course-model-research.md` and `docs/backend-contract-proposal.md`.
 

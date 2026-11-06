@@ -1,5 +1,15 @@
 # SundaySeeds implementation plan
 
+## Mobile course catalog source — 6 November 2026
+
+Mobile course listings, details and first-time learning-profile suggestions
+use the connected catalog. The bundled course fixture and fixed course links
+were removed. The legacy lesson-course shortcut opens the Course library.
+The standalone Lessons collection continues to support guest reading, quizzes
+and local progress. Onboarding suggestions rank actual listed courses by
+matching topics and available lesson estimates. Owner runtime review is pending
+for empty or unavailable catalog states and the standalone lesson journey.
+
 ## Connected Study Shelf concept — 5 November 2026
 
 The learner requested meaningful progress with multiple joined courses and after
