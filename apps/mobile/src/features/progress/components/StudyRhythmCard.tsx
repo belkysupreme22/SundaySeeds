@@ -1,5 +1,6 @@
 import { StyleSheet, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import { targets } from '../../../shared/theme/motion';
 import { brandColors, colors } from '../../../shared/theme/tokens';
 import { Button } from '../../../shared/ui/Button';
 import { Card } from '../../../shared/ui/Card';
@@ -31,7 +32,7 @@ export function StudyRhythmCard({
   return (
     <Card tone="mint" stroke="soft" shadow={false} style={styles.card}>
       <View style={[styles.lead, stacked && styles.stackedLead]}>
-        <StudyMedal badge="weekly" earned={level > 0} level={level} size={76} />
+        <StudyMedal badge="weekly" earned={level > 0} level={level} size={60} />
         <View style={[styles.copy, !stacked && styles.leadCopy]}>
           <Text variant="title">{t('progress.badges.weekly')}</Text>
           <Text variant="small" muted>
@@ -49,7 +50,7 @@ export function StudyRhythmCard({
           const done = index < daysThisWeek;
           return (
             <View key={index} style={[styles.step, done && styles.stepDone]}>
-              {done && <Icon name="check" size={13} color={brandColors.onForest} />}
+              {done && <Icon name="check" size={11} color={brandColors.onForest} />}
             </View>
           );
         })}
@@ -81,8 +82,8 @@ export function StudyRhythmCard({
 }
 
 const styles = StyleSheet.create({
-  card: { gap: 12 },
-  lead: { flexDirection: 'row', alignItems: 'center', gap: 12 },
+  card: { gap: 8, padding: 12 },
+  lead: { flexDirection: 'row', alignItems: 'center', gap: 10 },
   stackedLead: { flexDirection: 'column', alignItems: 'flex-start' },
   leadCopy: { flex: 1 },
   copy: { flexShrink: 1, minWidth: 0, gap: 3 },
@@ -90,12 +91,16 @@ const styles = StyleSheet.create({
   steps: { flexDirection: 'row', gap: 5 },
   step: {
     flex: 1,
-    minHeight: 17,
+    minHeight: 14,
     borderRadius: 5,
     backgroundColor: colors.line,
     alignItems: 'center',
     justifyContent: 'center',
   },
   stepDone: { backgroundColor: brandColors.forest },
-  review: { borderColor: brandColors.controlBorder },
+  review: {
+    borderColor: brandColors.controlBorder,
+    minHeight: targets.minimum,
+    paddingVertical: 8,
+  },
 });

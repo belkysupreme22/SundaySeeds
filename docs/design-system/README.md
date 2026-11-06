@@ -216,12 +216,12 @@ Backgrounding, unmount, cancellation and failure stop owned animation resources.
 
 ### Learning visuals
 
-Use a labelled numeric equivalent for any charted amount. The Progress
-milestone board pairs a next-lesson action with completed and upcoming
-checkpoints. Thresholds use the size of the available lesson collection. Skip
-halfway when it would duplicate another milestone. Profile uses one functional
-icon with each recorded count. The quiz score ribbon uses the actual
-correct-answer share beside its score.
+Use a labelled numeric equivalent for any charted amount. Progress leads with
+lesson totals and the next-lesson action, followed by Weekly Rhythm and Recent
+activity. The Study Badges collection uses compact aligned pairs and full-width
+rows when text needs more room. Profile uses one functional icon with each
+recorded count. The quiz score ribbon uses the actual correct-answer share
+beside its score.
 
 ## 7. Icons, imagery and content
 

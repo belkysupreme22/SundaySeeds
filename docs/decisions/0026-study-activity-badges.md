@@ -28,5 +28,10 @@ including retakes and personal bests. It uses the recorded study date and
 attempt score, and older snapshots start with an empty timeline. The weekly
 goal and the learner's actual number of study days are labelled separately.
 
+The owner requested smaller badge cards and removal of the separate lesson
+milestones board. Progress presents the lesson summary and resume action,
+Weekly Rhythm, and Recent activity. The badge collection uses compact paired
+cards with a single-column fallback for larger text.
+
 Source, locale and art export checks were performed. Device review and app
 verification are pending. See the [learner audit](../learner-screen-audit.md).

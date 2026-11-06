@@ -1,7 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, View, useWindowDimensions } from 'react-native';
 import { brandColors, spacing } from '../../../shared/theme/tokens';
-import { typeScale } from '../../../shared/theme/typography';
 import { Card } from '../../../shared/ui/Card';
 import { Icon } from '../../../shared/ui/Icon';
 import { PageHeader } from '../../../shared/ui/PageHeader';
@@ -16,15 +15,8 @@ import { useLearningProgress, useStudyBadgeProgress } from '../hooks/useLearning
 type TieredBadgeId = Exclude<StudyBadgeId, 'record'>;
 type BadgeUnit = 'weeks' | 'daysUnit' | 'lessonsUnit';
 const levelMarks = ['I', 'II', 'III', 'IV'];
-const medalSize = 72;
-const labelLineHeight = Math.max(
-  typeScale.label.lineHeight,
-  Math.ceil(typeScale.label.fontSize * 1.6),
-);
-const metaLineHeight = Math.max(
-  typeScale.meta.lineHeight,
-  Math.ceil(typeScale.meta.fontSize * 1.6),
-);
+const medalSize = 56;
+const rowMedalSize = 52;
 
 export function StudyBadgeCollectionScreen() {
   const { t } = useTranslation();
@@ -84,16 +76,13 @@ export function StudyBadgeCollectionScreen() {
   const earnedCount =
     tiered.filter(({ level }) => level > 0).length + Number(Boolean(progress.personalBest));
   const rows = stacked ? tiered.map((badge) => [badge]) : [tiered.slice(0, 2), tiered.slice(2)];
-  const titleSlot = { minHeight: Math.ceil(labelLineHeight * fontScale * 2) };
-  const targetSlot = { minHeight: Math.ceil(metaLineHeight * fontScale * 3) };
-
   return (
-    <Screen>
+    <Screen contentStyle={styles.content}>
       <PageHeader back title={title} subtitle={subtitle} />
       <Card tone="mint" stroke="subtle" shadow={false} style={styles.intro}>
         <View style={styles.summary}>
-          <Icon name="award" size={24} color={brandColors.forest} />
-          <Text variant="title" style={styles.summaryLabel}>
+          <Icon name="award" size={19} color={brandColors.forest} />
+          <Text variant="label" style={styles.summaryLabel}>
             {t('progress.badges.earnedCount', { earned: earnedCount, total: tiered.length + 1 })}
           </Text>
         </View>
@@ -130,30 +119,31 @@ export function StudyBadgeCollectionScreen() {
                   style={[styles.tile, stacked && styles.wide]}
                 >
                   <View style={styles.medal}>
-                    <StudyMedal badge={id} earned={level > 0} level={level} size={medalSize} />
+                    <StudyMedal
+                      badge={id}
+                      earned={level > 0}
+                      level={level}
+                      size={stacked ? rowMedalSize : medalSize}
+                    />
                   </View>
                   <View style={[styles.badgeCopy, stacked && styles.wideCopy]}>
-                    <View style={!stacked && titleSlot}>
-                      <Text variant="label" style={!stacked && styles.centered}>
-                        {name}
-                      </Text>
-                    </View>
+                    <Text variant="label" style={!stacked && styles.centered}>
+                      {name}
+                    </Text>
                     <Text variant="meta" muted={level === 0} style={!stacked && styles.centered}>
                       {levelLabel}
                     </Text>
                     <View style={styles.detail}>
-                      <View style={!stacked && styles.meterSlot}>
-                        {next !== undefined && (
-                          <ProgressBar
-                            value={(current / next) * 100}
-                            label={name}
-                            valueText={targetLabel}
-                          />
-                        )}
-                      </View>
-                      <Text variant="meta" muted style={!stacked && [styles.centered, targetSlot]}>
+                      <Text variant="meta" muted style={!stacked && styles.centered}>
                         {targetLabel}
                       </Text>
+                      {next !== undefined && (
+                        <ProgressBar
+                          value={(current / next) * 100}
+                          label={name}
+                          valueText={targetLabel}
+                        />
+                      )}
                     </View>
                   </View>
                 </Card>
@@ -164,7 +154,7 @@ export function StudyBadgeCollectionScreen() {
       </View>
       <Card stroke="subtle" shadow={false} style={[styles.tile, styles.wide, styles.record]}>
         <View style={styles.medal}>
-          <StudyMedal badge="record" earned={Boolean(progress.personalBest)} size={medalSize} />
+          <StudyMedal badge="record" earned={Boolean(progress.personalBest)} size={rowMedalSize} />
         </View>
         <View style={[styles.badgeCopy, styles.wideCopy]}>
           <Text variant="label">{t('progress.badges.record')}</Text>
@@ -186,18 +176,18 @@ export function StudyBadgeCollectionScreen() {
 }
 
 const styles = StyleSheet.create({
-  intro: { gap: spacing.sm },
+  content: { gap: spacing.md },
+  intro: { gap: spacing.xs, padding: spacing.md },
   summary: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm },
   summaryLabel: { color: brandColors.forest, flexShrink: 1 },
-  grid: { gap: spacing.md },
-  row: { flexDirection: 'row', gap: spacing.md },
-  tile: { flex: 1, minWidth: 0, gap: spacing.sm, padding: spacing.md },
-  wide: { flexDirection: 'row', alignItems: 'flex-start', gap: spacing.md },
+  grid: { gap: spacing.sm },
+  row: { flexDirection: 'row', gap: spacing.sm },
+  tile: { flex: 1, minWidth: 0, gap: spacing.xs, padding: spacing.sm },
+  wide: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm },
   record: { flexGrow: 0, flexBasis: 'auto' },
-  medal: { alignItems: 'center', justifyContent: 'center', minHeight: medalSize + spacing.xs },
+  medal: { alignItems: 'center' },
   badgeCopy: { flexGrow: 1, minWidth: 0, gap: spacing.xs },
   wideCopy: { flex: 1 },
   centered: { textAlign: 'center' },
   detail: { gap: spacing.xs, marginTop: 'auto', paddingTop: spacing.xs },
-  meterSlot: { minHeight: 7 },
 });

@@ -8,8 +8,9 @@
   for each finish, newest first, and each row opens the corresponding lesson.
   Confirm repeated taps on Finish produce one entry and the timeline keeps
   the latest six.
-- Check that badge cards line up in pairs at normal text sizes and reflow at
-  larger text sizes, including longer Amharic labels.
+- At 320 and 390 widths, check that badge cards line up in compact pairs and
+  that larger text reflows into full-width rows. Check longer Amharic labels,
+  the progress indicators, and the smaller Weekly Rhythm medal.
 - Open Progress with existing lesson scores. Check that dated activity starts
   empty. Finish a quiz, retry on the same day, and confirm one study day.
 - Finish on a second day in the same week to meet Weekly Rhythm. Cross a
@@ -45,11 +46,10 @@ check that signed-in and guest choices stay separate.
 - **Quiz results:** finish a new sample and connected attempt. Verify the short
   seed burst, usable actions during animation and unchanged score values. Reopen
   a recorded connected result and try reduced motion, backgrounding, and Back.
-- **Progress:** check the milestone board before starting, after opening a
-  reading, after advancing a section, after the first quiz, at halfway, and
-  after completing the collection. Verify the section name and position move
-  with reading and the completion count moves with a finished quiz. Check
-  Resume reading opens the saved section and Revisit lessons appears at the end.
+- **Progress:** check the lesson summary before starting, after opening a
+  reading, after advancing a section, and after finishing a quiz. Verify the
+  reading position and completion count update. Check Resume reading opens
+  the saved section and Review a past lesson stays available after completion.
   Check focus and press feedback on Recent activity rows.
 - **Profile:** check completed, in-progress and saved counts after changes.
   Each row opens its Lessons filter. Check keyboard focus, alignment with large

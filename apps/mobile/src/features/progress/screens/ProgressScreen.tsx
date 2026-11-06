@@ -6,7 +6,6 @@ import { useLearningProgress, useStudyBadgeProgress } from '../hooks/useLearning
 import { ProgressHero } from '../components/ProgressHero';
 import { ProgressStats } from '../components/ProgressStats';
 import { RecentStudyActivity } from '../components/RecentStudyActivity';
-import { LearningMilestones } from '../components/LearningMilestones';
 import { StudyRhythmCard } from '../components/StudyRhythmCard';
 import { colors } from '../../../shared/theme/tokens';
 import { Screen, ContentGroup } from '../../../shared/ui/Screen';
@@ -136,18 +135,6 @@ export function ProgressScreen() {
         quizzes={activity.recentQuizzes}
         onOpenLesson={(id) => router.push(`/lessons/${id}`)}
       />
-      <ContentGroup>
-        <Text variant="title" accessibilityRole="header">
-          {t('progress.milestoneBoard')}
-        </Text>
-        <Card stroke="subtle" shadow={false}>
-          <LearningMilestones
-            started={entries.length > 0}
-            completed={completed}
-            total={lessons.length}
-          />
-        </Card>
-      </ContentGroup>
       <ContentGroup>
         <Text variant="title">{t('progress.overview')}</Text>
         <ProgressStats
