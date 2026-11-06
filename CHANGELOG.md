@@ -5,6 +5,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Design system
+- Reworked Profile’s lesson activity into a visual summary with filtered shortcuts and removed the About section from Profile.
 - Added raised paper, inset flax, and a warm edge to the shared palette. Settings and progress cards have more depth, and the bottom nav uses flax.
 - Blended the bottom navigation, Settings, and adjacent Profile and Progress surfaces into the cream and sage palette.
 - Made Study Badges cards and Weekly Rhythm more compact, and removed the separate Lesson milestones board from Progress.

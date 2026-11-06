@@ -276,6 +276,11 @@
     "learner": "ተማሪ",
     "identityLabel": "የትምህርት መገለጫዎ",
     "lessonActivity": "የትምህርት እንቅስቃሴ",
+    "activity": {
+      "notStarted_one": "{{count}} ገና አልተጀመረም",
+      "notStarted_other": "{{count}} ገና አልተጀመሩም",
+      "distribution": "{{completed}} ተጠናቀዋል፣ {{inProgress}} በሂደት ላይ ናቸው፣ {{notStarted}} ገና አልተጀመሩም"
+    },
     "loadingName": "መገለጫዎ በመክፈት ላይ…",
     "nameUnavailable": "ስሙን ማግኘት አልተቻለም",
     "completed": "የተጠናቀቁ",

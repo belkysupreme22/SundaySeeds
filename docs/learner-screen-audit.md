@@ -37,7 +37,11 @@
 ## Profile identity and editing — 5 November 2026
 
 Profile aligns the portrait and name, with a compact edit pencil in the upper
-corner. The activity ledger aligns labels and counts in three rows.
+corner. Check that the activity overview represents completed, in-progress
+and unstarted lessons, including empty and all-complete cases. Confirm Saved
+can include lessons in any status. At 320 and 390 widths and with larger text,
+check the track labels, focus, press feedback and all three filter links.
+About and Replay introduction are available in Settings.
 Verify guest and signed-in names, blank names, save and retry. Start editing
 from Profile and Settings. Check that Save, Cancel and Back return to the
 screen that opened the form and that a direct entry falls back to Profile.

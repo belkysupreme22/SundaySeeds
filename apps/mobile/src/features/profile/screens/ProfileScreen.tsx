@@ -79,6 +79,8 @@ export function ProfileScreen() {
               completed={completed}
               inProgress={inProgress}
               saved={saved}
+              total={lessons.length}
+              stacked={stacked}
               onOpen={(filter) => router.replace({ pathname: '/lessons', params: { filter } })}
             />
             {error && (
@@ -110,23 +112,6 @@ export function ProfileScreen() {
                   },
                 ]
               : []),
-          ]}
-        />
-      </ContentGroup>
-      <ContentGroup>
-        <Text variant="title" accessibilityRole="header">
-          {t('settings.about')}
-        </Text>
-        <ProfileNavigationGroup
-          items={[
-            {
-              id: 'welcome',
-              title: t('settings.replayIntro'),
-              description: t('settings.replayIntroDesc'),
-              icon: 'sun',
-              tone: 'yellow',
-              onPress: () => router.push('/welcome'),
-            },
           ]}
         />
       </ContentGroup>

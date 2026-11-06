@@ -224,9 +224,11 @@ Backgrounding, unmount, cancellation and failure stop owned animation resources.
 Use a labelled numeric equivalent for any charted amount. Progress leads with
 lesson totals and the next-lesson action, followed by Weekly Rhythm and Recent
 activity. The Study Badges collection uses compact aligned pairs and full-width
-rows when text needs more room. Profile uses one functional icon with each
-recorded count. The quiz score ribbon uses the actual correct-answer share
-beside its score.
+rows when text needs more room. Profile shows the proportions of completed,
+in-progress and unstarted lessons with labeled counts and filtered shortcuts.
+Saved lessons have a separate row because their status can overlap the
+breakdown. The quiz score ribbon uses the actual correct-answer share beside
+its score.
 
 ## 7. Icons, imagery and content
 

@@ -276,6 +276,11 @@
     "learner": "learner",
     "identityLabel": "Your learning profile",
     "lessonActivity": "Lesson activity",
+    "activity": {
+      "notStarted_one": "{{count}} not started",
+      "notStarted_other": "{{count}} not started",
+      "distribution": "{{completed}} completed, {{inProgress}} in progress, {{notStarted}} not started"
+    },
     "loadingName": "Opening your profile…",
     "nameUnavailable": "Name unavailable",
     "completed": "Completed",
