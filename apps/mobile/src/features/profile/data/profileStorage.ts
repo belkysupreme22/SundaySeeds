@@ -10,10 +10,8 @@ export const avatarStorage = {
     const stored = await AsyncStorage.getItem(`${AVATAR_KEY}.${scope}`);
     return avatarIds.find((id) => id === stored) ?? null;
   },
-  async write(scope: string, avatarId: AvatarId | null) {
-    const key = `${AVATAR_KEY}.${scope}`;
-    if (avatarId) await AsyncStorage.setItem(key, avatarId);
-    else await AsyncStorage.removeItem(key);
+  async write(scope: string, avatarId: AvatarId) {
+    await AsyncStorage.setItem(`${AVATAR_KEY}.${scope}`, avatarId);
   },
 };
 

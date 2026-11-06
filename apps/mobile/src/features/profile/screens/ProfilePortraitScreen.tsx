@@ -19,7 +19,7 @@ export function ProfilePortraitScreen() {
 function PortraitGallery() {
   const { t } = useTranslation();
   const { avatarId, status, reload, saveAvatar } = useProfileAvatar();
-  const [draft, setDraft] = useState<AvatarId | null | undefined>();
+  const [draft, setDraft] = useState<AvatarId | null>(null);
   const [saving, setSaving] = useState(false);
   const [saveError, setSaveError] = useState(false);
   const pending = useRef(false);
@@ -33,7 +33,7 @@ function PortraitGallery() {
     }, []),
   );
 
-  const selected = draft === undefined ? avatarId : draft;
+  const selected = draft ?? avatarId;
   const changed = selected !== avatarId;
 
   function close() {
@@ -42,7 +42,7 @@ function PortraitGallery() {
   }
 
   async function save() {
-    if (!changed || status !== 'ready' || pending.current) return;
+    if (selected === null || !changed || status !== 'ready' || pending.current) return;
     pending.current = true;
     setSaving(true);
     setSaveError(false);

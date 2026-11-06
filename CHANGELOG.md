@@ -5,6 +5,7 @@ Notable changes are recorded here. Unreleased entries describe development miles
 ## Unreleased
 
 ### Design system
+- Kept the neutral portrait as the automatic fallback and simplified the gallery to a borderless grid with a sage selection highlight and checkmark.
 - Blended the portrait gallery into the cream canvas and kept the sage selection highlight.
 - Aligned the Profile portrait and edit action, moved portrait selection to a dedicated gallery with an in-grid selection marker and fixed Save button, and showed the saved portrait in Home’s top-right corner.
 - Added twelve cartoon profile portraits with a preview and selection in Edit profile. The selected image stays on this device for each account or guest.

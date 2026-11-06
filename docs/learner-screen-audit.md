@@ -9,10 +9,12 @@ from Profile and Settings. Check that Save, Cancel and Back return to the
 screen that opened the form and that a direct entry falls back to Profile.
 Check keyboard, narrow width and larger English/Amharic text.
 In Edit Profile, start editing a name, open Change portrait and check the
-gallery alignment at 320 and 390 widths and with larger text. Scroll to the
-silhouette and verify it behaves like any other tile. Check the selected tile
-and confirm Save portrait stays visible. Back should discard an unsaved choice. Save portrait
-updates Edit Profile without losing its name draft. Return to Profile and Home
+gallery alignment at 320 and 390 widths and with larger text. Start with an
+unset avatar and verify Home and Profile show the silhouette and the gallery
+has no selected tile. Choose a portrait and check the sage fill and checkmark,
+then tab through to confirm focus is visible. Back should discard an unsaved
+choice. Save portrait updates Edit Profile without losing its name draft.
+Return to Profile and Home
 to check the saved portrait. On Home, verify the portrait opens Profile and
 stays aligned beside long greetings. Reopen the app to verify persistence and
 check that signed-in and guest choices stay separate.

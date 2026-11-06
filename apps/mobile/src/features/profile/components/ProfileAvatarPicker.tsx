@@ -7,8 +7,6 @@ import { Icon } from '../../../shared/ui/Icon';
 import { avatarIds, type AvatarId } from '../types/avatar';
 import { ProfileAvatar } from './ProfileAvatar';
 
-const choices = [...avatarIds, null];
-
 export function ProfileAvatarPicker({
   selectedId,
   disabled,
@@ -16,11 +14,11 @@ export function ProfileAvatarPicker({
 }: {
   selectedId: AvatarId | null;
   disabled: boolean;
-  onSelect: (id: AvatarId | null) => void;
+  onSelect: (id: AvatarId) => void;
 }) {
   const { t } = useTranslation();
   const { width } = useWindowDimensions();
-  const [focused, setFocused] = useState<AvatarId | 'default' | null>(null);
+  const [focused, setFocused] = useState<AvatarId | null>(null);
   const portraitSize = width < 360 ? 64 : 76;
 
   return (
@@ -29,27 +27,26 @@ export function ProfileAvatarPicker({
       accessibilityRole="radiogroup"
       accessibilityLabel={t('profile.avatar.title')}
     >
-      {choices.map((id) => {
-        const key = id ?? 'default';
+      {avatarIds.map((id) => {
         const selected = selectedId === id;
         return (
-          <View key={key} style={[styles.column, width < 320 && styles.compactColumn]}>
+          <View key={id} style={[styles.column, width < 320 && styles.compactColumn]}>
             <Pressable
               accessibilityRole="radio"
               accessibilityState={{ checked: selected, disabled }}
-              accessibilityLabel={t(`profile.avatar.${key}`)}
+              accessibilityLabel={t(`profile.avatar.${id}`)}
               disabled={disabled}
               onPress={() => onSelect(id)}
-              onFocus={() => setFocused(key)}
-              onBlur={() => setFocused((current) => (current === key ? null : current))}
+              onFocus={() => setFocused(id)}
+              onBlur={() => setFocused((current) => (current === id ? null : current))}
               style={({ pressed }) => [
                 styles.choice,
                 selected && styles.selected,
-                focused === key && styles.focused,
+                focused === id && styles.focused,
                 pressed && styles.pressed,
               ]}
             >
-              <View style={[styles.ring, selected && styles.selectedRing]}>
+              <View>
                 <ProfileAvatar avatarId={id} size={portraitSize} />
                 {selected && (
                   <View style={styles.check} aria-hidden>
@@ -72,10 +69,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     rowGap: spacing.sm,
     padding: spacing.sm,
-    backgroundColor: brandColors.canvas,
-    borderColor: colors.line,
-    borderWidth: shape.stroke.subtle,
-    borderRadius: shape.radius.card,
   },
   column: { width: '33.333%', paddingHorizontal: spacing.xs },
   compactColumn: { width: '50%' },
@@ -88,13 +81,6 @@ const styles = StyleSheet.create({
     borderWidth: shape.stroke.focus,
     borderColor: 'transparent',
   },
-  ring: {
-    borderRadius: shape.radius.round,
-    borderWidth: shape.stroke.focus,
-    borderColor: 'transparent',
-    padding: 2,
-  },
-  selectedRing: { borderColor: brandColors.forest },
   selected: { backgroundColor: brandColors.surfaceStrong },
   focused: { borderColor: brandColors.forest },
   pressed: { opacity: motion.pressedOpacity, transform: [{ translateY: motion.distance.press }] },

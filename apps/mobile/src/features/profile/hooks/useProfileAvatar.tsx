@@ -18,7 +18,7 @@ type AvatarPreference = {
   avatarId: AvatarId | null;
   status: 'loading' | AvatarSnapshot['status'];
   reload: () => void;
-  saveAvatar: (avatarId: AvatarId | null) => Promise<boolean>;
+  saveAvatar: (avatarId: AvatarId) => Promise<boolean>;
 };
 
 const AvatarContext = createContext<AvatarPreference | null>(null);
@@ -48,7 +48,7 @@ export function ProfileAvatarProvider({ children }: PropsWithChildren) {
     };
   }, [attempt, hydrated, scope]);
 
-  async function saveAvatar(avatarId: AvatarId | null) {
+  async function saveAvatar(avatarId: AvatarId) {
     if (current?.status !== 'ready' || writing.current.has(scope)) return false;
     writing.current.add(scope);
     try {
